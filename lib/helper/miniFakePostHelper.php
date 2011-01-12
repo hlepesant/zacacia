@@ -18,7 +18,7 @@
     $output .= "<head>\n";
     $output .= "<title></title>\n";
     $output .= "</head>\n";
-#    $output .= "<body onLoad=\"JavaScript: fakePost();\">\n";
+    $output .= "<body onLoad=\"JavaScript: fakePost();\">\n";
     $output .= "<script type=\"text/javascript\">\n";
     $output .= "//<![CDATA[\n";
     $output .= "function fakePost()\n";
@@ -32,7 +32,7 @@
     foreach ($fields as $field => $value) {
       $output .= "<input type=\"hidden\" name=\"".$field."\" value=\"".$value."\" />\n";
     }
-    $output .= "<input type=\"submit\" name=\"submit\" value=\"submit\" />\n";
+#    $output .= "<input type=\"submit\" name=\"submit\" value=\"submit\" />\n";
     $output .= "</form>\n";
     $output .= "</body>\n";    
     $output .= "</html>\n";  
