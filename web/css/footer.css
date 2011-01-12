@@ -1,0 +1,14 @@
+/* Footer */
+
+#footer
+{
+width: 950px;
+margin: 0 auto;
+text-align: center;
+clear: both;
+border-top: dotted 1px #E1E1E1;
+margin-top: 1.0em;
+margin-bottom: 1.0em;
+padding-top: 1.0em;
+text-transform: lowercase;
+}

@@ -1,0 +1,109 @@
+#form_inner
+{
+  width: 500px;
+  padding-top: 20px; 
+  margin: auto;
+  text-align: left;
+}
+
+#form_line
+{
+  width: 490px;
+  padding: 0px 0px 0px 0px;
+  height: 30px;
+  clear: both;
+  margin-top: 1px;
+  border-top: #C0C0C0 1px solid;
+  border-right: #C0C0C0 1px solid;
+  border-left: #C0C0C0 1px solid;
+}
+
+#form_line .item
+{
+  width: 40%;
+  margin: 0px 0px 0px 0px;
+  padding: 5px 0px 0px 5px;
+  height: 25px;
+  font-family: Sans-serif;
+  font-size: 12px;
+  color: #2B2B35;
+  font-weight: bold;
+  float: left;
+  background-color: #ffffff;
+}
+
+#form_line .field
+{
+  width: auto;
+  background-color: #ffffff;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  font-family: Arial;
+  font-size: 12px;
+  float: left;
+  height: 30px;
+  background-color: #ffffff;
+}
+
+input[type=text] {
+  margin: 4px 0px 0px 0px;
+  background-color: #F0F0F0;
+  width: 150px;
+}
+
+select {
+  margin: 5px 0px 0px 0px;
+  background-color: #F0F0F0;
+  width: 80px;
+}
+
+input[readonly=readonly] {
+  background-color: #c0C0C0;
+  color: #ffffff;
+  width: 120px;
+}
+
+input[type=password] {
+  background-color: #F0F0F0;
+  width: 120px;
+}
+
+input[type=submit] {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.4em;
+  color: #000000;
+  float: right;
+}
+
+#form_submitline
+{
+  width: 492px;
+  padding: 0px 0px 0px 0px;
+  height: 30px;
+  clear: both;
+  margin-top: 0px;
+  border-top: #C0C0C0 1px solid;
+}
+
+#form_submit
+{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #000000;
+  float: right;
+}
+
+#form_submit[disabled]
+{
+  color: #a0a0a0;
+}
+
+#form_button
+{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  float: left;
+  color: #2B2B35;
+}

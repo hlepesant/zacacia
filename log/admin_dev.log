@@ -1,0 +1,1791 @@
+Jan 12 22:39:42 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'default',  'action' => 'index',)
+Jan 12 22:39:42 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 22:39:42 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 22:39:42 symfony [info] {defaultActions} Call "defaultActions->executeIndex()"
+Jan 12 22:39:42 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/lib/vendor/symfony/lib/controller/default/templates/indexSuccess.php"
+Jan 12 22:39:42 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/lib/vendor/symfony/lib/controller/default/templates/defaultLayout.php"
+Jan 12 22:39:42 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/lib/vendor/symfony/lib/controller/default/templates/defaultLayout.php"
+Jan 12 22:39:42 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 22:39:42 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 22:39:42 symfony [info] {sfWebDebugLogger} Configuration 117.07 ms (8)
+Jan 12 22:39:42 symfony [info] {sfWebDebugLogger} Factories 144.56 ms (1)
+Jan 12 22:39:42 symfony [info] {sfWebDebugLogger} Action "default/index" 0.24 ms (1)
+Jan 12 22:39:42 symfony [info] {sfWebDebugLogger} View "Success" for "default/index" 24.89 ms (1)
+Jan 12 22:39:42 symfony [info] {sfWebResponse} Send content (28828 o)
+Jan 12 22:40:07 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 22:40:07 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 22:40:07 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 22:40:07 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 22:40:07 symfony [info] {platformActions} Forward to action "default/module"
+Jan 12 22:40:07 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 22:40:07 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 22:40:07 symfony [info] {defaultActions} Call "defaultActions->executeModule()"
+Jan 12 22:40:07 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/lib/vendor/symfony/lib/controller/default/templates/moduleSuccess.php"
+Jan 12 22:40:07 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/lib/vendor/symfony/lib/controller/default/templates/defaultLayout.php"
+Jan 12 22:40:07 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/lib/vendor/symfony/lib/controller/default/templates/defaultLayout.php"
+Jan 12 22:40:07 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 22:40:07 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 22:40:07 symfony [info] {sfWebDebugLogger} Configuration 55.80 ms (12)
+Jan 12 22:40:07 symfony [info] {sfWebDebugLogger} Factories 57.34 ms (1)
+Jan 12 22:40:07 symfony [info] {sfWebDebugLogger} Action "platform/index" 12.93 ms (1)
+Jan 12 22:40:07 symfony [info] {sfWebDebugLogger} Action "default/module" 0.21 ms (1)
+Jan 12 22:40:07 symfony [info] {sfWebDebugLogger} View "Success" for "default/module" 8.12 ms (1)
+Jan 12 22:40:07 symfony [info] {sfWebResponse} Send content (30747 o)
+Jan 12 22:41:47 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 22:41:47 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 22:41:47 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 22:41:47 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 22:41:47 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/ldap/base/BaseLDAPeer.class.php on line 23 (ldap_bind() [<a href='function.ldap-bind'>function.ldap-bind</a>]: Unable to bind to server: Can't contact LDAP server)
+Jan 12 22:41:47 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/exception/sfException.class.php on line 105 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/lib/ldap/base/BaseLDAPeer.class.php:23))
+Jan 12 22:41:47 symfony [err] {Exception} Can't contact LDAP server
+Jan 12 22:41:47 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/exception/sfException.class.php on line 159 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/lib/ldap/base/BaseLDAPeer.class.php:23))
+Jan 12 22:41:47 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/response/sfWebResponse.class.php on line 336 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/lib/ldap/base/BaseLDAPeer.class.php:23))
+Jan 12 22:41:47 symfony [info] {sfWebResponse} Send status "HTTP/1.1 500 Internal Server Error"
+Jan 12 22:41:47 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/response/sfWebResponse.class.php on line 357 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/lib/ldap/base/BaseLDAPeer.class.php:23))
+Jan 12 22:41:47 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 22:41:47 symfony [info] {sfWebDebugLogger} Configuration 107.58 ms (7)
+Jan 12 22:41:47 symfony [info] {sfWebDebugLogger} Factories 107.88 ms (1)
+Jan 12 22:41:47 symfony [info] {sfWebDebugLogger} Action "platform/index" 41.58 ms (1)
+Jan 12 22:42:33 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 22:42:33 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 22:42:33 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 22:42:33 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 22:42:33 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #58
+Jan 12 22:42:33 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 22:42:33 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 22:42:33 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 22:42:33 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 22:42:33 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 22:42:33 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 22:42:33 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 22:48:09 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 22:48:09 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 22:48:09 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 22:48:09 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 22:48:09 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #28
+Jan 12 22:48:09 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 22:48:09 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 22:48:09 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 22:48:09 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 22:48:09 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 22:48:09 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 22:48:09 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 22:48:20 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 22:48:20 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 22:48:20 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 22:48:20 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 22:48:20 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #21
+Jan 12 22:48:20 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 22:48:20 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 22:48:20 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 22:48:20 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 22:48:20 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 22:48:20 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 22:48:20 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 22:48:20 symfony [err] {sfConfigurationException} You must enable i18n support in your settings.yml configuration file.
+Jan 12 22:48:20 symfony [info] {sfWebResponse} Send status "HTTP/1.1 500 Internal Server Error"
+Jan 12 22:48:20 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 22:48:20 symfony [info] {sfWebDebugLogger} Configuration 20.02 ms (10)
+Jan 12 22:48:20 symfony [info] {sfWebDebugLogger} Factories 9.43 ms (1)
+Jan 12 22:48:20 symfony [info] {sfWebDebugLogger} Action "platform/index" 77.84 ms (1)
+Jan 12 22:54:49 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 22:54:49 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 22:54:49 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 22:54:49 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #67
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #67
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #67
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 22:54:49 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 22:54:49 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 22:54:49 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 22:54:49 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 22:54:49 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 22:54:49 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 22:54:49 symfony [info] {sfWebDebugLogger} Configuration 114.23 ms (11)
+Jan 12 22:54:49 symfony [info] {sfWebDebugLogger} Factories 118.73 ms (1)
+Jan 12 22:54:49 symfony [info] {sfWebDebugLogger} Action "platform/index" 21.42 ms (1)
+Jan 12 22:54:49 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 12.75 ms (1)
+Jan 12 22:54:49 symfony [info] {sfWebResponse} Send content (35234 o)
+Jan 12 22:59:10 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 22:59:10 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 22:59:10 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 22:59:10 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #27
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #27
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #27
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 22:59:10 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 22:59:10 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 22:59:10 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 22:59:10 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 22:59:10 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 22:59:10 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 22:59:10 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 22:59:10 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 22:59:10 symfony [info] {sfWebDebugLogger} Configuration 2.25 ms (10)
+Jan 12 22:59:10 symfony [info] {sfWebDebugLogger} Factories 13.87 ms (1)
+Jan 12 22:59:10 symfony [info] {sfWebDebugLogger} Action "platform/index" 17.13 ms (1)
+Jan 12 22:59:10 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 17.66 ms (1)
+Jan 12 22:59:10 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 5.76 ms (2)
+Jan 12 22:59:10 symfony [info] {sfWebResponse} Send content (43263 o)
+Jan 12 22:59:39 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 22:59:39 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 22:59:39 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 22:59:39 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 22:59:39 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 22:59:39 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 22:59:39 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 22:59:39 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 22:59:39 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 22:59:39 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 22:59:39 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 22:59:39 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 22:59:39 symfony [info] {sfWebDebugLogger} Configuration 2.46 ms (10)
+Jan 12 22:59:39 symfony [info] {sfWebDebugLogger} Factories 13.23 ms (1)
+Jan 12 22:59:40 symfony [info] {sfWebDebugLogger} Action "platform/index" 17.00 ms (1)
+Jan 12 22:59:40 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 15.83 ms (1)
+Jan 12 22:59:40 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 5.30 ms (2)
+Jan 12 22:59:40 symfony [info] {sfWebResponse} Send content (43263 o)
+Jan 12 23:00:27 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:00:27 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:00:27 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:00:27 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:00:27 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:00:27 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:00:27 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:00:27 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:00:27 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:00:27 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:00:27 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:00:27 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:00:27 symfony [info] {sfWebDebugLogger} Configuration 2.19 ms (10)
+Jan 12 23:00:27 symfony [info] {sfWebDebugLogger} Factories 10.22 ms (1)
+Jan 12 23:00:27 symfony [info] {sfWebDebugLogger} Action "platform/index" 14.50 ms (1)
+Jan 12 23:00:27 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 13.96 ms (1)
+Jan 12 23:00:27 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 4.94 ms (2)
+Jan 12 23:00:27 symfony [info] {sfWebResponse} Send content (43263 o)
+Jan 12 23:00:47 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:00:47 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:00:47 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:00:47 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:00:47 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:00:47 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:00:47 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:00:47 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:00:47 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:00:47 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:00:47 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:00:47 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:00:47 symfony [info] {sfWebDebugLogger} Configuration 2.32 ms (10)
+Jan 12 23:00:47 symfony [info] {sfWebDebugLogger} Factories 13.46 ms (1)
+Jan 12 23:00:47 symfony [info] {sfWebDebugLogger} Action "platform/index" 17.13 ms (1)
+Jan 12 23:00:47 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 15.72 ms (1)
+Jan 12 23:00:47 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 5.24 ms (2)
+Jan 12 23:00:47 symfony [info] {sfWebResponse} Send content (44314 o)
+Jan 12 23:01:25 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:01:25 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:01:25 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:01:25 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:01:25 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:01:25 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:01:25 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:01:25 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:01:25 symfony [info] {sfPHPView} Decorate content with "/redbusiness.php"
+Jan 12 23:01:25 symfony [err] {sfRenderException} The decorator template "redbusiness.php" does not exist or is unreadable in "".
+Jan 12 23:01:25 symfony [info] {sfWebResponse} Send status "HTTP/1.1 500 Internal Server Error"
+Jan 12 23:01:25 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:01:25 symfony [info] {sfWebDebugLogger} Configuration 8.97 ms (11)
+Jan 12 23:01:25 symfony [info] {sfWebDebugLogger} Factories 13.29 ms (1)
+Jan 12 23:01:25 symfony [info] {sfWebDebugLogger} Action "platform/index" 17.18 ms (1)
+Jan 12 23:01:25 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 54.09 ms (1)
+Jan 12 23:01:25 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 5.24 ms (2)
+Jan 12 23:01:49 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:01:49 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:01:49 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:01:49 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:01:49 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:01:49 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:01:49 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:01:49 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:01:49 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:01:49 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:01:49 symfony [info] {sfWebDebugLogger} Configuration 7.88 ms (11)
+Jan 12 23:01:49 symfony [info] {sfWebDebugLogger} Factories 10.43 ms (1)
+Jan 12 23:01:49 symfony [info] {sfWebDebugLogger} Action "platform/index" 15.35 ms (1)
+Jan 12 23:01:49 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 18.82 ms (1)
+Jan 12 23:01:49 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 5.09 ms (2)
+Jan 12 23:01:49 symfony [info] {sfWebResponse} Send content (33008 o)
+Jan 12 23:02:54 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:02:54 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:02:54 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:02:54 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:02:54 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:02:54 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:02:54 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:02:54 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:02:54 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:02:54 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:02:54 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:02:54 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:02:55 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:02:55 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:02:55 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:02:55 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:02:55 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:02:55 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:02:55 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:02:55 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:02:55 symfony [info] {sfWebDebugLogger} Configuration 8.93 ms (11)
+Jan 12 23:02:55 symfony [info] {sfWebDebugLogger} Factories 13.17 ms (1)
+Jan 12 23:02:55 symfony [info] {sfWebDebugLogger} Action "platform/index" 17.10 ms (1)
+Jan 12 23:02:55 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 23.19 ms (1)
+Jan 12 23:02:55 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 5.28 ms (2)
+Jan 12 23:02:55 symfony [info] {sfWebResponse} Send content (44515 o)
+Jan 12 23:09:12 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:09:12 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:09:12 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:09:12 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:09:12 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:09:12 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:09:12 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:09:12 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:09:12 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:09:12 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:09:12 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:09:12 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:09:12 symfony [info] {sfWebDebugLogger} Configuration 7.60 ms (11)
+Jan 12 23:09:12 symfony [info] {sfWebDebugLogger} Factories 10.19 ms (1)
+Jan 12 23:09:12 symfony [info] {sfWebDebugLogger} Action "platform/index" 14.50 ms (1)
+Jan 12 23:09:12 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 19.91 ms (1)
+Jan 12 23:09:12 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 4.89 ms (2)
+Jan 12 23:09:12 symfony [info] {sfWebResponse} Send content (44492 o)
+Jan 12 23:09:40 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:09:40 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:09:40 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:09:40 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:09:40 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:09:40 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:09:40 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:09:40 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:09:40 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:09:40 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:09:40 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:09:40 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:09:40 symfony [info] {sfWebDebugLogger} Configuration 2.23 ms (10)
+Jan 12 23:09:40 symfony [info] {sfWebDebugLogger} Factories 10.21 ms (1)
+Jan 12 23:09:40 symfony [info] {sfWebDebugLogger} Action "platform/index" 14.46 ms (1)
+Jan 12 23:09:40 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 14.26 ms (1)
+Jan 12 23:09:40 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 4.86 ms (2)
+Jan 12 23:09:40 symfony [info] {sfWebResponse} Send content (44491 o)
+Jan 12 23:11:24 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:11:24 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:11:24 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:11:24 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:11:24 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:11:24 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:11:24 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:11:24 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:11:24 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:11:24 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:11:24 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:11:24 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:11:24 symfony [info] {sfWebDebugLogger} Configuration 2.22 ms (10)
+Jan 12 23:11:24 symfony [info] {sfWebDebugLogger} Factories 10.97 ms (1)
+Jan 12 23:11:24 symfony [info] {sfWebDebugLogger} Action "platform/index" 16.23 ms (1)
+Jan 12 23:11:24 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 14.19 ms (1)
+Jan 12 23:11:24 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 5.00 ms (2)
+Jan 12 23:11:24 symfony [info] {sfWebResponse} Send content (44491 o)
+Jan 12 23:16:14 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:16:14 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:16:14 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:16:14 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:14 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:14 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:16:14 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:16:14 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:16:14 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:16:14 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:16:14 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:16:14 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:16:14 symfony [info] {sfWebDebugLogger} Configuration 2.37 ms (10)
+Jan 12 23:16:14 symfony [info] {sfWebDebugLogger} Factories 13.21 ms (1)
+Jan 12 23:16:14 symfony [info] {sfWebDebugLogger} Action "platform/index" 17.11 ms (1)
+Jan 12 23:16:14 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 15.89 ms (1)
+Jan 12 23:16:14 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 5.13 ms (2)
+Jan 12 23:16:14 symfony [info] {sfWebResponse} Send content (44491 o)
+Jan 12 23:16:19 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/status/ with parameters array (  'module' => 'platform',  'action' => 'status',)
+Jan 12 23:16:19 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:16:19 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:16:19 symfony [info] {platformActions} Call "platformActions->executeStatus()"
+Jan 12 23:16:19 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:19 symfony [info] {BaseLDAPeer::select} getBaseDn = cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:19 symfony [info] {BaseLDAPeer::select} getFilter = (&(&(objectClass=top)(objectClass=organizationalRole))(objectClass=miniPlatform))
+Jan 12 23:16:19 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:19 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:19 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:19 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:19 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:19 symfony [err] {InvalidArgumentException} Unable to load "miniFakePostHelper.php" helper in: SF_ROOT_DIR/apps/admin/lib/helper, SF_ROOT_DIR/lib/helper, SF_ROOT_DIR/plugins/sfProtoculousPlugin/lib/helper, SF_ROOT_DIR/lib/vendor/symfony/lib/helper.
+Jan 12 23:16:19 symfony [info] {sfWebResponse} Send status "HTTP/1.1 500 Internal Server Error"
+Jan 12 23:16:19 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:16:19 symfony [info] {sfWebDebugLogger} Configuration 2.00 ms (9)
+Jan 12 23:16:19 symfony [info] {sfWebDebugLogger} Factories 9.75 ms (1)
+Jan 12 23:16:19 symfony [info] {sfWebDebugLogger} Action "platform/status" 66.29 ms (1)
+Jan 12 23:16:46 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/status/ with parameters array (  'module' => 'platform',  'action' => 'status',)
+Jan 12 23:16:46 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:16:46 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:16:46 symfony [info] {platformActions} Call "platformActions->executeStatus()"
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getBaseDn = cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getFilter = (&(&(objectClass=top)(objectClass=organizationalRole))(objectClass=miniPlatform))
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:46 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:16:46 symfony [info] {platformActions} Change template to "CURRENT/"
+Jan 12 23:16:46 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:16:46 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:16:46 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:16:46 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:46 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:46 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:16:46 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:16:46 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:16:46 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:16:46 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:16:46 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:16:46 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:16:46 symfony [info] {sfWebDebugLogger} Configuration 2.22 ms (10)
+Jan 12 23:16:46 symfony [info] {sfWebDebugLogger} Factories 9.64 ms (1)
+Jan 12 23:16:46 symfony [info] {sfWebDebugLogger} Action "platform/index" 15.49 ms (1)
+Jan 12 23:16:46 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 15.58 ms (1)
+Jan 12 23:16:46 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 5.15 ms (2)
+Jan 12 23:16:46 symfony [info] {sfWebResponse} Send content (44706 o)
+Jan 12 23:16:50 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/status/ with parameters array (  'module' => 'platform',  'action' => 'status',)
+Jan 12 23:16:50 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:16:50 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:16:50 symfony [info] {platformActions} Call "platformActions->executeStatus()"
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getBaseDn = cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getFilter = (&(&(objectClass=top)(objectClass=organizationalRole))(objectClass=miniPlatform))
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:50 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:16:50 symfony [info] {platformActions} Change template to "CURRENT/"
+Jan 12 23:16:50 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:16:50 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:16:50 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:16:50 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:50 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:50 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:16:50 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:16:50 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:16:50 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:16:50 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:16:50 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:16:50 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:16:50 symfony [info] {sfWebDebugLogger} Configuration 2.16 ms (10)
+Jan 12 23:16:50 symfony [info] {sfWebDebugLogger} Factories 9.41 ms (1)
+Jan 12 23:16:50 symfony [info] {sfWebDebugLogger} Action "platform/index" 14.50 ms (1)
+Jan 12 23:16:50 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 13.27 ms (1)
+Jan 12 23:16:50 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 4.66 ms (2)
+Jan 12 23:16:50 symfony [info] {sfWebResponse} Send content (44591 o)
+Jan 12 23:16:53 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/status/ with parameters array (  'module' => 'platform',  'action' => 'status',)
+Jan 12 23:16:53 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:16:53 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:16:53 symfony [info] {platformActions} Call "platformActions->executeStatus()"
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getBaseDn = cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getFilter = (&(&(objectClass=top)(objectClass=organizationalRole))(objectClass=miniPlatform))
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:53 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:16:53 symfony [info] {platformActions} Change template to "CURRENT/"
+Jan 12 23:16:53 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:16:53 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:16:53 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:16:53 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:16:53 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:16:53 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:16:53 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:16:53 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:16:53 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:16:53 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:16:53 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:16:53 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:16:53 symfony [info] {sfWebDebugLogger} Configuration 2.20 ms (10)
+Jan 12 23:16:53 symfony [info] {sfWebDebugLogger} Factories 9.44 ms (1)
+Jan 12 23:16:53 symfony [info] {sfWebDebugLogger} Action "platform/index" 15.00 ms (1)
+Jan 12 23:16:53 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 13.48 ms (1)
+Jan 12 23:16:53 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 4.79 ms (2)
+Jan 12 23:16:53 symfony [info] {sfWebResponse} Send content (44706 o)
+Jan 12 23:17:20 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/new with parameters array (  'module' => 'platform',  'action' => 'new',)
+Jan 12 23:17:20 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:17:20 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:17:20 symfony [info] {platformActions} Call "platformActions->executeNew()"
+Jan 12 23:17:29 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/new with parameters array (  'module' => 'platform',  'action' => 'new',)
+Jan 12 23:17:29 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:17:29 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:17:29 symfony [info] {platformActions} Call "platformActions->executeNew()"
+Jan 12 23:17:29 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/newSuccess.php"
+Jan 12 23:17:29 symfony [err] {InvalidArgumentException} The form formatter "MinivISP" does not exist.
+Jan 12 23:17:29 symfony [info] {sfWebResponse} Send status "HTTP/1.1 500 Internal Server Error"
+Jan 12 23:17:29 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:17:29 symfony [info] {sfWebDebugLogger} Configuration 21.45 ms (12)
+Jan 12 23:17:29 symfony [info] {sfWebDebugLogger} Factories 10.36 ms (1)
+Jan 12 23:17:29 symfony [info] {sfWebDebugLogger} Action "platform/new" 26.26 ms (1)
+Jan 12 23:17:29 symfony [info] {sfWebDebugLogger} View "Success" for "platform/new" 50.96 ms (1)
+Jan 12 23:17:48 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/new with parameters array (  'module' => 'platform',  'action' => 'new',)
+Jan 12 23:17:48 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:17:48 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:17:48 symfony [info] {platformActions} Call "platformActions->executeNew()"
+Jan 12 23:17:48 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/newSuccess.php"
+Jan 12 23:17:48 symfony [err] {sfConfigurationException} The route "platform" does not exist.
+Jan 12 23:17:48 symfony [info] {sfWebResponse} Send status "HTTP/1.1 500 Internal Server Error"
+Jan 12 23:17:48 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:17:48 symfony [info] {sfWebDebugLogger} Configuration 22.56 ms (12)
+Jan 12 23:17:48 symfony [info] {sfWebDebugLogger} Factories 13.49 ms (1)
+Jan 12 23:17:48 symfony [info] {sfWebDebugLogger} Action "platform/new" 6.21 ms (1)
+Jan 12 23:17:48 symfony [info] {sfWebDebugLogger} View "Success" for "platform/new" 89.16 ms (1)
+Jan 12 23:18:20 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/new with parameters array (  'module' => 'platform',  'action' => 'new',)
+Jan 12 23:18:20 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:18:20 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:18:20 symfony [info] {platformActions} Call "platformActions->executeNew()"
+Jan 12 23:18:20 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/newSuccess.php"
+Jan 12 23:18:20 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:18:20 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:18:20 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:18:20 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:18:20 symfony [info] {sfWebDebugLogger} Configuration 47.29 ms (11)
+Jan 12 23:18:20 symfony [info] {sfWebDebugLogger} Factories 58.55 ms (1)
+Jan 12 23:18:20 symfony [info] {sfWebDebugLogger} Action "platform/new" 6.25 ms (1)
+Jan 12 23:18:20 symfony [info] {sfWebDebugLogger} View "Success" for "platform/new" 14.01 ms (1)
+Jan 12 23:18:20 symfony [info] {sfWebResponse} Send content (33197 o)
+Jan 12 23:18:28 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/check with parameters array (  'module' => 'platform',  'action' => 'check',)
+Jan 12 23:18:28 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:18:28 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:18:28 symfony [info] {platformActions} Call "platformActions->executeCheck()"
+Jan 12 23:18:28 symfony [info] {platformActions} Change template to "CURRENT/check"
+Jan 12 23:18:28 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:18:28 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #21
+Jan 12 23:18:28 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:28 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniPlatform)(cn=Pri))
+Jan 12 23:18:28 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:28 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:28 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:28 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:28 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:28 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/checkSuccess.php"
+Jan 12 23:18:28 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:18:28 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:18:28 symfony [info] {sfWebDebugLogger} Configuration 2.27 ms (10)
+Jan 12 23:18:28 symfony [info] {sfWebDebugLogger} Factories 10.57 ms (1)
+Jan 12 23:18:28 symfony [info] {sfWebDebugLogger} Action "platform/check" 5.56 ms (1)
+Jan 12 23:18:28 symfony [info] {sfWebDebugLogger} View "Success" for "platform/check" 4.77 ms (1)
+Jan 12 23:18:28 symfony [info] {sfWebResponse} Send content (135 o)
+Jan 12 23:18:29 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/check with parameters array (  'module' => 'platform',  'action' => 'check',)
+Jan 12 23:18:29 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:18:29 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:18:29 symfony [info] {platformActions} Call "platformActions->executeCheck()"
+Jan 12 23:18:29 symfony [info] {platformActions} Change template to "CURRENT/check"
+Jan 12 23:18:29 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:18:29 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:29 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:29 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniPlatform)(cn=PrisM))
+Jan 12 23:18:29 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:29 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:29 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:29 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:29 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:29 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/checkSuccess.php"
+Jan 12 23:18:29 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:18:29 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:18:29 symfony [info] {sfWebDebugLogger} Configuration 2.42 ms (10)
+Jan 12 23:18:29 symfony [info] {sfWebDebugLogger} Factories 13.39 ms (1)
+Jan 12 23:18:29 symfony [info] {sfWebDebugLogger} Action "platform/check" 5.69 ms (1)
+Jan 12 23:18:29 symfony [info] {sfWebDebugLogger} View "Success" for "platform/check" 5.77 ms (1)
+Jan 12 23:18:29 symfony [info] {sfWebResponse} Send content (135 o)
+Jan 12 23:18:30 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/check with parameters array (  'module' => 'platform',  'action' => 'check',)
+Jan 12 23:18:30 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:18:30 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:18:30 symfony [info] {platformActions} Call "platformActions->executeCheck()"
+Jan 12 23:18:30 symfony [info] {platformActions} Change template to "CURRENT/check"
+Jan 12 23:18:30 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:18:30 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:30 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:30 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniPlatform)(cn=Prisma))
+Jan 12 23:18:30 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:30 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:30 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:30 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:30 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:30 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/checkSuccess.php"
+Jan 12 23:18:30 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:18:30 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:18:30 symfony [info] {sfWebDebugLogger} Configuration 2.18 ms (10)
+Jan 12 23:18:30 symfony [info] {sfWebDebugLogger} Factories 10.09 ms (1)
+Jan 12 23:18:30 symfony [info] {sfWebDebugLogger} Action "platform/check" 4.54 ms (1)
+Jan 12 23:18:30 symfony [info] {sfWebDebugLogger} View "Success" for "platform/check" 4.39 ms (1)
+Jan 12 23:18:30 symfony [info] {sfWebResponse} Send content (135 o)
+Jan 12 23:18:31 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/check with parameters array (  'module' => 'platform',  'action' => 'check',)
+Jan 12 23:18:31 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:18:31 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:18:31 symfony [info] {platformActions} Call "platformActions->executeCheck()"
+Jan 12 23:18:31 symfony [info] {platformActions} Change template to "CURRENT/check"
+Jan 12 23:18:31 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:18:31 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:31 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:31 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniPlatform)(cn=PrismaPre))
+Jan 12 23:18:31 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:31 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:31 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:31 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:31 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:31 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/checkSuccess.php"
+Jan 12 23:18:31 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:18:31 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:18:31 symfony [info] {sfWebDebugLogger} Configuration 2.25 ms (10)
+Jan 12 23:18:31 symfony [info] {sfWebDebugLogger} Factories 9.66 ms (1)
+Jan 12 23:18:31 symfony [info] {sfWebDebugLogger} Action "platform/check" 4.45 ms (1)
+Jan 12 23:18:31 symfony [info] {sfWebDebugLogger} View "Success" for "platform/check" 4.00 ms (1)
+Jan 12 23:18:31 symfony [info] {sfWebResponse} Send content (135 o)
+Jan 12 23:18:32 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/check with parameters array (  'module' => 'platform',  'action' => 'check',)
+Jan 12 23:18:32 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:18:32 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:18:32 symfony [info] {platformActions} Call "platformActions->executeCheck()"
+Jan 12 23:18:32 symfony [info] {platformActions} Change template to "CURRENT/check"
+Jan 12 23:18:32 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:18:32 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:32 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:32 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniPlatform)(cn=PrismaPresse))
+Jan 12 23:18:32 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:32 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:32 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:32 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:32 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:32 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/checkSuccess.php"
+Jan 12 23:18:32 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:18:32 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:18:32 symfony [info] {sfWebDebugLogger} Configuration 2.18 ms (10)
+Jan 12 23:18:32 symfony [info] {sfWebDebugLogger} Factories 9.79 ms (1)
+Jan 12 23:18:32 symfony [info] {sfWebDebugLogger} Action "platform/check" 5.60 ms (1)
+Jan 12 23:18:32 symfony [info] {sfWebDebugLogger} View "Success" for "platform/check" 4.07 ms (1)
+Jan 12 23:18:32 symfony [info] {sfWebResponse} Send content (135 o)
+Jan 12 23:18:33 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/new with parameters array (  'module' => 'platform',  'action' => 'new',)
+Jan 12 23:18:33 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:18:33 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:18:33 symfony [info] {platformActions} Call "platformActions->executeNew()"
+Jan 12 23:18:33 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:18:33 symfony [info] {platformActions} Change template to "CURRENT/"
+Jan 12 23:18:33 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:18:33 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:18:33 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:18:33 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:33 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:33 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:18:33 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:18:33 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:18:33 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:18:33 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:18:33 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:18:33 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:18:33 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:18:33 symfony [info] {sfWebDebugLogger} Configuration 2.39 ms (10)
+Jan 12 23:18:33 symfony [info] {sfWebDebugLogger} Factories 13.15 ms (1)
+Jan 12 23:18:33 symfony [info] {sfWebDebugLogger} Action "platform/index" 20.53 ms (1)
+Jan 12 23:18:33 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 18.81 ms (1)
+Jan 12 23:18:33 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 7.51 ms (3)
+Jan 12 23:18:33 symfony [info] {sfWebResponse} Send content (49845 o)
+Jan 12 23:18:40 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/status/ with parameters array (  'module' => 'platform',  'action' => 'status',)
+Jan 12 23:18:40 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:18:40 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:18:40 symfony [info] {platformActions} Call "platformActions->executeStatus()"
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getBaseDn = cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getFilter = (&(&(objectClass=top)(objectClass=organizationalRole))(objectClass=miniPlatform))
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:40 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:18:40 symfony [info] {platformActions} Change template to "CURRENT/"
+Jan 12 23:18:40 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:18:40 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:18:40 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:18:40 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:40 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:40 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:18:40 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:18:40 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:18:40 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:18:40 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:18:40 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:18:40 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:18:40 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:18:40 symfony [info] {sfWebDebugLogger} Configuration 2.17 ms (10)
+Jan 12 23:18:40 symfony [info] {sfWebDebugLogger} Factories 9.53 ms (1)
+Jan 12 23:18:40 symfony [info] {sfWebDebugLogger} Action "platform/index" 17.70 ms (1)
+Jan 12 23:18:40 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 16.34 ms (1)
+Jan 12 23:18:40 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 7.23 ms (3)
+Jan 12 23:18:40 symfony [info] {sfWebResponse} Send content (49967 o)
+Jan 12 23:18:43 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/delete/ with parameters array (  'module' => 'platform',  'action' => 'delete',)
+Jan 12 23:18:43 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:18:43 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:18:43 symfony [info] {platformActions} Call "platformActions->executeDelete()"
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getBaseDn = cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getFilter = (&(&(objectClass=top)(objectClass=organizationalRole))(objectClass=miniPlatform))
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::doDelete} deleting = cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::doDelete} deleting = ou=Organizations,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::doDelete} deleting = ou=Servers,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::doDelete} deleting = ou=SecurityGroups,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::doDelete} deleting = cn=OrganizationAdmin,ou=SecurityGroups,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::doDelete} deleting = cn=ServerAdmin,ou=SecurityGroups,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:43 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:18:43 symfony [info] {platformActions} Change template to "CURRENT/"
+Jan 12 23:18:43 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/exception/sfException.class.php on line 105 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/apps/admin/modules/platform/actions/actions.class.php:154))
+Jan 12 23:18:43 symfony [err] {sfRenderException} The template "Success.php" does not exist or is unreadable in "".
+Jan 12 23:18:43 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/exception/sfException.class.php on line 159 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/apps/admin/modules/platform/actions/actions.class.php:154))
+Jan 12 23:18:43 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/response/sfWebResponse.class.php on line 336 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/apps/admin/modules/platform/actions/actions.class.php:154))
+Jan 12 23:18:43 symfony [info] {sfWebResponse} Send status "HTTP/1.1 500 Internal Server Error"
+Jan 12 23:18:43 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/response/sfWebResponse.class.php on line 357 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/apps/admin/modules/platform/actions/actions.class.php:154))
+Jan 12 23:18:43 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:18:43 symfony [info] {sfWebDebugLogger} Configuration 2.20 ms (10)
+Jan 12 23:18:43 symfony [info] {sfWebDebugLogger} Factories 9.65 ms (1)
+Jan 12 23:18:43 symfony [info] {sfWebDebugLogger} Action "platform/delete" 57.73 ms (1)
+Jan 12 23:18:43 symfony [info] {sfWebDebugLogger} View "Success" for "platform/delete" 36.26 ms (1)
+Jan 12 23:18:43 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:18:43 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:18:43 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:18:43 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:18:43 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:18:43 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:18:43 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:18:43 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:18:43 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:18:43 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:18:43 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:18:43 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:18:43 symfony [info] {sfWebDebugLogger} Configuration 2.23 ms (10)
+Jan 12 23:18:43 symfony [info] {sfWebDebugLogger} Factories 9.55 ms (1)
+Jan 12 23:18:43 symfony [info] {sfWebDebugLogger} Action "platform/index" 14.72 ms (1)
+Jan 12 23:18:43 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 13.63 ms (1)
+Jan 12 23:18:43 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 4.84 ms (2)
+Jan 12 23:18:43 symfony [info] {sfWebResponse} Send content (44706 o)
+Jan 12 23:19:22 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/new with parameters array (  'module' => 'platform',  'action' => 'new',)
+Jan 12 23:19:22 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:19:22 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:19:22 symfony [info] {platformActions} Call "platformActions->executeNew()"
+Jan 12 23:19:22 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/newSuccess.php"
+Jan 12 23:19:22 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:19:22 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:19:22 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:19:22 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:19:22 symfony [info] {sfWebDebugLogger} Configuration 47.32 ms (11)
+Jan 12 23:19:22 symfony [info] {sfWebDebugLogger} Factories 58.42 ms (1)
+Jan 12 23:19:22 symfony [info] {sfWebDebugLogger} Action "platform/new" 6.29 ms (1)
+Jan 12 23:19:22 symfony [info] {sfWebDebugLogger} View "Success" for "platform/new" 14.04 ms (1)
+Jan 12 23:19:22 symfony [info] {sfWebResponse} Send content (33165 o)
+Jan 12 23:19:25 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/check with parameters array (  'module' => 'platform',  'action' => 'check',)
+Jan 12 23:19:25 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:19:25 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:19:25 symfony [info] {platformActions} Call "platformActions->executeCheck()"
+Jan 12 23:19:25 symfony [info] {platformActions} Change template to "CURRENT/check"
+Jan 12 23:19:25 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:19:25 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #21
+Jan 12 23:19:25 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:25 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniPlatform)(cn=PrismaPresse))
+Jan 12 23:19:25 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:19:25 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:19:25 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:19:25 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:19:25 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:19:25 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/checkSuccess.php"
+Jan 12 23:19:25 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:19:25 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:19:25 symfony [info] {sfWebDebugLogger} Configuration 2.22 ms (10)
+Jan 12 23:19:25 symfony [info] {sfWebDebugLogger} Factories 10.16 ms (1)
+Jan 12 23:19:25 symfony [info] {sfWebDebugLogger} Action "platform/check" 5.71 ms (1)
+Jan 12 23:19:25 symfony [info] {sfWebDebugLogger} View "Success" for "platform/check" 4.02 ms (1)
+Jan 12 23:19:25 symfony [info] {sfWebResponse} Send content (135 o)
+Jan 12 23:19:26 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/new with parameters array (  'module' => 'platform',  'action' => 'new',)
+Jan 12 23:19:26 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:19:26 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:19:26 symfony [info] {platformActions} Call "platformActions->executeNew()"
+Jan 12 23:19:26 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:19:26 symfony [info] {platformActions} Change template to "CURRENT/"
+Jan 12 23:19:27 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:19:27 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:19:27 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:19:27 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:19:27 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:19:27 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:19:27 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:19:27 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:19:27 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:19:27 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:19:27 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:19:27 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:19:27 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:19:27 symfony [info] {sfWebDebugLogger} Configuration 2.30 ms (10)
+Jan 12 23:19:27 symfony [info] {sfWebDebugLogger} Factories 9.52 ms (1)
+Jan 12 23:19:27 symfony [info] {sfWebDebugLogger} Action "platform/index" 17.98 ms (1)
+Jan 12 23:19:27 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 16.23 ms (1)
+Jan 12 23:19:27 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 7.05 ms (3)
+Jan 12 23:19:27 symfony [info] {sfWebResponse} Send content (49844 o)
+Jan 12 23:19:29 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/status/ with parameters array (  'module' => 'platform',  'action' => 'status',)
+Jan 12 23:19:29 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:19:29 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:19:29 symfony [info] {platformActions} Call "platformActions->executeStatus()"
+Jan 12 23:19:29 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:19:29 symfony [info] {BaseLDAPeer::select} getBaseDn = cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:29 symfony [info] {BaseLDAPeer::select} getFilter = (&(&(objectClass=top)(objectClass=organizationalRole))(objectClass=miniPlatform))
+Jan 12 23:19:29 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:19:29 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:19:29 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:19:29 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:19:29 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:19:29 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:19:29 symfony [info] {platformActions} Change template to "CURRENT/"
+Jan 12 23:19:30 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:19:30 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:19:30 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:19:30 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:19:30 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:19:30 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:19:30 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:19:30 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:19:30 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:19:30 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:19:30 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:19:30 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:19:30 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:19:30 symfony [info] {sfWebDebugLogger} Configuration 2.21 ms (10)
+Jan 12 23:19:30 symfony [info] {sfWebDebugLogger} Factories 9.54 ms (1)
+Jan 12 23:19:30 symfony [info] {sfWebDebugLogger} Action "platform/index" 17.66 ms (1)
+Jan 12 23:19:30 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 16.41 ms (1)
+Jan 12 23:19:30 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 7.23 ms (3)
+Jan 12 23:19:30 symfony [info] {sfWebResponse} Send content (49967 o)
+Jan 12 23:19:32 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/delete/ with parameters array (  'module' => 'platform',  'action' => 'delete',)
+Jan 12 23:19:32 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:19:32 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:19:32 symfony [info] {platformActions} Call "platformActions->executeDelete()"
+Jan 12 23:19:32 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:19:32 symfony [info] {BaseLDAPeer::select} getBaseDn = cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:32 symfony [info] {BaseLDAPeer::select} getFilter = (&(&(objectClass=top)(objectClass=organizationalRole))(objectClass=miniPlatform))
+Jan 12 23:19:32 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:19:32 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:19:32 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:19:32 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:19:32 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:19:32 symfony [info] {BaseLDAPeer::doDelete} deleting = cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:32 symfony [info] {BaseLDAPeer::doDelete} deleting = ou=Organizations,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:32 symfony [info] {BaseLDAPeer::doDelete} deleting = ou=Servers,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:32 symfony [info] {BaseLDAPeer::doDelete} deleting = ou=SecurityGroups,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:32 symfony [info] {BaseLDAPeer::doDelete} deleting = cn=OrganizationAdmin,ou=SecurityGroups,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:32 symfony [info] {BaseLDAPeer::doDelete} deleting = cn=ServerAdmin,ou=SecurityGroups,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:42 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/delete/ with parameters array (  'module' => 'platform',  'action' => 'delete',)
+Jan 12 23:19:42 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:19:42 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:19:42 symfony [info] {platformActions} Call "platformActions->executeDelete()"
+Jan 12 23:19:42 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:19:42 symfony [info] {BaseLDAPeer::select} getBaseDn = cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:19:42 symfony [info] {BaseLDAPeer::select} getFilter = (&(&(objectClass=top)(objectClass=organizationalRole))(objectClass=miniPlatform))
+Jan 12 23:19:42 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:19:42 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:19:42 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:19:42 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:19:42 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:19:42 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/ldap/base/BaseLDAPeer.class.php on line 179 (ldap_read() [<a href='function.ldap-read'>function.ldap-read</a>]: Search: No such object)
+Jan 12 23:19:42 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/exception/sfException.class.php on line 105 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/lib/ldap/base/BaseLDAPeer.class.php:179))
+Jan 12 23:19:42 symfony [err] {Exception} No such object
+Jan 12 23:19:42 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/exception/sfException.class.php on line 159 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/lib/ldap/base/BaseLDAPeer.class.php:179))
+Jan 12 23:19:42 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/response/sfWebResponse.class.php on line 336 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/lib/ldap/base/BaseLDAPeer.class.php:179))
+Jan 12 23:19:42 symfony [info] {sfWebResponse} Send status "HTTP/1.1 500 Internal Server Error"
+Jan 12 23:19:42 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/response/sfWebResponse.class.php on line 357 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/lib/ldap/base/BaseLDAPeer.class.php:179))
+Jan 12 23:19:42 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:19:42 symfony [info] {sfWebDebugLogger} Configuration 1.99 ms (9)
+Jan 12 23:19:42 symfony [info] {sfWebDebugLogger} Factories 9.61 ms (1)
+Jan 12 23:19:42 symfony [info] {sfWebDebugLogger} Action "platform/delete" 41.50 ms (1)
+Jan 12 23:20:04 symfony [err] {sfError404Exception} Empty module and/or action after parsing the URL "/platform/" (/).
+Jan 12 23:20:04 symfony [info] {sfWebResponse} Send status "HTTP/1.1 404 Not Found"
+Jan 12 23:20:04 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:20:04 symfony [info] {sfWebDebugLogger} Configuration 1.30 ms (6)
+Jan 12 23:20:04 symfony [info] {sfWebDebugLogger} Factories 9.07 ms (1)
+Jan 12 23:20:08 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:20:08 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:20:08 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:20:08 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:20:08 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:20:08 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:20:08 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:20:08 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:20:08 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:20:08 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:20:08 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:20:08 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:20:08 symfony [info] {sfWebDebugLogger} Configuration 2.21 ms (10)
+Jan 12 23:20:08 symfony [info] {sfWebDebugLogger} Factories 9.68 ms (1)
+Jan 12 23:20:08 symfony [info] {sfWebDebugLogger} Action "platform/index" 15.09 ms (1)
+Jan 12 23:20:08 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 13.48 ms (1)
+Jan 12 23:20:08 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 4.89 ms (2)
+Jan 12 23:20:08 symfony [info] {sfWebResponse} Send content (44458 o)
+Jan 12 23:20:10 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/new with parameters array (  'module' => 'platform',  'action' => 'new',)
+Jan 12 23:20:10 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:20:10 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:20:10 symfony [info] {platformActions} Call "platformActions->executeNew()"
+Jan 12 23:20:10 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/newSuccess.php"
+Jan 12 23:20:10 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:20:10 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:20:10 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:20:10 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:20:10 symfony [info] {sfWebDebugLogger} Configuration 2.21 ms (10)
+Jan 12 23:20:10 symfony [info] {sfWebDebugLogger} Factories 9.55 ms (1)
+Jan 12 23:20:10 symfony [info] {sfWebDebugLogger} Action "platform/new" 5.23 ms (1)
+Jan 12 23:20:10 symfony [info] {sfWebDebugLogger} View "Success" for "platform/new" 12.66 ms (1)
+Jan 12 23:20:10 symfony [info] {sfWebResponse} Send content (33160 o)
+Jan 12 23:21:34 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/check with parameters array (  'module' => 'platform',  'action' => 'check',)
+Jan 12 23:21:34 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:21:34 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:21:34 symfony [info] {platformActions} Call "platformActions->executeCheck()"
+Jan 12 23:21:34 symfony [info] {platformActions} Change template to "CURRENT/check"
+Jan 12 23:21:34 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:21:34 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:21:34 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:34 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniPlatform)(cn=PrismaPresse))
+Jan 12 23:21:34 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:21:34 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:21:34 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:21:34 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:21:34 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:21:34 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/checkSuccess.php"
+Jan 12 23:21:34 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:21:34 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:21:34 symfony [info] {sfWebDebugLogger} Configuration 2.19 ms (10)
+Jan 12 23:21:34 symfony [info] {sfWebDebugLogger} Factories 10.18 ms (1)
+Jan 12 23:21:34 symfony [info] {sfWebDebugLogger} Action "platform/check" 4.64 ms (1)
+Jan 12 23:21:34 symfony [info] {sfWebDebugLogger} View "Success" for "platform/check" 4.35 ms (1)
+Jan 12 23:21:34 symfony [info] {sfWebResponse} Send content (135 o)
+Jan 12 23:21:35 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/new with parameters array (  'module' => 'platform',  'action' => 'new',)
+Jan 12 23:21:35 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:21:35 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:21:35 symfony [info] {platformActions} Call "platformActions->executeNew()"
+Jan 12 23:21:35 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:21:35 symfony [info] {platformActions} Change template to "CURRENT/"
+Jan 12 23:21:37 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:21:37 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:21:37 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:21:37 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:21:37 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:21:37 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:21:37 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:21:37 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:21:37 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:21:37 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:21:37 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:21:37 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:21:37 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:21:37 symfony [info] {sfWebDebugLogger} Configuration 2.26 ms (10)
+Jan 12 23:21:37 symfony [info] {sfWebDebugLogger} Factories 9.58 ms (1)
+Jan 12 23:21:37 symfony [info] {sfWebDebugLogger} Action "platform/index" 17.74 ms (1)
+Jan 12 23:21:37 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 16.09 ms (1)
+Jan 12 23:21:37 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 7.02 ms (3)
+Jan 12 23:21:37 symfony [info] {sfWebResponse} Send content (49874 o)
+Jan 12 23:21:41 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/status/ with parameters array (  'module' => 'platform',  'action' => 'status',)
+Jan 12 23:21:41 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:21:41 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:21:41 symfony [info] {platformActions} Call "platformActions->executeStatus()"
+Jan 12 23:21:41 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:21:41 symfony [info] {BaseLDAPeer::select} getBaseDn = cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:41 symfony [info] {BaseLDAPeer::select} getFilter = (&(&(objectClass=top)(objectClass=organizationalRole))(objectClass=miniPlatform))
+Jan 12 23:21:41 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:21:41 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:21:41 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:21:41 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:21:41 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:21:41 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:21:41 symfony [info] {platformActions} Change template to "CURRENT/"
+Jan 12 23:21:43 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:21:43 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:21:43 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:21:43 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:21:43 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:21:43 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:21:43 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:21:43 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:21:43 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:21:43 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:21:43 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:21:43 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:21:43 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:21:43 symfony [info] {sfWebDebugLogger} Configuration 2.19 ms (10)
+Jan 12 23:21:43 symfony [info] {sfWebDebugLogger} Factories 9.53 ms (1)
+Jan 12 23:21:43 symfony [info] {sfWebDebugLogger} Action "platform/index" 17.64 ms (1)
+Jan 12 23:21:43 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 16.25 ms (1)
+Jan 12 23:21:43 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 7.14 ms (3)
+Jan 12 23:21:43 symfony [info] {sfWebResponse} Send content (49997 o)
+Jan 12 23:21:46 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/delete/ with parameters array (  'module' => 'platform',  'action' => 'delete',)
+Jan 12 23:21:46 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:21:46 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:21:46 symfony [info] {platformActions} Call "platformActions->executeDelete()"
+Jan 12 23:21:46 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:21:46 symfony [info] {BaseLDAPeer::select} getBaseDn = cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:46 symfony [info] {BaseLDAPeer::select} getFilter = (&(&(objectClass=top)(objectClass=organizationalRole))(objectClass=miniPlatform))
+Jan 12 23:21:46 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:21:46 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:21:46 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:21:46 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:21:46 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:21:46 symfony [info] {BaseLDAPeer::doDelete} deleting = cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:46 symfony [info] {BaseLDAPeer::doDelete} deleting = ou=Organizations,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:46 symfony [info] {BaseLDAPeer::doDelete} deleting = ou=Servers,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:46 symfony [info] {BaseLDAPeer::doDelete} deleting = ou=SecurityGroups,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:46 symfony [info] {BaseLDAPeer::doDelete} deleting = cn=OrganizationAdmin,ou=SecurityGroups,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:46 symfony [info] {BaseLDAPeer::doDelete} deleting = cn=ServerAdmin,ou=SecurityGroups,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:21:46 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:21:46 symfony [info] {platformActions} Change template to "CURRENT/"
+Jan 12 23:21:46 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/exception/sfException.class.php on line 105 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/apps/admin/modules/platform/actions/actions.class.php:154))
+Jan 12 23:21:46 symfony [err] {sfRenderException} The template "Success.php" does not exist or is unreadable in "".
+Jan 12 23:21:46 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/exception/sfException.class.php on line 159 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/apps/admin/modules/platform/actions/actions.class.php:154))
+Jan 12 23:21:46 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/response/sfWebResponse.class.php on line 336 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/apps/admin/modules/platform/actions/actions.class.php:154))
+Jan 12 23:21:46 symfony [info] {sfWebResponse} Send status "HTTP/1.1 500 Internal Server Error"
+Jan 12 23:21:46 symfony [warning] {sfWebDebugLogger}  Warning at /opt/WebSites/MinivISP/lib/vendor/symfony/lib/response/sfWebResponse.class.php on line 357 (Cannot modify header information - headers already sent by (output started at /opt/WebSites/MinivISP/apps/admin/modules/platform/actions/actions.class.php:154))
+Jan 12 23:21:46 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:21:46 symfony [info] {sfWebDebugLogger} Configuration 2.39 ms (10)
+Jan 12 23:21:46 symfony [info] {sfWebDebugLogger} Factories 13.24 ms (1)
+Jan 12 23:21:46 symfony [info] {sfWebDebugLogger} Action "platform/delete" 92.17 ms (1)
+Jan 12 23:21:46 symfony [info] {sfWebDebugLogger} View "Success" for "platform/delete" 38.07 ms (1)
+Jan 12 23:22:38 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:22:38 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:22:38 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:22:38 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:38 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:38 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:22:38 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:22:38 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:22:38 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:22:38 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:22:38 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:22:38 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:22:38 symfony [info] {sfWebDebugLogger} Configuration 2.25 ms (10)
+Jan 12 23:22:38 symfony [info] {sfWebDebugLogger} Factories 10.17 ms (1)
+Jan 12 23:22:38 symfony [info] {sfWebDebugLogger} Action "platform/index" 14.54 ms (1)
+Jan 12 23:22:38 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 13.79 ms (1)
+Jan 12 23:22:38 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 4.83 ms (2)
+Jan 12 23:22:38 symfony [info] {sfWebResponse} Send content (44737 o)
+Jan 12 23:22:40 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/new with parameters array (  'module' => 'platform',  'action' => 'new',)
+Jan 12 23:22:40 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:22:40 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:22:40 symfony [info] {platformActions} Call "platformActions->executeNew()"
+Jan 12 23:22:40 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/newSuccess.php"
+Jan 12 23:22:40 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:22:40 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:22:40 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:22:40 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:22:40 symfony [info] {sfWebDebugLogger} Configuration 2.18 ms (10)
+Jan 12 23:22:40 symfony [info] {sfWebDebugLogger} Factories 53.10 ms (1)
+Jan 12 23:22:40 symfony [info] {sfWebDebugLogger} Action "platform/new" 5.22 ms (1)
+Jan 12 23:22:40 symfony [info] {sfWebDebugLogger} View "Success" for "platform/new" 11.60 ms (1)
+Jan 12 23:22:40 symfony [info] {sfWebResponse} Send content (33162 o)
+Jan 12 23:22:44 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/check with parameters array (  'module' => 'platform',  'action' => 'check',)
+Jan 12 23:22:44 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:22:44 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:22:44 symfony [info] {platformActions} Call "platformActions->executeCheck()"
+Jan 12 23:22:44 symfony [info] {platformActions} Change template to "CURRENT/check"
+Jan 12 23:22:44 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:22:44 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:44 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:44 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniPlatform)(cn=PrismaPresse))
+Jan 12 23:22:44 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:44 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:44 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:44 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:44 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:44 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/checkSuccess.php"
+Jan 12 23:22:44 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:22:44 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:22:44 symfony [info] {sfWebDebugLogger} Configuration 2.19 ms (10)
+Jan 12 23:22:44 symfony [info] {sfWebDebugLogger} Factories 9.62 ms (1)
+Jan 12 23:22:44 symfony [info] {sfWebDebugLogger} Action "platform/check" 4.36 ms (1)
+Jan 12 23:22:44 symfony [info] {sfWebDebugLogger} View "Success" for "platform/check" 4.00 ms (1)
+Jan 12 23:22:44 symfony [info] {sfWebResponse} Send content (135 o)
+Jan 12 23:22:44 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/new with parameters array (  'module' => 'platform',  'action' => 'new',)
+Jan 12 23:22:44 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:22:44 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:22:44 symfony [info] {platformActions} Call "platformActions->executeNew()"
+Jan 12 23:22:45 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:22:45 symfony [info] {platformActions} Change template to "CURRENT/"
+Jan 12 23:22:47 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:22:47 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:22:47 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:22:47 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:47 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:47 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:22:47 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:22:47 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:22:47 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:22:47 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:22:47 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:22:47 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:22:47 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:22:47 symfony [info] {sfWebDebugLogger} Configuration 2.17 ms (10)
+Jan 12 23:22:47 symfony [info] {sfWebDebugLogger} Factories 9.59 ms (1)
+Jan 12 23:22:47 symfony [info] {sfWebDebugLogger} Action "platform/index" 17.75 ms (1)
+Jan 12 23:22:47 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 16.15 ms (1)
+Jan 12 23:22:47 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 6.98 ms (3)
+Jan 12 23:22:47 symfony [info] {sfWebResponse} Send content (49874 o)
+Jan 12 23:22:50 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/status/ with parameters array (  'module' => 'platform',  'action' => 'status',)
+Jan 12 23:22:50 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:22:50 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:22:50 symfony [info] {platformActions} Call "platformActions->executeStatus()"
+Jan 12 23:22:50 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:50 symfony [info] {BaseLDAPeer::select} getBaseDn = cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:50 symfony [info] {BaseLDAPeer::select} getFilter = (&(&(objectClass=top)(objectClass=organizationalRole))(objectClass=miniPlatform))
+Jan 12 23:22:50 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:50 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:50 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:50 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:50 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:50 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:22:50 symfony [info] {platformActions} Change template to "CURRENT/"
+Jan 12 23:22:51 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:22:51 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:22:51 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:22:51 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:51 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:51 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:22:51 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:22:51 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:22:51 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:22:51 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:22:51 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:22:51 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:22:51 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:22:51 symfony [info] {sfWebDebugLogger} Configuration 2.19 ms (10)
+Jan 12 23:22:51 symfony [info] {sfWebDebugLogger} Factories 9.59 ms (1)
+Jan 12 23:22:51 symfony [info] {sfWebDebugLogger} Action "platform/index" 17.60 ms (1)
+Jan 12 23:22:51 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 16.41 ms (1)
+Jan 12 23:22:51 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 7.27 ms (3)
+Jan 12 23:22:51 symfony [info] {sfWebResponse} Send content (49997 o)
+Jan 12 23:22:55 symfony [info] {sfPatternRouting} Match route "default" (/:module/:action/*) for /platform/delete/ with parameters array (  'module' => 'platform',  'action' => 'delete',)
+Jan 12 23:22:55 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:22:55 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:22:55 symfony [info] {platformActions} Call "platformActions->executeDelete()"
+Jan 12 23:22:55 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:55 symfony [info] {BaseLDAPeer::select} getBaseDn = cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:55 symfony [info] {BaseLDAPeer::select} getFilter = (&(&(objectClass=top)(objectClass=organizationalRole))(objectClass=miniPlatform))
+Jan 12 23:22:55 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:55 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:55 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:55 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:55 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:55 symfony [info] {BaseLDAPeer::doDelete} deleting = cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:55 symfony [info] {BaseLDAPeer::doDelete} deleting = ou=Organizations,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:55 symfony [info] {BaseLDAPeer::doDelete} deleting = ou=Servers,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:55 symfony [info] {BaseLDAPeer::doDelete} deleting = ou=SecurityGroups,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:55 symfony [info] {BaseLDAPeer::doDelete} deleting = cn=OrganizationAdmin,ou=SecurityGroups,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:55 symfony [info] {BaseLDAPeer::doDelete} deleting = cn=ServerAdmin,ou=SecurityGroups,cn=PrismaPresse,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:55 symfony [info] {platformActions} Change layout to ""
+Jan 12 23:22:55 symfony [info] {platformActions} Change template to "CURRENT/"
+Jan 12 23:22:56 symfony [info] {sfPatternRouting} Match route "homepage" (/) for / with parameters array (  'module' => 'platform',  'action' => 'index',)
+Jan 12 23:22:56 symfony [info] {sfFilterChain} Executing filter "sfRenderingFilter"
+Jan 12 23:22:56 symfony [info] {sfFilterChain} Executing filter "sfExecutionFilter"
+Jan 12 23:22:56 symfony [info] {platformActions} Call "platformActions->executeIndex()"
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getFilter = (objectClass=miniPlatform)
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getLinkId = Resource id #20
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getBaseDn = ou=Organizations,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getFilter = (&(objectClass=miniCompany)(cn=*))
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getAttributes = 
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getAttrsonly = 0
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getSizelimit = 0
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getTimelimit = 0
+Jan 12 23:22:56 symfony [info] {BaseLDAPeer::select} getDeref = 0
+Jan 12 23:22:56 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/indexSuccess.php"
+Jan 12 23:22:56 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:22:56 symfony [info] {sfPartialView} Render "/opt/WebSites/MinivISP/apps/admin/modules/platform/templates/_platform.php"
+Jan 12 23:22:56 symfony [info] {sfPHPView} Decorate content with "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:22:56 symfony [info] {sfPHPView} Render "/opt/WebSites/MinivISP/apps/admin/templates/layout.php"
+Jan 12 23:22:56 symfony [info] {sfWebResponse} Send status "HTTP/1.1 200 OK"
+Jan 12 23:22:56 symfony [info] {sfWebResponse} Send header "Content-Type: text/html; charset=utf-8"
+Jan 12 23:22:56 symfony [info] {sfWebDebugLogger} Configuration 2.95 ms (10)
+Jan 12 23:22:56 symfony [info] {sfWebDebugLogger} Factories 10.38 ms (1)
+Jan 12 23:22:56 symfony [info] {sfWebDebugLogger} Action "platform/index" 14.54 ms (1)
+Jan 12 23:22:56 symfony [info] {sfWebDebugLogger} View "Success" for "platform/index" 13.54 ms (1)
+Jan 12 23:22:56 symfony [info] {sfWebDebugLogger} Partial "platform/_platform" 4.90 ms (2)
+Jan 12 23:22:56 symfony [info] {sfWebResponse} Send content (44737 o)

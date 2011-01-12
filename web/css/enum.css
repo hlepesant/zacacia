@@ -1,0 +1,102 @@
+#enum {
+  padding-top: 3px;
+}
+#enum.table
+{
+  width: 700px;
+  margin: 0em;
+  padding: 0em;
+  margin-left: auto;
+}
+
+#enum.linkto
+{
+  margin: 0em;
+  padding: 0em;
+  text-align: right;
+}
+
+#enum.linkto img
+{
+padding: 3px;
+border: solid 0px #ffffff;
+}
+
+#enum.th
+{
+  width: 100%;
+  margin: 0em;
+  padding: 0em;
+}
+
+#enum.thtitle
+{
+  width: 79%;
+  text-align: left;
+  float: left;
+  clear: both;
+  font-family: "trebuchet ms", helvetica, sans-serif;
+  font-size: 1.6em;
+  font-weight: bold;
+}
+
+#enum.thaction
+{
+  width: 20%;
+  text-align: right;
+  float: right;
+  clear: right;
+  font-family: "trebuchet ms", helvetica, sans-serif;
+  font-size: 1.6em;
+  font-weight: bold;
+}
+
+#enum.td
+{
+  width: 100%;
+  margin: 0em;
+  padding: 0em;
+}
+
+#enum.tdtext
+{
+  width: 79%;
+  text-align: left;
+  float: left;
+  clear: both;
+}
+
+#enum.tdtextenable
+{
+  width: 79%;
+  text-align: left;
+  float: left;
+  clear: both;
+  color: green;
+  font-weight: bold;
+}
+
+#enum.tdtextdisable
+{
+  width: 80%;
+  text-align: left;
+  float: left;
+  clear: both;
+  color: red;
+  font-weight: bold;
+}
+
+#enum.navigation
+{
+  width: 20%;
+  text-align: right;
+  float: right;
+  clear: right;
+  background-color: white;
+}
+
+#enum.warning {
+background:url("/images/warn.gif") no-repeat scroll 0 15px transparent;
+font-weight:bold;
+padding:0.5em 0.5em 1em 28px;
+}
