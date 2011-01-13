@@ -1,102 +1,122 @@
-#enum {
-  padding-top: 3px;
-}
-#enum.table
+#enum
 {
-  width: 700px;
-  margin: 0em;
-  padding: 0em;
-  margin-left: auto;
+    padding-top: 3px;
+}
+
+#enum.navbar
+{
+    width: 700px;
+    margin: 0em;
+    padding: 0em;
+    margin-left: auto;
 }
 
 #enum.linkto
 {
+    margin: 0em;
+    padding: 0em;
+    text-align: right;
+}
+
+#enum.collection
+{
+    width: 700px;
+    margin: 0em;
+    padding: 0em;
+    margin-left: auto;
+}
+
+#enum.title
+{
+    width: 700px;
+    height: 30px;
+    margin: 0em;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #003366;
+    color: #ffffff;
+}
+
+#enum.name
+{
+    width: 500px;
+    text-align: left;
+    font-family: "trebuchet ms", helvetica, sans-serif;
+    font-size: 1.6em;
+    font-weight: bold;
+    float: left;
+    clear: right;
+}
+
+#enum.action
+{
+    width: 200px;
+    text-align: right;
+    font-family: "trebuchet ms", helvetica, sans-serif;
+    font-size: 1.6em;
+    font-weight: bold;
+    float: right;
+    clear: right;
+}
+
+#enum.line_light
+{
+  width: 700px;
+  height: 25px;
   margin: 0em;
   padding: 0em;
-  text-align: right;
+  background-color: #FFF8DC;
 }
 
-#enum.linkto img
+#enum.line_dark
 {
-padding: 3px;
-border: solid 0px #ffffff;
+    width: 700px;
+    height: 25px;
+    margin: 0em;
+    padding: 0em;
+    background-color: #F3EFE0;
 }
 
-#enum.th
+#enum.enable
 {
-  width: 100%;
-  margin: 0em;
-  padding: 0em;
+    width: 500px;
+    height: 25px;
+    text-align: left;
+    color: green;
+    font-weight: bold;
+    float: left;
+    clear: both;
 }
 
-#enum.thtitle
+#enum.disable
 {
-  width: 79%;
-  text-align: left;
-  float: left;
-  clear: both;
-  font-family: "trebuchet ms", helvetica, sans-serif;
-  font-size: 1.6em;
-  font-weight: bold;
-}
-
-#enum.thaction
-{
-  width: 20%;
-  text-align: right;
-  float: right;
-  clear: right;
-  font-family: "trebuchet ms", helvetica, sans-serif;
-  font-size: 1.6em;
-  font-weight: bold;
-}
-
-#enum.td
-{
-  width: 100%;
-  margin: 0em;
-  padding: 0em;
-}
-
-#enum.tdtext
-{
-  width: 79%;
-  text-align: left;
-  float: left;
-  clear: both;
-}
-
-#enum.tdtextenable
-{
-  width: 79%;
-  text-align: left;
-  float: left;
-  clear: both;
-  color: green;
-  font-weight: bold;
-}
-
-#enum.tdtextdisable
-{
-  width: 80%;
-  text-align: left;
-  float: left;
-  clear: both;
-  color: red;
-  font-weight: bold;
+    width: 500px;
+    height: 25px;
+    text-align: left;
+    color: red;
+    font-weight: bold;
+    float: left;
+    clear: both;
 }
 
 #enum.navigation
 {
-  width: 20%;
-  text-align: right;
-  float: right;
-  clear: right;
-  background-color: white;
+    width: 200px;
+    height: 25px;
+    text-align: right;
+    float: right;
+    clear: right;
 }
 
-#enum.warning {
-background:url("/images/warn.gif") no-repeat scroll 0 15px transparent;
-font-weight:bold;
-padding:0.5em 0.5em 1em 28px;
+#enum.linkto img
+{
+    padding: 3px;
+    border: solid 0px #ffffff;
+}
+
+#enum.warning
+{
+    background:url("/images/warn.gif") no-repeat scroll 0 15px transparent;
+    font-weight:bold;
+    padding:0.5em 0.5em 1em 28px;
 }

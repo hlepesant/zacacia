@@ -1,14 +1,17 @@
 <h3><?php echo __('Platforms') ;?></h3>
 
-<div id="enum" class="table">
+<div id="enum" class="navbar">
   <div id="enum" class="linkto">
   <?php echo link_to_function(image_tag('icons/world_add.png'), "document.getElementById('platform_new').submit()") ?> 
   </div>
+</div>
 
-  <div id="enum" class="th">
-    <div id="enum" class="thtitle"><?php echo __("Name") ?></div>
-    <div id="enum" class="thaction"><?php echo __("Action") ?></div>
-  </div>
+<div id="enum" class="collection">
+    <div id="enum" class="title">
+        <div id="enum" class="name"><?php echo __("Name") ?></div>
+        <div id="enum" class="action"><?php echo __("Action") ?></div>
+    </div>
+
 <?php
   $id = 0;
   foreach ($platforms as $p):
