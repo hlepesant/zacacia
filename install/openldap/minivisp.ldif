@@ -2,8 +2,8 @@ dn: dc=minivisp,dc=org
 objectClass: top
 objectClass: dcObject
 objectClass: organization
-o: dedibox.fr
-dc: dedibox
+o: minivisp.org
+dc: minivisp
 structuralObjectClass: organization
 entryUUID: f1c6d242-8483-102f-95e7-1dc2c00caac7
 creatorsName:
@@ -90,7 +90,7 @@ modifiersName: cn=admin,dc=minivisp,dc=org
 modifyTimestamp: 20101117050833Z
 
 dn: cn=mail.lepesant.com,ou=Servers,cn=miniPlatform,ou=Platforms,ou=MinivISP,d
- c=dedibox,dc=fr
+ c=minivisp,dc=org
 cn: mail.lepesant.com
 structuralObjectClass: organizationalRole
 entryUUID: a7132688-8654-102f-970f-1ff5f122f2e9
@@ -103,8 +103,7 @@ entryCSN: 20101117051014.330953Z#000000#000#000000
 modifiersName: cn=admin,dc=minivisp,dc=org
 modifyTimestamp: 20101117051014Z
 
-dn: cn=Lepesant,ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=d
- edibox,dc=fr
+dn: cn=Lepesant,ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=minivisp,dc=org
 cn: Lepesant
 structuralObjectClass: organizationalRole
 entryUUID: b5be8b04-8655-102f-9710-1ff5f122f2e9
@@ -119,8 +118,7 @@ entryCSN: 20110101084557.299407Z#000000#000#000000
 modifiersName: cn=admin,dc=minivisp,dc=org
 modifyTimestamp: 20110101084557Z
 
-dn: ou=Users,cn=Lepesant,ou=Organizations,cn=miniPlatform,ou=Platforms,ou=Mini
- vISP,dc=minivisp,dc=org
+dn: ou=Users,cn=Lepesant,ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=minivisp,dc=org
 ou: Users
 objectClass: organizationalUnit
 objectClass: top
@@ -221,8 +219,7 @@ entryCSN: 20101117055446.664779Z#000000#000#000000
 modifiersName: cn=admin,dc=minivisp,dc=org
 modifyTimestamp: 20101117055446Z
 
-dn: ou=SecurityGroups,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedibox,dc=f
- r
+dn: ou=SecurityGroups,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=minivisp,dc=org
 ou: SecurityGroups
 objectClass: organizationalUnit
 objectClass: top
@@ -364,8 +361,7 @@ entryCSN: 20101118070613.713744Z#000000#000#000000
 modifiersName: cn=admin,dc=minivisp,dc=org
 modifyTimestamp: 20101118070613Z
 
-dn: cn=MIST,ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=dedib
- ox,dc=fr
+dn: cn=MIST,ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=minivisp,dc=org
 cn: MIST
 zarafaAccount: 1
 structuralObjectClass: organizationalRole
@@ -380,8 +376,7 @@ entryCSN: 20110101084915.982050Z#000000#000#000000
 modifiersName: cn=admin,dc=minivisp,dc=org
 modifyTimestamp: 20110101084915Z
 
-dn: ou=Contacts,cn=MIST,ou=Organizations,cn=miniPlatform,ou=Platforms,ou=Miniv
- ISP,dc=minivisp,dc=org
+dn: ou=Contacts,cn=MIST,ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=minivisp,dc=org
 objectClass: organizationalUnit
 objectClass: top
 ou: Contacts
@@ -393,8 +388,7 @@ entryCSN: 20101117063223.570246Z#000000#000#000000
 modifiersName: cn=admin,dc=minivisp,dc=org
 modifyTimestamp: 20101117063223Z
 
-dn: ou=Domains,cn=MIST,ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivI
- SP,dc=minivisp,dc=org
+dn: ou=Domains,cn=MIST,ou=Organizations,cn=miniPlatform,ou=Platforms,ou=MinivISP,dc=minivisp,dc=org
 objectClass: organizationalUnit
 objectClass: top
 ou: Domains
@@ -773,8 +767,7 @@ entryCSN: 20110101083345.876765Z#000000#000#000000
 modifiersName: cn=admin,dc=minivisp,dc=org
 modifyTimestamp: 20110101083345Z
 
-dn: cn=ServerAdmin,ou=SecurityGroups,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=d
- edibox,dc=fr
+dn: cn=ServerAdmin,ou=SecurityGroups,cn=Lepesant,ou=Platforms,ou=MinivISP,dc=minivisp,dc=org
 cn: ServerAdmin
 objectClass: top
 objectClass: miniSecurityGroup
