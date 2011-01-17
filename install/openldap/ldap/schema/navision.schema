@@ -1,0 +1,58 @@
+#
+# navision.schema
+#
+# NavisionERP Schema
+# OIDs are owned by NavisionERP
+#
+# Written 2010-08-25 by Hugues Lepesant <hlepesant =AT= veepee -DOT- com>
+#
+#
+# 1.3.6.1.4.1.28948.3.x     - System
+# 1.3.6.1.4.1.28948.3.9.x   - Directory
+# 1.3.6.1.4.1.28948.3.9.1.x - VeeGas attributetype
+# 1.3.6.1.4.1.28948.3.9.2.x - VeeGas objectclasses
+# 1.3.6.1.4.1.28948.3.9.3.x - Navision attributetype
+# 1.3.6.1.4.1.28948.3.9.4.x - Navision objectclasses
+#
+# NavisionERPOID
+
+objectIdentifier navisionOID 1.3.6.1.4.1.28948.3
+objectIdentifier navisionAttributeType navisionOID:9.3
+objectIdentifier navisionObjectClass navisionOID:9.4
+
+
+## attributeType ##
+
+attributetype ( navisionAttributeType:1 NAME 'navisionStatus'
+  DESC 'NavisionERP: Object Status (new, deleted, updated, enable, ...).'
+  EQUALITY caseIgnoreIA5Match
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( navisionAttributeType:2 NAME 'navisionErpId'
+  DESC 'NavisionERP: Object single id'
+  EQUALITY integerMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
+## objectClass ##
+
+objectclass ( navisionObjectClass:1 NAME 'navisionGroup'
+	DESC 'NavisionERP Group'
+	SUP top
+	AUXILIARY
+	MUST ( cn )
+	MAY ( navisionErpId $ navisionStatus ) )
+
+objectclass ( navisionObjectClass:2 NAME 'navisionSociete'
+	DESC 'NavisionERP Contact de type Societe'
+	SUP top
+	AUXILIARY
+	MUST ( cn )
+	MAY ( navisionErpId $ navisionStatus ) )
+
+objectclass ( navisionObjectClass:3 NAME 'navisionContact'
+	DESC 'NavisionERP Contact de type Personne'
+	SUP top
+	AUXILIARY
+	MUST ( uid )
+	MAY ( navisionErpId $ navisionStatus ) )
+

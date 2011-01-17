@@ -1,0 +1,82 @@
+#
+# minivisp.schema
+#
+# MinivISP Schema
+# OIDs are owned by Zarafa
+#
+# Written 2010-08-25 by Hugues Lepesant <hugues =AT= lepesant -DOT- com>
+#
+#
+# 1.3.6.1.4.1.26278.2.1.x   - Directory
+# 1.3.6.1.4.1.26278.2.1.1.x - attributetype
+# 1.3.6.1.4.1.26278.2.1.2.x - objectclasses
+#
+# MinivISPOID
+
+objectIdentifier zarafaPrefix 1.3.6.1.4.1.26278
+objectIdentifier miniAttributeType zarafaPrefix:2.1
+objectIdentifier miniObjectClass zarafaPrefix:2.2
+
+
+## attributeType ##
+
+attributetype ( miniAttributeType:1 NAME 'miniStatus'
+  DESC 'MinivISP: Node Status (new, deleted, updated, enable, ...).'
+  EQUALITY caseIgnoreIA5Match
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( miniAttributeType:2 NAME 'miniUnDeletable'
+  DESC 'MinivISP: object can be deleted using Web User Interface'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+
+## objectClass ##
+
+objectclass ( miniObjectClass:1 NAME 'miniSecurityGroup'
+	DESC 'MinivISP Security Group'
+	SUP top
+	STRUCTURAL
+	MUST ( cn )
+	MAY ( member ) )
+
+objectclass ( miniObjectClass:2 NAME 'miniPlatform'
+	DESC 'MinivISP Platform'
+	SUP top
+	AUXILIARY
+	MUST ( cn )
+	MAY ( miniStatus $ miniUnDeletable ) )
+
+objectclass ( miniObjectClass:3 NAME 'miniCompany'
+	DESC 'MinivISP Company'
+	SUP top
+	AUXILIARY
+	MUST ( cn )
+	MAY ( miniStatus $ miniUnDeletable ) )
+
+objectclass ( miniObjectClass:4 NAME 'miniDomain'
+	DESC 'MinivISP Domain'
+	SUP top
+	AUXILIARY
+	MUST ( cn )
+	MAY ( miniStatus ) )
+
+objectclass ( miniObjectClass:5 NAME 'miniGroup'
+	DESC 'MinivISP Group'
+	SUP top
+	AUXILIARY
+	MUST ( cn )
+	MAY ( miniStatus $ miniUnDeletable ) )
+
+objectclass ( miniObjectClass:6 NAME 'miniUser'
+	DESC 'MinivISP User'
+	SUP top
+	AUXILIARY
+	MUST ( uid )
+	MAY ( miniStatus $ miniUnDeletable ) )
+
+objectclass ( miniObjectClass:7 NAME 'miniForward'
+	DESC 'MinivISP forward'
+	SUP top STRUCTURAL
+    MUST ( mail ))
+#	MAY ( miniStatus $ miniUnDeletable ) )
+#	MAY ( mailForwardingAddress ) )

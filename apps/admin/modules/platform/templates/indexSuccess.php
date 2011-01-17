@@ -6,10 +6,10 @@
   </div>
 </div>
 
-<div id="enum" class="collection">
-    <div id="enum" class="title">
-        <div id="enum" class="name"><?php echo __("Name") ?></div>
-        <div id="enum" class="action"><?php echo __("Action") ?></div>
+<div id="enum">
+    <div id="enum" class="th">
+        <div id="enum" class="thtitle"><?php echo __("Name") ?></div>
+        <div id="enum" class="thaction"><?php echo __("Action") ?></div>
     </div>
 
 <?php

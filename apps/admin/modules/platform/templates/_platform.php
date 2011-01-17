@@ -1,10 +1,9 @@
-
-
-<div id="enum" class="line_<?php echo (($id & 1) ? 'dark' : 'light'); ?>">
-    <form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
-    <?php echo $f->renderHiddenFields() ?>
-    <div id="enum" class="<?php echo $p->getMiniStatus() ?>"><?php echo $p->getCn() ?></div>
-    <div id="enum" class="navigation">
+    <div id="enum" class="td">
+        <form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
+        <?php echo $f->renderHiddenFields() ?>
+            <div id="enum" class="<?php echo (($id & 1) ? 'dark' : 'light'); ?>">
+                <div id="enum" class="<?php echo $p->getMiniStatus() ?>"><?php echo $p->getCn() ?></div>
+                <div id="enum" class="navigation">
  <?php 
 switch( sfConfig::get('navigation_look') )
 {
@@ -27,7 +26,8 @@ switch( sfConfig::get('navigation_look') )
     break;
 }
 ?>
+                </div>
+            </div>
+        </form>
     </div>
-    </form>
-</div>
 <!-- next line bellow -->

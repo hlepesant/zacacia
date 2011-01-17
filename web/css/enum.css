@@ -1,117 +1,139 @@
-#enum
-{
-    padding-top: 3px;
+#enum {
+  padding-top: 3px;
 }
-
-#enum.navbar
+#enum.table
 {
-    width: 700px;
-    margin: 0em;
-    padding: 0em;
-    margin-left: auto;
+  width: 800px;
+  margin: 0em;
+  padding: 0em;
 }
 
 #enum.linkto
 {
-    margin: 0em;
-    padding: 0em;
-    text-align: right;
+  width: 800px;
+  margin: 0em;
+  padding: 0em;
+  text-align: right;
 }
 
-#enum.collection
+#enum.linkto img
 {
-    width: 700px;
-    margin: 0em;
-    padding: 0em;
-    margin-left: auto;
+padding: 3px;
+border: solid 0px #ffffff;
 }
 
-#enum.title
+#enum.th
 {
-    width: 700px;
-    height: 30px;
-    margin: 0em;
-    padding-left: 5px;
-    padding-right: 5px;
-    background-color: #003366;
-    color: #ffffff;
+  width: 800px;
+  margin: 0em;
+  padding: 0em;
+  background-color: #1E1E1E;
+  color: #FFFFFF;
+  float: left;
+  clear: both;
 }
 
-#enum.name
+#enum.thtitle
 {
-    width: 500px;
-    text-align: left;
-    font-family: "trebuchet ms", helvetica, sans-serif;
-    font-size: 1.6em;
-    font-weight: bold;
+  width: 120px;
+  text-align: left;
+  float: left;
+  clear: both;
+  font-family: "trebuchet ms", helvetica, sans-serif;
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+#enum.thaction
+{
+  width: 80px;
+  text-align: right;
+  float: right;
+  clear: right;
+  font-family: "trebuchet ms", helvetica, sans-serif;
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+#enum.td
+{
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  float: left;
+  clear: both;
+}
+
+#enum.dark
+{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-color: #E5E6CC;
     float: left;
     clear: right;
 }
 
-#enum.action
+#enum.light
 {
-    width: 200px;
-    text-align: right;
-    font-family: "trebuchet ms", helvetica, sans-serif;
-    font-size: 1.6em;
-    font-weight: bold;
-    float: right;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-color: #EBEBEB;
+    float: left;
     clear: right;
 }
 
-#enum.line_light
+/*
+#enum.tdtext
 {
-  width: 700px;
-  height: 25px;
-  margin: 0em;
-  padding: 0em;
-  background-color: #FFF8DC;
+  width: 80%;
+  text-align: left;
+  float: left;
+  clear: both;
 }
-
-#enum.line_dark
-{
-    width: 700px;
-    height: 25px;
-    margin: 0em;
-    padding: 0em;
-    background-color: #F3EFE0;
-}
+*/
 
 #enum.enable
 {
-    width: 500px;
-    height: 25px;
+    width: 400px;
     text-align: left;
     color: green;
     font-weight: bold;
     float: left;
     clear: both;
+    margin-left: 10px;
 }
 
 #enum.disable
 {
-    width: 500px;
-    height: 25px;
+    width: 400px;
     text-align: left;
     color: red;
     font-weight: bold;
     float: left;
     clear: both;
+    margin-left: 10px;
 }
 
 #enum.navigation
 {
-    width: 200px;
-    height: 25px;
-    text-align: right;
-    float: right;
-    clear: right;
+  width: 220px;
+  height: 20px;
+  text-align: right;
+  float: right;
+  clear: right;
+  padding: 5px;
 }
 
-#enum.linkto img
-{
-    padding: 3px;
-    border: solid 0px #ffffff;
+#enum.navigation select{
+    font: 9px "Microsoft Sans Serif" , Arial;
+    vertical-align: middle;
+    color: #000000;
+    background-color: #FFFFFF;
+    vertical-align: middle;
 }
 
 #enum.warning
