@@ -1,4 +1,5 @@
-#enum {
+#collection
+{
   padding-top: 3px;
 }
 #enum.table
@@ -8,7 +9,7 @@
   padding: 0em;
 }
 
-#enum.linkto
+#navlink
 {
   width: 800px;
   margin: 0em;
@@ -16,24 +17,27 @@
   text-align: right;
 }
 
-#enum.linkto img
+#navlink img
 {
-padding: 3px;
+padding: 1px;
 border: solid 0px #ffffff;
 }
 
-#enum.th
+#title
 {
   width: 800px;
+  height: 50px;
   margin: 0em;
   padding: 0em;
-  background-color: #1E1E1E;
+  /* background-color: #1E1E1E; */
   color: #FFFFFF;
+  background-image:url('/images/redbusiness/enum_top.png');
+  background-repeat:repeat-x;
   float: left;
   clear: both;
 }
 
-#enum.thtitle
+#title.description
 {
   width: 120px;
   text-align: left;
@@ -43,9 +47,10 @@ border: solid 0px #ffffff;
   font-size: 1.4em;
   font-weight: bold;
   margin-left: 10px;
+  padding-top: 10px;
 }
 
-#enum.thaction
+#title.navigation
 {
   width: 80px;
   text-align: right;
@@ -55,9 +60,10 @@ border: solid 0px #ffffff;
   font-size: 1.4em;
   font-weight: bold;
   margin-right: 10px;
+  padding-top: 10px;
 }
 
-#enum.td
+#line
 {
   width: 100%;
   margin: 0px;
@@ -66,7 +72,7 @@ border: solid 0px #ffffff;
   clear: both;
 }
 
-#enum.dark
+#line.dark
 {
     width: 100%;
     margin: 0px;
@@ -76,7 +82,7 @@ border: solid 0px #ffffff;
     clear: right;
 }
 
-#enum.light
+#line.light
 {
     width: 100%;
     margin: 0px;
@@ -86,17 +92,7 @@ border: solid 0px #ffffff;
     clear: right;
 }
 
-/*
-#enum.tdtext
-{
-  width: 80%;
-  text-align: left;
-  float: left;
-  clear: both;
-}
-*/
-
-#enum.enable
+#line.enable
 {
     width: 400px;
     text-align: left;
@@ -105,9 +101,10 @@ border: solid 0px #ffffff;
     float: left;
     clear: both;
     margin-left: 10px;
+    padding-top: 5px;
 }
 
-#enum.disable
+#line.disable
 {
     width: 400px;
     text-align: left;
@@ -116,19 +113,21 @@ border: solid 0px #ffffff;
     float: left;
     clear: both;
     margin-left: 10px;
+    padding-top: 5px;
 }
 
-#enum.navigation
+#line.navigation
 {
-  width: 220px;
-  height: 20px;
-  text-align: right;
-  float: right;
-  clear: right;
-  padding: 5px;
+    width: 220px;
+    height: 20px;
+    text-align: right;
+    float: right;
+    clear: right;
+    padding: 5px;
 }
 
-#enum.navigation select{
+#line.navigation select
+{
     font: 9px "Microsoft Sans Serif" , Arial;
     vertical-align: middle;
     color: #000000;
@@ -136,7 +135,7 @@ border: solid 0px #ffffff;
     vertical-align: middle;
 }
 
-#enum.warning
+#line.warning
 {
     background:url("/images/warn.gif") no-repeat scroll 0 15px transparent;
     font-weight:bold;

@@ -8,7 +8,7 @@ class BasePlatformPeer extends BaseLDAPeer
   public function __construct()
   {
     parent::__construct();
-    $this->setBaseDn('ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr');
+    $this->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_bind_dn')));
   }
 
   public function setBaseDn($v)

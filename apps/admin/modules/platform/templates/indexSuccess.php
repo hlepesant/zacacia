@@ -1,15 +1,13 @@
 <h3><?php echo __('Platforms') ;?></h3>
 
-<div id="enum" class="navbar">
-  <div id="enum" class="linkto">
-  <?php echo link_to_function(image_tag('icons/world_add.png'), "document.getElementById('platform_new').submit()") ?> 
-  </div>
-</div>
+<div id="collection">
+    <div id="navlink">
+    <?php echo link_to_function(image_tag('icons/world_add.png'), "document.getElementById('platform_new').submit()") ?> 
+    </div>
 
-<div id="enum">
-    <div id="enum" class="th">
-        <div id="enum" class="thtitle"><?php echo __("Name") ?></div>
-        <div id="enum" class="thaction"><?php echo __("Action") ?></div>
+    <div id="title">
+        <div id="title" class="description"><?php echo __("Name") ?></div>
+        <div id="title" class="navigation"><?php echo __("Action") ?></div>
     </div>
 
 <?php

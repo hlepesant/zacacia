@@ -21,7 +21,8 @@ class platformActions extends sfActions
     $c->add('objectClass', 'miniPlatform');
 
     $l = new PlatformPeer();
-    $l->setBaseDn("ou=Platforms,ou=MinivISP,dc=dedibox,dc=fr");
+    $l->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_bind_dn')));
+
     $this->platforms = $l->doSelect($c);
 
     $id=0;

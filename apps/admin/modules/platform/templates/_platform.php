@@ -1,9 +1,9 @@
-    <div id="enum" class="td">
+    <div id="line">
         <form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
         <?php echo $f->renderHiddenFields() ?>
-            <div id="enum" class="<?php echo (($id & 1) ? 'dark' : 'light'); ?>">
-                <div id="enum" class="<?php echo $p->getMiniStatus() ?>"><?php echo $p->getCn() ?></div>
-                <div id="enum" class="navigation">
+            <div id="line" class="<?php echo (($id & 1) ? 'light' : 'dark'); ?>">
+                <div id="line" class="<?php echo $p->getMiniStatus() ?>"><?php echo $p->getCn() ?></div>
+                <div id="line" class="navigation">
  <?php 
 switch( sfConfig::get('navigation_look') )
 {
