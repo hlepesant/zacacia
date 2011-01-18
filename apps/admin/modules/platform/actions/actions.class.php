@@ -111,7 +111,48 @@ class platformActions extends sfActions
 
   public function executeEdit(sfWebRequest $request)
   {
-    print_r( $_POST ); exit;
+    $c = new LDAPCriteria();
+    $c->add('objectClass', 'top');
+    $c->add('objectClass', 'organizationalRole');
+    $c->add('objectClass', 'miniPlatform');
+
+    $l = new PlatformPeer();
+    $l->setBaseDn($request->getParameter('platformDn'));
+    $this->platform = $l->retrieveByDn($c);
+
+
+    $this->form = new PlatformEditForm();
+    if ($request->isMethod('post') && $request->getParameter('minidata'))
+    {
+      $this->form->bind($request->getParameter('minidata'));
+
+      if ($this->form->isValid())
+      {
+
+        $platform_object = new PlatformObject();
+        $platform_object->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $platform->getBaseDn()));
+        $platform_object->setCn($this->form->getValue('cn'));
+        $platform_object->setMiniStatus($this->form->getValue('status'));
+        $platform_object->setMiniUnDeletable($this->form->getValue('undeletable'));
+
+        if ( $platform->doAdd($platform_object) )
+        {
+          sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+          echo fake_post($this, '@homepage', Array());
+          exit;
+        }
+     }
+      else 
+        $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
+    }
+
+    $this->form->getWidget('platformDn')->setDefault($this->platform->getDn());
+    $this->form->getWidget('cn')->setDefault($this->platform->getCn());
+    $this->form->getWidget('undeletable')->setDefault($this->platform->getMiniundeletable());
+    $this->form->getWidget('status')->setDefault($this->platform->getMinistatus());
+
+    $this->cancel = new PlatformNavigationForm();
+    unset($this->cancel['platformDn'], $this->cancel['destination']);
   }
 
   public function executeStatus(sfWebRequest $request)
@@ -155,7 +196,7 @@ class platformActions extends sfActions
     echo fake_post($this, '@homepage', Array());
     exit;
   }
-
+/*
   public function executeUpdate(sfWebRequest $request)
   {
     $c = new LDAPCriteria();
@@ -163,8 +204,6 @@ class platformActions extends sfActions
 
     $p = PlatformPeer::retrieveByDn($c);
 
-#    $mini = new MiniPlatform($parameters);
-    
     $this->form = new PlatformForm();
 
     if ($request->isMethod('post') && $request->getParameter('minidata'))
@@ -207,6 +246,7 @@ class platformActions extends sfActions
     $this->cancel = new PlatformNavigationForm();
     unset($this->cancel['platformDn'], $this->cancel['destination']);
   }
+*/
 
 /* WebServices */
   public function executeCheck(sfWebRequest $request)

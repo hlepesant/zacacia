@@ -14,13 +14,26 @@ class BaseLDAPeer
   public function __construct()
   {
     $this->buildDefaultLdapParameters();
+    $this->doConnection();
+  }
 
+  public function doConnection($bind_user = null, $bind_password = null)
+  {
+    if ( null === $bind_user )
+    {
+        $bind_user = $this->getBindUser();
+    }
+
+    if ( null === $bind_password )
+    {
+        $bind_password = $this->getBindPwd();
+    }
     $conn = ldap_connect($this->getFullHost());
 
     ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);
     ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
 
-    if (!ldap_bind($conn, $this->getBindUser(), $this->getBindPwd()))
+    if (!ldap_bind($conn, $bind_user, $bind_password))
     {
       throw new Exception(ldap_error($conn));
     }

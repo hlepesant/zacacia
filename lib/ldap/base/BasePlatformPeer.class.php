@@ -46,8 +46,14 @@ class BasePlatformPeer extends BaseLDAPeer
     return( $ldap_object );
   }
 
-  public function doSelect(LDAPCriteria $ldap_criteria)
+  public function doSelect(LDAPCriteria $ldap_criteria, $conn = null)
   {
+#    if ($conn === null)
+#    {
+#        $conn = parent::doConnection();
+#    }
+#    $this->setLinkId($conn);
+
     $ldap_criteria = self::configureCriteria($ldap_criteria);
     $results = $this->select($ldap_criteria);
     $ldap_entry = ldap_first_entry($this->getLinkId(), $results);
@@ -138,6 +144,7 @@ class BasePlatformPeer extends BaseLDAPeer
 
   public function doSelectOne(LDAPCriteria $ldap_criteria)
   {
+    $ldap_criteria = self::configureCriteria($ldap_criteria);
     $results = $this->select($ldap_criteria);
     $first_entry = ldap_first_entry($this->getLinkid(), $results);
     return $this->createLDAPObject($first_entry);
@@ -147,6 +154,7 @@ class BasePlatformPeer extends BaseLDAPeer
   {
     $ldap_criteria = new LDAPCriteria();
     $ldap_criteria->add($attribute, $value);
+    $ldap_criteria = self::configureCriteria($ldap_criteria);
     return self::doSelectOne($ldap_criteria);
   }
 
@@ -162,6 +170,7 @@ class BasePlatformPeer extends BaseLDAPeer
     $ldap_criteria->add('objectClass', 'top');
     $ldap_criteria->add('objectClass', 'organizationalRole');
     $ldap_criteria->add('objectClass', 'miniPlatform');
+    $ldap_criteria = self::configureCriteria($ldap_criteria);
 
     return $this->doSelectOne($ldap_criteria);
   }

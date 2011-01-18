@@ -2,7 +2,7 @@
 class sfWidgetFormSchemaFormatterMinivISP extends sfWidgetFormSchemaFormatter
 {
   protected
-  $rowFormat                 = "\n<div id=\"form-line\">\n<div id=\"form-line\" class=\"item\">%label%%error%</div>\n<div id=\"form-line\" class=\"field\">%field%%help%%hidden_fields%</div>\n</div>\n",
+  $rowFormat                 = "\n<div id=\"form-line\">\n\t<div id=\"form-line\" class=\"item\">%label%%error%</div>\n\t<div id=\"form-line\" class=\"field\">%field%%help%%hidden_fields%</div>\n\t<div id=\"form-line\" class=\"check\"></div>\n</div>\n",
   $errorRowFormat            = "<div class=\"form-errors\">\n%errors%</div>\n",
   $helpFormat                = '<div class="form-help">%help%</div>',
   $decoratorFormat           = "<div>\n  %content%</div>",
@@ -10,3 +10,4 @@ class sfWidgetFormSchemaFormatterMinivISP extends sfWidgetFormSchemaFormatter
   $errorRowFormatInARow      = "    <li>%error%</li>\n",
   $namedErrorRowFormatInARow = "    <li>%name%: %error%</li>\n";
 }
+    

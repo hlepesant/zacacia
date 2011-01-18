@@ -2,13 +2,13 @@
 
 <div id="form-header">
     <div id="form-header" class="section">
-        <?php echo __('New Platform') ;?>
+        <?php echo __('Edit Platform') ;?>
     </div>
 </div>
 
 <div id="form-inner">
 
-<form action="<?php echo url_for('platform/new') ?>" method="POST">
+<form action="<?php echo url_for('platform/edit') ?>" method="POST">
 <?php echo $form->renderHiddenFields() ?>
 
 <?php if ($form->hasGlobalErrors()): ?>
@@ -21,7 +21,7 @@
 
   <div id="form-line">
     <div id="form-line" class="item"><?php echo $form['cn']->renderLabel() ?></div>
-    <div id="form-line" class="field"><?php echo $form['cn']->render() ?></div>
+    <div id="form-line" class="field"><?php echo $form['cn']->getValue() ?></div>
     <div id="form-line" class="check">
         <div id="checkName"></div>
     </div>

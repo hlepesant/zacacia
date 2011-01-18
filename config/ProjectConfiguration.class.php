@@ -12,7 +12,7 @@ class ProjectConfiguration extends sfProjectConfiguration
     sfConfig::set('sf_logging_enabled', true);
   
     sfConfig::set('projetctName', 'MinivISP');
-    sfConfig::set('projetctDesc', 'Zarafa Identity Lifecycle Wanager');
+    sfConfig::set('projetctDesc', 'Identity Lifecycle Wanager for Zarafa');
 
     sfConfig::set('widgetNameFormat', 'minidata');
     sfConfig::set('widgetFormaterName', 'MinivISP');
