@@ -1,24 +1,59 @@
-#form_inner
+#form-header
 {
-  width: 500px;
+    width: 800px;
+    height: 40px;
+    clear: both;
+}
+
+#form-header.section
+{
+    font: bold 1.8em Arial, Sans-Serif;
+    padding: 10px 0 0 0;
+    margin: 0;
+    letter-spacing: -1px;
+    width: 800px;
+    height: 30px;
+    float: left;
+    clear: right;
+    border: 1px solid red;
+}
+
+#form-header.navigation
+{
+    font: bold 1.8em Arial, Sans-Serif;
+    padding: 10px 0 0 0;
+    margin: 0;
+    letter-spacing: -1px;
+    width: 100px;
+    height: 30px;
+    float: right;
+    clear: right;
+    text-align: right;
+    padding-right: 10px;
+}
+
+#form-inner
+{
+  width: 800px;
   padding-top: 20px; 
   margin: auto;
   text-align: left;
+  border: 1px solid blue;
 }
 
-#form_line
+#form-line
 {
-  width: 490px;
+  width: 800px;
   padding: 0px 0px 0px 0px;
   height: 30px;
-  clear: both;
   margin-top: 1px;
   border-top: #C0C0C0 1px solid;
   border-right: #C0C0C0 1px solid;
   border-left: #C0C0C0 1px solid;
+  clear: both;
 }
 
-#form_line .item
+#form-line.item
 {
   width: 40%;
   margin: 0px 0px 0px 0px;
@@ -28,21 +63,31 @@
   font-size: 12px;
   color: #2B2B35;
   font-weight: bold;
-  float: left;
   background-color: #ffffff;
+  float: left;
+  clear: right;
 }
 
-#form_line .field
+#form-line.field
 {
-  width: auto;
+  width: 300px;
   background-color: #ffffff;
   margin: 0px 0px 0px 0px;
   padding: 0px 0px 0px 0px;
   font-family: Arial;
   font-size: 12px;
-  float: left;
   height: 30px;
   background-color: #ffffff;
+  float: left;
+  clear: right;
+}
+
+#checkName
+{
+    float: right;
+    clear: right;
+    width: 20px;
+    height: 30px;
 }
 
 input[type=text] {
@@ -75,7 +120,7 @@ input[type=submit] {
   float: right;
 }
 
-#form_submitline
+#form-submitline
 {
   width: 492px;
   padding: 0px 0px 0px 0px;
@@ -85,7 +130,7 @@ input[type=submit] {
   border-top: #C0C0C0 1px solid;
 }
 
-#form_submit
+#form-submit
 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.2em;
@@ -94,12 +139,12 @@ input[type=submit] {
   float: right;
 }
 
-#form_submit[disabled]
+#form-submit[disabled]
 {
   color: #a0a0a0;
 }
 
-#form_button
+#form-button
 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.2em;

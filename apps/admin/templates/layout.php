@@ -18,8 +18,8 @@
       	<a href="/sitemap/" title="Sitemap"><img src="/images/redbusiness/sitemap.png" alt="Sitemap" /></a>
       	<a href="/logout/" title="Logout"><img src="/images/redbusiness/logout.png" alt="Logout" /></a>
       </div>
-      <h1>MinivISP</h1>
-      <h2>ZCP Manager</h2>
+      <h1><?php echo sfConfig::get('projetctName'); ?></h1>
+      <h2><?php echo sfConfig::get('projetctDesc'); ?></h2>
 	</div>
 </div>			
 

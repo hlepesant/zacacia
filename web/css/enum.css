@@ -2,6 +2,7 @@
 {
   padding-top: 3px;
 }
+
 #enum.table
 {
   width: 800px;
@@ -26,12 +27,12 @@ border: solid 0px #ffffff;
 #title
 {
   width: 800px;
-  height: 50px;
+  height: 30px;
   margin: 0em;
   padding: 0em;
-  /* background-color: #1E1E1E; */
+  background-color: #1E1E1E;
   color: #FFFFFF;
-  background-image:url('/images/redbusiness/enum_top.png');
+  /* background-image:url('/images/redbusiness/enum_top.png'); */
   background-repeat:repeat-x;
   float: left;
   clear: both;
@@ -39,6 +40,7 @@ border: solid 0px #ffffff;
 
 #title.description
 {
+  background-image: none;
   width: 120px;
   text-align: left;
   float: left;
@@ -47,11 +49,12 @@ border: solid 0px #ffffff;
   font-size: 1.4em;
   font-weight: bold;
   margin-left: 10px;
-  padding-top: 10px;
+  padding-top: 5px;
 }
 
 #title.navigation
 {
+  background-image: none;
   width: 80px;
   text-align: right;
   float: right;
@@ -60,7 +63,7 @@ border: solid 0px #ffffff;
   font-size: 1.4em;
   font-weight: bold;
   margin-right: 10px;
-  padding-top: 10px;
+  padding-top: 5px;
 }
 
 #line

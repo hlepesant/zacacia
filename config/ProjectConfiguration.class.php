@@ -11,6 +11,9 @@ class ProjectConfiguration extends sfProjectConfiguration
 
     sfConfig::set('sf_logging_enabled', true);
   
+    sfConfig::set('projetctName', 'MinivISP');
+    sfConfig::set('projetctDesc', 'Zarafa Identity Lifecycle Wanager');
+
     sfConfig::set('widgetNameFormat', 'minidata');
     sfConfig::set('widgetFormaterName', 'MinivISP');
     #sfConfig::set('navigation_look', 'dropdown');
@@ -18,7 +21,6 @@ class ProjectConfiguration extends sfProjectConfiguration
 
 # Ldap Internal
     sfConfig::set('ldap_host', "localhost");
-    #sfConfig::set('ldap_port', 389);
     sfConfig::set('ldap_use_ssl', false);
     sfConfig::set('ldap_root_dn', "cn=admin,dc=minivisp,dc=org");
     sfConfig::set('ldap_root_pw', "minivisp");

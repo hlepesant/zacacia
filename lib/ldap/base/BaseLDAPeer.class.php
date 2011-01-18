@@ -94,7 +94,7 @@ class BaseLDAPeer
 
   private function getFullHost()
   {
-    return ($this->getUseSsl()?"ldaps://":"").$this->getHost();
+    return (sprintf("ldap%s://%s", $this->getUseSsl()? "s":"", $this->getHost()));
   }
 
   public function setLinkId($v)
