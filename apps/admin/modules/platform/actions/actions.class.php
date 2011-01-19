@@ -111,15 +111,22 @@ class platformActions extends sfActions
 
   public function executeEdit(sfWebRequest $request)
   {
+    $data = $request->getParameter('minidata');
+    $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+
+    if ( empty($platformDn) ) {
+      $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+      $this->redirect('@homepage');
+    }
+
     $c = new LDAPCriteria();
     $c->add('objectClass', 'top');
     $c->add('objectClass', 'organizationalRole');
     $c->add('objectClass', 'miniPlatform');
 
-    $l = new PlatformPeer();
-    $l->setBaseDn($request->getParameter('platformDn'));
-    $this->platform = $l->retrieveByDn($c);
-
+    $p = new PlatformPeer();
+    $p->setBaseDn($platformDn);
+    $platform = $p->retrieveByDn($c);
 
     $this->form = new PlatformEditForm();
     if ($request->isMethod('post') && $request->getParameter('minidata'))
@@ -128,14 +135,10 @@ class platformActions extends sfActions
 
       if ($this->form->isValid())
       {
+        $platform->setMiniStatus($this->form->getValue('status'));
+        $platform->setMiniUnDeletable($this->form->getValue('undeletable'));
 
-        $platform_object = new PlatformObject();
-        $platform_object->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $platform->getBaseDn()));
-        $platform_object->setCn($this->form->getValue('cn'));
-        $platform_object->setMiniStatus($this->form->getValue('status'));
-        $platform_object->setMiniUnDeletable($this->form->getValue('undeletable'));
-
-        if ( $platform->doAdd($platform_object) )
+        if ( $p->doSave($platform) )
         {
           sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
           echo fake_post($this, '@homepage', Array());
@@ -145,11 +148,12 @@ class platformActions extends sfActions
       else 
         $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
     }
+    
+    $this->cn = $platform->getCn();
 
-    $this->form->getWidget('platformDn')->setDefault($this->platform->getDn());
-    $this->form->getWidget('cn')->setDefault($this->platform->getCn());
-    $this->form->getWidget('undeletable')->setDefault($this->platform->getMiniundeletable());
-    $this->form->getWidget('status')->setDefault($this->platform->getMinistatus());
+    $this->form->getWidget('platformDn')->setDefault($platform->getDn());
+    $this->form->getWidget('undeletable')->setDefault($platform->getMiniundeletable());
+    $this->form->getWidget('status')->setDefault($platform->getMinistatus());
 
     $this->cancel = new PlatformNavigationForm();
     unset($this->cancel['platformDn'], $this->cancel['destination']);

@@ -1,13 +1,12 @@
-<?php use_helper('Javascript') ?>
+<?php /* use_helper('Javascript') */ ?>
 
 <div id="form-header">
     <div id="form-header" class="section">
-        <?php echo __('Edit Platform') ;?>
+        <?php echo __('Edit Platform : ') ;?><?php echo $cn ?>
     </div>
 </div>
 
 <div id="form-inner">
-
 <form action="<?php echo url_for('platform/edit') ?>" method="POST">
 <?php echo $form->renderHiddenFields() ?>
 
@@ -19,39 +18,13 @@
 </ul>
 <?php endif; ?>
 
-  <div id="form-line">
-    <div id="form-line" class="item"><?php echo $form['cn']->renderLabel() ?></div>
-    <div id="form-line" class="field"><?php echo $form['cn']->getValue() ?></div>
-    <div id="form-line" class="check">
-        <div id="checkName"></div>
-    </div>
-  </div>
-
   <?php echo $form['undeletable']->renderRow() ?>
   <?php echo $form['status']->renderRow() ?>
 
   <div id="form-submitline">
     <?php echo link_to( "<input type=\"button\" value=\"". __("Cancel") ."\" id=\"form-button\"  />" , "@platform") ?>
-    <input type="submit" value="<?php echo __('Create') ?>" disabled="true" id="form-submit" />
+    <input type="submit" value="<?php echo __('Update') ?>" id="form-submit" />
   </div>
 
 </form>
 </div>
-
-<?php echo observe_field('minidata_cn', array(
-  'update' => 'checkName',
-  'url' => url_for('platform/check/'),
-  'method' => 'get',
-  'with' => "'&name='+getName()",
-  'frequency' => '1',
-  'script' => 1
-))
-?>
-
-<?php echo javascript_tag("
-function getName()
-{
-  var cn = document.getElementById('minidata_cn');
-  return cn.value;
-}
-") ?>
