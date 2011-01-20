@@ -3,7 +3,8 @@
         <?php echo __('Servers') ;?>
     </div>
     <div id="collection-header" class="navigation">
-      <?php echo link_to_function(image_tag('icons/world_add.png'), "document.getElementById('server_new').submit()") ?> 
+      <?php echo link_to_function(image_tag('icons/arrow_up.png'), "document.getElementById('platform_back').submit()") ?> 
+      <?php echo link_to_function(image_tag('icons/server_add.png'), "document.getElementById('server_new').submit()") ?> 
     </div>
 </div>
 
@@ -23,6 +24,10 @@
 </div>
 
 <form action="<?php echo url_for('server/new') ?>" method="POST" id="server_new" class="invisible">
+<?php echo $new->renderHiddenFields() ?>
+</form>
+
+<form action="<?php echo url_for('@platform') ?>" method="POST" id="platform_back" class="invisible">
 <?php echo $new->renderHiddenFields() ?>
 </form>
 

@@ -108,6 +108,17 @@
     clear: right;
 }
 
+#checkIpAddress
+{
+    margin: 0px 0px 0px 0px;
+    padding: 5px 0px 0px 0px;
+    height: 20px;
+    width: 30px;
+    background-color: none;
+    float: left;
+    clear: right;
+}
+
 input[type=text] {
   margin: 4px 0px 0px 0px;
   background-color: #F0F0F0;

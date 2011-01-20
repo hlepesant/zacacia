@@ -108,6 +108,8 @@ class BaseServerPeer extends BaseLDAPeer
     $ldap_criteria->setSearchScope(LDAPCriteria::BASE);
     $ldap_criteria->add('objectClass', 'top');
     $ldap_criteria->add('objectClass', 'organizationalRole');
+    $ldap_criteria->add('objectClass', 'zarafa-server');
+    $ldap_criteria->add('objectClass', 'ipHost');
     $ldap_criteria->add('objectClass', 'miniServer');
     $ldap_criteria = self::configureCriteria($ldap_criteria);
 

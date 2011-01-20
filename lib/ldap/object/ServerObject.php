@@ -11,8 +11,9 @@ class ServerObject extends LDAPObject
     public function applyDefaultValues()
     {
 #       if (!is_array($this->attributes)) $this->attributes = array();
-        $this->attributes['objectClass'] = Array('top', 'organizationalRole', 'miniServer');
+        $this->attributes['objectClass'] = Array('top', 'organizationalRole', 'zarafa-server', 'ipHost', 'miniServer');
         $this->attributes['cn'] = null;
+        $this->attributes['ipHostNumber'] = null;
         $this->attributes['miniStatus'] = 'enable';
         $this->attributes['miniUnDeletable'] = 'FALSE';
         $this->attributes['zarafaAccount'] = 1;
@@ -34,6 +35,17 @@ class ServerObject extends LDAPObject
     public function getCn()
     {
         return $this->attributes['cn'];
+    }
+  
+    public function setIpHostNumber()
+    {
+        $this->attributes['ipHostNumber'] = $v;
+   	    return $this;
+    }
+
+    public function getIpHostNumber()
+    {
+        return $this->attributes['ipHostNumber'];
     }
   
     public function setMinistatus($v)

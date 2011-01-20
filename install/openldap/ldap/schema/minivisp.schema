@@ -80,3 +80,10 @@ objectclass ( miniObjectClass:7 NAME 'miniForward'
     MUST ( mail ))
 #	MAY ( miniStatus $ miniUnDeletable ) )
 #	MAY ( mailForwardingAddress ) )
+
+objectclass ( miniObjectClass:8 NAME 'miniServer'
+	DESC 'MinivISP Server'
+	SUP top
+	AUXILIARY
+	MUST ( cn )
+	MAY ( miniStatus $ miniUnDeletable ) )
