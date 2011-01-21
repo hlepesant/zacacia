@@ -71,15 +71,15 @@ class BaseServerPeer extends BaseLDAPeer
     return $objects;
   }
 
-  public function doAdd(LDAPObject $ldap_object)
-  {
-    if ( ! parent::doAdd($ldap_object) )
-    {
-      return false;
-    }
-
-    return $this->doSubTree($ldap_object);
-  }
+#  public function doAdd(LDAPObject $ldap_object)
+#  {
+#    if ( ! parent::doAdd($ldap_object) )
+#    {
+#      return false;
+#    }
+#
+#    return true;
+#  }
 
   public function doSelectOne(LDAPCriteria $ldap_criteria)
   {

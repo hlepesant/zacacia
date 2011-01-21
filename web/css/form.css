@@ -119,6 +119,12 @@
     clear: right;
 }
 
+ input[type=text].small-60 {
+  margin: 4px 0px 0px 0px;
+  background-color: #F0F0F0;
+  width: 60px;
+}
+
 input[type=text] {
   margin: 4px 0px 0px 0px;
   background-color: #F0F0F0;

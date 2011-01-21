@@ -84,7 +84,13 @@ class serverActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
+    $data = $request->getParameter('minidata');
+    $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+
     $this->form = new ServerForm();
+    $this->form->getWidget('platformDn')->setDefault($platformDn);
+    $this->form->getWidget('zarafaHttpPort')->setDefault(sfConfig::get('zarafaHttpPort'));
+    $this->form->getWidget('zarafaSslPort')->setDefault(sfConfig::get('zarafaSslPort'));
 
     if ($request->isMethod('post') && $request->getParameter('minidata'))
     {
@@ -93,6 +99,7 @@ class serverActions extends sfActions
         if ($this->form->isValid())
         {
             $server = new ServerPeer();
+            $server->setBaseDn(sprintf("ou=Servers,%s", $platformDn));
             
             $server_object = new ServerObject();
             $server_object->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $server->getBaseDn()));
@@ -100,11 +107,10 @@ class serverActions extends sfActions
             $server_object->setIpHostNumber($this->form->getValue('ip'));
             $server_object->setMiniStatus($this->form->getValue('status'));
             $server_object->setMiniUnDeletable($this->form->getValue('undeletable'));
-            
-            if ( $platform->doAdd($platform_object) )
+
+            if ( $server->doAdd($server_object) )
             {
                 sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
-                echo fake_post($this, '@homepage', Array());
                 echo fake_post($this, '@server', Array('platformDn' => $platformDn));
                 exit;
             }
@@ -155,6 +161,26 @@ class serverActions extends sfActions
     $c->add('cn', $request->getParameter('name'));
 
     $this->count = $s->doCount($c);
+
+    return sfView::SUCCESS;
+  }
+  
+  public function executeResolvehost(sfWebRequest $request)
+  {
+    #$this->setTemplate('check');
+    $this->setLayout(false);
+    $this->ip = 0;
+
+    $pattern = sfConfig::get('hostname_pattern');
+
+    if ( ! preg_match($pattern, $request->getParameter('name') ) )
+    {
+        $this->ip = 0;
+        return sfView::SUCCESS;
+    }
+
+    if ( $ip = dns_get_record ($request->getParameter('name'), DNS_A) )
+        $this->ip = $ip[0]['ip'];
 
     return sfView::SUCCESS;
   }

@@ -37,7 +37,7 @@ class ServerObject extends LDAPObject
         return $this->attributes['cn'];
     }
   
-    public function setIpHostNumber()
+    public function setIpHostNumber($v)
     {
         $this->attributes['ipHostNumber'] = $v;
    	    return $this;
@@ -70,7 +70,7 @@ class ServerObject extends LDAPObject
         return $this->attributes['miniUnDeletable'];
     }
 
-    public function setZarafaAccount()
+    public function setZarafaAccount($v)
     {
         $this->attributes['zarafaAccount'] = $v;
   	    return $this;
@@ -81,7 +81,7 @@ class ServerObject extends LDAPObject
         return $this->attributes['zarafaAccount'];
     }
 
-    public function setZarafaContainsPublic()
+    public function setZarafaContainsPublic($v)
     {
         $this->attributes['zarafaContainsPublic'] = $v;
   	    return $this;
@@ -92,7 +92,7 @@ class ServerObject extends LDAPObject
         return $this->attributes['zarafaContainsPublic'];
     }
 
-    public function setZarafaFilePath()
+    public function setZarafaFilePath($v)
     {
         $this->attributes['zarafaFilePath'] = $v;
   	    return $this;
@@ -103,7 +103,7 @@ class ServerObject extends LDAPObject
         return $this->attributes['zarafaFilePath'];
     }
 
-    public function setZarafaHidden()
+    public function setZarafaHidden($v)
     {
         $this->attributes['zarafaHidden'] = $v;
   	    return $this;
@@ -114,7 +114,7 @@ class ServerObject extends LDAPObject
         return $this->attributes['zarafaHidden'];
     }
 
-    public function setZarafaHttpPort()
+    public function setZarafaHttpPort($v)
     {
         $this->attributes['zarafaHttpPort'] = $v;
   	    return $this;
@@ -125,7 +125,7 @@ class ServerObject extends LDAPObject
         return $this->attributes['zarafaHttpPort'];
     }
 
-    public function setZarafaSslPort()
+    public function setZarafaSslPort($v)
     {
         $this->attributes['zarafaSslPort'] = $v;
   	    return $this;

@@ -35,6 +35,9 @@
         </div>
     </div>
 
+  <?php echo $form['zarafaHttpPort']->renderRow() ?>
+  <?php echo $form['zarafaSslPort']->renderRow() ?>
+  <?php echo $form['zarafaContainsPublic']->renderRow() ?>
   <?php echo $form['undeletable']->renderRow() ?>
   <?php echo $form['status']->renderRow() ?>
 
@@ -49,6 +52,16 @@
 <?php echo observe_field('minidata_cn', array(
   'update' => 'checkName',
   'url' => url_for('server/check/'),
+  'method' => 'get',
+  'with' => "'&name='+getName()",
+  'frequency' => '1',
+  'script' => 1
+))
+?>
+
+<?php echo observe_field('minidata_cn', array(
+  'update' => 'minidata_ip',
+  'url' => url_for('server/resolvehost/'),
   'method' => 'get',
   'with' => "'&name='+getName()",
   'frequency' => '1',

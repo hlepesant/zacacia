@@ -18,3 +18,7 @@ default:
 platform:
   url:   /
   param: { module: platform, action: index }
+
+server:
+  url:   /
+  param: { module: server, action: index }
