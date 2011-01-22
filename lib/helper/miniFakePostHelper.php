@@ -24,7 +24,7 @@
     $output .= "function fakePost()\n";
     $output .= "{\n";
     $output .= "var f = document.getElementById('fakeForm');\n";
-    $output .= "f.submit();\n";
+    #$output .= "f.submit();\n";
     $output .= "}\n";
     $output .= "//]]>\n";
     $output .= "</script>\n";
@@ -32,7 +32,7 @@
     foreach ($fields as $field => $value) {
       $output .= "<input type=\"hidden\" name=\"".$field."\" value=\"".$value."\" />\n";
     }
-#    $output .= "<input type=\"submit\" name=\"submit\" value=\"submit\" />\n";
+    $output .= "<input type=\"submit\" name=\"submit\" value=\"submit\" />\n";
     $output .= "</form>\n";
     $output .= "</body>\n";    
     $output .= "</html>\n";  

@@ -17,6 +17,14 @@ class serverActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+    $data = $request->getParameter('minidata');
+
+    $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+    if ( empty($platformDn) ) {
+      $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+      $this->redirect('@platform');
+    }
+
     $c = new LDAPCriteria();
     $c->add('objectClass', 'top');
     $c->add('objectClass', 'organizationalRole');
@@ -25,7 +33,7 @@ class serverActions extends sfActions
     $c->add('objectClass', 'miniServer');
 
     $l = new ServerPeer();
-    $l->setBaseDn(sprintf("ou=Servers,%s", $request->getParameter('platformDn')));
+    $l->setBaseDn(sprintf("ou=Servers,%s", $platformDn));
 
     $this->servers = $l->doSelect($c);
 
@@ -33,45 +41,46 @@ class serverActions extends sfActions
     $this->forms = array();
     foreach ($this->servers as $s)
     {
-      $form = new serverNavigationForm();
-      $form->getWidget('serverDn')->setDefault($s->getDn());
+        $form = new serverNavigationForm();
+        $form->getWidget('platformDn')->setDefault($platformDn);
+        $form->getWidget('serverDn')->setDefault($s->getDn());
+        
+        $criteria_user = new LDAPCriteria();
+        $criteria_user->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
+        $criteria_user->add('objectClass', 'zarafa-user');
+        $criteria_user->add('zarafaUserServer', $s->getCn());
+        $count_user = $l->doCount($criteria_user);
+        
+        switch( sfConfig::get('navigation_look') )
+        {
+            case 'dropdown':
+                $choices = $form->getWidget('destination')->getOption('choices');
+                $choices['status'] = $this->getContext()->getI18N()->__('Disable', Array(), 'messages');
+                
+                if ( $p->getMiniStatus() == 'disable' && $count_company  == 0 )
+                {
+                    $choices['status'] = $this->getContext()->getI18N()->__('Enable', Array(), 'messages');
+                    $choices['delete'] = $this->getContext()->getI18N()->__('Delete', Array(), 'messages');
+                }
+                
+                if ( $p->getMiniUnDeletable() === 'TRUE' )
+                {
+                    unset($choices['delete'], $choices['status']);
+                }
+                $choices['company'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Company', Array(), 'messages');
+                
+                $form->getWidget('destination')->setOption('choices', $choices);
+            break;
+            
+            case 'link':
+            default:
+                $s->set('user_count', $count_user);
+            break;
+        }
 
-      $criteria_user = new LDAPCriteria();
-      $criteria_user->setBaseDn(sprintf("ou=Organizations,%s", $request->getParameter('platformDn')));
-      $criteria_user->add('objectClass', 'zarafa-user');
-      $criteria_user->add('zarafaUserServer', $s->getCn());
-      $count_user = $l->doCount($criteria_user);
-
-      switch( sfConfig::get('navigation_look') )
-      {
-        case 'dropdown':
-          $choices = $form->getWidget('destination')->getOption('choices');
-          $choices['status'] = $this->getContext()->getI18N()->__('Disable', Array(), 'messages');
-
-          if ( $p->getMiniStatus() == 'disable' && $count_company  == 0 )
-          {
-            $choices['status'] = $this->getContext()->getI18N()->__('Enable', Array(), 'messages');
-            $choices['delete'] = $this->getContext()->getI18N()->__('Delete', Array(), 'messages');
-          }
-
-          if ( $p->getMiniUnDeletable() === 'TRUE' )
-          {
-            unset($choices['delete'], $choices['status']);
-          }
-          $choices['company'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Company', Array(), 'messages');
-
-          $form->getWidget('destination')->setOption('choices', $choices);
-        break;
-
-        case 'link':
-        default:
-          $s->set('user_count', $count_user);
-        break;
-      }
-
-      $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
-      $form->getWidget('serverDn')->setIdFormat(sprintf('%%s_%03d', $id));
-      $form->getWidget('destination')->setIdFormat(sprintf('%%s_%03d', $id));
+        $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
+        $form->getWidget('serverDn')->setIdFormat(sprintf('%%s_%03d', $id));
+        $form->getWidget('destination')->setIdFormat(sprintf('%%s_%03d', $id));
 
       $this->forms[$s->getDn()] = $form;
       $id++;
@@ -79,13 +88,17 @@ class serverActions extends sfActions
 
     $this->new = new ServerNavigationForm();
     unset($this->new['serverDn'], $this->new['destination']);
-    $this->new->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
+    $this->new->getWidget('platformDn')->setDefault($platformDn);
   }
 
   public function executeNew(sfWebRequest $request)
   {
     $data = $request->getParameter('minidata');
     $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+    if ( empty($platformDn) ) {
+      $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+      $this->redirect('@platform');
+    }
 
     $this->form = new ServerForm();
     $this->form->getWidget('platformDn')->setDefault($platformDn);
@@ -123,6 +136,74 @@ class serverActions extends sfActions
     unset($this->cancel['serverDn'], $this->cancel['destination']);
     $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
   }
+
+    public function executeStatus(sfWebRequest $request)
+    {
+        $platformDn = $request->getParameter('platformDn');
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->redirect('@platform');
+        }
+        
+        $serverDn = $request->getParameter('serverDn');
+        if ( empty($serverDn) ) {
+            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
+        }
+        
+        $c = new LDAPCriteria();
+        $c->setBaseDn($request->getParameter('serverDn'));
+        
+        $s = new ServerPeer();
+        $server = $s->retrieveByDn($c);
+        
+        if ( 'enable' === $server->getMiniStatus())
+        {
+            $server->setMiniStatus('disable');
+        }
+        else
+        {
+            $server->setMiniStatus('enable');
+        }
+        
+        $s->doSave($server);
+        
+        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+        echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
+        exit;
+    }
+
+    public function executeDelete(sfWebRequest $request)
+    {
+        $platformDn = $request->getParameter('platformDn');
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->redirect('@platform');
+        }
+        
+        $serverDn = $request->getParameter('serverDn');
+        if ( empty($serverDn) ) {
+            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
+        }
+        
+        $c = new LDAPCriteria();
+        $c->setBaseDn($serverDn);
+        
+        $s = new ServerPeer();
+        $server = $s->retrieveByDn($c);
+        
+        if ( 'disable' === $server->getMiniStatus())
+        {
+            $s->doDelete($server, false);
+        }
+        
+        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+        echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
+        exit;
+    }
 
 /* WebServices */
   public function executeCheck(sfWebRequest $request)
