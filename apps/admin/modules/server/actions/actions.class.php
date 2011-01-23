@@ -78,6 +78,8 @@ class serverActions extends sfActions
             break;
         }
 
+        $s->set('ping_time', $l->getPingTime($s->getIpHost()));
+
         $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
         $form->getWidget('serverDn')->setIdFormat(sprintf('%%s_%03d', $id));
         $form->getWidget('destination')->setIdFormat(sprintf('%%s_%03d', $id));
@@ -91,51 +93,82 @@ class serverActions extends sfActions
     $this->new->getWidget('platformDn')->setDefault($platformDn);
   }
 
-  public function executeNew(sfWebRequest $request)
-  {
-    $data = $request->getParameter('minidata');
-    $platformDn = $request->getParameter('platformDn', $data['platformDn']);
-    if ( empty($platformDn) ) {
-      $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
-      $this->redirect('@platform');
-    }
-
-    $this->form = new ServerForm();
-    $this->form->getWidget('platformDn')->setDefault($platformDn);
-    $this->form->getWidget('zarafaHttpPort')->setDefault(sfConfig::get('zarafaHttpPort'));
-    $this->form->getWidget('zarafaSslPort')->setDefault(sfConfig::get('zarafaSslPort'));
-
-    if ($request->isMethod('post') && $request->getParameter('minidata'))
+    public function executeNew(sfWebRequest $request)
     {
-      $this->form->bind($request->getParameter('minidata'));
-
-        if ($this->form->isValid())
-        {
-            $server = new ServerPeer();
-            $server->setBaseDn(sprintf("ou=Servers,%s", $platformDn));
-            
-            $server_object = new ServerObject();
-            $server_object->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $server->getBaseDn()));
-            $server_object->setCn($this->form->getValue('cn'));
-            $server_object->setIpHostNumber($this->form->getValue('ip'));
-            $server_object->setMiniStatus($this->form->getValue('status'));
-            $server_object->setMiniUnDeletable($this->form->getValue('undeletable'));
-
-            if ( $server->doAdd($server_object) )
-            {
-                sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
-                echo fake_post($this, '@server', Array('platformDn' => $platformDn));
-                exit;
-            }
+        $data = $request->getParameter('minidata');
+        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+        if ( empty($platformDn) ) {
+          $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+          $this->redirect('@platform');
         }
-        else 
-            $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
+    
+        $this->form = new ServerForm();
+        $this->form->getWidget('platformDn')->setDefault($platformDn);
+        $this->form->getWidget('zarafaHttpPort')->setDefault(sfConfig::get('zarafaHttpPort'));
+        $this->form->getWidget('zarafaSslPort')->setDefault(sfConfig::get('zarafaSslPort'));
+    
+        if ($request->isMethod('post') && $request->getParameter('minidata'))
+        {
+            $this->form->bind($request->getParameter('minidata'));
+            
+                if ($this->form->isValid())
+                {
+                    $server = new ServerPeer();
+                    $server->setBaseDn(sprintf("ou=Servers,%s", $platformDn));
+                    
+                    $server_object = new ServerObject();
+                    $server_object->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $server->getBaseDn()));
+                    $server_object->setCn($this->form->getValue('cn'));
+                    $server_object->setIpHostNumber($this->form->getValue('ip'));
+                    $server_object->setMiniStatus($this->form->getValue('status'));
+                    $server_object->setMiniUnDeletable($this->form->getValue('undeletable'));
+                
+                    if ( $server->doAdd($server_object) )
+                    {
+                        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                        echo fake_post($this, '@server', Array('platformDn' => $platformDn));
+                        exit;
+                    }
+                }
+                else 
+                {
+                    $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
+                }
+        }
+        
+        $this->cancel = new ServerNavigationForm();
+        unset($this->cancel['serverDn'], $this->cancel['destination']);
+        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
     }
 
-    $this->cancel = new ServerNavigationForm();
-    unset($this->cancel['serverDn'], $this->cancel['destination']);
-    $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
-  }
+    public function executeEdit(sfWebRequest $request)
+    {
+        $platformDn = $request->getParameter('platformDn');
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->redirect('@platform');
+        }
+        
+        $serverDn = $request->getParameter('serverDn');
+        if ( empty($serverDn) ) {
+            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
+        }
+        
+        $c = new LDAPCriteria();
+        $c->setBaseDn($request->getParameter('serverDn'));
+        
+        $s = new ServerPeer();
+        $server = $s->retrieveByDn($c);
+        
+        
+        $s->doSave($server);
+        
+        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+        echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
+        exit;
+    }
 
     public function executeStatus(sfWebRequest $request)
     {
