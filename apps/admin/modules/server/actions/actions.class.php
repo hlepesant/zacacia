@@ -10,88 +10,88 @@
  */
 class serverActions extends sfActions
 {
- /**
+/**
   * Executes index action
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request)
-  {
-    $data = $request->getParameter('minidata');
-
-    $platformDn = $request->getParameter('platformDn', $data['platformDn']);
-    if ( empty($platformDn) ) {
-      $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
-      $this->redirect('@platform');
-    }
-
-    $c = new LDAPCriteria();
-    $c->add('objectClass', 'top');
-    $c->add('objectClass', 'organizationalRole');
-    $c->add('objectClass', 'zarafa-server');
-    $c->add('objectClass', 'ipHost');
-    $c->add('objectClass', 'miniServer');
-
-    $l = new ServerPeer();
-    $l->setBaseDn(sprintf("ou=Servers,%s", $platformDn));
-
-    $this->servers = $l->doSelect($c);
-
-    $id=0;
-    $this->forms = array();
-    foreach ($this->servers as $s)
+    public function executeIndex(sfWebRequest $request)
     {
-        $form = new serverNavigationForm();
-        $form->getWidget('platformDn')->setDefault($platformDn);
-        $form->getWidget('serverDn')->setDefault($s->getDn());
+        $data = $request->getParameter('minidata');
         
-        $criteria_user = new LDAPCriteria();
-        $criteria_user->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
-        $criteria_user->add('objectClass', 'zarafa-user');
-        $criteria_user->add('zarafaUserServer', $s->getCn());
-        $count_user = $l->doCount($criteria_user);
-        
-        switch( sfConfig::get('navigation_look') )
-        {
-            case 'dropdown':
-                $choices = $form->getWidget('destination')->getOption('choices');
-                $choices['status'] = $this->getContext()->getI18N()->__('Disable', Array(), 'messages');
-                
-                if ( $p->getMiniStatus() == 'disable' && $count_company  == 0 )
-                {
-                    $choices['status'] = $this->getContext()->getI18N()->__('Enable', Array(), 'messages');
-                    $choices['delete'] = $this->getContext()->getI18N()->__('Delete', Array(), 'messages');
-                }
-                
-                if ( $p->getMiniUnDeletable() === 'TRUE' )
-                {
-                    unset($choices['delete'], $choices['status']);
-                }
-                $choices['company'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Company', Array(), 'messages');
-                
-                $form->getWidget('destination')->setOption('choices', $choices);
-            break;
-            
-            case 'link':
-            default:
-                $s->set('user_count', $count_user);
-            break;
+        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->redirect('@platform');
         }
-
-        $s->set('ping_time', $l->getPingTime($s->getIpHost()));
-
-        $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
-        $form->getWidget('serverDn')->setIdFormat(sprintf('%%s_%03d', $id));
-        $form->getWidget('destination')->setIdFormat(sprintf('%%s_%03d', $id));
-
-      $this->forms[$s->getDn()] = $form;
-      $id++;
+        
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zarafa-server');
+        $c->add('objectClass', 'ipHost');
+        $c->add('objectClass', 'miniServer');
+        
+        $l = new ServerPeer();
+        $l->setBaseDn(sprintf("ou=Servers,%s", $platformDn));
+        
+        $this->servers = $l->doSelect($c, 'extended');
+        
+        $id=0;
+        $this->forms = array();
+        foreach ($this->servers as $s)
+        {
+            $form = new serverNavigationForm();
+            $form->getWidget('platformDn')->setDefault($platformDn);
+            $form->getWidget('serverDn')->setDefault($s->getDn());
+            
+            $criteria_user = new LDAPCriteria();
+            $criteria_user->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
+            $criteria_user->add('objectClass', 'zarafa-user');
+            $criteria_user->add('zarafaUserServer', $s->getCn());
+            $count_user = $l->doCount($criteria_user);
+            
+            switch( sfConfig::get('navigation_look') )
+            {
+                case 'dropdown':
+                    $choices = $form->getWidget('destination')->getOption('choices');
+                    $choices['status'] = $this->getContext()->getI18N()->__('Disable', Array(), 'messages');
+                    
+                    if ( $p->getMiniStatus() == 'disable' && $count_company  == 0 )
+                    {
+                        $choices['status'] = $this->getContext()->getI18N()->__('Enable', Array(), 'messages');
+                        $choices['delete'] = $this->getContext()->getI18N()->__('Delete', Array(), 'messages');
+                    }
+                    
+                    if ( $p->getMiniUnDeletable() === 'TRUE' )
+                    {
+                        unset($choices['delete'], $choices['status']);
+                    }
+                    $choices['company'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Company', Array(), 'messages');
+                    
+                    $form->getWidget('destination')->setOption('choices', $choices);
+                break;
+                
+                case 'link':
+                default:
+                    $s->set('user_count', $count_user);
+                break;
+            }
+        
+            $s->setPingTime();
+        
+            $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
+            $form->getWidget('serverDn')->setIdFormat(sprintf('%%s_%03d', $id));
+            $form->getWidget('destination')->setIdFormat(sprintf('%%s_%03d', $id));
+        
+            $this->forms[$s->getDn()] = $form;
+            $id++;
+        }
+        
+        $this->new = new ServerNavigationForm();
+        unset($this->new['serverDn'], $this->new['destination']);
+        $this->new->getWidget('platformDn')->setDefault($platformDn);
     }
-
-    $this->new = new ServerNavigationForm();
-    unset($this->new['serverDn'], $this->new['destination']);
-    $this->new->getWidget('platformDn')->setDefault($platformDn);
-  }
 
     public function executeNew(sfWebRequest $request)
     {
@@ -126,7 +126,7 @@ class serverActions extends sfActions
                     if ( $server->doAdd($server_object) )
                     {
                         sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
-                        echo fake_post($this, '@server', Array('platformDn' => $platformDn));
+                        echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
                         exit;
                     }
                 }
@@ -148,7 +148,7 @@ class serverActions extends sfActions
             $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
             $this->redirect('@platform');
         }
-        
+
         $serverDn = $request->getParameter('serverDn');
         if ( empty($serverDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
@@ -186,10 +186,10 @@ class serverActions extends sfActions
         }
         
         $c = new LDAPCriteria();
-        $c->setBaseDn($request->getParameter('serverDn'));
+        $c->setBaseDn($serverDn);
         
-        $s = new ServerPeer();
-        $server = $s->retrieveByDn($c);
+        $ldap = new ServerPeer();
+        $server = $ldap->retrieveByDn($c);
         
         if ( 'enable' === $server->getMiniStatus())
         {
@@ -199,8 +199,8 @@ class serverActions extends sfActions
         {
             $server->setMiniStatus('enable');
         }
-        
-        $s->doSave($server);
+
+        $ldap->doSave($server);
         
         sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
         echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
@@ -225,8 +225,10 @@ class serverActions extends sfActions
         $c = new LDAPCriteria();
         $c->setBaseDn($serverDn);
         
-        $s = new ServerPeer();
-        $server = $s->retrieveByDn($c);
+        $ldap = new BaseServerPeer();
+        $server = $ldap->retrieveByDn($c);
+
+        var_dump( $server ); exit;
         
         if ( 'disable' === $server->getMiniStatus())
         {

@@ -2,14 +2,23 @@
 
 class ServerPeer extends BaseServerPeer
 {
-    private $awk = '/usr/bin/awk';
-    private $ping = '/bin/ping';
-    private $grep = '/bin/grep';
 
-    public function getPingTime($host)
+    private function createLDAPObject($ldap_entry, $ldap_object = 'base')
     {
-        $time_response = shell_exec("%s -c 1 %s | %s icmp_seq | %s -F \= '{print $4}'", self::$ping, $host, self::$grep, self::$awk);
-        return trim( $time_response );
-    }
+        if ( 'base' == $ldap_object )
+        {
+            $ldap_object = parent::createLDAPObject($ldap_entry);
+            return $ldap_object;
+        }
 
+        print('aki'); exit;
+
+        $attributes = $this->extractAttributes($ldap_entry);
+        $values = $this->extractValues($ldap_entry, $attributes);
+        $dn = ldap_get_dn($this->getLinkId(), $ldap_entry);
+        $ldap_object = new ServerObject();
+        $ldap_object->setDn($dn);
+        $ldap_object->__constructFrom($values);
+        return( $ldap_object );
+    }
 }

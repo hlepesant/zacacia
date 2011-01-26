@@ -3,7 +3,7 @@
 /**
  * platform actions.
  *
- * @package    VeeGAS
+ * @package    MinivISP
  * @subpackage platform
  * @author     Hugues Lepesant
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
@@ -164,8 +164,8 @@ class platformActions extends sfActions
     $c = new LDAPCriteria();
     $c->setBaseDn($request->getParameter('platformDn'));
 
-    $p = new PlatformPeer();
-    $platform = $p->retrieveByDn($c);
+    $ldap = new PlatformPeer();
+    $platform = $ldap->retrieveByDn($c);
 
     if ( 'enable' === $platform->getMiniStatus())
     {
@@ -176,7 +176,7 @@ class platformActions extends sfActions
       $platform->setMiniStatus('enable');
     }
 
-    $p->doSave($platform);
+    $ldap->doSave($platform);
 
     sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
     echo fake_post($this, '@homepage', Array());

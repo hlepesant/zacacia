@@ -1,6 +1,6 @@
 <?php
 
-class BaseLDAPeer
+class LDAPPeer
 {
     private $conn;
     private $host;
@@ -170,14 +170,14 @@ class BaseLDAPeer
         {
             if ( $log = sfContext::getInstance()->getLogger() )
             {
-                $log->info("{BaseLDAPeer::select} getLinkId = ".$this->getLinkId() );
-                $log->info("{BaseLDAPeer::select} getBaseDn = ".$ldap_criteria->getBaseDn() );
-                $log->info("{BaseLDAPeer::select} getFilter = ".$ldap_criteria->getFilter() );
-                $log->info("{BaseLDAPeer::select} getAttributes = ".implode(",", $ldap_criteria->getAttributes()) );
-                $log->info("{BaseLDAPeer::select} getAttrsonly = ".$ldap_criteria->getAttrsonly() );
-                $log->info("{BaseLDAPeer::select} getSizelimit = ".$ldap_criteria->getSizelimit() );
-                $log->info("{BaseLDAPeer::select} getTimelimit = ".$ldap_criteria->getTimelimit() );
-                $log->info("{BaseLDAPeer::select} getDeref = ".$ldap_criteria->getDeref() );
+                $log->info("{BaseLDAPPeer::select} getLinkId = ".$this->getLinkId() );
+                $log->info("{BaseLDAPPeer::select} getBaseDn = ".$ldap_criteria->getBaseDn() );
+                $log->info("{BaseLDAPPeer::select} getFilter = ".$ldap_criteria->getFilter() );
+                $log->info("{BaseLDAPPeer::select} getAttributes = ".implode(",", $ldap_criteria->getAttributes()) );
+                $log->info("{BaseLDAPPeer::select} getAttrsonly = ".$ldap_criteria->getAttrsonly() );
+                $log->info("{BaseLDAPPeer::select} getSizelimit = ".$ldap_criteria->getSizelimit() );
+                $log->info("{BaseLDAPPeer::select} getTimelimit = ".$ldap_criteria->getTimelimit() );
+                $log->info("{BaseLDAPPeer::select} getDeref = ".$ldap_criteria->getDeref() );
             }
             
             $results = $function($this->getLinkId(),
@@ -259,7 +259,7 @@ class BaseLDAPeer
     {
         if ( $log = sfContext::getInstance()->getLogger() )
         {
-            $log->info("{BaseLDAPeer::doDelete} deleting = ".$ldap_object->getDn() );
+            $log->info("{BaseLDAPPeer::doDelete} deleting = ".$ldap_object->getDn() );
         }
         
         if ($recursive == false)

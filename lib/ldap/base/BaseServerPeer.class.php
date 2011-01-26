@@ -1,6 +1,6 @@
 <?php
 
-class BaseServerPeer extends BaseLDAPeer
+class BaseServerPeer extends LDAPPeer
 {
   protected $base_dn;
   public static $exclude_attrs = array();
@@ -45,14 +45,8 @@ class BaseServerPeer extends BaseLDAPeer
     return( $ldap_object );
   }
 
-  public function doSelect(LDAPCriteria $ldap_criteria, $conn = null)
+  public function doSelect(LDAPCriteria $ldap_criteria, $ldap_object = 'base')
   {
-#    if ($conn === null)
-#    {
-#        $conn = parent::doConnection();
-#    }
-#    $this->setLinkId($conn);
-
     $ldap_criteria = self::configureCriteria($ldap_criteria);
     $results = $this->select($ldap_criteria);
     $ldap_entry = ldap_first_entry($this->getLinkId(), $results);
@@ -61,10 +55,10 @@ class BaseServerPeer extends BaseLDAPeer
 
     if ($ldap_entry !== false)
     {
-      $objects[] = $this->createLDAPObject($ldap_entry);
+      $objects[] = $this->createLDAPObject($ldap_entry, $ldap_object);
       while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry))
       {
-        $objects[] = $this->createLDAPObject($ldap_entry);
+        $objects[] = $this->createLDAPObject($ldap_entry, $ldap_object);
       }
     }
     

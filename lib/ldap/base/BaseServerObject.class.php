@@ -1,6 +1,6 @@
 <?php
 
-class ServerObject extends LDAPObject
+class BaseServerObject extends LDAPObject
 {
     public function __construct()
     {

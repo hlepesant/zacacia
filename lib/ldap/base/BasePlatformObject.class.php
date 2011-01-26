@@ -1,6 +1,6 @@
 <?php
 
-class PlatformObject extends LDAPObject
+class BasePlatformObject extends LDAPObject
 {
   /* protected $alreadyInSave = false; */
   /* protected $alreadyInValidation = false; */
