@@ -3,8 +3,24 @@
         <?php echo $f->renderHiddenFields() ?>
             <div id="line" class="<?php echo (($id & 1) ? 'light' : 'dark'); ?>">
                 <div id="line" class="ping">
-                    <?php if (is_null( $s->getPingTime())) { echo image_tag('icons/bullet_red.png'); } else { echo image_tag('icons/bullet_green.png'); } ?>
-                    <?php /* echo $s->getPingTime(); */ ?>
+<?php
+if (is_null( $s->getPingTime()))
+{
+    echo image_tag('icons/bullet_yellow.png');
+}
+else
+{
+    if ($s->getPingTime())
+    {
+        echo image_tag('icons/bullet_green.png');
+    }
+    else
+    {
+        echo image_tag('icons/bullet_red.png');
+    }
+}
+?>
+<?php /* echo $s->getPingTime(); */ ?>
                 </div>
                 <div id="line" class="<?php echo $s->getMiniStatus() ?>"><?php echo $s->getCn() ?></div>
                 <div id="line" class="ipaddress"><?php echo $s->getIpHostNumber() ?></div>

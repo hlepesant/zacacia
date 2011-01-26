@@ -251,8 +251,7 @@ class LDAPPeer
         if ( @ldap_modify($this->getLinkId(), $ldap_object->getDn(), $ldap_object->getAttributes()))
             return true;
     
-        print('bas bon');
-        throw new Exception("Fatal: ".ldap_error);
+        throw new Exception("Fatal: ".ldap_error($this->getLinkId()));
     }
 
     public function doDelete(LDAPObject $ldap_object, $recursive=false)

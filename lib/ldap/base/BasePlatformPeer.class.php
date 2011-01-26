@@ -8,7 +8,6 @@ class BasePlatformPeer extends LDAPPeer
     public function __construct()
     {
         parent::__construct();
-        $this->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_bind_dn')));
     }
 
     public function setBaseDn($v)
@@ -65,14 +64,13 @@ class BasePlatformPeer extends LDAPPeer
         return $objects;
     }
 
-#    public function doAdd(PlatformObject $ldap_object)
+#    public function doAdd(LDAPObject $ldap_object)
 #    {
 #        if ( ! parent::doAdd($ldap_object) )
 #        {
 #            return false;
 #        }
 #    }
-
 
     public function doSelectOne(LDAPCriteria $ldap_criteria)
     {
@@ -81,14 +79,6 @@ class BasePlatformPeer extends LDAPPeer
         $first_entry = ldap_first_entry($this->getLinkid(), $results);
         return $this->createLDAPObject($first_entry);
     }
-
-#    public function retrieveBy($attribute, $value)
-#    {
-#        $ldap_criteria = new LDAPCriteria();
-#        $ldap_criteria->add($attribute, $value);
-#        $ldap_criteria = self::configureCriteria($ldap_criteria);
-#        return self::doSelectOne($ldap_criteria);
-#    }
 
     public function doCount(LDAPCriteria $ldap_criteria)
     {
@@ -107,12 +97,12 @@ class BasePlatformPeer extends LDAPPeer
         return $this->doSelectOne($ldap_criteria);
     }
 
-    public function doSave(LDAPObject $ldap_object)
-    {
-        if ( ! parent::doSave($ldap_object) )
-        {
-            return false;
-        }
-        return true;
-    }
+#    public function doSave(LDAPObject $ldap_object)
+#    {
+#        if ( ! parent::doSave($ldap_object) )
+#        {
+#            return false;
+#        }
+#        return true;
+#    }
 }

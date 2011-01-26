@@ -5,8 +5,7 @@
  *
  * @package    MinivISP
  * @subpackage server
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
+ * @author     Hugues Lepesant
  */
 class serverActions extends sfActions
 {
@@ -63,7 +62,7 @@ class serverActions extends sfActions
                         $choices['delete'] = $this->getContext()->getI18N()->__('Delete', Array(), 'messages');
                     }
                     
-                    if ( $p->getMiniUnDeletable() === 'TRUE' )
+                    if ( $s->getMiniUnDeletable() === 'TRUE' )
                     {
                         unset($choices['delete'], $choices['status']);
                     }
@@ -113,17 +112,17 @@ class serverActions extends sfActions
             
                 if ($this->form->isValid())
                 {
-                    $server = new ServerPeer();
-                    $server->setBaseDn(sprintf("ou=Servers,%s", $platformDn));
+                    $l = new ServerPeer();
+                    $l->setBaseDn(sprintf("ou=Servers,%s", $platformDn));
                     
-                    $server_object = new ServerObject();
-                    $server_object->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $server->getBaseDn()));
-                    $server_object->setCn($this->form->getValue('cn'));
-                    $server_object->setIpHostNumber($this->form->getValue('ip'));
-                    $server_object->setMiniStatus($this->form->getValue('status'));
-                    $server_object->setMiniUnDeletable($this->form->getValue('undeletable'));
+                    $s = new ServerObject();
+                    $s->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
+                    $s->setCn($this->form->getValue('cn'));
+                    $s->setIpHostNumber($this->form->getValue('ip'));
+                    $s->setMiniStatus($this->form->getValue('status'));
+                    $s->setMiniUnDeletable($this->form->getValue('undeletable'));
                 
-                    if ( $server->doAdd($server_object) )
+                    if ( $l->doAdd($s) )
                     {
                         sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
                         echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
@@ -143,31 +142,68 @@ class serverActions extends sfActions
 
     public function executeEdit(sfWebRequest $request)
     {
-        $platformDn = $request->getParameter('platformDn');
+        $data = $request->getParameter('minidata');
+        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
             $this->redirect('@platform');
         }
 
-        $serverDn = $request->getParameter('serverDn');
+        $serverDn = $request->getParameter('serverDn', $data['serverDn']);
         if ( empty($serverDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
             echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
         }
+
+        $l = new ServerPeer();
+        $l->setBaseDn(sprintf("ou=Servers,%s", $platformDn));
         
         $c = new LDAPCriteria();
-        $c->setBaseDn($request->getParameter('serverDn'));
+        $c->setBaseDn($serverDn);
+
+        $s = $l->retrieveByDn($c);
         
-        $s = new ServerPeer();
-        $server = $s->retrieveByDn($c);
+        $this->form = new ServerEditForm();
+    
+        if ($request->isMethod('post') && $request->getParameter('minidata'))
+        {
+            $this->form->bind($request->getParameter('minidata'));
+            
+            if ($this->form->isValid())
+            {
+                $s->setIpHostNumber($this->form->getValue('ip'));
+                $s->setZarafaHttpPort($this->form->getValue('zarafaHttpPort'));
+                $s->setZarafaSslPort($this->form->getValue('zarafaSslPort'));
+                $s->setMiniStatus($this->form->getValue('status'));
+                $s->setMiniUnDeletable($this->form->getValue('undeletable'));
+            
+                if ( $l->doSave($s) )
+                {
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                    echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
+                    exit;
+                }
+            }
+            else 
+            {
+                $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
+            }
+        }
         
+        $this->form->getWidget('platformDn')->setDefault($platformDn);
+        $this->form->getWidget('serverDn')->setDefault($serverDn);
+        $this->form->getWidget('ip')->setDefault($s->getIpHostNumber());
+        $this->form->getWidget('zarafaHttpPort')->setDefault($s->getZarafaHttpPort());
+        $this->form->getWidget('zarafaSslPort')->setDefault($s->getZarafaSslPort());
+        $this->form->getWidget('status')->setDefault($s->getMiniStatus());
+        $this->form->getWidget('undeletable')->setDefault($s->getMiniUndeletable());
+
+        $this->cn = $s->getCn();
         
-        $s->doSave($server);
-        
-        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
-        echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
-        exit;
+        $this->cancel = new ServerNavigationForm();
+        unset($this->cancel['serverDn'], $this->cancel['destination']);
+        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
     }
 
     public function executeStatus(sfWebRequest $request)
@@ -188,19 +224,19 @@ class serverActions extends sfActions
         $c = new LDAPCriteria();
         $c->setBaseDn($serverDn);
         
-        $ldap = new ServerPeer();
-        $server = $ldap->retrieveByDn($c);
+        $l = new ServerPeer();
+        $s = $l->retrieveByDn($c);
         
-        if ( 'enable' === $server->getMiniStatus())
+        if ( 'enable' === $s->getMiniStatus())
         {
-            $server->setMiniStatus('disable');
+            $s->setMiniStatus('disable');
         }
         else
         {
-            $server->setMiniStatus('enable');
+            $s->setMiniStatus('enable');
         }
 
-        $ldap->doSave($server);
+        $l->doSave($s);
         
         sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
         echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
@@ -225,14 +261,12 @@ class serverActions extends sfActions
         $c = new LDAPCriteria();
         $c->setBaseDn($serverDn);
         
-        $ldap = new BaseServerPeer();
-        $server = $ldap->retrieveByDn($c);
+        $l = new ServerPeer();
+        $s = $l->retrieveByDn($c);
 
-        var_dump( $server ); exit;
-        
-        if ( 'disable' === $server->getMiniStatus())
+        if ( 'disable' === $s->getMiniStatus())
         {
-            $s->doDelete($server, false);
+            $l->doDelete($s, false);
         }
         
         sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
@@ -241,102 +275,104 @@ class serverActions extends sfActions
     }
 
 /* WebServices */
-  public function executeCheck(sfWebRequest $request)
-  {
-    $this->setTemplate('check');
-    $this->setLayout(false);
-    $this->count = 0;
-
-    #$ValidIpAddressRegex = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
-    $pattern = sfConfig::get('hostname_pattern');
-
-    if ( ! preg_match($pattern, $request->getParameter('name') ) )
+    public function executeCheck(sfWebRequest $request)
     {
-        $this->count = 1;
-        return sfView::SUCCESS;
-    }
+        $this->setTemplate('check');
+        $this->setLayout(false);
+        $this->count = 0;
+        
+        #$ValidIpAddressRegex = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
+        $pattern = sfConfig::get('hostname_pattern');
+        
+        if ( ! preg_match($pattern, $request->getParameter('name') ) )
+        {
+            $this->count = 1;
+            return sfView::SUCCESS;
+        }
 /*
-#    $split = explode('.', $request->getParameter('name'), 5);
-#    if ( 1 == count($split) )
-#    {
-#        $this->count = 1;
-#        return sfView::SUCCESS;
-#    }
+#       $split = explode('.', $request->getParameter('name'), 5);
+#       if ( 1 == count($split) )
+#       {
+#           $this->count = 1;
+#           return sfView::SUCCESS;
+#       }
 */
 
-    $s = new ServerPeer();
-    $c = new LDAPCriteria();
-
-    $c->setBaseDn( sprintf("ou=Platforms,%s", sfConfig::get('ldap_bind_dn')) );
-
-    $c->add('objectClass', 'top');
-    $c->add('objectClass', 'organizationalRole');
-    $c->add('objectClass', 'zarafa-server');
-    $c->add('objectClass', 'ipHost');
-    $c->add('objectClass', 'miniServer');
-    $c->add('cn', $request->getParameter('name'));
-
-    $this->count = $s->doCount($c);
-
-    return sfView::SUCCESS;
-  }
+        $l = new ServerPeer();
+        $c = new LDAPCriteria();
+        
+        $c->setBaseDn( sprintf("ou=Platforms,%s", sfConfig::get('ldap_bind_dn')) );
+        
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zarafa-server');
+        $c->add('objectClass', 'ipHost');
+        $c->add('objectClass', 'miniServer');
+        $c->add('cn', $request->getParameter('name'));
+        
+        $this->count = $l->doCount($c);
+        
+        return sfView::SUCCESS;
+    }
   
-  public function executeResolvehost(sfWebRequest $request)
-  {
-    #$this->setTemplate('check');
-    $this->setLayout(false);
-    $this->ip = 0;
-
-    $pattern = sfConfig::get('hostname_pattern');
-
-    if ( ! preg_match($pattern, $request->getParameter('name') ) )
+    public function executeResolvehost(sfWebRequest $request)
     {
+        #$this->setTemplate('check');
+        $this->setLayout(false);
         $this->ip = 0;
+        
+        $pattern = sfConfig::get('hostname_pattern');
+        
+        if ( ! preg_match($pattern, $request->getParameter('name') ) )
+        {
+            $this->ip = 0;
+            return sfView::SUCCESS;
+        }
+        
+        if ( $ip = dns_get_record ($request->getParameter('name'), DNS_A) )
+        {
+            $this->ip = $ip[0]['ip'];
+        }
+        
         return sfView::SUCCESS;
     }
-
-    if ( $ip = dns_get_record ($request->getParameter('name'), DNS_A) )
-        $this->ip = $ip[0]['ip'];
-
-    return sfView::SUCCESS;
-  }
   
-  public function executeCheckip(sfWebRequest $request)
-  {
-    $this->setTemplate('check');
-    $this->setLayout(false);
-    $this->count = 0;
-
-    $pattern = "/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/";
-
-    if ( ! preg_match($pattern, $request->getParameter('ip') ) )
+    public function executeCheckip(sfWebRequest $request)
     {
-        $this->count = 1;
-        return sfView::SUCCESS;
-    }
+        $this->setTemplate('check');
+        $this->setLayout(false);
+        $this->count = 0;
+        
+        $pattern = "/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/";
+        
+        if ( ! preg_match($pattern, $request->getParameter('ip') ) )
+        {
+            $this->count = 1;
+            return sfView::SUCCESS;
+        }
 /*
-#    $split = explode('.', $request->getParameter('ip'), 4);
-#    if ( 4 != count($split) )
-#    {
-#        $this->count = 1;
-#        return sfView::SUCCESS;
-#    }
+#       $split = explode('.', $request->getParameter('ip'), 4);
+#       if ( 4 != count($split) )
+#       {
+#           $this->count = 1;
+#           return sfView::SUCCESS;
+#       }
 */
 
-    $s = new ServerPeer();
-    $c = new LDAPCriteria();
-
-    $c->setBaseDn( sprintf("ou=Platforms,%s", sfConfig::get('ldap_bind_dn')) );
-
-    $c->add('objectClass', 'top');
-    $c->add('objectClass', 'organizationalRole');
-    $c->add('objectClass', 'zarafa-server');
-    $c->add('objectClass', 'ipHost');
-    $c->add('objectClass', 'miniServer');
-    $c->add('ipHostNumber', $request->getParameter('ip'));
-
-    $this->count = $s->doCount($c);
-
-    return sfView::SUCCESS;
-  }
+        $l = new ServerPeer();
+        $c = new LDAPCriteria();
+        
+        $c->setBaseDn( sprintf("ou=Platforms,%s", sfConfig::get('ldap_bind_dn')) );
+        
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zarafa-server');
+        $c->add('objectClass', 'ipHost');
+        $c->add('objectClass', 'miniServer');
+        $c->add('ipHostNumber', $request->getParameter('ip'));
+        
+        $this->count = $l->doCount($c);
+        
+        return sfView::SUCCESS;
+    }
 }

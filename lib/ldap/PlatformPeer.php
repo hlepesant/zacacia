@@ -2,47 +2,6 @@
 
 class PlatformPeer extends BasePlatformPeer
 {
-/*
-    private function createLDAPObject($ldap_entry, $ldap_object = 'base')
-    {
-        $attributes = $this->extractAttributes($ldap_entry);
-        $values = $this->extractValues($ldap_entry, $attributes);
-        $dn = ldap_get_dn($this->getLinkId(), $ldap_entry);
-       
-        if ( 'base' == $ldap_object )
-        {
-            $ldap_object = new BasePlatformObject();
-        }
-        else
-        {
-            $ldap_object = new PlatformObject();
-        }
-        $ldap_object->setDn($dn);
-        $ldap_object->__constructFrom($values);
-        return( $ldap_object );
-    }
-
-    public function doSelect(LDAPCriteria $ldap_criteria, $ldap_object = 'base')
-    {
-        $ldap_criteria = self::configureCriteria($ldap_criteria);
-        $results = $this->select($ldap_criteria);
-        $ldap_entry = ldap_first_entry($this->getLinkId(), $results);
-        
-        $objects = array();
-        
-        if ($ldap_entry !== false)
-        {
-            $objects[] = $this->createLDAPObject($ldap_entry, $ldap_object);
-            while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry))
-            {
-                $objects[] = $this->createLDAPObject($ldap_entry, $ldap_object);
-            }
-        }
-        
-        return $objects;
-    }
-*/
-
     public function doAdd(LDAPObject $ldap_object)
     {
         if ( ! parent::doAdd($ldap_object) )

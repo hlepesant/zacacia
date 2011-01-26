@@ -15,11 +15,11 @@
     </div>
 
 <?php
-  $id = 0;
-  foreach ($servers as $s):
+$id = 0;
+foreach ($servers as $s):
     include_partial('server', array('s' => $s, 'id' => $id, 'f' => $forms[$s->getDn()]));
     $id++;
-  endforeach;
+endforeach;
 ?>
 </div>
 
@@ -40,46 +40,49 @@ alert('". $sf_user->getFlash('ldap_error') ."');
 <?php echo javascript_tag("
 function jumpTo(id, name, destination) 
 {
-  var f = document.getElementById(sprintf('navigation_form_%03d', id));
-  var m = '".$this->getModuleName()."';
+    var f = document.getElementById(sprintf('navigation_form_%03d', id));
+    var m = '".$this->getModuleName()."';
+    
+    if ( typeof(destination) == 'undefined' )
+    {
+        var a = document.getElementById(sprintf('destination_%03d', id));
+        var d = a.options[a.selectedIndex].value;
+        var t = a.options[a.selectedIndex].text;
+    }
+    else
+    {
+        var d = destination;
+        var t = destination;
+    }
 
-  if ( typeof(destination) == 'undefined' )
-  {
-    var a = document.getElementById(sprintf('destination_%03d', id));
-    var d = a.options[a.selectedIndex].value;
-    var t = a.options[a.selectedIndex].text;
-  }
-  else
-  {
-    var d = destination;
-    var t = destination;
-  }
+    switch ( d )
+    {
+        case 'none':
+            return false;
+        break;
+        
+        case 'edit':
+        break;
+        
+        case 'status':
+            if ( ! confirm( t+' ".__("the server")." \"'+name+'\" ?'))
+            {
+                return false;
+            }
+        break;
+        
+        case 'delete':
+            if ( ! confirm( t+' ".__("the server")." \"'+name+'\" ?'))
+            {
+              a.selectedIndex = 0;
+              return false;
+            }
+        break;
+    }
 
-  switch ( d ) {
-    case 'none':
-      return false;
-    break;
+    f.action = sprintf('".url_for(false)."%s/%s/', m, d);
 
-    case 'edit':
-    break;
-
-    case 'status':
-      if ( ! confirm( t+' ".__("the server")." \"'+name+'\" ?')) {
-        return false;
-      }
-    break;
-
-    case 'delete':
-      if ( ! confirm( t+' ".__("the server")." \"'+name+'\" ?')) {
-        a.selectedIndex = 0;
-        return false;
-      }
-    break;
-  }
-
-  f.action = sprintf('".url_for(false)."%s/%s/', m, d);
-
-  f.submit();
-  return true;
+    f.submit();
+    return true;
 }
 ") ?>

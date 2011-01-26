@@ -44,5 +44,9 @@ class ProjectConfiguration extends sfProjectConfiguration
     sfConfig::set('quota_warn_ratio', (float)(80 / 100));
 
     sfConfig::set('user_default_quota', 250);
+
+    sfConfig::set('awk', '/usr/bin/awk');
+    sfConfig::set('ping', '/bin/ping');
+    sfConfig::set('grep', '/bin/grep');
   }
 }
