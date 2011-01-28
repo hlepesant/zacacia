@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * http://doc.zarafa.com/6.40/Administrator_Manual/en-US/html/_multi_server_setup.html
+ * 6.3.2. Prepare / setup the LDAP server for multi-server setup
+ */
+
 class BaseServerObject extends LDAPObject
 {
     public function __construct()
@@ -16,12 +21,13 @@ class BaseServerObject extends LDAPObject
         $this->attributes['ipHostNumber'] = null;
         $this->attributes['miniStatus'] = 'enable';
         $this->attributes['miniUnDeletable'] = 'FALSE';
-        $this->attributes['zarafaAccount'] = 1;
-        $this->attributes['zarafaContainsPublic'] = 0;
-        $this->attributes['zarafaFilePath'] = '/var/run/zarafa';
-        $this->attributes['zarafaHidden'] = 1;
-        $this->attributes['zarafaHttpPort'] = 236;
-        $this->attributes['zarafaSslPort'] = 237;
+        /* Zarafa Specific Attributs */
+        $this->attributes['zarafaAccount'] = 1;                         // Entry is a part of zarafa
+        $this->attributes['zarafaContainsPublic'] = 0;                  // This server contains the public store
+        $this->attributes['zarafaFilePath'] = '/var/run/zarafa';        // The unix socket or named pipe to the server
+        $this->attributes['zarafaHidden'] = 1;                          // This object should be hidden from address book
+        $this->attributes['zarafaHttpPort'] = 236;                      // Port for the http connection
+        $this->attributes['zarafaSslPort'] = 237;                       // Port for the ssl connection
 
         return $this;
     }
