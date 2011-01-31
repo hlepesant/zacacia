@@ -33,7 +33,7 @@ class companyActions extends sfActions
         
         $l = new CompanyPeer();
         $l->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
-        
+       
         $this->companies = $l->doSelect($c, 'extended');
         
         $id=0;
@@ -89,4 +89,86 @@ class companyActions extends sfActions
         unset($this->new['companyDn'], $this->new['destination']);
         $this->new->getWidget('platformDn')->setDefault($platformDn);
     }
+
+    public function executeNew(sfWebRequest $request)
+    {
+        $data = $request->getParameter('minidata');
+        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+        if ( empty($platformDn) ) {
+          $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+          $this->redirect('@platform');
+        }
+
+        $l = new CompanyPeer();
+        $l->setBaseDn(sprintf("ou=Companies,%s", $platformDn));
+
+        $this->form = new CompanyForm();
+        $this->form->getWidget('platformDn')->setDefault($platformDn);
+        #$this->form->getWidget('')->setDefault();
+    
+        if ($request->isMethod('post') && $request->getParameter('minidata'))
+        {
+            $this->form->bind($request->getParameter('minidata'));
+            
+                if ($this->form->isValid())
+                {
+                    $company = new CompanyObject();
+                    $company->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
+                    $company->setCn($this->form->getValue('cn'));
+                    #$company->($this->form->getValue(''));
+                    $company->setMiniStatus($this->form->getValue('status'));
+                    $company->setMiniUnDeletable($this->form->getValue('undeletable'));
+                
+                    if ( $l->doAdd($company) )
+                    {
+                        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                        echo fake_post($this, 'server/company', Array('platformDn' => $platformDn));
+                        exit;
+                    }
+                }
+                else 
+                {
+                    $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
+                }
+        }
+
+        $this->form->getWidget('zarafaCompanyServer')->setOption('choices', $l->getOptionForSelect($platformDn));
+        
+        $this->cancel = new CompanyNavigationForm();
+        unset($this->cancel['companyDn'], $this->cancel['destination']);
+        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
+    }
+
+
+
+/* WebServices */
+    public function executeCheck(sfWebRequest $request)
+    {
+        $this->setTemplate('check');
+        $this->setLayout(false);
+        $this->count = 0;
+        
+        $pattern = sfConfig::get('company_pattern');
+        if ( ! preg_match($pattern, $request->getParameter('name') ) )
+        {
+            $this->count = 1;
+            return sfView::SUCCESS;
+        }
+
+        $l = new CompanyPeer();
+        $c = new LDAPCriteria();
+        
+        $c->setBaseDn( sprintf("ou=Platforms,%s", sfConfig::get('ldap_bind_dn')) );
+        
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zarafa-company');
+        $c->add('objectClass', 'miniCompany');
+        $c->add('cn', $request->getParameter('name'));
+        
+        $this->count = $l->doCount($c);
+        
+        return sfView::SUCCESS;
+    }
+  
 }
