@@ -30,6 +30,11 @@ attributetype ( miniAttributeType:2 NAME 'miniUnDeletable'
   EQUALITY booleanMatch
   SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
 
+attributetype ( miniAttributeType:3 NAME 'miniCAL'
+  DESC 'MinivISP: number of CAL'
+  EQUALITY integerMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE-VALUE )
+
 ## objectClass ##
 
 objectclass ( miniObjectClass:1 NAME 'miniSecurityGroup'
@@ -51,7 +56,7 @@ objectclass ( miniObjectClass:3 NAME 'miniCompany'
 	SUP top
 	AUXILIARY
 	MUST ( cn )
-	MAY ( miniStatus $ miniUnDeletable ) )
+	MAY ( miniStatus $ miniUnDeletable $ miniCAL ) )
 
 objectclass ( miniObjectClass:4 NAME 'miniDomain'
 	DESC 'MinivISP Domain'

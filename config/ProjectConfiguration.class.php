@@ -24,7 +24,8 @@ class ProjectConfiguration extends sfProjectConfiguration
     sfConfig::set('ldap_use_ssl', false);
     sfConfig::set('ldap_root_dn', "cn=admin,dc=minivisp,dc=org");
     sfConfig::set('ldap_root_pw', "minivisp");
-    sfConfig::set('ldap_bind_dn', 'ou=MinivISP,dc=minivisp,dc=org');
+    #sfConfig::set('ldap_bind_dn', 'ou=MinivISP,dc=minivisp,dc=org');
+    sfConfig::set('ldap_base_dn', 'ou=MinivISP,dc=minivisp,dc=org');
 
 # Zarafa Internal
     sfConfig::set('zarafaHttpPort', 236);
@@ -34,11 +35,46 @@ class ProjectConfiguration extends sfProjectConfiguration
     sfConfig::set('hostname_pattern', '/^(([a-z0-9]+|([a-z0-9]+[-]+[a-z0-9]+))[.])+(AC|AD|AE|AERO|AF|AG|AI|AL|AM|AN|AO|AQ|AR|ARPA|AS|ASIA|AT|AU|AW|AX|AZ|BA|BB|BD|BE|BF|BG|BH|BI|BIZ|BJ|BM|BN|BO|BR|BS|BT|BV|BW|BY|BZ|CA|CAT|CC|CD|CF|CG|CH|CI|CK|CL|CM|CN|CO|COM|COOP|CR|CU|CV|CX|CY|CZ|DE|DJ|DK|DM|DO|DZ|EC|EDU|EE|EG|ER|ES|ET|EU|FI|FJ|FK|FM|FO|FR|GA|GB|GD|GE|GF|GG|GH|GI|GL|GM|GN|GOV|GP|GQ|GR|GS|GT|GU|GW|GY|HK|HM|HN|HR|HT|HU|ID|IE|IL|IM|IN|INFO|INT|IO|IQ|IR|IS|IT|JE|JM|JO|JOBS|JP|KE|KG|KH|KI|KM|KN|KP|KR|KW|KY|KZ|LA|LB|LC|LI|LK|LR|LS|LT|LU|LV|LY|MA|MC|MD|ME|MG|MH|MIL|MK|ML|MM|MN|MO|MOBI|MP|MQ|MR|MS|MT|MU|MUSEUM|MV|MW|MX|MY|MZ|NA|NAME|NC|NE|NET|NF|NG|NI|NL|NO|NP|NR|NU|NZ|OM|ORG|PA|PE|PF|PG|PH|PK|PL|PM|PN|PR|PRO|PS|PT|PW|PY|QA|RE|RO|RS|RU|RW|SA|SB|SC|SD|SE|SG|SH|SI|SJ|SK|SL|SM|SN|SO|SR|ST|SU|SV|SY|SZ|TC|TD|TEL|TF|TG|TH|TJ|TK|TL|TM|TN|TO|TP|TR|TRAVEL|TT|TV|TW|TZ|UA|UG|UK|US|UY|UZ|VA|VC|VE|VG|VI|VN|VU|WF|WS|XN|XN|XN|XN|XN|XN|XN|XN|XN|XN|XN|YE|YT|YU|ZA|ZM|ZW)[.]?$/i');
     sfConfig::set('company_pattern', '/^([a-z0-9]+)$/i');
 
-    sfConfig::set('hardQuotas', array('256' => '250 Mo', '512' => '500 Mo', '1024' => '1 Go', '2048' => '2 Go') );
-    sfConfig::set('hardQuota', 1.00 );
-    sfConfig::set('softQuota', 0.90 );
-    sfConfig::set('warnQuota', 0.80 );
-    sfConfig::set('user_default_quota', 256);
+#
+# Quota : http://doc.zarafa.com/6.40/Administrator_Manual/en-US/html/_multi_tenancy_configurations.html#_quota_levels
+#
+# Company Quota
+# - Global Company Quota
+    sfConfig::set('global_company_quota_warn', 0);
+# - Specific Company Quota (select in options )
+    sfConfig::set('options_company_quota_warn', array(
+        '5000' => '5 Go',
+        '10000' => '10 Go',
+        '25000' => '25 Go',
+        '50000' => '50 Go',
+        '100000' => '100 Go', 
+        '500000' => '500 Go', 
+        '1000000' => '1 To', 
+        '0' => 'unlimited', 
+    ));
+#
+# User Quota
+# - Global User Quota
+    sfConfig::set('server_user_quota_hard', 250);
+    sfConfig::set('server_user_quota_warn', ceil(sfConfig::get('server_quota_hard') * sfConfig::get('warnQuota')));
+    sfConfig::set('server_user_quota_soft', ceil(sfConfig::get('server_quota_hard') * sfConfig::get('softQuota')));
+# - Company User Quota
+# - Specific User Quota
+# - Options for select
+    sfConfig::set('options_user_quota_hard', array(
+        '250' => '250 Mo',
+        '500' => '500 Mo',
+        '1000' => '1 Go',
+        '2000' => '2 Go',
+        '0' => 'unlimited',
+    ));
+    sfConfig::set('ratio_quota_hard', 1.00 );
+    sfConfig::set('ratio_quota_soft', 0.90 );
+    sfConfig::set('ratio_quota_warn', 0.80 );
+
+    #sfConfig::set('server_user_quota_default', sfConfig::get('server_user_quota_hard'));
+    sfConfig::set('server_user_quota_default', 0);
+# End Quota
 
     sfConfig::set('uid_min', 10001);
     sfConfig::set('gid_min', 10001);
@@ -48,5 +84,7 @@ class ProjectConfiguration extends sfProjectConfiguration
     sfConfig::set('awk', '/usr/bin/awk');
     sfConfig::set('ping', '/bin/ping');
     sfConfig::set('grep', '/bin/grep');
+
+    sfConfig::set('undefined', '_undefined_');
   }
 }

@@ -69,3 +69,35 @@ function getName()
   return $('minidata_cn').value;
 }
 ") ?>
+
+<?php echo javascript_tag("
+function setCompanyWarningQuota()
+{
+  if ( $('minidata_zarafaQuotaOverride').checked )
+  {
+    $('minidata_zarafaQuotaWarn').disabled = false;
+    $('minidata_zarafaQuotaWarn').selectedIndex = 0;
+  }
+  else
+  {
+    $('minidata_zarafaQuotaWarn').disabled = true;
+    $('minidata_zarafaQuotaWarn').selectedIndex = $('minidata_zarafaQuotaWarn').options.length - 1;
+  }
+}
+") ?>
+
+<?php echo javascript_tag("
+function setUserHardQuota()
+{
+  if ( $('minidata_zarafaUserDefaultQuotaOverride').checked )
+  {
+    $('minidata_zarafaUserDefaultQuotaHard').disabled = false;
+    $('minidata_zarafaUserDefaultQuotaHard').selectedIndex = 0;
+  }
+  else
+  {
+    $('minidata_zarafaUserDefaultQuotaHard').disabled = true;
+    $('minidata_zarafaUserDefaultQuotaHard').selectedIndex = $('minidata_zarafaUserDefaultQuotaHard').options.length - 1;
+  }
+}
+") ?>

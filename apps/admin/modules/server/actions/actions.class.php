@@ -301,7 +301,7 @@ class serverActions extends sfActions
         $l = new ServerPeer();
         $c = new LDAPCriteria();
         
-        $c->setBaseDn( sprintf("ou=Platforms,%s", sfConfig::get('ldap_bind_dn')) );
+        $c->setBaseDn( sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')) );
         
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
@@ -362,7 +362,7 @@ class serverActions extends sfActions
         $l = new ServerPeer();
         $c = new LDAPCriteria();
         
-        $c->setBaseDn( sprintf("ou=Platforms,%s", sfConfig::get('ldap_bind_dn')) );
+        $c->setBaseDn( sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')) );
         
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');

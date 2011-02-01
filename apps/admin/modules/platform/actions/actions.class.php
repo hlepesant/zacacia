@@ -20,7 +20,7 @@ class platformActions extends sfActions
         $c->add('objectClass', 'miniPlatform');
         
         $l = new PlatformPeer();
-        $l->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_bind_dn')));
+        $l->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
         
         $this->platforms = $l->doSelect($c);
         
@@ -86,7 +86,7 @@ class platformActions extends sfActions
             if ($this->form->isValid())
             {
                 $l = new PlatformPeer();
-                $l->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_bind_dn')));
+                $l->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
                 
                 $p = new PlatformObject();
                 $p->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
@@ -214,7 +214,7 @@ class platformActions extends sfActions
         $this->count = 0;
         
         $l = new PlatformPeer();
-        $l->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_bind_dn')));
+        $l->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
 
         $c = new LDAPCriteria();
         

@@ -104,7 +104,6 @@ class companyActions extends sfActions
 
         $this->form = new CompanyForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
-        #$this->form->getWidget('')->setDefault();
     
         if ($request->isMethod('post') && $request->getParameter('minidata'))
         {
@@ -112,12 +111,15 @@ class companyActions extends sfActions
             
                 if ($this->form->isValid())
                 {
+                    print_r( $this->form->getValues() ); exit;
                     $company = new CompanyObject();
                     $company->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
                     $company->setCn($this->form->getValue('cn'));
                     #$company->($this->form->getValue(''));
                     $company->setMiniStatus($this->form->getValue('status'));
                     $company->setMiniUnDeletable($this->form->getValue('undeletable'));
+
+                    var_dump( $company );exit;
                 
                     if ( $l->doAdd($company) )
                     {
@@ -132,7 +134,8 @@ class companyActions extends sfActions
                 }
         }
 
-        $this->form->getWidget('zarafaCompanyServer')->setOption('choices', $l->getOptionForSelect($platformDn));
+        $this->form->getWidget('zarafaCompanyServer')->setOption('choices', $l->getServerOptionList($platformDn));
+        $this->form->getWidget('zarafaSystemAdmin')->setOption('choices', $l->getUserOptionList($platformDn));
         
         $this->cancel = new CompanyNavigationForm();
         unset($this->cancel['companyDn'], $this->cancel['destination']);
@@ -158,7 +161,7 @@ class companyActions extends sfActions
         $l = new CompanyPeer();
         $c = new LDAPCriteria();
         
-        $c->setBaseDn( sprintf("ou=Platforms,%s", sfConfig::get('ldap_bind_dn')) );
+        $c->setBaseDn( sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')) );
         
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');

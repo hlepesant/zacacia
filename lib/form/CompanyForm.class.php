@@ -16,14 +16,21 @@ class CompanyForm extends MinivISPForm
 #            'zarafaAccount' => new sfWidgetFormInput(),
 #            'zarafaHidden' => new sfWidgetFormInput(),
 #            'zarafaAdminPrivilege' => new sfWidgetFormInput(),
-            'zarafaCompanyServer' => new sfWidgetFormSelect( array('choices' => array())),
+            'zarafaCompanyServer' => new sfWidgetFormSelect( array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
 #            'zarafaQuotaCompanyWarningRecipients' => new sfWidgetFormInput(),
-            'zarafaQuotaOverride' => new sfWidgetFormInputCheckbox(),
+            'zarafaQuotaOverride' => new sfWidgetFormInputCheckbox(array(), array('onClick' => 'setCompanyWarningQuota()')),
 #            'zarafaQuotaUserWarningRecipients' => new sfWidgetFormInput(),
-            'zarafaQuotaWarn' => new sfWidgetFormInput(),
-            'zarafaSystemAdmin' => new sfWidgetFormInput(),
-            'zarafaUserDefaultQuotaOverride' => new sfWidgetFormInputCheckbox(),
-            'zarafaUserDefaultQuotaHard' => new sfWidgetFormSelect( array('choices' => sfConfig::get('hardQuotas')) ),
+#            'zarafaQuotaWarn' => new sfWidgetFormInput(array(), array('class' => 'small-60', 'maxlength' => '6')),
+            'zarafaQuotaWarn' => new sfWidgetFormSelect(array(
+                'choices' => sfConfig::get('options_company_quota_warn'),
+                'default' => sfConfig::get('global_company_quota_warn'),
+                ), array('disabled' => 'true')),
+            'zarafaSystemAdmin' => new  sfWidgetFormSelect( array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
+            'zarafaUserDefaultQuotaOverride' => new sfWidgetFormInputCheckbox(array(), array('onClick' => 'setUserHardQuota()')),
+            'zarafaUserDefaultQuotaHard' => new sfWidgetFormSelect(array(
+                'choices' => sfConfig::get('options_user_quota_hard'),
+                'default' => sfConfig::get('server_user_quota_default'),
+                ), array('disabled' => 'true')),
             /* 'zarafaUserDefaultQuotaSoft' => new sfWidgetFormInput(), */
             /* 'zarafaUserDefaultQuotaWarn' => new sfWidgetFormInput(), */
 #            'zarafaViewPrivilege' => new sfWidgetFormInput(),
@@ -36,7 +43,6 @@ class CompanyForm extends MinivISPForm
             'cn' => 'Name',
             'status' => 'Status',
             'undeletable' => 'Undeletable',
-        
 #            'zarafaAccount' => 'entry is a part of zarafa', // integer
 #            'zarafaHidden' => 'This object should be hidden from address book', // integer
 #            'zarafaAdminPrivilege' => 'Users from different companies which are administrator over selected company', // dn(s)
@@ -48,30 +54,29 @@ class CompanyForm extends MinivISPForm
             'zarafaSystemAdmin' => 'The user who is the system administrator for this company', // dn
             'zarafaUserDefaultQuotaOverride' => 'Override User default quota for children', // integer
             'zarafaUserDefaultQuotaHard' => 'User default hard quota size in MB', // integer
-            'zarafaUserDefaultQuotaSoft' => 'User default soft quota size in MB', // integer
-            'zarafaUserDefaultQuotaWarn' => 'User default warning quota size in MB', // integer
+#            'zarafaUserDefaultQuotaSoft' => 'User default soft quota size in MB', // integer
+#            'zarafaUserDefaultQuotaWarn' => 'User default warning quota size in MB', // integer
 #            'zarafaViewPrivilege' => 'Companies with view privileges over selected company', // dn(s)
         ));
         
         $this->setValidators(array(
             'platformDn' => new sfValidatorString(),
-            'ip' => new sfValidatorIpAddress(),
+            'cn' => new sfValidatorString(),
             'status' => new sfValidatorChoice(array('choices' => array_keys($status))),
             'undeletable' => new sfValidatorChoice(array('choices' => array_keys($undeletable))),
-        
 #            'zarafaAccount' => new sfValidatorString(),
 #            'zarafaHidden' => new sfValidatorString(),
 #            'zarafaAdminPrivilege' => new sfValidatorString(),
             'zarafaCompanyServer' => new sfValidatorString(),
 #            'zarafaQuotaCompanyWarningRecipients' => new sfValidatorString(),
-            'zarafaQuotaOverride' => new sfValidatorString(),
+            'zarafaQuotaOverride' => new sfValidatorBoolean(),
 #            'zarafaQuotaUserWarningRecipients' => new sfValidatorString(),
-            'zarafaQuotaWarn' => new sfValidatorString(),
+            'zarafaQuotaWarn' => new sfValidatorInteger(),
             'zarafaSystemAdmin' => new sfValidatorString(),
-            'zarafaUserDefaultQuotaHard' => new sfValidatorString(),
-            'zarafaUserDefaultQuotaOverride' => new sfValidatorString(),
-            'zarafaUserDefaultQuotaSoft' => new sfValidatorString(),
-            'zarafaUserDefaultQuotaWarn' => new sfValidatorString(),
+            'zarafaUserDefaultQuotaOverride' => new sfValidatorBoolean(),
+            'zarafaUserDefaultQuotaHard' => new sfValidatorInteger(),
+#            'zarafaUserDefaultQuotaSoft' => new sfValidatorInteger(),
+#            'zarafaUserDefaultQuotaWarn' => new sfValidatorInteger(),
 #            'zarafaViewPrivilege' => new sfValidatorString(),
         ));
     }

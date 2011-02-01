@@ -58,7 +58,7 @@
 
 #form-line.item
 {
-    width: 400px;
+    width: 450px;
     background-color: #C0C0C0;
     margin: 0px 0px 0px 0px;
     padding: 5px 0px 0px 5px;
@@ -87,7 +87,7 @@
 
 #form-line.check
 {
-    width: 150px;
+    width: 50px;
     background-color: #CCCCCC;
     margin: 0px 0px 0px 0px;
     padding: 5px 0px 0px 5px;
@@ -119,7 +119,7 @@
     clear: right;
 }
 
- input[type=text].small-60 {
+input[type=text].small-60 {
   margin: 4px 0px 0px 0px;
   background-color: #F0F0F0;
   width: 60px;
@@ -135,6 +135,12 @@ select {
   margin: 5px 0px 0px 0px;
   background-color: #F0F0F0;
   width: 80px;
+}
+
+select.large {
+  margin: 5px 0px 0px 0px;
+  background-color: #F0F0F0;
+  width: 150px;
 }
 
 input[readonly=readonly] {
