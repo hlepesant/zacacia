@@ -99,10 +99,16 @@ class companyActions extends sfActions
           $this->redirect('@platform');
         }
 
+        $this->step = $request->getParameter('step', $data['step']);
+        if ( empty($this->step) ) {
+            $this->step = 1;
+        }
+
         $l = new CompanyPeer();
         $l->setBaseDn(sprintf("ou=Companies,%s", $platformDn));
 
-        $this->form = new CompanyForm();
+        $this->form = new CompanyForm($this->step);
+
         $this->form->getWidget('platformDn')->setDefault($platformDn);
     
         if ($request->isMethod('post') && $request->getParameter('minidata'))
@@ -134,12 +140,28 @@ class companyActions extends sfActions
                 }
         }
 
-        $this->form->getWidget('zarafaCompanyServer')->setOption('choices', $l->getServerOptionList($platformDn));
-        $this->form->getWidget('zarafaSystemAdmin')->setOption('choices', $l->getUserOptionList($platformDn));
+        $this->form->getWidget('step')->setDefault($this->step);
+
+        switch ($this->step)
+        {
+            case 1:
+            break;
+
+            case 2:
+                $this->form->getWidget('zarafaCompanyServer')->setOption('choices', $l->getServerOptionList($platformDn));
+                $this->form->getWidget('zarafaSystemAdmin')->setOption('choices', $l->getUserOptionList($platformDn));
+            break;
+
+            case 3:
+            break;
+        }
+
         
         $this->cancel = new CompanyNavigationForm();
         unset($this->cancel['companyDn'], $this->cancel['destination']);
         $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
+       
+        $this->setTemplate( 'step'.$this->step );
     }
 
 

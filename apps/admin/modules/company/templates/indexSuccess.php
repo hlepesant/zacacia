@@ -1,3 +1,5 @@
+<?php /* use_helper('ModalBox') */ ?>
+
 <div id="collection-header">
     <div id="collection-header" class="section">
         <?php echo __('Companies') ;?>
@@ -5,6 +7,24 @@
     <div id="collection-header" class="navigation">
       <?php echo link_to_function(image_tag('icons/arrow_up.png'), "document.getElementById('platform_back').submit()") ?> 
       <?php echo link_to_function(image_tag('icons/building_add.png'), "document.getElementById('company_new').submit()") ?> 
+
+
+<?php /* echo link_to_function('add', m_link_to_element("$('company_new')",
+    array(
+        'title' => "'Create'",
+        'inactiveFade' => false))); */
+/*    array('width' => 400, 'height' => 180, 'params' => '*Form.serialize(\'company_new\')*'))); */
+/*
+<img src="/images/icons/building_add.png" onclick="Modalbox.show('<?php echo url_for('company/new'); ?>', {title: 'Sending status', params: $('company_new').serialize() }); return false;">
+*/
+/*
+echo link_to_function(
+    image_tag('icons/building_add.png'),
+    "Modalbox.show('".url_for('company/new')."', {title: 'Create company', params: $('company_new').serialize(), width:'700', height:'450' }); return false;"
+);
+*/
+?>
+
     </div>
 </div>
 

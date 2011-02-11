@@ -1,3 +1,5 @@
+<?php use_helper('ModalBox') ?>
+
 <div id="collection-header">
     <div id="collection-header" class="section">
         <?php echo __('Servers') ;?>
@@ -5,6 +7,17 @@
     <div id="collection-header" class="navigation">
       <?php echo link_to_function(image_tag('icons/arrow_up.png'), "document.getElementById('platform_back').submit()") ?> 
       <?php echo link_to_function(image_tag('icons/server_add.png'), "document.getElementById('server_new').submit()") ?> 
+
+<?php /* echo m_link_to('link name',
+    '@remote_route_for_action',
+    array('title' => __('Retrieve Forgotten Password')),
+    array('width' => 400, 'height' => 180)) */ ?>
+<?php echo javascript_tag(m_link_to_function(url_for('mymodule/index'),
+    array('title' => 'Window Title'))); ?>
+
+
+
+
     </div>
 </div>
 

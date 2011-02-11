@@ -2,7 +2,7 @@
 
 <div id="form-header">
     <div id="form-header" class="section">
-        <?php echo __('New Company') ;?>
+        <?php echo __('New Company: Step 3/3') ;?>
     </div>
 </div>
 
@@ -19,14 +19,6 @@
 </ul>
 <?php endif; ?>
 
-    <div id="form-line">
-        <div id="form-line" class="item"><?php echo $form['cn']->renderLabel() ?></div>
-        <div id="form-line" class="field"><?php echo $form['cn']->render() ?></div>
-        <div id="form-line" class="check">
-            <div id="checkName"></div>
-        </div>
-    </div>
-    
     <?php /* echo $form['zarafaAccount']->renderRow() */ ?>
     <?php /* echo $form['zarafaHidden']->renderRow() */ ?>
     <?php /* echo $form['zarafaAdminPrivilege']->renderRow() */ ?>
@@ -41,9 +33,6 @@
     <?php /* echo $form['zarafaUserDefaultQuotaSoft']->renderRow() */ ?>
     <?php /* echo $form['zarafaUserDefaultQuotaWarn']->renderRow() */ ?>
     <?php /* echo $form['zarafaViewPrivilege']->renderRow() */ ?>
-
-    <?php echo $form['undeletable']->renderRow() ?>
-    <?php echo $form['status']->renderRow() ?>
 
     <div id="form-submitline">
         <?php echo link_to( "<input type=\"button\" value=\"". __("Cancel") ."\" id=\"form-button\"  />" , "@platform") ?>
