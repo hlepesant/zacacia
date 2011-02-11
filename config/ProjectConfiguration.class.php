@@ -86,6 +86,5 @@ class ProjectConfiguration extends sfProjectConfiguration
     sfConfig::set('grep', '/bin/grep');
 
     sfConfig::set('undefined', '_undefined_');
-    $this->enablePlugins('sfModalBoxPlugin');
   }
 }

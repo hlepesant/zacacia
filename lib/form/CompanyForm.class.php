@@ -77,28 +77,6 @@ class CompanyForm extends MinivISPForm
             'zarafaUserDefaultQuotaWarn' => 'User default warning quota size in MB', // integer
             'zarafaViewPrivilege' => 'Companies with view privileges over selected company', // dn(s)
         ));
-        
-        $this->setValidators(array(
-            'step' => new sfValidatorInteger(array('min' => 1, 'max' => 3)),
-            'platformDn' => new sfValidatorString(),
-            'cn' => new sfValidatorString(),
-            'status' => new sfValidatorChoice(array('choices' => array_keys($this->status))),
-            'undeletable' => new sfValidatorChoice(array('choices' => array_keys($this->undeletable))),
-            'zarafaAccount' => new sfValidatorString(),
-            'zarafaHidden' => new sfValidatorString(),
-            'zarafaAdminPrivilege' => new sfValidatorString(),
-            'zarafaCompanyServer' => new sfValidatorString(),
-            'zarafaQuotaCompanyWarningRecipients' => new sfValidatorString(),
-            'zarafaQuotaOverride' => new sfValidatorBoolean(),
-            'zarafaQuotaUserWarningRecipients' => new sfValidatorString(),
-            'zarafaQuotaWarn' => new sfValidatorInteger(),
-            'zarafaSystemAdmin' => new sfValidatorString(),
-            'zarafaUserDefaultQuotaOverride' => new sfValidatorBoolean(),
-            'zarafaUserDefaultQuotaHard' => new sfValidatorInteger(),
-            'zarafaUserDefaultQuotaSoft' => new sfValidatorInteger(),
-            'zarafaUserDefaultQuotaWarn' => new sfValidatorInteger(),
-            'zarafaViewPrivilege' => new sfValidatorString(),
-        ));
     }
 
     private function setWidgetsStep1()
@@ -210,26 +188,26 @@ class CompanyForm extends MinivISPForm
         $v['status'] = new sfValidatorChoice(array('choices' => array_keys($this->status)));
         $v['undeletable'] = new sfValidatorChoice(array('choices' => array_keys($this->undeletable)));
         // for step 2
-        $v['zarafaAccount'] = new sfValidatorString();
-        $v['zarafaHidden'] = new sfValidatorString();
-        $v['zarafaAdminPrivilege'] = new sfValidatorString();
-        $v['zarafaCompanyServer'] = new sfValidatorString();
-        $v['zarafaQuotaCompanyWarningRecipients'] = new sfValidatorString();
-        $v['zarafaQuotaOverride'] = new sfValidatorBoolean();
-        $v['zarafaQuotaUserWarningRecipients'] = new sfValidatorString();
-        $v['zarafaQuotaWarn'] = new sfValidatorInteger();
-        $v['zarafaSystemAdmin'] = new sfValidatorString();
+        $v['zarafaAccount'] = new sfValidatorString(array('required' => false));
+        $v['zarafaHidden'] = new sfValidatorString(array('required' => false));
+        $v['zarafaAdminPrivilege'] = new sfValidatorString(array('required' => false));
+        $v['zarafaCompanyServer'] = new sfValidatorString(array('required' => false));
+        $v['zarafaQuotaCompanyWarningRecipients'] = new sfValidatorString(array('required' => false));
+        $v['zarafaQuotaOverride'] = new sfValidatorBoolean(array('required' => false));
+        $v['zarafaQuotaUserWarningRecipients'] = new sfValidatorString(array('required' => false));
+        $v['zarafaQuotaWarn'] = new sfValidatorInteger(array('required' => false));
+        $v['zarafaSystemAdmin'] = new sfValidatorString(array('required' => false));
         // for step 3
-        $v['zarafaUserDefaultQuotaOverride'] = new sfValidatorBoolean();
-        $v['zarafaUserDefaultQuotaHard'] = new sfValidatorInteger();
-        $v['zarafaUserDefaultQuotaSoft'] = new sfValidatorInteger();
-        $v['zarafaUserDefaultQuotaWarn'] = new sfValidatorInteger();
-        $v['zarafaViewPrivilege'] = new sfValidatorString();
+        $v['zarafaUserDefaultQuotaOverride'] = new sfValidatorBoolean(array('required' => false));
+        $v['zarafaUserDefaultQuotaHard'] = new sfValidatorInteger(array('required' => false));
+        $v['zarafaUserDefaultQuotaSoft'] = new sfValidatorInteger(array('required' => false));
+        $v['zarafaUserDefaultQuotaWarn'] = new sfValidatorInteger(array('required' => false));
+        $v['zarafaViewPrivilege'] = new sfValidatorString(array('required' => false));
 
         return $v;
     }
 
-    private function getValidatorsStep2()
+    private function setValidatorsStep2()
     {
         // step 1
         $v['step'] = new sfValidatorInteger(array('min' => 1, 'max' => 3));
@@ -248,11 +226,11 @@ class CompanyForm extends MinivISPForm
         $v['zarafaQuotaWarn'] = new sfValidatorInteger();
         $v['zarafaSystemAdmin'] = new sfValidatorString();
         // for step 3
-        $v['zarafaUserDefaultQuotaOverride'] = new sfValidatorBoolean();
-        $v['zarafaUserDefaultQuotaHard'] = new sfValidatorInteger();
-        $v['zarafaUserDefaultQuotaSoft'] = new sfValidatorInteger();
-        $v['zarafaUserDefaultQuotaWarn'] = new sfValidatorInteger();
-        $v['zarafaViewPrivilege'] = new sfValidatorString();
+        $v['zarafaUserDefaultQuotaOverride'] = new sfValidatorBoolean(array('required' => false));
+        $v['zarafaUserDefaultQuotaHard'] = new sfValidatorInteger(array('required' => false));
+        $v['zarafaUserDefaultQuotaSoft'] = new sfValidatorInteger(array('required' => false));
+        $v['zarafaUserDefaultQuotaWarn'] = new sfValidatorInteger(array('required' => false));
+        $v['zarafaViewPrivilege'] = new sfValidatorString(array('required' => false));
 
         return $v;
     }

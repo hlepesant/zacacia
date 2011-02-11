@@ -103,6 +103,9 @@ class companyActions extends sfActions
         if ( empty($this->step) ) {
             $this->step = 1;
         }
+        else {
+            $this->step++;
+        }
 
         $l = new CompanyPeer();
         $l->setBaseDn(sprintf("ou=Companies,%s", $platformDn));
@@ -115,7 +118,9 @@ class companyActions extends sfActions
         {
             $this->form->bind($request->getParameter('minidata'));
             
-                if ($this->form->isValid())
+            if ($this->form->isValid())
+            {
+                if ( 4 == $this->step )
                 {
                     print_r( $this->form->getValues() ); exit;
                     $company = new CompanyObject();
@@ -126,7 +131,7 @@ class companyActions extends sfActions
                     $company->setMiniUnDeletable($this->form->getValue('undeletable'));
 
                     var_dump( $company );exit;
-                
+            
                     if ( $l->doAdd($company) )
                     {
                         sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
@@ -134,13 +139,15 @@ class companyActions extends sfActions
                         exit;
                     }
                 }
-                else 
-                {
-                    $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
-                }
+            }
+            else 
+            {
+                $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
+            }
         }
 
         $this->form->getWidget('step')->setDefault($this->step);
+
 
         switch ($this->step)
         {
