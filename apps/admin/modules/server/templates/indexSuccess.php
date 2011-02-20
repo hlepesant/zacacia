@@ -1,4 +1,4 @@
-<?php use_helper('ModalBox') ?>
+<?php /* use_helper('ModalBox') */ ?>
 
 <div id="collection-header">
     <div id="collection-header" class="section">
@@ -12,8 +12,8 @@
     '@remote_route_for_action',
     array('title' => __('Retrieve Forgotten Password')),
     array('width' => 400, 'height' => 180)) */ ?>
-<?php echo javascript_tag(m_link_to_function(url_for('mymodule/index'),
-    array('title' => 'Window Title'))); ?>
+<?php /* echo javascript_tag(m_link_to_function(url_for('mymodule/index'),
+    array('title' => 'Window Title'))); */ ?>
 
 
 

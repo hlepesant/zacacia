@@ -1,0 +1,32 @@
+dn: cn=minivisp,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: minivisp
+olcObjectIdentifier: {0}zarafaPrefix 1.3.6.1.4.1.26278
+olcObjectIdentifier: {1}miniAttributeType zarafaPrefix:2.1
+olcObjectIdentifier: {2}miniObjectClass zarafaPrefix:2.2
+olcAttributeTypes: {0}( miniAttributeType:1 NAME 'miniStatus' DESC 'MinivISP: 
+ Node Status (new, deleted, updated, enable, ...).' EQUALITY caseIgnoreIA5Matc
+ h SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+olcAttributeTypes: {1}( miniAttributeType:2 NAME 'miniUnDeletable' DESC 'Miniv
+ ISP: object can be deleted using Web User Interface' EQUALITY booleanMatch SY
+ NTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+olcAttributeTypes: {2}( miniAttributeType:3 NAME 'miniCAL' DESC 'MinivISP: num
+ ber of CAL' EQUALITY integerMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 SINGLE
+ -VALUE )
+olcObjectClasses: {0}( miniObjectClass:1 NAME 'miniSecurityGroup' DESC 'MinivI
+ SP Security Group' SUP top STRUCTURAL MUST cn MAY member )
+olcObjectClasses: {1}( miniObjectClass:2 NAME 'miniPlatform' DESC 'MinivISP Pl
+ atform' SUP top AUXILIARY MUST cn MAY ( miniStatus $ miniUnDeletable ) )
+olcObjectClasses: {2}( miniObjectClass:3 NAME 'miniCompany' DESC 'MinivISP Com
+ pany' SUP top AUXILIARY MUST cn MAY ( miniStatus $ miniUnDeletable $ miniCAL 
+ ) )
+olcObjectClasses: {3}( miniObjectClass:4 NAME 'miniDomain' DESC 'MinivISP Doma
+ in' SUP top AUXILIARY MUST cn MAY miniStatus )
+olcObjectClasses: {4}( miniObjectClass:5 NAME 'miniGroup' DESC 'MinivISP Group
+ ' SUP top AUXILIARY MUST cn MAY ( miniStatus $ miniUnDeletable ) )
+olcObjectClasses: {5}( miniObjectClass:6 NAME 'miniUser' DESC 'MinivISP User' 
+ SUP top AUXILIARY MUST uid MAY ( miniStatus $ miniUnDeletable ) )
+olcObjectClasses: {6}( miniObjectClass:7 NAME 'miniForward' DESC 'MinivISP for
+ ward' SUP top STRUCTURAL MUST mail )
+olcObjectClasses: {7}( miniObjectClass:8 NAME 'miniServer' DESC 'MinivISP Serv
+ er' SUP top AUXILIARY MUST cn MAY ( miniStatus $ miniUnDeletable ) )

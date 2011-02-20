@@ -36,7 +36,7 @@
 
     <div id="form-submitline">
         <?php echo link_to( "<input type=\"button\" value=\"". __("Cancel") ."\" id=\"form-button\"  />" , "@platform") ?>
-        <input type="submit" value="<?php echo __('Next') ?>" disabled="true" id="form-submit" />
+        <input type="submit" value="<?php echo __('Next') ?>" id="form-submit" />
     </div>
 
 </form>
