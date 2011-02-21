@@ -146,8 +146,6 @@ class companyActions extends sfActions
             }
         }
 
-        $this->form->getWidget('step')->setDefault($this->step);
-
 
         switch ($this->step)
         {
@@ -162,8 +160,9 @@ class companyActions extends sfActions
             case 3:
             break;
         }
+       
+        $this->form->getWidget('step')->setDefault($this->step++);
 
-        
         $this->cancel = new CompanyNavigationForm();
         unset($this->cancel['companyDn'], $this->cancel['destination']);
         $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));

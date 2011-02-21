@@ -22,3 +22,7 @@ platform:
 server:
   url:   /
   param: { module: server, action: index }
+
+company:
+  url:   /
+  param: { module: company, action: index }

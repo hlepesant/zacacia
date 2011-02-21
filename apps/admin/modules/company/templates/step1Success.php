@@ -31,12 +31,16 @@
     <?php echo $form['status']->renderRow() ?>
 
     <div id="form-submitline">
-        <?php echo link_to( "<input type=\"button\" value=\"". __("Cancel") ."\" id=\"form-button\"  />" , "@platform") ?>
+        <?php echo link_to_function("<input type=\"button\" value=\"". __("Cancel") ."\" id=\"form_button\"  />", "$('company_cancel').submit()") ?>
         <input type="submit" value="<?php echo __('Next') ?>" disabled="true" id="form-submit" />
     </div>
 
 </form>
 </div>
+
+<form action="<?php echo url_for('company/index') ?>" method="POST" id="company_cancel" class="invisible">
+<?php echo $cancel->renderHiddenFields() ?>
+</form>
 
 <?php echo observe_field('minidata_cn', array(
   'update' => 'checkName',

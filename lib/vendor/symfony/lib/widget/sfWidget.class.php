@@ -331,7 +331,8 @@ abstract class sfWidget
       return '';
     }
 
-    return sprintf('<%s%s%s', $tag, $this->attributesToHtml($attributes), self::$xhtml ? ' />' : (strtolower($tag) == 'input' ? '>' : sprintf('></%s>', $tag)));
+    #return sprintf('<%s%s%s', $tag, $this->attributesToHtml($attributes), self::$xhtml ? ' />' : (strtolower($tag) == 'input' ? '>' : sprintf('></%s>', $tag)));
+    return sprintf("<%s%s%s", $tag, $this->attributesToHtml($attributes), self::$xhtml ? " />\n" : (strtolower($tag) == "input" ? ">" : sprintf("></%s>", $tag)));
   }
 
   /**
