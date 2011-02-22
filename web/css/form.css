@@ -125,6 +125,20 @@ input[type=text].small-60 {
   width: 60px;
 }
 
+input[type=text].small-60[disabled] {
+  background-color: #c0c0c0;
+}
+
+input[type=text].small-80 {
+  margin: 4px 0px 0px 0px;
+  background-color: #F0F0F0;
+  width: 80px;
+}
+
+input[type=text].small-80[disabled] {
+  background-color: #c0c0c0;
+}
+
 input[type=text] {
   margin: 4px 0px 0px 0px;
   background-color: #F0F0F0;

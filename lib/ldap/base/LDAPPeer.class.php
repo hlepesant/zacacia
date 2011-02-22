@@ -243,7 +243,7 @@ class LDAPPeer
         if (@ldap_add($this->getLinkId(), $ldap_object->getDn(), $ldap_object->getAttributes()))
             return true;
     
-        throw new Exception("Fatal: ".ldap_error());
+        throw new Exception("Fatal: ".ldap_error($this->getLinkId()));
     }
 
     public function doSave(LDAPObject $ldap_object)

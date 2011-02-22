@@ -23,7 +23,19 @@ class LDAPObject
 
   public function getAttributes()
   {
-    return $this->attributes;
+    #return $this->attributes;
+    
+    $filled_attributes = array();
+
+    foreach ( $this->attributes as $key => $value )
+    {
+        if ( !empty( $value ) )
+        {
+            $filled_attributes[ $key ] = $value;
+        }
+    }
+
+    return $filled_attributes;
   }
 
   public function set($attribute, $value)
