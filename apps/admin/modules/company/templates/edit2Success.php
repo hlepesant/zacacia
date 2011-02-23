@@ -2,13 +2,13 @@
 
 <div id="form-header">
     <div id="form-header" class="section">
-        <?php echo __('New Company: Step 2/3') ;?>
+        <?php echo __('Edit'); echo $cn; echo ('  : Step 2/3') ;?>
     </div>
 </div>
 
 <div id="form-inner">
 
-<form action="<?php echo url_for('company/step2') ?>" method="POST">
+<form action="<?php echo url_for('company/edit2') ?>" method="POST">
 <?php echo $form->renderHiddenFields() ?>
 
 <?php if ($form->hasGlobalErrors()): ?>
@@ -19,24 +19,11 @@
 </ul>
 <?php endif; ?>
 
-    <?php echo $form['zarafaCompanyServer']->renderRow() ?>
-    <?php /* echo $form['zarafaSystemAdmin']->renderRow() */ ?>
     <?php echo $form['zarafaQuotaOverride']->renderRow() ?>
     <?php echo $form['zarafaQuotaWarn']->renderRow() ?>
 
-    <?php /* echo $form['zarafaQuotaCompanyWarningRecipients']->renderRow() */ ?>
-    <?php /* echo $form['zarafaAccount']->renderRow() */ ?>
-    <?php /* echo $form['zarafaHidden']->renderRow() */ ?>
-    <?php /* echo $form['zarafaAdminPrivilege']->renderRow() */ ?>
-    <?php /* echo $form['zarafaQuotaUserWarningRecipients']->renderRow() */ ?>
-    <?php /* echo $form['zarafaUserDefaultQuotaOverride']->renderRow() */ ?>
-    <?php /* echo $form['zarafaUserDefaultQuotaHard']->renderRow() */ ?>
-    <?php /* echo $form['zarafaUserDefaultQuotaSoft']->renderRow() */ ?>
-    <?php /* echo $form['zarafaUserDefaultQuotaWarn']->renderRow() */ ?>
-    <?php /* echo $form['zarafaViewPrivilege']->renderRow() */ ?>
-
     <div id="form-submitline">
-        <?php echo link_to_function("<input type=\"button\" value=\"". __("Cancel") ."\" id=\"form_button\"  />", "miniCancel()") ?>
+        <?php echo link_to_function("<input type=\"button\" value=\"". __("Cancel") ."\" id=\"form_button\"  />", "$('company_cancel').submit()") ?>
         <input type="submit" value="<?php echo __('Next') ?>" id="form-submit" />
     </div>
 
@@ -63,11 +50,4 @@ function showCompanyQuotaFields()
 }
 
 showCompanyQuotaFields();
-") ?>
-
-<?php echo javascript_tag("
-function miniCancel()
-{
-    $('company_cancel').submit();
-}
 ") ?>

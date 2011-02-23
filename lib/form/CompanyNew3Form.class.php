@@ -1,10 +1,10 @@
 <?php
-class CompanyFormStep3 extends MinivISPForm
+class CompanyNew3Form extends MinivISPForm
 {
     public function configure()
     {
         $this->setWidgets(array(
-            'zarafaUserDefaultQuotaOverride' => new sfWidgetFormInputCheckbox(array(), array('onClick' => 'showUserQuotaFields()')),
+            'zarafaUserDefaultQuotaOverride' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1), array('onClick' => 'showUserQuotaFields()')),
             'zarafaUserDefaultQuotaHard' => new  sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '8', 'disabled' => 'true')),
             'zarafaUserDefaultQuotaSoft' => new sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '8', 'disabled' => 'true')),
             'zarafaUserDefaultQuotaWarn' => new sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '8', 'disabled' => 'true')),
@@ -34,7 +34,7 @@ class CompanyFormStep3 extends MinivISPForm
         $this->validatorSchema->setPostValidator(new sfValidatorOr(array(
                 new sfValidatorSchemaCompare('zarafaUserDefaultQuotaOverride', sfValidatorSchemaCompare::EQUAL, '_undefined_'),
                 new sfValidatorAnd(array(
-                    new sfValidatorSchemaCompare('zarafaUserDefaultQuotaOverride', sfValidatorSchemaCompare::EQUAL, 'on'),
+                    new sfValidatorSchemaCompare('zarafaUserDefaultQuotaOverride', sfValidatorSchemaCompare::EQUAL, 1),
                     new sfValidatorSchemaCompare('zarafaUserDefaultQuotaHard', sfValidatorSchemaCompare::GREATER_THAN, 100),
                     new sfValidatorSchemaCompare('zarafaUserDefaultQuotaHard', sfValidatorSchemaCompare::GREATER_THAN, 'zarafaUserDefaultQuotaSoft'),
                     new sfValidatorSchemaCompare('zarafaUserDefaultQuotaSoft', sfValidatorSchemaCompare::GREATER_THAN, 'zarafaUserDefaultQuotaWarn'),

@@ -1,5 +1,5 @@
 <?php
-class CompanyFormStep2 extends MinivISPForm
+class CompanyNew2Form extends MinivISPForm
 {
     public function configure()
     {
@@ -9,7 +9,7 @@ class CompanyFormStep2 extends MinivISPForm
 #            'zarafaAdminPrivilege' => new sfWidgetFormInput(),
             'zarafaCompanyServer' => new sfWidgetFormSelect( array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
 #            'zarafaSystemAdmin' => new sfWidgetFormSelect( array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
-            'zarafaQuotaOverride' => new sfWidgetFormInputCheckbox(array(), array('onClick' => 'showCompanyQuotaFields()')),
+            'zarafaQuotaOverride' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1), array('onClick' => 'showCompanyQuotaFields()')),
             'zarafaQuotaWarn' => new sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '8', 'disabled' => 'true')),
 #            'zarafaQuotaCompanyWarningRecipients' => new sfWidgetFormSelectMany( array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
 #            'zarafaQuotaUserWarningRecipients' => new sfWidgetFormSelect( array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
@@ -43,7 +43,7 @@ class CompanyFormStep2 extends MinivISPForm
         $this->widgetSchema->setFormFormatterName( sfConfig::get('widgetFormaterName') );
 
         $this->validatorSchema->setPostValidator(new sfValidatorOr(array(
-            new sfValidatorSchemaCompare('zarafaQuotaOverride', sfValidatorSchemaCompare::EQUAL, '_undefined_'),
+            new sfValidatorSchemaCompare('zarafaQuotaOverride', sfValidatorSchemaCompare::EQUAL, 1),
             new sfValidatorSchemaCompare('zarafaQuotaWarn', sfValidatorSchemaCompare::GREATER_THAN, 1),
         )));
 /*

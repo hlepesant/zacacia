@@ -40,9 +40,9 @@ class companyActions extends sfActions
         $this->forms = array();
         foreach ($this->companies as $comp)
         {
-            $form = new serverNavigationForm();
+            $form = new companyNavigationForm();
             $form->getWidget('platformDn')->setDefault($platformDn);
-            $form->getWidget('serverDn')->setDefault($comp->getDn());
+            $form->getWidget('companyDn')->setDefault($comp->getDn());
             
             $criteria_user = new LDAPCriteria();
             $criteria_user->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
@@ -78,7 +78,7 @@ class companyActions extends sfActions
             }
         
             $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
-            $form->getWidget('serverDn')->setIdFormat(sprintf('%%s_%03d', $id));
+            $form->getWidget('companyDn')->setIdFormat(sprintf('%%s_%03d', $id));
             $form->getWidget('destination')->setIdFormat(sprintf('%%s_%03d', $id));
         
             $this->forms[$comp->getDn()] = $form;
@@ -102,7 +102,7 @@ class companyActions extends sfActions
         $l = new CompanyPeer();
         $l->setBaseDn(sprintf("ou=Companies,%s", $platformDn));
 
-        $this->form = new CompanyFormStep1();
+        $this->form = new CompanyNew1Form();
 
         $this->form->getWidget('platformDn')->setDefault($platformDn);
     
@@ -113,7 +113,7 @@ class companyActions extends sfActions
             if ($this->form->isValid())
             {
                 $this->getUser()->setAttribute('company_data', $this->form->getValues());
-                $this->redirect('company/step2');
+                $this->redirect('company/new2');
             }
         }
 
@@ -121,15 +121,15 @@ class companyActions extends sfActions
         unset($this->cancel['companyDn'], $this->cancel['destination']);
         $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
 
-        $this->setTemplate( 'step1' );
+        $this->setTemplate( 'new1' );
     }
 
-    public function executeStep2(sfWebRequest $request)
+    public function executeNew2(sfWebRequest $request)
     {
         $company_data = $this->getUser()->getAttribute('company_data');
         $platformDn = $company_data['platformDn'];
 
-        $this->form = new CompanyFormStep2();
+        $this->form = new CompanyNew2Form();
 
         if ($request->isMethod('post') && $request->getParameter('minidata'))
         {
@@ -139,7 +139,7 @@ class companyActions extends sfActions
             {
                 $data = array_merge($company_data, $this->form->getValues());
                 $this->getUser()->setAttribute('company_data', $data );
-                $this->redirect('company/step3');
+                $this->redirect('company/new3');
             }
         }
 
@@ -157,11 +157,9 @@ class companyActions extends sfActions
         $this->cancel->getWidget('platformDn')->setDefault($company_data['platformDn']);
        
         $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
-
-        $this->setTemplate( 'step2' );
     }
 
-    public function executeStep3(sfWebRequest $request)
+    public function executeNew3(sfWebRequest $request)
     {
         $company_data = $this->getUser()->getAttribute('company_data');
         $platformDn = $company_data['platformDn'];
@@ -169,7 +167,7 @@ class companyActions extends sfActions
         $l = new CompanyPeer();
         $l->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
 
-        $this->form = new CompanyFormStep3();
+        $this->form = new CompanyNew3Form();
 
         if ($request->isMethod('post') && $request->getParameter('minidata'))
         {
@@ -201,6 +199,7 @@ class companyActions extends sfActions
 
                 if ( $l->doAdd($company) )
                 {
+                    $this->getUser()->setAttribute('company_data', null);
                     sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
                     echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
                     exit;
@@ -213,8 +212,189 @@ class companyActions extends sfActions
         $this->cancel->getWidget('platformDn')->setDefault($platformDn);
        
         $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
+    }
 
-        $this->setTemplate( 'step3' );
+    public function executeEdit(sfWebRequest $request)
+    {
+        $data = $request->getParameter('minidata');
+        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->redirect('@platform');
+        }
+
+        $companyDn = $request->getParameter('companyDn', $data['companyDn']);
+        if ( empty($companyDn) ) {
+            $this->getUser()->setFlash('miniJsAlert', "Missing company's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+        }
+
+        $l = new CompanyPeer();
+        $l->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
+        
+        $c = new LDAPCriteria();
+        $c->setBaseDn($companyDn);
+
+        $company = $l->retrieveByDn($c);
+        
+        $this->form = new CompanyEdit1Form();
+    
+        if ($request->isMethod('post') && $request->getParameter('minidata'))
+        {
+            $this->form->bind($request->getParameter('minidata'));
+            
+            if ($this->form->isValid())
+            {
+                $this->getUser()->setAttribute('company_data', $this->form->getValues());
+                $this->redirect('company/edit2');
+            }
+            else 
+            {
+                $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
+            }
+        }
+        
+        $this->form->getWidget('platformDn')->setDefault($platformDn);
+        $this->form->getWidget('companyDn')->setDefault($companyDn);
+        $this->form->getWidget('status')->setDefault($company->getMiniStatus());
+        $this->form->getWidget('undeletable')->setDefault($company->getMiniUndeletable());
+
+        $this->cn = $company->getCn();
+        
+        $this->cancel = new CompanyNavigationForm();
+        unset($this->cancel['companyDn'], $this->cancel['destination']);
+        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
+
+        $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
+        $this->setTemplate( 'edit1' );
+    }
+
+    public function executeEdit2(sfWebRequest $request)
+    {
+        $company_data = $this->getUser()->getAttribute('company_data');
+        $platformDn = $company_data['platformDn'];
+        $companyDn = $company_data['companyDn'];
+
+        $l = new CompanyPeer();
+        $l->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
+        
+        $c = new LDAPCriteria();
+        $c->setBaseDn($companyDn);
+
+        $company = $l->retrieveByDn($c);
+        
+        $this->form = new CompanyEdit2Form();
+    
+        if ($request->isMethod('post') && $request->getParameter('minidata'))
+        {
+            $this->form->bind($request->getParameter('minidata'));
+            
+            if ($this->form->isValid())
+            {
+                $data = array_merge($company_data, $this->form->getValues());
+                $this->getUser()->setAttribute('company_data', $data );
+                $this->redirect('company/edit3');
+            }
+            else 
+            {
+                $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
+            }
+        }
+        
+        if ( 1 == $company->getZarafaQuotaOverride() )
+        {
+            $this->form->getWidget('zarafaQuotaOverride')->setDefault(1);
+            $this->form->getWidget('zarafaQuotaWarn')->setDefault($company->getZarafaQuotaWarn());
+        }
+
+        $this->cn = $company->getCn();
+        
+        $this->cancel = new CompanyNavigationForm();
+        unset($this->cancel['companyDn'], $this->cancel['destination']);
+        $this->cancel->getWidget('platformDn')->setDefault($platformDn);
+
+        $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
+    }
+
+    public function executeEdit3(sfWebRequest $request)
+    {
+        $company_data = $this->getUser()->getAttribute('company_data');
+        $platformDn = $company_data['platformDn'];
+        $companyDn = $company_data['companyDn'];
+
+        $l = new CompanyPeer();
+        $l->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
+        
+        $c = new LDAPCriteria();
+        $c->setBaseDn($companyDn);
+
+        $company = $l->retrieveByDn($c);
+        
+        $this->form = new CompanyEdit3Form();
+    
+        if ($request->isMethod('post') && $request->getParameter('minidata'))
+        {
+            $this->form->bind($request->getParameter('minidata'));
+            
+            if ($this->form->isValid())
+            {
+                $data = array_merge($company_data, $this->form->getValues());
+
+                $company->setMiniStatus($data['status']);
+                $company->setMiniUnDeletable($data['undeletable']);
+
+                if ( !empty($data['zarafaQuotaOverride']) ) 
+                {
+                    $company->setZarafaQuotaOverride(1);
+                    $company->setZarafaQuotaWarn( $data['zarafaQuotaWarn'] );
+                }
+                else
+                {
+                    $company->setZarafaQuotaOverride(array());
+                    $company->setZarafaQuotaWarn(array());
+                }
+
+                if ( !empty($data['zarafaUserDefaultQuotaOverride']) ) 
+                {
+                    $company->setZarafaUserDefaultQuotaOverride(1);
+                    $company->setZarafaUserDefaultQuotaHard( $data['zarafaUserDefaultQuotaHard'] );
+                    $company->setZarafaUserDefaultQuotaSoft( $data['zarafaUserDefaultQuotaSoft'] );
+                    $company->setZarafaUserDefaultQuotaWarn( $data['zarafaUserDefaultQuotaWarn'] );
+                }
+                else
+                {
+                    $company->setZarafaUserDefaultQuotaOverride(array());
+                    $company->setZarafaUserDefaultQuotaHard(array());
+                    $company->setZarafaUserDefaultQuotaSoft(array());
+                    $company->setZarafaUserDefaultQuotaWarn(array());
+                }
+
+                if ( $l->doSave($company) )
+                {
+                    $this->getUser()->setAttribute('company_data', null);
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                    echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+                    exit;
+                }
+            }
+        }
+        
+        if ( 1 == $company->getZarafaUserDefaultQuotaOverride() )
+        {
+            $this->form->getWidget('zarafaUserDefaultQuotaOverride')->setDefault(1);
+            $this->form->getWidget('zarafaUserDefaultQuotaHard')->setDefault($company->getZarafaUserDefaultQuotaHard());
+            $this->form->getWidget('zarafaUserDefaultQuotaSoft')->setDefault($company->getZarafaUserDefaultQuotaSoft());
+            $this->form->getWidget('zarafaUserDefaultQuotaWarn')->setDefault($company->getZarafaUserDefaultQuotaWarn());
+        }
+
+        $this->cn = $company->getCn();
+        
+        $this->cancel = new CompanyNavigationForm();
+        unset($this->cancel['companyDn'], $this->cancel['destination']);
+        $this->cancel->getWidget('platformDn')->setDefault($platformDn);
+
+        $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
     }
 
 

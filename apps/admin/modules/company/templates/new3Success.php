@@ -8,7 +8,7 @@
 
 <div id="form-inner">
 
-<form action="<?php echo url_for('company/step3') ?>" method="POST">
+<form action="<?php echo url_for('company/new3') ?>" method="POST">
 <?php echo $form->renderHiddenFields() ?>
 
 <?php if ($form->hasGlobalErrors()): ?>

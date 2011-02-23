@@ -29,7 +29,7 @@ class LDAPObject
 
     foreach ( $this->attributes as $key => $value )
     {
-        if ( !empty( $value ) )
+        if ( is_array($value) or $value != '' )
         {
             $filled_attributes[ $key ] = $value;
         }

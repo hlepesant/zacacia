@@ -1,11 +1,10 @@
 <?php
-class CompanyFormStep1 extends MinivISPForm
+class CompanyNew1Form extends MinivISPForm
 {
     public function configure()
     {
         $status = array('enable' => 'enable', 'disable' => 'disable');
         $undeletable = array('FALSE' => 'no', 'TRUE' => 'yes');
-        $public_folder_option = array( 0 => 'no', 1 => 'yes');
 
         $this->setWidgets(array(
             'platformDn' => new sfWidgetFormInputHidden(),
