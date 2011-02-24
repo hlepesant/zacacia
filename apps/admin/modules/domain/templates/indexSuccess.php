@@ -1,30 +1,10 @@
-<?php /* use_helper('ModalBox') */ ?>
-
 <div id="collection-header">
     <div id="collection-header" class="section">
-        <?php echo __('Companies') ;?>
+        <?php echo __('Domains') ;?>
     </div>
     <div id="collection-header" class="navigation">
-      <?php echo link_to_function(image_tag('icons/arrow_up.png'), "document.getElementById('platform_back').submit()") ?> 
-      <?php echo link_to_function(image_tag('icons/building_add.png'), "document.getElementById('company_new').submit()") ?> 
-
-
-<?php /* echo link_to_function('add', m_link_to_element("$('company_new')",
-    array(
-        'title' => "'Create'",
-        'inactiveFade' => false))); */
-/*    array('width' => 400, 'height' => 180, 'params' => '*Form.serialize(\'company_new\')*'))); */
-/*
-<img src="/images/icons/building_add.png" onclick="Modalbox.show('<?php echo url_for('company/new'); ?>', {title: 'Sending status', params: $('company_new').serialize() }); return false;">
-*/
-/*
-echo link_to_function(
-    image_tag('icons/building_add.png'),
-    "Modalbox.show('".url_for('company/new')."', {title: 'Create company', params: $('company_new').serialize(), width:'700', height:'450' }); return false;"
-);
-*/
-?>
-
+      <?php echo link_to_function(image_tag('icons/arrow_up.png'), "$('company_back').submit()") ?> 
+      <?php echo link_to_function(image_tag('icons/world_add.png'), "$('domain_new').submit()") ?> 
     </div>
 </div>
 
@@ -36,18 +16,18 @@ echo link_to_function(
 
 <?php
 $id = 0;
-foreach ($companies as $c):
-    include_partial('company', array('c' => $c, 'id' => $id, 'f' => $forms[$c->getDn()]));
+foreach ($domains as $d):
+    include_partial('domain', array('d' => $d, 'id' => $id, 'f' => $forms[$d->getDn()]));
     $id++;
 endforeach;
 ?>
 </div>
 
-<form action="<?php echo url_for('company/new') ?>" method="POST" id="company_new" class="invisible">
+<form action="<?php echo url_for('domain/new') ?>" method="POST" id="domain_new" class="invisible">
 <?php echo $new->renderHiddenFields() ?>
 </form>
 
-<form action="<?php echo url_for('@platform') ?>" method="POST" id="platform_back" class="invisible">
+<form action="<?php echo url_for('@company') ?>" method="POST" id="company_back" class="invisible">
 <?php echo $new->renderHiddenFields() ?>
 </form>
 
@@ -97,17 +77,6 @@ function jumpTo(id, name, destination)
               a.selectedIndex = 0;
               return false;
             }
-        break;
-        
-        case 'domain':
-        case 'user':
-        case 'group':
-        case 'contact':
-        case 'forward':
-        case 'addresslist':
-        default:
-            m = d;
-            d = 'index';
         break;
     }
 

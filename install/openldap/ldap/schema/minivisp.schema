@@ -63,7 +63,7 @@ objectclass ( miniObjectClass:4 NAME 'miniDomain'
 	SUP top
 	AUXILIARY
 	MUST ( cn )
-	MAY ( miniStatus ) )
+	MAY ( miniStatus $ miniUnDeletable ) )
 
 objectclass ( miniObjectClass:5 NAME 'miniGroup'
 	DESC 'MinivISP Group'

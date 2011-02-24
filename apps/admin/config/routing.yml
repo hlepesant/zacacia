@@ -26,3 +26,11 @@ server:
 company:
   url:   /
   param: { module: company, action: index }
+
+domain:
+  url:   /
+  param: { module: domain, action: index }
+
+user:
+  url:   /
+  param: { module: user, action: index }

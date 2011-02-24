@@ -151,7 +151,7 @@ class serverActions extends sfActions
 
         $serverDn = $request->getParameter('serverDn', $data['serverDn']);
         if ( empty($serverDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->getUser()->setFlash('miniJsAlert', "Missing server's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
             echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
         }
@@ -281,7 +281,6 @@ class serverActions extends sfActions
         $this->setLayout(false);
         $this->count = 0;
         
-        #$ValidIpAddressRegex = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
         $pattern = sfConfig::get('hostname_pattern');
         
         if ( ! preg_match($pattern, $request->getParameter('name') ) )
@@ -289,16 +288,8 @@ class serverActions extends sfActions
             $this->count = 1;
             return sfView::SUCCESS;
         }
-/*
-#       $split = explode('.', $request->getParameter('name'), 5);
-#       if ( 1 == count($split) )
-#       {
-#           $this->count = 1;
-#           return sfView::SUCCESS;
-#       }
-*/
 
-        $l = new ServerPeer();
+        $l = new DomainPeer();
         $c = new LDAPCriteria();
         
         $c->setBaseDn( sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')) );
