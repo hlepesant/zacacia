@@ -28,7 +28,7 @@ class platformActions extends sfActions
         $this->forms = array();
         foreach ($this->platforms as $p)
         {
-            $form = new platformNavigationForm();
+            $form = new PlatformNavigationForm();
             $form->getWidget('platformDn')->setDefault($p->getDn());
             
             $criteria_company = new LDAPCriteria();

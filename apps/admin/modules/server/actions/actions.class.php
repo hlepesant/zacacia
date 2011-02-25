@@ -40,7 +40,7 @@ class serverActions extends sfActions
         $this->forms = array();
         foreach ($this->servers as $s)
         {
-            $form = new serverNavigationForm();
+            $form = new ServerNavigationForm();
             $form->getWidget('platformDn')->setDefault($platformDn);
             $form->getWidget('serverDn')->setDefault($s->getDn());
             

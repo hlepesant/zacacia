@@ -40,7 +40,7 @@ class companyActions extends sfActions
         $this->forms = array();
         foreach ($this->companies as $comp)
         {
-            $form = new companyNavigationForm();
+            $form = new CompanyNavigationForm();
             $form->getWidget('platformDn')->setDefault($platformDn);
             $form->getWidget('companyDn')->setDefault($comp->getDn());
 

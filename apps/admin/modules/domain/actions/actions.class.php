@@ -46,7 +46,7 @@ class domainActions extends sfActions
         $this->forms = array();
         foreach ($this->domains as $domain)
         {
-            $form = new domainNavigationForm();
+            $form = new DomainNavigationForm();
             $form->getWidget('platformDn')->setDefault($platformDn);
             $form->getWidget('companyDn')->setDefault($companyDn);
             $form->getWidget('domainDn')->setDefault($domain->getDn());
