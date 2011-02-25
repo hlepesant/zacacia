@@ -43,20 +43,35 @@ class companyActions extends sfActions
             $form = new companyNavigationForm();
             $form->getWidget('platformDn')->setDefault($platformDn);
             $form->getWidget('companyDn')->setDefault($comp->getDn());
-            
-            $criteria_user = new LDAPCriteria();
-            $criteria_user->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
-            $criteria_user->add('objectClass', 'zarafa-user');
-            $criteria_user->add('zarafaUserServer', $comp->getCn());
-            $count_user = $l->doCount($criteria_user);
-            
+
+            $comp->setNumberOfDomains($l);
+            $comp->setNumberOfUsers($l);
+            $comp->setNumberOfGroups($l);
+            $comp->setNumberOfForwards($l);
+            $comp->setNumberOfContacts($l);
+            $comp->setNumberOfAddressLists($l);
+
+            $undeletable = (
+                $comp->getNumberOfDomains() +
+                $comp->getNumberOfUsers() +
+                $comp->getNumberOfGroups() +
+                $comp->getNumberOfForwards() +
+                $comp->getNumberOfContacts() +
+                $comp->getNumberOfAddressLists()
+            );
+
+            $comp->set('undeletable', $undeletable);
+
             switch( sfConfig::get('navigation_look') )
             {
                 case 'dropdown':
                     $choices = $form->getWidget('destination')->getOption('choices');
+
+                    $choices['domain'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Domain', Array(), 'messages');
+
                     $choices['status'] = $this->getContext()->getI18N()->__('Disable', Array(), 'messages');
                     
-                    if ( $p->getMiniStatus() == 'disable' && $count_company  == 0 )
+                    if ( $p->getMiniStatus() == 'disable' && $undeletable )
                     {
                         $choices['status'] = $this->getContext()->getI18N()->__('Enable', Array(), 'messages');
                         $choices['delete'] = $this->getContext()->getI18N()->__('Delete', Array(), 'messages');
@@ -66,17 +81,24 @@ class companyActions extends sfActions
                     {
                         unset($choices['delete'], $choices['status']);
                     }
-                    $choices['company'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Company', Array(), 'messages');
+
+                    if ( $comp->getNumberOfDomains() )
+                    {
+                        $choices['user'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('User', Array(), 'messages');
+                        $choices['group'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Group', Array(), 'messages');
+                        $choices['contact'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Contact', Array(), 'messages');
+                        $choices['forward'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Forward', Array(), 'messages');
+                        $choices['addresslist'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Address List', Array(), 'messages');
+                    }
                     
                     $form->getWidget('destination')->setOption('choices', $choices);
                 break;
                 
                 case 'link':
                 default:
-                    $comp->set('user_count', $count_user);
                 break;
             }
-        
+
             $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
             $form->getWidget('companyDn')->setIdFormat(sprintf('%%s_%03d', $id));
             $form->getWidget('destination')->setIdFormat(sprintf('%%s_%03d', $id));

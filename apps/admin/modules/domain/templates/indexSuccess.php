@@ -27,7 +27,7 @@ endforeach;
 <?php echo $new->renderHiddenFields() ?>
 </form>
 
-<form action="<?php echo url_for('@company') ?>" method="POST" id="company_back" class="invisible">
+<form action="<?php echo url_for('company/index') ?>" method="POST" id="company_back" class="invisible">
 <?php echo $new->renderHiddenFields() ?>
 </form>
 
