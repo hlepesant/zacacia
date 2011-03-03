@@ -76,6 +76,9 @@ class ProjectConfiguration extends sfProjectConfiguration
     sfConfig::set('server_user_quota_default', 0);
 # End Quota
 
+    sfConfig::set('username_format', '%s%s'); // hlepesant
+    #sfConfig::set('username_format', '%s.%s'); // h.lepesant
+    #sfConfig::set('username_format', '%s_%s'); // h_lepesant
     sfConfig::set('uid_min', 10001);
     sfConfig::set('gid_min', 10001);
     sfConfig::set('default_gid_number', 10000);

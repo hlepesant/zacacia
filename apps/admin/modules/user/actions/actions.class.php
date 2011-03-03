@@ -112,7 +112,7 @@ class userActions extends sfActions
               exit;
         }
     
-        $this->form = new UserForm();
+        $this->form = new UserNew1Form();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
     
@@ -132,6 +132,44 @@ class userActions extends sfActions
         $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
         $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
 
+        $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
         $this->setTemplate( 'new1' );
+    }
+
+/* WebServices */
+    public function executeCheckUid(sfWebRequest $request)
+    {
+        $this->setTemplate('check');
+        $this->setLayout(false);
+        $this->count = 0;
+
+        if ( ! $request->hasParameter('companyDn') )
+        {
+            $this->count = 1;
+            return sfView::SUCCESS;
+        }
+
+        if ( ! $request->hasParameter('uid') )
+        {
+            $this->count = 1;
+            return sfView::SUCCESS;
+        }
+
+        $l = new UserPeer();
+        $c = new LDAPCriteria();
+        
+        $c->setBaseDn( sprintf("ou=Users,%s", $request->getParameter('companyDn')) );
+        print( $c->getBaseDn() ); exit;
+        
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'inetOrgPerson');
+        $c->add('objectClass', 'posixAccount');
+        $c->add('objectClass', 'zarafa-user');
+        $c->add('objectClass', 'miniUser');
+        $c->add('uid', $request->getParameter('uid'));
+        
+        $this->count = $l->doCount($c);
+        
+        return sfView::SUCCESS;
     }
 }

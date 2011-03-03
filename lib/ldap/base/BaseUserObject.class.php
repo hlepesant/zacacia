@@ -12,6 +12,15 @@ class BaseUserObject extends LDAPObject
     {
         $this->attributes['objectClass'] = Array('top', 'posixAccount', 'inetOrgPerson', 'zarafa-user', 'miniUser');
         $this->attributes['cn'] = null;
+        $this->attributes['homeDirectory'] = '/dev/null';
+        $this->attributes['loginShell'] = '/bin/false';
+        $this->attributes['miniStatus'] = 'enable';
+        $this->attributes['miniUnDeletable'] = 'FALSE';
+        $this->attributes['zarafaAccount'] = 1;
+        $this->attributes['zarafaAdmin'] = 0;
+        $this->attributes['zarafaQuotaOverride'] = 0;
+        $this->attributes['zarafaSendAsPrivilege'] = array();
+        $this->attributes['zarafaUserServer'] = array();
 
         return $this;
     }
