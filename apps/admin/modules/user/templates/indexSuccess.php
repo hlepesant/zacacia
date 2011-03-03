@@ -23,7 +23,7 @@ endforeach;
 ?>
 </div>
 
-<form action="<?php echo url_for('user/new1') ?>" method="POST" id="user_new" class="invisible">
+<form action="<?php echo url_for('user/new') ?>" method="POST" id="user_new" class="invisible">
 <?php echo $new->renderHiddenFields() ?>
 </form>
 

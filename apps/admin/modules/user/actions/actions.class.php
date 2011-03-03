@@ -95,4 +95,43 @@ class userActions extends sfActions
 
         $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
     }
+
+    public function executeNew(sfWebRequest $request)
+    {
+        $data = $request->getParameter('minidata');
+        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+        if ( empty($platformDn) ) {
+          $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+          $this->redirect('@platform');
+        }
+          
+        $companyDn = $request->getParameter('companyDn', $data['companyDn']);
+        if ( empty($companyDn) ) {
+              sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
+              echo fake_post($this, '@company', Array('holdingDn' => $holdingDn));
+              exit;
+        }
+    
+        $this->form = new UserForm();
+        $this->form->getWidget('platformDn')->setDefault($platformDn);
+        $this->form->getWidget('companyDn')->setDefault($companyDn);
+    
+        if ($request->isMethod('post') && $request->getParameter('minidata'))
+        {
+            $this->form->bind($request->getParameter('minidata'));
+            
+                if ($this->form->isValid())
+                {
+                    $this->getUser()->setAttribute('company_data', $this->form->getValues());
+                    $this->redirect('user/new2');
+                }
+        }
+        
+        $this->cancel = new DomainNavigationForm();
+        unset($this->cancel['domainDn'], $this->cancel['destination']);
+        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
+        $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
+
+        $this->setTemplate( 'new1' );
+    }
 }
