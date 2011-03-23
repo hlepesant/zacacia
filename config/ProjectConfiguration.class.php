@@ -20,7 +20,7 @@ class ProjectConfiguration extends sfProjectConfiguration
     sfConfig::set('navigation_look', 'link');
 
 # Ldap Internal
-    sfConfig::set('ldap_host', "localhost");
+    sfConfig::set('ldap_host', "ldapdev.lepesant.com");
     sfConfig::set('ldap_use_ssl', false);
     sfConfig::set('ldap_root_dn', "cn=admin,dc=minivisp,dc=org");
     sfConfig::set('ldap_root_pw', "minivisp");

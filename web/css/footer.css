@@ -1,14 +1,22 @@
-/* Footer */
+/*
+ *  Minivisp Style 0.1
+ *  - Footer
+ */
 
-#footer
-{
-width: 950px;
-margin: 0 auto;
-text-align: center;
-clear: both;
-border-top: dotted 1px #E1E1E1;
-margin-top: 1.0em;
-margin-bottom: 1.0em;
-padding-top: 1.0em;
-text-transform: lowercase;
+#footer-content {
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#footer-content p {
+    color: #FFFFFF;
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+#footer-content a {
+    text-decoration: none;
 }

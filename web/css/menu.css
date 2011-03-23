@@ -1,0 +1,27 @@
+/*
+ *  Minivisp Style 0.1
+ *   - Header
+ */
+
+#menu ul, li {
+    display: inline;
+    margin-top: 0;
+    line-height: 240%;
+    text-align: justify;
+}
+
+#menu li {
+    padding: 5px;
+    margin: 5px;
+}
+
+#menu a {
+    letter-spacing: -1px;
+    text-decoration: none;
+    text-align: center;
+    text-transform: lowercase;
+    font-family: Arial;
+    font-size: 1em;
+    font-weight: bold;
+    color: #FF6300;
+}

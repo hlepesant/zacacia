@@ -1,6 +1,73 @@
-@import "style.css";
-@import "main.css";
-@import "enum.css";
-@import "navigation.css";
-@import "form.css";
+/*
+ *  Minivisp Style 0.1
+ */
+/* http://www.colorzilla.com/gradient-editor/ */
+/* http://www.css3.info/preview/rounded-border/ */
 
+body {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 40px;
+    margin-right: 40px;
+    text-align: center;
+    background: #064B86; /* old browsers */
+    background: -moz-linear-gradient(top, #064B86 0%, #80ACCF 100%); /* firefox */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#064B86), color-stop(100%,#80ACCF)); /* webkit */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#064B86', endColorstr='#80ACCF',GradientType=0 ); /* ie */
+}
+
+#page {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+#header {
+    border: 1px solid #1B2142;
+    width: 100%;
+    height: 70px;
+    background: #ffffff;
+
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#menu {
+    border: 1px solid #000000;
+    width: 100%;
+    height: 40px;
+    background: #000000;
+
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-topleft: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    margin-top: 2px;
+}
+
+#content {
+    border: 1px solid #000000;
+    background: #ffffff;
+    width: 100%;
+    height: 410px;
+
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-bottom: 2px;
+}
+
+#footer {
+    border: 1px solid #000000;
+    width: 100%;
+    background: #000000;
+
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-topleft: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
