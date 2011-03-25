@@ -9,7 +9,9 @@
     <?php include_javascripts() ?>
 </head>
 <body>
-<div id="page">
+<?php /*
+<div id="page"> */
+?>
 
     <div id="header">
         <h1><?php echo sfConfig::get('projetctName'); ?></h1>
@@ -19,7 +21,7 @@
 
     <div id="menu">
         <ul>
-            <li class="current_page_item"><a href="#">Platform</a></li>
+            <li class="current_page_item"><a href="#" class="active">Platform</a></li>
             <li><a href="#" class="first">Company</a></li>
             <li><a href="#" class="first">Domain</a></li>
             <li><a href="#" class="first">User</a></li>
@@ -41,8 +43,9 @@
         <!-- end #footer-content -->
     </div>
     <!-- end #footer -->
-
+<?php /*
 </div>
 <!-- end #page -->
+*/ ?>
 </body>
 </html>

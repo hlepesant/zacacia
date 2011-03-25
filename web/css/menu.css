@@ -23,5 +23,13 @@
     font-family: Arial;
     font-size: 1em;
     font-weight: bold;
-    color: #FF6300;
+    color: #56A8D7;
+}
+
+#menu a.active {
+/*    color: #FF4364; */
+/*    color: #3FB349; */
+/*    color: #FAE767; */
+/*    color: #F26730; */
+    color: #D0D0D0;
 }
