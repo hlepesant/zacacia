@@ -1,10 +1,9 @@
-    <div id="line">
-        <form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
-        <?php echo $f->renderHiddenFields() ?>
-            <div id="line" class="<?php echo (($id & 1) ? 'light' : 'dark'); ?>">
-                <div id="line" class="<?php echo $p->getMiniStatus() ?>"><?php echo $p->getCn() ?></div>
-                <div id="line" class="navigation">
- <?php 
+<div id="collection_line_<?php echo (($id & 1) ? 'odd' : 'even'); ?>">
+    <form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
+<?php echo $f->renderHiddenFields() ?>
+    <div class="_name" class="<?php echo $p->getMiniStatus() ?>"><?php echo $p->getCn() ?></div>
+    <div class="_actions" class="navigation">
+ <?php
 switch( sfConfig::get('navigation_look') )
 {
     case 'dropdown':
@@ -26,8 +25,9 @@ switch( sfConfig::get('navigation_look') )
     break;
 }
 ?>
-                </div>
-            </div>
-        </form>
     </div>
-<!-- next line bellow -->
+    <!-- end #line -->
+
+    </form>
+</div>
+<!-- end #line -->

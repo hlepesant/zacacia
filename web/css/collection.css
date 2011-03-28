@@ -1,0 +1,121 @@
+#collection {
+    border: 1px solid blue;
+    width: 900px;
+    margin: auto;
+}
+
+#collection_header {
+    background-color: #003c78;
+    width: 900px;
+    height: 30px;
+    clear: both;
+}
+
+#collection_header ._title {
+    float: left;
+    width: 700px;
+    padding: 0;
+    color: #FFFFFF;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 1.5em;
+    letter-spacing: 2px;
+    padding-left: 10px;
+}
+
+#collection_header ._link {
+    float: right;
+    width: 100px;
+    text-align: right;
+    padding: 0;
+}
+
+#collection_header img {
+    background-color: none;
+    vertical-align: middle;
+    padding-right: 10px;
+}
+
+#collection_description {
+    background-color: #000000;
+    width: 900px;
+    height: 30px;
+    clear: both;
+}
+
+#collection_description ._name {
+    width: 700px;
+    float: left;
+    padding: 10px 0 0 10px;
+    color: #FFFFFF;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 1em;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+#collection_description ._action {
+    width: 100px;
+    float: right;
+    padding: 10px 10px 0 0;
+    color: #FFFFFF;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 1em;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-align: right;
+}
+
+#collection_enumerate {
+    width: 900px;
+    background-color: #FFFFFF;
+    /* height: 400px; */
+    clear: both;
+}
+
+#collection_line_odd {
+    width: 900px;
+    height: 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid black;
+    clear: both;
+}
+
+#collection_line_odd ._name {
+    padding: 4px 0 0 10px;
+    color: #000000;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    width: 700px;
+    float: left;
+}
+
+#collection_line_odd ._actions {
+    width: 100px;
+    float: right;
+    padding: 2px 0 0 10px;
+}
+
+#collection_line_even {
+    width: 900px;
+    height: 20px;
+    background-color: #d9edf2;
+    border-bottom: 1px solid black;
+    clear: both;
+}
+
+#collection_line_even ._name {
+    padding: 4px 0 0 10px;
+    color: #000000;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    width: 700px;
+    float: left;
+}
+
+#collection_line_even ._actions {
+    width: 100px;
+    float: right;
+    padding: 2px 0 0 10px;
+}

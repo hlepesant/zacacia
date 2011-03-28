@@ -9,84 +9,36 @@ body {
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
-/*
-    text-align: center;
-*/
-    background: #000000;
-/*
-    background: #80ACCF;
-    background: -moz-linear-gradient(top, #064B86 0%, #80ACCF 100%) no-repeat;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#064B86), color-stop(100%,#80ACCF)) no-repeat;
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#064B86', endColorstr='#80ACCF',GradientType=0 ) no-repeat;
-*/
+    background: #383838;
 }
-/*
-#page {
-    border: 1px solid red;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-    height: 800px;
-}
-*/
 
 #header {
-    border-bottom: 2px solid #235F9E;
     width: 100%;
     height: 70px;
-    background: #000000;
-/*
-    -moz-border-radius-bottomright: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-*/
+    background: #003c78;
+}
+
+#sep {
+    width: 100%;
+    height: 0.1em;
+    background: #ff9000;
 }
 
 #menu {
-    border-bottom: 2px solid #235F9E;
     width: 100%;
     height: 40px;
-/*
-    margin-top: 1px;
-    margin-bottom: 1px;
-    -moz-border-radius-topright: 5px;
-    -moz-border-radius-topleft: 5px;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-*/
-    background: #000000;
-/*
-    background: #45484d;
-    background: -moz-linear-gradient(top, #45484d 0%, #000000 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#000000));
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
-*/
+    background: #054a85;
 }
 
 #content {
-    border-bottom: 2px solid #235F9E;
     background: #ffffff;
     width: 100%;
-    height: 420px;
-/*
-    -moz-border-radius-bottomright: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-*/
+    height: 500px;
+    padding-top: 25px;
 }
 
 #footer {
-    border: 1px solid #000000;
     width: 100%;
     height: 40px;
-    background: #000000;
-/*
-    -moz-border-radius-topright: 5px;
-    -moz-border-radius-topleft: 5px;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-*/
+    background: #383838;
 }

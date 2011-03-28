@@ -1,29 +1,40 @@
-<div id="collection-header">
-    <div id="collection-header" class="section">
-        <?php echo __('Platforms') ;?>
-    </div>
-    <div id="collection-header" class="navigation">
-        <?php echo link_to_function(image_tag('icons/world_add.png'), "document.getElementById('platform_new').submit()") ?> 
-    </div>
-</div>
-
 <div id="collection">
-    <div id="title">
-        <div id="title" class="description"><?php echo __("Name") ?></div>
-        <div id="title" class="navigation"><?php echo __("Action") ?></div>
+    <div id="collection_header">
+        <div class="_title">
+            <?php echo __('Platforms') ;?>
+        </div>
+        <!-- end #collection_header._title -->
+        <div class="_link">
+            <?php echo link_to_function(image_tag('icons/world_add.png'), "document.getElementById('platform_new').submit()") ?>
+        </div>
+        <!-- end #collection_header._link -->
     </div>
+    <!-- end #collection_header -->
+
+    <div id="collection_description">
+            <div class="_name"><?php echo __("Name") ?></div>
+            <div class="_action"><?php echo __("Action") ?></div>
+    </div>
+    <!-- end #collection_description -->
+
+    <div id="collection_enumerate">
 <?php
 $id = 0;
 foreach ($platforms as $p):
-    include_partial('platform', array('p' => $p, 'id' => $id, 'f' => $forms[$p->getDn()]));
+    include_partial('item', array('p' => $p, 'id' => $id, 'f' => $forms[$p->getDn()]));
     $id++;
 endforeach;
 ?>
+    </div>
+    <!-- end #collection_enumerate -->
+
 </div>
+<!-- end #collection -->
 
 <form action="<?php echo url_for('platform/new') ?>" method="POST" id="platform_new" class="invisible">
 <?php echo $new->renderHiddenFields() ?>
 </form>
+
 
 <?php if ($sf_user->hasFlash('ldap_error')): ?>
 <?php echo javascript_tag("
@@ -32,11 +43,11 @@ alert('". $sf_user->getFlash('ldap_error') ."');
 <?php endif; ?>
 
 <?php echo javascript_tag("
-function jumpTo(id, name, destination) 
+function jumpTo(id, name, destination)
 {
     var f = document.getElementById(sprintf('navigation_form_%03d', id));
     var m = '".$this->getModuleName()."';
-    
+
     if ( typeof(destination) == 'undefined' )
     {
         var a = document.getElementById(sprintf('destination_%03d', id));
@@ -48,23 +59,23 @@ function jumpTo(id, name, destination)
         var d = destination;
         var t = destination;
     }
-    
+
     switch ( d )
     {
         case 'none':
             return false;
         break;
-        
+
         case 'edit':
         break;
-        
+
         case 'status':
             if ( ! confirm( t+' ".__("the platform")." \"'+name+'\" ?'))
             {
                 return false;
             }
         break;
-        
+
         case 'delete':
             if ( ! confirm( t+' ".__("the platform")." \"'+name+'\" ?'))
             {
@@ -72,7 +83,7 @@ function jumpTo(id, name, destination)
                 return false;
             }
         break;
-        
+
         case 'company':
         case 'server':
         default:
@@ -80,9 +91,9 @@ function jumpTo(id, name, destination)
             d = 'index';
         break;
     }
-    
+
     f.action = sprintf('".url_for(false)."%s/%s/', m, d);
-    
+
     f.submit();
     return true;
 }
