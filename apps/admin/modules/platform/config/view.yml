@@ -1,2 +1,5 @@
 indexSuccess:
-    stylesheets:    [collection]
+    stylesheets:    [collection.css]
+
+newSuccess:
+    stylesheets:    [form.css]

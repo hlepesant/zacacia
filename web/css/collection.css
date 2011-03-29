@@ -91,9 +91,11 @@
 }
 
 #collection_line_odd ._actions {
-    width: 100px;
+    width: 90px;
     float: right;
-    padding: 2px 0 0 10px;
+    padding: 2px 10px 0 0;
+    line-height: 0.8em;
+    text-align: right;
 }
 
 #collection_line_even {
@@ -117,5 +119,7 @@
 #collection_line_even ._actions {
     width: 100px;
     float: right;
-    padding: 2px 0 0 10px;
+    padding: 2px 10px 0 0;
+    line-height: 0.8em;
+    text-align: right;
 }
