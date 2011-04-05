@@ -14,7 +14,7 @@ default:
 
   stylesheets:    [style.css]
 
-  javascripts:    [phpjs.js]
+  javascripts:    [jquery.tools.min-1.2.5.js, php.full.min-3.24.js]
 
   has_layout:     true
   layout:         layout

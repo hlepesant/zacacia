@@ -9,11 +9,11 @@
     <?php include_javascripts() ?>
 </head>
 <body>
+
 <div id="header">
     <h1><?php echo sfConfig::get('projetctName'); ?></h1>
     <p><?php echo sfConfig::get('projetctDesc'); ?></p>
 </div>
-<div id="sep"></div>
 <!-- end #logo -->
 
 <div id="menu">
@@ -26,21 +26,20 @@
         <li><a href="#" class="first">Forward</a></li>
     </ul>
 </div>
-<div id="sep"></div>
 <!-- end #menu -->
 
 <div id="content">
     <?php echo $sf_content ?>
 </div>
-<div id="sep"></div>
 <!-- end #content -->
 
 <div id="footer">
     <div id="footer-content">
-        <p>Copyright &copy; 2004 Lepesant.com. All rights reserved.</p>
+        <p>hugues-at-lepesant-dot-com</p>
     </div>
     <!-- end #footer-content -->
 </div>
 <!-- end #footer -->
+
 </body>
 </html>

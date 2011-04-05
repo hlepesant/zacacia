@@ -1,5 +1,7 @@
 indexSuccess:
-    stylesheets:    [collection.css]
+    stylesheets:    [collection.css, tooltip.css]
+    javascripts:    [indexPlatform.js]
 
 newSuccess:
     stylesheets:    [form.css]
+    javascripts:    [newPlatform.js]

@@ -5,7 +5,8 @@
         </div>
         <!-- end #collection_header._title -->
         <div class="_link">
-            <?php echo link_to_function(image_tag('icons/world_add.png'), "document.getElementById('platform_new').submit()") ?>
+            <?php /* echo link_to('[+]', 'platform/new', array('id' => 'gotonew', 'title' => 'New')) */ ?>
+            <?php echo image_tag('famfam/add.png', array('title' => 'New', 'id' => 'gotonew')); ?>
         </div>
         <!-- end #collection_header._link -->
     </div>

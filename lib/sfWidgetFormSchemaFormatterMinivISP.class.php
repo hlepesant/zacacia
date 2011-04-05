@@ -2,12 +2,13 @@
 class sfWidgetFormSchemaFormatterMinivISP extends sfWidgetFormSchemaFormatter
 {
   protected
-  $rowFormat                 = "\n<div id=\"form-line\">\n\t<div id=\"form-line\" class=\"item\">%label%%error%</div>\n\t<div id=\"form-line\" class=\"field\">%field%%help%%hidden_fields%</div>\n\t<div id=\"form-line\" class=\"check\"></div>\n</div>\n",
-  $errorRowFormat            = "<div class=\"form-errors\">\n%errors%</div>\n",
-  $helpFormat                = '<div class="form-help">%help%</div>',
-  $decoratorFormat           = "<div>\n  %content%</div>",
-  $errorListFormatInARow     = "  <ul class=\"error-list\">\n%errors%</ul>\n",
-  $errorRowFormatInARow      = "    <li>%error%</li>\n",
-  $namedErrorRowFormatInARow = "    <li>%name%: %error%</li>\n";
+#   $rowFormat                 = "\n<div id=\"form-line\">\n\t<div id=\"form-line\" class=\"item\">%label%%error%</div>\n\t<div id=\"form-line\" class=\"field\">%field%%help%%hidden_fields%</div>\n\t<div id=\"form-line\" class=\"check\"></div>\n</div>\n",
+    $rowFormat       = "\n<div id=\"form_item\">\n<div class=\"_name\">%label%%error%</div>\n<div class=\"_field\">%field%%help%%hidden_fields%</div>\n<div class=\"_ajaxCheck\"></div>\n</div>\n",
+    $errorRowFormat            = "<div class=\"form-errors\">\n%errors%</div>\n",
+    $helpFormat                = '<div class="form-help">%help%</div>',
+    $decoratorFormat           = "<div>\n  %content%</div>",
+    $errorListFormatInARow     = "  <ul class=\"error-list\">\n%errors%</ul>\n",
+    $errorRowFormatInARow      = "    <li>%error%</li>\n",
+    $namedErrorRowFormatInARow = "    <li>%name%: %error%</li>\n";
 }
-    
+

@@ -3,16 +3,18 @@
  *   - Header
  */
 
-#menu ul, li {
+#menu ul {
+    margin: 0 0 0 20px;
+    padding: 0 0 0 0;
+    line-height: 40px;
     display: inline;
-    margin-top: 0;
-    line-height: 240%;
     text-align: justify;
 }
 
 #menu li {
-    padding: 5px;
-    margin: 5px;
+    display: inline;
+    padding: 0 5px 0 5px;
+    margin: 0 0 0 0;
 }
 
 #menu a {
@@ -23,13 +25,9 @@
     font-family: Arial;
     font-size: 1em;
     font-weight: bold;
-    color: #56A8D7;
+    color: #999999;
 }
 
 #menu a.active {
-/*    color: #FF4364; */
-/*    color: #3FB349; */
-/*    color: #FAE767; */
-/*    color: #F26730; */
-    color: #D0D0D0;
+    color: #F0C020;
 }

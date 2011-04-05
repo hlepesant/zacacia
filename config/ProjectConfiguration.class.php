@@ -10,14 +10,12 @@ class ProjectConfiguration extends sfProjectConfiguration
     $this->enablePlugins('sfProtoculousPlugin');
 
     sfConfig::set('sf_logging_enabled', true);
-  
-    sfConfig::set('projetctName', 'MinivISP');
-    sfConfig::set('projetctDesc', 'Identity Lifecycle Manager for Zarafa');
+
+    sfConfig::set('projetctName', 'Zacacia'); //'MinivISP');
+    sfConfig::set('projetctDesc', 'zarafa + ldap = Zacacia'); //'Identity Lifecycle Manager for Zarafa');
 
     sfConfig::set('widgetNameFormat', 'minidata');
     sfConfig::set('widgetFormaterName', 'MinivISP');
-    #sfConfig::set('navigation_look', 'dropdown');
-    sfConfig::set('navigation_look', 'link');
 
 # Ldap Internal
     sfConfig::set('ldap_host', "ldapdev.lepesant.com");
@@ -47,10 +45,10 @@ class ProjectConfiguration extends sfProjectConfiguration
         '10000' => '10 Go',
         '25000' => '25 Go',
         '50000' => '50 Go',
-        '100000' => '100 Go', 
-        '500000' => '500 Go', 
-        '1000000' => '1 To', 
-        '0' => 'unlimited', 
+        '100000' => '100 Go',
+        '500000' => '500 Go',
+        '1000000' => '1 To',
+        '0' => 'unlimited',
     ));
 #
 # User Quota
@@ -89,5 +87,6 @@ class ProjectConfiguration extends sfProjectConfiguration
     sfConfig::set('grep', '/bin/grep');
 
     sfConfig::set('undefined', '_undefined_');
+    $this->enablePlugins('sfJqueryReloadedPlugin');
   }
 }
