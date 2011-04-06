@@ -18,6 +18,7 @@ class platformActions extends sfActions
     {
         $c = new LDAPCriteria();
         $c->add('objectClass', 'miniPlatform');
+        $c->setSortFilter('cn');
 
         $l = new PlatformPeer();
         $l->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
@@ -72,7 +73,7 @@ class platformActions extends sfActions
         }
 
         $this->new = new PlatformNavigationForm();
-        unset($this->new['platformDn'], $this->new['destination']);
+        unset($this->new['platformDn']);
     }
 
     public function executeNew(sfWebRequest $request)
@@ -107,7 +108,7 @@ class platformActions extends sfActions
             }
         }
         $this->cancel = new PlatformNavigationForm();
-        unset($this->cancel['platformDn'], $this->cancel['destination']);
+        unset($this->cancel['platformDn']);
     }
 
     public function executeEdit(sfWebRequest $request)
@@ -150,7 +151,6 @@ class platformActions extends sfActions
             else
             {
                 $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
-
             }
         }
 

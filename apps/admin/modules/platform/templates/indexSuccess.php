@@ -1,16 +1,20 @@
-<div id="collection">
-    <div id="collection_header">
+<div id="navigation">
+    <div id="navigation_header">
         <div class="_title">
             <?php echo __('Platforms') ;?>
         </div>
-        <!-- end #collection_header._title -->
+        <!-- end #navigation_header._title -->
         <div class="_link">
             <?php /* echo link_to('[+]', 'platform/new', array('id' => 'gotonew', 'title' => 'New')) */ ?>
             <?php echo image_tag('famfam/add.png', array('title' => 'New', 'id' => 'gotonew')); ?>
         </div>
-        <!-- end #collection_header._link -->
+        <!-- end #navigation_header._link -->
     </div>
-    <!-- end #collection_header -->
+    <!-- end #navigation_header -->
+</div>
+<!-- end #navigation -->
+
+<div id="collection">
 
     <div id="collection_description">
             <div class="_name"><?php echo __("Name") ?></div>

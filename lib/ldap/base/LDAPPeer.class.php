@@ -8,7 +8,7 @@ class LDAPPeer
     private $bind_pwd;
     private $use_ssl;
     private $bind_dn;
-  
+
     public static $exclude_attrs = array();
 
     public function __construct()
@@ -23,21 +23,21 @@ class LDAPPeer
         {
             $bind_user = $this->getBindUser();
         }
-        
+
         if ( null === $bind_password )
         {
             $bind_password = $this->getBindPwd();
         }
         $conn = ldap_connect($this->getFullHost());
-        
+
         ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);
         ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
-        
+
         if (!ldap_bind($conn, $bind_user, $bind_password))
         {
             throw new miniException(ldap_error($conn));
         }
-        
+
         $this->setLinkId($conn);
     }
 
@@ -115,7 +115,7 @@ class LDAPPeer
         $this->conn = $v;
         return $this;
     }
- 
+
     public function getLinkId()
     {
         return $this->conn;
@@ -124,11 +124,11 @@ class LDAPPeer
     protected function extractAttributes($ldap_entry)
     {
         $attributes = array();
-        
+
         if ($ldap_entry !== false)
         {
             $attrs = ldap_get_attributes($this->getLinkId(), $ldap_entry);
-            
+
             foreach (array_keys($attrs) as $attribute)
             {
                 if (!is_int($attribute) && $attribute != "count")
@@ -157,7 +157,7 @@ class LDAPPeer
         $attributes = $this->extractAttributes($ldap_entry);
         $values = $this->extractValues($ldap_entry, $attributes);
         $dn = ldap_get_dn($this->getLinkId(), $ldap_entry);
-        
+
         $ldap_object = new LDAPObject();
         $ldap_object->setDn($dn);
         $ldap_object->__constructFrom($values);
@@ -179,7 +179,7 @@ class LDAPPeer
                 $log->info("{BaseLDAPPeer::select} getTimelimit = ".$ldap_criteria->getTimelimit() );
                 $log->info("{BaseLDAPPeer::select} getDeref = ".$ldap_criteria->getDeref() );
             }
-            
+
             $results = $function($this->getLinkId(),
                                  $ldap_criteria->getBaseDn(),
                                  $ldap_criteria->getFilter(),
@@ -188,12 +188,12 @@ class LDAPPeer
                                  $ldap_criteria->getSizelimit(),
                                  $ldap_criteria->getTimelimit(),
                                  $ldap_criteria->getDeref());
-            
+
             if (!$results)
             {
                 throw new Exception(ldap_error($this->getLinkId()));
             }
-            
+
             if (!is_null($ldap_criteria->getSortfilter()))
             {
                 ldap_sort($this->getLinkId(), $results, $ldap_criteria->getSortfilter());
@@ -210,12 +210,12 @@ class LDAPPeer
     {
         $_objects = array();
         $results = $this->select($ldap_criteria);
-        
+
         $ldap_entry = ldap_first_entry($this->getLinkId(), $results);
         if ($ldap_entry !== false)
         {
             $_objects[] = $this->createLDAPObject($ldap_entry);
-            
+
             while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry))
             {
                 $_objects[] = $this->createLDAPObject($ldap_entry);
@@ -228,7 +228,7 @@ class LDAPPeer
     {
         $results = $this->select($ldap_criteria);
         $first_entry = ldap_first_entry($this->getLinkid(), $results);
-        
+
         return $this->createLDAPObject($first_entry);
     }
 
@@ -242,7 +242,7 @@ class LDAPPeer
     {
         if (@ldap_add($this->getLinkId(), $ldap_object->getDn(), $ldap_object->getAttributes()))
             return true;
-    
+
         throw new Exception("Fatal: ".ldap_error($this->getLinkId()));
     }
 
@@ -250,7 +250,7 @@ class LDAPPeer
     {
         if ( @ldap_modify($this->getLinkId(), $ldap_object->getDn(), $ldap_object->getAttributes()))
             return true;
-    
+
         throw new Exception("Fatal: ".ldap_error($this->getLinkId()));
     }
 
@@ -260,7 +260,7 @@ class LDAPPeer
         {
             $log->info("{BaseLDAPPeer::doDelete} deleting = ".$ldap_object->getDn() );
         }
-        
+
         if ($recursive == false)
         {
             return (ldap_delete($this->getLinkId(), $ldap_object->getDn()));
@@ -268,13 +268,13 @@ class LDAPPeer
             //searching for sub entries
             $sr=ldap_list($this->getLinkId(),$ldap_object->getDn(),"ObjectClass=*",array(""));
             $info = ldap_get_entries($this->getLinkId(), $sr);
-        
+
             for($i=0;$i<$info['count'];$i++)
             {
                 //deleting recursively sub entries
                 $sub_object = new LDAPObject();
                 $sub_object->setDn($info[$i]['dn']);
-        
+
                 $result = $this->doDelete($sub_object,$recursive);
                 if(!$result){
                     print( ldap_error( $this->getLinkdId() ) );

@@ -8,17 +8,17 @@
 
 
 body {
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    background: #FFFFFF;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    background: #EFEFEF;
 }
 
 #header {
     width: 900px;
     height: 62px;
-    margin: 0 auto 0 auto;
-    padding: 0 0 0 0;
-    border-bottom: 1px solid #e09010;
+    margin: 0px auto 0px auto;
+    padding: 0px 0px 0px 0px;
+    border-bottom: 1px solid #FFFFFF;
     background-color: #00375A;
     background-image: url(/images/zacacia_w.png);
     background-repeat: no-repeat;
@@ -28,7 +28,7 @@ body {
 #menu {
     width: 900px;
     height: 40px;
-    margin: 0 auto 0 auto;
+    margin: 0px auto 0px auto;
     background-color: #004A73;
     border-bottom: 1px solid #e09010;
 }
@@ -36,19 +36,18 @@ body {
 #content {
     width: 898px;
     height: 400px;
-    padding: 0 0 0 0;
-    margin: 0 auto 0 auto;
-    background: #EFEFEF;
+    padding: 0px 0px 0px 0px;
+    margin: 0px auto 0px auto;
+    background: #FFFFFF;
     border-left: 1px solid #000000;
     border-right: 1px solid #000000;
 }
 
 #footer {
-    border: 1px solid #00FF00;
     width: 900px;
     height: 40px;
-    margin: 0 auto 0 auto;
-    padding: 0 0 0 0;
+    margin: 0px auto 0px auto;
+    padding: 0px 0px 0px 0px;
     background-color: #00375A;
-    border-top: 1px solid #FFCC00;
+    border-top: 2px solid #F0C020;
 }

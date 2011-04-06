@@ -1,12 +1,17 @@
-<?php /* use_helper('Javascript') */ ?>
-
-<div id="form-header">
-    <div id="form-header" class="section">
-        <?php echo __('Edit Platform : ') ;?><?php echo $cn ?>
+<div id="navigation">
+    <div id="navigation_header">
+        <div class="_title">
+            <?php echo __('Edit Platform') ;?>
+        </div>
+        <!-- end #navigation_header._title -->
     </div>
+    <!-- end #navigation_header -->
 </div>
+<!-- end #navigation -->
 
-<div id="form-inner">
+
+<div id="form_box">
+
 <form action="<?php echo url_for('platform/edit') ?>" method="POST">
 <?php echo $form->renderHiddenFields() ?>
 
@@ -18,13 +23,25 @@
 </ul>
 <?php endif; ?>
 
-  <?php echo $form['undeletable']->renderRow() ?>
-  <?php echo $form['status']->renderRow() ?>
+    <div id="form_item">
+        <div class="_name"><?php echo __('Name') ?></div>
+        <div class="_field"><input type="text" readonly="readonly" value="<?php echo $cn ?>" /></div>
+        <div class="_ajaxCheck"><div id="checkName_msg"></div></div>
+    </div>
+    <!-- end #form_item -->
 
-  <div id="form-submitline">
-    <?php echo link_to( "<input type=\"button\" value=\"". __("Cancel") ."\" id=\"form-button\"  />" , "@platform") ?>
-    <input type="submit" value="<?php echo __('Update') ?>" id="form-submit" />
-  </div>
+    <?php echo $form['status']->renderRow() ?>
+    <?php echo $form['undeletable']->renderRow() ?>
+
+    <div id="form_submit">
+        <input type="button" value="<?php echo __("Cancel") ?>" id="button_cancel"  />
+        <input type="submit" value="<?php echo __('Update') ?>" id="button_submit"/>
+    </div>
+    <!-- end #form_submit -->
 
 </form>
 </div>
+
+<form action="<?php echo url_for('@platform') ?>" method="POST" id="form_cancel" class="invisible">
+<?php echo $cancel->renderHiddenFields() ?>
+</form>

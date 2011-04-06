@@ -38,7 +38,7 @@ class BaseCompanyObject extends LDAPObject
 
         return $this;
     }
-  
+
     public function setCn($v)
     {
         $this->attributes['cn'] = $v;
@@ -49,7 +49,7 @@ class BaseCompanyObject extends LDAPObject
     {
         return $this->attributes['cn'];
     }
- 
+
     public function setMinistatus($v)
     {
         $this->attributes['miniStatus'] = $v;
@@ -66,7 +66,7 @@ class BaseCompanyObject extends LDAPObject
         $this->attributes['miniUnDeletable'] = $v;
         return $this;
     }
- 
+
     public function getMiniundeletable()
     {
         return $this->attributes['miniUnDeletable'];
@@ -75,7 +75,7 @@ class BaseCompanyObject extends LDAPObject
     public function setZarafaAccount($v)
     {
         $this->attributes['zarafaAccount'] = $v;
-  	    return $this;
+       return $this;
     }
 
     public function getZarafaAccount()
@@ -86,18 +86,18 @@ class BaseCompanyObject extends LDAPObject
     public function setZarafaHidden($v)
     {
         $this->attributes['zarafaHidden'] = $v;
-  	    return $this;
+       return $this;
     }
 
     public function getZarafaHidden()
     {
         return $this->attributes['zarafaHidden'];
     }
- 
+
     public function setZarafaAdminPrivilege($v)
     {
         $this->attributes['zarafaAdminPrivilege'] = $v;
-   	    return $this;
+        return $this;
     }
 
     public function getZarafaAdminPrivilege()

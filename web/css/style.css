@@ -1,15 +1,12 @@
 /*
- *
+ *  Minivisp Style 0.1
+ *   - Style
  */
+
 @import "minivisp.css";
 @import "header.css";
+@import "navigation.css";
 @import "menu.css";
 @import "image.css";
-/*
-@import "main.css";
-@import "enum.css";
-@import "navigation.css";
-@import "form.css";
-*/
 @import "footer.css";
 

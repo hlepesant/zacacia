@@ -4,7 +4,7 @@
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="/images/favicon.ico" />
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
 </head>
@@ -15,7 +15,7 @@
     <p><?php echo sfConfig::get('projetctDesc'); ?></p>
 </div>
 <!-- end #logo -->
-
+<?php /*
 <div id="menu">
     <ul>
         <li class="current_page_item"><a href="#" class="active">Platform</a></li>
@@ -27,6 +27,7 @@
     </ul>
 </div>
 <!-- end #menu -->
+*/ ?>
 
 <div id="content">
     <?php echo $sf_content ?>
