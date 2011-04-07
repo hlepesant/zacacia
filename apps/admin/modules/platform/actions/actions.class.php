@@ -116,8 +116,7 @@ class platformActions extends sfActions
         $data = $request->getParameter('minidata');
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
 
-        if ( empty($platformDn) )
-        {
+        if ( empty($platformDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
             $this->redirect('@homepage');
         }

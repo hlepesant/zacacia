@@ -1,40 +1,42 @@
-<?php /* use_helper('ModalBox') */ ?>
-
-<div id="collection-header">
-    <div id="collection-header" class="section">
-        <?php echo __('Servers') ;?>
+<div id="navigation">
+    <div id="navigation_header">
+        <div class="_title">
+            <u><?php echo $p->getCn() ?></u>&nbsp;&rarr;
+            <?php echo __('Servers') ;?>
+        </div>
+        <!-- end #navigation_header._title -->
+        <div class="_link">
+            <?php echo image_tag('famfam/back.png', array('title' => 'Back', 'id' => 'goback')) ?>
+            <?php echo image_tag('famfam/add.png', array('title' => 'New', 'id' => 'gotonew')); ?>
+        </div>
+        <!-- end #navigation_header._link -->
     </div>
-    <div id="collection-header" class="navigation">
-      <?php echo link_to_function(image_tag('icons/arrow_up.png'), "document.getElementById('platform_back').submit()") ?> 
-      <?php echo link_to_function(image_tag('icons/server_add.png'), "document.getElementById('server_new').submit()") ?> 
-
-<?php /* echo m_link_to('link name',
-    '@remote_route_for_action',
-    array('title' => __('Retrieve Forgotten Password')),
-    array('width' => 400, 'height' => 180)) */ ?>
-<?php /* echo javascript_tag(m_link_to_function(url_for('mymodule/index'),
-    array('title' => 'Window Title'))); */ ?>
-
-
-
-
-    </div>
+    <!-- end #navigation_header -->
 </div>
+<!-- end #navigation -->
 
 <div id="collection">
-    <div id="title">
-        <div id="title" class="description"><?php echo __("Name") ?></div>
-        <div id="title" class="navigation"><?php echo __("Action") ?></div>
+
+    <div id="collection_description">
+            <div class="_name"><?php echo __("Name") ?></div>
+            <div class="_action"><?php echo __("Action") ?></div>
     </div>
+    <!-- end #collection_description -->
+
+    <div id="collection_enumerate">
 
 <?php
 $id = 0;
 foreach ($servers as $s):
-    include_partial('server', array('s' => $s, 'id' => $id, 'f' => $forms[$s->getDn()]));
+    include_partial('item', array('s' => $s, 'id' => $id, 'f' => $forms[$s->getDn()]));
     $id++;
 endforeach;
 ?>
+    </div>
+    <!-- end #collection_enumerate -->
+
 </div>
+<!-- end #collection -->
 
 <form action="<?php echo url_for('server/new') ?>" method="POST" id="server_new" class="invisible">
 <?php echo $new->renderHiddenFields() ?>
@@ -51,49 +53,36 @@ alert('". $sf_user->getFlash('ldap_error') ."');
 <?php endif; ?>
 
 <?php echo javascript_tag("
-function jumpTo(id, name, destination) 
+function jumpTo(id, name, target, message)
 {
-    var f = document.getElementById(sprintf('navigation_form_%03d', id));
+    var f = \"f = $(sprintf('#navigation_form_%03d', id))\";
+    eval(f);
     var m = '".$this->getModuleName()."';
-    
-    if ( typeof(destination) == 'undefined' )
-    {
-        var a = document.getElementById(sprintf('destination_%03d', id));
-        var d = a.options[a.selectedIndex].value;
-        var t = a.options[a.selectedIndex].text;
-    }
-    else
-    {
-        var d = destination;
-        var t = destination;
-    }
+    var d = target;
 
-    switch ( d )
+    switch ( target )
     {
-        case 'none':
-            return false;
-        break;
-        
         case 'edit':
         break;
-        
+
         case 'status':
-            if ( ! confirm( t+' ".__("the server")." \"'+name+'\" ?'))
-            {
+            if ( ! confirm( message + ' ".__("the server")." \"' + name + '\" ?')) {
                 return false;
             }
         break;
-        
+
         case 'delete':
-            if ( ! confirm( t+' ".__("the server")." \"'+name+'\" ?'))
-            {
-              a.selectedIndex = 0;
+            if ( ! confirm( message +' ".__("the server")." \"' + name + '\" ?')) {
               return false;
             }
         break;
+
+        default:
+            return false;
+        break;
     }
 
-    f.action = sprintf('".url_for(false)."%s/%s/', m, d);
+    f.attr('action', sprintf('".url_for(false)."%s/%s/', m, d));
 
     f.submit();
     return true;

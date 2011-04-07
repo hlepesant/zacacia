@@ -48,56 +48,42 @@ alert('". $sf_user->getFlash('ldap_error') ."');
 <?php endif; ?>
 
 <?php echo javascript_tag("
-function jumpTo(id, name, destination)
+function jumpTo(id, name, target, message)
 {
-    var f = document.getElementById(sprintf('navigation_form_%03d', id));
+    var f = \"f = $(sprintf('#navigation_form_%03d', id))\";
+    eval(f);
     var m = '".$this->getModuleName()."';
+    var d = target;
 
-    if ( typeof(destination) == 'undefined' )
+    switch ( target )
     {
-        var a = document.getElementById(sprintf('destination_%03d', id));
-        var d = a.options[a.selectedIndex].value;
-        var t = a.options[a.selectedIndex].text;
-    }
-    else
-    {
-        var d = destination;
-        var t = destination;
-    }
-
-    switch ( d )
-    {
-        case 'none':
-            return false;
-        break;
-
         case 'edit':
         break;
 
         case 'status':
-            if ( ! confirm( t+' ".__("the platform")." \"'+name+'\" ?'))
-            {
+            if ( ! confirm( message + ' ".__("the platform")." \"' + name + '\" ?')) {
                 return false;
             }
         break;
 
         case 'delete':
-            if ( ! confirm( t+' ".__("the platform")." \"'+name+'\" ?'))
-            {
-                a.selectedIndex = 0;
+            if ( ! confirm( message + ' ".__("the platform")." \"' + name + '\" ?')) {
                 return false;
             }
         break;
 
         case 'company':
         case 'server':
-        default:
-            m = d;
+            m = target;
             d = 'index';
+        break;
+
+        default:
+            return false;
         break;
     }
 
-    f.action = sprintf('".url_for(false)."%s/%s/', m, d);
+    f.attr('action', sprintf('".url_for(false)."%s/%s/', m, d));
 
     f.submit();
     return true;

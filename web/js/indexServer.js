@@ -1,7 +1,11 @@
 $(document).ready(function() {
 
+    $("#goback").click(function() {
+        $("#platform_back").submit();
+    });
+
     $("#gotonew").click(function() {
-        $("#platform_new").submit();
+        $("#server_new").submit();
     });
 
     $("._link img[title]").tooltip({
