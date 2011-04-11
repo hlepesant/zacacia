@@ -1,0 +1,11 @@
+indexSuccess:
+    stylesheets:    [collection.css, tooltip.css]
+    javascripts:    [indexServer.js]
+
+newSuccess:
+    stylesheets:    [form.css, button.css, tooltip.css]
+    javascripts:    [newServer.js, jquery.observe_field.js]
+
+editSuccess:
+    stylesheets:    [form.css, button.css, tooltip.css]
+    javascripts:    [editServer.js]

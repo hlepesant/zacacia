@@ -1,13 +1,15 @@
 <?php
 if ( $count ) {
-echo image_tag('icons/cross.png');
-echo javascript_tag("
-Form.Element.disable('form-submit');
-");
+    $arr = array(
+        'img' => '/images/famfam/cross.png',
+        'disabled' => true,
+    );
 }
 else {
-echo image_tag('icons/tick.png');
-echo javascript_tag("
-Form.Element.enable('form-submit');
-");
+    $arr = array(
+        'img' => '/images/famfam/tick.png',
+        'disabled' => false,
+    );
 }
+
+echo json_encode($arr);

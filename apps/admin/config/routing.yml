@@ -20,17 +20,17 @@ platform:
   param: { module: platform, action: index }
 
 server:
-  url:   /
-  param: { module: server, action: index }
-
-company:
-  url:   /
-  param: { module: company, action: index }
-
-domain:
-  url:   /
-  param: { module: domain, action: index }
-
-user:
-  url:   /
-  param: { module: user, action: index }
+  url:   /server/:action
+  param: { }
+#
+#company:
+#  url:   /:module
+#  param: { module: company, action: index }
+#
+#domain:
+#  url:   /:module
+#  param: { module: domain, action: index }
+#
+#user:
+#  url:   /:module
+#  param: { module: user, action: index }

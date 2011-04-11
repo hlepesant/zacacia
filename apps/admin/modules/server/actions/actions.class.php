@@ -143,9 +143,18 @@ class serverActions extends sfActions
                 }
         }
 
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'miniPlatform');
+        $l = new PlatformPeer();
+        $l->setBaseDn($platformDn);
+        $this->p = $l->retrieveByDn($c);
+
+
         $this->cancel = new ServerNavigationForm();
-        unset($this->cancel['serverDn'], $this->cancel['destination']);
-        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
+        unset($this->cancel['serverDn']);
+        $this->cancel->getWidget('platformDn')->setDefault($this->p->getDn());
     }
 
     public function executeEdit(sfWebRequest $request)
@@ -291,8 +300,7 @@ class serverActions extends sfActions
 
         $pattern = sfConfig::get('hostname_pattern');
 
-        if ( ! preg_match($pattern, $request->getParameter('name') ) )
-        {
+        if ( ! preg_match($pattern, $request->getParameter('name') ) ) {
             $this->count = 1;
             return sfView::SUCCESS;
         }

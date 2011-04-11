@@ -88,3 +88,7 @@ input[readonly=readonly] {
     background-color: inherit;
     font-weight: bold;
 }
+
+input[type=text].small-60 {
+    width: 40px;
+}
