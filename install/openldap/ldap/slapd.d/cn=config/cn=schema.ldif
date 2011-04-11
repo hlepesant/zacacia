@@ -1,0 +1,10 @@
+dn: cn=schema
+objectClass: olcSchemaConfig
+cn: schema
+structuralObjectClass: olcSchemaConfig
+entryUUID: 25cd0246-e1a9-102f-91ac-178fd899b4f2
+creatorsName: cn=admin,cn=config
+createTimestamp: 20110313103358Z
+entryCSN: 20110313103358.031579Z#000000#000#000000
+modifiersName: cn=admin,cn=config
+modifyTimestamp: 20110313103358Z
