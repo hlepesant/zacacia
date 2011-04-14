@@ -11,17 +11,15 @@ echo link_to_function(
     "jumpTo('".sprintf('%03d', $id)."', '".addslashes($p->getCn())."', 'edit', null)");
 
 /* -- Status -- */
-$_msg = 'Disable';
-if ( 'disable' === $p->getMiniStatus() ) $_msg = 'Enable';
 echo link_to_function(
     image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Status')),
-    "jumpTo('".sprintf('%03d', $id)."', '".addslashes($p->getCn())."', 'status', '".$_msg."')");
+    "jumpTo('".sprintf('%03d', $id)."', '".addslashes($p->getCn())."', 'status', '".$p->getMiniStatus()."')");
 
 /* -- Delete -- */
 if ( 'disable' === $p->getMiniStatus() && 0 === $p->get('company_count') ) {
     echo link_to_function(
         image_tag('famfam/cross.png'),
-        "jumpTo('".sprintf('%03d', $id)."', '".addslashes($p->getCn())."', 'delete', 'Delete')");
+        "jumpTo('".sprintf('%03d', $id)."', '".addslashes($p->getCn())."', 'delete', null)");
 }
 else {
     echo image_tag('famfam/blank.png');

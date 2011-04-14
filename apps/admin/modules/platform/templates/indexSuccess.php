@@ -48,44 +48,9 @@ alert('". $sf_user->getFlash('ldap_error') ."');
 <?php endif; ?>
 
 <?php echo javascript_tag("
-function jumpTo(id, name, target, message)
-{
-    var f = \"f = $(sprintf('#navigation_form_%03d', id))\";
-    eval(f);
-    var m = '".$this->getModuleName()."';
-    var d = target;
-
-    switch ( target )
-    {
-        case 'edit':
-        break;
-
-        case 'status':
-            if ( ! confirm( message + ' ".__("the platform")." \"' + name + '\" ?')) {
-                return false;
-            }
-        break;
-
-        case 'delete':
-            if ( ! confirm( message + ' ".__("the platform")." \"' + name + '\" ?')) {
-                return false;
-            }
-        break;
-
-        case 'company':
-        case 'server':
-            m = target;
-            d = 'index';
-        break;
-
-        default:
-            return false;
-        break;
-    }
-
-    f.attr('action', sprintf('".url_for(false)."%s/%s/', m, d));
-
-    f.submit();
-    return true;
-}
+var _js_msg_01 = '".__("Disable the platform")."';
+var _js_msg_02 = '".__("Enable the platform")."';
+var _js_msg_03 = '".__("Delete the platform")."';
+var _js_module = '".$this->getModuleName()."';
+var _js_url = '".url_for(false)."';
 ") ?>

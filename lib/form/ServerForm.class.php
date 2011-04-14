@@ -10,7 +10,7 @@ class ServerForm extends MinivISPForm
         $this->setWidgets(array(
             'platformDn' => new sfWidgetFormInputHidden(),
             'cn' => new sfWidgetFormInput(),
-            'ip' => new sfWidgetFormInput(),
+            'ip' => new sfWidgetFormInput(), //array(), array('pattern' => '([0-9]{1,3}\.){3}[0-9]{1,3}')),
             'zarafaHttpPort' => new sfWidgetFormInput(array(), array('class' => 'small-60', 'maxlength' => '6')),
             'zarafaSslPort' => new sfWidgetFormInput(array(), array('class' => 'small-60', 'maxlength' => '6')),
             'zarafaContainsPublic' => new sfWidgetFormSelect( array('choices' => $public_folder_option) ),

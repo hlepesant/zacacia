@@ -9,10 +9,8 @@
 </div>
 <!-- end #navigation -->
 
-
 <div id="form_box">
-
-<form action="<?php echo url_for('platform/new') ?>" method="POST">
+<form action="<?php echo url_for('platform/new') ?>" method="POST" id="new_item">
 <?php echo $form->renderHiddenFields() ?>
 
     <div id="form_item">
@@ -35,8 +33,10 @@
 </div>
 <!-- end #form_box -->
 
-<form action="<?php echo url_for('@platform') ?>" method="POST" id="form_cancel" class="invisible">
+<form action="<?php echo url_for('@platform') ?>" method="POST" id="form_cancel">
 <?php echo $cancel->renderHiddenFields() ?>
 </form>
 
-<?php echo javascript_tag(" var json_check_url = '". url_for('platform/check/')."'; ");?>
+<?php echo javascript_tag("
+var json_check_url = '". url_for('platform/check/')."';
+");?>

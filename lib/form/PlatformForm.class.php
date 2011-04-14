@@ -7,8 +7,8 @@ class PlatformForm extends MinivISPForm
     $undeletable = array('FALSE' => 'no', 'TRUE' => 'yes');
 
     $this->setWidgets(array(
-      'cn' => new sfWidgetFormInput(),
-      'status' => new sfWidgetFormSelect( array('choices' => $status) ),
+      'cn' => new sfWidgetFormInput(array(), array('pattern' => '[a-zA-Z ]{5,}', 'maxlength' => 30, 'required' => 'required')),
+      'status' => new sfWidgetFormSelect(array('choices' => $status)),
       'undeletable' => new sfWidgetFormSelect( array('choices' => $undeletable) ),
     ));
 

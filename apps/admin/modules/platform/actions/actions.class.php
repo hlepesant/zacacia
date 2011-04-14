@@ -14,8 +14,8 @@ class platformActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-    public function executeIndex(sfWebRequest $request)
-    {
+    public function executeIndex(sfWebRequest $request) {
+
         $c = new LDAPCriteria();
         $c->add('objectClass', 'miniPlatform');
         $c->setSortFilter('cn');
@@ -27,8 +27,8 @@ class platformActions extends sfActions
 
         $id=0;
         $this->forms = array();
-        foreach ($this->platforms as $p)
-        {
+        foreach ($this->platforms as $p) {
+
             $form = new PlatformNavigationForm();
             $form->getWidget('platformDn')->setDefault($p->getDn());
 
@@ -38,32 +38,7 @@ class platformActions extends sfActions
             $criteria_company->add('cn', '*');
             $count_company = $l->doCount($criteria_company);
 
-            switch( sfConfig::get('navigation_look') )
-            {
-                case 'dropdown':
-                    $choices = $form->getWidget('destination')->getOption('choices');
-                    $choices['status'] = $this->getContext()->getI18N()->__('Disable', Array(), 'messages');
-
-                    if ( $p->getMiniStatus() == 'disable' && $count_company  == 0 )
-                    {
-                        $choices['status'] = $this->getContext()->getI18N()->__('Enable', Array(), 'messages');
-                        $choices['delete'] = $this->getContext()->getI18N()->__('Delete', Array(), 'messages');
-                    }
-
-                    if ( $p->getMiniUnDeletable() === 'TRUE' )
-                    {
-                        unset($choices['delete'], $choices['status']);
-                    }
-                    $choices['company'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Company', Array(), 'messages');
-
-                    $form->getWidget('destination')->setOption('choices', $choices);
-                break;
-
-                case 'link':
-                default:
-                    $p->set('company_count', $count_company);
-                break;
-            }
+            $p->set('company_count', $count_company);
 
             $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
             $form->getWidget('destination')->setIdFormat(sprintf('%%s_%03d', $id));
@@ -76,16 +51,16 @@ class platformActions extends sfActions
         unset($this->new['platformDn']);
     }
 
-    public function executeNew(sfWebRequest $request)
-    {
+    public function executeNew(sfWebRequest $request) {
+
         $this->form = new PlatformForm();
 
-        if ($request->isMethod('post') && $request->getParameter('minidata'))
-        {
+        if ($request->isMethod('post') && $request->getParameter('minidata')) {
+
             $this->form->bind($request->getParameter('minidata'));
 
-            if ($this->form->isValid())
-            {
+            if ($this->form->isValid()) {
+
                 $l = new PlatformPeer();
                 $l->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
 
@@ -95,15 +70,13 @@ class platformActions extends sfActions
                 $p->setMiniStatus($this->form->getValue('status'));
                 $p->setMiniUnDeletable($this->form->getValue('undeletable'));
 
-                if ( $l->doAdd($p) )
-                {
+                if ( $l->doAdd($p) ) {
+
                   sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
                   echo fake_post($this, 'platform/index', Array());
                   exit;
                 }
-            }
-            else
-            {
+            } else {
                 $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
             }
         }
@@ -111,8 +84,8 @@ class platformActions extends sfActions
         unset($this->cancel['platformDn']);
     }
 
-    public function executeEdit(sfWebRequest $request)
-    {
+    public function executeEdit(sfWebRequest $request) {
+
         $data = $request->getParameter('minidata');
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
 
@@ -131,24 +104,23 @@ class platformActions extends sfActions
         $p = $l->retrieveByDn($c);
 
         $this->form = new PlatformEditForm();
-        if ($request->isMethod('post') && $request->getParameter('minidata'))
-        {
+
+        if ($request->isMethod('post') && $request->getParameter('minidata')) {
+
             $this->form->bind($request->getParameter('minidata'));
 
-            if ($this->form->isValid())
-            {
+            if ($this->form->isValid()) {
+
                 $p->setMiniStatus($this->form->getValue('status'));
                 $p->setMiniUnDeletable($this->form->getValue('undeletable'));
 
-                if ( $l->doSave($p) )
-                {
+                if ( $l->doSave($p) ) {
+
                   sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
                   echo fake_post($this, 'platform/index', Array());
                   exit;
                 }
-            }
-            else
-            {
+            } else {
                 $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
             }
         }
@@ -163,20 +135,17 @@ class platformActions extends sfActions
         unset($this->cancel['platformDn'], $this->cancel['destination']);
     }
 
-    public function executeStatus(sfWebRequest $request)
-    {
+    public function executeStatus(sfWebRequest $request) {
+
         $c = new LDAPCriteria();
         $c->setBaseDn($request->getParameter('platformDn'));
 
         $l = new PlatformPeer();
         $p = $l->retrieveByDn($c);
 
-        if ( 'enable' === $p->getMiniStatus())
-        {
+        if ( 'enable' === $p->getMiniStatus()) {
             $p->setMiniStatus('disable');
-        }
-        else
-        {
+        } else {
             $p->setMiniStatus('enable');
         }
 
@@ -187,16 +156,15 @@ class platformActions extends sfActions
         exit;
     }
 
-    public function executeDelete(sfWebRequest $request)
-    {
+    public function executeDelete(sfWebRequest $request) {
+
         $c = new LDAPCriteria();
         $c->setBaseDn($request->getParameter('platformDn'));
 
         $l = new PlatformPeer();
         $p = $l->retrieveByDn($c);
 
-        if ( 'disable' === $p->getMiniStatus())
-        {
+        if ( 'disable' === $p->getMiniStatus()) {
             $l->doDelete($p, true);
         }
 
@@ -206,8 +174,8 @@ class platformActions extends sfActions
     }
 
 /* WebServices */
-    public function executeCheck(sfWebRequest $request)
-    {
+    public function executeCheck(sfWebRequest $request) {
+
         $this->setTemplate('check');
         $this->setLayout(false);
         $this->count = 0;
