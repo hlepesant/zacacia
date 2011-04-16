@@ -18,13 +18,17 @@
     $output .= "<head>\n";
     $output .= "<title></title>\n";
     $output .= "</head>\n";
-    $output .= "<body onLoad=\"JavaScript: fakePost();\">\n";
+    $output .= "<body onLoad=\"JavaScript: timePost();\">\n";
     $output .= "<script type=\"text/javascript\">\n";
     $output .= "//<![CDATA[\n";
+    $output .= "function timePost()\n";
+    $output .= "{\n";
+    $output .= "var t = setTimeout(\"fakePost()\",3000);\n";
+    $output .= "}\n";
     $output .= "function fakePost()\n";
     $output .= "{\n";
     $output .= "var f = document.getElementById('fakeForm');\n";
-    #$output .= "f.submit();\n";
+    $output .= "f.submit();\n";
     $output .= "}\n";
     $output .= "//]]>\n";
     $output .= "</script>\n";
@@ -32,10 +36,11 @@
     foreach ($fields as $field => $value) {
       $output .= "<input type=\"hidden\" name=\"".$field."\" value=\"".$value."\" />\n";
     }
-    $output .= "<input type=\"submit\" name=\"submit\" value=\"submit\" />\n";
     $output .= "</form>\n";
     $output .= "</body>\n";    
     $output .= "</html>\n";  
+
+
 
     return $output;
   }

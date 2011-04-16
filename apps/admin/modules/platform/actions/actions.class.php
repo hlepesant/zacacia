@@ -14,8 +14,8 @@ class platformActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-    public function executeIndex(sfWebRequest $request) {
-
+    public function executeIndex(sfWebRequest $request)
+    {
         $c = new LDAPCriteria();
         $c->add('objectClass', 'miniPlatform');
         $c->setSortFilter('cn');
@@ -51,8 +51,8 @@ class platformActions extends sfActions
         unset($this->new['platformDn']);
     }
 
-    public function executeNew(sfWebRequest $request) {
-
+    public function executeNew(sfWebRequest $request)
+    {
         $this->form = new PlatformForm();
 
         if ($request->isMethod('post') && $request->getParameter('minidata')) {
@@ -84,8 +84,8 @@ class platformActions extends sfActions
         unset($this->cancel['platformDn']);
     }
 
-    public function executeEdit(sfWebRequest $request) {
-
+    public function executeEdit(sfWebRequest $request)
+    {
         $data = $request->getParameter('minidata');
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
 
@@ -135,8 +135,8 @@ class platformActions extends sfActions
         unset($this->cancel['platformDn'], $this->cancel['destination']);
     }
 
-    public function executeStatus(sfWebRequest $request) {
-
+    public function executeStatus(sfWebRequest $request)
+    {
         $c = new LDAPCriteria();
         $c->setBaseDn($request->getParameter('platformDn'));
 
@@ -156,8 +156,8 @@ class platformActions extends sfActions
         exit;
     }
 
-    public function executeDelete(sfWebRequest $request) {
-
+    public function executeDelete(sfWebRequest $request)
+    {
         $c = new LDAPCriteria();
         $c->setBaseDn($request->getParameter('platformDn'));
 
@@ -174,8 +174,8 @@ class platformActions extends sfActions
     }
 
 /* WebServices */
-    public function executeCheck(sfWebRequest $request) {
-
+    public function executeCheck(sfWebRequest $request)
+    {
         $this->setTemplate('check');
         $this->setLayout(false);
         $this->count = 0;

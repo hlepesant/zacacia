@@ -42,12 +42,12 @@ class serverActions extends sfActions
         $l = new ServerPeer();
         $l->setBaseDn(sprintf("ou=Servers,%s", $platformDn));
 
-        $this->servers = $l->doSelect($c, 'extended');
+        $this->servers = $l->doSelect($c, 'base');
 
         $id=0;
         $this->forms = array();
-        foreach ($this->servers as $s)
-        {
+        foreach ($this->servers as $s) {
+
             $form = new ServerNavigationForm();
             $form->getWidget('platformDn')->setDefault($platformDn);
             $form->getWidget('serverDn')->setDefault($s->getDn());
@@ -57,35 +57,9 @@ class serverActions extends sfActions
             $criteria_user->add('objectClass', 'zarafa-user');
             $criteria_user->add('zarafaUserServer', $s->getCn());
             $count_user = $l->doCount($criteria_user);
+            $s->set('user_count', $count_user);
 
-            switch( sfConfig::get('navigation_look') )
-            {
-                case 'dropdown':
-                    $choices = $form->getWidget('destination')->getOption('choices');
-                    $choices['status'] = $this->getContext()->getI18N()->__('Disable', Array(), 'messages');
-
-                    if ( $p->getMiniStatus() == 'disable' && $count_company  == 0 )
-                    {
-                        $choices['status'] = $this->getContext()->getI18N()->__('Enable', Array(), 'messages');
-                        $choices['delete'] = $this->getContext()->getI18N()->__('Delete', Array(), 'messages');
-                    }
-
-                    if ( $s->getMiniUnDeletable() === 'TRUE' )
-                    {
-                        unset($choices['delete'], $choices['status']);
-                    }
-                    $choices['company'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Company', Array(), 'messages');
-
-                    $form->getWidget('destination')->setOption('choices', $choices);
-                break;
-
-                case 'link':
-                default:
-                    $s->set('user_count', $count_user);
-                break;
-            }
-
-            $s->setPingTime();
+            #$s->setPingTime();
 
             $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
             $form->getWidget('serverDn')->setIdFormat(sprintf('%%s_%03d', $id));

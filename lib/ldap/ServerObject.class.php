@@ -2,6 +2,7 @@
 
 class ServerObject extends BaseServerObject
 {
+/*
     public function setPingTime()
     {
         $time_response = false;
@@ -22,9 +23,11 @@ class ServerObject extends BaseServerObject
         $this->attributes['ping'] = $time_response;
    	    return $this;
     }
-
+*/
+/*
     public function getPingTime()
     {
         return $this->attributes['ping'];
     }
+*/
 }

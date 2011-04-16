@@ -2,23 +2,6 @@
     <form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
 <?php echo $f->renderHiddenFields() ?>
 
-    <div class="_ping">
-<?php
-if (is_null( $s->getPingTime())) {
-    echo image_tag('famfam/bullet_yellow.png');
-}
-else {
-    if ($s->getPingTime()) {
-        echo image_tag('famfam/bullet_green.png');
-    }
-    else {
-        echo image_tag('famfam/bullet_red.png');
-    }
-}
-?>
-    </div>
-    <!-- end #line.ping -->
-
     <div class="_name_<?php echo $s->getMiniStatus() ?>"><?php echo $s->getCn() ?></div>
     <!-- end #line._name_ -->
 

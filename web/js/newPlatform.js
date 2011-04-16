@@ -12,12 +12,15 @@ $(document).ready(function() {
         $("#button_submit").attr("disabled", true);
 
         if ( val_cn.data("validator").checkValidity() ) {
-            $.get( json_check_url, { name: $(this).val() }, function(data){
-                    $("#checkName_msg").html("<img src=\""+data.img+"\" />");
-                    if ( ! data.disabled ) {
-                        $("#button_submit").removeAttr("disabled");
-                    }
-                }, 'json');
+            $.get( json_check_url, {
+                name: $(this).val()
+            },
+            function(data){
+                $("#checkName_msg").html("<img src=\""+data.img+"\" />");
+                if ( ! data.disabled ) {
+                    $("#button_submit").removeAttr("disabled");
+                }
+            }, 'json');
         }
     });
 
