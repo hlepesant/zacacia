@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     $("#button_cancel").click(function() {
-        $('#form_cancel').submit();
+        $("#form_cancel").submit();
     });
 
     var val_cn = $("input#minidata_cn").validator();
@@ -20,7 +20,7 @@ $(document).ready(function() {
                 if ( ! data.disabled ) {
                     $("#button_submit").removeAttr("disabled");
                 }
-            }, 'json');
+            }, "json");
         }
     });
 

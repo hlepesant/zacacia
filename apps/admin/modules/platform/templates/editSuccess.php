@@ -15,14 +15,6 @@
 <form action="<?php echo url_for('platform/edit') ?>" method="POST">
 <?php echo $form->renderHiddenFields() ?>
 
-<?php if ($form->hasGlobalErrors()): ?>
-<ul class="form-error">
-  <?php foreach ($form->getGlobalErrors() as $name => $error): ?>
-    <li><?php echo $name.': '.$error ?></li>
-  <?php endforeach; ?>
-</ul>
-<?php endif; ?>
-
     <div id="form_item">
         <div class="_name"><?php echo __('Name') ?></div>
         <div class="_field"><input type="text" readonly="readonly" value="<?php echo $cn ?>" /></div>

@@ -25,6 +25,9 @@ else {
     echo image_tag('famfam/blank.png');
 }
 
+/* -- Separateur -- */
+echo image_tag('famfam/blank.png');
+
 /* -- Server -- */
 echo link_to_function(
     image_tag('famfam/server.png', array('title' => 'Server')),
