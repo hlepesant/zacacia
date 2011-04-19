@@ -1,7 +1,7 @@
 <div id="navigation">
     <div id="navigation_header">
         <div class="_title">
-            <?php echo __('Edit Platform') ;?>
+            <?php echo __('Edit Platform') ;?> : <?php echo $platform->getCn(); ?>
         </div>
         <!-- end #navigation_header._title -->
     </div>
@@ -15,13 +15,7 @@
 <form action="<?php echo url_for('platform/edit') ?>" method="POST">
 <?php echo $form->renderHiddenFields() ?>
 
-    <div id="form_item">
-        <div class="_name"><?php echo __('Name') ?></div>
-        <div class="_field"><input type="text" readonly="readonly" value="<?php echo $cn ?>" /></div>
-        <div class="_ajaxCheck"><div id="checkName_msg"></div></div>
-    </div>
-    <!-- end #form_item -->
-
+    <?php echo $form['multiserver']->renderRow() ?>
     <?php echo $form['status']->renderRow() ?>
     <?php echo $form['undeletable']->renderRow() ?>
 

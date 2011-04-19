@@ -2,7 +2,7 @@
 <div id="navigation">
     <div id="navigation_header">
         <div class="_title">
-            <u><?php echo $p->getCn();?></u>&nbsp;&rarr;&nbsp;<?php echo __('New Server') ;?>
+            <u><?php echo $platform->getCn();?></u>&nbsp;&rarr;&nbsp;<?php echo __('New Server') ;?>
         </div>
         <!-- end #navigation_header._title -->
     </div>
@@ -31,6 +31,7 @@
     <?php echo $form['zarafaHttpPort']->renderRow() ?>
     <?php echo $form['zarafaSslPort']->renderRow() ?>
     <?php echo $form['zarafaContainsPublic']->renderRow() ?>
+    <?php echo $form['multitenant']->renderRow() ?>
     <?php echo $form['undeletable']->renderRow() ?>
     <?php echo $form['status']->renderRow() ?>
 
@@ -48,43 +49,9 @@
 <?php echo $cancel->renderHiddenFields() ?>
 </form>
 
-
 <?php
 echo javascript_tag("
 var json_check_url = '".url_for('server/check/')."';
 var json_resolvhost_url = '".url_for('server/resolvehost/')."';
 var json_checkip_url = '".url_for('server/checkip/')."';
 ");?>
-
-<?php /* echo observe_field('minidata_cn', array(
-  'update' => 'checkName',
-  'url' => url_for('server/check/'),
-  'method' => 'get',
-  'with' => "'&name='+getName()",
-  'frequency' => '1',
-  'script' => 1
-))
-*/
-?>
-
-<?php /* echo observe_field('minidata_cn', array(
-  'update' => 'minidata_ip',
-  'url' => url_for('server/resolvehost/'),
-  'method' => 'get',
-  'with' => "'&name='+getName()",
-  'frequency' => '1',
-  'script' => 1
-))
-*/
-?>
-
-<?php /* echo observe_field('minidata_ip', array(
-  'update' => 'checkIpAddress',
-  'url' => url_for('server/checkip/'),
-  'method' => 'get',
-  'with' => "'&ip='+getIpAddress()",
-  'frequency' => '1',
-  'script' => 1
-))
-*/
-?>

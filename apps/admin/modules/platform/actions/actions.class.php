@@ -41,7 +41,6 @@ class platformActions extends sfActions
             $p->set('company_count', $count_company);
 
             $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
-            $form->getWidget('destination')->setIdFormat(sprintf('%%s_%03d', $id));
 
             $this->forms[$p->getDn()] = $form;
             $id++;
@@ -67,8 +66,18 @@ class platformActions extends sfActions
                 $p = new PlatformObject();
                 $p->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
                 $p->setCn($this->form->getValue('cn'));
+
+                $p->setMiniMultiServer(array());
+                if ( $this->form->getValue('multiserver') ) {
+                    $p->setMiniMultiServer(1);
+                }
+
                 $p->setMiniStatus($this->form->getValue('status'));
-                $p->setMiniUnDeletable($this->form->getValue('undeletable'));
+
+                $p->setMiniUnDeletable(array());
+                if ( $this->form->getValue('undeletable') ) {
+                    $p->setMiniUnDeletable(1);
+                }
 
                 if ( $l->doAdd($p) ) {
 
@@ -101,7 +110,7 @@ class platformActions extends sfActions
 
         $l = new PlatformPeer();
         $l->setBaseDn($platformDn);
-        $p = $l->retrieveByDn($c);
+        $this->platform = $l->retrieveByDn($c);
 
         $this->form = new PlatformEditForm();
 
@@ -111,10 +120,19 @@ class platformActions extends sfActions
 
             if ($this->form->isValid()) {
 
-                $p->setMiniStatus($this->form->getValue('status'));
-                $p->setMiniUnDeletable($this->form->getValue('undeletable'));
+                $this->platform->setMiniMultiServer(array());
+                if ( $this->form->getValue('multiserver') ) {
+                    $this->platform->setMiniMultiServer(1);
+                }
 
-                if ( $l->doSave($p) ) {
+                $this->platform->setMiniStatus($this->form->getValue('status'));
+
+                $this->platform->setMiniUnDeletable(array());
+                if ( $this->form->getValue('undeletable') ) {
+                    $this->platform->setMiniUnDeletable(1);
+                }
+
+                if ( $l->doSave($this->platform) ) {
 
                   sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
                   echo fake_post($this, 'platform/index', Array());
@@ -125,14 +143,20 @@ class platformActions extends sfActions
             }
         }
 
-        $this->cn = $p->getCn();
+        $this->form->getWidget('platformDn')->setDefault($this->platform->getDn());
 
-        $this->form->getWidget('platformDn')->setDefault($p->getDn());
-        $this->form->getWidget('undeletable')->setDefault($p->getMiniundeletable());
-        $this->form->getWidget('status')->setDefault($p->getMinistatus());
+        if ( $this->platform->getMiniMultiServer() ) {
+            $this->form->getWidget('multiserver')->setDefault('true');
+        }
+
+        if ( $this->platform->getMiniUndeletable() ) {
+            $this->form->getWidget('undeletable')->setDefault('true');
+        }
+
+        $this->form->getWidget('status')->setDefault($this->platform->getMiniStatus());
 
         $this->cancel = new PlatformNavigationForm();
-        unset($this->cancel['platformDn'], $this->cancel['destination']);
+        unset($this->cancel['platformDn']);
     }
 
     public function executeStatus(sfWebRequest $request)

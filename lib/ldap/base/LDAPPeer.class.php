@@ -19,13 +19,11 @@ class LDAPPeer
 
     public function doConnection($bind_user = null, $bind_password = null)
     {
-        if ( null === $bind_user )
-        {
+        if ( null === $bind_user ) {
             $bind_user = $this->getBindUser();
         }
 
-        if ( null === $bind_password )
-        {
+        if ( null === $bind_password ) {
             $bind_password = $this->getBindPwd();
         }
         $conn = ldap_connect($this->getFullHost());
@@ -33,8 +31,7 @@ class LDAPPeer
         ldap_set_option($conn, LDAP_OPT_PROTOCOL_VERSION, 3);
         ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
 
-        if (!ldap_bind($conn, $bind_user, $bind_password))
-        {
+        if (!ldap_bind($conn, $bind_user, $bind_password)) {
             throw new miniException(ldap_error($conn));
         }
 
@@ -125,14 +122,11 @@ class LDAPPeer
     {
         $attributes = array();
 
-        if ($ldap_entry !== false)
-        {
+        if ($ldap_entry !== false) {
             $attrs = ldap_get_attributes($this->getLinkId(), $ldap_entry);
 
-            foreach (array_keys($attrs) as $attribute)
-            {
-                if (!is_int($attribute) && $attribute != "count")
-                {
+            foreach (array_keys($attrs) as $attribute) {
+                if (!is_int($attribute) && $attribute != "count") {
                     $attributes[] = $attribute;
                 }
             }
@@ -143,8 +137,7 @@ class LDAPPeer
     protected function extractValues($ldap_entry, $attributes)
     {
         $values = array();
-        foreach ($attributes as $attribute)
-        {
+        foreach ($attributes as $attribute) {
             $vals = ldap_get_values($this->getLinkId(), $ldap_entry, $attribute);
             unset($vals["count"]);
             $values[$attribute] = $vals;
@@ -166,10 +159,8 @@ class LDAPPeer
 
     protected function select(LDAPCriteria $ldap_criteria)
     {
-        if ($function = $ldap_criteria->getFunction())
-        {
-            if ( $log = sfContext::getInstance()->getLogger() )
-            {
+        if ($function = $ldap_criteria->getFunction()) {
+            if ( $log = sfContext::getInstance()->getLogger() ) {
                 $log->info("{BaseLDAPPeer::select} getLinkId = ".$this->getLinkId() );
                 $log->info("{BaseLDAPPeer::select} getBaseDn = ".$ldap_criteria->getBaseDn() );
                 $log->info("{BaseLDAPPeer::select} getFilter = ".$ldap_criteria->getFilter() );
@@ -189,19 +180,15 @@ class LDAPPeer
                                  $ldap_criteria->getTimelimit(),
                                  $ldap_criteria->getDeref());
 
-            if (!$results)
-            {
+            if (!$results) {
                 throw new Exception(ldap_error($this->getLinkId()));
             }
 
-            if (!is_null($ldap_criteria->getSortfilter()))
-            {
+            if (!is_null($ldap_criteria->getSortfilter())) {
                 ldap_sort($this->getLinkId(), $results, $ldap_criteria->getSortfilter());
             }
             return $results;
-        }
-        else
-        {
+        } else {
           throw new miniException("Fatal error: method not implemented.");
         }
     }
@@ -212,8 +199,7 @@ class LDAPPeer
         $results = $this->select($ldap_criteria);
 
         $ldap_entry = ldap_first_entry($this->getLinkId(), $results);
-        if ($ldap_entry !== false)
-        {
+        if ($ldap_entry !== false) {
             $_objects[] = $this->createLDAPObject($ldap_entry);
 
             while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry))
@@ -240,37 +226,36 @@ class LDAPPeer
 
     public function doAdd(LDAPObject $ldap_object)
     {
-        if (@ldap_add($this->getLinkId(), $ldap_object->getDn(), $ldap_object->getAttributes()))
+        if (@ldap_add($this->getLinkId(), $ldap_object->getDn(), $ldap_object->getAttributes())) {
             return true;
+        }
 
         throw new Exception("Fatal: ".ldap_error($this->getLinkId()));
     }
 
     public function doSave(LDAPObject $ldap_object)
     {
-        if ( @ldap_modify($this->getLinkId(), $ldap_object->getDn(), $ldap_object->getAttributes()))
+        if ( @ldap_modify($this->getLinkId(), $ldap_object->getDn(), $ldap_object->getAttributes())) {
             return true;
+        }
 
         throw new Exception("Fatal: ".ldap_error($this->getLinkId()));
     }
 
     public function doDelete(LDAPObject $ldap_object, $recursive=false)
     {
-        if ( $log = sfContext::getInstance()->getLogger() )
-        {
+        if ( $log = sfContext::getInstance()->getLogger() ) {
             $log->info("{BaseLDAPPeer::doDelete} deleting = ".$ldap_object->getDn() );
         }
 
-        if ($recursive == false)
-        {
+        if ($recursive == false) {
             return (ldap_delete($this->getLinkId(), $ldap_object->getDn()));
-        }else{
+        } else {
             //searching for sub entries
             $sr=ldap_list($this->getLinkId(),$ldap_object->getDn(),"ObjectClass=*",array(""));
             $info = ldap_get_entries($this->getLinkId(), $sr);
 
-            for($i=0;$i<$info['count'];$i++)
-            {
+            for($i=0;$i<$info['count'];$i++) {
                 //deleting recursively sub entries
                 $sub_object = new LDAPObject();
                 $sub_object->setDn($info[$i]['dn']);

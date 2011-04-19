@@ -20,7 +20,7 @@ class BaseServerObject extends LDAPObject
         $this->attributes['cn'] = null;
         $this->attributes['ipHostNumber'] = null;
         $this->attributes['miniStatus'] = 'enable';
-        $this->attributes['miniUnDeletable'] = 'FALSE';
+        $this->attributes['miniUnDeletable'] = 0;
         /* Zarafa Specific Attributs */
         $this->attributes['zarafaAccount'] = 1;                         // Entry is a part of zarafa
         $this->attributes['zarafaContainsPublic'] = 0;                  // This server contains the public store
@@ -28,6 +28,7 @@ class BaseServerObject extends LDAPObject
         $this->attributes['zarafaHidden'] = 1;                          // This object should be hidden from address book
         $this->attributes['zarafaHttpPort'] = 236;                      // Port for the http connection
         $this->attributes['zarafaSslPort'] = 237;                       // Port for the ssl connection
+        $this->attributes['miniMultiTenant'] = 0;                       // Multi tenant server
 
         return $this;
     }
@@ -140,5 +141,16 @@ class BaseServerObject extends LDAPObject
     public function getZarafaSslPort()
     {
         return $this->attributes['zarafaSslPort'];
+    }
+
+    public function setMiniMultiTenant($v)
+    {
+        $this->attributes['miniMultiTenant'] = $v;
+  	    return $this;
+    }
+
+    public function getMiniMultiTenant()
+    {
+        return $this->attributes['miniMultiTenant'];
     }
 }

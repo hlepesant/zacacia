@@ -23,11 +23,6 @@ class BasePlatformPeer extends LDAPPeer
 
     public function configureCriteria(LDAPCriteria $ldap_criteria)
     {
-#       $ldap_criteria->setHost(self::HOST);
-#       $ldap_criteria->setUsername(self::USERNAME);
-#       $ldap_criteria->setPassword(self::PASSWORD);
-#       $ldap_criteria->setUseSsl(self::USE_SSL);
-#       if ( $ldap_criteria->getBaseDn() == null ) $ldap_criteria->setBaseDn(self::BASE_DN);
         if ( $ldap_criteria->getBaseDn() == null ) $ldap_criteria->setBaseDn($this->getBaseDn());
         return $ldap_criteria;
     }
@@ -52,25 +47,15 @@ class BasePlatformPeer extends LDAPPeer
         
         $objects = array();
         
-        if ($ldap_entry !== false)
-        {
+        if ($ldap_entry !== false) {
             $objects[] = $this->createLDAPObject($ldap_entry);
-            while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry))
-            {
+            while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry)) {
                 $objects[] = $this->createLDAPObject($ldap_entry);
             }
         }
         
         return $objects;
     }
-
-#    public function doAdd(LDAPObject $ldap_object)
-#    {
-#        if ( ! parent::doAdd($ldap_object) )
-#        {
-#            return false;
-#        }
-#    }
 
     public function doSelectOne(LDAPCriteria $ldap_criteria)
     {
@@ -96,13 +81,4 @@ class BasePlatformPeer extends LDAPPeer
         
         return $this->doSelectOne($ldap_criteria);
     }
-
-#    public function doSave(LDAPObject $ldap_object)
-#    {
-#        if ( ! parent::doSave($ldap_object) )
-#        {
-#            return false;
-#        }
-#        return true;
-#    }
 }

@@ -20,6 +20,7 @@
     </div>
     <!-- end #form_item -->
 
+    <?php echo $form['multiserver']->renderRow() ?>
     <?php echo $form['status']->renderRow() ?>
     <?php echo $form['undeletable']->renderRow() ?>
 

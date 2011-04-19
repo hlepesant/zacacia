@@ -11,18 +11,21 @@
     <div class="_actions">
 <?php
 /* Edit */
-echo link_to_function(image_tag('famfam/page_white_edit.png', array('title' => 'Edit')), "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($s->getCn()))."', 'edit')");
+echo link_to_function(
+    image_tag('famfam/page_white_edit.png', array('title' => __('Edit'))), 
+    "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($s->getCn()))."', 'edit', null)");
+
 /* Status */
-$_msg = 'Disable';
-if ( 'disable' == $s->getMiniStatus() ) {
-    $_msg = 'Enable';
-}
-echo link_to_function(image_tag('famfam/arrow_rotate_clockwise.png', array('title' => $_msg)), "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($s->getCn()))."', 'status', '".$_msg."')");
+echo link_to_function(
+    image_tag('famfam/arrow_rotate_clockwise.png', array('title' => __('Status'))), 
+    "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($s->getCn()))."', 'status', '".$s->getMiniStatus()."')");
+
 /* Delete */
-if ( 'disable' == $s->getMiniStatus() && 0 == $s->get('user_count') ) {
-    echo link_to_function(image_tag('famfam/cross.png', array('title' => 'Delete')), "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($s->getCn()))."', 'delete', 'Delete')");
-}
-else {
+if ( 'FALSE' === $s->getMiniUnDeletable() && 'disable' === $s->getMiniStatus() && 0 === $s->get('user_count') ) {
+    echo link_to_function(
+        image_tag('famfam/cross.png', array('title' => __('Delete'))), 
+        "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($s->getCn()))."', 'delete', null)");
+} else {
     echo image_tag('famfam/blank.png');
 }
 ?>

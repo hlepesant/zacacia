@@ -5,7 +5,7 @@
         </div>
         <!-- end #navigation_header._title -->
         <div class="_link">
-            <?php echo image_tag('famfam/add.png', array('title' => 'New', 'id' => 'gotonew')); ?>
+            <?php echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew')); ?>
         </div>
         <!-- end #navigation_header._link -->
     </div>

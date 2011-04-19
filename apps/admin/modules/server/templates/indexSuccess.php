@@ -1,13 +1,18 @@
 <div id="navigation">
     <div id="navigation_header">
         <div class="_title">
-            <u><?php echo $p->getCn() ?></u>&nbsp;&rarr;
+            <u><?php echo $platform->getCn() ?></u>&nbsp;&rarr;
             <?php echo __('Servers') ;?>
         </div>
         <!-- end #navigation_header._title -->
         <div class="_link">
-            <?php echo image_tag('famfam/back.png', array('title' => 'Back', 'id' => 'goback')) ?>
-            <?php echo image_tag('famfam/add.png', array('title' => 'New', 'id' => 'gotonew')); ?>
+            <?php echo image_tag('famfam/back.png', array('title' => __('Back'), 'id' => 'goback')) ?>
+<?php
+if ( $platform->getMiniMultiServer() && count($servers) ) {
+    echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew'));
+} else {
+    echo image_tag('add_bw.png', array('title' => __('Single Server Platform'), 'id' => 'not_allowed'));
+} ?>
         </div>
         <!-- end #navigation_header._link -->
     </div>
@@ -24,13 +29,12 @@
     <!-- end #collection_description -->
 
     <div id="collection_enumerate">
-
 <?php
 $id = 0;
-foreach ($servers as $s):
+foreach ($servers as $s) {
     include_partial('item', array('s' => $s, 'id' => $id, 'f' => $forms[$s->getDn()]));
     $id++;
-endforeach;
+}
 ?>
     </div>
     <!-- end #collection_enumerate -->
@@ -46,45 +50,10 @@ endforeach;
 <?php echo $new->renderHiddenFields() ?>
 </form>
 
-<?php if ($sf_user->hasFlash('ldap_error')): ?>
 <?php echo javascript_tag("
-alert('". $sf_user->getFlash('ldap_error') ."');
-") ?>
-<?php endif; ?>
-
-<?php echo javascript_tag("
-function jumpTo(id, name, target, message)
-{
-    var f = \"f = $(sprintf('#navigation_form_%03d', id))\";
-    eval(f);
-    var m = '".$this->getModuleName()."';
-    var d = target;
-
-    switch ( target )
-    {
-        case 'edit':
-        break;
-
-        case 'status':
-            if ( ! confirm( message + ' ".__("the server")." \"' + name + '\" ?')) {
-                return false;
-            }
-        break;
-
-        case 'delete':
-            if ( ! confirm( message +' ".__("the server")." \"' + name + '\" ?')) {
-              return false;
-            }
-        break;
-
-        default:
-            return false;
-        break;
-    }
-
-    f.attr('action', sprintf('".url_for(false)."%s/%s/', m, d));
-
-    f.submit();
-    return true;
-}
+var _js_msg_01 = '".__("Disable the host")."';
+var _js_msg_02 = '".__("Enable the host")."';
+var _js_msg_03 = '".__("Delete the host")."';
+var _js_module = '".$this->getModuleName()."';
+var _js_url = '".url_for(false)."';
 ") ?>

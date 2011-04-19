@@ -20,8 +20,7 @@ if ( 'FALSE' === $p->getMiniUnDeletable() && 'disable' === $p->getMiniStatus() &
     echo link_to_function(
         image_tag('famfam/cross.png'),
         "jumpTo('".sprintf('%03d', $id)."', '".addslashes($p->getCn())."', 'delete', null)");
-}
-else {
+} else {
     echo image_tag('famfam/blank.png');
 }
 

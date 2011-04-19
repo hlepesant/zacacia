@@ -4,8 +4,7 @@ class PlatformPeer extends BasePlatformPeer
 {
     public function doAdd(LDAPObject $ldap_object)
     {
-        if ( ! parent::doAdd($ldap_object) )
-        {
+        if ( ! parent::doAdd($ldap_object) ) {
           return false;
         }
         
@@ -22,8 +21,7 @@ class PlatformPeer extends BasePlatformPeer
         $ldap_object_ou_org->set('ou', 'Organizations'); 
         $ldap_object_ou_org->set('objectclass', (array('top','organizationalUnit'))); 
 
-        if ( ! parent::doAdd($ldap_object_ou_org) )
-        {
+        if ( ! parent::doAdd($ldap_object_ou_org) ) {
             $subtree = false;
         }
 
@@ -33,8 +31,7 @@ class PlatformPeer extends BasePlatformPeer
         $ldap_object_ou_srv->set('ou', 'Servers'); 
         $ldap_object_ou_srv->set('objectclass', (array('top','organizationalUnit'))); 
 
-        if ( ! parent::doAdd($ldap_object_ou_srv) )
-        {
+        if ( ! parent::doAdd($ldap_object_ou_srv) ) {
             $subtree = false;
         }
 
@@ -44,8 +41,7 @@ class PlatformPeer extends BasePlatformPeer
         $ldap_object_ou_sg->set('ou', 'SecurityGroups'); 
         $ldap_object_ou_sg->set('objectclass', (array('top','organizationalUnit'))); 
         
-        if ( ! parent::doAdd($ldap_object_ou_sg) )
-        {
+        if ( ! parent::doAdd($ldap_object_ou_sg) ) {
             $subtree = false;
         }
 
@@ -54,8 +50,7 @@ class PlatformPeer extends BasePlatformPeer
         $ldap_object_sg_orgadmin->set('cn', 'OrganizationAdmin'); 
         $ldap_object_sg_orgadmin->set('objectclass', (array('top','miniSecurityGroup'))); 
         
-        if ( ! parent::doAdd($ldap_object_sg_orgadmin) )
-        {
+        if ( ! parent::doAdd($ldap_object_sg_orgadmin) ) {
             $subtree = false;
         }
 
@@ -64,8 +59,7 @@ class PlatformPeer extends BasePlatformPeer
         $ldap_object_sg_srvadmin->set('cn', 'ServerAdmin'); 
         $ldap_object_sg_srvadmin->set('objectclass', (array('top','miniSecurityGroup'))); 
         
-        if ( ! parent::doAdd($ldap_object_sg_srvadmin) )
-        {
+        if ( ! parent::doAdd($ldap_object_sg_srvadmin) ) {
             $subtree = false;
         }
 

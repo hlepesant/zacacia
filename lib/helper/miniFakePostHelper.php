@@ -23,7 +23,7 @@
     $output .= "//<![CDATA[\n";
     $output .= "function timePost()\n";
     $output .= "{\n";
-    $output .= "var t = setTimeout(\"fakePost()\",3000);\n";
+    $output .= "var t = setTimeout(\"fakePost()\",2000);\n";
     $output .= "}\n";
     $output .= "function fakePost()\n";
     $output .= "{\n";
