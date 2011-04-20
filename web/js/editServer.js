@@ -29,7 +29,7 @@ $(document).ready(function() {
         check_form();
     });
 
-    if ($(this).is(':checked')) {
+    if ($("input[type='checkbox']#minidata_zarafaAccount").is(':checked')) {
         $("input[type='text']#minidata_zarafaHttpPort").attr("disabled", true);
         $("input[type='text']#minidata_zarafaSslPort").attr("disabled", true);
         $("input[type='checkbox']#minidata_multitenant").attr("disabled", true);
