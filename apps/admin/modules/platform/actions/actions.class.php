@@ -63,24 +63,21 @@ class platformActions extends sfActions
                 $l = new PlatformPeer();
                 $l->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
 
-                $p = new PlatformObject();
-                $p->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
-                $p->setCn($this->form->getValue('cn'));
-
-                $p->setMiniMultiServer(array());
+                $platform = new PlatformObject();
+                $platform->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
+                $platform->setCn($this->form->getValue('cn'));
+                if ( $this->form->getValue('multitenant') ) {
+                    $platform->setMiniMultiTenant(1);
+                }
                 if ( $this->form->getValue('multiserver') ) {
-                    $p->setMiniMultiServer(1);
+                    $platform->setMiniMultiServer(1);
                 }
-
-                $p->setMiniStatus($this->form->getValue('status'));
-
-                $p->setMiniUnDeletable(array());
                 if ( $this->form->getValue('undeletable') ) {
-                    $p->setMiniUnDeletable(1);
+                    $platform->setMiniUnDeletable(1);
                 }
+                $platform->setMiniStatus($this->form->getValue('status'));
 
-                if ( $l->doAdd($p) ) {
-
+                if ( $l->doAdd($platform) ) {
                   sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
                   echo fake_post($this, 'platform/index', Array());
                   exit;
@@ -120,17 +117,10 @@ class platformActions extends sfActions
 
             if ($this->form->isValid()) {
 
-                $this->platform->setMiniMultiServer(array());
-                if ( $this->form->getValue('multiserver') ) {
-                    $this->platform->setMiniMultiServer(1);
-                }
-
+                $this->platform->setMiniMultiTenant($this->form->getValue('multitenant'));
+                $this->platform->setMiniMultiServer($this->form->getValue('multiserver'));
+                $this->platform->setMiniUnDeletable($this->form->getValue('undeletable'));
                 $this->platform->setMiniStatus($this->form->getValue('status'));
-
-                $this->platform->setMiniUnDeletable(array());
-                if ( $this->form->getValue('undeletable') ) {
-                    $this->platform->setMiniUnDeletable(1);
-                }
 
                 if ( $l->doSave($this->platform) ) {
 
@@ -147,6 +137,10 @@ class platformActions extends sfActions
 
         if ( $this->platform->getMiniMultiServer() ) {
             $this->form->getWidget('multiserver')->setDefault('true');
+        }
+
+        if ( $this->platform->getMiniMultiTenant() ) {
+            $this->form->getWidget('multitenant')->setDefault('true');
         }
 
         if ( $this->platform->getMiniUndeletable() ) {

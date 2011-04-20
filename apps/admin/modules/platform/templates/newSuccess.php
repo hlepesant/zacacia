@@ -20,8 +20,9 @@
     </div>
     <!-- end #form_item -->
 
-    <?php echo $form['multiserver']->renderRow() ?>
     <?php echo $form['status']->renderRow() ?>
+    <?php echo $form['multitenant']->renderRow() ?>
+    <?php echo $form['multiserver']->renderRow() ?>
     <?php echo $form['undeletable']->renderRow() ?>
 
     <div id="form_submit">

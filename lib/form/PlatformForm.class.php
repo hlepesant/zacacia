@@ -10,6 +10,7 @@ class PlatformForm extends MinivISPForm
     
         $this->setWidgets(array(
             'cn'          => new sfWidgetFormInput(array(), array('pattern' => '[a-zA-Z ]{5,}', 'maxlength' => 30, 'required' => 'required')),
+            'multitenant' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
             'multiserver' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
             'status'      => new sfWidgetFormSelect(array('choices' => $status)),
             'undeletable' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
@@ -20,6 +21,7 @@ class PlatformForm extends MinivISPForm
     
         $this->widgetSchema->setLabels(array(
             'cn'          => 'Name',
+            'multitenant' => 'Multi tenant',
             'multiserver' => 'Multi server',
             'status'      => 'Status',
             'undeletable' => 'Undeletable',
@@ -27,6 +29,7 @@ class PlatformForm extends MinivISPForm
     
         $this->setValidators(array(
             'cn'          => new sfValidatorString(),
+            'multitenant' => new sfValidatorBoolean(),
             'multiserver' => new sfValidatorBoolean(),
             'status'      => new sfValidatorChoice(array('choices' => array_keys($status))),
             'undeletable' => new sfValidatorBoolean(),

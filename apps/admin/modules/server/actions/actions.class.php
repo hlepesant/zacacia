@@ -82,8 +82,6 @@ class serverActions extends sfActions
 
         $this->form = new ServerForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
-        $this->form->getWidget('zarafaHttpPort')->setDefault(sfConfig::get('zarafaHttpPort'));
-        $this->form->getWidget('zarafaSslPort')->setDefault(sfConfig::get('zarafaSslPort'));
 
         if ($request->isMethod('post') && $request->getParameter('minidata')) {
 
@@ -98,19 +96,29 @@ class serverActions extends sfActions
                     $server->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
                     $server->setCn($this->form->getValue('cn'));
                     $server->setIpHostNumber($this->form->getValue('ip'));
-
-                    $server->setMiniMultiTenant(array());
-                    if ( $this->form->getValue('multitenant') ) {
-                        $server->setMiniMultiTenant(1);
-                    }
-
-                    $server->setMiniUnDeletable(array());
                     if ( $this->form->getValue('undeletable') ) {
                         $server->setMiniUnDeletable(1);
                     }
                     $server->setMiniStatus($this->form->getValue('status'));
 
-                    if ( $l->doAdd($s) ) {
+                    /* zarafa properties */
+                    if ( $this->form->getValue('zarafaAccount') == 1 ) {
+                            
+                        $server->setZarafaAccount(1);
+
+                        if ( $this->form->getValue('multitenant') ) {
+                            $server->setMiniMultiTenant(1);
+                        }
+
+                        $server->setZarafaHttpPort($this->form->getValue('zarafaHttpPort'));
+                        $server->setZarafaSslPort($this->form->getValue('zarafaSslPort'));
+
+                        if ( $this->form->getValue('zarafaContainsPublic') ) {
+                            $server->setZarafaContainsPublic(1);
+                        }
+                    }
+
+                    if ( $l->doAdd($server) ) {
                         sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
                         echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
                         exit;
@@ -119,6 +127,9 @@ class serverActions extends sfActions
                     $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
                 }
         }
+
+        $this->form->getWidget('zarafaHttpPort')->setDefault(sfConfig::get('zarafaHttpPort'));
+        $this->form->getWidget('zarafaSslPort')->setDefault(sfConfig::get('zarafaSslPort'));
 
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
@@ -163,20 +174,24 @@ class serverActions extends sfActions
             if ($this->form->isValid()) {
 
                 $this->server->setIpHostNumber($this->form->getValue('ip'));
-                $this->server->setZarafaHttpPort($this->form->getValue('zarafaHttpPort'));
-                $this->server->setZarafaSslPort($this->form->getValue('zarafaSslPort'));
-
-                $this->server->setMiniMultiTenant(array());
-                if ( $this->form->getValue('multitenant') ) {
-                    $this->server->setMiniMultiTenant(1);
-                }
-
-                $this->server->setMiniUnDeletable(array());
-                if ( $this->form->getValue('undeletable') ) {
-                    $this->server->setMiniUnDeletable(1);
-                }
-
+                $this->server->setMiniUnDeletable($this->form->getValue('undeletable'));
                 $this->server->setMiniStatus($this->form->getValue('status'));
+                /* zarafa properties */
+                if ( $this->form->getValue('zarafaAccount') == 1 ) {
+                    $this->server->setZarafaAccount(1);
+                    $this->server->setMiniMultiTenant($this->form->getValue('multitenant'));
+                    $this->server->setZarafaHttpPort($this->form->getValue('zarafaHttpPort'));
+                    $this->server->setZarafaSslPort($this->form->getValue('zarafaSslPort'));
+                    $this->server->setZarafaContainsPublic($this->form->getValue('zarafaContainsPublic'));
+                } else {
+                    $this->server->setZarafaAccount(0);
+                    $this->server->setMiniMultiTenant(0);
+                    $this->server->setZarafaHttpPort(array());
+                    $this->server->setZarafaSslPort(array());
+                    $this->server->setZarafaContainsPublic(array());
+                }
+
+                #var_dump( $this->server ); exit;
 
                 if ( $l->doSave($this->server) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
@@ -191,14 +206,21 @@ class serverActions extends sfActions
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('serverDn')->setDefault($serverDn);
         $this->form->getWidget('ip')->setDefault($this->server->getIpHostNumber());
-        $this->form->getWidget('zarafaHttpPort')->setDefault($this->server->getZarafaHttpPort());
-        $this->form->getWidget('zarafaSslPort')->setDefault($this->server->getZarafaSslPort());
-        $this->form->getWidget('status')->setDefault($this->server->getMiniStatus());
         if ( $this->server->getMiniUndeletable() ) {
             $this->form->getWidget('undeletable')->setDefault('true');
         }
-        if ( $this->server->getMiniMultiTenant() ) {
-            $this->form->getWidget('multitenant')->setDefault('true');
+        $this->form->getWidget('status')->setDefault($this->server->getMiniStatus());
+
+        if ( $this->server->getZarafaHttpPort() ) {
+            $this->form->getWidget('zarafaAccount')->setDefault('true');
+            $this->form->getWidget('zarafaHttpPort')->setDefault($this->server->getZarafaHttpPort());
+            $this->form->getWidget('zarafaSslPort')->setDefault($this->server->getZarafaSslPort());
+            if ( $this->server->getZarafaContainsPublic() ) {
+                $this->form->getWidget('zarafaContainsPublic')->setDefault('true');
+            }
+            if ( $this->server->getMiniMultiTenant() ) {
+                $this->form->getWidget('multitenant')->setDefault('true');
+            }
         }
 
         $c = new LDAPCriteria();

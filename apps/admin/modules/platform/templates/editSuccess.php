@@ -9,14 +9,13 @@
 </div>
 <!-- end #navigation -->
 
-
 <div id="form_box">
-
 <form action="<?php echo url_for('platform/edit') ?>" method="POST">
 <?php echo $form->renderHiddenFields() ?>
 
-    <?php echo $form['multiserver']->renderRow() ?>
     <?php echo $form['status']->renderRow() ?>
+    <?php echo $form['multitenant']->renderRow() ?>
+    <?php echo $form['multiserver']->renderRow() ?>
     <?php echo $form['undeletable']->renderRow() ?>
 
     <div id="form_submit">

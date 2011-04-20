@@ -59,7 +59,7 @@ objectclass ( miniObjectClass:2 NAME 'miniPlatform'
 	SUP top
 	AUXILIARY
 	MUST ( cn )
-	MAY ( miniMultiServer $ miniStatus $ miniUnDeletable ) )
+	MAY ( miniMultiTenant $ miniMultiServer $ miniStatus $ miniUnDeletable ) )
 
 objectclass ( miniObjectClass:3 NAME 'miniCompany'
 	DESC 'MinivISP Company'

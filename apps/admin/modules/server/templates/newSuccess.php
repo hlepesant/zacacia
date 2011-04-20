@@ -28,12 +28,19 @@
     </div>
     <!-- end #form_item -->
 
+    <?php echo $form['status']->renderRow() ?>
+    <?php echo $form['undeletable']->renderRow() ?>
+
+    <div id="form_sub_section">
+        <div class="_title"><?php echo $form['zarafaAccount']->renderLabel() ?></div>
+        <div class="_field"><?php echo $form['zarafaAccount']->render() ?></div>
+    </div>
+    <!-- end #form_section -->
+
     <?php echo $form['zarafaHttpPort']->renderRow() ?>
     <?php echo $form['zarafaSslPort']->renderRow() ?>
-    <?php echo $form['zarafaContainsPublic']->renderRow() ?>
     <?php echo $form['multitenant']->renderRow() ?>
-    <?php echo $form['undeletable']->renderRow() ?>
-    <?php echo $form['status']->renderRow() ?>
+    <?php echo $form['zarafaContainsPublic']->renderRow() ?>
 
     <div id="form_submit">
         <input type="button" value="<?php echo __("Cancel") ?>" id="button_cancel"  />

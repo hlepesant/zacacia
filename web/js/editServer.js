@@ -28,4 +28,30 @@ $(document).ready(function() {
         }
         check_form();
     });
+
+    if ($(this).is(':checked')) {
+        $("input[type='text']#minidata_zarafaHttpPort").attr("disabled", true);
+        $("input[type='text']#minidata_zarafaSslPort").attr("disabled", true);
+        $("input[type='checkbox']#minidata_multitenant").attr("disabled", true);
+        $("input[type='checkbox']#minidata_zarafaContainsPublic").attr("disabled", true);
+    }
+
+    $("input[type='checkbox']#minidata_zarafaAccount").change(function() {
+
+        if ($(this).is(':checked')) {
+            $("input[type='text']#minidata_zarafaHttpPort").removeAttr("disabled");
+            $("input[type='text']#minidata_zarafaSslPort").removeAttr("disabled");
+            $("input[type='checkbox']#minidata_multitenant").removeAttr("disabled");
+            $("input[type='checkbox']#minidata_zarafaContainsPublic").removeAttr("disabled");
+            $("input[type='text']#minidata_zarafaHttpPort").val(_zarafaHttpPort);
+            $("input[type='text']#minidata_zarafaSslPort").val(_zarafaSslPort);
+        } else {
+            $("input[type='text']#minidata_zarafaHttpPort").attr("disabled", true);
+            $("input[type='text']#minidata_zarafaSslPort").attr("disabled", true);
+            $("input[type='checkbox']#minidata_multitenant").attr("disabled", true);
+            $("input[type='checkbox']#minidata_zarafaContainsPublic").attr("disabled", true);
+            $("input[type='text']#minidata_zarafaHttpPort").val(null);
+            $("input[type='text']#minidata_zarafaSslPort").val(null);
+        }
+    });
 });

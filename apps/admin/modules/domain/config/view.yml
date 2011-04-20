@@ -1,0 +1,7 @@
+indexSuccess:
+    stylesheets:    [collection.css, tooltip.css]
+    javascripts:    [indexPlatform.js]
+
+newSuccess:
+    stylesheets:    [form.css, button.css, tooltip.css, validator.css]
+    javascripts:    [newDomain.js, jquery.observe_field.js]

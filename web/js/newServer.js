@@ -9,7 +9,7 @@ var ip_ok = 0;
 
 $(document).ready(function() {
 
-    $("._link img[title]").tooltip({
+    $('._link img[title]').tooltip({
         position: "bottom left",
         opacity: 0.9
     });
@@ -19,36 +19,52 @@ $(document).ready(function() {
     });
 
 
-    var val_cn = $("input#minidata_cn").validator();
+    var val_cn = $('input#minidata_cn').validator();
 
-    $("input#minidata_cn").blur(function() {
+    $('input#minidata_cn').blur(function() {
 
-        if ( val_cn.data("validator").checkValidity() ) {
+        if ( val_cn.data('validator').checkValidity() ) {
 
-            $("#checkName_msg").html('');
+            $('#checkName_msg').html('');
 
             $.get( json_check_url, { name: $(this).val() },
                 function(data){
                     cn_ok = 0;
-                    $("#checkName_msg").html('<img src=\''+data.img+'\' />');
+                    $('#checkName_msg').html('<img src=\''+data.img+'\' />');
                     if ( ! data.disabled ) {
                         cn_ok = 1;
                     }
                     check_form();
                 },
-                "json");
+                'json');
 
             $.get( json_resolvhost_url, { name: $(this).val() },
                 function(data){
-                    $("input#minidata_ip").val(data.ip);
+                    $('input#minidata_ip').val(data.ip);
                     if ( ! data.disabled ) {
                         ip_ok = 1;
                     }
                     check_form();
                 },
-                "json");
+                'json');
         }
     });
+
+    $("input[type='checkbox']#minidata_zarafaAccount").change(function() {
+
+        if ($(this).is(':checked')) {
+            $("input[type='text']#minidata_zarafaHttpPort").removeAttr("disabled");
+            $("input[type='text']#minidata_zarafaSslPort").removeAttr("disabled");
+            $("input[type='checkbox']#minidata_multitenant").removeAttr("disabled");
+            $("input[type='checkbox']#minidata_zarafaContainsPublic").removeAttr("disabled");
+        } else {
+            $("input[type='text']#minidata_zarafaHttpPort").attr("disabled", true);
+            $("input[type='text']#minidata_zarafaSslPort").attr("disabled", true);
+            $("input[type='checkbox']#minidata_multitenant").attr("disabled", true);
+            $("input[type='checkbox']#minidata_zarafaContainsPublic").attr("disabled", true);
+        }
+    });
+
 /*
     var val_ip = $("input#minidata_ip").validator();
 

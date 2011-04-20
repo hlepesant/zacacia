@@ -27,6 +27,32 @@
     text-shadow: 1px 1px #101010;
 }
 
+#form_sub_section {
+    width: 498px;
+    height: 30px;
+    padding: 1px 0 1px 1px;
+    margin: 1px auto 1px auto;
+    background-color: #004A73;
+    clear: both;
+}
+
+#form_sub_section ._title {
+    float: left;
+    width: 200px;
+    height: 20px;
+    padding: 4px 0 0 10px;
+    font-family: Verdana,Geneva,sans-serif;
+    color: #FFFFFF;
+}
+
+#form_sub_section ._field {
+    float: right;
+    width: 60px;
+    padding: 4px 38px 0 0;
+    margin: 0;
+    text-align: right;
+}
+
 #form_item {
     width: 498px;
     height: 30px;

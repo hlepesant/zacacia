@@ -21,12 +21,19 @@
     </div>
     <!-- end #form_item -->
 
-    <?php echo $form['zarafaHttpPort']->renderRow() ?>
-    <?php echo $form['zarafaSslPort']->renderRow() ?>
-    <?php echo $form['zarafaContainsPublic']->renderRow() ?>
-    <?php echo $form['multitenant']->renderRow() ?>
     <?php echo $form['undeletable']->renderRow() ?>
     <?php echo $form['status']->renderRow() ?>
+
+    <div id="form_sub_section">
+        <div class="_title"><?php echo $form['zarafaAccount']->renderLabel() ?></div>
+        <div class="_field"><?php echo $form['zarafaAccount']->render() ?></div>
+    </div>
+    <!-- end #form_section -->
+
+    <?php echo $form['zarafaHttpPort']->renderRow() ?>
+    <?php echo $form['zarafaSslPort']->renderRow() ?>
+    <?php echo $form['multitenant']->renderRow() ?>
+    <?php echo $form['zarafaContainsPublic']->renderRow() ?>
 
     <div id="form_submit">
         <input type="button" value="<?php echo __("Cancel") ?>" id="button_cancel"  />
@@ -37,13 +44,15 @@
 </form>
 </div>
 
-<form action="<?php echo url_for('server/index') ?>" method="POST" id="server_cancel" class="invisible">
+<form action="<?php echo url_for('server/index') ?>" method="POST" id="form_cancel" class="invisible">
 <?php echo $cancel->renderHiddenFields() ?>
 </form>
 
 <?php
 echo javascript_tag("
 var json_checkip_url = '".url_for('server/checkip/')."';
+var _zarafaHttpPort = '".sfConfig::get('zarafaHttpPort')."';
+var _zarafaSslPort = '".sfConfig::get('zarafaSslPort')."';
 ");?>
 
 <?php /* echo observe_field('minidata_ip', array(

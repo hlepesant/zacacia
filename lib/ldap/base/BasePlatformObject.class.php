@@ -14,11 +14,12 @@ class BasePlatformObject extends LDAPObject
     public function applyDefaultValues()
     {
 #       if (!is_array($this->attributes)) $this->attributes = array();
-        $this->attributes['objectClass'] = Array('top', 'organizationalRole', 'miniPlatform');
-        $this->attributes['cn'] = null;
-        $this->attributes['miniStatus'] = 'enable';
-        $this->attributes['miniUnDeletable'] = 0;
-        $this->attributes['miniMultiServer'] = 0;
+        $this->attributes['objectClass']        = Array('top', 'organizationalRole', 'miniPlatform');
+        $this->attributes['cn']                 = null;
+        $this->attributes['miniStatus']         = 'enable';
+        $this->attributes['miniUnDeletable']    = 0;
+        $this->attributes['miniMultiServer']    = 0;
+        $this->attributes['miniMultiTenant']    = 0;
         return $this;
     }
   
@@ -44,25 +45,48 @@ class BasePlatformObject extends LDAPObject
         return $this->attributes['miniStatus'];
     }
 
-    public function setMiniUndeletable($v)
+    public function setMiniUnDeletable($v)
     {
-        $this->attributes['miniUnDeletable'] = $v;
+        if ( $v ) {
+            $this->attributes['miniUnDeletable'] = 1;
+        } else {
+            $this->attributes['miniUnDeletable'] = array();
+        }
     	return $this;
     }
  
-    public function getMiniUndeletable()
+    public function getMiniUnDeletable()
     {
-        return $this->attributes['miniUnDeletable'];
+        return (int)$this->attributes['miniUnDeletable'];
     }
 
     public function setMiniMultiServer($v)
     {
-        $this->attributes['miniMultiServer'] = $v;
+        if ( $v ) {
+            $this->attributes['miniMultiServer'] = 1;
+        } else {
+            $this->attributes['miniMultiServer'] = array();
+        }
     	return $this;
     }
  
     public function getMiniMultiServer()
     {
-        return $this->attributes['miniMultiServer'];
+        return (int)$this->attributes['miniMultiServer'];
+    }
+
+    public function setMiniMultiTenant($v)
+    {
+        if ( $v ) {
+            $this->attributes['miniMultiTenant'] = 1;
+        } else {
+            $this->attributes['miniMultiTenant'] = array();
+        }
+    	return $this;
+    }
+ 
+    public function getMiniMultiTenant()
+    {
+        return (int)$this->attributes['miniMultiTenant'];
     }
 }
