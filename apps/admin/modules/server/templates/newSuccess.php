@@ -33,7 +33,6 @@
 
     <div id="form_sub_section">
         <div class="_title"><?php echo $form['zarafaAccount']->renderLabel() ?></div>
-        <div class="_field"><?php echo $form['zarafaAccount']->render() ?></div>
     </div>
     <!-- end #form_section -->
 

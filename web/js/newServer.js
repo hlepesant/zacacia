@@ -49,7 +49,7 @@ $(document).ready(function() {
                 'json');
         }
     });
-
+/*
     $("input[type='checkbox']#minidata_zarafaAccount").change(function() {
 
         if ($(this).is(':checked')) {
@@ -64,7 +64,7 @@ $(document).ready(function() {
             $("input[type='checkbox']#minidata_zarafaContainsPublic").attr("disabled", true);
         }
     });
-
+*/
 /*
     var val_ip = $("input#minidata_ip").validator();
 

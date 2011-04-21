@@ -19,7 +19,7 @@ $(document).ready(function() {
     });
 });
 
-function jumpTo(id, name, target, message) {
+function jumpTo(id, name, target, status) {
 
     var m = _js_module;
     var d = target;
