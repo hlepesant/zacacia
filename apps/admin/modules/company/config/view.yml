@@ -1,0 +1,11 @@
+indexSuccess:
+    stylesheets:    [collection.css, tooltip.css]
+    javascripts:    [indexCompany.js]
+
+newSuccess:
+    stylesheets:    [form.css, button.css, tooltip.css, validator.css]
+    javascripts:    [newCompany.js, jquery.observe_field.js]
+
+editSuccess:
+    stylesheets:    [form.css, button.css, tooltip.css, validator.css]
+    javascripts:    [editCompany.js]

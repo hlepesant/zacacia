@@ -24,6 +24,14 @@ class companyActions extends sfActions
             $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
             $this->redirect('@platform');
         }
+
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'miniPlatform');
+        $l = new PlatformPeer();
+        $l->setBaseDn($platformDn);
+        $this->platform = $l->retrieveByDn($c);
         
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
@@ -38,72 +46,33 @@ class companyActions extends sfActions
         
         $id=0;
         $this->forms = array();
-        foreach ($this->companies as $comp)
-        {
+        foreach ($this->companies as $company) {
             $form = new CompanyNavigationForm();
             $form->getWidget('platformDn')->setDefault($platformDn);
-            $form->getWidget('companyDn')->setDefault($comp->getDn());
+            $form->getWidget('companyDn')->setDefault($company->getDn());
 
-            $comp->setNumberOfDomains($l);
-            $comp->setNumberOfUsers($l);
-            $comp->setNumberOfGroups($l);
-            $comp->setNumberOfForwards($l);
-            $comp->setNumberOfContacts($l);
-            $comp->setNumberOfAddressLists($l);
+            $company->setNumberOfDomains($l);
+            $company->setNumberOfUsers($l);
+            $company->setNumberOfGroups($l);
+            $company->setNumberOfForwards($l);
+            $company->setNumberOfContacts($l);
+            $company->setNumberOfAddressLists($l);
 
             $undeletable = (
-                $comp->getNumberOfDomains() +
-                $comp->getNumberOfUsers() +
-                $comp->getNumberOfGroups() +
-                $comp->getNumberOfForwards() +
-                $comp->getNumberOfContacts() +
-                $comp->getNumberOfAddressLists()
+                $company->getNumberOfDomains() +
+                $company->getNumberOfUsers() +
+                $company->getNumberOfGroups() +
+                $company->getNumberOfForwards() +
+                $company->getNumberOfContacts() +
+                $company->getNumberOfAddressLists()
             );
 
-            $comp->set('undeletable', $undeletable);
-
-            switch( sfConfig::get('navigation_look') )
-            {
-                case 'dropdown':
-                    $choices = $form->getWidget('destination')->getOption('choices');
-
-                    $choices['domain'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Domain', Array(), 'messages');
-
-                    $choices['status'] = $this->getContext()->getI18N()->__('Disable', Array(), 'messages');
-                    
-                    if ( $p->getMiniStatus() == 'disable' && $undeletable )
-                    {
-                        $choices['status'] = $this->getContext()->getI18N()->__('Enable', Array(), 'messages');
-                        $choices['delete'] = $this->getContext()->getI18N()->__('Delete', Array(), 'messages');
-                    }
-                    
-                    if ( $s->getMiniUnDeletable() === 'TRUE' )
-                    {
-                        unset($choices['delete'], $choices['status']);
-                    }
-
-                    if ( $comp->getNumberOfDomains() )
-                    {
-                        $choices['user'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('User', Array(), 'messages');
-                        $choices['group'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Group', Array(), 'messages');
-                        $choices['contact'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Contact', Array(), 'messages');
-                        $choices['forward'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Forward', Array(), 'messages');
-                        $choices['addresslist'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Address List', Array(), 'messages');
-                    }
-                    
-                    $form->getWidget('destination')->setOption('choices', $choices);
-                break;
-                
-                case 'link':
-                default:
-                break;
-            }
+            $company->set('undeletable', $undeletable);
 
             $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
             $form->getWidget('companyDn')->setIdFormat(sprintf('%%s_%03d', $id));
-            $form->getWidget('destination')->setIdFormat(sprintf('%%s_%03d', $id));
         
-            $this->forms[$comp->getDn()] = $form;
+            $this->forms[$company->getDn()] = $form;
             $id++;
         }
         
@@ -128,12 +97,10 @@ class companyActions extends sfActions
 
         $this->form->getWidget('platformDn')->setDefault($platformDn);
     
-        if ($request->isMethod('post') && $request->getParameter('minidata'))
-        {
+        if ($request->isMethod('post') && $request->getParameter('minidata')) {
             $this->form->bind($request->getParameter('minidata'));
             
-            if ($this->form->isValid())
-            {
+            if ($this->form->isValid()) {
                 $this->getUser()->setAttribute('company_data', $this->form->getValues());
                 $this->redirect('company/new2');
             }
@@ -153,12 +120,10 @@ class companyActions extends sfActions
 
         $this->form = new CompanyNew2Form();
 
-        if ($request->isMethod('post') && $request->getParameter('minidata'))
-        {
+        if ($request->isMethod('post') && $request->getParameter('minidata')) {
             $this->form->bind($request->getParameter('minidata'));
             
-            if ($this->form->isValid())
-            {
+            if ($this->form->isValid()) {
                 $data = array_merge($company_data, $this->form->getValues());
                 $this->getUser()->setAttribute('company_data', $data );
                 $this->redirect('company/new3');
@@ -191,12 +156,10 @@ class companyActions extends sfActions
 
         $this->form = new CompanyNew3Form();
 
-        if ($request->isMethod('post') && $request->getParameter('minidata'))
-        {
+        if ($request->isMethod('post') && $request->getParameter('minidata')) {
             $this->form->bind($request->getParameter('minidata'));
             
-            if ($this->form->isValid())
-            {
+            if ($this->form->isValid()) {
                 $data = array_merge($company_data, $this->form->getValues());
 
                 $company = new CompanyObject();
@@ -205,22 +168,19 @@ class companyActions extends sfActions
                 $company->setMiniStatus($data['status']);
                 $company->setMiniUnDeletable($data['undeletable']);
 
-                if ( !empty($data['zarafaQuotaOverride']) ) 
-                {
+                if ( !empty($data['zarafaQuotaOverride']) ) {
                     $company->setZarafaQuotaOverride(1);
                     $company->setZarafaQuotaWarn( $data['zarafaQuotaWarn'] );
                 }
 
-                if ( !empty($data['zarafaUserDefaultQuotaOverride']) ) 
-                {
+                if ( !empty($data['zarafaUserDefaultQuotaOverride']) ) {
                     $company->setZarafaUserDefaultQuotaOverride(1);
                     $company->setZarafaUserDefaultQuotaHard( $data['zarafaUserDefaultQuotaHard'] );
                     $company->setZarafaUserDefaultQuotaSoft( $data['zarafaUserDefaultQuotaSoft'] );
                     $company->setZarafaUserDefaultQuotaWarn( $data['zarafaUserDefaultQuotaWarn'] );
                 }
 
-                if ( $l->doAdd($company) )
-                {
+                if ( $l->doAdd($company) ) {
                     $this->getUser()->setAttribute('company_data', null);
                     sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
                     echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
@@ -262,17 +222,13 @@ class companyActions extends sfActions
         
         $this->form = new CompanyEdit1Form();
     
-        if ($request->isMethod('post') && $request->getParameter('minidata'))
-        {
+        if ($request->isMethod('post') && $request->getParameter('minidata')) {
             $this->form->bind($request->getParameter('minidata'));
             
-            if ($this->form->isValid())
-            {
+            if ($this->form->isValid()) {
                 $this->getUser()->setAttribute('company_data', $this->form->getValues());
                 $this->redirect('company/edit2');
-            }
-            else 
-            {
+            } else {
                 $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
             }
         }
@@ -308,24 +264,19 @@ class companyActions extends sfActions
         
         $this->form = new CompanyEdit2Form();
     
-        if ($request->isMethod('post') && $request->getParameter('minidata'))
-        {
+        if ($request->isMethod('post') && $request->getParameter('minidata')) {
             $this->form->bind($request->getParameter('minidata'));
             
-            if ($this->form->isValid())
-            {
+            if ($this->form->isValid()) {
                 $data = array_merge($company_data, $this->form->getValues());
                 $this->getUser()->setAttribute('company_data', $data );
                 $this->redirect('company/edit3');
-            }
-            else 
-            {
+            } else {
                 $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
             }
         }
         
-        if ( 1 == $company->getZarafaQuotaOverride() )
-        {
+        if ( 1 == $company->getZarafaQuotaOverride() ) {
             $this->form->getWidget('zarafaQuotaOverride')->setDefault(1);
             $this->form->getWidget('zarafaQuotaWarn')->setDefault($company->getZarafaQuotaWarn());
         }
@@ -355,45 +306,36 @@ class companyActions extends sfActions
         
         $this->form = new CompanyEdit3Form();
     
-        if ($request->isMethod('post') && $request->getParameter('minidata'))
-        {
+        if ($request->isMethod('post') && $request->getParameter('minidata')) {
             $this->form->bind($request->getParameter('minidata'));
             
-            if ($this->form->isValid())
-            {
+            if ($this->form->isValid()) {
                 $data = array_merge($company_data, $this->form->getValues());
 
                 $company->setMiniStatus($data['status']);
                 $company->setMiniUnDeletable($data['undeletable']);
 
-                if ( !empty($data['zarafaQuotaOverride']) ) 
-                {
+                if ( !empty($data['zarafaQuotaOverride']) ) {
                     $company->setZarafaQuotaOverride(1);
                     $company->setZarafaQuotaWarn( $data['zarafaQuotaWarn'] );
-                }
-                else
-                {
+                } else {
                     $company->setZarafaQuotaOverride(array());
                     $company->setZarafaQuotaWarn(array());
                 }
 
-                if ( !empty($data['zarafaUserDefaultQuotaOverride']) ) 
-                {
+                if ( !empty($data['zarafaUserDefaultQuotaOverride']) ) {
                     $company->setZarafaUserDefaultQuotaOverride(1);
                     $company->setZarafaUserDefaultQuotaHard( $data['zarafaUserDefaultQuotaHard'] );
                     $company->setZarafaUserDefaultQuotaSoft( $data['zarafaUserDefaultQuotaSoft'] );
                     $company->setZarafaUserDefaultQuotaWarn( $data['zarafaUserDefaultQuotaWarn'] );
-                }
-                else
-                {
+                } else {
                     $company->setZarafaUserDefaultQuotaOverride(array());
                     $company->setZarafaUserDefaultQuotaHard(array());
                     $company->setZarafaUserDefaultQuotaSoft(array());
                     $company->setZarafaUserDefaultQuotaWarn(array());
                 }
 
-                if ( $l->doSave($company) )
-                {
+                if ( $l->doSave($company) ) {
                     $this->getUser()->setAttribute('company_data', null);
                     sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
                     echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
@@ -402,8 +344,7 @@ class companyActions extends sfActions
             }
         }
         
-        if ( 1 == $company->getZarafaUserDefaultQuotaOverride() )
-        {
+        if ( 1 == $company->getZarafaUserDefaultQuotaOverride() ) {
             $this->form->getWidget('zarafaUserDefaultQuotaOverride')->setDefault(1);
             $this->form->getWidget('zarafaUserDefaultQuotaHard')->setDefault($company->getZarafaUserDefaultQuotaHard());
             $this->form->getWidget('zarafaUserDefaultQuotaSoft')->setDefault($company->getZarafaUserDefaultQuotaSoft());
@@ -429,8 +370,7 @@ class companyActions extends sfActions
         $this->count = 0;
         
         $pattern = sfConfig::get('company_pattern');
-        if ( ! preg_match($pattern, $request->getParameter('name') ) )
-        {
+        if ( ! preg_match($pattern, $request->getParameter('name') ) ) {
             $this->count = 1;
             return sfView::SUCCESS;
         }
