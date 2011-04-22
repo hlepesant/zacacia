@@ -16,9 +16,6 @@ class PlatformEditForm extends MinivISPForm
             'undeletable' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
         ));
         
-        $this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));
-        $this->widgetSchema->setFormFormatterName( sfConfig::get('widgetFormaterName') );
-        
         $this->widgetSchema->setLabels(array(
             'multitenant' => 'Multi tenant',
             'multiserver' => 'Multi server',
@@ -33,6 +30,9 @@ class PlatformEditForm extends MinivISPForm
             'status'      => new sfValidatorChoice(array('choices' => array_keys($status))),
             'undeletable' => new sfValidatorBoolean(),
         ));
+        
+        $this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));
+        $this->widgetSchema->setFormFormatterName( sfConfig::get('widgetFormaterName') );
     }
 }
 

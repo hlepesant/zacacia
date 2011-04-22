@@ -108,11 +108,16 @@ select {
   font-size: 12px;
 }
 
+input[disabled=disabled] {
+    color: #000000;
+    border: none;
+    background-color: inherit;
+}
+
 input[readonly=readonly] {
     color: #000000;
     border: none;
     background-color: inherit;
-    font-weight: bold;
 }
 
 input[type=text].small-60 {

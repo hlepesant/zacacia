@@ -8,24 +8,24 @@ class CompanyEdit3Form extends MinivISPForm
         $public_folder_option = array( 0 => 'no', 1 => 'yes');
 
         $this->setWidgets(array(
-            'zarafaUserDefaultQuotaOverride' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1), array('onClick' => 'showUserQuotaFields()')),
-            'zarafaUserDefaultQuotaHard' => new  sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '8', 'disabled' => 'true')),
-            'zarafaUserDefaultQuotaSoft' => new sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '8', 'disabled' => 'true')),
-            'zarafaUserDefaultQuotaWarn' => new sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '8', 'disabled' => 'true')),
+            'zarafaUserDefaultQuotaOverride'    => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1), array('onClick' => 'showUserQuotaFields()')),
+            'zarafaUserDefaultQuotaHard'        => new  sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '8', 'disabled' => 'true')),
+            'zarafaUserDefaultQuotaSoft'        => new sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '8', 'disabled' => 'true')),
+            'zarafaUserDefaultQuotaWarn'        => new sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '8', 'disabled' => 'true')),
         ));
 
         $this->setValidators(array(
-            'zarafaUserDefaultQuotaOverride' => new sfValidatorBoolean(array('required' => false)),
-            'zarafaUserDefaultQuotaHard' => new sfValidatorInteger(array('required' => false)),
-            'zarafaUserDefaultQuotaSoft' => new sfValidatorInteger(array('required' => false)),
-            'zarafaUserDefaultQuotaWarn' => new sfValidatorInteger(array('required' => false)),
+            'zarafaUserDefaultQuotaOverride'    => new sfValidatorBoolean(array('required' => false)),
+            'zarafaUserDefaultQuotaHard'        => new sfValidatorInteger(array('required' => false)),
+            'zarafaUserDefaultQuotaSoft'        => new sfValidatorInteger(array('required' => false)),
+            'zarafaUserDefaultQuotaWarn'        => new sfValidatorInteger(array('required' => false)),
         ));
         
         $this->widgetSchema->setLabels(array(
-            'zarafaUserDefaultQuotaOverride' => 'Override User default quota for children', // integer
-            'zarafaUserDefaultQuotaHard' => 'User default hard quota size in MB', // integer
-            'zarafaUserDefaultQuotaSoft' => 'User default soft quota size in MB', // integer
-            'zarafaUserDefaultQuotaWarn' => 'User default warning quota size in MB', // integer
+            'zarafaUserDefaultQuotaOverride'    => 'Override User default quota for children', // integer
+            'zarafaUserDefaultQuotaHard'        => 'User default hard quota size in MB', // integer
+            'zarafaUserDefaultQuotaSoft'        => 'User default soft quota size in MB', // integer
+            'zarafaUserDefaultQuotaWarn'        => 'User default warning quota size in MB', // integer
         ));
 
 #        $this->validatorSchema->setPostValidator(new sfValidatorOr(array(

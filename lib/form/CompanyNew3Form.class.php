@@ -27,9 +27,6 @@ class CompanyNew3Form extends MinivISPForm
 #            'zarafaViewPrivilege' => 'Companies with view privileges over selected company', // dn(s)
         ));
 
-        $this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));
-        $this->widgetSchema->setFormFormatterName( sfConfig::get('widgetFormaterName') );
-
 
         $this->validatorSchema->setPostValidator(new sfValidatorOr(array(
                 new sfValidatorSchemaCompare('zarafaUserDefaultQuotaOverride', sfValidatorSchemaCompare::EQUAL, '_undefined_'),
@@ -39,13 +36,11 @@ class CompanyNew3Form extends MinivISPForm
                     new sfValidatorSchemaCompare('zarafaUserDefaultQuotaHard', sfValidatorSchemaCompare::GREATER_THAN, 'zarafaUserDefaultQuotaSoft'),
                     new sfValidatorSchemaCompare('zarafaUserDefaultQuotaSoft', sfValidatorSchemaCompare::GREATER_THAN, 'zarafaUserDefaultQuotaWarn'),
                 )),
-         )));
-
-
-
-
-
-        $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(
         )));
+
+#        $this->validatorSchema->setPostValidator(new sfValidatorAnd(array()));
+
+        $this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));
+        $this->widgetSchema->setFormFormatterName( sfConfig::get('widgetFormaterName') );
     }
 }

@@ -58,6 +58,7 @@ class UserNew1Form extends MinivISPForm
     }
 
 /* WebServices */
+/*
     public function executeCheck(sfWebRequest $request)
     {
         $this->setTemplate('check');
@@ -86,5 +87,6 @@ class UserNew1Form extends MinivISPForm
         
         return sfView::SUCCESS;
     }
+*/
 }
 

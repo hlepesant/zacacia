@@ -1,73 +1,48 @@
-<?php use_helper('Javascript') ?>
-
-<div id="form-header">
-    <div id="form-header" class="section">
-        <?php echo __('New Company: Step 2/3') ;?>
+<div id="navigation">
+    <div id="navigation_header">
+        <div class="_title">
+            <u><?php echo $platform->getCn();?></u>&nbsp;&rarr;&nbsp;<?php echo __('New Company') ;?> : <?php echo __('Step 2/3') ;?>
+        </div>
+        <!-- end #navigation_header._title -->
     </div>
+    <!-- end #navigation_header -->
 </div>
+<!-- end #navigation -->
 
-<div id="form-inner">
-
+<div id="form_box">
 <form action="<?php echo url_for('company/new2') ?>" method="POST">
 <?php echo $form->renderHiddenFields() ?>
 
-<?php if ($form->hasGlobalErrors()): ?>
-<ul class="form-error">
-  <?php foreach ($form->getGlobalErrors() as $name => $error): ?>
-    <li><?php echo $name.': '.$error ?></li>
-  <?php endforeach; ?>
-</ul>
-<?php endif; ?>
-
     <?php echo $form['zarafaCompanyServer']->renderRow() ?>
-    <?php /* echo $form['zarafaSystemAdmin']->renderRow() */ ?>
     <?php echo $form['zarafaQuotaOverride']->renderRow() ?>
     <?php echo $form['zarafaQuotaWarn']->renderRow() ?>
 
-    <?php /* echo $form['zarafaQuotaCompanyWarningRecipients']->renderRow() */ ?>
-    <?php /* echo $form['zarafaAccount']->renderRow() */ ?>
-    <?php /* echo $form['zarafaHidden']->renderRow() */ ?>
-    <?php /* echo $form['zarafaAdminPrivilege']->renderRow() */ ?>
-    <?php /* echo $form['zarafaQuotaUserWarningRecipients']->renderRow() */ ?>
-    <?php /* echo $form['zarafaUserDefaultQuotaOverride']->renderRow() */ ?>
-    <?php /* echo $form['zarafaUserDefaultQuotaHard']->renderRow() */ ?>
-    <?php /* echo $form['zarafaUserDefaultQuotaSoft']->renderRow() */ ?>
-    <?php /* echo $form['zarafaUserDefaultQuotaWarn']->renderRow() */ ?>
-    <?php /* echo $form['zarafaViewPrivilege']->renderRow() */ ?>
+<?php
+/* 
+ * echo $form['zarafaSystemAdmin']->renderRow();
+ * echo $form['zarafaQuotaCompanyWarningRecipients']->renderRow();
+ * echo $form['zarafaAccount']->renderRow();
+ * echo $form['zarafaHidden']->renderRow();
+ * echo $form['zarafaAdminPrivilege']->renderRow();
+ * echo $form['zarafaQuotaUserWarningRecipients']->renderRow();
+ * echo $form['zarafaUserDefaultQuotaOverride']->renderRow();
+ * echo $form['zarafaUserDefaultQuotaHard']->renderRow();
+ * echo $form['zarafaUserDefaultQuotaSoft']->renderRow();
+ * echo $form['zarafaUserDefaultQuotaWarn']->renderRow();
+ * echo $form['zarafaViewPrivilege']->renderRow()
+ */
+?>
 
-    <div id="form-submitline">
-        <?php echo link_to_function("<input type=\"button\" value=\"". __("Cancel") ."\" id=\"form_button\"  />", "miniCancel()") ?>
-        <input type="submit" value="<?php echo __('Next') ?>" id="form-submit" />
+    <div id="form_submit">
+        <input type="button" value="<?php echo __("Cancel") ?>" id="button_cancel"  />
+        <input type="submit" value="<?php echo __('Next') ?>" disabled="true" id="button_submit"/>
     </div>
+    <!-- end #form_submit -->
 
 </form>
 </div>
+<!-- end #form_box -->
 
-<form action="<?php echo url_for('company/index') ?>" method="POST" id="company_cancel" class="invisible">
+<form action="<?php echo url_for('company/index') ?>" method="POST" id="button_cancel" class="invisible">
 <?php echo $cancel->renderHiddenFields() ?>
 </form>
-
-<?php echo javascript_tag("
-function showCompanyQuotaFields()
-{
-  if ( $('minidata_zarafaQuotaOverride').checked )
-  {
-    $('minidata_zarafaQuotaWarn').disabled = false;
-    $('minidata_zarafaQuotaWarn').focus();
-  }
-  else
-  {
-    $('minidata_zarafaQuotaWarn').disabled = true;
-    $('minidata_zarafaQuotaWarn').value = null;
-  }
-}
-
-showCompanyQuotaFields();
-") ?>
-
-<?php echo javascript_tag("
-function miniCancel()
-{
-    $('company_cancel').submit();
-}
-") ?>

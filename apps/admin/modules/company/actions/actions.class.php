@@ -106,6 +106,14 @@ class companyActions extends sfActions
             }
         }
 
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'miniPlatform');
+        $l = new PlatformPeer();
+        $l->setBaseDn($platformDn);
+        $this->platform = $l->retrieveByDn($c);
+
         $this->cancel = new CompanyNavigationForm();
         unset($this->cancel['companyDn'], $this->cancel['destination']);
         $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
@@ -130,11 +138,18 @@ class companyActions extends sfActions
             }
         }
 
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'miniPlatform');
+        $l = new PlatformPeer();
+        $l->setBaseDn($platformDn);
+        $this->platform = $l->retrieveByDn($c);
+
         $l = new CompanyPeer();
         $l->setBaseDn(sprintf("ou=Companies,%s", $platformDn));
 
         $this->form->getWidget('zarafaCompanyServer')->setOption('choices', $l->getServerOptionList($platformDn));
-
 #        $zarafa_admins = $l->getUserOptionList($platformDn);
 #        $this->form->getWidget('zarafaSystemAdmin')->setOption('choices', $zarafa_admins );
 #        $this->form->getWidget('zarafaQuotaCompanyWarningRecipients')->setOption('choices', $zarafa_admins);
@@ -142,8 +157,6 @@ class companyActions extends sfActions
         $this->cancel = new CompanyNavigationForm();
         unset($this->cancel['companyDn'], $this->cancel['destination']);
         $this->cancel->getWidget('platformDn')->setDefault($company_data['platformDn']);
-       
-        $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
     }
 
     public function executeNew3(sfWebRequest $request)
@@ -385,9 +398,9 @@ class companyActions extends sfActions
         $c->add('objectClass', 'zarafa-company');
         $c->add('objectClass', 'miniCompany');
         $c->add('cn', $request->getParameter('name'));
-        
+
         $this->count = $l->doCount($c);
-        
+
         return sfView::SUCCESS;
     }
   

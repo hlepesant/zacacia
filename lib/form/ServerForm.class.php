@@ -21,9 +21,6 @@ class ServerForm extends MinivISPForm
             'multitenant'           => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')), //, array('disabled' => 'disabled')),
         ));
 
-        $this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));
-        $this->widgetSchema->setFormFormatterName( sfConfig::get('widgetFormaterName') );
-
         $this->widgetSchema->setLabels(array(
             'cn'                    => 'Name',
             'ip'                    => 'IP Address',
@@ -51,6 +48,9 @@ class ServerForm extends MinivISPForm
             'zarafaContainsPublic'  => new sfValidatorBoolean(),
             'multitenant'           => new sfValidatorBoolean(),
         ));
+
+        $this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));
+        $this->widgetSchema->setFormFormatterName( sfConfig::get('widgetFormaterName') );
     }
 }
 
