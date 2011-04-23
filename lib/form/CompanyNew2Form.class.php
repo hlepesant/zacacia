@@ -5,36 +5,37 @@ class CompanyNew2Form extends MinivISPForm
     {
         $this->setWidgets(array(
             'zarafaAccount'         => new sfWidgetFormInputHidden(array('default' => '1')),
+            'zarafaCompanyServer'   => new sfWidgetFormSelect( array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
+            'zarafaQuotaOverride'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
+#            'zarafaQuotaWarn'       => new sfWidgetFormInput(array(), array('type' => 'number', 'min' => 5, 'max' => 1024, 'maxlength' => '8', 'disabled' => 'disabled')),
+            'zarafaQuotaWarn'       => new sfWidgetFormInput(array(), array('maxlength' => '8', 'disabled' => 'disabled')),
 #            'zarafaHidden'         => new sfWidgetFormInputCheckbox(),
 #            'zarafaAdminPrivilege' => new sfWidgetFormInput(),
-            'zarafaCompanyServer'   => new sfWidgetFormSelect( array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
 #            'zarafaSystemAdmin'    => new sfWidgetFormSelect( array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
-            'zarafaQuotaOverride'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
-            'zarafaQuotaWarn'       => new sfWidgetFormInput(array(), array('type' => 'number', 'maxlength' => '8', 'disabled' => 'disabled')),
 #            'zarafaQuotaCompanyWarningRecipients'  => new sfWidgetFormSelectMany( array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
 #            'zarafaQuotaUserWarningRecipients'     => new sfWidgetFormSelect( array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
         ));
         
         $this->widgetSchema->setLabels(array(
-#            'zarafaAccount'        => 'Entry is a part of Zarafa',
-#            'zarafaHidden'         => 'This object should be hidden from address book', // integer
-#            'zarafaAdminPrivilege' => 'Users from different companies which are administrator over selected company', // dn(s)
+            'zarafaAccount'         => 'Entry is a part of Zarafa',
             'zarafaCompanyServer'   => 'Home server for the company', // dn
-#            'zarafaSystemAdmin'    => 'The user who is the system administrator for this company', // dn
             'zarafaQuotaOverride'   => 'Override child quota', // integer
             'zarafaQuotaWarn'       => 'Warning quota size in MB', // integer 
+#            'zarafaHidden'         => 'This object should be hidden from address book', // integer
+#            'zarafaAdminPrivilege' => 'Users from different companies which are administrator over selected company', // dn(s)
+#            'zarafaSystemAdmin'    => 'The user who is the system administrator for this company', // dn
 #            'zarafaQuotaCompanyWarningRecipients'  => 'Users who will recieve a notification email when a company exceeds its quota', // dn(s)
 #            'zarafaQuotaUserWarningRecipients'     => 'Users who will recieve a notification email when a user exceeds his quota', // dn(s)
         ));
 
         $this->setValidators(array(
             'zarafaAccount'         => new sfValidatorBoolean(),
-#            'zarafaHidden'         => new sfValidatorString(),
-#            'zarafaAdminPrivilege' => new sfValidatorString(),
             'zarafaCompanyServer'   => new sfValidatorString(array('required' => false)),
-#            'zarafaSystemAdmin'    => new sfValidatorString(),
             'zarafaQuotaOverride'   => new sfValidatorBoolean(),
             'zarafaQuotaWarn'       => new sfValidatorInteger(array('required' => false)),
+#            'zarafaHidden'         => new sfValidatorString(),
+#            'zarafaAdminPrivilege' => new sfValidatorString(),
+#            'zarafaSystemAdmin'    => new sfValidatorString(),
 #            'zarafaQuotaCompanyWarningRecipients'  => new sfValidatorString(),
 #            'zarafaQuotaUserWarningRecipients'     => new sfValidatorString(),
         ));

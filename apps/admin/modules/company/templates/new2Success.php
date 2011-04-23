@@ -43,6 +43,6 @@
 </div>
 <!-- end #form_box -->
 
-<form action="<?php echo url_for('company/index') ?>" method="POST" id="button_cancel" class="invisible">
+<form action="<?php echo url_for('company/index') ?>" method="POST" id="form_cancel" class="invisible">
 <?php echo $cancel->renderHiddenFields() ?>
 </form>

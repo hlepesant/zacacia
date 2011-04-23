@@ -27,6 +27,7 @@ $(document).ready(function() {
         if ($("input[type='checkbox']#minidata_zarafaQuotaOverride").is(':checked')) {
             $("input[type='text']#minidata_zarafaQuotaWarn").removeAttr("disabled");
             check_wq = 1;
+            wq_ok = 1;
         } else {
             $("input[type='text']#minidata_zarafaQuotaWarn").attr("disabled", true);
             check_wq = 0;
@@ -35,11 +36,10 @@ $(document).ready(function() {
     });
 /*
     if ( check_wq ) {
-
-        wq_ok = 0;
-        var val_qw = $("input[type='text']#minidata_zarafaQuotaWarn").validator();
-        if ( val_qw.data("validator").checkValidity() ) {
-            wq_ok = 1;
+        var val_qw = $("input[type='text']#minidata_zarafaQuotaWarn").val();
+        wq_ok = 1;
+        if ( isNaN( val_qw ) ) {
+            wq_ok = 0;
         }
         check_form();
     }
@@ -49,6 +49,7 @@ $(document).ready(function() {
 function check_form() {
     $("#button_submit").attr("disabled", true);
     if ( (hs_ok == 1 ) && (wq_ok == 1) ) {
+        alert('toto');
         $("#button_submit").removeAttr("disabled");
     }
 }
