@@ -24,8 +24,8 @@
     <?php echo $form['undeletable']->renderRow() ?>
 
     <div id="form_submit">
-        <input type="button" value="<?php echo __("Cancel") ?>" id="button_cancel"  />
-        <input type="submit" value="<?php echo __('Next') ?>" disabled="true" id="button_submit"/>
+        <input type="button" value="<?php echo __("Cancel") ?>" id="button_cancel" />
+        <input type="submit" value="<?php echo __('Next') ?>" disabled="true" id="button_submit" />
     </div>
     <!-- end #form_submit -->
 

@@ -105,6 +105,8 @@ class companyActions extends sfActions
                 $this->redirect('company/new2');
             }
         }
+        
+        $this->form->getWidget('status')->setDefault('true');
 
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
@@ -202,11 +204,17 @@ class companyActions extends sfActions
             }
         }
 
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'miniPlatform');
+        $l = new PlatformPeer();
+        $l->setBaseDn($platformDn);
+        $this->platform = $l->retrieveByDn($c);
+
         $this->cancel = new CompanyNavigationForm();
         unset($this->cancel['companyDn'], $this->cancel['destination']);
         $this->cancel->getWidget('platformDn')->setDefault($platformDn);
-       
-        $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
     }
 
     public function executeEdit(sfWebRequest $request)

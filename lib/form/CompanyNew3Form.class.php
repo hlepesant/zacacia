@@ -4,10 +4,37 @@ class CompanyNew3Form extends MinivISPForm
     public function configure()
     {
         $this->setWidgets(array(
-            'zarafaUserDefaultQuotaOverride' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1), array('onClick' => 'showUserQuotaFields()')),
-            'zarafaUserDefaultQuotaHard' => new  sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '8', 'disabled' => 'true')),
-            'zarafaUserDefaultQuotaSoft' => new sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '8', 'disabled' => 'true')),
-            'zarafaUserDefaultQuotaWarn' => new sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '8', 'disabled' => 'true')),
+            'zarafaUserDefaultQuotaOverride' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
+/*
+            'zarafaUserDefaultQuotaHard' => new  sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '4')),
+            'zarafaUserDefaultQuotaSoft' => new sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '4')),
+            'zarafaUserDefaultQuotaWarn' => new sfWidgetFormInput(array(), array('class' => 'small-80', 'maxlength' => '4')),
+*/
+            'zarafaUserDefaultQuotaHard'       => new sfWidgetFormInput( array(), array(
+                    'type' => 'number',
+                    'size' => '5',
+                    'min' => 25,
+                    'max' => 2048,
+                    'maxlength' => '4', 
+                    'data-message' => 'Enter a value between 25 and 2048',
+                )),
+            'zarafaUserDefaultQuotaSoft'       => new sfWidgetFormInput( array(), array(
+                    'type' => 'number',
+                    'size' => '5',
+                    'min' => 25,
+                    'max' => 2048,
+                    'maxlength' => '4', 
+                    'data-message' => 'Enter a value between 25 and 2048',
+                )),
+            'zarafaUserDefaultQuotaWarn'       => new sfWidgetFormInput( array(), array(
+                    'type' => 'number',
+                    'size' => '5',
+                    'min' => 25,
+                    'max' => 2048,
+                    'maxlength' => '4', 
+                    'data-message' => 'Enter a value between 25 and 2048',
+                )),
+
 #            'zarafaViewPrivilege' => new sfWidgetFormInput(),
         ));
 
@@ -26,7 +53,6 @@ class CompanyNew3Form extends MinivISPForm
             'zarafaUserDefaultQuotaWarn' => 'User default warning quota size in MB', // integer
 #            'zarafaViewPrivilege' => 'Companies with view privileges over selected company', // dn(s)
         ));
-
 
         $this->validatorSchema->setPostValidator(new sfValidatorOr(array(
                 new sfValidatorSchemaCompare('zarafaUserDefaultQuotaOverride', sfValidatorSchemaCompare::EQUAL, '_undefined_'),

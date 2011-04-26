@@ -1,77 +1,51 @@
-<?php use_helper('Javascript') ?>
-
-<div id="form-header">
-    <div id="form-header" class="section">
-        <?php echo __('New Company: Step 3/3') ;?>
+<div id="navigation">
+    <div id="navigation_header">
+        <div class="_title">
+            <u><?php echo $platform->getCn();?></u>&nbsp;&rarr;&nbsp;<?php echo __('New Company') ;?> : <?php echo __('Step 3/3') ;?>
+        </div>
+        <!-- end #navigation_header._title -->
     </div>
+    <!-- end #navigation_header -->
 </div>
+<!-- end #navigation -->
 
-<div id="form-inner">
-
+<div id="form_box">
 <form action="<?php echo url_for('company/new3') ?>" method="POST">
 <?php echo $form->renderHiddenFields() ?>
 
-<?php if ($form->hasGlobalErrors()): ?>
-<ul class="form-error">
-  <?php foreach ($form->getGlobalErrors() as $name => $error): ?>
-    <li><?php echo $name.': '.$error ?></li>
-  <?php endforeach; ?>
-</ul>
-<?php endif; ?>
     <?php echo $form['zarafaUserDefaultQuotaOverride']->renderRow() ?>
+
+    <div id="zarafaUserDefaultQuota" style="display: none;">
     <?php echo $form['zarafaUserDefaultQuotaHard']->renderRow() ?>
     <?php echo $form['zarafaUserDefaultQuotaSoft']->renderRow() ?>
     <?php echo $form['zarafaUserDefaultQuotaWarn']->renderRow() ?>
-
-    <?php /* echo $form['zarafaAccount']->renderRow() */ ?>
-    <?php /* echo $form['zarafaHidden']->renderRow() */ ?>
-    <?php /* echo $form['zarafaAdminPrivilege']->renderRow() */ ?>
-    <?php /* echo $form['zarafaCompanyServer']->renderRow() */ ?>
-    <?php /* echo $form['zarafaQuotaCompanyWarningRecipients']->renderRow() */ ?>
-    <?php /* echo $form['zarafaQuotaOverride']->renderRow() */ ?>
-    <?php /* echo $form['zarafaQuotaUserWarningRecipients']->renderRow() */ ?>
-    <?php /* echo $form['zarafaQuotaWarn']->renderRow() */ ?>
-    <?php /* echo $form['zarafaSystemAdmin']->renderRow() */ ?>
-    <?php /* echo $form['zarafaViewPrivilege']->renderRow() */ ?>
-
-    <div id="form-submitline">
-        <?php echo link_to_function("<input type=\"button\" value=\"". __("Cancel") ."\" id=\"form_button\"  />", "miniCancel()") ?>
-        <input type="submit" value="<?php echo __('Create') ?>" id="form-submit" />
     </div>
+
+<?php
+/*
+ * echo $form['zarafaAccount']->renderRow();
+ * echo $form['zarafaHidden']->renderRow();
+ * echo $form['zarafaAdminPrivilege']->renderRow();
+ * echo $form['zarafaCompanyServer']->renderRow();
+ * echo $form['zarafaQuotaCompanyWarningRecipients']->renderRow();
+ * echo $form['zarafaQuotaOverride']->renderRow();
+ * echo $form['zarafaQuotaUserWarningRecipients']->renderRow();
+ * echo $form['zarafaQuotaWarn']->renderRow();
+ * echo $form['zarafaSystemAdmin']->renderRow();
+ * echo $form['zarafaViewPrivilege']->renderRow();
+ */
+?>
+
+    <div id="form_submit">
+        <input type="button" value="<?php echo __("Cancel") ?>" id="button_cancel" />
+        <input type="submit" value="<?php echo __('Next') ?>" id="button_submit" />
+    </div>
+    <!-- end #form_submit -->
 
 </form>
 </div>
+<!-- end #form_box -->
 
-<form action="<?php echo url_for('company/index') ?>" method="POST" id="company_cancel" class="invisible">
+<form action="<?php echo url_for('company/index') ?>" method="POST" id="form_cancel" class="invisible">
 <?php echo $cancel->renderHiddenFields() ?>
 </form>
-
-<?php echo javascript_tag("
-function showUserQuotaFields()
-{
-  if ( $('minidata_zarafaUserDefaultQuotaOverride').checked )
-  {
-    $('minidata_zarafaUserDefaultQuotaHard').disabled = false;
-    $('minidata_zarafaUserDefaultQuotaSoft').disabled = false;
-    $('minidata_zarafaUserDefaultQuotaWarn').disabled = false;
-  }
-  else
-  {
-    $('minidata_zarafaUserDefaultQuotaHard').disabled = true;
-    $('minidata_zarafaUserDefaultQuotaHard').value = null;
-
-    $('minidata_zarafaUserDefaultQuotaSoft').disabled = true;
-    $('minidata_zarafaUserDefaultQuotaSoft').value = null;
-
-    $('minidata_zarafaUserDefaultQuotaWarn').disabled = true;
-    $('minidata_zarafaUserDefaultQuotaWarn').value = null;
-  }
-}
-") ?>
-
-<?php echo javascript_tag("
-function miniCancel()
-{
-    $('company_cancel').submit();
-}
-") ?>

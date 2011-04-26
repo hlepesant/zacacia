@@ -7,8 +7,18 @@ class CompanyNew2Form extends MinivISPForm
             'zarafaAccount'         => new sfWidgetFormInputHidden(array('default' => '1')),
             'zarafaCompanyServer'   => new sfWidgetFormSelect( array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
             'zarafaQuotaOverride'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
-#            'zarafaQuotaWarn'       => new sfWidgetFormInput(array(), array('type' => 'number', 'min' => 5, 'max' => 1024, 'maxlength' => '8', 'disabled' => 'disabled')),
-            'zarafaQuotaWarn'       => new sfWidgetFormInput(array(), array('maxlength' => '8', 'disabled' => 'disabled')),
+            'zarafaQuotaWarn'       => new sfWidgetFormInput(
+                array(), 
+                array(
+                    'type' => 'number',
+                    'size' => '5',
+                    'min' => 25,
+                    'max' => 2048,
+                    'maxlength' => '4', 
+                    'data-message' => 'Enter a value between 25 and 2048',
+                    'disabled' => 'disabled'
+                )),
+#            'zarafaQuotaWarn'       => new sfWidgetFormInput(array(), array('maxlength' => '8', 'disabled' => 'disabled')),
 #            'zarafaHidden'         => new sfWidgetFormInputCheckbox(),
 #            'zarafaAdminPrivilege' => new sfWidgetFormInput(),
 #            'zarafaSystemAdmin'    => new sfWidgetFormSelect( array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
