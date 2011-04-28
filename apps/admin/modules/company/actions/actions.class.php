@@ -90,10 +90,7 @@ class companyActions extends sfActions
           $this->redirect('@platform');
         }
 
-        $l = new CompanyPeer();
-        $l->setBaseDn(sprintf("ou=Companies,%s", $platformDn));
-
-        $this->form = new CompanyNew1Form();
+        $this->form = new CompanyForm();
 
         $this->form->getWidget('platformDn')->setDefault($platformDn);
     
@@ -101,13 +98,50 @@ class companyActions extends sfActions
             $this->form->bind($request->getParameter('minidata'));
             
             if ($this->form->isValid()) {
-                $this->getUser()->setAttribute('company_data', $this->form->getValues());
-                $this->redirect('company/new2');
+
+                $l = new CompanyPeer();
+                $l->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
+
+                $company = new CompanyObject();
+                $company->setDn(sprintf("cn=%s,ou=Organizations,%s", $this->form->getValue('cn'), $platformDn));
+                $company->setCn($this->form->getValue('cn'));
+
+                if ( $this->form->getValue('status') ) {
+                    $company->setMiniStatus('enable');
+                } else {
+                    $company->setMiniStatus('disable');
+                }
+
+                if ( $this->form->getValue('undeletable') ) {
+                    $company->setMiniUnDeletable(1);
+                }
+
+                if ( $this->form->getValue('zarafaQuotaOverride') ) {
+                    $company->setZarafaQuotaOverride(1);
+                    $company->setZarafaQuotaWarn($this->form->getValue('zarafaQuotaWarn'));
+                }
+
+                if ( $this->form->getValue('zarafaUserDefaultQuotaOverride') ) {
+                    $company->setZarafaUserDefaultQuotaOverride(1);
+                    $company->setZarafaUserDefaultQuotaHard($this->form->getValue('zarafaUserDefaultQuotaHard'));
+                    $company->setZarafaUserDefaultQuotaSoft($this->form->getValue('zarafaUserDefaultQuotaSoft'));
+                    $company->setZarafaUserDefaultQuotaWarn($this->form->getValue('zarafaUserDefaultQuotaWarn'));
+                }
+
+                if ( $l->doAdd($company) ) {
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                    echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+                    exit;
+                }
             }
         }
         
         $this->form->getWidget('status')->setDefault('true');
-
+/*
+        $l = new CompanyPeer();
+        $l->setBaseDn(sprintf("ou=Companies,%s", $platformDn));
+        $this->form->getWidget('zarafaCompanyServer')->setOption('choices', $l->getServerOptionList($platformDn));
+*/
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
@@ -119,10 +153,8 @@ class companyActions extends sfActions
         $this->cancel = new CompanyNavigationForm();
         unset($this->cancel['companyDn'], $this->cancel['destination']);
         $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
-
-        $this->setTemplate( 'new1' );
     }
-
+/*
     public function executeNew2(sfWebRequest $request)
     {
         $company_data = $this->getUser()->getAttribute('company_data');
@@ -160,7 +192,8 @@ class companyActions extends sfActions
         unset($this->cancel['companyDn'], $this->cancel['destination']);
         $this->cancel->getWidget('platformDn')->setDefault($company_data['platformDn']);
     }
-
+*/
+/*
     public function executeNew3(sfWebRequest $request)
     {
         $company_data = $this->getUser()->getAttribute('company_data');
@@ -216,6 +249,7 @@ class companyActions extends sfActions
         unset($this->cancel['companyDn'], $this->cancel['destination']);
         $this->cancel->getWidget('platformDn')->setDefault($platformDn);
     }
+*/
 
     public function executeEdit(sfWebRequest $request)
     {

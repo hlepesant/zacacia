@@ -96,10 +96,16 @@ class serverActions extends sfActions
                     $server->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
                     $server->setCn($this->form->getValue('cn'));
                     $server->setIpHostNumber($this->form->getValue('ip'));
+
                     if ( $this->form->getValue('undeletable') ) {
                         $server->setMiniUnDeletable(1);
                     }
-                    $server->setMiniStatus($this->form->getValue('status'));
+
+                    if ( $this->form->getValue('status') ) {
+                        $server->setMiniStatus('enable');
+                    } else {
+                        $server->setMiniStatus('disable');
+                    }
 
                     /* zarafa properties */
                     if ( $this->form->getValue('zarafaAccount') == 1 ) {
@@ -175,7 +181,17 @@ class serverActions extends sfActions
 
                 $this->server->setIpHostNumber($this->form->getValue('ip'));
                 $this->server->setMiniUnDeletable($this->form->getValue('undeletable'));
-                $this->server->setMiniStatus($this->form->getValue('status'));
+                if ( $this->form->getValue('undeletable') ) {
+                    $this->server->setMiniUnDeletable(1);
+                } else {
+                    $this->server->setMiniUnDeletable(0);
+                }
+
+                if ( $this->form->getValue('status') ) {
+                    $this->server->setMiniStatus('enable');
+                } else {
+                    $this->server->setMiniStatus('disable');
+                }
                 /* zarafa properties */
                 if ( $this->form->getValue('zarafaAccount') == 1 ) {
                     $this->server->setZarafaAccount(1);
@@ -206,10 +222,14 @@ class serverActions extends sfActions
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('serverDn')->setDefault($serverDn);
         $this->form->getWidget('ip')->setDefault($this->server->getIpHostNumber());
+
         if ( $this->server->getMiniUndeletable() ) {
             $this->form->getWidget('undeletable')->setDefault('true');
         }
-        $this->form->getWidget('status')->setDefault($this->server->getMiniStatus());
+
+        if ( $this->server->getMiniStatus() == 'enable' ) {
+            $this->form->getWidget('status')->setDefault('true');
+        }
 
         if ( $this->server->getZarafaHttpPort() ) {
             $this->form->getWidget('zarafaAccount')->setDefault('true');

@@ -19,19 +19,19 @@ class BaseCompanyObject extends LDAPObject
         $this->attributes['objectClass'] = Array('top', 'organizationalRole', 'zarafa-company', 'miniCompany');
         $this->attributes['cn'] = null;
         $this->attributes['miniStatus'] = 'enable';
-        $this->attributes['miniUnDeletable'] = 'FALSE';
+        $this->attributes['miniUnDeletable'] = 0;
         /* Zarafa Specific Attributs */
         $this->attributes['zarafaAccount'] = 1;                         // Entry is a part of zarafa
         $this->attributes['zarafaAdminPrivilege'] = '';                 // Users from different companies which are administrator over selected company
         $this->attributes['zarafaCompanyServer'] = '';                  // Home server for the user
         $this->attributes['zarafaHidden'] = 1;                          // This object should be hidden from address book
         $this->attributes['zarafaQuotaCompanyWarningRecipients'] = '';  // Users who will recieve a notification email when a company exceeds its quota
-        $this->attributes['zarafaQuotaOverride'] = '';                  // Override child quota
+        $this->attributes['zarafaQuotaOverride'] = 0;                   // Override child quota
         $this->attributes['zarafaQuotaUserWarningRecipients'] = '';     // Users who will recieve a notification email when a user exceeds his quota
         $this->attributes['zarafaQuotaWarn'] = '';                      // Warning quota size in MB
         $this->attributes['zarafaSystemAdmin'] = '';                    // The user who is the system administrator for this company
         $this->attributes['zarafaUserDefaultQuotaHard'] = '';           // User default hard quota size in MB
-        $this->attributes['zarafaUserDefaultQuotaOverride'] = '';       // Override User default quota for children
+        $this->attributes['zarafaUserDefaultQuotaOverride'] = 0;        // Override User default quota for children
         $this->attributes['zarafaUserDefaultQuotaSoft'] = '';           // User default soft quota size in MB
         $this->attributes['zarafaUserDefaultQuotaWarn'] = '';           // User default warning quota size in MB
         $this->attributes['zarafaViewPrivilege'] = '';                  // Companies with view privileges over selected company

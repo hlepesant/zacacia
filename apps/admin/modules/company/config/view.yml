@@ -2,17 +2,9 @@ indexSuccess:
     stylesheets:    [collection.css, tooltip.css]
     javascripts:    [indexCompany.js]
 
-new1Success:
+newSuccess:
     stylesheets:    [form.css, button.css, tooltip.css, validator.css]
-    javascripts:    [new1Company.js, jquery.observe_field.js]
-
-new2Success:
-    stylesheets:    [form.css, button.css, tooltip.css, validator.css]
-    javascripts:    [new2Company.js]
-
-new3Success:
-    stylesheets:    [form.css, button.css, tooltip.css, validator.css]
-    javascripts:    [new3Company.js]
+    javascripts:    [newCompany.js, jquery.observe_field.js]
 
 editSuccess:
     stylesheets:    [form.css, button.css, tooltip.css, validator.css]

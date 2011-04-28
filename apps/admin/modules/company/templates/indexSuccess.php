@@ -8,7 +8,7 @@
         <div class="_link">
             <?php echo image_tag('famfam/back.png', array('title' => __('Back'), 'id' => 'goback')) ?>
 <?php
-if ( $platform->getMiniMultiTenant() || ( count($companies) <= 1 ) ) {
+if ( $platform->getMiniMultiTenant() || ( count($companies) == 0 ) ) {
     echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew'));
 } else {
     echo image_tag('add_bw.png', array('title' => __('Single Tenant Platform'), 'id' => 'not_allowed'));
@@ -32,7 +32,7 @@ if ( $platform->getMiniMultiTenant() || ( count($companies) <= 1 ) ) {
 <?php
 $id = 0;
 foreach ($companies as $c) {
-   include_partial('company', array('c' => $c, 'id' => $id, 'f' => $forms[$c->getDn()]));
+   include_partial('item', array('c' => $c, 'id' => $id, 'f' => $forms[$c->getDn()]));
     $id++;
 }
 ?>

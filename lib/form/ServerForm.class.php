@@ -3,34 +3,30 @@ class ServerForm extends MinivISPForm
 {
     public function configure()
     {
-        $status = array('enable' => 'enable', 'disable' => 'disable');
-#        $public_folder_option = array( 0 => 'no', 1 => 'yes');
-
         $this->setWidgets(array(
             'platformDn'            => new sfWidgetFormInputHidden(),
             'cn'                    => new sfWidgetFormInput(),
             'ip'                    => new sfWidgetFormInput(),
-            'status'                => new sfWidgetFormSelect( array('choices' => $status) ),
+            'status'                => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1', 'default' => '1')),
             'undeletable'           => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
 
-#            'zarafaAccount'         => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
             'zarafaAccount'         => new sfWidgetFormInputHidden(array('default' => '1')),
-            'zarafaHttpPort'        => new sfWidgetFormInput(array(), array('class' => 'small-60', 'maxlength' => '6')), //, 'disabled' => 'disabled')),
-            'zarafaSslPort'         => new sfWidgetFormInput(array(), array('class' => 'small-60', 'maxlength' => '6')), //, 'disabled' => 'disabled')),
-            'zarafaContainsPublic'  =>  new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')), //, array('disabled' => 'disabled')),
-            'multitenant'           => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')), //, array('disabled' => 'disabled')),
+            'zarafaFilePath'        => new sfWidgetFormInputHidden(array('default' => '/var/run/zarafa')),
+            'zarafaHttpPort'        => new sfWidgetFormInput(array(), array('type' => 'number')),
+            'zarafaSslPort'         => new sfWidgetFormInput(array(), array('type' => 'number')),
+            'zarafaContainsPublic'  =>  new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1', 'default' => '1')),
+            'multitenant'           => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
         ));
 
         $this->widgetSchema->setLabels(array(
             'cn'                    => 'Name',
             'ip'                    => 'IP Address',
-            'status'                => 'Status',
+            'status'                => 'Enable',
             'undeletable'           => 'Undeletable',
 
-#            'zarafaAccount'         => 'Entry is a part of Zarafa',
             'zarafaAccount'         => 'Zarafa Properties',
-            'zarafaHttpPort'        => 'Port for the http connection',
-            'zarafaSslPort'         => 'Port for the ssl connection',
+            'zarafaHttpPort'        => 'HTTP Port',
+            'zarafaSslPort'         => 'SSL Port',
             'zarafaContainsPublic'  => 'Contains Public Store',
             'multitenant'           => 'Multi tenant',
         ));
@@ -39,10 +35,11 @@ class ServerForm extends MinivISPForm
             'platformDn'            => new sfValidatorString(),
             'cn'                    => new sfValidatorString(),
             'ip'                    => new sfValidatorIpAddress(),
-            'status'                => new sfValidatorChoice(array('choices' => array_keys($status))),
+            'status'                => new sfValidatorBoolean(),
             'undeletable'           => new sfValidatorBoolean(),
 
             'zarafaAccount'         => new sfValidatorBoolean(),
+            'zarafaFilePath'        => new sfValidatorString(),
             'zarafaHttpPort'        => new sfValidatorInteger(), //array('required' => false)),
             'zarafaSslPort'         => new sfValidatorInteger(), //array('required' => false)),
             'zarafaContainsPublic'  => new sfValidatorBoolean(),

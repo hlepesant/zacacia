@@ -85,8 +85,7 @@ class BaseCompanyPeer extends LDAPPeer
 
     public function doAdd(LDAPObject $ldap_object)
     {
-        if ( ! parent::doAdd($ldap_object) )
-        {
+        if ( ! parent::doAdd($ldap_object) ) {
           return false;
         }
         

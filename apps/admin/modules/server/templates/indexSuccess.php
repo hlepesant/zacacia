@@ -8,7 +8,7 @@
         <div class="_link">
             <?php echo image_tag('famfam/back.png', array('title' => __('Back'), 'id' => 'goback')) ?>
 <?php
-if ( $platform->getMiniMultiServer() || ( count($servers) <= 1 ) ) {
+if ( $platform->getMiniMultiServer() || ( count($servers) == 0 ) ) {
     echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew'));
 } else {
     echo image_tag('add_bw.png', array('title' => __('Single Server Platform'), 'id' => 'not_allowed'));
