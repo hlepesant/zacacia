@@ -273,9 +273,9 @@ class companyActions extends sfActions
         $c = new LDAPCriteria();
         $c->setBaseDn($companyDn);
 
-        $company = $l->retrieveByDn($c);
+        $this->company = $l->retrieveByDn($c);
         
-        $this->form = new CompanyEdit1Form();
+        $this->form = new CompanyEditForm();
     
         if ($request->isMethod('post') && $request->getParameter('minidata')) {
             $this->form->bind($request->getParameter('minidata'));
@@ -290,17 +290,20 @@ class companyActions extends sfActions
         
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
-        $this->form->getWidget('status')->setDefault($company->getMiniStatus());
-        $this->form->getWidget('undeletable')->setDefault($company->getMiniUndeletable());
+        $this->form->getWidget('status')->setDefault($this->company->getMiniStatus());
+        $this->form->getWidget('undeletable')->setDefault($this->company->getMiniUndeletable());
 
-        $this->cn = $company->getCn();
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'miniPlatform');
+        $l = new PlatformPeer();
+        $l->setBaseDn($platformDn);
+        $this->platform = $l->retrieveByDn($c);
         
         $this->cancel = new CompanyNavigationForm();
         unset($this->cancel['companyDn'], $this->cancel['destination']);
         $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
-
-        $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
-        $this->setTemplate( 'edit1' );
     }
 
     public function executeEdit2(sfWebRequest $request)
