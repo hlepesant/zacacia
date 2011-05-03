@@ -55,9 +55,14 @@ class BaseServerObject extends LDAPObject
         return $this->attributes['ipHostNumber'];
     }
   
-    public function setMinistatus($v)
+    public function setMiniStatus($v)
     {
-        $this->attributes['miniStatus'] = $v;
+#        $this->attributes['miniStatus'] = $v;
+        if ( $v ) {
+            $this->attributes['miniStatus'] = 'enable';
+        } else {
+            $this->attributes['miniStatus'] = 'disable';
+        }
         return $this;
     }
 
@@ -68,8 +73,12 @@ class BaseServerObject extends LDAPObject
 
     public function setZarafaAccount($v)
     {
-        $this->attributes['zarafaAccount'] = $v;
-  	    return $this;
+        if ( $v ) {
+            $this->attributes['zarafaAccount'] = 1;
+        } else {
+            $this->attributes['zarafaAccount'] = array();
+        }
+        return $this;
     }
 
     public function getZarafaAccount()
@@ -79,7 +88,11 @@ class BaseServerObject extends LDAPObject
 
     public function setZarafaContainsPublic($v)
     {
-        $this->attributes['zarafaContainsPublic'] = $v;
+        if ( $v ) {
+            $this->attributes['zarafaContainsPublic'] = 1;
+        } else {
+            $this->attributes['zarafaContainsPublic'] = array();
+        }
   	    return $this;
     }
 

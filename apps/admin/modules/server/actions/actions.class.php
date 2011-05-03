@@ -101,11 +101,7 @@ class serverActions extends sfActions
                         $server->setMiniUnDeletable(1);
                     }
 
-                    if ( $this->form->getValue('status') ) {
-                        $server->setMiniStatus('enable');
-                    } else {
-                        $server->setMiniStatus('disable');
-                    }
+                    $server->setMiniStatus($this->form->getValue('status'));
 
                     /* zarafa properties */
                     if ( $this->form->getValue('zarafaAccount') == 1 ) {
@@ -187,11 +183,8 @@ class serverActions extends sfActions
                     $this->server->setMiniUnDeletable(0);
                 }
 
-                if ( $this->form->getValue('status') ) {
-                    $this->server->setMiniStatus('enable');
-                } else {
-                    $this->server->setMiniStatus('disable');
-                }
+                $this->server->setMiniStatus($this->form->getValue('status'));
+
                 /* zarafa properties */
                 if ( $this->form->getValue('zarafaAccount') == 1 ) {
                     $this->server->setZarafaAccount(1);
@@ -278,9 +271,9 @@ class serverActions extends sfActions
         $s = $l->retrieveByDn($c);
 
         if ( 'enable' === $s->getMiniStatus()) {
-            $s->setMiniStatus('disable');
+            $s->setMiniStatus(false);
         } else {
-            $s->setMiniStatus('enable');
+            $s->setMiniStatus(true);
         }
 
         $l->doSave($s);

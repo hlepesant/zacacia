@@ -75,8 +75,15 @@ class platformActions extends sfActions
                 if ( $this->form->getValue('undeletable') ) {
                     $platform->setMiniUnDeletable(1);
                 }
-                $platform->setMiniStatus($this->form->getValue('status'));
 
+                $platform->setMiniStatus($this->form->getValue('status'));
+/*
+                if ( $this->form->getValue('status') ) {
+                    $platform->setMiniStatus('enable');
+                } else {
+                    $platform->setMiniStatus('disable');
+                }
+*/
                 if ( $l->doAdd($platform) ) {
                   sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
                   echo fake_post($this, 'platform/index', Array());
@@ -120,8 +127,15 @@ class platformActions extends sfActions
                 $this->platform->setMiniMultiTenant($this->form->getValue('multitenant'));
                 $this->platform->setMiniMultiServer($this->form->getValue('multiserver'));
                 $this->platform->setMiniUnDeletable($this->form->getValue('undeletable'));
-                $this->platform->setMiniStatus($this->form->getValue('status'));
 
+                $this->platform->setMiniStatus($this->form->getValue('status'));
+/*
+                if ( $this->form->getValue('status') ) {
+                    $this->platform->setMiniStatus('enable');
+                } else {
+                    $this->platform->setMiniStatus('disable');
+                }
+*/
                 if ( $l->doSave($this->platform) ) {
 
                   sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
@@ -162,9 +176,9 @@ class platformActions extends sfActions
         $p = $l->retrieveByDn($c);
 
         if ( 'enable' === $p->getMiniStatus()) {
-            $p->setMiniStatus('disable');
+            $p->setMiniStatus(false);
         } else {
-            $p->setMiniStatus('enable');
+            $p->setMiniStatus(true);
         }
 
         $l->doSave($p);
