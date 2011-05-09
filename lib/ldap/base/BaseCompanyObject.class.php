@@ -50,32 +50,45 @@ class BaseCompanyObject extends LDAPObject
         return $this->attributes['cn'];
     }
 
-    public function setMinistatus($v)
+    public function setMiniStatus($v)
     {
-        $this->attributes['miniStatus'] = $v;
+#        $this->attributes['miniStatus'] = $v;
+        if ( $v ) {
+            $this->attributes['miniStatus'] = 'enable';
+        } else {
+            $this->attributes['miniStatus'] = 'disable';
+        }
         return $this;
     }
 
-    public function getMinistatus()
+    public function getMiniStatus()
     {
         return $this->attributes['miniStatus'];
     }
 
-    public function setMiniundeletable($v)
+    public function setMiniUnDeletable($v)
     {
-        $this->attributes['miniUnDeletable'] = $v;
-        return $this;
+        if ( $v ) {
+            $this->attributes['miniUnDeletable'] = 1;
+        } else {
+            $this->attributes['miniUnDeletable'] = array();
+        }
+    	return $this;
     }
-
-    public function getMiniundeletable()
+ 
+    public function getMiniUnDeletable()
     {
-        return $this->attributes['miniUnDeletable'];
+        return (int)$this->attributes['miniUnDeletable'];
     }
 
     public function setZarafaAccount($v)
     {
-        $this->attributes['zarafaAccount'] = $v;
-       return $this;
+        if ( $v ) {
+            $this->attributes['zarafaAccount'] = 1;
+        } else {
+            $this->attributes['zarafaAccount'] = array();
+        }
+        return $this;
     }
 
     public function getZarafaAccount()
@@ -85,8 +98,12 @@ class BaseCompanyObject extends LDAPObject
 
     public function setZarafaHidden($v)
     {
-        $this->attributes['zarafaHidden'] = $v;
-       return $this;
+        if ( $v ) {
+            $this->attributes['zarafaHidden'] = 1;
+        } else {
+            $this->attributes['zarafaHidden'] = array();
+        }
+        return $this;
     }
 
     public function getZarafaHidden()
@@ -96,7 +113,11 @@ class BaseCompanyObject extends LDAPObject
 
     public function setZarafaAdminPrivilege($v)
     {
-        $this->attributes['zarafaAdminPrivilege'] = $v;
+        if ( $v ) {
+            $this->attributes['zarafaAdminPrivilege'] = 1;
+        } else {
+            $this->attributes['zarafaAdminPrivilege'] = array();
+        }
         return $this;
     }
 
@@ -129,7 +150,11 @@ class BaseCompanyObject extends LDAPObject
 
     public function setZarafaQuotaOverride($v)
     {
-        $this->attributes['zarafaQuotaOverride'] = $v;
+        if ( $v ) {
+            $this->attributes['zarafaQuotaOverride'] = 1;
+        } else {
+            $this->attributes['zarafaQuotaOverride'] = array();
+        }
    	    return $this;
     }
 
@@ -184,7 +209,11 @@ class BaseCompanyObject extends LDAPObject
 
     public function setZarafaUserDefaultQuotaOverride($v)
     {
-        $this->attributes['zarafaUserDefaultQuotaOverride'] = $v;
+        if ( $v ) {
+            $this->attributes['zarafaUserDefaultQuotaOverride'] = 1;
+        } else {
+            $this->attributes['zarafaUserDefaultQuotaOverride'] = array();
+        }
    	    return $this;
     }
 

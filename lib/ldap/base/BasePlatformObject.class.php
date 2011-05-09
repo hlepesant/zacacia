@@ -36,7 +36,12 @@ class BasePlatformObject extends LDAPObject
   
     public function setMiniStatus($v)
     {
-        $this->attributes['miniStatus'] = $v;
+#        $this->attributes['miniStatus'] = $v;
+        if ( $v ) {
+            $this->attributes['miniStatus'] = 'enable';
+        } else {
+            $this->attributes['miniStatus'] = 'disable';
+        }
     	return $this;
     }
 

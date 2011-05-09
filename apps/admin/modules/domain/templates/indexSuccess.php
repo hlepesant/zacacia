@@ -2,17 +2,13 @@
     <div id="navigation_header">
         <div class="_title">
             <u><?php echo $platform->getCn() ?></u>&nbsp;&rarr;
-            <?php echo __('Servers') ;?>
+            <u><?php echo $company->getCn() ?></u>&nbsp;&rarr;
+            <?php echo __('Domains') ;?>
         </div>
         <!-- end #navigation_header._title -->
         <div class="_link">
             <?php echo image_tag('famfam/back.png', array('title' => __('Back'), 'id' => 'goback')) ?>
-<?php
-if ( $platform->getMiniMultiServer() || ( count($servers) <= 1 ) ) {
-    echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew'));
-} else {
-    echo image_tag('add_bw.png', array('title' => __('Single Server Platform'), 'id' => 'not_allowed'));
-} ?>
+            <?php echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew')); ?>
         </div>
         <!-- end #navigation_header._link -->
     </div>
@@ -32,7 +28,7 @@ if ( $platform->getMiniMultiServer() || ( count($servers) <= 1 ) ) {
 <?php
 $id = 0;
 foreach ($domains as $d) {
-    include_partial('domain', array('d' => $d, 'id' => $id, 'f' => $forms[$d->getDn()]));
+    include_partial('item', array('d' => $d, 'id' => $id, 'f' => $forms[$d->getDn()]));
     $id++;
 }
 ?>
@@ -51,10 +47,10 @@ foreach ($domains as $d) {
 </form>
 
 <?php echo javascript_tag("
-var _js_msg_01 = '".__("Disable the host")."';
-var _js_msg_02 = '".__("Enable the host")."';
-var _js_msg_03 = '".__("Delete the host")."';
-var _js_module = '".$this->getModuleName()."';
+var _js_msg_01 = \"".__("Disable the domain")."\";
+var _js_msg_02 = \"".__("Enable the domain")."\";
+var _js_msg_03 = \"".__("Delete the domain")."\";
+var _js_module = \"'".$this->getModuleName()."\";
 var _js_url = '".url_for(false)."';
 ") ?>
 </div>

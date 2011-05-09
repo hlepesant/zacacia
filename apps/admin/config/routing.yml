@@ -22,14 +22,14 @@ platform:
 server:
   url:   /server/:action
   param: { }
-#
-#company:
-#  url:   /:module
-#  param: { module: company, action: index }
-#
-#domain:
-#  url:   /:module
-#  param: { module: domain, action: index }
+
+company:
+  url:   /:module/:action
+  param: { module: company, action: index }
+
+domain:
+  url:   /:module/:action
+  param: { module: domain, action: index }
 #
 #user:
 #  url:   /:module

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     $("#gotonew").click(function() {
-        $("#platform_new").submit();
+        $("#domain_new").submit();
     });
 
     $("._link img[title]").tooltip({

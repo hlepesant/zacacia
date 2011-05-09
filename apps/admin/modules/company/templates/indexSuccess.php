@@ -21,7 +21,6 @@ if ( $platform->getMiniMultiTenant() || ( count($companies) == 0 ) ) {
 <!-- end #navigation -->
 
 <div id="collection">
-
     <div id="collection_description">
             <div class="_name"><?php echo __("Name") ?></div>
             <div class="_action"><?php echo __("Action") ?></div>
@@ -51,9 +50,9 @@ foreach ($companies as $c) {
 </form>
 
 <?php echo javascript_tag("
-var _js_msg_01 = '".__("Disable the company")."';
-var _js_msg_02 = '".__("Enable the company")."';
-var _js_msg_03 = '".__("Delete the company")."';
-var _js_module = '".$this->getModuleName()."';
+var _js_msg_01 = \"".__("Disable the company")."\";
+var _js_msg_02 = \"".__("Enable the company")."\";
+var _js_msg_03 = \"".__("Delete the company")."\";
+var _js_module = \"".$this->getModuleName()."\";
 var _js_url = '".url_for(false)."';
 ") ?>

@@ -75,7 +75,7 @@ class companyActions extends sfActions
             $this->forms[$company->getDn()] = $form;
             $id++;
         }
-        
+
         $this->new = new CompanyNavigationForm();
         unset($this->new['companyDn'], $this->new['destination']);
         $this->new->getWidget('platformDn')->setDefault($platformDn);
@@ -105,12 +105,14 @@ class companyActions extends sfActions
                 $company = new CompanyObject();
                 $company->setDn(sprintf("cn=%s,ou=Organizations,%s", $this->form->getValue('cn'), $platformDn));
                 $company->setCn($this->form->getValue('cn'));
-
+/*
                 if ( $this->form->getValue('status') ) {
                     $company->setMiniStatus('enable');
                 } else {
                     $company->setMiniStatus('disable');
                 }
+*/
+                $company->setMiniStatus($this->form->getValue('status'));
 
                 if ( $this->form->getValue('undeletable') ) {
                     $company->setMiniUnDeletable(1);
@@ -254,6 +256,7 @@ class companyActions extends sfActions
     public function executeEdit(sfWebRequest $request)
     {
         $data = $request->getParameter('minidata');
+
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
@@ -270,10 +273,12 @@ class companyActions extends sfActions
         $l = new CompanyPeer();
         $l->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
         
-        $c = new LDAPCriteria();
-        $c->setBaseDn($companyDn);
+        $criteria = new LDAPCriteria();
+        $criteria->setBaseDn($companyDn);
 
-        $this->company = $l->retrieveByDn($c);
+        $this->company = $l->retrieveByDn($criteria);
+
+        #print_r( $this->company ); exit;
         
         $this->form = new CompanyEditForm();
     
@@ -281,8 +286,48 @@ class companyActions extends sfActions
             $this->form->bind($request->getParameter('minidata'));
             
             if ($this->form->isValid()) {
-                $this->getUser()->setAttribute('company_data', $this->form->getValues());
-                $this->redirect('company/edit2');
+
+                #print_r( $this->form->getValues() );
+                #exit;
+/*
+                if ( $this->form->getValue('status') ) {
+                    $this->company->setMiniStatus('enable');
+                } else {
+                    $this->company->setMiniStatus('disable');
+                }
+*/
+                $this->company->setMiniStatus($this->form->getValue('status'));
+
+                $this->company->setMiniUnDeletable($this->form->getValue('undeletable'));
+
+                if ($this->form->getValue('zarafaQuotaOverride')) {
+                    $this->company->setZarafaQuotaOverride(1);
+                    $this->company->setZarafaQuotaWarn($this->form->getValue('zarafaQuotaWarn'));
+                } else {
+                    $this->company->setZarafaQuotaOverride(array());
+                    $this->company->setZarafaQuotaWarn(array());
+                }
+
+                if ($this->form->getValue('zarafaUserDefaultQuotaOverride')) {
+                    $this->company->setZarafaUserDefaultQuotaOverride(1);
+                    $this->company->setZarafaUserDefaultQuotaHard($this->form->getValue('zarafaUserDefaultQuotaHard'));
+                    $this->company->setZarafaUserDefaultQuotaSoft($this->form->getValue('zarafaUserDefaultQuotaSoft'));
+                    $this->company->setZarafaUserDefaultQuotaWarn($this->form->getValue('zarafaUserDefaultQuotaWarn'));
+                } else {
+                    $this->company->setZarafaUserDefaultQuotaOverride(array());
+                    $this->company->setZarafaUserDefaultQuotaHard(array());
+                    $this->company->setZarafaUserDefaultQuotaSoft(array());
+                    $this->company->setZarafaUserDefaultQuotaWarn(array());
+                }
+
+#                print_r( $this->company ); exit;
+
+                if ( $l->doSave($this->company) ) {
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                    echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+                    exit;
+                }
+
             } else {
                 $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
             }
@@ -292,6 +337,21 @@ class companyActions extends sfActions
         $this->form->getWidget('companyDn')->setDefault($companyDn);
         $this->form->getWidget('status')->setDefault($this->company->getMiniStatus());
         $this->form->getWidget('undeletable')->setDefault($this->company->getMiniUndeletable());
+        
+        if ( 1 == $this->company->getZarafaQuotaOverride() ) {
+            $this->form->getWidget('zarafaQuotaOverride')->setDefault(1);
+            $this->form->getWidget('zarafaQuotaWarn')->setDefault($this->company->getZarafaQuotaWarn());
+        }
+
+        if ( 1 == $this->company->getZarafaUserDefaultQuotaOverride() ) {
+            $this->form->getWidget('zarafaUserDefaultQuotaOverride')->setDefault(1);
+            $this->form->getWidget('zarafaUserDefaultQuotaHard')->setDefault($this->company->getZarafaUserDefaultQuotaHard());
+            $this->form->getWidget('zarafaUserDefaultQuotaSoft')->setDefault($this->company->getZarafaUserDefaultQuotaSoft());
+            $this->form->getWidget('zarafaUserDefaultQuotaWarn')->setDefault($this->company->getZarafaUserDefaultQuotaWarn());
+        }
+
+
+
 
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
@@ -305,7 +365,7 @@ class companyActions extends sfActions
         unset($this->cancel['companyDn'], $this->cancel['destination']);
         $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
     }
-
+/*
     public function executeEdit2(sfWebRequest $request)
     {
         $company_data = $this->getUser()->getAttribute('company_data');
@@ -347,7 +407,8 @@ class companyActions extends sfActions
 
         $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
     }
-
+*/
+/*
     public function executeEdit3(sfWebRequest $request)
     {
         $company_data = $this->getUser()->getAttribute('company_data');
@@ -416,6 +477,70 @@ class companyActions extends sfActions
         $this->cancel->getWidget('platformDn')->setDefault($platformDn);
 
         $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
+    }
+*/
+    public function executeStatus(sfWebRequest $request)
+    {
+        $platformDn = $request->getParameter('platformDn');
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->redirect('@platform');
+        }
+
+        $companyDn = $request->getParameter('companyDn');
+        if ( empty($companyDn) ) {
+            $this->getUser()->setFlash('miniJsAlert', "Missing company's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+        }
+
+        $criteria = new LDAPCriteria();
+        $criteria->setBaseDn($companyDn);
+
+        $l = new CompanyPeer();
+        $company = $l->retrieveByDn($criteria);
+
+        if ( 'enable' === $company->getMiniStatus()) {
+            $company->setMiniStatus(false);
+        } else {
+            $company->setMiniStatus(true);
+        }
+
+        $l->doSave($company);
+
+        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+        echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+        exit;
+    }
+
+    public function executeDelete(sfWebRequest $request)
+    {
+        $platformDn = $request->getParameter('platformDn');
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->redirect('@platform');
+        }
+
+        $companyDn = $request->getParameter('companyDn');
+        if ( empty($companyDn) ) {
+            $this->getUser()->setFlash('miniJsAlert', "Missing company's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+        }
+
+        $criteria = new LDAPCriteria();
+        $criteria->setBaseDn($companyDn);
+
+        $l = new CompanyPeer();
+        $company = $l->retrieveByDn($criteria);
+
+        if ( 'disable' === $company->getMiniStatus()) {
+            $l->doDelete($company, true);
+        }
+
+        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+        echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+        exit;
     }
 
 

@@ -3,16 +3,11 @@ class PlatformForm extends MinivISPForm
 {
     public function configure()
     {
-        $status = array(
-            'enable'    => parent::__('enable'),
-            'disable'   => parent::__('disable')
-        );
-    
         $this->setWidgets(array(
             'cn'          => new sfWidgetFormInput(array(), array('pattern' => '[a-zA-Z ]{5,}', 'maxlength' => 30, 'required' => 'required')),
             'multitenant' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
             'multiserver' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
-            'status'      => new sfWidgetFormSelect(array('choices' => $status)),
+            'status'      => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1', 'default' => '1')),
             'undeletable' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
         ));
     
@@ -20,7 +15,7 @@ class PlatformForm extends MinivISPForm
             'cn'          => 'Name',
             'multitenant' => 'Multi tenant',
             'multiserver' => 'Multi server',
-            'status'      => 'Status',
+            'status'      => 'Enable',
             'undeletable' => 'Undeletable',
         ));
     
@@ -28,7 +23,7 @@ class PlatformForm extends MinivISPForm
             'cn'          => new sfValidatorString(),
             'multitenant' => new sfValidatorBoolean(),
             'multiserver' => new sfValidatorBoolean(),
-            'status'      => new sfValidatorChoice(array('choices' => array_keys($status))),
+            'status'      => new sfValidatorBoolean(),
             'undeletable' => new sfValidatorBoolean(),
         ));
     

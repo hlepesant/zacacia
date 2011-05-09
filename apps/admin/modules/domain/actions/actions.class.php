@@ -32,15 +32,15 @@ class domainActions extends sfActions
               exit;
         }
           
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'miniDomain');
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'organizationalRole');
+        $criteria->add('objectClass', 'miniDomain');
         
         $l = new DomainPeer();
         $l->setBaseDn(sprintf("ou=Domains,%s", $companyDn));
         
-        $this->domains = $l->doSelect($c, 'extended');
+        $this->domains = $l->doSelect($criteria, 'extended');
         
         $id=0;
         $this->forms = array();
@@ -57,48 +57,38 @@ class domainActions extends sfActions
             $criteria_user->add('zarafaUserServer', $domain->getCn());
             $count_user = $l->doCount($criteria_user);
             
-            switch( sfConfig::get('navigation_look') )
-            {
-                case 'dropdown':
-                    $choices = $form->getWidget('destination')->getOption('choices');
-                    $choices['status'] = $this->getContext()->getI18N()->__('Disable', Array(), 'messages');
-                    
-                    if ( $p->getMiniStatus() == 'disable' && $count_user  == 0 )
-                    {
-                        $choices['status'] = $this->getContext()->getI18N()->__('Enable', Array(), 'messages');
-                        $choices['delete'] = $this->getContext()->getI18N()->__('Delete', Array(), 'messages');
-                    }
-                    
-                    if ( $s->getMiniUnDeletable() === 'TRUE' )
-                    {
-                        unset($choices['delete'], $choices['status']);
-                    }
-                    $choices['company'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Company', Array(), 'messages');
-                    
-                    $form->getWidget('destination')->setOption('choices', $choices);
-                break;
-                
-                case 'link':
-                default:
-                    $domain->set('user_count', $count_user);
-                break;
-            }
+            $domain->set('user_count', $count_user);
         
             $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
             $form->getWidget('companyDn')->setIdFormat(sprintf('%%s_%03d', $id));
             $form->getWidget('domainDn')->setIdFormat(sprintf('%%s_%03d', $id));
-            $form->getWidget('destination')->setIdFormat(sprintf('%%s_%03d', $id));
         
             $this->forms[$domain->getDn()] = $form;
             $id++;
         }
         
+        $c1 = new LDAPCriteria();
+        $c1->add('objectClass', 'top');
+        $c1->add('objectClass', 'organizationalRole');
+        $c1->add('objectClass', 'miniPlatform');
+
+        $l1 = new PlatformPeer();
+        $l1->setBaseDn($platformDn);
+        $this->platform = $l1->retrieveByDn($c1);
+        
+        $c2 = new LDAPCriteria();
+        $c2->add('objectClass', 'top');
+        $c2->add('objectClass', 'organizationalRole');
+        $c2->add('objectClass', 'miniCompany');
+
+        $l2 = new CompanyPeer();
+        $l2->setBaseDn($companyDn);
+        $this->company = $l2->retrieveByDn($c2);
+        
         $this->new = new DomainNavigationForm();
-        unset($this->new['domainDn'], $this->new['destination']);
+        unset($this->new['domainDn']);
         $this->new->getWidget('platformDn')->setDefault($platformDn);
         $this->new->getWidget('companyDn')->setDefault($companyDn);
-
-        $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
     }
 
     public function executeNew(sfWebRequest $request)
@@ -148,6 +138,25 @@ class domainActions extends sfActions
                     $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
                 }
         }
+        
+        $c1 = new LDAPCriteria();
+        $c1->add('objectClass', 'top');
+        $c1->add('objectClass', 'organizationalRole');
+        $c1->add('objectClass', 'miniPlatform');
+
+        $l1 = new PlatformPeer();
+        $l1->setBaseDn($platformDn);
+        $this->platform = $l1->retrieveByDn($c1);
+        
+        $c2 = new LDAPCriteria();
+        $c2->add('objectClass', 'top');
+        $c2->add('objectClass', 'organizationalRole');
+        $c2->add('objectClass', 'miniCompany');
+
+        $l2 = new CompanyPeer();
+        $l2->setBaseDn($companyDn);
+        $this->company = $l2->retrieveByDn($c2);
+        
         
         $this->cancel = new DomainNavigationForm();
         unset($this->cancel['domainDn'], $this->cancel['destination']);

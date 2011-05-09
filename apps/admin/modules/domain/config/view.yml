@@ -1,6 +1,6 @@
 indexSuccess:
     stylesheets:    [collection.css, tooltip.css]
-    javascripts:    [indexPlatform.js]
+    javascripts:    [indexDomain.js]
 
 newSuccess:
     stylesheets:    [form.css, button.css, tooltip.css, validator.css]

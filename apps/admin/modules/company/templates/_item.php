@@ -18,7 +18,8 @@ echo link_to_function(
     "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($c->getCn()))."', 'status', '".$c->getMiniStatus()."')");
 
 /* Delete */
-if ( !$c->getMiniUnDeletable() && 'disable' === $c->getMiniStatus() && 0 === $c->get('user_count') ) {
+// if ( !$c->getMiniUnDeletable() && 'disable' === $c->getMiniStatus() && 0 === $c->get('user_count') ) {
+if ( $c->getMiniUnDeletable() && 'disable' === $c->getMiniStatus() ) {
     echo link_to_function(
         image_tag('famfam/cross.png', array('title' => __('Delete'))), 
         "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($c->getCn()))."', 'delete', null)");
