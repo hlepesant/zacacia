@@ -1,0 +1,52 @@
+This is the Zacacia project.
+
+(c) 2010 Hugues Lepesant (http://hugues.lepesant.com/)
+
+
+About
+=====
+
+Zacacia is a web frontend to manage an OpenLDAP direcory.
+This OpenLDAP directory can be used with Zarafa Collaborative Platform - ZCP - (http://www.zarafa.com/)
+
+
+Requirements
+============
+
+Zacacia is written in PHP5 and use the symfony, an open-source PHP web framework (http://www.symfony-project.org/)
+
+ - Debian Linux >= 5.0
+ - Apache 2 (apt-get install apache2-mpm-prefork)
+ - PHP5 (apt-get install libapache2-mod-php5)
+ - OpenLDAP (apt-get install slapd)
+ - LDAP module for PHP5 (apt-get install php5-ldap) 
+
+
+Installation
+============
+
+ - Apache
+untar the zacacia.tar.gz in /opt/WebSites/
+create link in /etc/apache2/site-enable/
+restart apache
+
+ - OpenLDAP
+ /etc/init.d/slapd stop
+ cp /opt/WebSites/Zacacia/install/openldap/ldap/slapd.conf /etc/ldap/slapd.conf
+ cp /opt/WebSites/Zacacia/install/openldap/ldap/schema/zacacia.schema /etc/ldap/schema/
+ cp /usr/share/doc/zarafa/zarafa.schema /etc/ldap/schema/
+ rm -f /var/lib/ldap/*
+ slapadd -f /etc/ldap/slapd.conf -l /opt/WebSites/Zacacia/install/openldap/zacacia.ldif
+ chown -R openldap:openldap /var/lib/ldap
+ /etc/init.d/slapd start
+
+
+ Greetings
+ =========
+
+ Zarafa (http://www.zarafa.com/)
+ Sensio Labs (http://www.sensiolabs.com/)
+ PHP (http://www.php.net/)
+ OpenLDAP (http://www.openldap.org/)
+ Patricio Mac Adden (http://www.symfony-project.org/plugins/dcLDAPAbstractionPlugin)
+
