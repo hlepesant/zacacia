@@ -1,5 +1,5 @@
 <?php
-class PlatformForm extends MinivISPForm
+class PlatformForm extends ZacaciaForm
 {
     public function configure()
     {

@@ -16,12 +16,12 @@ class BaseServerObject extends LDAPObject
     public function applyDefaultValues()
     {
 #       if (!is_array($this->attributes)) $this->attributes = array();
-        $this->attributes['objectClass']            = Array('top', 'organizationalRole', 'zarafa-server', 'ipHost', 'miniServer');
+        $this->attributes['objectClass']            = Array('top', 'organizationalRole', 'zarafa-server', 'ipHost', 'zacaciaServer');
         $this->attributes['cn']                     = null;
         $this->attributes['ipHostNumber']           = null;
-        $this->attributes['miniStatus']             = 'enable';
-        $this->attributes['miniUnDeletable']        = 0;
-        $this->attributes['miniMultiTenant']        = 0;                  // Multi tenant server
+        $this->attributes['zacaciaStatus']          = 'enable';
+        $this->attributes['zacaciaUnDeletable']     = 0;
+        $this->attributes['zacaciaMultiTenant']     = 0;                  // Multi tenant server
         /* Zarafa Specific Attributs */
         $this->attributes['zarafaAccount']          = 0;                  // Entry is a part of zarafa
         $this->attributes['zarafaContainsPublic']   = 0;                  // This server contains the public store
@@ -55,20 +55,19 @@ class BaseServerObject extends LDAPObject
         return $this->attributes['ipHostNumber'];
     }
   
-    public function setMiniStatus($v)
+    public function setZacaciaStatus($v)
     {
-#        $this->attributes['miniStatus'] = $v;
         if ( $v ) {
-            $this->attributes['miniStatus'] = 'enable';
+            $this->attributes['zacaciaStatus'] = 'enable';
         } else {
-            $this->attributes['miniStatus'] = 'disable';
+            $this->attributes['zacaciaStatus'] = 'disable';
         }
         return $this;
     }
 
-    public function getMinistatus()
+    public function getZacaciaStatus()
     {
-        return $this->attributes['miniStatus'];
+        return $this->attributes['zacaciaStatus'];
     }
 
     public function setZarafaAccount($v)
@@ -145,33 +144,33 @@ class BaseServerObject extends LDAPObject
         return $this->attributes['zarafaSslPort'];
     }
 
-    public function setMiniUnDeletable($v)
+    public function setZacaciaUnDeletable($v)
     {
         if ( $v ) {
-            $this->attributes['miniUnDeletable'] = 1;
+            $this->attributes['zacaciaUnDeletable'] = 1;
         } else {
-            $this->attributes['miniUnDeletable'] = array();
+            $this->attributes['zacaciaUnDeletable'] = array();
         }
     	return $this;
     }
  
-    public function getMiniUnDeletable()
+    public function getZacaciaUnDeletable()
     {
-        return (int)$this->attributes['miniUnDeletable'];
+        return (int)$this->attributes['zacaciaUnDeletable'];
     }
 
-    public function setMiniMultiTenant($v)
+    public function setZacaciaMultiTenant($v)
     {
         if ( $v ) {
-            $this->attributes['miniMultiTenant'] = 1;
+            $this->attributes['zacaciaMultiTenant'] = 1;
         } else {
-            $this->attributes['miniMultiTenant'] = array();
+            $this->attributes['zacaciaMultiTenant'] = array();
         }
     	return $this;
     }
  
-    public function getMiniMultiTenant()
+    public function getZacaciaMultiTenant()
     {
-        return (int)$this->attributes['miniMultiTenant'];
+        return (int)$this->attributes['zacaciaMultiTenant'];
     }
 }

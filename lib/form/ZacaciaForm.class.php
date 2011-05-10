@@ -1,5 +1,5 @@
 <?php
-class MinivISPForm extends sfFormSymfony
+class ZacaciaForm extends sfFormSymfony
 {
     protected function __($string, $args = array(), $catalogue = 'messages')
     {
@@ -12,9 +12,10 @@ class MinivISPForm extends sfFormSymfony
         $pattern = sprintf('/^%s/', $pattern);
         $match = Array();
         foreach( $values as $key => $value ) {
-          if ( preg_match( $pattern, $key ) ) {
-            $match[] = $value;
-          }
+            if ( preg_match( $pattern, $key ) )
+            {
+                $match[] = $value;
+            }
         }
         return $match;
     }

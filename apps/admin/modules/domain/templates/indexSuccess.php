@@ -42,7 +42,7 @@ foreach ($domains as $d) {
 <?php echo $new->renderHiddenFields() ?>
 </form>
 
-<form action="<?php echo url_for('@platform') ?>" method="POST" id="platform_back" class="invisible">
+<form action="<?php echo url_for('@company') ?>" method="POST" id="company_back" class="invisible">
 <?php echo $new->renderHiddenFields() ?>
 </form>
 
@@ -53,6 +53,8 @@ var _js_msg_03 = \"".__("Delete the domain")."\";
 var _js_module = \"'".$this->getModuleName()."\";
 var _js_url = '".url_for(false)."';
 ") ?>
+<?php
+/*
 </div>
 
 <?php echo $new->renderHiddenFields() ?>
@@ -117,3 +119,5 @@ function jumpTo(id, name, destination)
     return true;
 }
 ") ?>
+*/
+?>

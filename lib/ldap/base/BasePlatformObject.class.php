@@ -13,13 +13,12 @@ class BasePlatformObject extends LDAPObject
 
     public function applyDefaultValues()
     {
-#       if (!is_array($this->attributes)) $this->attributes = array();
-        $this->attributes['objectClass']        = Array('top', 'organizationalRole', 'miniPlatform');
-        $this->attributes['cn']                 = null;
-        $this->attributes['miniStatus']         = 'enable';
-        $this->attributes['miniUnDeletable']    = 0;
-        $this->attributes['miniMultiServer']    = 0;
-        $this->attributes['miniMultiTenant']    = 0;
+        $this->attributes['objectClass']            = Array('top', 'organizationalRole', 'zacaciaPlatform');
+        $this->attributes['cn']                     = null;
+        $this->attributes['zacaciaStatus']          = 'enable';
+        $this->attributes['zacaciaUnDeletable']     = 0;
+        $this->attributes['zacaciaMultiServer']     = 0;
+        $this->attributes['zacaciaMultiTenant']     = 0;
         return $this;
     }
   
@@ -34,64 +33,63 @@ class BasePlatformObject extends LDAPObject
         return $this->attributes['cn'];
     }
   
-    public function setMiniStatus($v)
+    public function setZacaciaStatus($v)
     {
-#        $this->attributes['miniStatus'] = $v;
         if ( $v ) {
-            $this->attributes['miniStatus'] = 'enable';
+            $this->attributes['zacaciaStatus'] = 'enable';
         } else {
-            $this->attributes['miniStatus'] = 'disable';
+            $this->attributes['zacaciaStatus'] = 'disable';
         }
     	return $this;
     }
 
-    public function getMiniStatus()
+    public function getZacaciaStatus()
     {
-        return $this->attributes['miniStatus'];
+        return $this->attributes['zacaciaStatus'];
     }
 
-    public function setMiniUnDeletable($v)
+    public function setZacaciaUnDeletable($v)
     {
         if ( $v ) {
-            $this->attributes['miniUnDeletable'] = 1;
+            $this->attributes['zacaciaUnDeletable'] = 1;
         } else {
-            $this->attributes['miniUnDeletable'] = array();
-        }
-    	return $this;
-    }
- 
-    public function getMiniUnDeletable()
-    {
-        return (int)$this->attributes['miniUnDeletable'];
-    }
-
-    public function setMiniMultiServer($v)
-    {
-        if ( $v ) {
-            $this->attributes['miniMultiServer'] = 1;
-        } else {
-            $this->attributes['miniMultiServer'] = array();
+            $this->attributes['zacaciaUnDeletable'] = array();
         }
     	return $this;
     }
  
-    public function getMiniMultiServer()
+    public function getZacaciaUnDeletable()
     {
-        return (int)$this->attributes['miniMultiServer'];
+        return (int)$this->attributes['zacaciaUnDeletable'];
     }
 
-    public function setMiniMultiTenant($v)
+    public function setZacaciaMultiServer($v)
     {
         if ( $v ) {
-            $this->attributes['miniMultiTenant'] = 1;
+            $this->attributes['zacaciaMultiServer'] = 1;
         } else {
-            $this->attributes['miniMultiTenant'] = array();
+            $this->attributes['zacaciaMultiServer'] = array();
         }
     	return $this;
     }
  
-    public function getMiniMultiTenant()
+    public function getZacaciaMultiServer()
     {
-        return (int)$this->attributes['miniMultiTenant'];
+        return (int)$this->attributes['zacaciaMultiServer'];
+    }
+
+    public function setZacaciaMultiTenant($v)
+    {
+        if ( $v ) {
+            $this->attributes['zacaciaMultiTenant'] = 1;
+        } else {
+            $this->attributes['zacaciaMultiTenant'] = array();
+        }
+    	return $this;
+    }
+ 
+    public function getZacaciaMultiTenant()
+    {
+        return (int)$this->attributes['zacaciaMultiTenant'];
     }
 }

@@ -48,7 +48,7 @@ class PlatformPeer extends BasePlatformPeer
         $ldap_object_sg_orgadmin = new LdapObject();
         $ldap_object_sg_orgadmin->setDn(sprintf("cn=OrganizationAdmin,ou=SecurityGroups,%s", $ldap_object->getDn())); 
         $ldap_object_sg_orgadmin->set('cn', 'OrganizationAdmin'); 
-        $ldap_object_sg_orgadmin->set('objectclass', (array('top','miniSecurityGroup'))); 
+        $ldap_object_sg_orgadmin->set('objectclass', (array('top','zacaciaSecurityGroup'))); 
         
         if ( ! parent::doAdd($ldap_object_sg_orgadmin) ) {
             $subtree = false;
@@ -57,7 +57,7 @@ class PlatformPeer extends BasePlatformPeer
         $ldap_object_sg_srvadmin = new LdapObject();
         $ldap_object_sg_srvadmin->setDn(sprintf("cn=ServerAdmin,ou=SecurityGroups,%s", $ldap_object->getDn())); 
         $ldap_object_sg_srvadmin->set('cn', 'ServerAdmin'); 
-        $ldap_object_sg_srvadmin->set('objectclass', (array('top','miniSecurityGroup'))); 
+        $ldap_object_sg_srvadmin->set('objectclass', (array('top','zacaciaSecurityGroup'))); 
         
         if ( ! parent::doAdd($ldap_object_sg_srvadmin) ) {
             $subtree = false;

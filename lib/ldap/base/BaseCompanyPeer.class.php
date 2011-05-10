@@ -177,7 +177,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_sg_1 = new LdapObject();
         $ldap_object_sg_1->setDn(sprintf("cn=AddressListAdmin,ou=SecurityGroups,%s", $ldap_object->getDn())); 
         $ldap_object_sg_1->set('cn', 'AddressListAdmin'); 
-        $ldap_object_sg_1->set('objectclass', (array('top','miniSecurityGroup'))); 
+        $ldap_object_sg_1->set('objectclass', (array('top','zacaciaSecurityGroup'))); 
         
         if ( ! parent::doAdd($ldap_object_sg_1) )
         {
@@ -187,7 +187,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_sg_2 = new LdapObject();
         $ldap_object_sg_2->setDn(sprintf("cn=ContactAdmin,ou=SecurityGroups,%s", $ldap_object->getDn())); 
         $ldap_object_sg_2->set('cn', 'ContactAdmin'); 
-        $ldap_object_sg_2->set('objectclass', (array('top','miniSecurityGroup'))); 
+        $ldap_object_sg_2->set('objectclass', (array('top','zacaciaSecurityGroup'))); 
         
         if ( ! parent::doAdd($ldap_object_sg_2) )
         {
@@ -197,7 +197,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_sg_3 = new LdapObject();
         $ldap_object_sg_3->setDn(sprintf("cn=DomainAdmin,ou=SecurityGroups,%s", $ldap_object->getDn())); 
         $ldap_object_sg_3->set('cn', 'DomainAdmin'); 
-        $ldap_object_sg_3->set('objectclass', (array('top','miniSecurityGroup'))); 
+        $ldap_object_sg_3->set('objectclass', (array('top','zacaciaSecurityGroup'))); 
         
         if ( ! parent::doAdd($ldap_object_sg_3) )
         {
@@ -207,7 +207,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_sg_4 = new LdapObject();
         $ldap_object_sg_4->setDn(sprintf("cn=ForwardAdmin,ou=SecurityGroups,%s", $ldap_object->getDn())); 
         $ldap_object_sg_4->set('cn', 'ForwardAdmin'); 
-        $ldap_object_sg_4->set('objectclass', (array('top','miniSecurityGroup'))); 
+        $ldap_object_sg_4->set('objectclass', (array('top','zacaciaSecurityGroup'))); 
         
         if ( ! parent::doAdd($ldap_object_sg_4) )
         {
@@ -217,7 +217,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_sg_5 = new LdapObject();
         $ldap_object_sg_5->setDn(sprintf("cn=GroupAdmin,ou=SecurityGroups,%s", $ldap_object->getDn())); 
         $ldap_object_sg_5->set('cn', 'GroupAdmin'); 
-        $ldap_object_sg_5->set('objectclass', (array('top','miniSecurityGroup'))); 
+        $ldap_object_sg_5->set('objectclass', (array('top','zacaciaSecurityGroup'))); 
         
         if ( ! parent::doAdd($ldap_object_sg_5) )
         {
@@ -227,7 +227,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_sg_6 = new LdapObject();
         $ldap_object_sg_6->setDn(sprintf("cn=UserAdmin,ou=SecurityGroups,%s", $ldap_object->getDn())); 
         $ldap_object_sg_6->set('cn', 'UserAdmin'); 
-        $ldap_object_sg_6->set('objectclass', (array('top','miniSecurityGroup'))); 
+        $ldap_object_sg_6->set('objectclass', (array('top','zacaciaSecurityGroup'))); 
         
         if ( ! parent::doAdd($ldap_object_sg_6) )
         {
@@ -265,7 +265,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_criteria->add('objectClass', 'top');
         $ldap_criteria->add('objectClass', 'organizationalRole');
         $ldap_criteria->add('objectClass', 'zarafa-company');
-        $ldap_criteria->add('objectClass', 'miniCompany');
+        $ldap_criteria->add('objectClass', 'zacaciaCompany');
         $ldap_criteria = self::configureCriteria($ldap_criteria);
         
         return $this->doSelectOne($ldap_criteria);

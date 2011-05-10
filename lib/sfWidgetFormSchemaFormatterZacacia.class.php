@@ -1,5 +1,5 @@
 <?php
-class sfWidgetFormSchemaFormatterMinivISP extends sfWidgetFormSchemaFormatter
+class sfWidgetFormSchemaFormatterZacacia extends sfWidgetFormSchemaFormatter
 {
   protected
     $rowFormat       = "<div id=\"form_item\">\n\t\t<div class=\"_name\">%label%%error%</div>\n\t\t<div class=\"_field\">%field%%help%%hidden_fields%</div>\n\t\t<div class=\"_ajaxCheck\"></div>\n\t</div>\n\t<!-- end #form_item -->",

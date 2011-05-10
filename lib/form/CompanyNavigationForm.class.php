@@ -1,5 +1,5 @@
 <?php
-class CompanyNavigationForm extends MinivISPForm
+class CompanyNavigationForm extends ZacaciaForm
 {
     public function configure()
     {

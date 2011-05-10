@@ -11,7 +11,7 @@ class CompanyPeer extends BaseCompanyPeer
         $c->add('objectClass', 'organizationalRole');
         $c->add('objectClass', 'zarafa-server');
         $c->add('objectClass', 'ipHost');
-        $c->add('objectClass', 'miniServer');
+        $c->add('objectClass', 'zacaciaServer');
         
         $servers = $this->doSelect($c);
 
@@ -33,7 +33,7 @@ class CompanyPeer extends BaseCompanyPeer
         $c->add('objectClass', 'inetOrgPerson');
         $c->add('objectClass', 'posixAccount');
         $c->add('objectClass', 'zarafa-user');
-        $c->add('objectClass', 'miniUser');
+        $c->add('objectClass', 'zacaciaUser');
         
         $users = $this->doSelect($c);
 

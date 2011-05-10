@@ -3,7 +3,7 @@
 /**
  * server actions.
  *
- * @package    MinivISP
+ * @package    Zacacia
  * @subpackage server
  * @author     Hugues Lepesant
  */
@@ -16,18 +16,18 @@ class serverActions extends sfActions
   */
     public function executeIndex(sfWebRequest $request)
     {
-        $data = $request->getParameter('minidata');
+        $data = $request->getParameter('zdata');
 
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
             $this->redirect('@platform');
         }
 
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'miniPlatform');
+        $c->add('objectClass', 'zacaciaPlatform');
         $l = new PlatformPeer();
         $l->setBaseDn($platformDn);
         $this->platform = $l->retrieveByDn($c);
@@ -37,11 +37,11 @@ class serverActions extends sfActions
         $c->add('objectClass', 'organizationalRole');
         $c->add('objectClass', 'zarafa-server');
         $c->add('objectClass', 'ipHost');
-        $c->add('objectClass', 'miniServer');
+        $c->add('objectClass', 'zacaciaServer');
+        #$c->add('objectClass', Array('top', 'organizationalRole', 'zarafa-server', 'ipHost', 'zacaciaServer'));
 
         $l = new ServerPeer();
         $l->setBaseDn(sprintf("ou=Servers,%s", $platformDn));
-
         $this->servers = $l->doSelect($c, 'base');
 
         $id=0;
@@ -55,7 +55,7 @@ class serverActions extends sfActions
             $criteria_user = new LDAPCriteria();
             $criteria_user->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
             $criteria_user->add('objectClass', 'zarafa-user');
-            $criteria_user->add('zarafaUserServer', $s->getCn());
+            $criteria_user->add('zacaciaUserServer', $s->getCn());
             $count_user = $l->doCount($criteria_user);
             $s->set('user_count', $count_user);
 
@@ -73,19 +73,19 @@ class serverActions extends sfActions
 
     public function executeNew(sfWebRequest $request)
     {
-        $data = $request->getParameter('minidata');
+        $data = $request->getParameter('zdata');
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
-          $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+          $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
           $this->redirect('@platform');
         }
 
         $this->form = new ServerForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
 
-        if ($request->isMethod('post') && $request->getParameter('minidata')) {
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
 
-            $this->form->bind($request->getParameter('minidata'));
+            $this->form->bind($request->getParameter('zdata'));
 
                 if ($this->form->isValid()) {
 
@@ -98,10 +98,10 @@ class serverActions extends sfActions
                     $server->setIpHostNumber($this->form->getValue('ip'));
 
                     if ( $this->form->getValue('undeletable') ) {
-                        $server->setMiniUnDeletable(1);
+                        $server->setZacaciaUnDeletable(1);
                     }
 
-                    $server->setMiniStatus($this->form->getValue('status'));
+                    $server->setZacaciaStatus($this->form->getValue('status'));
 
                     /* zarafa properties */
                     if ( $this->form->getValue('zarafaAccount') == 1 ) {
@@ -109,7 +109,7 @@ class serverActions extends sfActions
                         $server->setZarafaAccount(1);
 
                         if ( $this->form->getValue('multitenant') ) {
-                            $server->setMiniMultiTenant(1);
+                            $server->setZacaciaMultiTenant(1);
                         }
 
                         $server->setZarafaHttpPort($this->form->getValue('zarafaHttpPort'));
@@ -121,7 +121,7 @@ class serverActions extends sfActions
                     }
 
                     if ( $l->doAdd($server) ) {
-                        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                         echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
                         exit;
                     }
@@ -136,7 +136,7 @@ class serverActions extends sfActions
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'miniPlatform');
+        $c->add('objectClass', 'zacaciaPlatform');
         $l = new PlatformPeer();
         $l->setBaseDn($platformDn);
         $this->platform = $l->retrieveByDn($c);
@@ -148,17 +148,17 @@ class serverActions extends sfActions
 
     public function executeEdit(sfWebRequest $request)
     {
-        $data = $request->getParameter('minidata');
+        $data = $request->getParameter('zdata');
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
             $this->redirect('@platform');
         }
 
         $serverDn = $request->getParameter('serverDn', $data['serverDn']);
         if ( empty($serverDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing server's DN.");
-            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            $this->getUser()->setFlash('zJsAlert', "Missing server's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
             echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
         }
 
@@ -170,31 +170,31 @@ class serverActions extends sfActions
 
         $this->form = new ServerEditForm();
 
-        if ($request->isMethod('post') && $request->getParameter('minidata')) {
-            $this->form->bind($request->getParameter('minidata'));
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+            $this->form->bind($request->getParameter('zdata'));
 
             if ($this->form->isValid()) {
 
                 $this->server->setIpHostNumber($this->form->getValue('ip'));
-                $this->server->setMiniUnDeletable($this->form->getValue('undeletable'));
+                $this->server->setZacaciaUnDeletable($this->form->getValue('undeletable'));
                 if ( $this->form->getValue('undeletable') ) {
-                    $this->server->setMiniUnDeletable(1);
+                    $this->server->setZacaciaUnDeletable(1);
                 } else {
-                    $this->server->setMiniUnDeletable(0);
+                    $this->server->setZacaciaUnDeletable(0);
                 }
 
-                $this->server->setMiniStatus($this->form->getValue('status'));
+                $this->server->setZacaciaStatus($this->form->getValue('status'));
 
                 /* zarafa properties */
                 if ( $this->form->getValue('zarafaAccount') == 1 ) {
                     $this->server->setZarafaAccount(1);
-                    $this->server->setMiniMultiTenant($this->form->getValue('multitenant'));
+                    $this->server->setZacaciaMultiTenant($this->form->getValue('multitenant'));
                     $this->server->setZarafaHttpPort($this->form->getValue('zarafaHttpPort'));
                     $this->server->setZarafaSslPort($this->form->getValue('zarafaSslPort'));
                     $this->server->setZarafaContainsPublic($this->form->getValue('zarafaContainsPublic'));
                 } else {
                     $this->server->setZarafaAccount(0);
-                    $this->server->setMiniMultiTenant(0);
+                    $this->server->setZacaciaMultiTenant(0);
                     $this->server->setZarafaHttpPort(array());
                     $this->server->setZarafaSslPort(array());
                     $this->server->setZarafaContainsPublic(array());
@@ -203,7 +203,7 @@ class serverActions extends sfActions
                 #var_dump( $this->server ); exit;
 
                 if ( $l->doSave($this->server) ) {
-                    sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                     echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
                     exit;
                 }
@@ -216,11 +216,11 @@ class serverActions extends sfActions
         $this->form->getWidget('serverDn')->setDefault($serverDn);
         $this->form->getWidget('ip')->setDefault($this->server->getIpHostNumber());
 
-        if ( $this->server->getMiniUndeletable() ) {
+        if ( $this->server->getZacaciaUndeletable() ) {
             $this->form->getWidget('undeletable')->setDefault('true');
         }
 
-        if ( $this->server->getMiniStatus() == 'enable' ) {
+        if ( $this->server->getZacaciaStatus() == 'enable' ) {
             $this->form->getWidget('status')->setDefault('true');
         }
 
@@ -231,7 +231,7 @@ class serverActions extends sfActions
             if ( $this->server->getZarafaContainsPublic() ) {
                 $this->form->getWidget('zarafaContainsPublic')->setDefault('true');
             }
-            if ( $this->server->getMiniMultiTenant() ) {
+            if ( $this->server->getZacaciaMultiTenant() ) {
                 $this->form->getWidget('multitenant')->setDefault('true');
             }
         }
@@ -239,7 +239,7 @@ class serverActions extends sfActions
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'miniPlatform');
+        $c->add('objectClass', 'zacaciaPlatform');
         $l = new PlatformPeer();
         $l->setBaseDn($platformDn);
         $this->platform = $l->retrieveByDn($c);
@@ -253,14 +253,14 @@ class serverActions extends sfActions
     {
         $platformDn = $request->getParameter('platformDn');
         if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
             $this->redirect('@platform');
         }
 
         $serverDn = $request->getParameter('serverDn');
         if ( empty($serverDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
-            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
             echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
         }
 
@@ -270,15 +270,15 @@ class serverActions extends sfActions
         $l = new ServerPeer();
         $s = $l->retrieveByDn($c);
 
-        if ( 'enable' === $s->getMiniStatus()) {
-            $s->setMiniStatus(false);
+        if ( 'enable' === $s->getZacaciaStatus()) {
+            $s->setZacaciaStatus(false);
         } else {
-            $s->setMiniStatus(true);
+            $s->setZacaciaStatus(true);
         }
 
         $l->doSave($s);
 
-        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
         echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
         exit;
     }
@@ -287,14 +287,14 @@ class serverActions extends sfActions
     {
         $platformDn = $request->getParameter('platformDn');
         if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
             $this->redirect('@platform');
         }
 
         $serverDn = $request->getParameter('serverDn');
         if ( empty($serverDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
-            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
             echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
         }
 
@@ -304,11 +304,11 @@ class serverActions extends sfActions
         $l = new ServerPeer();
         $s = $l->retrieveByDn($c);
 
-        if ( 'disable' === $s->getMiniStatus()) {
+        if ( 'disable' === $s->getZacaciaStatus()) {
             $l->doDelete($s, false);
         }
 
-        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
         echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
         exit;
     }
@@ -336,7 +336,7 @@ class serverActions extends sfActions
         $c->add('objectClass', 'organizationalRole');
         $c->add('objectClass', 'zarafa-server');
         $c->add('objectClass', 'ipHost');
-        $c->add('objectClass', 'miniServer');
+        $c->add('objectClass', 'zacaciaServer');
         $c->add('cn', $request->getParameter('name'));
 
         $this->count = $l->doCount($c);
@@ -386,7 +386,7 @@ class serverActions extends sfActions
         $c->add('objectClass', 'organizationalRole');
         $c->add('objectClass', 'zarafa-server');
         $c->add('objectClass', 'ipHost');
-        $c->add('objectClass', 'miniServer');
+        $c->add('objectClass', 'zacaciaServer');
         $c->add('ipHostNumber', $request->getParameter('ip'));
 
         $this->count = $l->doCount($c);

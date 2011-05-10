@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+    $("#goback").click(function() {
+        $("#company_back").submit();
+    });
+
     $("#gotonew").click(function() {
         $("#domain_new").submit();
     });

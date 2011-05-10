@@ -24,11 +24,11 @@ server:
   param: { }
 
 company:
-  url:   /:module/:action
+  url:   /company/:action
   param: { module: company, action: index }
 
 domain:
-  url:   /:module/:action
+  url:   /domain/:action
   param: { module: domain, action: index }
 #
 #user:

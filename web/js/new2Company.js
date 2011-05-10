@@ -14,8 +14,8 @@ $(document).ready(function() {
         $("#form_cancel").submit();
     });
 /*
-    $("select#minidata_zarafaCompanyServer").change(function() {
-        if ( "_undefined_" == $("select#minidata_zarafaCompanyServer").val() ) {
+    $("select#zdata_zarafaCompanyServer").change(function() {
+        if ( "_undefined_" == $("select#zdata_zarafaCompanyServer").val() ) {
             hs_ok = 0;
             wq_ok = 1;
         } else {
@@ -26,22 +26,22 @@ $(document).ready(function() {
 */
     check_form();
 
-    $("input[type='checkbox']#minidata_zarafaQuotaOverride").change(function() {
-        if ($("input[type='checkbox']#minidata_zarafaQuotaOverride").is(':checked')) {
-            $("input[type='number']#minidata_zarafaQuotaWarn").removeAttr("disabled");
+    $("input[type='checkbox']#zdata_zarafaQuotaOverride").change(function() {
+        if ($("input[type='checkbox']#zdata_zarafaQuotaOverride").is(':checked')) {
+            $("input[type='number']#zdata_zarafaQuotaWarn").removeAttr("disabled");
             check_wq = 1;
             wq_ok = 0;
         } else {
-            $("input[type='number']#minidata_zarafaQuotaWarn").attr("disabled", true);
+            $("input[type='number']#zdata_zarafaQuotaWarn").attr("disabled", true);
             check_wq = 0;
             wq_ok = 1;
         }
         check_form();
     });
 
-    $("input[type='number']#minidata_zarafaQuotaWarn").change(function() {
+    $("input[type='number']#zdata_zarafaQuotaWarn").change(function() {
         if ( check_wq ) {
-            var val_qw = $("input[type='number']#minidata_zarafaQuotaWarn").validator();
+            var val_qw = $("input[type='number']#zdata_zarafaQuotaWarn").validator();
 
             if ( val_qw.data("validator").checkValidity() ) {
                 wq_ok = 1;

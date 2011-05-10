@@ -11,8 +11,8 @@ $(document).ready(function() {
         $("#form_cancel").submit();
     });
 
-    $("input[type='checkbox']#minidata_zarafaUserDefaultQuotaOverride").change(function() {
-        if ($("input[type='checkbox']#minidata_zarafaUserDefaultQuotaOverride").is(':checked')) {
+    $("input[type='checkbox']#zdata_zarafaUserDefaultQuotaOverride").change(function() {
+        if ($("input[type='checkbox']#zdata_zarafaUserDefaultQuotaOverride").is(':checked')) {
             $("#zarafaUserDefaultQuota").show();
         } else {
             $("#zarafaUserDefaultQuota").hide();

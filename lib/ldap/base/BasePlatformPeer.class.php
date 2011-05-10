@@ -76,7 +76,7 @@ class BasePlatformPeer extends LDAPPeer
         $ldap_criteria->setSearchScope(LDAPCriteria::BASE);
         $ldap_criteria->add('objectClass', 'top');
         $ldap_criteria->add('objectClass', 'organizationalRole');
-        $ldap_criteria->add('objectClass', 'miniPlatform');
+        $ldap_criteria->add('objectClass', 'zacaciaPlatform');
         $ldap_criteria = self::configureCriteria($ldap_criteria);
         
         return $this->doSelectOne($ldap_criteria);

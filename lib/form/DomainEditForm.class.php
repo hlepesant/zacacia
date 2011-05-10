@@ -1,5 +1,5 @@
 <?php
-class DomainEditForm extends MinivISPForm
+class DomainEditForm extends ZacaciaForm
 {
     public function configure()
     {

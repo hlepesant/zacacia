@@ -10,17 +10,17 @@ class BaseUserObject extends LDAPObject
 
     public function applyDefaultValues()
     {
-        $this->attributes['objectClass'] = Array('top', 'posixAccount', 'inetOrgPerson', 'zarafa-user', 'miniUser');
-        $this->attributes['cn'] = null;
-        $this->attributes['homeDirectory'] = '/dev/null';
-        $this->attributes['loginShell'] = '/bin/false';
-        $this->attributes['miniStatus'] = 'enable';
-        $this->attributes['miniUnDeletable'] = 'FALSE';
-        $this->attributes['zarafaAccount'] = 1;
-        $this->attributes['zarafaAdmin'] = 0;
-        $this->attributes['zarafaQuotaOverride'] = 0;
-        $this->attributes['zarafaSendAsPrivilege'] = array();
-        $this->attributes['zarafaUserServer'] = array();
+        $this->attributes['objectClass']            = Array('top', 'posixAccount', 'inetOrgPerson', 'zarafa-user', 'zacaciaUser');
+        $this->attributes['cn']                     = null;
+        $this->attributes['homeDirectory']          = '/dev/null';
+        $this->attributes['loginShell']             = '/bin/false';
+        $this->attributes['zacaciaStatus']          = 'enable';
+        $this->attributes['zacaciaUnDeletable']     = 'FALSE';
+        $this->attributes['zarafaAccount']          = 1;
+        $this->attributes['zarafaAdmin']            = 0;
+        $this->attributes['zarafaQuotaOverride']    = 0;
+        $this->attributes['zarafaSendAsPrivilege']  = Array();
+        $this->attributes['zarafaUserServer']       = Array();
 
         return $this;
     }
@@ -300,25 +300,25 @@ class BaseUserObject extends LDAPObject
         return $this->attributes[''];
     }
 */  
-    public function setMinistatus($v)
+    public function setZacaciastatus($v)
     {
-        $this->attributes['miniStatus'] = $v;
+        $this->attributes['zacaciaStatus'] = $v;
         return $this;
     }
 
-    public function getMinistatus()
+    public function getZacaciastatus()
     {
-        return $this->attributes['miniStatus'];
+        return $this->attributes['zacaciaStatus'];
     }
 
-    public function setMiniundeletable($v)
+    public function setZacaciaUndeletable($v)
     {
-        $this->attributes['miniUnDeletable'] = $v;
+        $this->attributes['zacaciaUnDeletable'] = $v;
         return $this;
     }
  
-    public function getMiniundeletable()
+    public function getZacaciaUndeletable()
     {
-        return $this->attributes['miniUnDeletable'];
+        return $this->attributes['zacaciaUnDeletable'];
     }
 }

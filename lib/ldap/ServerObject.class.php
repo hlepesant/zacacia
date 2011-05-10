@@ -7,7 +7,7 @@ class ServerObject extends BaseServerObject
     {
         $time_response = false;
     
-        if ( 'enable' == $this->getMinistatus() )
+        if ( 'enable' == $this->getZacaciaStatus() )
         {
             $time_response = shell_exec(sprintf("%s -c 1 %s -W 1 -n -s 16 | %s icmp_seq | %s -F \= '{print $4}'",
                 sfConfig::get('ping'),

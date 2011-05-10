@@ -11,10 +11,10 @@ $(document).ready(function() {
         $("#form_cancel").submit();
     });
 
-    var val_cn = $("input#minidata_cn").validator();
+    var val_cn = $("input#zdata_cn").validator();
 
-/*    $("input#minidata_cn").observe_field(0.5, function() { */
-    $("input#minidata_cn").blur(function() {
+/*    $("input#zdata_cn").observe_field(0.5, function() { */
+    $("input#zdata_cn").blur(function() {
 
         $("#checkName_msg").html("");
         $("#button_submit").attr("disabled", true);
@@ -32,16 +32,16 @@ $(document).ready(function() {
         }
     });
 
-    $("input[type='checkbox']#minidata_zarafaQuotaOverride").change(function() {
-        if ($("input[type='checkbox']#minidata_zarafaQuotaOverride").is(':checked')) {
+    $("input[type='checkbox']#zdata_zarafaQuotaOverride").change(function() {
+        if ($("input[type='checkbox']#zdata_zarafaQuotaOverride").is(':checked')) {
             $("#zarafaQuota").show();
         } else {
             $("#zarafaQuota").hide();
         }
     });
 
-    $("input[type='checkbox']#minidata_zarafaUserDefaultQuotaOverride").change(function() {
-        if ($("input[type='checkbox']#minidata_zarafaUserDefaultQuotaOverride").is(':checked')) {
+    $("input[type='checkbox']#zdata_zarafaUserDefaultQuotaOverride").change(function() {
+        if ($("input[type='checkbox']#zdata_zarafaUserDefaultQuotaOverride").is(':checked')) {
             $("#zarafaUserDefaultQuota").show();
         } else {
             $("#zarafaUserDefaultQuota").hide();

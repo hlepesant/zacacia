@@ -1,7 +1,7 @@
 <div id="collection_line_<?php echo (($id & 1) ? 'odd' : 'even'); ?>">
     <form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
 <?php echo $f->renderHiddenFields() ?>
-    <div class="_name_<?php echo $p->getMiniStatus() ?>"><?php echo $p->getCn() ?></div>
+    <div class="_name_<?php echo $p->getZacaciaStatus() ?>"><?php echo $p->getCn() ?></div>
     <!-- end #line._name_ -->
     <div class="_actions">
 <?php
@@ -13,11 +13,11 @@ echo link_to_function(
 /* -- Status -- */
 echo link_to_function(
     image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Status')),
-    "jumpTo('".sprintf('%03d', $id)."', '".addslashes($p->getCn())."', 'status', '".$p->getMiniStatus()."')");
+    "jumpTo('".sprintf('%03d', $id)."', '".addslashes($p->getCn())."', 'status', '".$p->getZacaciaStatus()."')");
 
 /* -- Delete -- */
-#if ( !$p->getMiniUnDeletable() && 'disable' === $p->getMiniStatus() && 0 === $p->get('company_count') ) {
-if ( $p->getMiniUnDeletable() && 'disable' === $p->getMiniStatus() ) {
+#if ( !$p->getZacaciaUnDeletable() && 'disable' === $p->getZacaciaStatus() && 0 === $p->get('company_count') ) {
+if ( $p->getZacaciaUnDeletable() && 'disable' === $p->getZacaciaStatus() ) {
     echo link_to_function(
         image_tag('famfam/cross.png'),
         "jumpTo('".sprintf('%03d', $id)."', '".addslashes($p->getCn())."', 'delete', null)");

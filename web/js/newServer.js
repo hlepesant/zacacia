@@ -19,9 +19,9 @@ $(document).ready(function() {
     });
 
 
-    var val_cn = $('input#minidata_cn').validator();
+    var val_cn = $('input#zdata_cn').validator();
 
-    $('input#minidata_cn').blur(function() {
+    $('input#zdata_cn').blur(function() {
 
         if ( val_cn.data('validator').checkValidity() ) {
 
@@ -40,7 +40,7 @@ $(document).ready(function() {
 
             $.get( json_resolvhost_url, { name: $(this).val() },
                 function(data){
-                    $('input#minidata_ip').val(data.ip);
+                    $('input#zdata_ip').val(data.ip);
                     if ( ! data.disabled ) {
                         ip_ok = 1;
                     }
@@ -50,25 +50,25 @@ $(document).ready(function() {
         }
     });
 /*
-    $("input[type='checkbox']#minidata_zarafaAccount").change(function() {
+    $("input[type='checkbox']#zdata_zarafaAccount").change(function() {
 
         if ($(this).is(':checked')) {
-            $("input[type='text']#minidata_zarafaHttpPort").removeAttr("disabled");
-            $("input[type='text']#minidata_zarafaSslPort").removeAttr("disabled");
-            $("input[type='checkbox']#minidata_multitenant").removeAttr("disabled");
-            $("input[type='checkbox']#minidata_zarafaContainsPublic").removeAttr("disabled");
+            $("input[type='text']#zdata_zarafaHttpPort").removeAttr("disabled");
+            $("input[type='text']#zdata_zarafaSslPort").removeAttr("disabled");
+            $("input[type='checkbox']#zdata_multitenant").removeAttr("disabled");
+            $("input[type='checkbox']#zdata_zarafaContainsPublic").removeAttr("disabled");
         } else {
-            $("input[type='text']#minidata_zarafaHttpPort").attr("disabled", true);
-            $("input[type='text']#minidata_zarafaSslPort").attr("disabled", true);
-            $("input[type='checkbox']#minidata_multitenant").attr("disabled", true);
-            $("input[type='checkbox']#minidata_zarafaContainsPublic").attr("disabled", true);
+            $("input[type='text']#zdata_zarafaHttpPort").attr("disabled", true);
+            $("input[type='text']#zdata_zarafaSslPort").attr("disabled", true);
+            $("input[type='checkbox']#zdata_multitenant").attr("disabled", true);
+            $("input[type='checkbox']#zdata_zarafaContainsPublic").attr("disabled", true);
         }
     });
 */
 /*
-    var val_ip = $("input#minidata_ip").validator();
+    var val_ip = $("input#zdata_ip").validator();
 
-    $("input#minidata_cn").change(function() {
+    $("input#zdata_cn").change(function() {
         $("#checkIpAddress_msg_msg").html('');
         if ( val_ip.data("validator").checkValidity() ) {
             $("#checkIpAddress_msg_msg").html('<img src=\'/images/famfam/tick.png\' />');

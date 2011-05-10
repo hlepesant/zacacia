@@ -3,9 +3,9 @@
 /**
  * domain actions.
  *
- * @package    MinivISP
+ * @package    Zacacia
  * @subpackage domain
- * @author     Your name here
+ * @author     Hugues Lepesant
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 class domainActions extends sfActions
@@ -17,7 +17,7 @@ class domainActions extends sfActions
   */
     public function executeIndex(sfWebRequest $request)
     {
-        $data = $request->getParameter('minidata');
+        $data = $request->getParameter('zdata');
           
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
@@ -31,16 +31,34 @@ class domainActions extends sfActions
               echo fake_post($this, '@company', Array('holdingDn' => $holdingDn));
               exit;
         }
+
+/* zacaciaPlatform */
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaPlatform');
+        $l = new PlatformPeer();
+        $l->setBaseDn($platformDn);
+        $this->platform = $l->retrieveByDn($c);
+
+/* zacaciaCompany */
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaCompany');
+        $l = new CompanyPeer();
+        $l->setBaseDn($companyDn);
+        $this->company = $l->retrieveByDn($c);
           
-        $criteria = new LDAPCriteria();
-        $criteria->add('objectClass', 'top');
-        $criteria->add('objectClass', 'organizationalRole');
-        $criteria->add('objectClass', 'miniDomain');
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaDomain');
         
         $l = new DomainPeer();
         $l->setBaseDn(sprintf("ou=Domains,%s", $companyDn));
         
-        $this->domains = $l->doSelect($criteria, 'extended');
+        $this->domains = $l->doSelect($c, 'extended');
         
         $id=0;
         $this->forms = array();
@@ -67,24 +85,6 @@ class domainActions extends sfActions
             $id++;
         }
         
-        $c1 = new LDAPCriteria();
-        $c1->add('objectClass', 'top');
-        $c1->add('objectClass', 'organizationalRole');
-        $c1->add('objectClass', 'miniPlatform');
-
-        $l1 = new PlatformPeer();
-        $l1->setBaseDn($platformDn);
-        $this->platform = $l1->retrieveByDn($c1);
-        
-        $c2 = new LDAPCriteria();
-        $c2->add('objectClass', 'top');
-        $c2->add('objectClass', 'organizationalRole');
-        $c2->add('objectClass', 'miniCompany');
-
-        $l2 = new CompanyPeer();
-        $l2->setBaseDn($companyDn);
-        $this->company = $l2->retrieveByDn($c2);
-        
         $this->new = new DomainNavigationForm();
         unset($this->new['domainDn']);
         $this->new->getWidget('platformDn')->setDefault($platformDn);
@@ -93,7 +93,7 @@ class domainActions extends sfActions
 
     public function executeNew(sfWebRequest $request)
     {
-        $data = $request->getParameter('minidata');
+        $data = $request->getParameter('zdata');
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
           $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
@@ -103,7 +103,7 @@ class domainActions extends sfActions
         $companyDn = $request->getParameter('companyDn', $data['companyDn']);
         if ( empty($companyDn) ) {
               sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-              echo fake_post($this, '@company', Array('holdingDn' => $holdingDn));
+              echo fake_post($this, '@domain', Array('holdingDn' => $holdingDn, 'companyDn' => $companyDn));
               exit;
         }
     
@@ -111,9 +111,9 @@ class domainActions extends sfActions
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
     
-        if ($request->isMethod('post') && $request->getParameter('minidata'))
+        if ($request->isMethod('post') && $request->getParameter('zdata'))
         {
-            $this->form->bind($request->getParameter('minidata'));
+            $this->form->bind($request->getParameter('zdata'));
             
                 if ($this->form->isValid())
                 {
@@ -123,12 +123,12 @@ class domainActions extends sfActions
                     $d = new DomainObject();
                     $d->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
                     $d->setCn($this->form->getValue('cn'));
-                    $d->setMiniStatus($this->form->getValue('status'));
-                    $d->setMiniUnDeletable($this->form->getValue('undeletable'));
+                    $d->setZacaciaStatus($this->form->getValue('status'));
+                    $d->setZacaciaUnDeletable($this->form->getValue('undeletable'));
 
                     if ( $l->doAdd($d) )
                     {
-                        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                         echo fake_post($this, 'domain/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
                         exit;
                     }
@@ -138,35 +138,34 @@ class domainActions extends sfActions
                     $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
                 }
         }
-        
-        $c1 = new LDAPCriteria();
-        $c1->add('objectClass', 'top');
-        $c1->add('objectClass', 'organizationalRole');
-        $c1->add('objectClass', 'miniPlatform');
 
-        $l1 = new PlatformPeer();
-        $l1->setBaseDn($platformDn);
-        $this->platform = $l1->retrieveByDn($c1);
-        
-        $c2 = new LDAPCriteria();
-        $c2->add('objectClass', 'top');
-        $c2->add('objectClass', 'organizationalRole');
-        $c2->add('objectClass', 'miniCompany');
+/* zacaciaPlatform */
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaPlatform');
+        $l = new PlatformPeer();
+        $l->setBaseDn($platformDn);
+        $this->platform = $l->retrieveByDn($c);
 
-        $l2 = new CompanyPeer();
-        $l2->setBaseDn($companyDn);
-        $this->company = $l2->retrieveByDn($c2);
-        
+/* zacaciaCompany */
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaCompany');
+        $l = new CompanyPeer();
+        $l->setBaseDn($companyDn);
+        $this->company = $l->retrieveByDn($c);
         
         $this->cancel = new DomainNavigationForm();
         unset($this->cancel['domainDn'], $this->cancel['destination']);
-        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
-        $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
+        $this->cancel->getWidget('platformDn')->setDefault($this->platform->getDn());
+        $this->cancel->getWidget('companyDn')->setDefault($this->company->getDn());
     }
 
     public function executeEdit(sfWebRequest $request)
     {
-        $data = $request->getParameter('minidata');
+        $data = $request->getParameter('zdata');
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
@@ -200,18 +199,18 @@ class domainActions extends sfActions
         $this->form->getWidget('companyDn')->setDefault($companyDn);
         $this->form->getWidget('domainDn')->setDefault($domainDn);
     
-        if ($request->isMethod('post') && $request->getParameter('minidata'))
+        if ($request->isMethod('post') && $request->getParameter('zdata'))
         {
-            $this->form->bind($request->getParameter('minidata'));
+            $this->form->bind($request->getParameter('zdata'));
             
                 if ($this->form->isValid())
                 {
-                    $d->setMiniStatus($this->form->getValue('status'));
-                    $d->setMiniUnDeletable($this->form->getValue('undeletable'));
+                    $d->setZacaciaStatus($this->form->getValue('status'));
+                    $d->setZacaciaUnDeletable($this->form->getValue('undeletable'));
 
                     if ( $l->doSave($d) )
                     {
-                        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                         echo fake_post($this, 'domain/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
                         exit;
                     }
@@ -241,14 +240,14 @@ class domainActions extends sfActions
         $companyDn = $request->getParameter('companyDn');
         if ( empty($companyDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing company's DN.");
-            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
             echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
         }
         
         $domainDn = $request->getParameter('domainDn');
         if ( empty($domainDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing domain's DN.");
-            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
             echo fake_post($this, 'domain/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         }
         
@@ -258,18 +257,18 @@ class domainActions extends sfActions
         $l = new DomainPeer();
         $d = $l->retrieveByDn($c);
         
-        if ( 'enable' === $d->getMiniStatus())
+        if ( 'enable' === $d->getZacaciaStatus())
         {
-            $d->setMiniStatus('disable');
+            $d->setZacaciaStatus('disable');
         }
         else
         {
-            $d->setMiniStatus('enable');
+            $d->setZacaciaStatus('enable');
         }
 
         $l->doSave($d);
         
-        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
         echo fake_post($this, 'domain/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         exit;
     }
@@ -285,14 +284,14 @@ class domainActions extends sfActions
         $companyDn = $request->getParameter('companyDn');
         if ( empty($companyDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing company's DN.");
-            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
             echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
         }
         
         $domainDn = $request->getParameter('domainDn');
         if ( empty($domainDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing domain's DN.");
-            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
             echo fake_post($this, 'domain/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         }
         
@@ -303,12 +302,12 @@ class domainActions extends sfActions
         $l = new DomainPeer();
         $d = $l->retrieveByDn($c);
 
-        if ( 'disable' === $d->getMiniStatus())
+        if ( 'disable' === $d->getZacaciaStatus())
         {
             $l->doDelete($d, false);
         }
         
-        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
         echo fake_post($this, 'domain/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         exit;
     }

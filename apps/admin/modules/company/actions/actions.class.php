@@ -3,7 +3,7 @@
 /**
  * organization actions.
  *
- * @package    MinivISP
+ * @package    Zacacia
  * @subpackage company
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
@@ -17,18 +17,18 @@ class companyActions extends sfActions
   */
     public function executeIndex(sfWebRequest $request)
     {
-        $data = $request->getParameter('minidata');
+        $data = $request->getParameter('zdata');
         
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
             $this->redirect('@platform');
         }
 
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'miniPlatform');
+        $c->add('objectClass', 'zacaciaPlatform');
         $l = new PlatformPeer();
         $l->setBaseDn($platformDn);
         $this->platform = $l->retrieveByDn($c);
@@ -37,7 +37,7 @@ class companyActions extends sfActions
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
         $c->add('objectClass', 'zarafa-company');
-        $c->add('objectClass', 'miniCompany');
+        $c->add('objectClass', 'zacaciaCompany');
         
         $l = new CompanyPeer();
         $l->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
@@ -83,10 +83,10 @@ class companyActions extends sfActions
 
     public function executeNew(sfWebRequest $request)
     {
-        $data = $request->getParameter('minidata');
+        $data = $request->getParameter('zdata');
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
-          $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+          $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
           $this->redirect('@platform');
         }
 
@@ -94,8 +94,8 @@ class companyActions extends sfActions
 
         $this->form->getWidget('platformDn')->setDefault($platformDn);
     
-        if ($request->isMethod('post') && $request->getParameter('minidata')) {
-            $this->form->bind($request->getParameter('minidata'));
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+            $this->form->bind($request->getParameter('zdata'));
             
             if ($this->form->isValid()) {
 
@@ -107,15 +107,15 @@ class companyActions extends sfActions
                 $company->setCn($this->form->getValue('cn'));
 /*
                 if ( $this->form->getValue('status') ) {
-                    $company->setMiniStatus('enable');
+                    $company->setZacaciaStatus('enable');
                 } else {
-                    $company->setMiniStatus('disable');
+                    $company->setZacaciaStatus('disable');
                 }
 */
-                $company->setMiniStatus($this->form->getValue('status'));
+                $company->setZacaciaStatus($this->form->getValue('status'));
 
                 if ( $this->form->getValue('undeletable') ) {
-                    $company->setMiniUnDeletable(1);
+                    $company->setZacaciaUnDeletable(1);
                 }
 
                 if ( $this->form->getValue('zarafaQuotaOverride') ) {
@@ -131,7 +131,7 @@ class companyActions extends sfActions
                 }
 
                 if ( $l->doAdd($company) ) {
-                    sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                     echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
                     exit;
                 }
@@ -147,7 +147,7 @@ class companyActions extends sfActions
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'miniPlatform');
+        $c->add('objectClass', 'zacaciaPlatform');
         $l = new PlatformPeer();
         $l->setBaseDn($platformDn);
         $this->platform = $l->retrieveByDn($c);
@@ -164,8 +164,8 @@ class companyActions extends sfActions
 
         $this->form = new CompanyNew2Form();
 
-        if ($request->isMethod('post') && $request->getParameter('minidata')) {
-            $this->form->bind($request->getParameter('minidata'));
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+            $this->form->bind($request->getParameter('zdata'));
             
             if ($this->form->isValid()) {
                 $data = array_merge($company_data, $this->form->getValues());
@@ -177,7 +177,7 @@ class companyActions extends sfActions
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'miniPlatform');
+        $c->add('objectClass', 'zacaciaPlatform');
         $l = new PlatformPeer();
         $l->setBaseDn($platformDn);
         $this->platform = $l->retrieveByDn($c);
@@ -206,8 +206,8 @@ class companyActions extends sfActions
 
         $this->form = new CompanyNew3Form();
 
-        if ($request->isMethod('post') && $request->getParameter('minidata')) {
-            $this->form->bind($request->getParameter('minidata'));
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+            $this->form->bind($request->getParameter('zdata'));
             
             if ($this->form->isValid()) {
                 $data = array_merge($company_data, $this->form->getValues());
@@ -215,8 +215,8 @@ class companyActions extends sfActions
                 $company = new CompanyObject();
                 $company->setDn(sprintf("cn=%s,%s", $data['cn'], $l->getBaseDn()));
                 $company->setCn($data['cn']);
-                $company->setMiniStatus($data['status']);
-                $company->setMiniUnDeletable($data['undeletable']);
+                $company->setZacaciaStatus($data['status']);
+                $company->setZacaciaUnDeletable($data['undeletable']);
 
                 if ( !empty($data['zarafaQuotaOverride']) ) {
                     $company->setZarafaQuotaOverride(1);
@@ -232,7 +232,7 @@ class companyActions extends sfActions
 
                 if ( $l->doAdd($company) ) {
                     $this->getUser()->setAttribute('company_data', null);
-                    sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                     echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
                     exit;
                 }
@@ -242,7 +242,7 @@ class companyActions extends sfActions
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'miniPlatform');
+        $c->add('objectClass', 'zacaciaPlatform');
         $l = new PlatformPeer();
         $l->setBaseDn($platformDn);
         $this->platform = $l->retrieveByDn($c);
@@ -255,18 +255,18 @@ class companyActions extends sfActions
 
     public function executeEdit(sfWebRequest $request)
     {
-        $data = $request->getParameter('minidata');
+        $data = $request->getParameter('zdata');
 
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
             $this->redirect('@platform');
         }
 
         $companyDn = $request->getParameter('companyDn', $data['companyDn']);
         if ( empty($companyDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing company's DN.");
-            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            $this->getUser()->setFlash('zJsAlert', "Missing company's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
             echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
         }
 
@@ -282,8 +282,8 @@ class companyActions extends sfActions
         
         $this->form = new CompanyEditForm();
     
-        if ($request->isMethod('post') && $request->getParameter('minidata')) {
-            $this->form->bind($request->getParameter('minidata'));
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+            $this->form->bind($request->getParameter('zdata'));
             
             if ($this->form->isValid()) {
 
@@ -291,14 +291,14 @@ class companyActions extends sfActions
                 #exit;
 /*
                 if ( $this->form->getValue('status') ) {
-                    $this->company->setMiniStatus('enable');
+                    $this->company->setZacaciaStatus('enable');
                 } else {
-                    $this->company->setMiniStatus('disable');
+                    $this->company->setZacaciaStatus('disable');
                 }
 */
-                $this->company->setMiniStatus($this->form->getValue('status'));
+                $this->company->setZacaciaStatus($this->form->getValue('status'));
 
-                $this->company->setMiniUnDeletable($this->form->getValue('undeletable'));
+                $this->company->setZacaciaUnDeletable($this->form->getValue('undeletable'));
 
                 if ($this->form->getValue('zarafaQuotaOverride')) {
                     $this->company->setZarafaQuotaOverride(1);
@@ -323,7 +323,7 @@ class companyActions extends sfActions
 #                print_r( $this->company ); exit;
 
                 if ( $l->doSave($this->company) ) {
-                    sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                     echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
                     exit;
                 }
@@ -335,8 +335,8 @@ class companyActions extends sfActions
         
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
-        $this->form->getWidget('status')->setDefault($this->company->getMiniStatus());
-        $this->form->getWidget('undeletable')->setDefault($this->company->getMiniUndeletable());
+        $this->form->getWidget('status')->setDefault($this->company->getZacaciaStatus());
+        $this->form->getWidget('undeletable')->setDefault($this->company->getZacaciaUndeletable());
         
         if ( 1 == $this->company->getZarafaQuotaOverride() ) {
             $this->form->getWidget('zarafaQuotaOverride')->setDefault(1);
@@ -356,7 +356,7 @@ class companyActions extends sfActions
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'miniPlatform');
+        $c->add('objectClass', 'zacaciaPlatform');
         $l = new PlatformPeer();
         $l->setBaseDn($platformDn);
         $this->platform = $l->retrieveByDn($c);
@@ -382,8 +382,8 @@ class companyActions extends sfActions
         
         $this->form = new CompanyEdit2Form();
     
-        if ($request->isMethod('post') && $request->getParameter('minidata')) {
-            $this->form->bind($request->getParameter('minidata'));
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+            $this->form->bind($request->getParameter('zdata'));
             
             if ($this->form->isValid()) {
                 $data = array_merge($company_data, $this->form->getValues());
@@ -425,14 +425,14 @@ class companyActions extends sfActions
         
         $this->form = new CompanyEdit3Form();
     
-        if ($request->isMethod('post') && $request->getParameter('minidata')) {
-            $this->form->bind($request->getParameter('minidata'));
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+            $this->form->bind($request->getParameter('zdata'));
             
             if ($this->form->isValid()) {
                 $data = array_merge($company_data, $this->form->getValues());
 
-                $company->setMiniStatus($data['status']);
-                $company->setMiniUnDeletable($data['undeletable']);
+                $company->setZacaciaStatus($data['status']);
+                $company->setZacaciaUnDeletable($data['undeletable']);
 
                 if ( !empty($data['zarafaQuotaOverride']) ) {
                     $company->setZarafaQuotaOverride(1);
@@ -456,7 +456,7 @@ class companyActions extends sfActions
 
                 if ( $l->doSave($company) ) {
                     $this->getUser()->setAttribute('company_data', null);
-                    sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                     echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
                     exit;
                 }
@@ -483,14 +483,14 @@ class companyActions extends sfActions
     {
         $platformDn = $request->getParameter('platformDn');
         if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
             $this->redirect('@platform');
         }
 
         $companyDn = $request->getParameter('companyDn');
         if ( empty($companyDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing company's DN.");
-            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            $this->getUser()->setFlash('zJsAlert', "Missing company's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
             echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
         }
 
@@ -500,15 +500,15 @@ class companyActions extends sfActions
         $l = new CompanyPeer();
         $company = $l->retrieveByDn($criteria);
 
-        if ( 'enable' === $company->getMiniStatus()) {
-            $company->setMiniStatus(false);
+        if ( 'enable' === $company->getZacaciaStatus()) {
+            $company->setZacaciaStatus(false);
         } else {
-            $company->setMiniStatus(true);
+            $company->setZacaciaStatus(true);
         }
 
         $l->doSave($company);
 
-        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
         echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
         exit;
     }
@@ -517,14 +517,14 @@ class companyActions extends sfActions
     {
         $platformDn = $request->getParameter('platformDn');
         if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
             $this->redirect('@platform');
         }
 
         $companyDn = $request->getParameter('companyDn');
         if ( empty($companyDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing company's DN.");
-            sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+            $this->getUser()->setFlash('zJsAlert', "Missing company's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
             echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
         }
 
@@ -534,11 +534,11 @@ class companyActions extends sfActions
         $l = new CompanyPeer();
         $company = $l->retrieveByDn($criteria);
 
-        if ( 'disable' === $company->getMiniStatus()) {
+        if ( 'disable' === $company->getZacaciaStatus()) {
             $l->doDelete($company, true);
         }
 
-        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
         echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
         exit;
     }
@@ -566,7 +566,7 @@ class companyActions extends sfActions
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
         $c->add('objectClass', 'zarafa-company');
-        $c->add('objectClass', 'miniCompany');
+        $c->add('objectClass', 'zacaciaCompany');
         $c->add('cn', $request->getParameter('name'));
 
         $this->count = $l->doCount($c);

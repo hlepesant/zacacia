@@ -11,19 +11,18 @@ class ProjectConfiguration extends sfProjectConfiguration
 
     sfConfig::set('sf_logging_enabled', true);
 
-    sfConfig::set('projetctName', 'Zacacia'); //'MinivISP');
-    sfConfig::set('projetctDesc', 'zarafa + ldap = Zacacia'); //'Identity Lifecycle Manager for Zarafa');
+    sfConfig::set('projetctName', 'Zacacia');
+    sfConfig::set('projetctDesc', 'zarafa + ldap = Zacacia');
 
-    sfConfig::set('widgetNameFormat', 'minidata');
-    sfConfig::set('widgetFormaterName', 'MinivISP');
+    sfConfig::set('widgetNameFormat', 'zdata');
+    sfConfig::set('widgetFormaterName', 'Zacacia');
 
 # Ldap Internal
     sfConfig::set('ldap_host', "localhost");
     sfConfig::set('ldap_use_ssl', false);
-    sfConfig::set('ldap_root_dn', "cn=admin,dc=minivisp,dc=org");
-    sfConfig::set('ldap_root_pw', "minivisp");
-    #sfConfig::set('ldap_bind_dn', 'ou=MinivISP,dc=minivisp,dc=org');
-    sfConfig::set('ldap_base_dn', 'ou=MinivISP,dc=minivisp,dc=org');
+    sfConfig::set('ldap_root_dn', "cn=admin,dc=zarafa,dc=com");
+    sfConfig::set('ldap_root_pw', "TheTreeThatHidesTheForest");
+    sfConfig::set('ldap_base_dn', 'ou=Zacacia,ou=Applications,dc=zarafa,dc=com');
 
 # Zarafa Internal
     sfConfig::set('zarafaHttpPort', 236);

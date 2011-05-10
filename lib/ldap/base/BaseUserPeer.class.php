@@ -95,7 +95,7 @@ class BaseUserPeer extends LDAPPeer
         $ldap_criteria->add('objectClass', 'inetOrgPerson');
         $ldap_criteria->add('objectClass', 'posixAccount');
         $ldap_criteria->add('objectClass', 'zarafa-user');
-        $ldap_criteria->add('objectClass', 'miniUser');
+        $ldap_criteria->add('objectClass', 'zacaciaUser');
 
 
         $ldap_criteria = self::configureCriteria($ldap_criteria);

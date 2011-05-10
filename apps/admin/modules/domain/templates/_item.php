@@ -2,7 +2,7 @@
     <form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
 <?php echo $f->renderHiddenFields() ?>
 
-    <div class="_name_<?php echo $d->getMiniStatus() ?>"><?php echo $d->getCn() ?></div>
+    <div class="_name_<?php echo $d->getZacaciaStatus() ?>"><?php echo $d->getCn() ?></div>
     <!-- end #line._name_ -->
 
     <div class="_actions">
@@ -10,10 +10,10 @@
 /* Status */
 echo link_to_function(
     image_tag('famfam/arrow_rotate_clockwise.png', array('title' => __('Status'))), 
-    "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($d->getCn()))."', 'status', '".$d->getMiniStatus()."')");
+    "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($d->getCn()))."', 'status', '".$d->getZacaciaStatus()."')");
 
 /* Delete */
-if ( $d->getMiniUnDeletable() && 'disable' === $d->getMiniStatus() && 0 === $d->get('user_count') ) {
+if ( $d->getZacaciaUnDeletable() && 'disable' === $d->getZacaciaStatus() && 0 === $d->get('user_count') ) {
     echo link_to_function(
         image_tag('famfam/cross.png', array('title' => __('Delete'))), 
         "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($d->getCn()))."', 'delete', null)");

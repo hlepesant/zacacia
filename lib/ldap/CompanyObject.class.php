@@ -7,7 +7,7 @@ class CompanyObject extends BaseCompanyObject
         $c = new LDAPCriteria();
         $c->setBaseDn(sprintf("ou=Domains,%s", $this->getDn()));
         $c->add('objectClass', 'top');
-        $c->add('objectClass', 'miniDomain');
+        $c->add('objectClass', 'zacaciaDomain');
         $c->add('cn', '*');
         $count = $l->doCount($c);
     
@@ -26,7 +26,7 @@ class CompanyObject extends BaseCompanyObject
         $c->setBaseDn(sprintf("ou=Users,%s", $this->getDn()));
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'zarafa-user');
-        $c->add('objectClass', 'miniUser');
+        $c->add('objectClass', 'zacaciaUser');
         $c->add('cn', '*');
         $count = $l->doCount($c);
     
@@ -45,7 +45,7 @@ class CompanyObject extends BaseCompanyObject
         $c->setBaseDn(sprintf("ou=Groups,%s", $this->getDn()));
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'zarafa-group');
-        $c->add('objectClass', 'miniGroup');
+        $c->add('objectClass', 'zacaciaGroup');
         $c->add('cn', '*');
         $count = $l->doCount($c);
     
@@ -63,7 +63,7 @@ class CompanyObject extends BaseCompanyObject
         $c = new LDAPCriteria();
         $c->setBaseDn(sprintf("ou=Forwards,%s", $this->getDn()));
         $c->add('objectClass', 'top');
-        $c->add('objectClass', 'miniForward');
+        $c->add('objectClass', 'zacaciaForward');
         $c->add('cn', '*');
         $count = $l->doCount($c);
     
@@ -82,7 +82,7 @@ class CompanyObject extends BaseCompanyObject
         $c->setBaseDn(sprintf("ou=Contacts,%s", $this->getDn()));
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'zarafa-contact');
-        $c->add('objectClass', 'miniContact');
+        $c->add('objectClass', 'zacaciaContact');
         $c->add('cn', '*');
         $count = $l->doCount($c);
     
@@ -101,7 +101,7 @@ class CompanyObject extends BaseCompanyObject
         $c->setBaseDn(sprintf("ou=AddressLists,%s", $this->getDn()));
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'zarafa-addresslist');
-        $c->add('objectClass', 'miniForward');
+        $c->add('objectClass', 'zacaciaForward');
         $c->add('cn', '*');
         $count = $l->doCount($c);
     

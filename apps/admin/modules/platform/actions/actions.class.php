@@ -3,7 +3,7 @@
 /**
  * platform actions.
  *
- * @package    MinivISP
+ * @package    Zacacia
  * @subpackage platform
  * @author     Hugues Lepesant
  */
@@ -17,7 +17,7 @@ class platformActions extends sfActions
     public function executeIndex(sfWebRequest $request)
     {
         $criteria = new LDAPCriteria();
-        $criteria->add('objectClass', 'miniPlatform');
+        $criteria->add('objectClass', 'zacaciaPlatform');
         $criteria->setSortFilter('cn');
 
         $l = new PlatformPeer();
@@ -34,7 +34,7 @@ class platformActions extends sfActions
 
             $criteria_company = new LDAPCriteria();
             $criteria_company->setBaseDn(sprintf("ou=Organizations,%s", $p->getDn()));
-            $criteria_company->add('objectClass', 'miniCompany');
+            $criteria_company->add('objectClass', 'zacaciaCompany');
             $criteria_company->add('cn', '*');
             $count_company = $l->doCount($criteria_company);
 
@@ -54,9 +54,9 @@ class platformActions extends sfActions
     {
         $this->form = new PlatformForm();
 
-        if ($request->isMethod('post') && $request->getParameter('minidata')) {
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
 
-            $this->form->bind($request->getParameter('minidata'));
+            $this->form->bind($request->getParameter('zdata'));
 
             if ($this->form->isValid()) {
 
@@ -67,25 +67,25 @@ class platformActions extends sfActions
                 $platform->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
                 $platform->setCn($this->form->getValue('cn'));
                 if ( $this->form->getValue('multitenant') ) {
-                    $platform->setMiniMultiTenant(1);
+                    $platform->setZacaciaMultiTenant(1);
                 }
                 if ( $this->form->getValue('multiserver') ) {
-                    $platform->setMiniMultiServer(1);
+                    $platform->setZacaciaMultiServer(1);
                 }
                 if ( $this->form->getValue('undeletable') ) {
-                    $platform->setMiniUnDeletable(1);
+                    $platform->setZacaciaUnDeletable(1);
                 }
 
-                $platform->setMiniStatus($this->form->getValue('status'));
+                $platform->setZacaciaStatus($this->form->getValue('status'));
 /*
                 if ( $this->form->getValue('status') ) {
-                    $platform->setMiniStatus('enable');
+                    $platform->setZacaciaStatus('enable');
                 } else {
-                    $platform->setMiniStatus('disable');
+                    $platform->setZacaciaStatus('disable');
                 }
 */
                 if ( $l->doAdd($platform) ) {
-                  sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                  sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                   echo fake_post($this, 'platform/index', Array());
                   exit;
                 }
@@ -99,18 +99,18 @@ class platformActions extends sfActions
 
     public function executeEdit(sfWebRequest $request)
     {
-        $data = $request->getParameter('minidata');
+        $data = $request->getParameter('zdata');
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
 
         if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
             $this->redirect('@homepage');
         }
 
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'miniPlatform');
+        $c->add('objectClass', 'zacaciaPlatform');
 
         $l = new PlatformPeer();
         $l->setBaseDn($platformDn);
@@ -118,27 +118,27 @@ class platformActions extends sfActions
 
         $this->form = new PlatformEditForm();
 
-        if ($request->isMethod('post') && $request->getParameter('minidata')) {
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
 
-            $this->form->bind($request->getParameter('minidata'));
+            $this->form->bind($request->getParameter('zdata'));
 
             if ($this->form->isValid()) {
 
-                $this->platform->setMiniMultiTenant($this->form->getValue('multitenant'));
-                $this->platform->setMiniMultiServer($this->form->getValue('multiserver'));
-                $this->platform->setMiniUnDeletable($this->form->getValue('undeletable'));
+                $this->platform->setZacaciaMultiTenant($this->form->getValue('multitenant'));
+                $this->platform->setZacaciaMultiServer($this->form->getValue('multiserver'));
+                $this->platform->setZacaciaUnDeletable($this->form->getValue('undeletable'));
 
-                $this->platform->setMiniStatus($this->form->getValue('status'));
+                $this->platform->setZacaciaStatus($this->form->getValue('status'));
 /*
                 if ( $this->form->getValue('status') ) {
-                    $this->platform->setMiniStatus('enable');
+                    $this->platform->setZacaciaStatus('enable');
                 } else {
-                    $this->platform->setMiniStatus('disable');
+                    $this->platform->setZacaciaStatus('disable');
                 }
 */
                 if ( $l->doSave($this->platform) ) {
 
-                  sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+                  sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                   echo fake_post($this, 'platform/index', Array());
                   exit;
                 }
@@ -149,19 +149,19 @@ class platformActions extends sfActions
 
         $this->form->getWidget('platformDn')->setDefault($this->platform->getDn());
 
-        if ( $this->platform->getMiniMultiServer() ) {
+        if ( $this->platform->getZacaciaMultiServer() ) {
             $this->form->getWidget('multiserver')->setDefault('true');
         }
 
-        if ( $this->platform->getMiniMultiTenant() ) {
+        if ( $this->platform->getZacaciaMultiTenant() ) {
             $this->form->getWidget('multitenant')->setDefault('true');
         }
 
-        if ( $this->platform->getMiniUndeletable() ) {
+        if ( $this->platform->getZacaciaUndeletable() ) {
             $this->form->getWidget('undeletable')->setDefault('true');
         }
 
-        $this->form->getWidget('status')->setDefault($this->platform->getMiniStatus());
+        $this->form->getWidget('status')->setDefault($this->platform->getZacaciaStatus());
 
         $this->cancel = new PlatformNavigationForm();
         unset($this->cancel['platformDn']);
@@ -175,15 +175,15 @@ class platformActions extends sfActions
         $l = new PlatformPeer();
         $p = $l->retrieveByDn($c);
 
-        if ( 'enable' === $p->getMiniStatus()) {
-            $p->setMiniStatus(false);
+        if ( 'enable' === $p->getZacaciaStatus()) {
+            $p->setZacaciaStatus(false);
         } else {
-            $p->setMiniStatus(true);
+            $p->setZacaciaStatus(true);
         }
 
         $l->doSave($p);
 
-        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
         echo fake_post($this, 'platform/index', Array());
         exit;
     }
@@ -196,11 +196,11 @@ class platformActions extends sfActions
         $l = new PlatformPeer();
         $p = $l->retrieveByDn($c);
 
-        if ( 'disable' === $p->getMiniStatus()) {
+        if ( 'disable' === $p->getZacaciaStatus()) {
             $l->doDelete($p, true);
         }
 
-        sfContext::getInstance()->getConfiguration()->loadHelpers('miniFakePost');
+        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
         echo fake_post($this, 'platform/index', Array());
         exit;
     }
@@ -218,7 +218,7 @@ class platformActions extends sfActions
         $c = new LDAPCriteria();
 
         $c->setBaseDn( $l->getBaseDn() );
-        $c->add('objectClass', 'miniPlatform');
+        $c->add('objectClass', 'zacaciaPlatform');
         $c->add('cn', $request->getParameter('name'));
 
         $this->count = $l->doCount($c);

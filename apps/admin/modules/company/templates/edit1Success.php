@@ -1,5 +1,3 @@
-<?php use_helper('Javascript') ?>
-
 <div id="form-header">
     <div id="form-header" class="section">
         <?php echo __('Edit'); echo $cn; echo ('  : Step 1/3') ;?>

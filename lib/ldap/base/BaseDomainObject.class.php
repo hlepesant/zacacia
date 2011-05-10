@@ -10,7 +10,7 @@ class BaseDomainObject extends LDAPObject
 
     public function applyDefaultValues()
     {
-        $this->attributes['objectClass'] = Array('top', 'organizationalRole', 'miniDomain');
+        $this->attributes['objectClass'] = Array('top', 'organizationalRole', 'zacaciaDomain');
         $this->attributes['cn'] = null;
 
         return $this;
@@ -27,25 +27,25 @@ class BaseDomainObject extends LDAPObject
         return $this->attributes['cn'];
     }
   
-    public function setMinistatus($v)
+    public function setZacaciaStatus($v)
     {
-        $this->attributes['miniStatus'] = $v;
+        $this->attributes['zacaciaStatus'] = $v;
         return $this;
     }
 
-    public function getMinistatus()
+    public function getZacaciaStatus()
     {
-        return $this->attributes['miniStatus'];
+        return $this->attributes['zacaciaStatus'];
     }
 
-    public function setMiniundeletable($v)
+    public function setZacaciaUndeletable($v)
     {
-        $this->attributes['miniUnDeletable'] = $v;
+        $this->attributes['zacaciaUnDeletable'] = $v;
         return $this;
     }
  
-    public function getMiniundeletable()
+    public function getZacaciaUndeletable()
     {
-        return $this->attributes['miniUnDeletable'];
+        return $this->attributes['zacaciaUnDeletable'];
     }
 }

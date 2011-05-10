@@ -16,9 +16,9 @@ $(document).ready(function() {
     });
 
     $("#button_submit").removeAttr("disabled");
-    var val_ip = $("input#minidata_ip").validator();
+    var val_ip = $("input#zdata_ip").validator();
 
-    $("input#minidata_cn").change(function() {
+    $("input#zdata_cn").change(function() {
         $("#checkIpAddress_msg_msg").html('');
         if ( val_ip.data("validator").checkValidity() ) {
             $("#checkIpAddress_msg_msg").html('<img src=\'/images/famfam/tick.png\' />');
@@ -29,29 +29,29 @@ $(document).ready(function() {
         check_form();
     });
 
-    if ($("input[type='checkbox']#minidata_zarafaAccount").is(':checked')) {
-        $("input[type='text']#minidata_zarafaHttpPort").attr("disabled", true);
-        $("input[type='text']#minidata_zarafaSslPort").attr("disabled", true);
-        $("input[type='checkbox']#minidata_multitenant").attr("disabled", true);
-        $("input[type='checkbox']#minidata_zarafaContainsPublic").attr("disabled", true);
+    if ($("input[type='checkbox']#zdata_zarafaAccount").is(':checked')) {
+        $("input[type='text']#zdata_zarafaHttpPort").attr("disabled", true);
+        $("input[type='text']#zdata_zarafaSslPort").attr("disabled", true);
+        $("input[type='checkbox']#zdata_multitenant").attr("disabled", true);
+        $("input[type='checkbox']#zdata_zarafaContainsPublic").attr("disabled", true);
     }
 
-    $("input[type='checkbox']#minidata_zarafaAccount").change(function() {
+    $("input[type='checkbox']#zdata_zarafaAccount").change(function() {
 
         if ($(this).is(':checked')) {
-            $("input[type='text']#minidata_zarafaHttpPort").removeAttr("disabled");
-            $("input[type='text']#minidata_zarafaSslPort").removeAttr("disabled");
-            $("input[type='checkbox']#minidata_multitenant").removeAttr("disabled");
-            $("input[type='checkbox']#minidata_zarafaContainsPublic").removeAttr("disabled");
-            $("input[type='text']#minidata_zarafaHttpPort").val(_zarafaHttpPort);
-            $("input[type='text']#minidata_zarafaSslPort").val(_zarafaSslPort);
+            $("input[type='text']#zdata_zarafaHttpPort").removeAttr("disabled");
+            $("input[type='text']#zdata_zarafaSslPort").removeAttr("disabled");
+            $("input[type='checkbox']#zdata_multitenant").removeAttr("disabled");
+            $("input[type='checkbox']#zdata_zarafaContainsPublic").removeAttr("disabled");
+            $("input[type='text']#zdata_zarafaHttpPort").val(_zarafaHttpPort);
+            $("input[type='text']#zdata_zarafaSslPort").val(_zarafaSslPort);
         } else {
-            $("input[type='text']#minidata_zarafaHttpPort").attr("disabled", true);
-            $("input[type='text']#minidata_zarafaSslPort").attr("disabled", true);
-            $("input[type='checkbox']#minidata_multitenant").attr("disabled", true);
-            $("input[type='checkbox']#minidata_zarafaContainsPublic").attr("disabled", true);
-            $("input[type='text']#minidata_zarafaHttpPort").val(null);
-            $("input[type='text']#minidata_zarafaSslPort").val(null);
+            $("input[type='text']#zdata_zarafaHttpPort").attr("disabled", true);
+            $("input[type='text']#zdata_zarafaSslPort").attr("disabled", true);
+            $("input[type='checkbox']#zdata_multitenant").attr("disabled", true);
+            $("input[type='checkbox']#zdata_zarafaContainsPublic").attr("disabled", true);
+            $("input[type='text']#zdata_zarafaHttpPort").val(null);
+            $("input[type='text']#zdata_zarafaSslPort").val(null);
         }
     });
 });

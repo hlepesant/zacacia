@@ -11,10 +11,10 @@ $(document).ready(function() {
         $("#form_cancel").submit();
     });
 
-    var val_cn = $("input#minidata_cn").validator();
+    var val_cn = $("input#zdata_cn").validator();
 
-/*    $("input#minidata_cn").observe_field(0.5, function() { */
-    $("input#minidata_cn").blur(function() {
+/*    $("input#zdata_cn").observe_field(0.5, function() { */
+    $("input#zdata_cn").blur(function() {
 
         $("#checkName_msg").html("");
         $("#button_submit").attr("disabled", true);

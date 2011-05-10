@@ -1,5 +1,5 @@
 <?php
-class UserNew1Form extends MinivISPForm
+class UserNew1Form extends ZacaciaForm
 {
     public function configure()
     {
@@ -80,7 +80,7 @@ class UserNew1Form extends MinivISPForm
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
         $c->add('objectClass', 'zarafa-company');
-        $c->add('objectClass', 'miniCompany');
+        $c->add('objectClass', 'zacaciaCompany');
         $c->add('cn', $request->getParameter('name'));
         
         $this->count = $l->doCount($c);

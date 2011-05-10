@@ -32,7 +32,7 @@ class LDAPPeer
         ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
 
         if (!ldap_bind($conn, $bind_user, $bind_password)) {
-            throw new miniException(ldap_error($conn));
+            throw new zacaciaException(ldap_error($conn));
         }
 
         $this->setLinkId($conn);
@@ -189,7 +189,7 @@ class LDAPPeer
             }
             return $results;
         } else {
-          throw new miniException("Fatal error: method not implemented.");
+          throw new zacaciaException("Fatal error: method not implemented.");
         }
     }
 
