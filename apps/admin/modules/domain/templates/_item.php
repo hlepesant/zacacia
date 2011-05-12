@@ -7,13 +7,18 @@
 
     <div class="_actions">
 <?php
+/* Edit */
+echo link_to_function(
+    image_tag('famfam/page_white_edit.png', array('title' => __('Edit'))), 
+    "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($d->getCn()))."', 'edit', null)");
+
 /* Status */
 echo link_to_function(
     image_tag('famfam/arrow_rotate_clockwise.png', array('title' => __('Status'))), 
     "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($d->getCn()))."', 'status', '".$d->getZacaciaStatus()."')");
 
 /* Delete */
-if ( $d->getZacaciaUnDeletable() && 'disable' === $d->getZacaciaStatus() && 0 === $d->get('user_count') ) {
+if ( !$d->getZacaciaUnDeletable() && 'disable' === $d->getZacaciaStatus() && 0 === $d->get('user_count') ) {
     echo link_to_function(
         image_tag('famfam/cross.png', array('title' => __('Delete'))), 
         "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($d->getCn()))."', 'delete', null)");

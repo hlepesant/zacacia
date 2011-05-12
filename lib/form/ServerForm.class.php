@@ -7,15 +7,15 @@ class ServerForm extends ZacaciaForm
             'platformDn'            => new sfWidgetFormInputHidden(),
             'cn'                    => new sfWidgetFormInput(),
             'ip'                    => new sfWidgetFormInput(),
-            'status'                => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1', 'default' => '1')),
-            'undeletable'           => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
+            'status'                => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1, 'default' => 1)),
+            'undeletable'           => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
 
-            'zarafaAccount'         => new sfWidgetFormInputHidden(array('default' => '1')),
+            'zarafaAccount'         => new sfWidgetFormInputHidden(array('default' => 1)),
             'zarafaFilePath'        => new sfWidgetFormInputHidden(array('default' => '/var/run/zarafa')),
             'zarafaHttpPort'        => new sfWidgetFormInput(array(), array('type' => 'number')),
             'zarafaSslPort'         => new sfWidgetFormInput(array(), array('type' => 'number')),
-            'zarafaContainsPublic'  =>  new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1', 'default' => '1')),
-            'multitenant'           => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
+            'zarafaContainsPublic'  =>  new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1, 'default' => 1)),
+            'multitenant'           => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
         ));
 
         $this->widgetSchema->setLabels(array(

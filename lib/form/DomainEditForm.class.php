@@ -3,19 +3,16 @@ class DomainEditForm extends ZacaciaForm
 {
     public function configure()
     {
-        $status = array('enable' => 'enable', 'disable' => 'disable');
-        $undeletable = array('FALSE' => 'no', 'TRUE' => 'yes');
-    
         $this->setWidgets(array(
             'platformDn'    => new sfWidgetFormInputHidden(),
             'companyDn'     => new sfWidgetFormInputHidden(),
             'domainDn'      => new sfWidgetFormInputHidden(),
-            'status'        => new sfWidgetFormSelect( array('choices' => $status) ),
-            'undeletable'   => new sfWidgetFormSelect( array('choices' => $undeletable) ),
+            'status'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
+            'undeletable'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
         ));
     
         $this->widgetSchema->setLabels(array(
-            'status'        => 'Status',
+            'status'        => 'Enable',
             'undeletable'   => 'Undeletable',
         ));
     
@@ -23,8 +20,8 @@ class DomainEditForm extends ZacaciaForm
             'platformDn'    => new sfValidatorString(),
             'companyDn'     => new sfValidatorString(),
             'domainDn'      => new sfValidatorString(),
-            'status'        => new sfValidatorChoice(array('choices' => array_keys($status))),
-            'undeletable'   => new sfValidatorChoice(array('choices' => array_keys($undeletable))),
+            'status'        => new sfValidatorBoolean(),
+            'undeletable'   => new sfValidatorBoolean(),
         ));
 
         $this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));

@@ -12,6 +12,8 @@ class BaseDomainObject extends LDAPObject
     {
         $this->attributes['objectClass'] = Array('top', 'organizationalRole', 'zacaciaDomain');
         $this->attributes['cn'] = null;
+        $this->attributes['zacaciaStatus'] = 'enable';
+        $this->attributes['zacaciaUnDeletable'] = 0;
 
         return $this;
     }
@@ -26,10 +28,14 @@ class BaseDomainObject extends LDAPObject
     {
         return $this->attributes['cn'];
     }
-  
+
     public function setZacaciaStatus($v)
     {
-        $this->attributes['zacaciaStatus'] = $v;
+        if ( $v ) {
+            $this->attributes['zacaciaStatus'] = 'enable';
+        } else {
+            $this->attributes['zacaciaStatus'] = 'disable';
+        }
         return $this;
     }
 
@@ -38,14 +44,18 @@ class BaseDomainObject extends LDAPObject
         return $this->attributes['zacaciaStatus'];
     }
 
-    public function setZacaciaUndeletable($v)
+    public function setZacaciaUnDeletable($v)
     {
-        $this->attributes['zacaciaUnDeletable'] = $v;
-        return $this;
+        if ( $v ) {
+            $this->attributes['zacaciaUnDeletable'] = 1;
+        } else {
+            $this->attributes['zacaciaUnDeletable'] = array();
+        }
+    	return $this;
     }
  
-    public function getZacaciaUndeletable()
+    public function getZacaciaUnDeletable()
     {
-        return $this->attributes['zacaciaUnDeletable'];
+        return (int)$this->attributes['zacaciaUnDeletable'];
     }
 }

@@ -350,9 +350,6 @@ class companyActions extends sfActions
             $this->form->getWidget('zarafaUserDefaultQuotaWarn')->setDefault($this->company->getZarafaUserDefaultQuotaWarn());
         }
 
-
-
-
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');

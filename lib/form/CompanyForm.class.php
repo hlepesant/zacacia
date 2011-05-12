@@ -6,10 +6,10 @@ class CompanyForm extends ZacaciaForm
         $this->setWidgets(array(
             'platformDn'    => new sfWidgetFormInputHidden(),
             'cn'            => new sfWidgetFormInput(),
-            'status'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
-            'undeletable'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
+            'status'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1, 'default' => 1)),
+            'undeletable'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
 #
-            'zarafaAccount'         => new sfWidgetFormInputHidden(array('default' => '1')),
+            'zarafaAccount'         => new sfWidgetFormInputHidden(array('default' => 1)),
 #            'zarafaCompanyServer'   => new sfWidgetFormSelect(array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
             'zarafaQuotaOverride'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
             'zarafaQuotaWarn'       => new sfWidgetFormInput(array(), array(

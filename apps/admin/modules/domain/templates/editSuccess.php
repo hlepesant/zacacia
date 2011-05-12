@@ -1,40 +1,33 @@
-<?php use_helper('Javascript') ?>
-
-<div id="form-header">
-    <div id="form-header" class="section">
-        <?php echo __('Edit Domain') ;?>
+<div id="navigation">
+    <div id="navigation_header">
+        <div class="_title">
+            <u><?php echo $platform->getCn();?></u>&nbsp;&rarr;&nbsp;
+            <u><?php echo $company->getCn();?></u>&nbsp;&rarr;&nbsp;
+            <u><?php echo $domain->getCn();?></u>&nbsp;&rarr;&nbsp;
+            <?php echo __('Edit') ;?>
+        </div>
+        <!-- end #navigation_header._title -->
     </div>
+    <!-- end #navigation_header -->
 </div>
+<!-- end #navigation -->
 
-<div id="form-inner">
-
+<div id="form_box">
 <form action="<?php echo url_for('domain/edit') ?>" method="POST">
 <?php echo $form->renderHiddenFields() ?>
 
-<?php if ($form->hasGlobalErrors()): ?>
-<ul class="form-error">
-  <?php foreach ($form->getGlobalErrors() as $name => $error): ?>
-    <li><?php echo $name.': '.$error ?></li>
-  <?php endforeach; ?>
-</ul>
-<?php endif; ?>
+    <?php echo $form['status']->renderRow() ?>
+    <?php echo $form['undeletable']->renderRow() ?>
 
-    <div id="form-line">
-        <div id="form-line" class="item"><?php echo __('Name'); ?></div>
-        <div id="form-line" class="field"><?php echo $cn; ?></div>
+    <div id="form_submit">
+        <input type="button" value="<?php echo __("Cancel") ?>" id="button_cancel" />
+        <input type="submit" value="<?php echo __('Save') ?>" id="button_submit" />
     </div>
-    
-  <?php echo $form['undeletable']->renderRow() ?>
-  <?php echo $form['status']->renderRow() ?>
-
-    <div id="form-submitline">
-        <?php echo link_to_function( "<input type=\"button\" value=\"". __("Cancel") ."\" id=\"form-button\"  />" , "$('domain_cancel').submit()") ?>
-        <input type="submit" value="<?php echo __('Update') ?>" id="form-submit" />
-    </div>
+    <!-- end #form_submit -->
 
 </form>
 </div>
 
-<form action="<?php echo url_for('domain/index') ?>" method="POST" id="domain_cancel" class="invisible">
+<form action="<?php echo url_for('domain/index') ?>" method="POST" id="form_cancel" class="invisible">
 <?php echo $cancel->renderHiddenFields() ?>
 </form>

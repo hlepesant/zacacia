@@ -7,7 +7,7 @@ class DomainForm extends ZacaciaForm
             'platformDn'    => new sfWidgetFormInputHidden(),
             'companyDn'     => new sfWidgetFormInputHidden(),
             'cn'            => new sfWidgetFormInput(),
-            'status'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
+            'status'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1', 'default' => '1')),
             'undeletable'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
         ));
     

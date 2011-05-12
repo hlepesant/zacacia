@@ -111,30 +111,27 @@ class domainActions extends sfActions
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
     
-        if ($request->isMethod('post') && $request->getParameter('zdata'))
-        {
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
             $this->form->bind($request->getParameter('zdata'));
             
-                if ($this->form->isValid())
-                {
+                if ($this->form->isValid()) {
                     $l = new DomainPeer();
                     $l->setBaseDn(sprintf("ou=Domains,%s", $companyDn));
                     
-                    $d = new DomainObject();
-                    $d->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
-                    $d->setCn($this->form->getValue('cn'));
-                    $d->setZacaciaStatus($this->form->getValue('status'));
-                    $d->setZacaciaUnDeletable($this->form->getValue('undeletable'));
+                    $domain = new DomainObject();
+                    $domain->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
+                    $domain->setCn($this->form->getValue('cn'));
+                    $domain->setZacaciaStatus($this->form->getValue('status'));
+                    if ( $this->form->getValue('undeletable') ) {
+                        $domain->setZacaciaUnDeletable(1);
+                    }
 
-                    if ( $l->doAdd($d) )
-                    {
+                    if ( $l->doAdd($domain) ) {
                         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                         echo fake_post($this, 'domain/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
                         exit;
                     }
-                }
-                else 
-                {
+                } else {
                     $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
                 }
         }
@@ -192,37 +189,69 @@ class domainActions extends sfActions
         $c = new LDAPCriteria();
         $c->setBaseDn($domainDn);
 
-        $d = $l->retrieveByDn($c);
+        $this->domain = $l->retrieveByDn($c);
 
         $this->form = new DomainEditForm();
-        $this->form->getWidget('platformDn')->setDefault($platformDn);
-        $this->form->getWidget('companyDn')->setDefault($companyDn);
-        $this->form->getWidget('domainDn')->setDefault($domainDn);
-    
-        if ($request->isMethod('post') && $request->getParameter('zdata'))
-        {
+
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+
             $this->form->bind($request->getParameter('zdata'));
             
-                if ($this->form->isValid())
-                {
-                    $d->setZacaciaStatus($this->form->getValue('status'));
-                    $d->setZacaciaUnDeletable($this->form->getValue('undeletable'));
+                if ($this->form->isValid()) {
+                    #$this->domain->setZacaciaStatus($this->form->getValue('status'));
+                    #$this->domain->setZacaciaUnDeletable($this->form->getValue('undeletable'));
 
-                    if ( $l->doSave($d) )
-                    {
+
+                    $this->domain->setZacaciaUnDeletable($this->form->getValue('undeletable'));
+                    if ( $this->form->getValue('undeletable') ) {
+                        $this->domain->setZacaciaUnDeletable(1);
+                    } else {
+                        $this->domain->setZacaciaUnDeletable(0);
+                    }
+
+                    $this->domain->setZacaciaStatus($this->form->getValue('status'));
+
+                    #var_dump( $this->domain ); exit;
+
+                    if ( $l->doSave($this->domain) ) {
                         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                         echo fake_post($this, 'domain/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
                         exit;
                     }
-                }
-                else 
-                {
+                } else {
                     $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
                 }
         }
 
-        $this->cn = $d->getCn();
-        
+        $this->form->getWidget('platformDn')->setDefault($platformDn);
+        $this->form->getWidget('companyDn')->setDefault($companyDn);
+        $this->form->getWidget('domainDn')->setDefault($domainDn);
+        if ( $this->domain->getZacaciaUndeletable() ) {
+            $this->form->getWidget('undeletable')->setDefault('true');
+        }
+
+        if ( $this->domain->getZacaciaStatus() == 'enable' ) {
+            $this->form->getWidget('status')->setDefault('true');
+        }
+
+/* zacaciaPlatform */
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaPlatform');
+        $l = new PlatformPeer();
+        $l->setBaseDn($platformDn);
+        $this->platform = $l->retrieveByDn($c);
+
+/* zacaciaCompany */
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaCompany');
+        $l = new CompanyPeer();
+        $l->setBaseDn($companyDn);
+        $this->company = $l->retrieveByDn($c);
+
         $this->cancel = new DomainNavigationForm();
         unset($this->cancel['domainDn'], $this->cancel['destination']);
         $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
@@ -257,13 +286,10 @@ class domainActions extends sfActions
         $l = new DomainPeer();
         $d = $l->retrieveByDn($c);
         
-        if ( 'enable' === $d->getZacaciaStatus())
-        {
-            $d->setZacaciaStatus('disable');
-        }
-        else
-        {
-            $d->setZacaciaStatus('enable');
+        if ( 'enable' === $d->getZacaciaStatus()) {
+            $d->setZacaciaStatus(false);
+        } else {
+            $d->setZacaciaStatus(true);
         }
 
         $l->doSave($d);
