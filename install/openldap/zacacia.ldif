@@ -1,0 +1,44 @@
+dn: dc=zarafa,dc=com
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: zarafa.com
+structuralObjectClass: organization
+
+dn: cn=admin,dc=zarafa,dc=com
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+description: LDAP administrator
+structuralObjectClass: organizationalRole
+userPassword:: e0NSWVBUfVBJanpVejJIQWdSZHc=
+
+dn: ou=Applications,dc=zarafa,dc=com
+ou: Applications
+objectClass: organizationalUnit
+objectClass: top
+structuralObjectClass: organizationalUnit
+
+dn: ou=Zacacia,ou=Applications,dc=zarafa,dc=com
+ou: Zacacia
+objectClass: organizationalUnit
+objectClass: top
+structuralObjectClass: organizationalUnit
+
+dn: ou=Platforms,ou=Zacacia,ou=Applications,dc=zarafa,dc=com
+ou: Platforms
+objectClass: organizationalUnit
+objectClass: top
+structuralObjectClass: organizationalUnit
+
+dn: ou=SecurityGroups,ou=Zacacia,ou=Applications,dc=zarafa,dc=com
+ou: SecurityGroups
+objectClass: organizationalUnit
+objectClass: top
+structuralObjectClass: organizationalUnit
+
+dn: cn=PlatformAdmin,ou=SecurityGroups,ou=Zacacia,ou=Applications,dc=zarafa,dc=com
+cn: PlatformAdmin
+objectClass: zacaciaSecurityGroup
+objectClass: top
+structuralObjectClass: zacaciaSecurityGroup
