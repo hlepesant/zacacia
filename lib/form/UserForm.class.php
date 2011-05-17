@@ -3,13 +3,14 @@ class UserNew1Form extends ZacaciaForm
 {
     public function configure()
     {
-        $status = array('enable' => 'enable', 'disable' => 'disable');
-        $undeletable = array('FALSE' => 'no', 'TRUE' => 'yes');
         $displayRender = array('fl' => 'First Last', 'lf' => 'Last First');
 
         $this->setWidgets(array(
             'platformDn' => new sfWidgetFormInputHidden(),
             'companyDn' => new sfWidgetFormInputHidden(),
+            'status'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1, 'default' => 1)),
+            'undeletable'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
+
 #            'cn' => new sfWidgetFormInput(),
             'displayRender' => new sfWidgetFormSelect(array('choices' => $displayRender), array('onChange' => 'updateDisplayName()')),
             'displayName' => new sfWidgetFormInput(),
@@ -18,13 +19,26 @@ class UserNew1Form extends ZacaciaForm
             'userPassword' => new sfWidgetFormInputPassword(),
             'confirmPassword' => new sfWidgetFormInputPassword(),
             'uid' => new sfWidgetFormInput(),
-            'status' => new sfWidgetFormSelect( array('choices' => $status) ),
-            'undeletable' => new sfWidgetFormSelect( array('choices' => $undeletable) ),
+        ));
+        
+        $this->widgetSchema->setLabels(array(
+            'status'        => 'Enable',
+            'undeletable'   => 'Undeletable',
+#            'cn' => 'Name',
+            'displayName' => 'Display Name',
+            'displayRender' => 'Display Name',
+            'givenName' => 'Given Name',
+            'sn' => 'Surname',
+            'userPassword' => 'Password',
+            'uid' => 'Username',
         ));
 
         $this->setValidators(array(
             'platformDn' => new sfValidatorString(),
             'companyDn' => new sfValidatorString(),
+            'status'        => new sfValidatorBoolean(),
+            'undeletable'   => new sfValidatorBoolean(),
+
 #            'cn' => new sfValidatorString(),
             'displayName' => new sfValidatorString(),
             'displayRender' => new sfValidatorChoice(array('choices' => array_keys($displayRender))),
@@ -33,20 +47,6 @@ class UserNew1Form extends ZacaciaForm
             'userPassword' => new sfValidatorString(),
             'confirmPassword' => new sfValidatorString(),
             'uid' => new sfValidatorString(),
-            'status' => new sfValidatorChoice(array('choices' => array_keys($status))),
-            'undeletable' => new sfValidatorChoice(array('choices' => array_keys($undeletable))),
-        ));
-        
-        $this->widgetSchema->setLabels(array(
-#            'cn' => 'Name',
-            'displayName' => 'Display Name',
-            'displayRender' => 'Display Name',
-            'givenName' => 'Given Name',
-            'sn' => 'Surname',
-            'userPassword' => 'Password',
-            'uid' => 'Username',
-            'status' => 'Status',
-            'undeletable' => 'Undeletable',
         ));
 
         $this->validatorSchema->setPostValidator(

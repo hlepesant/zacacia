@@ -53,47 +53,42 @@ class userActions extends sfActions
             $form->getWidget('companyDn')->setDefault($companyDn);
             $form->getWidget('userDn')->setDefault($user->getDn());
             
-            switch( sfConfig::get('navigation_look') )
-            {
-                case 'dropdown':
-                    $choices = $form->getWidget('destination')->getOption('choices');
-                    $choices['status'] = $this->getContext()->getI18N()->__('Disable', Array(), 'messages');
-                    
-                    if ( $p->getMiniStatus() == 'disable' && $count_user  == 0 )
-                    {
-                        $choices['status'] = $this->getContext()->getI18N()->__('Enable', Array(), 'messages');
-                        $choices['delete'] = $this->getContext()->getI18N()->__('Delete', Array(), 'messages');
-                    }
-                    
-                    if ( $s->getMiniUnDeletable() === 'TRUE' )
-                    {
-                        unset($choices['delete'], $choices['status']);
-                    }
-                    $choices['company'] = '&rarr;&nbsp;'.$this->getContext()->getI18N()->__('Company', Array(), 'messages');
-                    
-                    $form->getWidget('destination')->setOption('choices', $choices);
-                break;
-                
-                case 'link':
-                default:
-                break;
-            }
-        
             $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
             $form->getWidget('companyDn')->setIdFormat(sprintf('%%s_%03d', $id));
             $form->getWidget('userDn')->setIdFormat(sprintf('%%s_%03d', $id));
-            $form->getWidget('destination')->setIdFormat(sprintf('%%s_%03d', $id));
         
             $this->forms[$user->getDn()] = $form;
             $id++;
         }
         
         $this->new = new UserNavigationForm();
-        unset($this->new['userDn'], $this->new['destination']);
+        unset($this->new['userDn']);
         $this->new->getWidget('platformDn')->setDefault($platformDn);
         $this->new->getWidget('companyDn')->setDefault($platformDn);
 
-        $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
+
+/* zacaciaPlatform */
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaPlatform');
+        $l = new PlatformPeer();
+        $l->setBaseDn($platformDn);
+        $this->platform = $l->retrieveByDn($c);
+
+/* zacaciaCompany */
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaCompany');
+        $l = new CompanyPeer();
+        $l->setBaseDn($companyDn);
+        $this->company = $l->retrieveByDn($c);
+          
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaDomain');
     }
 
     public function executeNew(sfWebRequest $request)
@@ -132,8 +127,6 @@ class userActions extends sfActions
         $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
         $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
 
-        $this->getResponse()->addJavascript(sfConfig::get('sf_prototype_web_dir').'/js/prototype', 'last');
-        $this->setTemplate( 'new1' );
     }
 
 /* WebServices */

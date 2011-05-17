@@ -1,19 +1,34 @@
-<div id="collection-header">
-    <div id="collection-header" class="section">
-        <?php echo __('Users') ;?>
+<div id="navigation">
+    <div id="navigation_header">
+        <div class="_title">
+            <u><?php echo $platform->getCn() ?></u>&nbsp;&rarr;
+            <u><?php echo $company->getCn() ?></u>&nbsp;&rarr;
+            <?php echo __('Users') ;?>
+        </div>
+        <!-- end #navigation_header._title -->
+        <div class="_link">
+            <?php echo image_tag('famfam/back.png', array('title' => __('Back'), 'id' => 'goback')) ?>
+<?php
+if ( 1 ) { # $company->getZacaciaMultiTenant() ) {
+    echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew'));
+} else {
+    echo image_tag('add_bw.png', array('title' => __('User Licence reached'), 'id' => 'not_allowed'));
+} ?>
+        </div>
+        <!-- end #navigation_header._link -->
     </div>
-    <div id="collection-header" class="navigation">
-      <?php echo link_to_function(image_tag('icons/arrow_up.png'), "$('company_back').submit()") ?> 
-      <?php echo link_to_function(image_tag('icons/user_add.png'), "$('user_new').submit()") ?> 
-    </div>
+    <!-- end #navigation_header -->
 </div>
+<!-- end #navigation -->
 
 <div id="collection">
-    <div id="title">
-        <div id="title" class="description"><?php echo __("Name") ?></div>
-        <div id="title" class="navigation"><?php echo __("Action") ?></div>
+    <div id="collection_description">
+            <div class="_name"><?php echo __("Name") ?></div>
+            <div class="_action"><?php echo __("Action") ?></div>
     </div>
+    <!-- end #collection_description -->
 
+    <div id="collection_enumerate">
 <?php
 $id = 0;
 foreach ($users as $u):
@@ -21,68 +36,24 @@ foreach ($users as $u):
     $id++;
 endforeach;
 ?>
+    </div>
+    <!-- end #collection_enumerate -->
+
 </div>
+<!-- end #collection -->
 
 <form action="<?php echo url_for('user/new') ?>" method="POST" id="user_new" class="invisible">
 <?php echo $new->renderHiddenFields() ?>
 </form>
 
-<form action="<?php echo url_for('company/index') ?>" method="POST" id="company_back" class="invisible">
+<form action="<?php echo url_for('@company') ?>" method="POST" id="company_back" class="invisible">
 <?php echo $new->renderHiddenFields() ?>
 </form>
 
-<?php if ($sf_user->hasFlash('ldap_error')): ?>
 <?php echo javascript_tag("
-alert('". $sf_user->getFlash('ldap_error') ."');
-") ?>
-<?php endif; ?>
-
-<?php echo javascript_tag("
-function jumpTo(id, name, destination) 
-{
-    var f = document.getElementById(sprintf('navigation_form_%03d', id));
-    var m = '".$this->getModuleName()."';
-    
-    if ( typeof(destination) == 'undefined' )
-    {
-        var a = document.getElementById(sprintf('destination_%03d', id));
-        var d = a.options[a.selectedIndex].value;
-        var t = a.options[a.selectedIndex].text;
-    }
-    else
-    {
-        var d = destination;
-        var t = destination;
-    }
-
-    switch ( d )
-    {
-        case 'none':
-            return false;
-        break;
-        
-        case 'edit':
-        break;
-        
-        case 'status':
-            if ( ! confirm( t+' ".__("the server")." \"'+name+'\" ?'))
-            {
-                return false;
-            }
-        break;
-        
-        case 'delete':
-            if ( ! confirm( t+' ".__("the server")." \"'+name+'\" ?'))
-            {
-              a.selectedIndex = 0;
-              return false;
-            }
-        break;
-    }
-
-    f.action = sprintf('".url_for(false)."%s/%s/', m, d);
-
-    f.submit();
-    return true;
-}
+var _js_msg_01 = \"".__("Disable the user")."\";
+var _js_msg_02 = \"".__("Enable the user")."\";
+var _js_msg_03 = \"".__("Delete the user")."\";
+var _js_module = \"".$this->getModuleName()."\";
+var _js_url = '".url_for(false)."';
 ") ?>
