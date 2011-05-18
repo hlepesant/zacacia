@@ -155,7 +155,7 @@ class domainActions extends sfActions
         $this->company = $l->retrieveByDn($c);
         
         $this->cancel = new DomainNavigationForm();
-        unset($this->cancel['domainDn'], $this->cancel['destination']);
+        unset($this->cancel['domainDn']);
         $this->cancel->getWidget('platformDn')->setDefault($this->platform->getDn());
         $this->cancel->getWidget('companyDn')->setDefault($this->company->getDn());
     }

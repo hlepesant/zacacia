@@ -105,6 +105,16 @@ input[type=text] {
   text-align: right;
 }
 
+input[type=password] {
+  background-color: #EDEDED;
+  width: 120px;
+  font-size: 11px;
+  margin: 2px 2px 0 0;
+  padding: 2px 2px 0 0;
+  border: 1px solid #A9A9A9;
+  text-align: right;
+}
+
 input[type=number] {
   background-color: #EDEDED;
   width: 35px;

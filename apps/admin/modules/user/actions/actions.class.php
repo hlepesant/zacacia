@@ -64,7 +64,7 @@ class userActions extends sfActions
         $this->new = new UserNavigationForm();
         unset($this->new['userDn']);
         $this->new->getWidget('platformDn')->setDefault($platformDn);
-        $this->new->getWidget('companyDn')->setDefault($platformDn);
+        $this->new->getWidget('companyDn')->setDefault($companyDn);
 
 
 /* zacaciaPlatform */
@@ -85,21 +85,22 @@ class userActions extends sfActions
         $l->setBaseDn($companyDn);
         $this->company = $l->retrieveByDn($c);
           
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaDomain');
+#        $c = new LDAPCriteria();
+#        $c->add('objectClass', 'top');
+#        $c->add('objectClass', 'organizationalRole');
+#        $c->add('objectClass', 'zacaciaDomain');
     }
 
     public function executeNew(sfWebRequest $request)
     {
         $data = $request->getParameter('minidata');
+
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
           $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
           $this->redirect('@platform');
         }
-          
+
         $companyDn = $request->getParameter('companyDn', $data['companyDn']);
         if ( empty($companyDn) ) {
               sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
@@ -107,23 +108,39 @@ class userActions extends sfActions
               exit;
         }
     
-        $this->form = new UserNew1Form();
+        $this->form = new UserForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
     
-        if ($request->isMethod('post') && $request->getParameter('minidata'))
-        {
+        if ($request->isMethod('post') && $request->getParameter('minidata')) {
             $this->form->bind($request->getParameter('minidata'));
             
-                if ($this->form->isValid())
-                {
+                if ($this->form->isValid()) {
                     $this->getUser()->setAttribute('company_data', $this->form->getValues());
                     $this->redirect('user/new2');
                 }
         }
+
+/* zacaciaPlatform */
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaPlatform');
+        $l = new PlatformPeer();
+        $l->setBaseDn($platformDn);
+        $this->platform = $l->retrieveByDn($c);
+
+/* zacaciaCompany */
+        $c2 = new LDAPCriteria();
+        $c2->add('objectClass', 'top');
+        $c2->add('objectClass', 'organizationalRole');
+        $c2->add('objectClass', 'zacaciaCompany');
+        $l2 = new CompanyPeer();
+        $l2->setBaseDn($companyDn);
+        $this->company = $l2->retrieveByDn($c2);
         
-        $this->cancel = new DomainNavigationForm();
-        unset($this->cancel['domainDn'], $this->cancel['destination']);
+        $this->cancel = new UserNavigationForm();
+        unset($this->cancel['userDn']);
         $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
         $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
 
