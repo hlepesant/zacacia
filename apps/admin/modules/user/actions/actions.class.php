@@ -10,18 +10,18 @@
  */
 class userActions extends sfActions
 {
- /**
-  * Executes index action
-  *
-  * @param sfRequest $request A request object
-  */
+    /*
+     * Executes index action
+     *
+     * @param sfRequest $request A request object
+     */
     public function executeIndex(sfWebRequest $request)
     {
-        $data = $request->getParameter('minidata');
+        $data = $request->getParameter('zdata');
           
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
             $this->redirect('@platform');
         }
           
@@ -37,7 +37,7 @@ class userActions extends sfActions
         $c->add('objectClass', 'inetOrgPerson');
         $c->add('objectClass', 'posixAccount');
         $c->add('objectClass', 'zarafa-user');
-        $c->add('objectClass', 'miniUser');
+        $c->add('objectClass', 'zacaciaUser');
         
         $l = new UserPeer();
         $l->setBaseDn(sprintf("ou=Users,%s", $companyDn));
@@ -46,8 +46,8 @@ class userActions extends sfActions
         
         $id=0;
         $this->forms = array();
-        foreach ($this->users as $user)
-        {
+        foreach ($this->users as $user) {
+
             $form = new UserNavigationForm();
             $form->getWidget('platformDn')->setDefault($platformDn);
             $form->getWidget('companyDn')->setDefault($companyDn);
@@ -66,7 +66,6 @@ class userActions extends sfActions
         $this->new->getWidget('platformDn')->setDefault($platformDn);
         $this->new->getWidget('companyDn')->setDefault($companyDn);
 
-
 /* zacaciaPlatform */
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
@@ -84,40 +83,82 @@ class userActions extends sfActions
         $l = new CompanyPeer();
         $l->setBaseDn($companyDn);
         $this->company = $l->retrieveByDn($c);
-          
-#        $c = new LDAPCriteria();
-#        $c->add('objectClass', 'top');
-#        $c->add('objectClass', 'organizationalRole');
-#        $c->add('objectClass', 'zacaciaDomain');
     }
 
     public function executeNew(sfWebRequest $request)
     {
-        $data = $request->getParameter('minidata');
+        $data = $request->getParameter('zdata');
 
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
-          $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
-          $this->redirect('@platform');
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
+            $this->redirect('@platform');
         }
 
         $companyDn = $request->getParameter('companyDn', $data['companyDn']);
         if ( empty($companyDn) ) {
-              sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-              echo fake_post($this, '@company', Array('holdingDn' => $holdingDn));
-              exit;
+            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
+            echo fake_post($this, '@company', Array('holdingDn' => $holdingDn));
+            exit;
         }
     
         $this->form = new UserForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
     
-        if ($request->isMethod('post') && $request->getParameter('minidata')) {
-            $this->form->bind($request->getParameter('minidata'));
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+
+            $this->form->bind($request->getParameter('zdata'));
             
-                if ($this->form->isValid()) {
-                    $this->getUser()->setAttribute('company_data', $this->form->getValues());
-                    $this->redirect('user/new2');
+            if ($this->form->isValid()) {
+
+                $l = new UserPeer();
+                $l->setBaseDn(sprintf("ou=Users,%s", $companyDn));
+
+                $user = new UserObject();
+                $user->setDn(sprintf("cn=%s %s,%s", $this->form->getValue('sn'), $this->form->getValue('givenName'), $l->getBaseDn()));
+                $user->setCn(sprintf('%s %s', $this->form->getValue('givenName'), $this->form->getValue('sn')));
+                $user->setGivenName($this->form->getValue('givenName'));
+                $user->setSn($this->form->getValue('sn'));
+
+                $fi = strToLower($this->form->getValue('givenName'));
+                $la = strToLower($this->form->getValue('lastName'));
+
+                $user->setUid('%s%s', $f[0], $l);
+                $user->setUidNumber(100001);
+                $user->setGidNumber(100001);
+
+/*
+                if ( $this->form->getValue('status') ) {
+                    $user->setZacaciaStatus('enable');
+                } else {
+                    $user->setZacaciaStatus('disable');
+                }
+
+                $user->setZacaciaStatus($this->form->getValue('status'));
+
+                if ( $this->form->getValue('undeletable') ) {
+                    $user->setZacaciaUnDeletable(1);
+                }
+
+                if ( $this->form->getValue('zarafaQuotaOverride') ) {
+                    $user->setZarafaQuotaOverride(1);
+                    $user->setZarafaQuotaWarn($this->form->getValue('zarafaQuotaWarn'));
+                }
+
+                if ( $this->form->getValue('zarafaUserDefaultQuotaOverride') ) {
+                    $user->setZarafaUserDefaultQuotaOverride(1);
+                    $user->setZarafaUserDefaultQuotaHard($this->form->getValue('zarafaUserDefaultQuotaHard'));
+                    $user->setZarafaUserDefaultQuotaSoft($this->form->getValue('zarafaUserDefaultQuotaSoft'));
+                    $user->setZarafaUserDefaultQuotaWarn($this->form->getValue('zarafaUserDefaultQuotaWarn'));
+                }
+*/
+                if ( $l->doAdd($user) ) {
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
+                    echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+                    exit;
+                }
+
                 }
         }
 
@@ -175,7 +216,7 @@ class userActions extends sfActions
         $c->add('objectClass', 'inetOrgPerson');
         $c->add('objectClass', 'posixAccount');
         $c->add('objectClass', 'zarafa-user');
-        $c->add('objectClass', 'miniUser');
+        $c->add('objectClass', 'zacaciaUser');
         $c->add('uid', $request->getParameter('uid'));
         
         $this->count = $l->doCount($c);

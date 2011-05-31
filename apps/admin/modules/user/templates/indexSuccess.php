@@ -32,7 +32,7 @@ if ( 1 ) { # $company->getZacaciaMultiTenant() ) {
 <?php
 $id = 0;
 foreach ($users as $u):
-    include_partial('user', array('u' => $u, 'id' => $id, 'f' => $forms[$u->getDn()]));
+    include_partial('item', array('u' => $u, 'id' => $id, 'f' => $forms[$u->getDn()]));
     $id++;
 endforeach;
 ?>

@@ -17,8 +17,7 @@
 
     <?php echo $form['givenName']->renderRow() ?>
     <?php echo $form['sn']->renderRow() ?>
-    <?php echo $form['displayRender']->renderRow() ?>
-    <?php echo $form['displayName']->renderRow() ?>
+    <?php /* echo $form['displayName']->renderRow() */ ?>
 <?php /*
     <div id="form_item">
         <div class="_name"><?php echo $form['cn']->renderLabel() ?></div>
@@ -26,7 +25,6 @@
         <div class="_ajaxCheck"><div id="checkName_msg"></div></div>
     </div>
     <!-- end #form_item -->
-*/ ?>
 
     <div id="form_item">
         <div class="_name"><?php echo $form['uid']->renderLabel() ?></div>
@@ -46,10 +44,12 @@
 
     <?php echo $form['userPassword']->renderRow() ?>
     <?php echo $form['confirmPassword']->renderRow() ?>
+*/ ?>
 
     <div id="form_submit">
         <input type="button" value="<?php echo __('Cancel') ?>" id="button_cancel" />
-        <input type="submit" value="<?php echo __('Create') ?>" disabled="true" id="button_submit" />
+        <!-- input type="submit" value="<?php echo __('Create') ?>" disabled="true" id="button_submit" / -->
+        <input type="submit" value="<?php echo __('Create') ?>" id="button_submit" />
     </div>
     <!-- end #form_submit -->
 

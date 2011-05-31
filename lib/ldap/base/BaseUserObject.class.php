@@ -15,12 +15,12 @@ class BaseUserObject extends LDAPObject
         $this->attributes['homeDirectory']          = '/dev/null';
         $this->attributes['loginShell']             = '/bin/false';
         $this->attributes['zacaciaStatus']          = 'enable';
-        $this->attributes['zacaciaUnDeletable']     = 'FALSE';
+        $this->attributes['zacaciaUnDeletable']     = 0;
         $this->attributes['zarafaAccount']          = 1;
         $this->attributes['zarafaAdmin']            = 0;
         $this->attributes['zarafaQuotaOverride']    = 0;
-        $this->attributes['zarafaSendAsPrivilege']  = Array();
-        $this->attributes['zarafaUserServer']       = Array();
+        $this->attributes['zarafaSendAsPrivilege']  = '';
+        $this->attributes['zarafaUserServer']       = '';
 
         return $this;
     }
@@ -269,8 +269,12 @@ class BaseUserObject extends LDAPObject
   
     public function setZarafaUserServer($v)
     {
-        $this->attributes['zarafaUserServer'] = $v;
-   	    return $this;
+        if ( $v ) {
+            $this->attributes['zarafaUserServer'] = $v;
+        } else {
+            $this->attributes['zarafaUserServer'] = array();
+        }
+        return $this;
     }
 
     public function getZarafaUserServer()
@@ -280,8 +284,12 @@ class BaseUserObject extends LDAPObject
   
     public function setZarafaSendAsPrivilege($v)
     {
-        $this->attributes['zarafaSendAsPrivilege'] = $v;
-   	    return $this;
+        if ( $v ) {
+            $this->attributes['zarafaSendAsPrivilege'] = $v;
+        } else {
+            $this->attributes['zarafaSendAsPrivilege'] = array();
+        }
+        return $this;
     }
 
     public function getZarafaSendAsPrivilege()
@@ -311,10 +319,14 @@ class BaseUserObject extends LDAPObject
         return $this->attributes['zacaciaStatus'];
     }
 
-    public function setZacaciaUndeletable($v)
+    public function setZacaciaUnDeletable($v)
     {
-        $this->attributes['zacaciaUnDeletable'] = $v;
-        return $this;
+        if ( $v ) {
+            $this->attributes['zacaciaUnDeletable'] = 1;
+        } else {
+            $this->attributes['zacaciaUnDeletable'] = array();
+        }
+    	return $this;
     }
  
     public function getZacaciaUndeletable()
