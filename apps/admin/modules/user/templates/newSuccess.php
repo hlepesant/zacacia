@@ -15,8 +15,8 @@
 <form action="<?php echo url_for('user/new') ?>" method="POST">
 <?php echo $form->renderHiddenFields() ?>
 
-    <?php echo $form['givenName']->renderRow() ?>
     <?php echo $form['sn']->renderRow() ?>
+    <?php echo $form['givenName']->renderRow() ?>
     <?php /* echo $form['displayName']->renderRow() */ ?>
 <?php /*
     <div id="form_item">

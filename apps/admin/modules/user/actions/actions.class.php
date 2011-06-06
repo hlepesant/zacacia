@@ -117,15 +117,14 @@ class userActions extends sfActions
 
                 $user = new UserObject();
                 $user->setDn(sprintf("cn=%s %s,%s", $this->form->getValue('sn'), $this->form->getValue('givenName'), $l->getBaseDn()));
-                $user->setCn(sprintf('%s %s', $this->form->getValue('givenName'), $this->form->getValue('sn')));
                 $user->setGivenName($this->form->getValue('givenName'));
                 $user->setSn($this->form->getValue('sn'));
 
-                $fi = strToLower($this->form->getValue('givenName'));
-                $la = strToLower($this->form->getValue('lastName'));
+                $fi = strToLower($this->form->getValue('sn'));
+                $la = strToLower($this->form->getValue('givenName'));
 
-                $user->setUid('%s%s', $f[0], $l);
-                $user->setUidNumber(100001);
+                $user->setUid(sprintf('%s%s', $fi[0], $la));
+                $user->setUidNumber($l->getNewUidNumber());
                 $user->setGidNumber(100001);
 
 /*
@@ -153,6 +152,8 @@ class userActions extends sfActions
                     $user->setZarafaUserDefaultQuotaWarn($this->form->getValue('zarafaUserDefaultQuotaWarn'));
                 }
 */
+                var_dump( $user ); exit;
+
                 if ( $l->doAdd($user) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                     echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
@@ -187,6 +188,47 @@ class userActions extends sfActions
 
     }
 
+    public function executeStatus(sfWebRequest $request)
+    {
+        $platformDn = $request->getParameter('platformDn');
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
+            $this->redirect('@platform');
+        }
+
+        $companyDn = $request->getParameter('companyDn');
+        if ( empty($companyDn) ) {
+            $this->getUser()->setFlash('zJsAlert', "Missing company's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
+            echo fake_post($this, '@company', Array('platformDn' => $platformDn));
+        }
+
+        $userDn = $request->getParameter('userDn');
+        if ( empty($userDn) ) {
+            $this->getUser()->setFlash('zJsAlert', "Missing user's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
+            echo fake_post($this, '@user', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+        }
+
+        $criteria = new LDAPCriteria();
+        $criteria->setBaseDn($userDn);
+
+        $l = new UserPeer();
+        $user = $l->retrieveByDn($criteria);
+
+        if ( 'enable' === $user->getZacaciaStatus()) {
+            $user->setZacaciaStatus(false);
+        } else {
+            $user->setZacaciaStatus(true);
+        }
+
+        $l->doSave($user);
+
+        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
+        echo fake_post($this, '@user', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+        exit;
+    }
+
 /* WebServices */
     public function executeCheckUid(sfWebRequest $request)
     {
@@ -194,14 +236,12 @@ class userActions extends sfActions
         $this->setLayout(false);
         $this->count = 0;
 
-        if ( ! $request->hasParameter('companyDn') )
-        {
+        if ( ! $request->hasParameter('companyDn') ) {
             $this->count = 1;
             return sfView::SUCCESS;
         }
 
-        if ( ! $request->hasParameter('uid') )
-        {
+        if ( ! $request->hasParameter('uid') ) {
             $this->count = 1;
             return sfView::SUCCESS;
         }

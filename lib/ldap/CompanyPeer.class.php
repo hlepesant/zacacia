@@ -45,4 +45,26 @@ class CompanyPeer extends BaseCompanyPeer
         }
         return $options;
     }
+
+    public function getNewGidNumber()
+    {
+        $gidNumber = sfConfig::get('gid_min');
+
+        $l = clone $this;
+        $l->setBaseDn(sfConfig::get('ldap_base_dn'));
+
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zarafa-company');
+        $c->add('objectClass', 'zacaciaCompany');
+        $c->add('cn', '*');
+        $c->setAttributes(array('gidNumber'));
+       
+        if ( $companies = $l->doSelect($c) ) {
+            print_r($companies); exit;
+        }
+
+        return $gidNumber;
+    }
 }

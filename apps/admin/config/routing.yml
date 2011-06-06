@@ -30,7 +30,7 @@ company:
 domain:
   url:   /domain/:action
   param: { module: domain, action: index }
-#
-#user:
-#  url:   /:module
-#  param: { module: user, action: index }
+
+user:
+  url:   /user/:action
+  param: { module: user, action: index }

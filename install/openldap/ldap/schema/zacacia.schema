@@ -66,7 +66,7 @@ objectclass ( zacaciaObjectClass:3 NAME 'zacaciaCompany'
 	SUP top
 	AUXILIARY
 	MUST ( cn )
-	MAY ( zacaciaStatus $ zacaciaUnDeletable $ zacaciaCAL ) )
+	MAY ( gidNumber $ zacaciaStatus $ zacaciaUnDeletable $ zacaciaCAL ) )
 
 objectclass ( zacaciaObjectClass:4 NAME 'zacaciaDomain'
 	DESC 'Zacacia Domain'

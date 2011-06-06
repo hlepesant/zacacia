@@ -49,13 +49,13 @@ class BaseUserPeer extends LDAPPeer
     public function doSelect(LDAPCriteria $ldap_criteria, $ldap_object = 'base')
     {
         $ldap_criteria = self::configureCriteria($ldap_criteria);
+#        var_dump( $ldap_criteria);exit;
         $results = $this->select($ldap_criteria);
         $ldap_entry = ldap_first_entry($this->getLinkId(), $results);
         
         $objects = array();
         
-        if ($ldap_entry !== false)
-        {
+        if ($ldap_entry !== false) {
             $objects[] = $this->createLDAPObject($ldap_entry, $ldap_object);
             while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry))
             {
