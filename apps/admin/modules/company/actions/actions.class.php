@@ -105,14 +105,8 @@ class companyActions extends sfActions
                 $company = new CompanyObject();
                 $company->setDn(sprintf("cn=%s,ou=Organizations,%s", $this->form->getValue('cn'), $platformDn));
                 $company->setCn($this->form->getValue('cn'));
-/*
-                if ( $this->form->getValue('status') ) {
-                    $company->setZacaciaStatus('enable');
-                } else {
-                    $company->setZacaciaStatus('disable');
-                }
-*/
                 $company->setZacaciaStatus($this->form->getValue('status'));
+                $company->setGidNumber($l->getNewGidNumber());
 
                 if ( $this->form->getValue('undeletable') ) {
                     $company->setZacaciaUnDeletable(1);
@@ -336,7 +330,11 @@ class companyActions extends sfActions
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
         $this->form->getWidget('status')->setDefault($this->company->getZacaciaStatus());
-        $this->form->getWidget('undeletable')->setDefault($this->company->getZacaciaUndeletable());
+        
+        if ( $this->company->getZacaciaUndeletable() ) {
+            $this->form->getWidget('undeletable')->setDefault('true');
+        }
+
         
         if ( 1 == $this->company->getZarafaQuotaOverride() ) {
             $this->form->getWidget('zarafaQuotaOverride')->setDefault(1);

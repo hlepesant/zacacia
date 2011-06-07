@@ -101,6 +101,24 @@ class userActions extends sfActions
             echo fake_post($this, '@company', Array('holdingDn' => $holdingDn));
             exit;
         }
+
+/* zacaciaPlatform */
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaPlatform');
+        $l = new PlatformPeer();
+        $l->setBaseDn($platformDn);
+        $this->platform = $l->retrieveByDn($c);
+
+/* zacaciaCompany */
+        $c2 = new LDAPCriteria();
+        $c2->add('objectClass', 'top');
+        $c2->add('objectClass', 'organizationalRole');
+        $c2->add('objectClass', 'zacaciaCompany');
+        $l2 = new CompanyPeer();
+        $l2->setBaseDn($companyDn);
+        $this->company = $l2->retrieveByDn($c2);
     
         $this->form = new UserForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
@@ -125,7 +143,7 @@ class userActions extends sfActions
 
                 $user->setUid(sprintf('%s%s', $fi[0], $la));
                 $user->setUidNumber($l->getNewUidNumber());
-                $user->setGidNumber(100001);
+                $user->setGidNumber($this->company->getGidNumber());
 
 /*
                 if ( $this->form->getValue('status') ) {
@@ -152,7 +170,7 @@ class userActions extends sfActions
                     $user->setZarafaUserDefaultQuotaWarn($this->form->getValue('zarafaUserDefaultQuotaWarn'));
                 }
 */
-                var_dump( $user ); exit;
+                #var_dump( $user ); exit;
 
                 if ( $l->doAdd($user) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
@@ -162,24 +180,6 @@ class userActions extends sfActions
 
                 }
         }
-
-/* zacaciaPlatform */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaPlatform');
-        $l = new PlatformPeer();
-        $l->setBaseDn($platformDn);
-        $this->platform = $l->retrieveByDn($c);
-
-/* zacaciaCompany */
-        $c2 = new LDAPCriteria();
-        $c2->add('objectClass', 'top');
-        $c2->add('objectClass', 'organizationalRole');
-        $c2->add('objectClass', 'zacaciaCompany');
-        $l2 = new CompanyPeer();
-        $l2->setBaseDn($companyDn);
-        $this->company = $l2->retrieveByDn($c2);
         
         $this->cancel = new UserNavigationForm();
         unset($this->cancel['userDn']);

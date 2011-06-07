@@ -59,10 +59,14 @@ class CompanyPeer extends BaseCompanyPeer
         $c->add('objectClass', 'zarafa-company');
         $c->add('objectClass', 'zacaciaCompany');
         $c->add('cn', '*');
-        $c->setAttributes(array('gidNumber'));
-       
+      
         if ( $companies = $l->doSelect($c) ) {
-            print_r($companies); exit;
+            $gids = array();
+            foreach( $companies as $company ) {
+                $gids[] = $company->getGidNumber();
+            }
+            rsort($gids);
+            $gidNumber = $gids[0] + 1;
         }
 
         return $gidNumber;

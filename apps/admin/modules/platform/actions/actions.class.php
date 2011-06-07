@@ -127,7 +127,6 @@ class platformActions extends sfActions
                 $this->platform->setZacaciaMultiTenant($this->form->getValue('multitenant'));
                 $this->platform->setZacaciaMultiServer($this->form->getValue('multiserver'));
                 $this->platform->setZacaciaUnDeletable($this->form->getValue('undeletable'));
-
                 $this->platform->setZacaciaStatus($this->form->getValue('status'));
 /*
                 if ( $this->form->getValue('status') ) {

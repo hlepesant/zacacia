@@ -226,7 +226,7 @@ class LDAPPeer
 
     public function doAdd(LDAPObject $ldap_object)
     {
-        if (@ldap_add($this->getLinkId(), $ldap_object->getDn(), $ldap_object->getAttributes())) {
+        if (ldap_add($this->getLinkId(), $ldap_object->getDn(), $ldap_object->getAttributes())) {
             return true;
         }
 

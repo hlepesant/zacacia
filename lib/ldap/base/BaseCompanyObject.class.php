@@ -20,6 +20,7 @@ class BaseCompanyObject extends LDAPObject
         $this->attributes['cn'] = null;
         $this->attributes['zacaciaStatus'] = 'enable';
         $this->attributes['zacaciaUnDeletable'] = 0;
+        $this->attributes['gidNumber'] = '';
         /* Zarafa Specific Attributs */
         $this->attributes['zarafaAccount'] = 1;                         // Entry is a part of zarafa
         $this->attributes['zarafaAdminPrivilege'] = '';                 // Users from different companies which are administrator over selected company
@@ -79,6 +80,17 @@ class BaseCompanyObject extends LDAPObject
     public function getZacaciaUnDeletable()
     {
         return (int)$this->attributes['zacaciaUnDeletable'];
+    }
+
+    public function setGidNumber($v)
+    {
+        $this->attributes['gidNumber'] = $v;
+   	    return $this;
+    }
+
+    public function getGidNumber()
+    {
+        return $this->attributes['gidNumber'];
     }
 
     public function setZarafaAccount($v)

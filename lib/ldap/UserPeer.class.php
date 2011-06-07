@@ -19,7 +19,12 @@ class UserPeer extends BaseUserPeer
         $c->setAttributes(array('uidNumber'));
        
         if ( $users = $l->doSelect($c) ) {
-            print_r($users); exit;
+            $uids = array();
+            foreach( $users as $user ) {
+                $uids[] = $user->getUidNumber();
+            }
+            rsort($uids);
+            $uidNumber = $uids[0] + 1;
         }
 
         return $uidNumber;

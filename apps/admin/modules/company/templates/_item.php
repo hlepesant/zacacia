@@ -19,7 +19,7 @@ echo link_to_function(
 
 /* Delete */
 // if ( !$c->getZacaciaUnDeletable() && 'disable' === $c->getZacaciaStatus() && 0 === $c->get('user_count') ) {
-if ( $c->getZacaciaUnDeletable() && 'disable' === $c->getZacaciaStatus() ) {
+if ( !$c->getZacaciaUnDeletable() && 'disable' === $c->getZacaciaStatus() ) {
     echo link_to_function(
         image_tag('famfam/cross.png', array('title' => __('Delete'))), 
         "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($c->getCn()))."', 'delete', null)");
