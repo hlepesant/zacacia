@@ -17,7 +17,7 @@
 
     <?php echo $form['sn']->renderRow() ?>
     <?php echo $form['givenName']->renderRow() ?>
-    <?php /* echo $form['displayName']->renderRow() */ ?>
+    <?php echo $form['displayName']->renderRow() ?>
 <?php /*
     <div id="form_item">
         <div class="_name"><?php echo $form['cn']->renderLabel() ?></div>
@@ -48,8 +48,8 @@
 
     <div id="form_submit">
         <input type="button" value="<?php echo __('Cancel') ?>" id="button_cancel" />
-        <!-- input type="submit" value="<?php echo __('Create') ?>" disabled="true" id="button_submit" / -->
-        <input type="submit" value="<?php echo __('Create') ?>" id="button_submit" />
+        <input type="submit" value="<?php echo __('Create') ?>" disabled="true" id="button_submit" />
+        <!-- input type="submit" value="<?php echo __('Create') ?>" id="button_submit" / -->
     </div>
     <!-- end #form_submit -->
 
@@ -63,7 +63,8 @@
 
 <?php
 echo javascript_tag("
-var json_check_url = '".url_for('user/check/')."';
+var json_checkcn_url = '".url_for('user/checkcn/')."';
+var json_checkuid_url = '".url_for('user/checkuid/')."';
 ");?>
 
 <?php /* echo javascript_tag("

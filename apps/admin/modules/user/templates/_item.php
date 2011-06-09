@@ -16,7 +16,7 @@ echo link_to_function(
     image_tag('famfam/arrow_rotate_clockwise.png', array('title' => __('Status'))), 
     "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($u->getCn()))."', 'status', '".$u->getZacaciaStatus()."')");
 /* Delete */
-if ( $u->getZacaciaUnDeletable() && 'disable' === $u->getZacaciaStatus() ) {
+if ( !$u->getZacaciaUnDeletable() && 'disable' === $u->getZacaciaStatus() ) {
     echo link_to_function(
         image_tag('famfam/cross.png', array('title' => __('Delete'))), 
         "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($u->getCn()))."', 'delete', null)");

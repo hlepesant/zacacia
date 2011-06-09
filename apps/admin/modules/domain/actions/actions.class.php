@@ -128,7 +128,7 @@ class domainActions extends sfActions
 
                     if ( $l->doAdd($domain) ) {
                         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                        echo fake_post($this, 'domain/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+                        echo fake_post($this, '@domain', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
                         exit;
                     }
                 } else {
@@ -215,7 +215,7 @@ class domainActions extends sfActions
 
                     if ( $l->doSave($this->domain) ) {
                         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                        echo fake_post($this, 'domain/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+                        echo fake_post($this, '@domain', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
                         exit;
                     }
                 } else {
@@ -270,14 +270,14 @@ class domainActions extends sfActions
         if ( empty($companyDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing company's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+            echo fake_post($this, '@company', Array('platformDn' => $platformDn));
         }
         
         $domainDn = $request->getParameter('domainDn');
         if ( empty($domainDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing domain's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, 'domain/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+            echo fake_post($this, '@domain', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         }
         
         $c = new LDAPCriteria();
@@ -295,7 +295,7 @@ class domainActions extends sfActions
         $l->doSave($d);
         
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-        echo fake_post($this, 'domain/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+        echo fake_post($this, '@domain', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         exit;
     }
 
@@ -311,14 +311,14 @@ class domainActions extends sfActions
         if ( empty($companyDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing company's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+            echo fake_post($this, '@company', Array('platformDn' => $platformDn));
         }
         
         $domainDn = $request->getParameter('domainDn');
         if ( empty($domainDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing domain's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, 'domain/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+            echo fake_post($this, '@domain', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         }
         
         
@@ -334,7 +334,7 @@ class domainActions extends sfActions
         }
         
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-        echo fake_post($this, 'domain/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+        echo fake_post($this, '@domain', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         exit;
     }
 

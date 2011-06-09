@@ -126,7 +126,7 @@ class companyActions extends sfActions
 
                 if ( $l->doAdd($company) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                    echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+                    echo fake_post($this, '@company', Array('platformDn' => $platformDn));
                     exit;
                 }
             }
@@ -227,7 +227,7 @@ class companyActions extends sfActions
                 if ( $l->doAdd($company) ) {
                     $this->getUser()->setAttribute('company_data', null);
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                    echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+                    echo fake_post($this, '@company', Array('platformDn' => $platformDn));
                     exit;
                 }
             }
@@ -261,7 +261,7 @@ class companyActions extends sfActions
         if ( empty($companyDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing company's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+            echo fake_post($this, '@company', Array('platformDn' => $platformDn));
         }
 
         $l = new CompanyPeer();
@@ -318,7 +318,7 @@ class companyActions extends sfActions
 
                 if ( $l->doSave($this->company) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                    echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+                    echo fake_post($this, '@company', Array('platformDn' => $platformDn));
                     exit;
                 }
 
@@ -452,7 +452,7 @@ class companyActions extends sfActions
                 if ( $l->doSave($company) ) {
                     $this->getUser()->setAttribute('company_data', null);
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                    echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+                    echo fake_post($this, '@company', Array('platformDn' => $platformDn));
                     exit;
                 }
             }
@@ -486,7 +486,7 @@ class companyActions extends sfActions
         if ( empty($companyDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing company's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+            echo fake_post($this, '@company', Array('platformDn' => $platformDn));
         }
 
         $criteria = new LDAPCriteria();
@@ -504,7 +504,7 @@ class companyActions extends sfActions
         $l->doSave($company);
 
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-        echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+        echo fake_post($this, '@company', Array('platformDn' => $platformDn));
         exit;
     }
 
@@ -520,7 +520,7 @@ class companyActions extends sfActions
         if ( empty($companyDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing company's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+            echo fake_post($this, '@company', Array('platformDn' => $platformDn));
         }
 
         $criteria = new LDAPCriteria();
@@ -534,7 +534,7 @@ class companyActions extends sfActions
         }
 
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-        echo fake_post($this, 'company/index', Array('platformDn' => $platformDn));
+        echo fake_post($this, '@company', Array('platformDn' => $platformDn));
         exit;
     }
 

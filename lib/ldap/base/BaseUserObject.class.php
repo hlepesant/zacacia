@@ -308,13 +308,18 @@ class BaseUserObject extends LDAPObject
         return $this->attributes[''];
     }
 */  
-    public function setZacaciastatus($v)
+    public function setZacaciaStatus($v)
     {
-        $this->attributes['zacaciaStatus'] = $v;
+#        $this->attributes['zacaciaStatus'] = $v;
+        if ( $v ) {
+            $this->attributes['zacaciaStatus'] = 'enable';
+        } else {
+            $this->attributes['zacaciaStatus'] = 'disable';
+        }
         return $this;
     }
 
-    public function getZacaciastatus()
+    public function getZacaciaStatus()
     {
         return $this->attributes['zacaciaStatus'];
     }
@@ -329,8 +334,8 @@ class BaseUserObject extends LDAPObject
     	return $this;
     }
  
-    public function getZacaciaUndeletable()
+    public function getZacaciaUnDeletable()
     {
-        return $this->attributes['zacaciaUnDeletable'];
+        return (int)$this->attributes['zacaciaUnDeletable'];
     }
 }

@@ -122,7 +122,7 @@ class serverActions extends sfActions
 
                     if ( $l->doAdd($server) ) {
                         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                        echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
+                        echo fake_post($this, '@server', Array('platformDn' => $platformDn));
                         exit;
                     }
                 } else {
@@ -159,7 +159,7 @@ class serverActions extends sfActions
         if ( empty($serverDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing server's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
+            echo fake_post($this, '@server', Array('platformDn' => $platformDn));
         }
 
         $l = new ServerPeer();
@@ -204,7 +204,7 @@ class serverActions extends sfActions
 
                 if ( $l->doSave($this->server) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                    echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
+                    echo fake_post($this, '@server', Array('platformDn' => $platformDn));
                     exit;
                 }
             } else {
@@ -261,7 +261,7 @@ class serverActions extends sfActions
         if ( empty($serverDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
+            echo fake_post($this, '@server', Array('platformDn' => $platformDn));
         }
 
         $c = new LDAPCriteria();
@@ -279,7 +279,7 @@ class serverActions extends sfActions
         $l->doSave($s);
 
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-        echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
+        echo fake_post($this, '@server', Array('platformDn' => $platformDn));
         exit;
     }
 
@@ -295,7 +295,7 @@ class serverActions extends sfActions
         if ( empty($serverDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
+            echo fake_post($this, '@server', Array('platformDn' => $platformDn));
         }
 
         $c = new LDAPCriteria();
@@ -309,7 +309,7 @@ class serverActions extends sfActions
         }
 
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-        echo fake_post($this, 'server/index', Array('platformDn' => $platformDn));
+        echo fake_post($this, '@server', Array('platformDn' => $platformDn));
         exit;
     }
 

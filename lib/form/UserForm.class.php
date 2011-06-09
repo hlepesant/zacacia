@@ -12,7 +12,7 @@ class UserForm extends ZacaciaForm
 # ObjectClasse: inetOrgPerson
             'givenName' => new sfWidgetFormInput(),
             'sn' => new sfWidgetFormInput(),
-#            'displayName' => new sfWidgetFormInput(),
+            'displayName' => new sfWidgetFormInput(),
 # ObjectClasse: posixAccount
 #            'userPassword' => new sfWidgetFormInputPassword(),
 #            'confirmPassword' => new sfWidgetFormInputPassword(),
@@ -52,7 +52,7 @@ class UserForm extends ZacaciaForm
             #'undeletable'   => 'Undeletable',
             'givenName'     => 'Lastname',
             'sn'            => 'Firstname',
-            #'displayName'   => 'Display Name',
+            'displayName'   => 'Display Name',
             #'userPassword'  => 'Password',
             #'uid'           => 'Username',
         ));
@@ -64,7 +64,7 @@ class UserForm extends ZacaciaForm
             #'undeletable'       => new sfValidatorBoolean(),
             'givenName'         => new sfValidatorString(),
             'sn'                => new sfValidatorString(),
-            #'displayName'       => new sfValidatorString(),
+            'displayName'       => new sfValidatorString(),
             #'userPassword'      => new sfValidatorString(),
             #'confirmPassword'   => new sfValidatorString(),
             #'uid'               => new sfValidatorString(),

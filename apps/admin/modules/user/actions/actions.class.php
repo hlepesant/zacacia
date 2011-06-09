@@ -229,6 +229,43 @@ class userActions extends sfActions
         exit;
     }
 
+    public function executeDelete(sfWebRequest $request)
+    {
+        $platformDn = $request->getParameter('platformDn');
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
+            $this->redirect('@platform');
+        }
+
+        $companyDn = $request->getParameter('companyDn');
+        if ( empty($companyDn) ) {
+            $this->getUser()->setFlash('zJsAlert', "Missing company's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
+            echo fake_post($this, '@company', Array('platformDn' => $platformDn));
+        }
+
+        $userDn = $request->getParameter('userDn');
+        if ( empty($userDn) ) {
+            $this->getUser()->setFlash('zJsAlert', "Missing user's DN.");
+            sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
+            echo fake_post($this, '@user', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+        }
+
+        $criteria = new LDAPCriteria();
+        $criteria->setBaseDn($userDn);
+
+        $l = new UserPeer();
+        $user = $l->retrieveByDn($criteria);
+
+        if ( 'disable' === $user->getZacaciaStatus()) {
+            $l->doDelete($user, true);
+        }
+
+        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
+        echo fake_post($this, '@user', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+        exit;
+    }
+
 /* WebServices */
     public function executeCheckUid(sfWebRequest $request)
     {
