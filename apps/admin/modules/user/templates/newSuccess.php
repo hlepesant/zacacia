@@ -16,15 +16,16 @@
 <?php echo $form->renderHiddenFields() ?>
 
     <?php echo $form['sn']->renderRow() ?>
-    <?php echo $form['givenName']->renderRow() ?>
-    <?php echo $form['displayName']->renderRow() ?>
-<?php /*
+    <?php /* echo $form['givenName']->renderRow() */ ?>
     <div id="form_item">
-        <div class="_name"><?php echo $form['cn']->renderLabel() ?></div>
-        <div class="_field"><?php echo $form['cn']->render() ?></div>
+        <div class="_name"><?php echo $form['givenName']->renderLabel() ?></div>
+        <div class="_field"><?php echo $form['givenName']->render() ?></div>
         <div class="_ajaxCheck"><div id="checkName_msg"></div></div>
     </div>
     <!-- end #form_item -->
+
+    <?php echo $form['displayName']->renderRow() ?>
+<?php /*
 
     <div id="form_item">
         <div class="_name"><?php echo $form['uid']->renderLabel() ?></div>

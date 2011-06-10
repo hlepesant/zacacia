@@ -267,6 +267,39 @@ class userActions extends sfActions
     }
 
 /* WebServices */
+    public function executeCheckcn(sfWebRequest $request)
+    {
+        $this->setTemplate('check');
+        $this->setLayout(false);
+        $this->count = 0;
+
+        if ( ! $request->hasParameter('companyDn') ) {
+            $this->count = 1;
+            return sfView::SUCCESS;
+        }
+
+        if ( ! $request->hasParameter('name') ) {
+            $this->count = 1;
+            return sfView::SUCCESS;
+        }
+
+        $l = new UserPeer();
+        $c = new LDAPCriteria();
+        
+        $c->setBaseDn( sprintf("ou=Users,%s", $request->getParameter('companyDn')) );
+        
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'inetOrgPerson');
+        $c->add('objectClass', 'posixAccount');
+        $c->add('objectClass', 'zarafa-user');
+        $c->add('objectClass', 'zacaciaUser');
+        $c->add('cn', $request->getParameter('name'));
+        
+        $this->count = $l->doCount($c);
+
+        return sfView::SUCCESS;
+    }
+
     public function executeCheckUid(sfWebRequest $request)
     {
         $this->setTemplate('check');
