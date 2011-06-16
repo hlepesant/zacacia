@@ -17,7 +17,7 @@ class UserForm extends ZacaciaForm
 # ObjectClasse: posixAccount
 #            'userPassword' => new sfWidgetFormInputPassword(),
 #            'confirmPassword' => new sfWidgetFormInputPassword(),
-#            'uid' => new sfWidgetFormInput(),
+            'uid' => new sfWidgetFormInput(),
 # ObjectClasse: zarafa-user
 #            'zarafaAccount'         => new sfWidgetFormInputHidden(array('default' => 1)),
 #            'zarafaAdmin'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
@@ -55,7 +55,7 @@ class UserForm extends ZacaciaForm
             'sn'            => 'Firstname',
             'displayName'   => 'Display Name',
             #'userPassword'  => 'Password',
-            #'uid'           => 'Username',
+            'uid'           => 'Username',
         ));
 
         $this->setValidators(array(
@@ -69,7 +69,7 @@ class UserForm extends ZacaciaForm
             'displayName'       => new sfValidatorString(),
             #'userPassword'      => new sfValidatorString(),
             #'confirmPassword'   => new sfValidatorString(),
-            #'uid'               => new sfValidatorString(),
+            'uid'               => new sfValidatorString(),
         ));
 
         $this->validatorSchema->setPostValidator(

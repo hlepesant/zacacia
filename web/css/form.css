@@ -91,6 +91,15 @@
     margin: 4px 0px 0px 0px;
 }
 
+#form_item ._ajaxSwitch {
+    float: right;
+    width: 30px;
+    height: 18px;
+    padding: 0px 0px 0px 0px;
+    margin: 4px 0px 0px 0px;
+    visibility: hidden;
+}
+
 #checkName {
     text-align: right;
 }

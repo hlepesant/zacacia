@@ -24,8 +24,15 @@
     </div>
     <!-- end #form_item -->
 
-    <?php echo $form['displayName']->renderRow() ?>
-<?php /*
+    <?php /* echo $form['displayName']->renderRow() */ ?>
+    <div id="form_item">
+        <div class="_name"><?php echo $form['displayName']->renderLabel() ?></div>
+        <div class="_field"><?php echo $form['displayName']->render() ?></div>
+        <div class="_ajaxSwitch" id="imgSwitch">
+            <?php echo image_tag('famfam/arrow_rotate_anticlockwise.png', array('title' => __('Switch'), 'id' => 'switch')) ?>
+        </div>
+    </div>
+    <!-- end #form_item -->
 
     <div id="form_item">
         <div class="_name"><?php echo $form['uid']->renderLabel() ?></div>
@@ -34,6 +41,7 @@
     </div>
     <!-- end #form_item -->
 
+<?php /*
     <?php echo $form['status']->renderRow() ?>
     <?php echo $form['undeletable']->renderRow() ?>
 

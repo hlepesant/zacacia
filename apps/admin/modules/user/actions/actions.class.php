@@ -300,18 +300,13 @@ class userActions extends sfActions
         return sfView::SUCCESS;
     }
 
-    public function executeCheckUid(sfWebRequest $request)
+    public function executeCheckuid(sfWebRequest $request)
     {
         $this->setTemplate('check');
         $this->setLayout(false);
         $this->count = 0;
 
-        if ( ! $request->hasParameter('companyDn') ) {
-            $this->count = 1;
-            return sfView::SUCCESS;
-        }
-
-        if ( ! $request->hasParameter('uid') ) {
+        if ( ! $request->hasParameter('name') ) {
             $this->count = 1;
             return sfView::SUCCESS;
         }
@@ -319,15 +314,14 @@ class userActions extends sfActions
         $l = new UserPeer();
         $c = new LDAPCriteria();
         
-        $c->setBaseDn( sprintf("ou=Users,%s", $request->getParameter('companyDn')) );
-        print( $c->getBaseDn() ); exit;
+        $c->setBaseDn( sfConfig::get('ldap_base_dn') );
         
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'inetOrgPerson');
         $c->add('objectClass', 'posixAccount');
         $c->add('objectClass', 'zarafa-user');
         $c->add('objectClass', 'zacaciaUser');
-        $c->add('uid', $request->getParameter('uid'));
+        $c->add('uid', $request->getParameter('name'));
         
         $this->count = $l->doCount($c);
         
