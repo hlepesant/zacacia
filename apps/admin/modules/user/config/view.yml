@@ -3,8 +3,8 @@ indexSuccess:
     javascripts:    [indexUser.js]
 
 newSuccess:
-    stylesheets:    [form.css, button.css, tooltip.css, validator.css]
-    javascripts:    [newUser.js, jquery.observe_field.js]
+    stylesheets:    [form.css, button.css, tooltip.css, validator.css, password.css]
+    javascripts:    [newUser.js, jquery.observe_field.js, jquery.password_strength.js]
 
 editSuccess:
     stylesheets:    [form.css, button.css, tooltip.css, validator.css]

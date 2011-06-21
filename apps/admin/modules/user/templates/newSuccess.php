@@ -41,6 +41,14 @@
     </div>
     <!-- end #form_item -->
 
+    <div id="form_item">
+        <div class="_name"><?php echo $form['userPassword']->renderLabel() ?></div>
+        <div class="_field"><?php echo $form['userPassword']->render() ?></div>
+        <div class="_ajaxCheck"><div id="pmeter"></div></div>
+    </div>
+    <!-- end #form_item -->
+    <?php echo $form['confirmPassword']->renderRow() ?>
+
 <?php /*
     <?php echo $form['status']->renderRow() ?>
     <?php echo $form['undeletable']->renderRow() ?>
@@ -51,8 +59,6 @@
     </div>
     <!-- end #form_section -->
 
-    <?php echo $form['userPassword']->renderRow() ?>
-    <?php echo $form['confirmPassword']->renderRow() ?>
 */ ?>
 
     <div id="form_submit">
@@ -74,6 +80,12 @@
 echo javascript_tag("
 var json_checkcn_url = '".url_for('user/checkcn/')."';
 var json_checkuid_url = '".url_for('user/checkuid/')."';
+var password_i18n = new Array();
+password_i18n[1] = '".__('Too weak')."'; 
+password_i18n[2] = '".__('Weak')."'; 
+password_i18n[3] = '".__('Medium')."'; 
+password_i18n[4] = '".__('Strong')."'; 
+password_i18n[5] = '".__('Very strong')."'; 
 ");?>
 
 <?php /* echo javascript_tag("

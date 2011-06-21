@@ -74,5 +74,9 @@ $(document).ready(function() {
         }
     });
 
+    $('#zdata_userPassword').attr('autocomplete', 'off');
+    $('#zdata_confirmPassword').attr('autocomplete', 'off');
+    $('#zdata_userPassword').password_strength({container: $('#pmeter'), minLength: 5, texts: password_i18n});
+
 });
 
