@@ -115,8 +115,15 @@ class BaseUserObject extends LDAPObject
   
     public function setUserPassword($v)
     {
-        $this->attributes['userPassword'] = $v;
-   	    return $this;
+      if ( $this->isValidMd5($v) ) {
+        $p = sprintf("{MD5}%s", base64_encode(pack('H*',$v)));
+      } else {
+        $p = sprintf("{MD5}%s", base64_encode(pack('H*',md5($v))));
+      }
+
+      $this->attributes['userPassword'] = $p;
+
+   	  return $this;
     }
 
     public function getUserPassword()
@@ -337,5 +344,10 @@ class BaseUserObject extends LDAPObject
     public function getZacaciaUnDeletable()
     {
         return (int)$this->attributes['zacaciaUnDeletable'];
+    }
+
+    private function isValidMd5($md5)
+    {
+      return !empty($md5) && preg_match('/^[a-f0-9]{32}$/', $md5);
     }
 }

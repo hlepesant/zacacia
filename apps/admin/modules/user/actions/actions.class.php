@@ -142,6 +142,7 @@ class userActions extends sfActions
                 $la = strToLower($this->form->getValue('givenName'));
 
                 $user->setUid(sprintf('%s%s', $fi[0], $la));
+                $user->setUserPassword($this->form->getValue('userPassword'));
                 $user->setUidNumber($l->getNewUidNumber());
                 $user->setGidNumber($this->company->getGidNumber());
 
@@ -170,7 +171,7 @@ class userActions extends sfActions
                     $user->setZarafaUserDefaultQuotaWarn($this->form->getValue('zarafaUserDefaultQuotaWarn'));
                 }
 */
-                #var_dump( $user ); exit;
+#                var_dump( $user ); exit;
 
                 if ( $l->doAdd($user) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');

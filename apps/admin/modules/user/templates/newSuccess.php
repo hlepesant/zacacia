@@ -47,7 +47,12 @@
         <div class="_ajaxCheck"><div id="pmeter"></div></div>
     </div>
     <!-- end #form_item -->
-    <?php echo $form['confirmPassword']->renderRow() ?>
+    <div id="form_item">
+        <div class="_name"><?php echo $form['confirmPassword']->renderLabel() ?></div>
+        <div class="_field"><?php echo $form['confirmPassword']->render() ?></div>
+        <div class="_ajaxCheck"><div id="pequality"></div></div>
+    </div>
+    <!-- end #form_item -->
 
 <?php /*
     <?php echo $form['status']->renderRow() ?>

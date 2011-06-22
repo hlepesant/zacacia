@@ -4,7 +4,7 @@ indexSuccess:
 
 newSuccess:
     stylesheets:    [form.css, button.css, tooltip.css, validator.css]
-    javascripts:    [newDomain.js, jquery.observe_field.js]
+    javascripts:    [newDomain.js, lib/jquery.observe_field.js]
 
 editSuccess:
     stylesheets:    [form.css, button.css, tooltip.css, validator.css]

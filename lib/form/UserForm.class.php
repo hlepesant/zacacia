@@ -15,8 +15,8 @@ class UserForm extends ZacaciaForm
             'cn' => new sfWidgetFormInputHidden(),
             'displayName' => new sfWidgetFormInput(),
 # ObjectClasse: posixAccount
-            'userPassword' => new sfWidgetFormInputPassword(),
-            'confirmPassword' => new sfWidgetFormInputPassword(),
+            'userPassword' => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),
+            'confirmPassword' => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),
             'uid' => new sfWidgetFormInput(),
 # ObjectClasse: zarafa-user
 #            'zarafaAccount'         => new sfWidgetFormInputHidden(array('default' => 1)),

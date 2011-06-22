@@ -4,7 +4,7 @@ indexSuccess:
 
 newSuccess:
     stylesheets:    [form.css, button.css, tooltip.css, validator.css, password.css]
-    javascripts:    [newUser.js, jquery.observe_field.js, jquery.password_strength.js]
+    javascripts:    [newUser.js, lib/jquery.observe_field.js, lib/jquery.password_strength.js, lib/jquery.crypt.js]
 
 editSuccess:
     stylesheets:    [form.css, button.css, tooltip.css, validator.css]
