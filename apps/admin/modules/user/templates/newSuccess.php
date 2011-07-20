@@ -16,15 +16,14 @@
 <?php echo $form->renderHiddenFields() ?>
 
     <?php echo $form['sn']->renderRow() ?>
-    <?php /* echo $form['givenName']->renderRow() */ ?>
+    
     <div id="form_item">
         <div class="_name"><?php echo $form['givenName']->renderLabel() ?></div>
         <div class="_field"><?php echo $form['givenName']->render() ?></div>
         <div class="_ajaxCheck"><div id="checkName_msg"></div></div>
     </div>
     <!-- end #form_item -->
-
-    <?php /* echo $form['displayName']->renderRow() */ ?>
+    
     <div id="form_item">
         <div class="_name"><?php echo $form['displayName']->renderLabel() ?></div>
         <div class="_field"><?php echo $form['displayName']->render() ?></div>
@@ -32,8 +31,8 @@
             <?php echo image_tag('famfam/arrow_rotate_anticlockwise.png', array('title' => __('Switch'), 'id' => 'switch')) ?>
         </div>
     </div>
-    <!-- end #form_item -->
 
+    <!-- end #form_item -->
     <div id="form_item">
         <div class="_name"><?php echo $form['uid']->renderLabel() ?></div>
         <div class="_field"><?php echo $form['uid']->render() ?></div>
@@ -47,6 +46,7 @@
         <div class="_ajaxCheck"><div id="pmeter"></div></div>
     </div>
     <!-- end #form_item -->
+
     <div id="form_item">
         <div class="_name"><?php echo $form['confirmPassword']->renderLabel() ?></div>
         <div class="_field"><?php echo $form['confirmPassword']->render() ?></div>
