@@ -7,7 +7,7 @@ class ProjectConfiguration extends sfProjectConfiguration
 {
   public function setup()
   {
-    $this->enablePlugins('sfProtoculousPlugin');
+#    $this->enablePlugins('sfProtoculousPlugin');
 
     sfConfig::set('sf_logging_enabled', true);
 
