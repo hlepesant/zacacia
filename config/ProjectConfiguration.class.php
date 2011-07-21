@@ -7,8 +7,6 @@ class ProjectConfiguration extends sfProjectConfiguration
 {
   public function setup()
   {
-#    $this->enablePlugins('sfProtoculousPlugin');
-
     sfConfig::set('sf_logging_enabled', true);
 
     sfConfig::set('projetctName', 'Zacacia');
@@ -86,6 +84,5 @@ class ProjectConfiguration extends sfProjectConfiguration
     sfConfig::set('grep', '/bin/grep');
 
     sfConfig::set('undefined', '_undefined_');
-    $this->enablePlugins('sfJqueryReloadedPlugin');
   }
 }

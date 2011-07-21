@@ -10,7 +10,7 @@
     clear: both;
 }
 
-#button_submit {
+.button_submit {
     float: right;
     display: block;
     margin: 0px 10px 0px 0px;
@@ -32,12 +32,12 @@
     background-repeat: no-repeat;
 }
 
-#button_submit[disabled] {
+.button_submit[disabled] {
     color: #a0a0a0;
     background-color: #EEEEEE;
 }
 
-#button_cancel {
+.button_cancel {
     float: left;
     display: block;
     margin: 0px 0px 0px 10px;
@@ -62,7 +62,7 @@
     background-repeat: no-repeat;
 }
 
-#button_cancel:hover {
+.button_cancel:hover {
     background-color: #dff4ff;
     border: 1px solid #c2e1ef;
     color: #336699;

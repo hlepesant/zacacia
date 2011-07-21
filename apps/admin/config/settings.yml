@@ -37,7 +37,7 @@ all:
     i18n:                   true
     default_culture:        fr
     # Enable the helper manager
-    standard_helpers:       [Partial,Cache,I18N,JavascriptBase,jQuery]
+    standard_helpers:       [Partial,Cache,I18N,JavascriptBase]
     # jQuery Reloader
     jquery_web_dir:         /sfJqueryReloadedPlugin
     jquery_core:            jquery-1.4.2.min.js

@@ -2,6 +2,32 @@ var _displayName = 'fl';
 
 $(document).ready(function() {
 
+  $.fx.off = true;
+
+  $("#section_user").show();
+  $("#section_zarafa").hide();
+
+  $("#goto_section_zarafa").click(function() {
+    $("#section_user").hide();
+    $("#section_zarafa").show();
+
+    if ( $(this).is(':checked')) {
+      $('#zdata_zarafaQuotaWarn').show();
+      $('#zdata_zarafaQuotaSoft').show();
+      $('#zdata_zarafaQuotaHard').show();
+    } else {
+      $('#zdata_zarafaQuotaWarn').hide();
+      $('#zdata_zarafaQuotaSoft').hide();
+      $('#zdata_zarafaQuotaHard').hide();
+    }
+    return false;
+  }); 
+
+  $("#back_section_user").click(function() {
+    $("#section_user").show();
+    $("#section_zarafa").hide();
+  });
+
   $('#button_cancel').click(function() {
     $('#form_cancel').submit();
   });
@@ -59,7 +85,7 @@ $(document).ready(function() {
   $('input#zdata_uid').observe_field(0.5, function() {
   
     $('#checkUid_msg').html("");
-    $('#button_submit').attr('disabled', true);
+    $('#goto_section_zarafa').attr('disabled', true);
   
     if ( val_uid.data('validator').checkValidity() ) {
       $.get( json_checkuid_url, {
@@ -68,7 +94,7 @@ $(document).ready(function() {
       function(data){
         $('#checkUid_msg').html("<img src=\""+data.img+"\" />");
         if ( ! data.disabled ) {
-          $('#button_submit').removeAttr('disabled');
+          $('#goto_section_zarafa').removeAttr('disabled');
         }
       }, 'json');
     }
@@ -78,16 +104,16 @@ $(document).ready(function() {
 
   if ( null == $('input#zdata_confirmPassword').val() == $('input#zdata_userPassword').val() ) {
     $('#pequality').html("<img src=\"/images/famfam/cross.png\" />");
-    $('#button_submit').attr('disabled', true);
+    $('#goto_section_zarafa').attr('disabled', true);
   }
 
   $('input#zdata_confirmPassword').observe_field(0.5, function() {
     if ( $('input#zdata_userPassword').val() == $(this).val() ) {
       $('#pequality').html("<img src=\"/images/famfam/tick.png\" />");
-      $('#button_submit').removeAttr('disabled');
+      $('#goto_section_zarafa').removeAttr('disabled');
     } else {
       $('#pequality').html("<img src=\"/images/famfam/cross.png\" />");
-      $('#button_submit').attr('disabled', true);
+      $('#goto_section_zarafa').attr('disabled', true);
     }
   });
 
@@ -96,6 +122,19 @@ $(document).ready(function() {
     $('input#zdata_userPassword').val(_md5);
     $('input#zdata_confirmPassword').val(_md5);
   });
+
+  $('#zdata_zarafaQuotaOverride').click(function() {
+    if ( $(this).is(':checked')) {
+      $('#zdata_zarafaQuotaWarn').show();
+      $('#zdata_zarafaQuotaSoft').show();
+      $('#zdata_zarafaQuotaHard').show();
+    } else {
+      $('#zdata_zarafaQuotaWarn').hide();
+      $('#zdata_zarafaQuotaSoft').hide();
+      $('#zdata_zarafaQuotaHard').hide();
+    }
+  });
+
 
 });
 
