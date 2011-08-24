@@ -38,14 +38,13 @@ class ProjectConfiguration extends sfProjectConfiguration
     sfConfig::set('global_company_quota_warn', 0);
 # - Specific Company Quota (select in options )
     sfConfig::set('options_company_quota_warn', array(
-        '5000' => '5 Go',
-        '10000' => '10 Go',
-        '25000' => '25 Go',
-        '50000' => '50 Go',
-        '100000' => '100 Go',
-        '500000' => '500 Go',
-        '1000000' => '1 To',
-        '0' => 'unlimited',
+        '5120'    => '5 Go',
+        '10240'   => '10 Go',
+        '25600'   => '25 Go',
+        '51200'   => '50 Go',
+        '102400'  => '100 Go',
+        '512000'  => '500 Go',
+        '1024000' => '1 To',
     ));
 #
 # User Quota
@@ -57,11 +56,10 @@ class ProjectConfiguration extends sfProjectConfiguration
 # - Specific User Quota
 # - Options for select
     sfConfig::set('options_user_quota_hard', array(
-        '250' => '250 Mo',
-        '500' => '500 Mo',
-        '1000' => '1 Go',
-        '2000' => '2 Go',
-        '0' => 'unlimited',
+        '256'  => '250 Mo',
+        '512'  => '500 Mo',
+        '1024' => '1 Go',
+        '2048' => '2 Go',
     ));
     sfConfig::set('ratio_quota_hard', 1.00 );
     sfConfig::set('ratio_quota_soft', 0.90 );

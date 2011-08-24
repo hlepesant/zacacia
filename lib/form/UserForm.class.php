@@ -1,8 +1,13 @@
 <?php
 class UserForm extends ZacaciaForm
 {
+  protected static $quotas = array();
+
   public function configure()
   {
+  
+    self::$quotas = sfConfig::get('options_user_quota_hard');
+
     $this->setWidgets(array(
       'platformDn'          => new sfWidgetFormInputHidden(),
       'companyDn'           => new sfWidgetFormInputHidden(),
@@ -22,21 +27,28 @@ class UserForm extends ZacaciaForm
       'zarafaAdmin'         => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'zarafaHidden'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'zarafaQuotaOverride' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
+      /*
       'zarafaQuotaWarn'     => new sfWidgetFormInput(array(), 
       array(
         'type' => 'number', 'size' => '5', 'min' => 25,
         'max' => 2048, 'maxlength' => '4', 'data-message' => 'Enter a value between 25 and 2048'
       )),
+      */
+      /*
       'zarafaQuotaSoft'     => new sfWidgetFormInput(array(),
       array(
         'type' => 'number', 'size' => '5', 'min' => 25,
         'max' => 2048, 'maxlength' => '4', 'data-message' => 'Enter a value between 25 and 2048'
       )),
+      */
+      'zarafaQuotaHard'     => new sfWidgetFormSelect(array('choices' => self::$quotas)),
+      /*
       'zarafaQuotaHard'     => new sfWidgetFormInput(array(),
       array(
         'type' => 'number', 'size' => '5', 'min' => 25,
         'max' => 2048, 'maxlength' => '4', 'data-message' => 'Enter a value between 25 and 2048'
       )),
+      */
 #     'zarafaUserServer' => new sfWidgetFormSelect(array('choices' => array())),
     ));
         
@@ -53,8 +65,8 @@ class UserForm extends ZacaciaForm
       'zarafaAdmin'         => 'Zarafa Admin',
       'zarafaHidden'        => 'Hidden',
       'zarafaQuotaOverride' => 'Override Quotas',
-      'zarafaQuotaWarn'     => 'Warning Quota',
-      'zarafaQuotaSoft'     => 'Soft Quota',
+#      'zarafaQuotaWarn'     => 'Warning Quota',
+#      'zarafaQuotaSoft'     => 'Soft Quota',
       'zarafaQuotaHard'     => 'Hard Quota',
 #     'zarafaUserServer' => new sfWidgetFormSelect(array('choices' => array())),
     ));
@@ -76,8 +88,8 @@ class UserForm extends ZacaciaForm
       'zarafaAdmin'         => new sfValidatorBoolean(),
       'zarafaHidden'        => new sfValidatorBoolean(),
       'zarafaQuotaOverride' => new sfValidatorBoolean(),
-      'zarafaQuotaWarn'     => new sfValidatorInteger(),
-      'zarafaQuotaSoft'     => new sfValidatorInteger(),
+#      'zarafaQuotaWarn'     => new sfValidatorInteger(),
+#      'zarafaQuotaSoft'     => new sfValidatorInteger(),
       'zarafaQuotaHard'     => new sfValidatorInteger(),
 #     'zarafaUserServer'    => new sfWidgetFormSelect(array('choices' => array())),
     ));
@@ -90,10 +102,10 @@ class UserForm extends ZacaciaForm
     $this->widgetSchema->setFormFormatterName( sfConfig::get('widgetFormaterName') );
     
     $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(
-      new sfValidatorSchemaCompare('zarafaQuotaOverride', sfValidatorSchemaCompare::EQUAL, true),
-      new sfValidatorSchemaCompare('zarafaQuotaWarn', sfValidatorSchemaCompare::LESS_THAN, 'zarafaQuotaSoft'),
-      new sfValidatorSchemaCompare('zarafaQuotaSoft', sfValidatorSchemaCompare::LESS_THAN, 'zarafaQuotaHard')
-    )));
+#      new sfValidatorSchemaCompare('zarafaQuotaOverride', sfValidatorSchemaCompare::EQUAL, true),
+#      new sfValidatorSchemaCompare('zarafaQuotaWarn', sfValidatorSchemaCompare::LESS_THAN, 'zarafaQuotaSoft'),
+#      new sfValidatorSchemaCompare('zarafaQuotaSoft', sfValidatorSchemaCompare::LESS_THAN, 'zarafaQuotaHard')
+#    )));
   }
 
 /* WebServices */
