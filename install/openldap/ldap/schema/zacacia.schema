@@ -99,4 +99,8 @@ objectclass ( zacaciaObjectClass:8 NAME 'zacaciaServer'
 	SUP top
 	AUXILIARY
 	MUST ( cn )
-	MAY ( zacaciaMultiTenant $ zacaciaStatus $ zacaciaUnDeletable ) )
+	MAY ( 
+		zacaciaMultiTenant $ zacaciaStatus $ zacaciaUnDeletable $
+		zarafaAccount $ zarafaQuotaWarn $ zarafaQuotaSoft $ zarafaQuotaHard
+	    )
+        )
