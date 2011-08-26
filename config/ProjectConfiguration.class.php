@@ -60,6 +60,7 @@ class ProjectConfiguration extends sfProjectConfiguration
         '512'  => '500 Mo',
         '1024' => '1 Go',
         '2048' => '2 Go',
+        '0'    => 'Unlimited',
     ));
     sfConfig::set('ratio_quota_hard', 1.00 );
     sfConfig::set('ratio_quota_soft', 0.90 );

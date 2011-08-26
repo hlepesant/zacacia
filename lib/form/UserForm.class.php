@@ -5,7 +5,6 @@ class UserForm extends ZacaciaForm
 
   public function configure()
   {
-  
     self::$quotas = sfConfig::get('options_user_quota_hard');
 
     $this->setWidgets(array(
@@ -101,10 +100,10 @@ class UserForm extends ZacaciaForm
     $this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));
     $this->widgetSchema->setFormFormatterName( sfConfig::get('widgetFormaterName') );
     
-    $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(
-#      new sfValidatorSchemaCompare('zarafaQuotaOverride', sfValidatorSchemaCompare::EQUAL, true),
-#      new sfValidatorSchemaCompare('zarafaQuotaWarn', sfValidatorSchemaCompare::LESS_THAN, 'zarafaQuotaSoft'),
-#      new sfValidatorSchemaCompare('zarafaQuotaSoft', sfValidatorSchemaCompare::LESS_THAN, 'zarafaQuotaHard')
+#    $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(
+##      new sfValidatorSchemaCompare('zarafaQuotaOverride', sfValidatorSchemaCompare::EQUAL, true),
+##      new sfValidatorSchemaCompare('zarafaQuotaWarn', sfValidatorSchemaCompare::LESS_THAN, 'zarafaQuotaSoft'),
+##      new sfValidatorSchemaCompare('zarafaQuotaSoft', sfValidatorSchemaCompare::LESS_THAN, 'zarafaQuotaHard')
 #    )));
   }
 

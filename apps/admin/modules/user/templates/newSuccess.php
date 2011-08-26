@@ -69,8 +69,8 @@
     <?php echo $form['zarafaAdmin']->renderRow() ?>
     <?php echo $form['zarafaHidden']->renderRow() ?>
     <?php echo $form['zarafaQuotaOverride']->renderRow() ?>
-    <?php echo $form['zarafaQuotaWarn']->renderRow() ?>
-    <?php echo $form['zarafaQuotaSoft']->renderRow() ?>
+    <?php /* echo $form['zarafaQuotaWarn']->renderRow() */ ?>
+    <?php /* echo $form['zarafaQuotaSoft']->renderRow() */ ?>
     <?php echo $form['zarafaQuotaHard']->renderRow() ?>
 
     <div id="form_submit">
@@ -99,45 +99,3 @@ password_i18n[3] = '".__('Medium')."';
 password_i18n[4] = '".__('Strong')."'; 
 password_i18n[5] = '".__('Very strong')."'; 
 ");?>
-
-<?php /* echo javascript_tag("
-function updateUsername()
-{
-    var givenName = substr( strtolower( $('minidata_givenName').value ), 0, 1);
-    var sn = strtolower( $('minidata_sn').value );
-
-    if ( strlen( givenName ) && strlen( sn ) )
-    {
-        $('minidata_uid').value = sprintf('".sfConfig::get('username_format')."', givenName, sn);
-    }
-}
-") */ ?>
-
-<?php /* echo observe_field('minidata_uid', array(
-  'update' => 'checkUid',
-  'url' => url_for('user/checkuid/'),
-  'method' => 'get',
-//  'with' => "'&platformDn='+$('minidata_platformDn').value+'&companyDn='+$('minidata_companyDn').value+'&uid='+$('minidata_uid').value",
-  'with' => "'&companyDn='+$('minidata_companyDn').value+'&uid='+$('minidata_uid').value",
-  'frequency' => '1',
-  'script' => 1
-))
-*/ ?>
-
-<?php /* echo observe_field('veegasdata_cn', array(
-  'update' => 'checkName',
-  'url' => url_for('user/check/'),
-  'method' => 'get',
-  'with' => "'&holdingDn=".$holding['dn']."&companyDn=".$company['dn']."&name='+getName()",
-  'frequency' => '1',
-  'script' => 1
-))
-*/ ?>
-
-<?php /* echo javascript_tag("
-function getUserName()
-{
-    var givenName = $('minidata_givenName').value;
-    var sn = $('minidata_sn').value;
-}
-") */ ?>

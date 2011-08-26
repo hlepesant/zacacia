@@ -49,34 +49,15 @@ $(document).ready(function() {
                 'json');
         }
     });
-/*
+
     $("input[type='checkbox']#zdata_zarafaAccount").change(function() {
 
         if ($(this).is(':checked')) {
-            $("input[type='text']#zdata_zarafaHttpPort").removeAttr("disabled");
-            $("input[type='text']#zdata_zarafaSslPort").removeAttr("disabled");
-            $("input[type='checkbox']#zdata_multitenant").removeAttr("disabled");
-            $("input[type='checkbox']#zdata_zarafaContainsPublic").removeAttr("disabled");
+          $("#zarafa_settings").slideDown('slow');
         } else {
-            $("input[type='text']#zdata_zarafaHttpPort").attr("disabled", true);
-            $("input[type='text']#zdata_zarafaSslPort").attr("disabled", true);
-            $("input[type='checkbox']#zdata_multitenant").attr("disabled", true);
-            $("input[type='checkbox']#zdata_zarafaContainsPublic").attr("disabled", true);
+          $("#zarafa_settings").slideUp();
         }
     });
-*/
-/*
-    var val_ip = $("input#zdata_ip").validator();
-
-    $("input#zdata_cn").change(function() {
-        $("#checkIpAddress_msg_msg").html('');
-        if ( val_ip.data("validator").checkValidity() ) {
-            $("#checkIpAddress_msg_msg").html('<img src=\'/images/famfam/tick.png\' />');
-           ip_ok = 1;
-        }
-        check_form();
-    });
-*/
 });
 
 function check_form() {
