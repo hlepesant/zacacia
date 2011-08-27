@@ -31,7 +31,9 @@ class ServerForm extends ZacaciaForm
       'undeletable'           => 'Undeletable',
 
       'zarafaAccount'         => 'Zarafa Host',
-      'zarafaQuotaHard'       => 'Hard Quota',
+      'zarafaQuotaHard'       => 'default Hard Quota Level',
+#      'zarafaQuotaSoft'       => 'default Soft Quota Level',
+#      'zarafaQuotaWarn'       => 'default Warn Quota Level',
       'zarafaHttpPort'        => 'HTTP Port',
       'zarafaSslPort'         => 'SSL Port',
       'zarafaContainsPublic'  => 'Contains Public Store',

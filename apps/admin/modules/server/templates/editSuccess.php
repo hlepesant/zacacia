@@ -30,10 +30,13 @@
     </div>
     <!-- end #form_section -->
 
+    <div id="zarafa_settings" style="display: <?php echo $zarafa_settings_display ?>;">
+    <?php echo $form['zarafaQuotaHard']->renderRow() ?>
     <?php echo $form['zarafaHttpPort']->renderRow() ?>
     <?php echo $form['zarafaSslPort']->renderRow() ?>
     <?php echo $form['multitenant']->renderRow() ?>
     <?php echo $form['zarafaContainsPublic']->renderRow() ?>
+    </div>
 
     <div id="form_submit">
         <input type="button" value="<?php echo __("Cancel") ?>" id="button_cancel"  />

@@ -112,6 +112,7 @@ class serverActions extends sfActions
                             $server->setZacaciaMultiTenant(1);
                         }
 
+                        $server->setZarafaQuotaHard($this->form->getValue('zarafaQuotaHard'));
                         $server->setZarafaHttpPort($this->form->getValue('zarafaHttpPort'));
                         $server->setZarafaSslPort($this->form->getValue('zarafaSslPort'));
 
@@ -192,12 +193,14 @@ class serverActions extends sfActions
                     $this->server->setZarafaHttpPort($this->form->getValue('zarafaHttpPort'));
                     $this->server->setZarafaSslPort($this->form->getValue('zarafaSslPort'));
                     $this->server->setZarafaContainsPublic($this->form->getValue('zarafaContainsPublic'));
+                    $this->server->setZarafaQuotaHard($this->form->getValue('zarafaQuotaHard'));
                 } else {
                     $this->server->setZarafaAccount(0);
                     $this->server->setZacaciaMultiTenant(0);
                     $this->server->setZarafaHttpPort(array());
                     $this->server->setZarafaSslPort(array());
                     $this->server->setZarafaContainsPublic(array());
+                    $this->server->setZarafaQuotaHard(0);
                 }
 
                 #var_dump( $this->server ); exit;
@@ -224,7 +227,10 @@ class serverActions extends sfActions
             $this->form->getWidget('status')->setDefault('true');
         }
 
-        if ( $this->server->getZarafaHttpPort() ) {
+        $this->zarafa_settings_display = 'none';
+
+        if ( $this->server->getZarafaAccount() ) {
+            $this->zarafa_settings_display = 'block';
             $this->form->getWidget('zarafaAccount')->setDefault('true');
             $this->form->getWidget('zarafaHttpPort')->setDefault($this->server->getZarafaHttpPort());
             $this->form->getWidget('zarafaSslPort')->setDefault($this->server->getZarafaSslPort());
@@ -234,6 +240,7 @@ class serverActions extends sfActions
             if ( $this->server->getZacaciaMultiTenant() ) {
                 $this->form->getWidget('multitenant')->setDefault('true');
             }
+            $this->form->getWidget('zarafaQuotaHard')->setDefault($this->server->getZarafaQuotaHard());
         }
 
         $c = new LDAPCriteria();

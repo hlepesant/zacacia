@@ -29,13 +29,23 @@ $(document).ready(function() {
         check_form();
     });
 
+/*
     if ($("input[type='checkbox']#zdata_zarafaAccount").is(':checked')) {
         $("input[type='text']#zdata_zarafaHttpPort").attr("disabled", true);
         $("input[type='text']#zdata_zarafaSslPort").attr("disabled", true);
         $("input[type='checkbox']#zdata_multitenant").attr("disabled", true);
         $("input[type='checkbox']#zdata_zarafaContainsPublic").attr("disabled", true);
     }
+*/
+    $("input[type='checkbox']#zdata_zarafaAccount").change(function() {
 
+        if ($(this).is(':checked')) {
+          $("#zarafa_settings").slideDown('slow');
+        } else {
+          $("#zarafa_settings").slideUp();
+        }
+    });
+/*
     $("input[type='checkbox']#zdata_zarafaAccount").change(function() {
 
         if ($(this).is(':checked')) {
@@ -54,4 +64,5 @@ $(document).ready(function() {
             $("input[type='text']#zdata_zarafaSslPort").val(null);
         }
     });
+*/
 });
