@@ -1,9 +1,10 @@
 /*
- *  Minivisp Style 0.1
+ *  Zacacia Style 0.1
  *   - Style
  */
 
-@import "minivisp.css";
+@import "zacacia.css";
+@import "topnav.css";
 @import "header.css";
 @import "navigation.css";
 @import "menu.css";

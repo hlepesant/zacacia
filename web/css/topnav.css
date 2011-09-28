@@ -1,0 +1,36 @@
+.topnav {
+background: none repeat scroll 0 0 #999999;
+font-size: 14px;
+overflow: hidden;
+position: relative;
+}
+
+.topnav ul {
+background: none repeat scroll 0 0 #999999;
+margin: 0 auto;
+padding: 5px 0 5px 30px;
+width: 800px;
+}
+.topnav li {
+background: none repeat scroll 0 0 transparent;
+display: inline;
+margin: 0 1.2em 0 0;
+padding: 0;
+list-style: none outside none;
+}
+.topnav a:link {
+color: #FFFFFF;
+text-decoration: none;
+}
+.topnav a:visited {
+color: #FFFFFF;
+}
+.topnav a:focus {
+color: #DDDDDD;
+}
+.topnav a:hover {
+color: lime;
+}
+.topnav a:active {
+color: yellow;
+}

@@ -9,43 +9,43 @@
     <?php include_javascripts() ?>
 </head>
 <body>
-<div id="header_band">
-    <div id="header">
-        <h1><?php echo sfConfig::get('projetctName'); ?></h1>
-        <p><?php echo sfConfig::get('projetctDesc'); ?></p>
-    </div>
-    <!-- end #header -->
+
+<nav class="topnav">
+<ul>
+<li id="home-nav">
+<a href="/">Max Design home</a>
+</li>
+</ul>
+</nav>
+<div class="container">
+
+    <header role="banner">
+        <hgroup>
+            <h1><?php echo sfConfig::get('projetctName'); ?></h1>
+            <h2><?php echo sfConfig::get('projetctDesc'); ?></h2>
+        </hgroup>
+    </header>
+
+  </div>
+  <!-- end #header_band -->
+  <div id="content_band">
+      <div id="content">
+          <?php echo $sf_content ?>
+      </div>
+      <!-- end #content -->
+  </div>
+  <!-- end #content_band -->
+  <div id="footer_band">
+      <div id="footer">
+          <div id="footer-content">
+              <p>hugues-at-lepesant-dot-com</p>
+          </div>
+          <!-- end #footer-content -->
+      </div>
+      <!-- end #footer -->
+  </div>
+  <!-- end #footer_band -->
 </div>
-<!-- end #header_band -->
-<?php /*
-<div id="menu">
-    <ul>
-        <li class="current_page_item"><a href="#" class="active">Platform</a></li>
-        <li><a href="#" class="first">Company</a></li>
-        <li><a href="#" class="first">Domain</a></li>
-        <li><a href="#" class="first">User</a></li>
-        <li><a href="#" class="first">Group</a></li>
-        <li><a href="#" class="first">Forward</a></li>
-    </ul>
-</div>
-<!-- end #menu -->
-*/ ?>
-<div id="content_band">
-    <div id="content">
-        <?php echo $sf_content ?>
-    </div>
-    <!-- end #content -->
-</div>
-<!-- end #content_band -->
-<div id="footer_band">
-    <div id="footer">
-        <div id="footer-content">
-            <p>hugues-at-lepesant-dot-com</p>
-        </div>
-        <!-- end #footer-content -->
-    </div>
-    <!-- end #footer -->
-</div>
-<!-- end #footer_band -->
+<!-- end .container -->
 </body>
 </html>

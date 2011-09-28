@@ -1,0 +1,86 @@
+/*
+ *  Zacacia Style 0.1
+ *
+ *   - http://www.colorzilla.com/gradient-editor/
+ *   - http://www.css3.info/preview/rounded-border/
+ *   - http://www.colorcombos.com/color-scheme-219.html
+ */
+
+html, body, ul, ol, li, form, fieldset, legend, p, div {
+margin: 0;
+padding: 0;
+}
+
+body {
+color: #000000;
+font: 100%/1.5 HelveticaNeue-Light,'Helvetica Neue Light','Helvetica Neue',helvetica,arial,sans-serif;
+}
+
+.container {
+background: none repeat scroll 0 0 #002255;
+box-shadow: 0 0 10px #DDDDDD;
+clear: both;
+margin: 0 auto;
+padding: 40px 50px 0px 50px;
+width: 800px;
+}
+
+.paddingSmall {
+padding: 0 0 10px;
+}
+
+h2, .fontSmall {
+color: #999999;
+font: bold 16px 'Helvetica Neue',helvetica,arial,sans-serif;
+text-transform: uppercase;
+}
+
+h1 {
+color: #FFFFFF;
+font: 40px 'ChunkFiveRegular',helvetica,arial,sans-serif;
+letter-spacing: -0.03em;
+text-transform: uppercase;
+}
+
+hgroup {
+background-image: url(/images/zacacia_w.png);
+background-repeat: no-repeat;
+background-position: right bottom;
+}
+
+h1, h2, h3, h4, h5, h6 {
+clear: both;
+line-height: 1;
+margin: 0;
+}
+
+#content_band {
+width: 100%;
+background-color: #EFEFEF;
+}
+
+#content {
+width: 898px;
+min-height: 500px;
+padding: 0px 0px 0px 0px;
+margin: 0px auto 0px auto;
+background: #FFFFFF;
+border-left: 1px solid #000000;
+border-right: 1px solid #000000;
+}
+
+#footer_band {
+width: 100%;
+height: 90px;
+margin: 0px auto 0px auto;
+padding: 0px 0px 0px 0px;
+background-color: #00375A;
+border-top: 2px solid #F0C020;
+}
+
+#footer {
+width: 900px;
+height: 50px;
+margin: 0px auto 0px auto;
+padding: 0px 0px 0px 0px;
+}
