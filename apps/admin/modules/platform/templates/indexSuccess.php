@@ -1,9 +1,10 @@
+<?php slot('topnav') ?>
+<?php echo __('Platforms') ;?>
+<?php end_slot() ?>
+
+
 <div id="navigation">
     <div id="navigation_header">
-        <div class="_title">
-            <?php echo __('Platforms') ;?>
-        </div>
-        <!-- end #navigation_header._title -->
         <div class="_link">
             <?php echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew')); ?>
         </div>

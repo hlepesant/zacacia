@@ -10,42 +10,31 @@
 </head>
 <body>
 
-<nav class="topnav">
-<ul>
-<li id="home-nav">
-<a href="/">Max Design home</a>
-</li>
-</ul>
-</nav>
-<div class="container">
+<div class="wrapper">
 
-    <header role="banner">
-        <hgroup>
-            <h1><?php echo sfConfig::get('projetctName'); ?></h1>
-            <h2><?php echo sfConfig::get('projetctDesc'); ?></h2>
-        </hgroup>
-    </header>
+    <div class="header">
+        <?php echo image_tag('zacacia.png') ?><br />
+    </div>
+    <!-- end .header -->
 
-  </div>
-  <!-- end #header_band -->
-  <div id="content_band">
-      <div id="content">
-          <?php echo $sf_content ?>
-      </div>
-      <!-- end #content -->
-  </div>
-  <!-- end #content_band -->
-  <div id="footer_band">
-      <div id="footer">
-          <div id="footer-content">
-              <p>hugues-at-lepesant-dot-com</p>
-          </div>
-          <!-- end #footer-content -->
-      </div>
-      <!-- end #footer -->
-  </div>
-  <!-- end #footer_band -->
+    <div class="topnav">
+    <?php if (has_slot('topnav')): ?>
+        <?php include_slot('topnav') ?>
+    <?php endif; ?>
+    </div>
+    <!-- end .topnav -->
+
+    <div class="content">
+        <?php echo $sf_content ?>
+    </div>
+    <!-- end .content -->
+
+    <div class="footer">
+        <p>hugues-at-lepesant-dot-com</p>
+    </div>
+    <!-- end .footer -->
+
 </div>
-<!-- end .container -->
+<!-- end .wrapper -->
 </body>
 </html>
