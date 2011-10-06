@@ -1,18 +1,10 @@
 <?php slot('topnav') ?>
-<?php echo __('Platforms') ;?>
+<a href="#"><?php echo __('Home') ;?></a> &raquo; <strong><?php echo __('Platforms') ;?></strong>
 <?php end_slot() ?>
 
 
-<div id="navigation">
-    <div id="navigation_header">
-        <div class="_link">
-            <?php echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew')); ?>
-        </div>
-        <!-- end #navigation_header._link -->
-    </div>
-    <!-- end #navigation_header -->
-</div>
-<!-- end #navigation -->
+<h1 class="title">Contact</h1>
+<?php echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew')); ?>
 
 <div id="collection">
 
