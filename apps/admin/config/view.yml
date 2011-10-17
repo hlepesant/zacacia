@@ -12,7 +12,7 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [reset.css, style.css]
+  stylesheets:    [reset-yui.css, style.css]
 
   javascripts:    [lib/jquery-1.6.2.min.js, lib/jquery.tools.min-1.2.5.js, lib/php.full.min-3.24.js]
 #  javascripts:    [lib/jquery-1.4.4.min.js, lib/jquery.tools.min-1.2.5.js, lib/php.full.min-3.24.js]

@@ -1,16 +1,13 @@
 <?php slot('topnav') ?>
 <a href="#"><?php echo __('Home') ;?></a> &raquo; <strong><?php echo __('Platforms') ;?></strong>
-<?php end_slot() ?>
-
-
-<h1 class="title">Contact</h1>
 <?php echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew')); ?>
+<?php end_slot() ?>
 
 <div id="collection">
 
     <div id="collection_description">
-            <div class="_name"><?php echo __("Name") ?></div>
-            <div class="_action"><?php echo __("Actions") ?></div>
+        <div class="_name"><?php echo __("Name") ?></div>
+        <div class="_action"><?php echo __("Actions") ?></div>
     </div>
     <!-- end #collection_description -->
 

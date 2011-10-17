@@ -32,11 +32,8 @@
 	</div><!-- /#top -->
        
     <div id="content">
-        <div class="post">
-            <?php echo $sf_content ?>
-        </div><!-- /.post -->
+        <?php echo $sf_content ?>
     </div><!-- /#content -->
-		
         
 	<div id="footer">
         <div class="col-full">
