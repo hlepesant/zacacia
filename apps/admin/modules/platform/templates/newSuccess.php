@@ -1,17 +1,14 @@
-<div id="navigation">
-    <div id="navigation_header">
-        <div class="_title">
-            <?php echo __('New Platform') ;?>
-        </div>
-        <!-- end #navigation_header._title -->
-    </div>
-    <!-- end #navigation_header -->
-</div>
-<!-- end #navigation -->
+<?php slot('topnav') ?>
+<a href="#"><?php echo __('Home') ;?></a> &raquo; <strong><?php echo __('Platforms') ;?></strong>
+<?php end_slot() ?>
 
 <div id="form_box">
 <form action="<?php echo url_for('platform/new') ?>" method="POST" id="new_item">
 <?php echo $form->renderHiddenFields() ?>
+
+    <div id="form_header">
+        <h1><?php echo __('Create a platform') ?></h1>
+    </div>
 
     <div id="form_item">
         <div class="_name"><?php echo $form['cn']->renderLabel() ?></div>
