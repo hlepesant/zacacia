@@ -28,7 +28,7 @@ text-align: right;
 }
 
 input[type=number] {
-background-color: #EDEDED;
+background-color: #FFFFFF;
 width: 35px;
 font-size: 11px;
 margin: 2px 2px 0 0;
@@ -45,8 +45,8 @@ border: 1px solid #A9A9A9;
 }
 
 select {
-background-color: #EDEDED;
-width: 184px;
+background-color: #FFFFFF;
+width: auto;
 font-size: 11px;
 margin: 2px 2px 0 0;
 padding: 2px 2px 0 0;

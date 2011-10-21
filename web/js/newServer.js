@@ -14,7 +14,7 @@ $(document).ready(function() {
         opacity: 0.9
     });
 
-    $('#button_cancel').click(function() {
+    $('.button_cancel').click(function() {
         $('#form_cancel').submit();
     });
 
@@ -61,8 +61,8 @@ $(document).ready(function() {
 });
 
 function check_form() {
-    $("#button_submit").attr("disabled", true);
+    $(".button_submit").attr("disabled", true);
     if ( (cn_ok == 1 ) && (ip_ok == 1) ) {
-        $("#button_submit").removeAttr("disabled");
+        $(".button_submit").removeAttr("disabled");
     }
 }

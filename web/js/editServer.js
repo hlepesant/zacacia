@@ -11,11 +11,11 @@ $(document).ready(function() {
         opacity: 0.9
     });
 
-    $('#button_cancel').click(function() {
+    $('.button_cancel').click(function() {
         $('#form_cancel').submit();
     });
 
-    $("#button_submit").removeAttr("disabled");
+    $(".button_submit").removeAttr("disabled");
     var val_ip = $("input#zdata_ip").validator();
 
     $("input#zdata_cn").change(function() {
@@ -23,7 +23,7 @@ $(document).ready(function() {
         if ( val_ip.data("validator").checkValidity() ) {
             $("#checkIpAddress_msg_msg").html('<img src=\'/images/famfam/tick.png\' />');
             if ( data.disabled ) {
-                $("#button_submit").attr("disabled", true);
+                $(".button_submit").attr("disabled", true);
             }
         }
         check_form();

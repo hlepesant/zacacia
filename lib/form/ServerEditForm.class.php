@@ -29,7 +29,8 @@ class ServerEditForm extends ZacaciaForm
       'undeletable'           => 'Undeletable',
   
       'zarafaAccount'         => 'Zarafa Properties',
-      'zarafaQuotaHard'       => 'default Hard Quota Level',
+      'zarafaQuotaHard'       => 'Hard Quota Level',
+#      'zarafaQuotaHard'       => 'default Hard Quota Level',
 #      'zarafaQuotaSoft'       => 'default Soft Quota Level',
 #      'zarafaQuotaWarn'       => 'default Warn Quota Level',
       'zarafaHttpPort'        => 'HTTP Port',

@@ -5,11 +5,10 @@ background-color: #FFFFFF;
 }
 
 #form_header {
-width: 498px;
-height: 25px;
-padding: 1px 0 1px 1px;
+width: 500px;
+height: 30px;
+padding: 1px 0px 1px 1px;
 margin: 0px auto 0px auto;
-/* background-color: #273B52; */
 background-color: #04243A;
 clear: both;
 border-top: 1px solid #273B52;
@@ -18,20 +17,19 @@ border-right: 1px solid #273B52;
 border-bottom: 1px solid #C0C0C0;
 }
 
-#form_header h1
-{
+#form_header h1 {
 color: #FFFFFF;
 font-family: Helvetica;
 font-size: 14px;
 letter-spacing: 2px;
-padding: 2px 0 0 10px;
+padding: 4px 0 0 10px;
 font-weight: bold;
 }
 
 #form_item {
-width: 498px;
+width: 500px;
 height: 25px;
-padding: 1px 0 1px 1px;
+padding: 1px 0px 1px 1px;
 margin: 0px auto 0px auto;
 background-color: #F0F0F0;
 clear: both;
@@ -81,4 +79,34 @@ visibility: hidden;
 
 #checkName {
 text-align: right;
+}
+
+#form_sub_section {
+border: 1px solid red;
+width: 500px;
+height: 30px;
+padding: 1px 0px 1px 1px;
+margin: 0px auto 0px auto;
+background-color: #04243A;
+clear: both;
+border-top: 1px solid #273B52;
+border-left: 1px solid #273B52;
+border-right: 1px solid #273B52;
+border-bottom: 1px solid #C0C0C0;
+}
+
+#form_sub_section h1 {
+color: #FFFFFF;
+font-family: Helvetica;
+font-size: 13px;
+letter-spacing: 2px;
+padding: 4px 0 0 20px;
+font-weight: bold;
+}
+
+#form_sub_section ._field {
+padding: 3px 10px 0 0;
+margin: 0;
+text-align: right;
+float: right;
 }

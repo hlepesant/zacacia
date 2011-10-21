@@ -3,67 +3,65 @@
  */
 
 #form_submit {
-    padding: 5px 0px 5px 0px;
-    margin: 10px auto 10px auto;
-    height: 30px;
-    width: 500px;
-    clear: both;
+padding: 5px 0px 5px 0px;
+margin: 10px auto 10px auto;
+height: 30px;
+width: 500px;
+clear: both;
 }
 
 .button_submit {
-    float: right;
-    display: block;
-    margin: 0px 10px 0px 0px;
-    border: 1px solid #dedede;
-    border-top: 1px solid #eee;
-    border-left: 1px solid #eee;
-    width: 90px;
-    font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
-    font-size: 12px;
-    line-height: 130%;
-    text-decoration: none;
-    font-weight: bold;
-    color: #565656;
-    cursor: pointer;
-    padding: 5px 7px 6px 14px;
-    background-color: #E6EFC2;
-    background-image: url(/images/apply2.png);
-    background-position: 7% 40%;
-    background-repeat: no-repeat;
+float: right;
+display: block;
+margin: 0px 10px 0px 0px;
+border: 1px solid #dedede;
+border-top: 1px solid #eee;
+border-left: 1px solid #eee;
+width: 90px;
+font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+font-size: 12px;
+line-height: 130%;
+text-decoration: none;
+font-weight: bold;
+color: #565656;
+cursor: pointer;
+padding: 5px 7px 6px 14px;
+background-color: #E6EFC2;
+background-image: url(/images/apply2.png);
+background-position: 7% 40%;
+background-repeat: no-repeat;
 }
 
 .button_submit[disabled] {
-    color: #a0a0a0;
-    background-color: #EEEEEE;
+color: #a0a0a0;
+background-color: #EEEEEE;
 }
 
 .button_cancel {
-    float: left;
-    display: block;
-    margin: 0px 0px 0px 10px;
-    background-color: #f5f5f5;
-    border: 1px solid #dedede;
-    border-top: 1px solid #eeeeee;
-    border-left: 1px solid #eeeeee;
-    width: 90px;
-
-    font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
-    font-size: 12px;
-    line-height: 130%;
-    text-decoration: none;
-    font-weight: bold;
-    color:#565656;
-    cursor: pointer;
-    padding: 5px 7px 6px 14px;
-
-    background-color: #EEEEEE;
-    background-image: url(/images/cross.png);
-    background-position: 7% 40%;
-    background-repeat: no-repeat;
+float: left;
+display: block;
+margin: 0px 0px 0px 10px;
+background-color: #f5f5f5;
+border: 1px solid #dedede;
+border-top: 1px solid #eeeeee;
+border-left: 1px solid #eeeeee;
+width: 90px;
+font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+font-size: 12px;
+line-height: 130%;
+text-decoration: none;
+font-weight: bold;
+color:#565656;
+cursor: pointer;
+padding: 5px 7px 6px 14px;
+background-color: #EEEEEE;
+background-image: url(/images/cross.png);
+background-position: 7% 40%;
+background-repeat: no-repeat;
 }
 
 .button_cancel:hover {
-    background-color: #dff4ff;
-    border: 1px solid #c2e1ef;
-    color: #336699;
+background-color: #dff4ff;
+border: 1px solid #c2e1ef;
+color: #336699;
 }

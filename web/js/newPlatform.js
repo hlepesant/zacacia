@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $("#button_cancel").click(function() {
+    $(".button_cancel").click(function() {
         $("#form_cancel").submit();
     });
 
@@ -9,7 +9,7 @@ $(document).ready(function() {
     $("input#zdata_cn").observe_field(0.5, function() {
 
         $("#checkName_msg").html("");
-        $("#button_submit").attr("disabled", true);
+        $(".button_submit").attr("disabled", true);
 
         if ( val_cn.data("validator").checkValidity() ) {
             $.get( json_check_url, {
@@ -27,7 +27,7 @@ $(document).ready(function() {
                 }
 
                 if ( ! data.disabled ) {
-                    $("#button_submit").removeAttr("disabled");
+                    $(".button_submit").removeAttr("disabled");
                 }
             }, "json");
         }

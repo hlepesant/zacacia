@@ -131,9 +131,6 @@ class serverActions extends sfActions
                 }
         }
 
-        $this->form->getWidget('zarafaHttpPort')->setDefault(sfConfig::get('zarafaHttpPort'));
-        $this->form->getWidget('zarafaSslPort')->setDefault(sfConfig::get('zarafaSslPort'));
-
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
@@ -141,6 +138,10 @@ class serverActions extends sfActions
         $l = new PlatformPeer();
         $l->setBaseDn($platformDn);
         $this->platform = $l->retrieveByDn($c);
+
+        $this->form->getWidget('zarafaHttpPort')->setDefault(sfConfig::get('zarafaHttpPort'));
+        $this->form->getWidget('zarafaSslPort')->setDefault(sfConfig::get('zarafaSslPort'));
+        $this->form->getWidget('multitenant')->setDefault($this->platform->getZacaciaMultiTenant());
 
         $this->cancel = new ServerNavigationForm();
         unset($this->cancel['serverDn']);

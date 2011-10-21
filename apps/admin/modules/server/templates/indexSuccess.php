@@ -1,30 +1,22 @@
-<div id="navigation">
-    <div id="navigation_header">
-        <div class="_title">
-            <u><?php echo $platform->getCn() ?></u>&nbsp;&rarr;
-            <?php echo __('Servers') ;?>
-        </div>
-        <!-- end #navigation_header._title -->
-        <div class="_link">
-            <?php echo image_tag('famfam/back.png', array('title' => __('Back'), 'id' => 'goback')) ?>
+<?php slot('topnav') ?>
+<a href="#"><?php echo __('Home') ;?></a> &raquo; 
+<strong><?php echo $platform->getCn() ?></strong> &raquo;
+<strong><?php echo __('Servers') ;?></strong>
+
 <?php
-if ( $platform->getZacaciaMultiServer() || ( count($servers) == 0 ) ) {
-    echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew'));
-} else {
-    echo image_tag('add_bw.png', array('title' => __('Single Server Platform'), 'id' => 'not_allowed'));
-} ?>
-        </div>
-        <!-- end #navigation_header._link -->
-    </div>
-    <!-- end #navigation_header -->
-</div>
-<!-- end #navigation -->
+if ( $platform->getZacaciaMultiServer() || ( count($servers) == 0 ) ) : ?>
+<?php echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew')); ?>
+<?php else: ?>
+<?php echo image_tag('add_bw.png', array('title' => __('Single Server Platform'), 'id' => 'not_allowed')); ?>
+<?php endif; ?>
+<?php end_slot() ?>
+
 
 <div id="collection">
 
     <div id="collection_description">
-            <div class="_name"><?php echo __("Name") ?></div>
-            <div class="_action"><?php echo __("Action") ?></div>
+        <div class="_name"><?php echo __("Name") ?></div>
+        <div class="_action"><?php echo __("Action") ?></div>
     </div>
     <!-- end #collection_description -->
 

@@ -19,12 +19,12 @@
 
     <?php echo $form['status']->renderRow() ?>
     <?php echo $form['multitenant']->renderRow() ?>
-    <?php echo $form['multiserver']->renderRow() ?>
+    <?php /* echo $form['multiserver']->renderRow() */ ?>
     <?php echo $form['undeletable']->renderRow() ?>
 
     <div id="form_submit">
-        <input type="button" value="<?php echo __("Cancel") ?>" id="button_cancel"  />
-        <input type="submit" value="<?php echo __('Create') ?>" disabled="true" id="button_submit"/>
+        <input type="button" value="<?php echo __("Cancel") ?>" class="button_cancel" />
+        <input type="submit" value="<?php echo __('Create') ?>" disabled="true" class="button_submit" />
     </div>
     <!-- end #form_submit -->
 
