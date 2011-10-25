@@ -1,24 +1,23 @@
-<div id="navigation">
-    <div id="navigation_header">
-        <div class="_title">
-            <u><?php echo $platform->getCn();?></u>&nbsp;&rarr;&nbsp;
-            <u><?php echo $company->getCn();?></u>&nbsp;&rarr;&nbsp;
-            <?php echo __('New User') ;?>
-        </div>
-        <!-- end #navigation_header._title -->
-    </div>
-    <!-- end #navigation_header -->
-</div>
-<!-- end #navigation -->
+<?php slot('topnav') ?>
+<a href="#"><?php echo __('Home') ;?></a> &raquo; 
+<strong><?php echo $platform->getCn() ?></strong> &raquo; 
+<strong><?php echo $company->getCn() ?></strong> &raquo; 
+<strong><?php echo __('Users') ;?></strong>
+<?php end_slot() ?>
+
 
 <div id="form_box">
 <form action="<?php echo url_for('user/new') ?>" method="POST">
 <?php echo $form->renderHiddenFields() ?>
 
-  <div id="section_user">
-    <div id="form_sub_section">
-        <div class="_title"><?php echo __('User Info') ?></div>
+    <div id="form_header">
+        <h1><?php echo __('Create a user') ?></h1>
     </div>
+
+    <div id="form_sub_section">
+        <h1><?php echo __('User Info') ?></h1>
+    </div>
+
     <?php echo $form['sn']->renderRow() ?>
     <div id="form_item">
         <div class="_name"><?php echo $form['givenName']->renderLabel() ?></div>
@@ -30,7 +29,7 @@
         <div class="_name"><?php echo $form['displayName']->renderLabel() ?></div>
         <div class="_field"><?php echo $form['displayName']->render() ?></div>
         <div class="_ajaxSwitch" id="imgSwitch">
-            <?php echo image_tag('famfam/arrow_rotate_anticlockwise.png', array('title' => __('Switch'), 'id' => 'switch')) ?>
+            <?php echo image_tag('famfam/arrow_refresh.png', array('title' => __('Switch'), 'id' => 'switch')) ?>
         </div>
     </div>
     <!-- end #form_item -->

@@ -21,6 +21,14 @@ $(document).ready(function() {
 
     var val_cn = $("input#zdata_cn").validator();
 
+    $("input[type='checkbox']#zdata_zarafaAccount").change(function() {
+        if ($(this).is(':checked')) {
+          $("#zarafa_settings").slideDown('slow');
+        } else {
+          $("#zarafa_settings").slideUp();
+        }
+    });
+
     $("input[type='checkbox']#zdata_zarafaQuotaOverride").change(function() {
         if ($("input[type='checkbox']#zdata_zarafaQuotaOverride").is(':checked')) {
             $("#zarafaQuota").show();

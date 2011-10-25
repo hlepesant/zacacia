@@ -30,7 +30,8 @@ text-decoration:none;
 }
 
 a:hover {
-text-decoration:underline;
+color: #f8ac0a;
+/*text-decoration:underline;*/
 }
 
 h1 a:link, h1 a:visited, h2 a:link, h2 a:visited, h3 a:link, h3 a:visited,

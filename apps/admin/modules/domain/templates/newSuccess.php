@@ -1,19 +1,17 @@
-<div id="navigation">
-    <div id="navigation_header">
-        <div class="_title">
-            <u><?php echo $platform->getCn();?></u>&nbsp;&rarr;&nbsp;
-            <u><?php echo $company->getCn();?></u>&nbsp;&rarr;&nbsp;
-            <?php echo __('New Domain') ;?>
-        </div>
-        <!-- end #navigation_header._title -->
-    </div>
-    <!-- end #navigation_header -->
-</div>
-<!-- end #navigation -->
+<?php slot('topnav') ?>
+<a href="#"><?php echo __('Home') ;?></a> &raquo; 
+<strong><?php echo $platform->getCn() ?></strong> &raquo; 
+<strong><?php echo $company->getCn() ?></strong> &raquo; 
+<strong><?php echo __('Domains') ;?></strong>
+<?php end_slot() ?>
 
 <div id="form_box">
 <form action="<?php echo url_for('domain/new') ?>" method="POST">
 <?php echo $form->renderHiddenFields() ?>
+
+    <div id="form_header">
+        <h1><?php echo __('Create a domain') ?></h1>
+    </div>
 
     <div id="form_item">
         <div class="_name"><?php echo $form['cn']->renderLabel() ?></div>
@@ -26,8 +24,8 @@
     <?php echo $form['undeletable']->renderRow() ?>
 
     <div id="form_submit">
-        <input type="button" value="<?php echo __("Cancel") ?>" id="button_cancel"  />
-        <input type="submit" value="<?php echo __('Create') ?>" disabled="true" id="button_submit"/>
+        <input type="button" value="<?php echo __("Cancel") ?>" class="button_cancel"  />
+        <input type="submit" value="<?php echo __('Create') ?>" disabled="true" class="button_submit"/>
     </div>
     <!-- end #form_submit -->
 </form>
@@ -40,13 +38,3 @@
 <?php echo javascript_tag("
 var json_check_url = '". url_for('domain/check/')."';
 ");?>
-
-<?php /* echo observe_field('minidata_cn', array(
-  'update' => 'checkName',
-  'url' => url_for('domain/check/'),
-  'method' => 'get',
-  'with' => "'&name='+$('minidata_cn').value",
-  'frequency' => '1',
-  'script' => 1
-)) */
-?>

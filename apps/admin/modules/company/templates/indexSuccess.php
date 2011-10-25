@@ -1,24 +1,15 @@
-<div id="navigation">
-    <div id="navigation_header">
-        <div class="_title">
-            <u><?php echo $platform->getCn() ?></u>&nbsp;&rarr;
-            <?php echo __('Companies') ;?>
-        </div>
-        <!-- end #navigation_header._title -->
-        <div class="_link">
-            <?php echo image_tag('famfam/back.png', array('title' => __('Back'), 'id' => 'goback')) ?>
+<?php slot('topnav') ?>
+<a href="#"><?php echo __('Home') ;?></a> &raquo; 
+<strong><a href="#" id="goback"><?php echo $platform->getCn() ?></a></strong> &raquo;
+<strong><?php echo __('Companies') ;?></strong>
+
 <?php
-if ( $platform->getZacaciaMultiTenant() || ( count($companies) == 0 ) ) {
-    echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew'));
-} else {
-    echo image_tag('add_bw.png', array('title' => __('Single Tenant Platform'), 'id' => 'not_allowed'));
-} ?>
-        </div>
-        <!-- end #navigation_header._link -->
-    </div>
-    <!-- end #navigation_header -->
-</div>
-<!-- end #navigation -->
+if ( $platform->getZacaciaMultiTenant() || ( count($companies) == 0 ) ) : ?>
+<?php echo image_tag('famfam/add.png', array('title' => __('Create a new company'), 'id' => 'gotonew', 'class' => 'tt')); ?>
+<?php else: ?>
+<?php echo image_tag('add_bw.png', array('title' => __('Not allowed. Single Server Platform'), 'class' => 'tt')); ?>
+<?php endif; ?>
+<?php end_slot() ?>
 
 <div id="collection">
     <div id="collection_description">

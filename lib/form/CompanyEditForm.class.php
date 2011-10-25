@@ -1,8 +1,12 @@
 <?php
 class CompanyEditForm extends ZacaciaForm
 {
+    protected static $quotas = array();
+
     public function configure()
     {
+        self::$quotas = sfConfig::get('options_user_quota_hard');
+
         $this->setWidgets(array(
             'platformDn'    => new sfWidgetFormInputHidden(),
             'companyDn'     => new sfWidgetFormInputHidden(),
@@ -10,7 +14,7 @@ class CompanyEditForm extends ZacaciaForm
             'status'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
             'undeletable'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
 #
-            'zarafaAccount'         => new sfWidgetFormInputHidden(array('default' => '1')),
+            'zarafaAccount'         => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
 #            'zarafaCompanyServer'   => new sfWidgetFormSelect(array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
             'zarafaQuotaOverride'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
             'zarafaQuotaWarn'       => new sfWidgetFormInput(array(), array(
@@ -23,30 +27,7 @@ class CompanyEditForm extends ZacaciaForm
                 )),
 #
             'zarafaUserDefaultQuotaOverride' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
-            'zarafaUserDefaultQuotaHard'       => new sfWidgetFormInput( array(), array(
-                    'type' => 'number',
-                    'size' => '5',
-                    'min' => 25,
-                    'max' => 2048,
-                    'maxlength' => '4', 
-                    'data-message' => 'Enter a value between 25 and 2048',
-                )),
-            'zarafaUserDefaultQuotaSoft'       => new sfWidgetFormInput( array(), array(
-                    'type' => 'number',
-                    'size' => '5',
-                    'min' => 25,
-                    'max' => 2048,
-                    'maxlength' => '4', 
-                    'data-message' => 'Enter a value between 25 and 2048',
-                )),
-            'zarafaUserDefaultQuotaWarn'       => new sfWidgetFormInput( array(), array(
-                    'type' => 'number',
-                    'size' => '5',
-                    'min' => 25,
-                    'max' => 2048,
-                    'maxlength' => '4', 
-                    'data-message' => 'Enter a value between 25 and 2048',
-                )),
+            'zarafaUserDefaultQuotaHard'     => new sfWidgetFormSelect(array('choices' => self::$quotas)),
         ));
         
         $this->widgetSchema->setLabels(array(

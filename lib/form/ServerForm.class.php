@@ -11,24 +11,24 @@ class ServerForm extends ZacaciaForm
       'platformDn'            => new sfWidgetFormInputHidden(),
       'cn'                    => new sfWidgetFormInput(),
       'ip'                    => new sfWidgetFormInput(),
-      'status'                => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1, 'default' => 1)),
       'undeletable'           => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
+      'status'                => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1, 'default' => 1)),
 
-      'zarafaAccount'         =>  new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
+      'zarafaAccount'         => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'zarafaQuotaHard'       => new sfWidgetFormSelect(array('choices' => self::$quotas, 'default' => 0)),
       'zarafaFilePath'        => new sfWidgetFormInputHidden(array('default' => '/var/run/zarafa')),
       'zarafaHttpPort'        => new sfWidgetFormInput(array(), array('type' => 'number')),
       'zarafaHttpPort'        => new sfWidgetFormInput(array(), array('type' => 'number')),
       'zarafaSslPort'         => new sfWidgetFormInput(array(), array('type' => 'number')),
-      'zarafaContainsPublic'  =>  new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1, 'default' => 1)),
+      'zarafaContainsPublic'  => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1, 'default' => 1)),
       'multitenant'           => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
     ));
 
     $this->widgetSchema->setLabels(array(
       'cn'                    => 'Name',
       'ip'                    => 'IP Address',
-      'status'                => 'Enable',
       'undeletable'           => 'Undeletable',
+      'status'                => 'Enable',
 
       'zarafaAccount'         => 'Zarafa Host',
       'zarafaQuotaHard'       => 'Hard Quota Level',
@@ -45,8 +45,8 @@ class ServerForm extends ZacaciaForm
       'platformDn'            => new sfValidatorString(),
       'cn'                    => new sfValidatorString(),
       'ip'                    => new sfValidatorIpAddress(),
-      'status'                => new sfValidatorBoolean(),
       'undeletable'           => new sfValidatorBoolean(),
+      'status'                => new sfValidatorBoolean(),
 
       'zarafaAccount'         => new sfValidatorBoolean(),
       'zarafaQuotaHard'       => new sfValidatorInteger(),

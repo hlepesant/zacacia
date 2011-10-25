@@ -1,20 +1,10 @@
-<div id="navigation">
-    <div id="navigation_header">
-        <div class="_title">
-            <u><?php echo $platform->getCn() ?></u>&nbsp;&rarr;
-            <u><?php echo $company->getCn() ?></u>&nbsp;&rarr;
-            <?php echo __('Domains') ;?>
-        </div>
-        <!-- end #navigation_header._title -->
-        <div class="_link">
-            <?php echo image_tag('famfam/back.png', array('title' => __('Back'), 'id' => 'goback')) ?>
-            <?php echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew')); ?>
-        </div>
-        <!-- end #navigation_header._link -->
-    </div>
-    <!-- end #navigation_header -->
-</div>
-<!-- end #navigation -->
+<?php slot('topnav') ?>
+<a href="#"><?php echo __('Home') ;?></a> &raquo; 
+<strong><?php echo $platform->getCn() ?></strong> &raquo;
+<strong><a href="#" id="goback"><?php echo $company->getCn() ?></a></strong> &raquo;
+<strong><?php echo __('Domains') ;?></strong>
+<?php echo image_tag('famfam/add.png', array('title' => __('Create a new domain'), 'id' => 'gotonew', 'class' => 'tt')); ?>
+<?php end_slot() ?>
 
 <div id="collection">
 

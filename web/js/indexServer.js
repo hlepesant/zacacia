@@ -1,5 +1,9 @@
 $(document).ready(function() {
-
+/*
+    $("#goback").hover(function() {
+        alert('go back');
+    });
+*/
     $("#goback").click(function() {
         $("#platform_back").submit();
     });
@@ -8,12 +12,12 @@ $(document).ready(function() {
         $("#server_new").submit();
     });
 
-    $("._link img[title]").tooltip({
+    $("img[title].tt").tooltip({
         position: "bottom left",
         opacity: 0.9
     });
 
-    $("._actions img[title]").tooltip({
+    $("img[title].act").tooltip({
         position: "top left",
         opacity: 0.9
     });

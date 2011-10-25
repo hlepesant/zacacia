@@ -60,7 +60,10 @@ class BasePlatformObject extends LDAPObject
  
     public function getZacaciaUnDeletable()
     {
-        return (int)$this->attributes['zacaciaUnDeletable'];
+        if ( (int)$this->attributes['zacaciaUnDeletable'] )
+            return true;
+        
+        return false;
     }
 
     public function setZacaciaMultiServer($v)
@@ -75,7 +78,10 @@ class BasePlatformObject extends LDAPObject
  
     public function getZacaciaMultiServer()
     {
-        return (int)$this->attributes['zacaciaMultiServer'];
+        if ( (int)$this->attributes['zacaciaMultiServer'] )
+            return true;
+        
+        return false;
     }
 
     public function setZacaciaMultiTenant($v)
@@ -90,6 +96,9 @@ class BasePlatformObject extends LDAPObject
  
     public function getZacaciaMultiTenant()
     {
-        return (int)$this->attributes['zacaciaMultiTenant'];
+        if ( (int)$this->attributes['zacaciaMultiTenant'] )
+            return true;
+
+        return false;
     }
 }

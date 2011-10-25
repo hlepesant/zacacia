@@ -1,13 +1,13 @@
 <?php slot('topnav') ?>
 <a href="#"><?php echo __('Home') ;?></a> &raquo; 
-<strong><?php echo $platform->getCn() ?></strong> &raquo;
+<strong><a href="#" id="goback"><?php echo $platform->getCn() ?></a></strong> &raquo;
 <strong><?php echo __('Servers') ;?></strong>
 
 <?php
 if ( $platform->getZacaciaMultiServer() || ( count($servers) == 0 ) ) : ?>
-<?php echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew')); ?>
+<?php echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew', 'class' => 'tt')); ?>
 <?php else: ?>
-<?php echo image_tag('add_bw.png', array('title' => __('Single Server Platform'), 'id' => 'not_allowed')); ?>
+<?php echo image_tag('add_bw.png', array('title' => __('Single Server Platform'), 'id' => 'not_allowed', 'class' => 'tt')); ?>
 <?php endif; ?>
 <?php end_slot() ?>
 

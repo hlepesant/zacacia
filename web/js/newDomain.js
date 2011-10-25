@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-    $("#button_cancel").click(function() {
-        $("#form_cancel").submit();
+    $(".button_cancel").click(function() {
+        $(".form_cancel").submit();
     });
 
     var val_cn = $("input#zdata_cn").validator();
@@ -18,7 +18,7 @@ $(document).ready(function() {
             function(data){
                 $("#checkName_msg").html("<img src=\""+data.img+"\" />");
                 if ( ! data.disabled ) {
-                    $("#button_submit").removeAttr("disabled");
+                    $(".button_submit").removeAttr("disabled");
                 }
             }, "json");
         }

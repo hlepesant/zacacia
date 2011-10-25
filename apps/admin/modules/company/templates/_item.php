@@ -5,7 +5,7 @@
     <div class="_name_<?php echo $c->getZacaciaStatus() ?>"><?php echo $c->getCn() ?></div>
     <!-- end #line._name_ -->
 
-    <div class="_actions">
+    <span class="_actions">
 <?php
 /* Edit */
 echo link_to_function(
@@ -49,7 +49,7 @@ echo link_to_function(image_tag('icons/page_white_edit.png'), "jumpTo('".sprintf
 echo link_to_function(image_tag('icons/arrow_rotate_clockwise.png'), "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($c->getCn()))."', 'status')");
 */
 ?>
-    </div>
+    </span>
     <!-- end #line._actions -->
 
     </form>

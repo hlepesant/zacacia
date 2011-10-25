@@ -6,25 +6,25 @@ class PlatformForm extends ZacaciaForm
         $this->setWidgets(array(
             'cn'          => new sfWidgetFormInput(array(), array('pattern' => '[a-zA-Z ]{5,}', 'maxlength' => 30, 'required' => 'required')),
             'multitenant' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
-#            'multiserver' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
-            'status'      => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1, 'default' => 1)),
+            'multiserver' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
             'undeletable' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
+            'status'      => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1, 'default' => 1)),
         ));
     
         $this->widgetSchema->setLabels(array(
             'cn'          => 'Name',
             'multitenant' => 'Multi tenant',
-#            'multiserver' => 'Multi server',
-            'status'      => 'Enable',
+            'multiserver' => 'Multi server',
             'undeletable' => 'Undeletable',
+            'status'      => 'Enable',
         ));
     
         $this->setValidators(array(
             'cn'          => new sfValidatorString(),
             'multitenant' => new sfValidatorBoolean(),
-#            'multiserver' => new sfValidatorBoolean(),
-            'status'      => new sfValidatorBoolean(),
+            'multiserver' => new sfValidatorBoolean(),
             'undeletable' => new sfValidatorBoolean(),
+            'status'      => new sfValidatorBoolean(),
         ));
     
         $this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));

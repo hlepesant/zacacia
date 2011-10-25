@@ -326,27 +326,6 @@ class companyActions extends sfActions
                 $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
             }
         }
-        
-        $this->form->getWidget('platformDn')->setDefault($platformDn);
-        $this->form->getWidget('companyDn')->setDefault($companyDn);
-        $this->form->getWidget('status')->setDefault($this->company->getZacaciaStatus());
-        
-        if ( $this->company->getZacaciaUndeletable() ) {
-            $this->form->getWidget('undeletable')->setDefault('true');
-        }
-
-        
-        if ( 1 == $this->company->getZarafaQuotaOverride() ) {
-            $this->form->getWidget('zarafaQuotaOverride')->setDefault(1);
-            $this->form->getWidget('zarafaQuotaWarn')->setDefault($this->company->getZarafaQuotaWarn());
-        }
-
-        if ( 1 == $this->company->getZarafaUserDefaultQuotaOverride() ) {
-            $this->form->getWidget('zarafaUserDefaultQuotaOverride')->setDefault(1);
-            $this->form->getWidget('zarafaUserDefaultQuotaHard')->setDefault($this->company->getZarafaUserDefaultQuotaHard());
-            $this->form->getWidget('zarafaUserDefaultQuotaSoft')->setDefault($this->company->getZarafaUserDefaultQuotaSoft());
-            $this->form->getWidget('zarafaUserDefaultQuotaWarn')->setDefault($this->company->getZarafaUserDefaultQuotaWarn());
-        }
 
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
@@ -355,6 +334,34 @@ class companyActions extends sfActions
         $l = new PlatformPeer();
         $l->setBaseDn($platformDn);
         $this->platform = $l->retrieveByDn($c);
+        
+        $this->form->getWidget('platformDn')->setDefault($platformDn);
+        $this->form->getWidget('companyDn')->setDefault($companyDn);
+        $this->form->getWidget('status')->setDefault($this->company->getZacaciaStatus());
+        $this->form->getWidget('undeletable')->setDefault($this->company->getZacaciaUndeletable());
+
+        $this->zarafa_settings_display = 'none';
+        $this->zarafa_company_settings_display = 'none';
+        $this->zarafa_users_settings_display = 'none';
+
+        if ( $this->company->getZarafaAccount() ) {
+            $this->zarafa_settings_display = 'block';
+            $this->form->getWidget('zarafaAccount')->setDefault('true');
+
+            if ( $this->company->getZarafaQuotaOverride() ) {
+                $this->zarafa_company_settings_display = 'block';
+                $this->form->getWidget('zarafaQuotaOverride')->setDefault(1);
+                $this->form->getWidget('zarafaQuotaWarn')->setDefault($this->company->getZarafaQuotaWarn());
+            }
+
+            if ( $this->company->getZarafaUserDefaultQuotaOverride() ) {
+                $this->zarafa_users_settings_display = 'block';
+                $this->form->getWidget('zarafaUserDefaultQuotaOverride')->setDefault(1);
+                $this->form->getWidget('zarafaUserDefaultQuotaHard')->setDefault($this->company->getZarafaUserDefaultQuotaHard());
+                /* $this->form->getWidget('zarafaUserDefaultQuotaSoft')->setDefault($this->company->getZarafaUserDefaultQuotaSoft()); */
+                /* $this->form->getWidget('zarafaUserDefaultQuotaWarn')->setDefault($this->company->getZarafaUserDefaultQuotaWarn()); */
+            }
+        }
         
         $this->cancel = new CompanyNavigationForm();
         unset($this->cancel['companyDn'], $this->cancel['destination']);

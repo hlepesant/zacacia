@@ -44,6 +44,9 @@ $(document).ready(function() {
                     if ( ! data.disabled ) {
                         ip_ok = 1;
                     }
+                    /* no network */
+                    ip_ok = 1;
+                    /* end no network */
                     check_form();
                 },
                 'json');

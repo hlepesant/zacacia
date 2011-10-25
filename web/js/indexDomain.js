@@ -8,7 +8,7 @@ $(document).ready(function() {
         $("#domain_new").submit();
     });
 
-    $("._link img[title]").tooltip({
+    $("img[title].tt").tooltip({
         position: "bottom left",
         opacity: 0.9
     });

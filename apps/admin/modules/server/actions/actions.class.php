@@ -141,6 +141,7 @@ class serverActions extends sfActions
 
         $this->form->getWidget('zarafaHttpPort')->setDefault(sfConfig::get('zarafaHttpPort'));
         $this->form->getWidget('zarafaSslPort')->setDefault(sfConfig::get('zarafaSslPort'));
+
         $this->form->getWidget('multitenant')->setDefault($this->platform->getZacaciaMultiTenant());
 
         $this->cancel = new ServerNavigationForm();
@@ -365,7 +366,7 @@ class serverActions extends sfActions
             return sfView::SUCCESS;
         }
 
-        if ( $ip = dns_get_record ($request->getParameter('name'), DNS_A) ) {
+        if ( $ip = dns_get_record($request->getParameter('name'), DNS_A) ) {
             $this->ip = $ip[0]['ip'];
         }
 

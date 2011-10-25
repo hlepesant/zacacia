@@ -10,10 +10,10 @@
         <h1><?php echo __('Edit Platform') ;?> : <?php echo $platform->getCn(); ?></h1>
     </div>
 
-    <?php echo $form['status']->renderRow() ?>
     <?php echo $form['multitenant']->renderRow() ?>
-    <?php /* echo $form['multiserver']->renderRow() */ ?>
+    <?php echo $form['multiserver']->renderRow() ?>
     <?php echo $form['undeletable']->renderRow() ?>
+    <?php echo $form['status']->renderRow() ?>
 
     <div id="form_submit">
         <input type="button" value="<?php echo __("Cancel") ?>" class="button_cancel"  />
