@@ -22,7 +22,7 @@ class UserForm extends ZacaciaForm
       'confirmPassword'     => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),
       'uid'                 => new sfWidgetFormInput(),
 # ObjectClasse: zarafa-user
-      'zarafaAccount'       => new sfWidgetFormInputHidden(array('default' => 1)),
+      'zarafaAccount'       => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'zarafaAdmin'         => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'zarafaHidden'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'zarafaQuotaOverride' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),

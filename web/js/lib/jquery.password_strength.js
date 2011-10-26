@@ -14,6 +14,8 @@
  *
  * NOTE: This script requires jQuery to work.  Download jQuery at www.jquery.com
  *
+ * http://plugins.jquery.com/project/password_strength
+ *
  */
 
 (function($){
@@ -86,7 +88,8 @@ var passwordStrength = new function()
 $.fn.password_strength = function(options)
 {
 	var settings = $.extend({
-		'container' : null,
+		/* 'container' : null, */
+        'container' : '#zStrength',
 		'minLength' : 6,
 		'texts' : {
 			1 : 'Too weak',
@@ -109,7 +112,6 @@ $.fn.password_strength = function(options)
 			var container = $('<span/>').attr('class', 'password_strength');
 			$(this).after(container);
 		}
-
 		
 		$(this).keyup(function()
 		{

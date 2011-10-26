@@ -1,0 +1,25 @@
+<div id="section_zarafa">
+
+    <div id="form_sub_section">
+        <h1><?php echo $form['zarafaAccount']->renderLabel() ?>
+        <span class="_field"><?php echo $form['zarafaAccount']->render() ?></span>
+        </h1>
+    </div>
+    <!-- end #form_section -->
+
+    <div id="zarafa_settings" style="display: none;">
+        <?php echo $form['zarafaAdmin']->renderRow() ?>
+        <?php echo $form['zarafaHidden']->renderRow() ?>
+        <?php echo $form['zarafaQuotaOverride']->renderRow() ?>
+        <?php /* echo $form['zarafaQuotaWarn']->renderRow() */ ?>
+        <?php /* echo $form['zarafaQuotaSoft']->renderRow() */ ?>
+        <?php echo $form['zarafaQuotaHard']->renderRow() ?>
+    </div>
+    
+    <div id="form_submit">
+        <input type="button" value="<?php echo __('Back') ?>" id="back_section_userinfo" class="button_cancel" />
+        <input type="submit" value="<?php echo __('Create') ?>" disabled="true" class="button_submit" />
+    </div>
+    <!-- end #form_submit -->
+</div>
+
