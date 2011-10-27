@@ -10,16 +10,6 @@ $(document).ready(function() {
     $("#goto_section_zarafa").click(function() {
         $("#section_userinfo").hide();
         $("#section_zarafa").show();
-    
-        if ( $(this).is(':checked')) {
-            $('#zdata_zarafaQuotaWarn').show();
-            $('#zdata_zarafaQuotaSoft').show();
-            $('#zdata_zarafaQuotaHard').show();
-        } else {
-            $('#zdata_zarafaQuotaWarn').hide();
-            $('#zdata_zarafaQuotaSoft').hide();
-            $('#zdata_zarafaQuotaHard').hide();
-        }
         return false;
     }); 
 
@@ -115,7 +105,7 @@ $(document).ready(function() {
         }
     });
 
-    $("form").submit(function(e) {
+    $("#userform").submit(function(e) {
         var _md5 = $('input#zdata_userPassword').crypt({method:"md5",source:""});
         $('input#zdata_userPassword').val(_md5);
         $('input#zdata_confirmPassword').val(_md5);
@@ -132,13 +122,9 @@ $(document).ready(function() {
 
     $('#zdata_zarafaQuotaOverride').click(function() {
         if ( $(this).is(':checked')) {
-            $('#zdata_zarafaQuotaWarn').show();
-            $('#zdata_zarafaQuotaSoft').show();
-            $('#zdata_zarafaQuotaHard').show();
+            $('#quota_setting').show();
         } else {
-            $('#zdata_zarafaQuotaWarn').hide();
-            $('#zdata_zarafaQuotaSoft').hide();
-            $('#zdata_zarafaQuotaHard').hide();
+            $('#quota_setting').hide();
         }
     });
 });

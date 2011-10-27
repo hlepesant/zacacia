@@ -12,7 +12,6 @@ class ServerEditForm extends ZacaciaForm
       'serverDn'              => new sfWidgetFormInputHidden(),
       'ip'                    => new sfWidgetFormInput(),
       'status'                => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
-      'undeletable'           => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
   
       'zarafaAccount'         => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'zarafaQuotaHard'       => new sfWidgetFormSelect(array('choices' => self::$quotas, 'default' => 0)),
@@ -26,7 +25,6 @@ class ServerEditForm extends ZacaciaForm
     $this->widgetSchema->setLabels(array(
       'ip'                    => 'IP Address',
       'status'                => 'Enable',
-      'undeletable'           => 'Undeletable',
   
       'zarafaAccount'         => 'Zarafa Properties',
       'zarafaQuotaHard'       => 'Hard Quota Level',
@@ -44,7 +42,6 @@ class ServerEditForm extends ZacaciaForm
       'serverDn'              => new sfValidatorString(),
       'ip'                    => new sfValidatorIpAddress(),
       'status'                => new sfValidatorBoolean(),
-      'undeletable'           => new sfValidatorBoolean(),
   
       'zarafaAccount'         => new sfValidatorBoolean(),
       'zarafaQuotaHard'       => new sfValidatorInteger(),

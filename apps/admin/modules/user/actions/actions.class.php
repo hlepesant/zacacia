@@ -147,18 +147,6 @@ class userActions extends sfActions
                 $user->setGidNumber($this->company->getGidNumber());
 
 /*
-                if ( $this->form->getValue('status') ) {
-                    $user->setZacaciaStatus('enable');
-                } else {
-                    $user->setZacaciaStatus('disable');
-                }
-
-                $user->setZacaciaStatus($this->form->getValue('status'));
-
-                if ( $this->form->getValue('undeletable') ) {
-                    $user->setZacaciaUnDeletable(1);
-                }
-
                 if ( $this->form->getValue('zarafaQuotaOverride') ) {
                     $user->setZarafaQuotaOverride(1);
                     $user->setZarafaQuotaWarn($this->form->getValue('zarafaQuotaWarn'));
@@ -178,8 +166,7 @@ class userActions extends sfActions
                     echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
                     exit;
                 }
-
-                }
+            }
         }
         
         $this->cancel = new UserNavigationForm();
@@ -265,6 +252,103 @@ class userActions extends sfActions
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
         echo fake_post($this, '@user', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         exit;
+    }
+
+    public function executeEdit(sfWebRequest $request)
+    {
+        $data = $request->getParameter('zdata');
+
+        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
+            $this->redirect('@platform');
+        }
+
+        $companyDn = $request->getParameter('companyDn', $data['companyDn']);
+        if ( empty($companyDn) ) {
+            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
+            echo fake_post($this, '@company', Array('holdingDn' => $holdingDn));
+            exit;
+        }
+
+        $userDn = $request->getParameter('userDn', $data['userDn']);
+        if ( empty($userDn) ) {
+            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
+            echo fake_post($this, '@company', Array('holdingDn' => $holdingDn, 'companyDn' => $companyDn));
+            exit;
+        }
+
+/* zacaciaPlatform */
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaPlatform');
+        $l = new PlatformPeer();
+        $l->setBaseDn($platformDn);
+        $this->platform = $l->retrieveByDn($c);
+
+/* zacaciaCompany */
+        $c2 = new LDAPCriteria();
+        $c2->add('objectClass', 'top');
+        $c2->add('objectClass', 'organizationalRole');
+        $c2->add('objectClass', 'zacaciaCompany');
+        $l2 = new CompanyPeer();
+        $l2->setBaseDn($companyDn);
+        $this->company = $l2->retrieveByDn($c2);
+
+/* zacaciaUser */
+        $c3 = new LDAPCriteria();
+        $c3->add('objectClass', 'top');
+        $c3->add('objectClass', 'posixAccount');
+        $c3->add('objectClass', 'inetOrgPerson');
+        $c3->add('objectClass', 'zarafa-user');
+        $c3->add('objectClass', 'zacaciaUser');
+        $l3 = new UserPeer();
+        $l3->setBaseDn($userDn);
+        $this->zuser = $l3->retrieveByDn($c3);
+    
+        $this->form = new UserEditForm();
+        $this->form->getWidget('platformDn')->setDefault($platformDn);
+        $this->form->getWidget('companyDn')->setDefault($companyDn);
+        $this->form->getWidget('userDn')->setDefault($userDn);
+    
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+
+            $this->form->bind($request->getParameter('zdata'));
+            
+            if ($this->form->isValid()) {
+
+                $l = new UserPeer();
+                $l->setBaseDn(sprintf("ou=Users,%s", $companyDn));
+
+                $user = new UserObject();
+                $user->setDn(sprintf("cn=%s %s,%s", $this->form->getValue('sn'), $this->form->getValue('givenName'), $l->getBaseDn()));
+                $user->setGivenName($this->form->getValue('givenName'));
+                $user->setSn($this->form->getValue('sn'));
+
+                $fi = strToLower($this->form->getValue('sn'));
+                $la = strToLower($this->form->getValue('givenName'));
+
+                $user->setUid(sprintf('%s%s', $fi[0], $la));
+                $user->setUserPassword($this->form->getValue('userPassword'));
+                $user->setUidNumber($l->getNewUidNumber());
+                $user->setGidNumber($this->company->getGidNumber());
+
+#                var_dump( $user ); exit;
+
+                if ( $l->doSave($user) ) {
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
+                    echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+                    exit;
+                }
+            }
+        }
+        
+        $this->cancel = new UserNavigationForm();
+        unset($this->cancel['userDn']);
+        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
+        $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
+
     }
 
 /* WebServices */

@@ -7,11 +7,11 @@
 
 
 <div id="form_box">
-<form action="<?php echo url_for('user/new') ?>" method="POST" id="userform">
+<form action="<?php echo url_for('user/edit') ?>" method="POST" id="userform">
 <?php echo $form->renderHiddenFields() ?>
 
-<?php include_partial('userinfo', array('form' => $form)) ?>
-<?php include_partial('zarafa', array('form' => $form)) ?>
+<?php include_partial('userinfo_edit', array('form' => $form)) ?>
+<?php include_partial('zarafa_edit', array('form' => $form)) ?>
 
 </form>
 </div>

@@ -12,7 +12,6 @@
 
     <?php echo $form['multitenant']->renderRow() ?>
     <?php echo $form['multiserver']->renderRow() ?>
-    <?php echo $form['undeletable']->renderRow() ?>
     <?php echo $form['status']->renderRow() ?>
 
     <div id="form_submit">

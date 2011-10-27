@@ -14,7 +14,6 @@
     </div>
 
     <?php echo $form['status']->renderRow() ?>
-    <?php echo $form['undeletable']->renderRow() ?>
 
     <div id="form_submit">
         <input type="button" value="<?php echo __("Cancel") ?>" class="button_cancel" />

@@ -66,24 +66,12 @@ class platformActions extends sfActions
                 $platform = new PlatformObject();
                 $platform->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
                 $platform->setCn($this->form->getValue('cn'));
-                if ( $this->form->getValue('multitenant') ) {
-                    $platform->setZacaciaMultiTenant(1);
-                }
-                if ( $this->form->getValue('multiserver') ) {
-                    $platform->setZacaciaMultiServer(1);
-                }
-                if ( $this->form->getValue('undeletable') ) {
-                    $platform->setZacaciaUnDeletable(1);
-                }
-
+                $platform->setZacaciaMultiTenant($this->form->getValue('multitenant'));
+                $platform->setZacaciaMultiServer($this->form->getValue('multiserver'));
                 $platform->setZacaciaStatus($this->form->getValue('status'));
-/*
-                if ( $this->form->getValue('status') ) {
-                    $platform->setZacaciaStatus('enable');
-                } else {
-                    $platform->setZacaciaStatus('disable');
-                }
-*/
+
+                #var_dump( $platform ); exit;
+
                 if ( $l->doAdd($platform) ) {
                   sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                   echo fake_post($this, 'platform/index', Array());

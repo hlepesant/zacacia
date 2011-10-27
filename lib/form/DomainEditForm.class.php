@@ -8,12 +8,10 @@ class DomainEditForm extends ZacaciaForm
             'companyDn'     => new sfWidgetFormInputHidden(),
             'domainDn'      => new sfWidgetFormInputHidden(),
             'status'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
-            'undeletable'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
         ));
     
         $this->widgetSchema->setLabels(array(
             'status'        => 'Enable',
-            'undeletable'   => 'Undeletable',
         ));
     
         $this->setValidators(array(
@@ -21,7 +19,6 @@ class DomainEditForm extends ZacaciaForm
             'companyDn'     => new sfValidatorString(),
             'domainDn'      => new sfValidatorString(),
             'status'        => new sfValidatorBoolean(),
-            'undeletable'   => new sfValidatorBoolean(),
         ));
 
         $this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));

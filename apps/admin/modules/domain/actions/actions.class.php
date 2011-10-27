@@ -122,9 +122,6 @@ class domainActions extends sfActions
                     $domain->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
                     $domain->setCn($this->form->getValue('cn'));
                     $domain->setZacaciaStatus($this->form->getValue('status'));
-                    if ( $this->form->getValue('undeletable') ) {
-                        $domain->setZacaciaUnDeletable(1);
-                    }
 
                     if ( $l->doAdd($domain) ) {
                         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
@@ -198,19 +195,7 @@ class domainActions extends sfActions
             $this->form->bind($request->getParameter('zdata'));
             
                 if ($this->form->isValid()) {
-                    #$this->domain->setZacaciaStatus($this->form->getValue('status'));
-                    #$this->domain->setZacaciaUnDeletable($this->form->getValue('undeletable'));
-
-
-                    $this->domain->setZacaciaUnDeletable($this->form->getValue('undeletable'));
-                    if ( $this->form->getValue('undeletable') ) {
-                        $this->domain->setZacaciaUnDeletable(1);
-                    } else {
-                        $this->domain->setZacaciaUnDeletable(0);
-                    }
-
                     $this->domain->setZacaciaStatus($this->form->getValue('status'));
-
                     #var_dump( $this->domain ); exit;
 
                     if ( $l->doSave($this->domain) ) {
@@ -226,9 +211,6 @@ class domainActions extends sfActions
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
         $this->form->getWidget('domainDn')->setDefault($domainDn);
-        if ( $this->domain->getZacaciaUndeletable() ) {
-            $this->form->getWidget('undeletable')->setDefault('true');
-        }
 
         if ( $this->domain->getZacaciaStatus() == 'enable' ) {
             $this->form->getWidget('status')->setDefault('true');

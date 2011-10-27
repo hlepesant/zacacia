@@ -7,14 +7,12 @@ class PlatformEditForm extends ZacaciaForm
             'platformDn'  => new sfWidgetFormInputHidden(),
             'multitenant' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
             'multiserver' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
-            'undeletable' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
             'status'      => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
         ));
         
         $this->widgetSchema->setLabels(array(
             'multitenant' => 'Multi tenant',
             'multiserver' => 'Multi server',
-            'undeletable' => 'Undeletable',
             'status'      => 'Enable',
         ));
         
@@ -22,7 +20,6 @@ class PlatformEditForm extends ZacaciaForm
             'platformDn'  => new sfValidatorString(),
             'multitenant' => new sfValidatorBoolean(),
             'multiserver' => new sfValidatorBoolean(),
-            'undeletable' => new sfValidatorBoolean(),
             'status'      => new sfValidatorBoolean(),
         ));
         

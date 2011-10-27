@@ -27,7 +27,6 @@
     <!-- end #form_item -->
 
     <?php echo $form['status']->renderRow() ?>
-    <?php echo $form['undeletable']->renderRow() ?>
 
     <div id="form_sub_section">
         <h1><?php echo $form['zarafaAccount']->renderLabel() ?>

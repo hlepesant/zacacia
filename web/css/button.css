@@ -37,7 +37,7 @@ color: #a0a0a0;
 background-color: #EEEEEE;
 }
 
-.button_cancel {
+.button_cancel, .button_previous {
 float: left;
 display: block;
 margin: 0px 0px 0px 10px;
@@ -60,7 +60,7 @@ background-position: 7% 40%;
 background-repeat: no-repeat;
 }
 
-.button_cancel:hover {
+.button_cancel:hover, .button_previous:hover {
 background-color: #dff4ff;
 border: 1px solid #c2e1ef;
 color: #336699;

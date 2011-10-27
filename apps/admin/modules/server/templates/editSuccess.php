@@ -19,7 +19,6 @@
     </div>
     <!-- end #form_item -->
 
-    <?php echo $form['undeletable']->renderRow() ?>
     <?php echo $form['status']->renderRow() ?>
 
     <div id="form_sub_section">

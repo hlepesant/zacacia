@@ -97,10 +97,6 @@ class serverActions extends sfActions
                     $server->setCn($this->form->getValue('cn'));
                     $server->setIpHostNumber($this->form->getValue('ip'));
 
-                    if ( $this->form->getValue('undeletable') ) {
-                        $server->setZacaciaUnDeletable(1);
-                    }
-
                     $server->setZacaciaStatus($this->form->getValue('status'));
 
                     /* zarafa properties */
@@ -179,13 +175,6 @@ class serverActions extends sfActions
             if ($this->form->isValid()) {
 
                 $this->server->setIpHostNumber($this->form->getValue('ip'));
-                $this->server->setZacaciaUnDeletable($this->form->getValue('undeletable'));
-                if ( $this->form->getValue('undeletable') ) {
-                    $this->server->setZacaciaUnDeletable(1);
-                } else {
-                    $this->server->setZacaciaUnDeletable(0);
-                }
-
                 $this->server->setZacaciaStatus($this->form->getValue('status'));
 
                 /* zarafa properties */
@@ -220,10 +209,6 @@ class serverActions extends sfActions
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('serverDn')->setDefault($serverDn);
         $this->form->getWidget('ip')->setDefault($this->server->getIpHostNumber());
-
-        if ( $this->server->getZacaciaUndeletable() ) {
-            $this->form->getWidget('undeletable')->setDefault('true');
-        }
 
         if ( $this->server->getZacaciaStatus() == 'enable' ) {
             $this->form->getWidget('status')->setDefault('true');

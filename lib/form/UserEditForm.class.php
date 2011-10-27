@@ -1,5 +1,5 @@
 <?php
-class UserForm extends ZacaciaForm
+class UserEditForm extends ZacaciaForm
 {
   protected static $quotas = array();
 
@@ -10,43 +10,23 @@ class UserForm extends ZacaciaForm
     $this->setWidgets(array(
       'platformDn'          => new sfWidgetFormInputHidden(),
       'companyDn'           => new sfWidgetFormInputHidden(),
+      'userDn'              => new sfWidgetFormInputHidden(),
 #     'status'              => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1, 'default' => 1)),
 # ObjectClasse: inetOrgPerson
       'givenName'           => new sfWidgetFormInput(),
       'sn'                  => new sfWidgetFormInput(),
       'cn'                  => new sfWidgetFormInputHidden(),
       'displayName'         => new sfWidgetFormInput(),
-# ObjectClasse: posixAccount
-      'userPassword'        => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),
-      'confirmPassword'     => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),
-      'uid'                 => new sfWidgetFormInput(),
-# ObjectClasse: zarafa-user
-      'zarafaAccount'       => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
+## ObjectClasse: posixAccount
+#      'userPassword'        => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),
+#      'confirmPassword'     => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),
+#      'uid'                 => new sfWidgetFormInput(),
+## ObjectClasse: zarafa-user
+#      'zarafaAccount'       => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'zarafaAdmin'         => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'zarafaHidden'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'zarafaQuotaOverride' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
-      /*
-      'zarafaQuotaWarn'     => new sfWidgetFormInput(array(), 
-      array(
-        'type' => 'number', 'size' => '5', 'min' => 25,
-        'max' => 2048, 'maxlength' => '4', 'data-message' => 'Enter a value between 25 and 2048'
-      )),
-      */
-      /*
-      'zarafaQuotaSoft'     => new sfWidgetFormInput(array(),
-      array(
-        'type' => 'number', 'size' => '5', 'min' => 25,
-        'max' => 2048, 'maxlength' => '4', 'data-message' => 'Enter a value between 25 and 2048'
-      )),
-      */
       'zarafaQuotaHard'     => new sfWidgetFormSelect(array('choices' => self::$quotas)),
-      /*
-      'zarafaQuotaHard'     => new sfWidgetFormInput(array(),
-      array(
-        'type' => 'number', 'size' => '5', 'min' => 25,
-        'max' => 2048, 'maxlength' => '4', 'data-message' => 'Enter a value between 25 and 2048'
-      )),
-      */
 #     'zarafaUserServer' => new sfWidgetFormSelect(array('choices' => array())),
     ));
         
@@ -55,10 +35,10 @@ class UserForm extends ZacaciaForm
       'givenName'           => 'Lastname',
       'sn'                  => 'Firstname',
       'displayName'         => 'Display Name',
-      'userPassword'        => 'Password',
-      'uid'                 => 'Username',
+#      'userPassword'        => 'Password',
+#      'uid'                 => 'Username',
       
-      'zarafaAccount'       => 'Zarafa Account',
+#      'zarafaAccount'       => 'Zarafa Account',
       'zarafaAdmin'         => 'Zarafa Admin',
       'zarafaHidden'        => 'Hidden',
       'zarafaQuotaOverride' => 'Override Quotas',

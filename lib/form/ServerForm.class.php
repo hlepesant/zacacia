@@ -11,7 +11,6 @@ class ServerForm extends ZacaciaForm
       'platformDn'            => new sfWidgetFormInputHidden(),
       'cn'                    => new sfWidgetFormInput(),
       'ip'                    => new sfWidgetFormInput(),
-      'undeletable'           => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'status'                => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1, 'default' => 1)),
 
       'zarafaAccount'         => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
@@ -27,7 +26,6 @@ class ServerForm extends ZacaciaForm
     $this->widgetSchema->setLabels(array(
       'cn'                    => 'Name',
       'ip'                    => 'IP Address',
-      'undeletable'           => 'Undeletable',
       'status'                => 'Enable',
 
       'zarafaAccount'         => 'Zarafa Host',
@@ -45,7 +43,6 @@ class ServerForm extends ZacaciaForm
       'platformDn'            => new sfValidatorString(),
       'cn'                    => new sfValidatorString(),
       'ip'                    => new sfValidatorIpAddress(),
-      'undeletable'           => new sfValidatorBoolean(),
       'status'                => new sfValidatorBoolean(),
 
       'zarafaAccount'         => new sfValidatorBoolean(),

@@ -26,8 +26,8 @@ class BaseServerObject extends LDAPObject
     $this->attributes['zarafaContainsPublic']   = 0;                  // This server contains the public store
     $this->attributes['zarafaFilePath']         = '/var/run/zarafa';  // The unix socket or named pipe to the server
     $this->attributes['zarafaHidden']           = 0;                  // This object should be hidden from address book
-    $this->attributes['zarafaHttpPort']         = 0;                  // Port for the http connection
-    $this->attributes['zarafaSslPort']          = 0;                  // Port for the ssl connection
+    $this->attributes['zarafaHttpPort']         = 236;                // Port for the http connection
+    $this->attributes['zarafaSslPort']          = 237;                // Port for the ssl connection
 
     return $this;
   }

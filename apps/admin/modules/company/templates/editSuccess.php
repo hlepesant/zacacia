@@ -13,7 +13,6 @@
         <h1><?php echo __('Edit Company') ;?> : <?php echo $company->getCn(); ?></h1>
     </div>
 
-    <?php echo $form['undeletable']->renderRow() ?>
     <?php echo $form['status']->renderRow() ?>
 
     <div id="form_sub_section">

@@ -12,7 +12,6 @@ class CompanyEditForm extends ZacaciaForm
             'companyDn'     => new sfWidgetFormInputHidden(),
 #            'cn'            => new sfWidgetFormInput(),
             'status'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
-            'undeletable'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
 #
             'zarafaAccount'         => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
 #            'zarafaCompanyServer'   => new sfWidgetFormSelect(array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
@@ -33,7 +32,6 @@ class CompanyEditForm extends ZacaciaForm
         $this->widgetSchema->setLabels(array(
 #            'cn'            => 'Name',
             'status'        => 'Enable',
-            'undeletable'   => 'Undeletable',
 #
             'zarafaAccount'         => 'Zarafa Properties',
 #            'zarafaCompanyServer'   => 'Home server for the company', // dn
@@ -51,7 +49,6 @@ class CompanyEditForm extends ZacaciaForm
             'companyDn'     => new sfValidatorString(),
 #            'cn'            => new sfValidatorString(),
             'status'        => new sfValidatorBoolean(),
-            'undeletable'   => new sfValidatorBoolean(),
 #
             'zarafaAccount'         => new sfValidatorBoolean(),
 #            'zarafaCompanyServer'   => new sfValidatorString(array('required' => false)),

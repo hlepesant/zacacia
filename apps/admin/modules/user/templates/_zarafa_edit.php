@@ -1,9 +1,7 @@
 <div id="section_zarafa">
 
     <div id="form_sub_section">
-        <h1><?php echo $form['zarafaAccount']->renderLabel() ?>
-        <span class="_field"><?php echo $form['zarafaAccount']->render() ?></span>
-        </h1>
+        <h1><?php echo __('Zarafa Settings') ?></h1>
     </div>
     <!-- end #form_section -->
 
@@ -12,8 +10,6 @@
         <?php echo $form['zarafaHidden']->renderRow() ?>
         <?php echo $form['zarafaQuotaOverride']->renderRow() ?>
         <div id="quota_setting" style="display:none;">
-        <?php /* echo $form['zarafaQuotaWarn']->renderRow() */ ?>
-        <?php /* echo $form['zarafaQuotaSoft']->renderRow() */ ?>
         <?php echo $form['zarafaQuotaHard']->renderRow() ?>
         </div>
     </div>

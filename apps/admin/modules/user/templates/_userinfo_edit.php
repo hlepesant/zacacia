@@ -19,30 +19,6 @@
         </div>
     </div>
     <!-- end #form_item -->
-    <div id="form_item">
-        <div class="_name"><?php echo $form['uid']->renderLabel() ?></div>
-        <div class="_field"><?php echo $form['uid']->render() ?></div>
-        <div class="_ajaxCheck"><div id="checkUid_msg"></div></div>
-    </div>
-    <!-- end #form_item -->
-    <div id="form_item">
-        <div class="_name"><?php echo $form['userPassword']->renderLabel() ?></div>
-        <div class="_field"><?php echo $form['userPassword']->render() ?></div>
-    </div>
-    <!-- end #form_item -->
-
-    <div id="form_item">
-        <div class="_name"></div>
-        <div class="_field"><span id="zStrength"></span></div>
-    </div>
-    <!-- end #form_item -->
-
-    <div id="form_item">
-        <div class="_name"><?php echo $form['confirmPassword']->renderLabel() ?></div>
-        <div class="_field"><?php echo $form['confirmPassword']->render() ?></div>
-        <div class="_ajaxCheck"><div id="pequality"></div></div>
-    </div>
-    <!-- end #form_item -->
     <?php /* echo $form['status']->renderRow() */ ?>
 
     <div id="form_submit">
