@@ -16,6 +16,8 @@ class UserForm extends ZacaciaForm
       'sn'                  => new sfWidgetFormInput(),
       'cn'                  => new sfWidgetFormInputHidden(),
       'displayName'         => new sfWidgetFormInput(),
+      'mail'                => new sfWidgetFormInput(),
+      'domain'              => new sfWidgetFormSelect(array('choices' => array()),
 # ObjectClasse: posixAccount
       'userPassword'        => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),
       'confirmPassword'     => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),
@@ -57,6 +59,7 @@ class UserForm extends ZacaciaForm
       'displayName'         => 'Display Name',
       'userPassword'        => 'Password',
       'uid'                 => 'Username',
+      'mail'                => 'Email',
       
       'zarafaAccount'       => 'Zarafa Account',
       'zarafaAdmin'         => 'Zarafa Admin',
@@ -79,6 +82,8 @@ class UserForm extends ZacaciaForm
       'userPassword'        => new sfValidatorString(),
       'confirmPassword'     => new sfValidatorString(),
       'uid'                 => new sfValidatorString(),
+      'mail'                => new sfValidatorString(),
+      'domain'              => new sfValidatorString(),
       
       'zarafaAccount'       => new sfValidatorBoolean(),
       'zarafaAdmin'         => new sfValidatorBoolean(),

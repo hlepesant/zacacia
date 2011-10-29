@@ -21,6 +21,7 @@ class BaseUserObject extends LDAPObject
         $this->attributes['zarafaQuotaOverride']    = 0;
         $this->attributes['zarafaSendAsPrivilege']  = '';
         $this->attributes['zarafaUserServer']       = '';
+        $this->attributes['mail']                   = '';
 
         return $this;
     }
@@ -346,8 +347,29 @@ class BaseUserObject extends LDAPObject
         return (int)$this->attributes['zacaciaUnDeletable'];
     }
 
+    public function setEmailAddress($v)
+    {
+        if ( $v ) {
+            $this->attributes['mail'] = $v;
+        } else {
+            $this->attributes['mail'] = array();
+        }
+    	return $this;
+    }
+ 
+    public function getEmailAddress()
+    {
+        return (int)$this->attributes['mail'];
+    }
+
     private function isValidMd5($md5)
     {
-      return !empty($md5) && preg_match('/^[a-f0-9]{32}$/', $md5);
+        return !empty($md5) && preg_match('/^[a-f0-9]{32}$/', $md5);
+    }
+
+    private function isValidMd5($mail)
+    {
+        return true;
+        return !empty($mail) && preg_match('/^[a-f0-9\.\-]\@{32}$/', $mail);
     }
 }

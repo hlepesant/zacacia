@@ -6,6 +6,9 @@
         </h1>
     </div>
     <!-- end #form_section -->
+    <?php echo $form['mail']->renderLabel() ?>
+    <?php echo $form['mail']->render() ?>
+    <?php echo $form['domain']->render() ?>
 
     <div id="zarafa_settings" style="display: none;">
         <?php echo $form['zarafaAdmin']->renderRow() ?>
