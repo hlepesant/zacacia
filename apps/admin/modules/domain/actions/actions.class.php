@@ -49,7 +49,8 @@ class domainActions extends sfActions
         $l = new CompanyPeer();
         $l->setBaseDn($companyDn);
         $this->company = $l->retrieveByDn($c);
-          
+
+/* zacaciaDomain */          
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');

@@ -56,6 +56,7 @@ $(document).ready(function() {
                     $('#imgSwitch').css('visibility','visible');
                     _uid = sprintf("%s%s", substr($('input#zdata_sn').val(), 0, 1), $('input#zdata_givenName').val());
                     $('input#zdata_uid').val(_uid.toLowerCase());
+                    $('input#zdata_mail').val(_uid.toLowerCase());
                 }
             }, 'json');
         }

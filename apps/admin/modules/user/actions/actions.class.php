@@ -118,7 +118,7 @@ class userActions extends sfActions
         $c2->add('objectClass', 'zacaciaCompany');
         $l2 = new CompanyPeer();
         $l2->setBaseDn($companyDn);
-        $this->company = $l2->retrieveByDn($c2);
+        $this->company = $l2->retrieveByDn($c2, 'extended');
     
         $this->form = new UserForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
@@ -168,6 +168,26 @@ class userActions extends sfActions
                 }
             }
         }
+
+/* zacaciaDomain */          
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaDomain');
+        
+        $l = new DomainPeer();
+        $l->setBaseDn(sprintf("ou=Domains,%s", $companyDn));
+        
+        $domains = $l->doSelect($c);
+        $domainWidgetChoice = array();
+        foreach ( $domains as $domain ) {
+            $domainWidgetChoice[ $domain->getCn() ] = $domain->getCn();
+        }
+        $this->form->getWidget('domain')->setOption('choices', $domainWidgetChoice);
+/*        $this->form->getWidget('domain')->setDefault(); */
+
+/* zacaciaCompany */
+
         
         $this->cancel = new UserNavigationForm();
         unset($this->cancel['userDn']);

@@ -17,7 +17,7 @@ class UserForm extends ZacaciaForm
       'cn'                  => new sfWidgetFormInputHidden(),
       'displayName'         => new sfWidgetFormInput(),
       'mail'                => new sfWidgetFormInput(),
-      'domain'              => new sfWidgetFormSelect(array('choices' => array()),
+      'domain'              => new sfWidgetFormSelect(array('choices' => array())),
 # ObjectClasse: posixAccount
       'userPassword'        => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),
       'confirmPassword'     => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),

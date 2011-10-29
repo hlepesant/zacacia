@@ -71,11 +71,9 @@ class BaseCompanyPeer extends LDAPPeer
         
         $objects = array();
         
-        if ($ldap_entry !== false)
-        {
+        if ($ldap_entry !== false) {
             $objects[] = $this->createLDAPObject($ldap_entry, $ldap_object);
-            while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry))
-            {
+            while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry)) {
                 $objects[] = $this->createLDAPObject($ldap_entry, $ldap_object);
             }
         }
@@ -237,12 +235,12 @@ class BaseCompanyPeer extends LDAPPeer
         return $subtree;
     }
 
-    public function doSelectOne(LDAPCriteria $ldap_criteria)
+    public function doSelectOne(LDAPCriteria $ldap_criteria, $ldap_object = 'base')
     {
         $ldap_criteria = self::configureCriteria($ldap_criteria);
         $results = $this->select($ldap_criteria);
         $first_entry = ldap_first_entry($this->getLinkid(), $results);
-        return $this->createLDAPObject($first_entry);
+        return $this->createLDAPObject($first_entry, $ldap_object);
     }
 
     public function retrieveBy($attribute, $value)
@@ -259,7 +257,7 @@ class BaseCompanyPeer extends LDAPPeer
         return parent::doCount($ldap_criteria);
     }
 
-    public function retrieveByDn(LDAPCriteria $ldap_criteria)
+    public function retrieveByDn(LDAPCriteria $ldap_criteria, $ldap_object = 'base')
     {
         $ldap_criteria->setSearchScope(LDAPCriteria::BASE);
         $ldap_criteria->add('objectClass', 'top');
@@ -268,7 +266,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_criteria->add('objectClass', 'zacaciaCompany');
         $ldap_criteria = self::configureCriteria($ldap_criteria);
         
-        return $this->doSelectOne($ldap_criteria);
+        return $this->doSelectOne($ldap_criteria, $ldap_object);
     }
 
 #  public function doSave(LDAPObject $ldap_object)
