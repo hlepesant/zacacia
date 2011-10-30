@@ -146,6 +146,8 @@ class userActions extends sfActions
                 $user->setUidNumber($l->getNewUidNumber());
                 $user->setGidNumber($this->company->getGidNumber());
 
+                $user->setEmailAddress( sprintf("%s@%s", $this->form->getValue('mail'), $this->form->getValue('domain')));
+
 /*
                 if ( $this->form->getValue('zarafaQuotaOverride') ) {
                     $user->setZarafaQuotaOverride(1);
@@ -158,8 +160,8 @@ class userActions extends sfActions
                     $user->setZarafaUserDefaultQuotaSoft($this->form->getValue('zarafaUserDefaultQuotaSoft'));
                     $user->setZarafaUserDefaultQuotaWarn($this->form->getValue('zarafaUserDefaultQuotaWarn'));
                 }
+                var_dump( $user ); exit;
 */
-#                var_dump( $user ); exit;
 
                 if ( $l->doAdd($user) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');

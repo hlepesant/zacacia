@@ -6,13 +6,14 @@
         </h1>
     </div>
     <!-- end #form_section -->
-    <div id="form_item">
-        <div class="_name"><?php echo $form['mail']->renderLabel() ?></div>
-        <div class="_field"><?php echo $form['mail']->render() ?>@<?php echo $form['domain']->render() ?></div>
-        <div class="_ajaxCheck"><div id="checkName_mail"></div></div>
-    </div>
-    <!-- end #form_item -->
     <div id="zarafa_settings" style="display: none;">
+        <div id="form_item_email">
+            <div class="_name"><?php echo $form['mail']->renderLabel() ?></div>
+            <div class="_field">
+                <?php echo $form['mail']->render(array('class' => 'emailpart')) ?>@<?php echo $form['domain']->render(array('class' => 'domainpart')) ?> </div>
+            <div class="_ajaxCheck"><div id="checkName_mail"></div></div>
+        </div>
+        <!-- end #form_item -->
         <?php echo $form['zarafaAdmin']->renderRow() ?>
         <?php echo $form['zarafaHidden']->renderRow() ?>
         <?php echo $form['zarafaQuotaOverride']->renderRow() ?>
