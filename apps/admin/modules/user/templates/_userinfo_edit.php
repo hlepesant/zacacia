@@ -23,7 +23,7 @@
 
     <div id="form_submit">
         <input type="button" value="<?php echo __('Cancel') ?>" class="button_cancel" />
-        <input type="submit" value="<?php echo __('Next') ?>" disabled="true" id="goto_section_zarafa" class="button_submit" />
+        <input type="submit" value="<?php echo __('Next') ?>" id="goto_section_zarafa" class="button_submit" />
     </div>
     <!-- end #form_submit -->
 </div>

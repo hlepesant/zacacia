@@ -328,7 +328,7 @@ class userActions extends sfActions
         $l3 = new UserPeer();
         $l3->setBaseDn($userDn);
         $this->zuser = $l3->retrieveByDn($c3);
-    
+
         $this->form = new UserEditForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
@@ -365,6 +365,20 @@ class userActions extends sfActions
                 }
             }
         }
+
+        list($mail, $domain) = preg_split('/@/', $this->zuser->getMail(), 2);
+
+        $this->form->getWidget('sn')->setDefault($this->zuser->getSn());
+        $this->form->getWidget('givenName')->setDefault($this->zuser->getGivenName());
+        $this->form->getWidget('displayName')->setDefault($this->zuser->getCn());
+        $this->form->getWidget('zarafaAccount')->setDefault($this->zuser->getZarafaAccount());
+        $this->form->getWidget('zarafaAdmin')->setDefault($this->zuser->getZarafaAdmin());
+        $this->form->getWidget('zarafaHidden')->setDefault($this->zuser->getZarafaHidden());
+        //$this->form->getWidget('status')->setDefault('true');
+        //$this->form->getWidget('firstname')->setDefault($this->zuser->get());
+        //$this->form->getWidget('firstname')->setDefault($this->zuser->get());
+        $this->form->getWidget('mail')->setDefault($mail);
+        $this->form->getWidget('domain')->setDefault($domain);
         
         $this->cancel = new UserNavigationForm();
         unset($this->cancel['userDn']);

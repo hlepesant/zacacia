@@ -11,7 +11,7 @@
 <?php echo $form->renderHiddenFields() ?>
 
 <?php include_partial('userinfo_edit', array('form' => $form)) ?>
-<?php include_partial('zarafa_edit', array('form' => $form)) ?>
+<?php include_partial('zarafa_edit', array('form' => $form, 'zuser' => $zuser)) ?>
 
 </form>
 </div>

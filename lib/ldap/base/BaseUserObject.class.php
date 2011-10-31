@@ -21,6 +21,7 @@ class BaseUserObject extends LDAPObject
         $this->attributes['zarafaQuotaOverride']    = 0;
         $this->attributes['zarafaSendAsPrivilege']  = '';
         $this->attributes['zarafaUserServer']       = '';
+        $this->attributes['zarafaHidden']           = '';
         $this->attributes['mail']                   = '';
 
         return $this;
@@ -360,6 +361,21 @@ class BaseUserObject extends LDAPObject
     public function getEmailAddress()
     {
         return (int)$this->attributes['mail'];
+    }
+  
+    public function setZarafaHidden($v)
+    {
+        if ( $v ) {
+            $this->attributes['zarafaHidden'] = 1;
+        } else {
+            $this->attributes['zarafaHidden'] = array();
+        }
+        return $this;
+    }
+
+    public function getZarafaHidden()
+    {
+        return $this->attributes['zarafaHidden'];
     }
 
     private function isValidMd5($md5)

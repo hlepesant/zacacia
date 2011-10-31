@@ -1,11 +1,13 @@
 <div id="section_zarafa">
 
     <div id="form_sub_section">
-        <h1><?php echo __('Zarafa Settings') ?></h1>
+        <h1><?php echo __('Zarafa Settings') ?>
+        <span class="_field"><?php echo $form['zarafaAccount']->render() ?></span>
+        </h1>
     </div>
     <!-- end #form_section -->
 
-    <div id="zarafa_settings" style="display: none;">
+    <div id="zarafa_settings" style="display: <?php echo ($zuser->getZarafaAccount() ? 'block' : 'none' ) ?>;">
         <?php echo $form['zarafaAdmin']->renderRow() ?>
         <?php echo $form['zarafaHidden']->renderRow() ?>
         <?php echo $form['zarafaQuotaOverride']->renderRow() ?>

@@ -8,4 +8,4 @@ newSuccess:
 
 editSuccess:
     stylesheets:    [form.css, input.css, button.css, tooltip.css, validator.css]
-    javascripts:    [editUser.js]
+    javascripts:    [editUser.js, lib/jquery.observe_field.js]

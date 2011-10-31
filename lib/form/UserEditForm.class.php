@@ -17,12 +17,14 @@ class UserEditForm extends ZacaciaForm
       'sn'                  => new sfWidgetFormInput(),
       'cn'                  => new sfWidgetFormInputHidden(),
       'displayName'         => new sfWidgetFormInput(),
+      'mail'                => new sfWidgetFormInput(),
+      'domain'              => new sfWidgetFormSelect(array('choices' => array())),
 ## ObjectClasse: posixAccount
 #      'userPassword'        => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),
 #      'confirmPassword'     => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),
 #      'uid'                 => new sfWidgetFormInput(),
 ## ObjectClasse: zarafa-user
-#      'zarafaAccount'       => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
+      'zarafaAccount'       => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'zarafaAdmin'         => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'zarafaHidden'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'zarafaQuotaOverride' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
@@ -37,6 +39,7 @@ class UserEditForm extends ZacaciaForm
       'displayName'         => 'Display Name',
 #      'userPassword'        => 'Password',
 #      'uid'                 => 'Username',
+      'mail'                => 'Email',
       
 #      'zarafaAccount'       => 'Zarafa Account',
       'zarafaAdmin'         => 'Zarafa Admin',
@@ -58,7 +61,9 @@ class UserEditForm extends ZacaciaForm
       'displayName'         => new sfValidatorString(),
       'userPassword'        => new sfValidatorString(),
       'confirmPassword'     => new sfValidatorString(),
-      'uid'                 => new sfValidatorString(),
+#      'uid'                 => new sfValidatorString(),
+      'mail'                => new sfValidatorString(),
+      'domain'              => new sfValidatorString(),
       
       'zarafaAccount'       => new sfValidatorBoolean(),
       'zarafaAdmin'         => new sfValidatorBoolean(),
