@@ -24,8 +24,9 @@ if ( !$u->getZacaciaUnDeletable() && 'disable' === $u->getZacaciaStatus() ) {
     echo image_tag('famfam/blank.png');
 }
 
-echo link_to_function(image_tag('famfam/aliases.png'), "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($u->getCn()))."', 'user', null)");
-echo link_to_function(image_tag('famfam/sendas.png'), "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($u->getCn()))."', 'user', null)");
+echo link_to_function(image_tag('famfam/key.png'), "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($u->getCn()))."', 'password', null)");
+echo link_to_function(image_tag('famfam/email.png'), "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($u->getCn()))."', 'alias', null)");
+echo link_to_function(image_tag('famfam/user_gray.png'), "jumpTo('".sprintf('%03s', $id)."', '".sprintf(addslashes($u->getCn()))."', 'sendas', null)");
 ?>
     </div>
     <!-- end #line._actions -->

@@ -51,8 +51,10 @@ function jumpTo(id, name, target, status) {
         case 'alias':
         case 'password':
         case 'sendas':
+/*
             m = target;
             d = 'index';
+*/
         break;
 
         default:

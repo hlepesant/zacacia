@@ -9,3 +9,7 @@ newSuccess:
 editSuccess:
     stylesheets:    [form.css, input.css, button.css, tooltip.css, validator.css]
     javascripts:    [editUser.js, lib/jquery.observe_field.js]
+
+passwordSuccess:
+    stylesheets:    [form.css, input.css, button.css, tooltip.css, validator.css, password.css]
+    javascripts:    [passwordUser.js, lib/jquery.observe_field.js, lib/jquery.password_strength.js, lib/jquery.crypt.js]

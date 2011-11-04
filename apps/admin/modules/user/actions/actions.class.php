@@ -130,6 +130,8 @@ class userActions extends sfActions
             
             if ($this->form->isValid()) {
 
+                #print_r( $this->form->getValues()); exit;
+
                 $l = new UserPeer();
                 $l->setBaseDn(sprintf("ou=Users,%s", $companyDn));
 
@@ -137,6 +139,7 @@ class userActions extends sfActions
                 $user->setDn(sprintf("cn=%s %s,%s", $this->form->getValue('sn'), $this->form->getValue('givenName'), $l->getBaseDn()));
                 $user->setGivenName($this->form->getValue('givenName'));
                 $user->setSn($this->form->getValue('sn'));
+                $user->setDisplayName($this->form->getValue('displayName'));
 
                 $fi = strToLower($this->form->getValue('sn'));
                 $la = strToLower($this->form->getValue('givenName'));
@@ -310,24 +313,24 @@ class userActions extends sfActions
         $this->platform = $l->retrieveByDn($c);
 
 /* zacaciaCompany */
-        $c2 = new LDAPCriteria();
-        $c2->add('objectClass', 'top');
-        $c2->add('objectClass', 'organizationalRole');
-        $c2->add('objectClass', 'zacaciaCompany');
-        $l2 = new CompanyPeer();
-        $l2->setBaseDn($companyDn);
-        $this->company = $l2->retrieveByDn($c2);
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaCompany');
+        $l = new CompanyPeer();
+        $l->setBaseDn($companyDn);
+        $this->company = $l->retrieveByDn($c);
 
 /* zacaciaUser */
-        $c3 = new LDAPCriteria();
-        $c3->add('objectClass', 'top');
-        $c3->add('objectClass', 'posixAccount');
-        $c3->add('objectClass', 'inetOrgPerson');
-        $c3->add('objectClass', 'zarafa-user');
-        $c3->add('objectClass', 'zacaciaUser');
-        $l3 = new UserPeer();
-        $l3->setBaseDn($userDn);
-        $this->zuser = $l3->retrieveByDn($c3);
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'posixAccount');
+        $c->add('objectClass', 'inetOrgPerson');
+        $c->add('objectClass', 'zarafa-user');
+        $c->add('objectClass', 'zacaciaUser');
+        $l = new UserPeer();
+        $l->setBaseDn($userDn);
+        $this->zuser = $l->retrieveByDn($c);
 
         $this->form = new UserEditForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
@@ -337,28 +340,20 @@ class userActions extends sfActions
         if ($request->isMethod('post') && $request->getParameter('zdata')) {
 
             $this->form->bind($request->getParameter('zdata'));
+
+#            print_r( $_POST['zdata'] ); exit;
+#            print_r( $this->form->getValues() ); exit;
             
             if ($this->form->isValid()) {
 
-                $l = new UserPeer();
-                $l->setBaseDn(sprintf("ou=Users,%s", $companyDn));
+                $this->zuser->setGivenName($this->form->getValue('givenName'));
+                $this->zuser->setSn($this->form->getValue('sn'));
+                $this->zuser->setDisplayName($this->form->getValue('displayName'));
+                $this->zuser->setEmailAddress( sprintf("%s@%s", $this->form->getValue('mail'), $this->form->getValue('domain')));
 
-                $user = new UserObject();
-                $user->setDn(sprintf("cn=%s %s,%s", $this->form->getValue('sn'), $this->form->getValue('givenName'), $l->getBaseDn()));
-                $user->setGivenName($this->form->getValue('givenName'));
-                $user->setSn($this->form->getValue('sn'));
+#                var_dump( $this->zuser ); exit;
 
-                $fi = strToLower($this->form->getValue('sn'));
-                $la = strToLower($this->form->getValue('givenName'));
-
-                $user->setUid(sprintf('%s%s', $fi[0], $la));
-                $user->setUserPassword($this->form->getValue('userPassword'));
-                $user->setUidNumber($l->getNewUidNumber());
-                $user->setGidNumber($this->company->getGidNumber());
-
-#                var_dump( $user ); exit;
-
-                if ( $l->doSave($user) ) {
+                if ( $l->doSave($this->zuser) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                     echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
                     exit;
@@ -366,11 +361,27 @@ class userActions extends sfActions
             }
         }
 
+/* zacaciaDomain */          
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaDomain');
+        
+        $l = new DomainPeer();
+        $l->setBaseDn(sprintf("ou=Domains,%s", $companyDn));
+        
+        $domains = $l->doSelect($c);
+        $domainWidgetChoice = array();
+        foreach ( $domains as $domain ) {
+            $domainWidgetChoice[ $domain->getCn() ] = $domain->getCn();
+        }
+        $this->form->getWidget('domain')->setOption('choices', $domainWidgetChoice);
         list($mail, $domain) = preg_split('/@/', $this->zuser->getMail(), 2);
+        $this->form->getWidget('domain')->setDefault($domain);
 
         $this->form->getWidget('sn')->setDefault($this->zuser->getSn());
         $this->form->getWidget('givenName')->setDefault($this->zuser->getGivenName());
-        $this->form->getWidget('displayName')->setDefault($this->zuser->getCn());
+        $this->form->getWidget('displayName')->setDefault($this->zuser->getDisplayName());
         $this->form->getWidget('zarafaAccount')->setDefault($this->zuser->getZarafaAccount());
         $this->form->getWidget('zarafaAdmin')->setDefault($this->zuser->getZarafaAdmin());
         $this->form->getWidget('zarafaHidden')->setDefault($this->zuser->getZarafaHidden());
@@ -379,6 +390,104 @@ class userActions extends sfActions
         //$this->form->getWidget('firstname')->setDefault($this->zuser->get());
         $this->form->getWidget('mail')->setDefault($mail);
         $this->form->getWidget('domain')->setDefault($domain);
+        
+        $this->cancel = new UserNavigationForm();
+        unset($this->cancel['userDn']);
+        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
+        $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
+
+    }
+
+    public function executePassword(sfWebRequest $request)
+    {
+        $data = $request->getParameter('zdata');
+
+        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
+            $this->redirect('@platform');
+        }
+
+        $companyDn = $request->getParameter('companyDn', $data['companyDn']);
+        if ( empty($companyDn) ) {
+            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
+            echo fake_post($this, '@company', Array('holdingDn' => $holdingDn));
+            exit;
+        }
+
+        $userDn = $request->getParameter('userDn', $data['userDn']);
+        if ( empty($userDn) ) {
+            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
+            echo fake_post($this, '@company', Array('holdingDn' => $holdingDn, 'companyDn' => $companyDn));
+            exit;
+        }
+
+/* zacaciaPlatform */
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaPlatform');
+        $l = new PlatformPeer();
+        $l->setBaseDn($platformDn);
+        $this->platform = $l->retrieveByDn($c);
+
+/* zacaciaCompany */
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'organizationalRole');
+        $c->add('objectClass', 'zacaciaCompany');
+        $l = new CompanyPeer();
+        $l->setBaseDn($companyDn);
+        $this->company = $l->retrieveByDn($c);
+
+/* zacaciaUser */
+        $c = new LDAPCriteria();
+        $c->add('objectClass', 'top');
+        $c->add('objectClass', 'posixAccount');
+        $c->add('objectClass', 'inetOrgPerson');
+        $c->add('objectClass', 'zarafa-user');
+        $c->add('objectClass', 'zacaciaUser');
+        $l = new UserPeer();
+        $l->setBaseDn($userDn);
+        $this->zuser = $l->retrieveByDn($c);
+
+        $this->form = new UserPasswordForm();
+        $this->form->getWidget('platformDn')->setDefault($platformDn);
+        $this->form->getWidget('companyDn')->setDefault($companyDn);
+        $this->form->getWidget('userDn')->setDefault($userDn);
+    
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+
+            $this->form->bind($request->getParameter('zdata'));
+
+#            print_r( $_POST['zdata'] ); exit;
+#            print_r( $this->form->getValues() ); exit;
+            
+            if ($this->form->isValid()) {
+
+                $this->zuser->setUserPassword($this->form->getValue('userPassword'));
+
+#                var_dump( $this->zuser ); exit;
+
+                if ( $l->doSave($this->zuser) ) {
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
+                    echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+                    exit;
+                }
+            }
+        }
+
+#        $this->form->getWidget('sn')->setDefault($this->zuser->getSn());
+#        $this->form->getWidget('givenName')->setDefault($this->zuser->getGivenName());
+#        $this->form->getWidget('displayName')->setDefault($this->zuser->getDisplayName());
+#        $this->form->getWidget('zarafaAccount')->setDefault($this->zuser->getZarafaAccount());
+#        $this->form->getWidget('zarafaAdmin')->setDefault($this->zuser->getZarafaAdmin());
+#        $this->form->getWidget('zarafaHidden')->setDefault($this->zuser->getZarafaHidden());
+#        //$this->form->getWidget('status')->setDefault('true');
+#        //$this->form->getWidget('firstname')->setDefault($this->zuser->get());
+#        //$this->form->getWidget('firstname')->setDefault($this->zuser->get());
+#        $this->form->getWidget('mail')->setDefault($mail);
+#        $this->form->getWidget('domain')->setDefault($domain);
         
         $this->cancel = new UserNavigationForm();
         unset($this->cancel['userDn']);

@@ -15,14 +15,9 @@ class UserEditForm extends ZacaciaForm
 # ObjectClasse: inetOrgPerson
       'givenName'           => new sfWidgetFormInput(),
       'sn'                  => new sfWidgetFormInput(),
-      'cn'                  => new sfWidgetFormInputHidden(),
       'displayName'         => new sfWidgetFormInput(),
       'mail'                => new sfWidgetFormInput(),
       'domain'              => new sfWidgetFormSelect(array('choices' => array())),
-## ObjectClasse: posixAccount
-#      'userPassword'        => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),
-#      'confirmPassword'     => new sfWidgetFormInputPassword(array(), array('autocomplete' => 'off')),
-#      'uid'                 => new sfWidgetFormInput(),
 ## ObjectClasse: zarafa-user
       'zarafaAccount'       => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
       'zarafaAdmin'         => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
@@ -37,8 +32,6 @@ class UserEditForm extends ZacaciaForm
       'givenName'           => 'Lastname',
       'sn'                  => 'Firstname',
       'displayName'         => 'Display Name',
-#      'userPassword'        => 'Password',
-#      'uid'                 => 'Username',
       'mail'                => 'Email',
       
 #      'zarafaAccount'       => 'Zarafa Account',
@@ -54,13 +47,12 @@ class UserEditForm extends ZacaciaForm
     $this->setValidators(array(
       'platformDn'          => new sfValidatorString(),
       'companyDn'           => new sfValidatorString(),
+      'userDn'           => new sfValidatorString(),
 #     'status'              => new sfValidatorBoolean(),
       'givenName'           => new sfValidatorString(),
       'sn'                  => new sfValidatorString(),
-      'cn'                  => new sfValidatorString(),
+#      'cn'                  => new sfValidatorString(),
       'displayName'         => new sfValidatorString(),
-      'userPassword'        => new sfValidatorString(),
-      'confirmPassword'     => new sfValidatorString(),
 #      'uid'                 => new sfValidatorString(),
       'mail'                => new sfValidatorString(),
       'domain'              => new sfValidatorString(),

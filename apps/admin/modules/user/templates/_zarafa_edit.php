@@ -8,6 +8,12 @@
     <!-- end #form_section -->
 
     <div id="zarafa_settings" style="display: <?php echo ($zuser->getZarafaAccount() ? 'block' : 'none' ) ?>;">
+        <div id="form_item_email">
+            <div class="_name"><?php echo $form['mail']->renderLabel() ?></div>
+            <div class="_field">
+                <?php echo $form['mail']->render(array('class' => 'emailpart')) ?>@<?php echo $form['domain']->render(array('class' => 'domainpart')) ?> </div>
+            <div class="_ajaxCheck"><div id="checkName_mail"></div></div>
+        </div>
         <?php echo $form['zarafaAdmin']->renderRow() ?>
         <?php echo $form['zarafaHidden']->renderRow() ?>
         <?php echo $form['zarafaQuotaOverride']->renderRow() ?>
@@ -18,7 +24,7 @@
     
     <div id="form_submit">
         <input type="button" value="<?php echo __('Previous') ?>" id="back_section_userinfo" class="button_previous" />
-        <input type="submit" value="<?php echo __('Create') ?>" disabled="true" class="button_submit" />
+        <input type="submit" value="<?php echo __('Update') ?>" class="button_submit" />
     </div>
     <!-- end #form_submit -->
 </div>
