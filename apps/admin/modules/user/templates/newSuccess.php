@@ -25,6 +25,7 @@
 echo javascript_tag("
 var json_checkcn_url = '".url_for('user/checkcn/')."';
 var json_checkuid_url = '".url_for('user/checkuid/')."';
+var json_checkemail_url = '".url_for('user/checkemail/')."';
 var password_i18n = new Array();
 password_i18n[1] = '".__('Too weak')."'; 
 password_i18n[2] = '".__('Weak')."'; 

@@ -22,19 +22,6 @@ $(document).ready(function() {
         $('#form_cancel').submit();
     });
 
-    var val_sn = $('input#zdata_sn').validator();
-    var val_givenName = $('input#zdata_givenName').validator();
-
-    $('#switch').click( function() {
-        if ( _displayName == 'fl' ) {
-            $('input#zdata_displayName').val( sprintf("%s %s", $('input#zdata_givenName').val(), $('input#zdata_sn').val() ) ) ;
-            _displayName = 'lf';
-        } else {
-            $('input#zdata_displayName').val( sprintf("%s %s", $('input#zdata_sn').val(), $('input#zdata_givenName').val() ) ) ;
-            _displayName = 'fl';
-        }
-    });
-
     $("input[type='checkbox']#zdata_zarafaAccount").change(function() {
 
         if ($(this).is(':checked')) {

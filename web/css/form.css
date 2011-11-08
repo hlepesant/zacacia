@@ -49,7 +49,6 @@ color: #000000;
 font-family: Arial;
 font-size: 13px;
 font-weight: bold;
-border: 1px solid blue;
 }
 
 #form_item ._field {
@@ -59,7 +58,6 @@ height: 18px;
 padding: 2px 0 0 0;
 margin: 0;
 text-align: left;
-border: 1px solid red;
 }
 
 #form_item ._ajaxCheck {
@@ -68,7 +66,6 @@ width: 18px;
 height: 18px;
 padding: 5px 10px 0px 0px;
 margin: 0;
-border: 1px solid green;
 text-align: right;
 }
 
@@ -120,8 +117,7 @@ width: 500px;
 height: 25px;
 padding: 1px 0px 1px 1px;
 margin: 0px auto 0px auto;
-/* background-color: #F0F0F0; */
-background-color: #FFFFFF;
+background-color: #F0F0F0;
 clear: both;
 border-bottom: 1px solid #C0C0C0;
 border-left: 1px solid #C0C0C0;
@@ -139,7 +135,6 @@ color: #000000;
 font-family: Arial;
 font-size: 13px;
 font-weight: bold;
-border: 1px solid blue;
 }
 
 #form_item_email ._field {
@@ -149,7 +144,6 @@ height: 18px;
 padding: 2px 0 0 0;
 margin: 0;
 text-align: left;
-border: 1px solid red;
 }
 
 #form_item_email ._ajaxCheck {
@@ -158,6 +152,5 @@ width: 18px;
 height: 18px;
 padding: 5px 10px 0px 0px;
 margin: 0;
-border: 1px solid green;
 text-align: right;
 }

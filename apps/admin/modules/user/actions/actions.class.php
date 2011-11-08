@@ -557,4 +557,36 @@ class userActions extends sfActions
         
         return sfView::SUCCESS;
     }
+
+    public function executeCheckemail(sfWebRequest $request)
+    {
+        $this->setTemplate('check');
+        $this->setLayout(false);
+        $this->count = 0;
+
+        if ( ! $request->hasParameter('email') ) {
+            $this->count = 1;
+            return sfView::SUCCESS;
+        }
+
+        $l = new LdapPeer();
+        $c = new LDAPCriteria();
+        
+        $c->setBaseDn( sfConfig::get('ldap_base_dn') );
+        
+#        $c->add('objectClass', 'top');
+#        $c->add('objectClass', 'inetOrgPerson');
+#        $c->add('objectClass', 'posixAccount');
+#        $c->add('objectClass', 'zarafa-user');
+#        $c->add('objectClass', 'zacaciaUser');
+        $c->addOr('mail', $request->getParameter('email'));
+        $c->addOr('mailAlternateAddress', $request->getParameter('email'));
+        $c->add('objectClass', 'top');
+       
+        if ( $l->doCount($c) == 0 ) {
+            $this->count = 0;
+        };
+        
+        return sfView::SUCCESS;
+    }
 }

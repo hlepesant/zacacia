@@ -26,6 +26,7 @@ $(document).ready(function() {
     var val_givenName = $('input#zdata_givenName').validator();
     var val_cn = $('input#zdata_cn').validator();
     var val_uid = $('input#zdata_uid').validator();
+    var val_emailAddress = $('input#zdata_emailAddress').validator();
 
     $('input#zdata_sn').observe_field(0.5, function() {
         if( $('input#zdata_givenName').val().length ) {
@@ -115,10 +116,39 @@ $(document).ready(function() {
     $("input[type='checkbox']#zdata_zarafaAccount").change(function() {
 
         if ($(this).is(':checked')) {
-          $("#zarafa_settings").slideDown('slow');
+            $("#zarafa_settings").slideDown('slow');
         } else {
           $("#zarafa_settings").slideUp();
         }
+    });
+
+    $('#zdata_mail').observe_field(0.5, function() {
+        $('input#zdata_emailAddress').val(sprintf("%s@%s", $(this).val(), $('#zdata_domain').val())) ;
+    
+    });
+    $('#zdata_domain').change(function() {
+        $('input#zdata_emailAddress').val(sprintf("%s@%s", $('#zdata_mail').val(), $(this).val())) ;
+    });
+/*    
+    if ( val_emailAddress.data("validator").checkValidity() ) {
+        $.get( json_checkemail_url, {
+            email: $(this).val()
+        },
+        function(data){
+            $("#checkEmail_msg").html("<img src=\""+data.img+"\" />");
+            if ( ! data.disabled ) {
+                $(".button_submit").removeAttr("disabled");
+            }
+        }, "json");
+    }
+*/
+    $('input#zdata_emailAddress').change( function() {
+        $.getJSON( json_checkemail_url, { email: $(this).val() }, function(data) {
+            $("#checkEmail_msg").html("<img src=\""+data.img+"\" />");
+            if ( ! data.disabled ) {
+                $(".button_submit").removeAttr("disabled");
+            }
+        });
     });
 
     $('#zdata_zarafaQuotaOverride').click(function() {

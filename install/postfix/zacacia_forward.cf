@@ -1,0 +1,11 @@
+server_host = localhost
+server_port = 389
+bind = yes
+bind_dn = cn=admin,dc=xxxxxx,dc=com
+bind_pw = XXXXXXXXXXXXXX
+timeout = 20
+version = 3
+search_base = ou=Companies,ou=YYYYYY,ou=Platforms,dc=xxxxxx,dc=com
+query_filter = (&(objectClass=top)(objectClass=qmailUser)(objectClass=miniForward)(mail=%s))
+scope = sub
+result_attribute = mailForwardingAddress

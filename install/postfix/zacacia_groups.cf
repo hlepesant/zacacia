@@ -1,0 +1,12 @@
+server_host = localhost
+server_port = 389
+bind = yes
+bind_dn = cn=admin,dc=xxxxxx,dc=com
+bind_pw = XXXXXX
+timeout = 20
+version = 3
+search_base = ou=Companies,ou=YYYYYY,ou=Platforms,dc=xxxxxx,dc=com
+query_filter = (&(objectClass=top)(objectClass=groupOfNames)(objectClass=zarafa-group)(objectClass=zacaciaGroup)(mail=%s))
+scope = sub
+special_result_attribute = member
+leaf_result_attribute = mail

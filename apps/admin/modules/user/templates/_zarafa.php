@@ -11,7 +11,7 @@
             <div class="_name"><?php echo $form['mail']->renderLabel() ?></div>
             <div class="_field">
                 <?php echo $form['mail']->render(array('class' => 'emailpart')) ?>@<?php echo $form['domain']->render(array('class' => 'domainpart')) ?> </div>
-            <div class="_ajaxCheck"><div id="checkName_mail"></div></div>
+            <div class="_ajaxCheck"><div id="checkEmail_msg"></div></div>
         </div>
         <!-- end #form_item -->
         <?php echo $form['zarafaAdmin']->renderRow() ?>
