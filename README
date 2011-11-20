@@ -7,7 +7,8 @@ About
 =====
 
 Zacacia is a web frontend to manage an OpenLDAP direcory.
-This OpenLDAP directory can be used with Zarafa Collaborative Platform - ZCP - (http://www.zarafa.com/)
+The LDAP tree is deisgned to be by Zarafa Collaborative Platform - ZCP - (http://www.zarafa.com/)
+Zacacia will help you to manage the different LDAP object.
 
 
 Requirements
@@ -15,7 +16,7 @@ Requirements
 
 Zacacia is written in PHP5 and use the symfony, an open-source PHP web framework (http://www.symfony-project.org/)
 
- - Debian Linux >= 5.0
+ - Debian Linux >= 6.0
  - Apache 2 (apt-get install apache2-mpm-prefork)
  - PHP5 (apt-get install libapache2-mod-php5)
  - OpenLDAP (apt-get install slapd)
@@ -25,20 +26,29 @@ Zacacia is written in PHP5 and use the symfony, an open-source PHP web framework
 Installation
 ============
 
- - Apache
-untar the zacacia.tar.gz in /opt/WebSites/
-create link in /etc/apache2/site-enable/
-restart apache
+ - Apache2
+ Clone from GitHub :
+   mkdir -p /opt/WebSites
+   cd /opt/WebSites
+   git clone git@github.com:hlepesant/Zacacia.git
+
+ Configure virtualhost :
+   ls /opt/WebSites/Zacacia/httpd.conf /etc/apache2/sites-available/zacacia
+   a2ensite zacacia
+   apachectl -t
+   apachectl -S
+   /etc/init.d/apache2 restart
 
  - OpenLDAP
- /etc/init.d/slapd stop
- cp /opt/WebSites/Zacacia/install/openldap/ldap/slapd.conf /etc/ldap/slapd.conf
- cp /opt/WebSites/Zacacia/install/openldap/ldap/schema/zacacia.schema /etc/ldap/schema/
- cp /usr/share/doc/zarafa/zarafa.schema /etc/ldap/schema/
- rm -f /var/lib/ldap/*
- slapadd -f /etc/ldap/slapd.conf -l /opt/WebSites/Zacacia/install/openldap/zacacia.ldif
- chown -R openldap:openldap /var/lib/ldap
- /etc/init.d/slapd start
+   /etc/init.d/slapd stop
+   cp /opt/WebSites/Zacacia/install/openldap/ldap/slapd.conf /etc/ldap/slapd.conf
+   cp /opt/WebSites/Zacacia/install/openldap/ldap/schema/zacacia.schema /etc/ldap/schema/
+   cp /usr/share/doc/zarafa/zarafa.schema /etc/ldap/schema/
+   rm -f /var/lib/ldap/*
+   slapadd -f /etc/ldap/slapd.conf -l /opt/WebSites/Zacacia/install/openldap/zacacia.ldif
+   chown -R openldap:openldap /var/lib/ldap
+   vi /etc/default/slapd
+   /etc/init.d/slapd start
 
 
  Greetings
@@ -49,4 +59,4 @@ restart apache
  PHP (http://www.php.net/)
  OpenLDAP (http://www.openldap.org/)
  Patricio Mac Adden (http://www.symfony-project.org/plugins/dcLDAPAbstractionPlugin)
-
+ GitHub (http://github.com/)
