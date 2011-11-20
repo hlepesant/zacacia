@@ -4,41 +4,72 @@ objectClass: dcObject
 objectClass: organization
 o: zarafa.com
 structuralObjectClass: organization
-
-dn: cn=admin,dc=zarafa,dc=com
-objectClass: simpleSecurityObject
-objectClass: organizationalRole
-cn: admin
-description: LDAP administrator
-structuralObjectClass: organizationalRole
-userPassword:: e0NSWVBUfVBJanpVejJIQWdSZHc=
+dc: zarafa
+entryUUID: be893064-a80e-1030-979a-3d37eb09d385
+creatorsName: cn=admin,dc=zarafa,dc=com
+createTimestamp: 20111120220003Z
+entryCSN: 20111120220003.678115Z#000000#000#000000
+modifiersName: cn=admin,dc=zarafa,dc=com
+modifyTimestamp: 20111120220003Z
 
 dn: ou=Applications,dc=zarafa,dc=com
 ou: Applications
 objectClass: organizationalUnit
 objectClass: top
 structuralObjectClass: organizationalUnit
+entryUUID: be89f3be-a80e-1030-979b-3d37eb09d385
+creatorsName: cn=admin,dc=zarafa,dc=com
+createTimestamp: 20111120220003Z
+entryCSN: 20111120220003.683179Z#000000#000#000000
+modifiersName: cn=admin,dc=zarafa,dc=com
+modifyTimestamp: 20111120220003Z
 
 dn: ou=Zacacia,ou=Applications,dc=zarafa,dc=com
 ou: Zacacia
 objectClass: organizationalUnit
 objectClass: top
 structuralObjectClass: organizationalUnit
+entryUUID: be8a1416-a80e-1030-979c-3d37eb09d385
+creatorsName: cn=admin,dc=zarafa,dc=com
+createTimestamp: 20111120220003Z
+entryCSN: 20111120220003.684011Z#000000#000#000000
+modifiersName: cn=admin,dc=zarafa,dc=com
+modifyTimestamp: 20111120220003Z
 
 dn: ou=Platforms,ou=Zacacia,ou=Applications,dc=zarafa,dc=com
 ou: Platforms
 objectClass: organizationalUnit
 objectClass: top
 structuralObjectClass: organizationalUnit
+entryUUID: be8a1dc6-a80e-1030-979d-3d37eb09d385
+creatorsName: cn=admin,dc=zarafa,dc=com
+createTimestamp: 20111120220003Z
+entryCSN: 20111120220003.684259Z#000000#000#000000
+modifiersName: cn=admin,dc=zarafa,dc=com
+modifyTimestamp: 20111120220003Z
 
 dn: ou=SecurityGroups,ou=Zacacia,ou=Applications,dc=zarafa,dc=com
 ou: SecurityGroups
 objectClass: organizationalUnit
 objectClass: top
 structuralObjectClass: organizationalUnit
+entryUUID: be8a62d6-a80e-1030-979e-3d37eb09d385
+creatorsName: cn=admin,dc=zarafa,dc=com
+createTimestamp: 20111120220003Z
+entryCSN: 20111120220003.686027Z#000000#000#000000
+modifiersName: cn=admin,dc=zarafa,dc=com
+modifyTimestamp: 20111120220003Z
 
-dn: cn=PlatformAdmin,ou=SecurityGroups,ou=Zacacia,ou=Applications,dc=zarafa,dc=com
+dn: cn=PlatformAdmin,ou=SecurityGroups,ou=Zacacia,ou=Applications,dc=zarafa,dc
+ =com
 cn: PlatformAdmin
 objectClass: zacaciaSecurityGroup
 objectClass: top
 structuralObjectClass: zacaciaSecurityGroup
+entryUUID: be8a7d52-a80e-1030-979f-3d37eb09d385
+creatorsName: cn=admin,dc=zarafa,dc=com
+createTimestamp: 20111120220003Z
+entryCSN: 20111120220003.686704Z#000000#000#000000
+modifiersName: cn=admin,dc=zarafa,dc=com
+modifyTimestamp: 20111120220003Z
+
