@@ -14,10 +14,8 @@ default:
 
   stylesheets:    [reset-yui.css, style.css]
 
-  javascripts:    [lib/jquery-1.6.4.min.js, lib/jquery.tools.min-1.2.6.js, lib/php.full.min-3.26.js]
-#  javascripts:    [lib/jquery-1.6.2.min.js, lib/jquery.tools.min-1.2.5.js, lib/php.full.min-3.24.js]
-#  javascripts:    [lib/jquery-1.4.4.min.js, lib/jquery.tools.min-1.2.5.js, lib/php.full.min-3.24.js]
-#  javascripts:    [lib/jquery-1.4.2.min.js, lib/jquery.tools.min-1.2.5.js, lib/php.full.min-3.24.js]
+  javascripts:    [lib/jquery-1.7.min.js, lib/php.full.min-3.26.js, lib/jquery.tools.tooltip.min-1.2.6.js]
+#  javascripts:    [lib/jquery-1.6.4.min.js, lib/jquery.tools.min-1.2.6.js, lib/php.full.min-3.26.js]
 
   has_layout:     true
   layout:         layout

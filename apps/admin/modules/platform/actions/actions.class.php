@@ -66,8 +66,13 @@ class platformActions extends sfActions
                 $platform = new PlatformObject();
                 $platform->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
                 $platform->setCn($this->form->getValue('cn'));
-                $platform->setZacaciaMultiTenant($this->form->getValue('multitenant'));
-                $platform->setZacaciaMultiServer($this->form->getValue('multiserver'));
+
+                if ( $this->form->getValue('multitenant') )
+                    $platform->setZacaciaMultiTenant($this->form->getValue('multitenant'));
+
+                if ( $this->form->getValue('multiserver') )
+                    $platform->setZacaciaMultiServer($this->form->getValue('multiserver'));
+
                 $platform->setZacaciaStatus($this->form->getValue('status'));
 
                 #var_dump( $platform ); exit;

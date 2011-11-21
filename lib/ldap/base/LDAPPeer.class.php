@@ -32,10 +32,11 @@ class LDAPPeer
         ldap_set_option($conn, LDAP_OPT_REFERRALS, 0);
 
         if (!ldap_bind($conn, $bind_user, $bind_password)) {
-            throw new zacaciaException(ldap_error($conn));
+            throw new Exception(ldap_error($conn));
         }
 
         $this->setLinkId($conn);
+        return true;
     }
 
     public function buildDefaultLdapParameters()
@@ -189,7 +190,7 @@ class LDAPPeer
             }
             return $results;
         } else {
-          throw new zacaciaException("Fatal error: method not implemented.");
+          throw new Exception("Fatal error: method not implemented.");
         }
     }
 
@@ -226,6 +227,10 @@ class LDAPPeer
 
     public function doAdd(LDAPObject $ldap_object)
     {
+        #var_dump( $this->getLinkId() ); exit;
+        #var_dump( $ldap_object->getDn() ); exit;
+        #var_dump( $ldap_object->getAttributes() ); exit;
+
         if (ldap_add($this->getLinkId(), $ldap_object->getDn(), $ldap_object->getAttributes())) {
             return true;
         }
