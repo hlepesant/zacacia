@@ -1,9 +1,16 @@
 <?php slot('topnav') ?>
-<a href="#"><?php echo __('Home') ;?></a> &raquo; <strong><?php echo __('Platforms') ;?></strong>
-<?php echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew')); ?>
+<?php echo __('Home') ;?> &raquo; 
+<strong><?php echo __('Platforms') ;?></strong>
+<?php echo image_tag('famfam/door_in.png', array('title' => __('Logout'), 'id' => 'logout', 'class' => 'tt')); ?>
 <?php end_slot() ?>
 
 <div id="collection">
+    <div id="collection_menu">
+        <div class="_right">
+            <?php echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew')); ?>
+        </div>
+    </div>
+    <!-- end #collection_menu -->
 
     <div id="collection_description">
         <div class="_name"><?php echo __("Name") ?></div>

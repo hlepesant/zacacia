@@ -1,17 +1,26 @@
 <?php slot('topnav') ?>
-<a href="#"><?php echo __('Home') ;?></a> &raquo; 
-<strong><a href="#" id="goback"><?php echo $platform->getCn() ?></a></strong> &raquo;
+<?php echo __('Home') ;?> &raquo; 
+<strong><?php echo $platform->getCn() ?></strong> &raquo;
 <strong><?php echo __('Companies') ;?></strong>
+<?php echo image_tag('famfam/door_in.png', array('title' => __('Logout'), 'id' => 'logout', 'class' => 'tt')); ?>
+<?php end_slot() ?>
 
-<?php
-if ( $platform->getZacaciaMultiTenant() || ( count($companies) == 0 ) ) : ?>
+<div id="collection">
+
+    <div id="collection_menu">
+        <div class="_left">
+<?php echo image_tag('back.jpg', array('title' => __('Back'), 'id' => 'goback', 'class' => 'tt')); ?>
+        </div>
+        <div class="_right">
+<?php if ( $platform->getZacaciaMultiTenant() || ( count($companies) == 0 ) ) : ?>
 <?php echo image_tag('famfam/add.png', array('title' => __('Create a new company'), 'id' => 'gotonew', 'class' => 'tt')); ?>
 <?php else: ?>
 <?php echo image_tag('add_bw.png', array('title' => __('Not allowed. Single Server Platform'), 'class' => 'tt')); ?>
 <?php endif; ?>
-<?php end_slot() ?>
+        </div>
+    </div>
+    <!-- end #collection_menu -->
 
-<div id="collection">
     <div id="collection_description">
             <div class="_name"><?php echo __("Name") ?></div>
             <div class="_action"><?php echo __("Action") ?></div>

@@ -1,5 +1,6 @@
 <?php slot('topnav') ?>
-<a href="#"><?php echo __('Home') ;?></a> &raquo; <strong><?php echo __('Platforms') ;?></strong>
+<?php echo __('Home') ;?> &raquo; 
+<strong><?php echo __('Platforms') ;?></strong>
 <?php end_slot() ?>
 
 <div id="form_box">

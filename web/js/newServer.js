@@ -19,11 +19,9 @@ $(document).ready(function() {
     });
 
 
-    var val_cn = $('input#zdata_cn').validator();
-
     $('input#zdata_cn').blur(function() {
 
-        if ( val_cn.data('validator').checkValidity() ) {
+        if ( $('input#zdata_cn').length ) {
 
             $('#checkName_msg').html('');
 

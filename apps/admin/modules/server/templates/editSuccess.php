@@ -1,5 +1,5 @@
 <?php slot('topnav') ?>
-<a href="#"><?php echo __('Home') ;?></a> &raquo; 
+<?php echo __('Home') ;?> &raquo; 
 <strong><?php echo $platform->getCn() ?></strong> &raquo; 
 <strong><?php echo __('Servers') ;?></strong>
 <?php end_slot() ?>

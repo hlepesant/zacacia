@@ -6,8 +6,8 @@
 
 $(document).ready(function() {
 
-    $("._link img[title]").tooltip({
-        position: "bottom left",
+    $('._link img[title]').tooltip({
+        position: 'bottom left',
         opacity: 0.9
     });
 
@@ -16,11 +16,10 @@ $(document).ready(function() {
     });
 
     $(".button_submit").removeAttr("disabled");
-    var val_ip = $("input#zdata_ip").validator();
 
     $("input#zdata_cn").change(function() {
         $("#checkIpAddress_msg_msg").html('');
-        if ( val_ip.data("validator").checkValidity() ) {
+        if ( $("input#zdata_ip").length ) {
             $("#checkIpAddress_msg_msg").html('<img src=\'/images/famfam/tick.png\' />');
             if ( data.disabled ) {
                 $(".button_submit").attr("disabled", true);

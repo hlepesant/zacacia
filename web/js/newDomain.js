@@ -1,17 +1,15 @@
 $(document).ready(function() {
 
     $(".button_cancel").click(function() {
-        $(".form_cancel").submit();
+        $("#form_cancel").submit();
     });
-
-    var val_cn = $("input#zdata_cn").validator();
 
     $("input#zdata_cn").observe_field(0.5, function() {
 
         $("#checkName_msg").html("");
         $("#button_submit").attr("disabled", true);
 
-        if ( val_cn.data("validator").checkValidity() ) {
+        if ( $("input#zdata_cn").length ) {
             $.get( json_check_url, {
                 name: $(this).val()
             },

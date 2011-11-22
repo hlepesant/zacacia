@@ -92,11 +92,10 @@ margin-top: 10px;
 }
 
 #content {
-min-height:320px;
-padding:20px 0 30px 0;
+min-height: 500px;
+padding: 2px 0 30px 0;
 width: 800px;
 margin: 0 auto;
-border: 1px solid red;
 text-align: left;
 }
 
