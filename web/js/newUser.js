@@ -21,13 +21,13 @@ $(document).ready(function() {
     $('.button_cancel').click(function() {
         $('#form_cancel').submit();
     });
-
+/*
     var val_sn = $('input#zdata_sn').validator();
     var val_givenName = $('input#zdata_givenName').validator();
     var val_cn = $('input#zdata_cn').validator();
     var val_uid = $('input#zdata_uid').validator();
     var val_emailAddress = $('input#zdata_emailAddress').validator();
-
+*/
     $('input#zdata_sn').observe_field(0.5, function() {
         if( $('input#zdata_givenName').val().length ) {
             $('input#zdata_cn').val( sprintf("%s %s", $('input#zdata_sn').val(), $('input#zdata_givenName').val() ) ) ;
@@ -35,7 +35,7 @@ $(document).ready(function() {
     });
 
     $('input#zdata_givenName').observe_field(0.5, function() {
-        if( $('input#zdata_sn').val().length ) {
+        if( $('input#zdata_sn').length ) {
             $('input#zdata_cn').val( sprintf("%s %s", $('input#zdata_sn').val(), $('input#zdata_givenName').val() ) ) ;
         }
     });
@@ -44,7 +44,7 @@ $(document).ready(function() {
         $('#checkName_msg').html("");
         $('.button_submit').attr('disabled', true);
 
-        if ( val_cn.data('validator').checkValidity() ) {
+        if ( $(this).length ) {
             $.get( json_checkcn_url, {
                 companyDn: $('input#zdata_companyDn').val(),
                 name: $(this).val()
@@ -77,7 +77,7 @@ $(document).ready(function() {
         $('#checkUid_msg').html("");
         $('#goto_section_zarafa').attr('disabled', true);
   
-        if ( val_uid.data('validator').checkValidity() ) {
+        if ( $('input#zdata_uid').length ) {
         $.get( json_checkuid_url, {
             name: $(this).val()
         },
@@ -90,11 +90,20 @@ $(document).ready(function() {
         }
     });
 
-    $('input#zdata_userPassword').password_strength();
+    /* $('input#zdata_userPassword').pwdMeter(); */
+    $('#zdata_userPassword').pwdMeter({
+        minLength: 6,
+        displayGeneratePassword: false,
+        generatePassText: 'Password Generator',
+        generatePassClass: 'GeneratePasswordLink',
+        randomPassLength: 13           
+    });
 
-    if ( null == $('input#zdata_confirmPassword').val() == $('input#zdata_userPassword').val() ) {
-        $('#pequality').html("<img src=\"/images/famfam/cross.png\" />");
-        $('#goto_section_zarafa').attr('disabled', true);
+    if ( $('input#zdata_confirmPassword').val().length ) {
+        if ( null == $('input#zdata_confirmPassword').val() == $('input#zdata_userPassword').val() ) {
+            $('#pequality').html("<img src=\"/images/famfam/cross.png\" />");
+            $('#goto_section_zarafa').attr('disabled', true);
+        }
     }
 
     $('input#zdata_confirmPassword').observe_field(0.5, function() {
@@ -130,7 +139,7 @@ $(document).ready(function() {
         $('input#zdata_emailAddress').val(sprintf("%s@%s", $('#zdata_mail').val(), $(this).val())) ;
     });
 /*    
-    if ( val_emailAddress.data("validator").checkValidity() ) {
+    if ( $('input#zdata_emailAddress').length ) ) {
         $.get( json_checkemail_url, {
             email: $(this).val()
         },

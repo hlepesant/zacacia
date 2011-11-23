@@ -33,7 +33,7 @@
 
     <div id="form_item">
         <div class="_name"></div>
-        <div class="_field"><span id="zStrength"></span></div>
+        <div class="_field"><div id="pwdMeter" class="neutral">Very Weak</div></div>
     </div>
     <!-- end #form_item -->
 
