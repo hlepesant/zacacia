@@ -1,4 +1,9 @@
 var _displayName = 'fl';
+var _check_ok = 5;
+
+var _check_sn = 0;
+var _check_givenName = 0;
+var _check_cn = 0;
 
 $(document).ready(function() {
 
@@ -21,26 +26,23 @@ $(document).ready(function() {
     $('.button_cancel').click(function() {
         $('#form_cancel').submit();
     });
-/*
-    var val_sn = $('input#zdata_sn').validator();
-    var val_givenName = $('input#zdata_givenName').validator();
-    var val_cn = $('input#zdata_cn').validator();
-    var val_uid = $('input#zdata_uid').validator();
-    var val_emailAddress = $('input#zdata_emailAddress').validator();
-*/
-    $('input#zdata_sn').observe_field(0.5, function() {
+
+/*    $('input#zdata_sn').observe_field(0.5, function() { */
+    $('input#zdata_sn').blur(function() {
         if( $('input#zdata_givenName').val().length ) {
             $('input#zdata_cn').val( sprintf("%s %s", $('input#zdata_sn').val(), $('input#zdata_givenName').val() ) ) ;
         }
     });
 
-    $('input#zdata_givenName').observe_field(0.5, function() {
+/*    $('input#zdata_givenName').observe_field(0.5, function() { */
+    $('input#zdata_givenName').blur(function() {
         if( $('input#zdata_sn').length ) {
             $('input#zdata_cn').val( sprintf("%s %s", $('input#zdata_sn').val(), $('input#zdata_givenName').val() ) ) ;
         }
     });
 
-    $('input#zdata_cn').observe_field(0.5, function() {
+/*    $('input#zdata_cn').observe_field(0.5, function() { */
+    $('input#zdata_cn').blur(function() {
         $('#checkName_msg').html("");
         $('.button_submit').attr('disabled', true);
 
