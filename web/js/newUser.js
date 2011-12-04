@@ -3,13 +3,14 @@ var _displayName = 'fl';
 var _sum_userinfo = 6;
 var _sum_zarafa = 1;
 
-var _check_sn = 0;
-var _check_givenName = 0;
-var _check_cn = 0;
-var _check_displayName = 0;
-var _check_userPassword = 0;
-var _check_confirmPassword = 0;
-var _check_emailAddress = 0;
+var _check_sn = 'no';
+var _check_givenName = 'no';
+var _check_cn = 'no';
+var _check_uid = 'no';
+var _check_displayName = 'no';
+var _check_userPassword = 'no';
+var _check_confirmPassword = 'no';
+var _check_emailAddress = 'no';
 
 var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 
@@ -60,22 +61,22 @@ $(document).ready(function() {
             function(data){
                 $('#checkName_msg').html("<img src=\""+data.img+"\" />");
                 if ( ! data.disabled ) {
-                    $('.button_submit').removeAttr('disabled');
                     $('input#zdata_displayName').val( sprintf("%s %s", $('input#zdata_sn').val(), $('input#zdata_givenName').val() ) ) ;
                     $('#imgSwitch').css('visibility','visible');
                     _uid = sprintf("%s%s", substr($('input#zdata_sn').val(), 0, 1), $('input#zdata_givenName').val());
                     $('input#zdata_uid').val(_uid.toLowerCase());
 
-                    _check_sn = 1;
-                    _check_givenName = 1;
-                    _check_cn = 1;
+                    _check_sn = 'yes';
+                    _check_givenName = 'yes';
+                    _check_cn = 'yes';
                 } else {
-                    _check_sn = 0;
-                    _check_givenName = 0;
-                    _check_cn = 0;
+                    _check_sn = 'no';
+                    _check_givenName = 'no';
+                    _check_cn = 'no';
                 }
             }, 'json');
         }
+        checkSumUserInfo()
     });
 
     $('#switch').click( function() {
@@ -88,12 +89,12 @@ $(document).ready(function() {
         }
     });
 
-    $('input#zdata_displayName').blur(function() {
+    $('input#zdata_displayName').observe_field(0.5, function() {
+        _check_displayName = 'no';
         if ( $(this).length ) {
-            _check_displayName = 1;
-        } else {
-            _check_displayName = 0;
+            _check_displayName = 'yes';
         }
+        checkSumUserInfo()
     });
 
     $('input#zdata_uid').observe_field(0.5, function() {
@@ -106,14 +107,15 @@ $(document).ready(function() {
         },
         function(data){
             $('#checkUid_msg').html("<img src=\""+data.img+"\" />");
+            _check_uid = 'no';
             if ( ! data.disabled ) {
-                $('#goto_section_zarafa').removeAttr('disabled');
+                _check_uid = 'yes';
             }
         }, 'json');
         }
+        checkSumUserInfo()
     });
 
-    /* $('input#zdata_userPassword').pwdMeter(); */
     $('#zdata_userPassword').pwdMeter({
         minLength: 6,
         displayGeneratePassword: false,
@@ -123,31 +125,28 @@ $(document).ready(function() {
     });
 
     if ( $('input#zdata_confirmPassword').val().length ) {
+        _check_userPassword = 'no';
+        _check_confirmPassword = 'no';
+
         if ( null == $('input#zdata_confirmPassword').val() == $('input#zdata_userPassword').val() ) {
             $('#pequality').html("<img src=\"/images/famfam/cross.png\" />");
-            $('#goto_section_zarafa').attr('disabled', true);
-
-            _check_userPassword = 1;
-            _check_confirmPassword = 1;
-        } else {
-            _check_userPassword = 0;
-            _check_confirmPassword = 0;
+            _check_userPassword = 'yes';
+            _check_confirmPassword = 'yes';
         }
+
+        checkSumUserInfo()
     }
 
     $('input#zdata_confirmPassword').observe_field(0.5, function() {
+
         if ( $('input#zdata_userPassword').val() == $(this).val() ) {
             $('#pequality').html("<img src=\"/images/famfam/tick.png\" />");
-            _check_userPassword = 1;
-            _check_confirmPassword = 1;
-
-            /* $('#goto_section_zarafa').removeAttr('disabled'); */
+            _check_userPassword = 'yes';
+            _check_confirmPassword = 'yes';
         } else {
             $('#pequality').html("<img src=\"/images/famfam/cross.png\" />");
-            _check_userPassword = 0;
-            _check_confirmPassword = 0;
-
-            /* $('#goto_section_zarafa').attr('disabled', true); */
+            _check_userPassword = 'no';
+            _check_confirmPassword = 'no';
         }
         checkSumUserInfo()
     });
@@ -162,10 +161,8 @@ $(document).ready(function() {
 
         if ($(this).is(':checked')) {
             $("#zarafa_settings").slideDown('slow');
-            _check_all = 7;
         } else {
             $("#zarafa_settings").slideUp();
-            _check_all = 6;
         }
 
         if ($(this).is(':checked')) {
@@ -188,13 +185,16 @@ $(document).ready(function() {
 
         if ( ! emailReg.test($(this).val()) ) {
             $("#checkEmail_msg").html("<img src=\"/images/famfam/cross.png\" />");
-            _check_emailAddress = 0;
+            $('.button_submit').attr('disabled', true);
         } else {
+
+            $('.button_submit').attr('disabled', true);
+
             $.getJSON( json_checkemail_url, { email: $(this).val() }, function(data) {
+                $('button_submit').attr('disabled', true);
                 $("#checkEmail_msg").html("<img src=\""+data.img+"\" />");
                 if ( ! data.disabled ) {
-                    _check_emailAddress = 1;
-                    $("#goto_section_zarafa").removeAttr("disabled");
+                    $(".button_submit").removeAttr("disabled");
                 }
             });
         }
@@ -210,9 +210,16 @@ $(document).ready(function() {
 });
 
 function checkSumUserInfo() {
-    if ( ( _check_sn + _check_givenName + _check_cn + _check_displayName + _check_userPassword + _check_confirmPassword + _check_emailAddress ) == _sum_userinfo ) {
+
+    $('#goto_section_zarafa').attr('disabled', true);
+    
+    if ( ( _check_sn == 'yes' ) && 
+         ( _check_givenName == 'yes' ) &&
+         ( _check_cn == 'yes' ) && 
+         ( _check_displayName == 'yes' ) && 
+         ( _check_userPassword == 'yes' ) && 
+         ( _check_confirmPassword == 'yes' ) 
+       ) {
         $("#goto_section_zarafa").removeAttr("disabled");
-    } else {
-        $('#goto_section_zarafa').attr('disabled', true);
     }
 }
