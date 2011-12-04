@@ -185,7 +185,10 @@ $(document).ready(function() {
 
         if ( ! emailReg.test($(this).val()) ) {
             $("#checkEmail_msg").html("<img src=\"/images/famfam/cross.png\" />");
+<<<<<<< HEAD
             $('.button_submit').attr('disabled', true);
+=======
+>>>>>>> 777f7d5061307d5e807de710c4812b2e9616b7bd
         } else {
 
             $('.button_submit').attr('disabled', true);
@@ -194,6 +197,10 @@ $(document).ready(function() {
                 $('button_submit').attr('disabled', true);
                 $("#checkEmail_msg").html("<img src=\""+data.img+"\" />");
                 if ( ! data.disabled ) {
+<<<<<<< HEAD
+=======
+                    _check_emailAddress = 1;
+>>>>>>> 777f7d5061307d5e807de710c4812b2e9616b7bd
                     $(".button_submit").removeAttr("disabled");
                 }
             });
@@ -210,6 +217,7 @@ $(document).ready(function() {
 });
 
 function checkSumUserInfo() {
+<<<<<<< HEAD
 
     $('#goto_section_zarafa').attr('disabled', true);
     
@@ -221,5 +229,17 @@ function checkSumUserInfo() {
          ( _check_confirmPassword == 'yes' ) 
        ) {
         $("#goto_section_zarafa").removeAttr("disabled");
+=======
+    
+    alert('sn = ' + _check_sn +'\ngivenName = ' + _check_givenName +'\ncn = ' + _check_cn + '\ndisplayName = ' + _check_displayName + '\nuserPassword = ' + _check_userPassword + '\nconfirmPassword = ' +_check_confirmPassword );
+
+
+    if ( _check_sn == _check_givenName == _check_cn == _check_displayName == _check_userPassword == _check_confirmPassword == 'yes' ) {
+        $("#goto_section_zarafa").removeAttr("disabled");
+        alert('ok');
+    } else {
+        $('#goto_section_zarafa').attr('disabled', true);
+        alert('pas ok');
+>>>>>>> 777f7d5061307d5e807de710c4812b2e9616b7bd
     }
 }
