@@ -332,6 +332,8 @@ class userActions extends sfActions
         $l->setBaseDn($userDn);
         $this->zuser = $l->retrieveByDn($c);
 
+#        print_r( $this->zuser ); exit;
+
         $this->form = new UserEditForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
@@ -385,9 +387,6 @@ class userActions extends sfActions
         $this->form->getWidget('zarafaAccount')->setDefault($this->zuser->getZarafaAccount());
         $this->form->getWidget('zarafaAdmin')->setDefault($this->zuser->getZarafaAdmin());
         $this->form->getWidget('zarafaHidden')->setDefault($this->zuser->getZarafaHidden());
-        //$this->form->getWidget('status')->setDefault('true');
-        //$this->form->getWidget('firstname')->setDefault($this->zuser->get());
-        //$this->form->getWidget('firstname')->setDefault($this->zuser->get());
         $this->form->getWidget('mail')->setDefault($mail);
         $this->form->getWidget('domain')->setDefault($domain);
         

@@ -5,11 +5,7 @@
     </div>
 
     <?php echo $form['sn']->renderRow() ?>
-    <div id="form_item">
-        <div class="_name"><?php echo $form['givenName']->renderLabel() ?></div>
-        <div class="_field"><?php echo $form['givenName']->render() ?></div>
-        <div class="_ajaxCheck"><div id="checkName_msg"></div></div>
-    </div>
+    <?php echo $form['givenName']->renderRow() ?>
     <!-- end #form_item -->
     <div id="form_item">
         <div class="_name"><?php echo $form['displayName']->renderLabel() ?></div>
