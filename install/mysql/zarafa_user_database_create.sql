@@ -6,3 +6,4 @@ GRANT ALL PRIVILEGES ON `zarafa` . * TO 'zarafa'@'localhost';
 -- to drop
 -- DROP USER 'zarafa'@'localhost';
 -- DROP DATABASE IF EXISTS `zarafa` ;
+FLUSH PRIVILEGES;
