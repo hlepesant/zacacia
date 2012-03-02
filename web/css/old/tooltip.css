@@ -1,0 +1,12 @@
+.tooltip {
+    display: none;
+    font-size: 10px;
+    height: auto;
+    width: auto;
+    padding: 2px 5px 2px 5px;
+    color: #000000;
+    background-color: #FFDA35;
+    border: 1px solid #000000;
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: bold;
+}

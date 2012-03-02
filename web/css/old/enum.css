@@ -1,0 +1,171 @@
+#collection
+{
+padding-top: 3px;
+}
+
+#enum.table
+{
+width: 800px;
+margin: 0em;
+padding: 0em;
+}
+
+#navlink
+{
+width: 800px;
+margin: 0em;
+padding: 0em;
+text-align: right;
+}
+
+#navlink img
+{
+padding: 1px;
+border: solid 0px #ffffff;
+}
+
+#title
+{
+width: 800px;
+height: 30px;
+margin: 0em;
+padding: 0em;
+background-color: #1E1E1E;
+color: #FFFFFF;
+/* background-image:url('/images/redbusiness/enum_top.png'); */
+/* background-repeat:repeat-x; */
+float: left;
+clear: both;
+}
+
+#title.description
+{
+background-image: none;
+width: 120px;
+text-align: left;
+float: left;
+clear: both;
+font-family: "trebuchet ms", helvetica, sans-serif;
+font-size: 1.4em;
+font-weight: bold;
+margin-left: 10px;
+margin-top: 5px;
+height: 20px;
+}
+
+#title.navigation
+{
+background-image: none;
+width: 80px;
+text-align: right;
+float: right;
+clear: right;
+font-family: "trebuchet ms", helvetica, sans-serif;
+font-size: 1.4em;
+font-weight: bold;
+margin-right: 10px;
+padding-top: 5px;
+height: 20px;
+}
+
+#line
+{
+width: 100%;
+margin: 0px;
+padding: 0px;
+float: left;
+clear: both;
+}
+
+#line.dark
+{
+width: 100%;
+margin: 0px;
+padding: 0px;
+background-color: #E5E6CC;
+float: left;
+clear: right;
+}
+
+#line.light
+{
+width: 100%;
+margin: 0px;
+padding: 0px;
+background-color: #EBEBEB;
+float: left;
+clear: right;
+}
+
+#line.enable
+{
+width: 200px;
+height: 20px;
+text-align: left;
+color: green;
+font-weight: bold;
+float: left;
+clear: right;
+margin-left: 10px;
+padding: 5px;
+}
+
+#line.disable
+{
+width: 200px;
+height: 20px;
+text-align: left;
+color: red;
+font-weight: bold;
+float: left;
+clear: right;
+margin-left: 10px;
+padding: 5px;
+}
+
+#line.ping
+{
+width: 5px;
+height: 20px;
+float: left;
+clear: left;
+margin-left: 10px;
+padding: 5px;
+font: 9px "Microsoft Sans Serif" , Arial;
+}
+
+#line.ipaddress
+{
+width: 100px;
+height: 20px;
+float: left;
+clear: right;
+margin-left: 10px;
+padding: 5px;
+}
+
+#line.navigation
+{
+width: 220px;
+height: 20px;
+text-align: right;
+float: right;
+clear: right;
+padding: 5px;
+}
+
+#line.navigation select
+{
+font: 9px "Microsoft Sans Serif" , Arial;
+vertical-align: middle;
+color: #000000;
+background-color: #FFFFFF;
+vertical-align: middle;
+}
+
+#line.warning
+{
+background:url("/images/warn.gif") no-repeat scroll 0 15px transparent;
+font-weight:bold;
+padding:0.5em 0.5em 1em 28px;
+}

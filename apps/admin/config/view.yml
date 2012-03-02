@@ -12,9 +12,10 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [reset-yui.css, style.css]
+  stylesheets:    [zacacia.css]
 
-  javascripts:    [lib/jquery-1.7.min.js, lib/php.full.min-3.26.js, lib/jquery.tools.tooltip.min-1.2.6.js]
+  javascripts:    []
+#  javascripts:    [lib/jquery-1.7.min.js, lib/php.full.min-3.26.js, lib/jquery.tools.tooltip.min-1.2.6.js]
 #  javascripts:    [lib/jquery-1.6.4.min.js, lib/jquery.tools.min-1.2.6.js, lib/php.full.min-3.26.js]
 
   has_layout:     true

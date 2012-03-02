@@ -1,0 +1,77 @@
+input[type=text] {
+background-color: #FFFFFF;
+width: 150px;
+font-size: 12px;
+margin: 2px 2px 0 0;
+padding: 2px 2px 0 0;
+border: 1px solid #A9A9A9;
+}
+
+input[type=text].error {
+background-color: #FFFFFF;
+width: 150px;
+font-size: 12px;
+margin: 2px 2px 0 0;
+padding: 2px 2px 0 0;
+border: 1px solid #A9A9A9;
+}
+
+input[type=password] {
+background-color: #FFFFFF;
+width: 150px;
+font-size: 11px;
+margin: 2px 2px 0 0;
+padding: 2px 2px 0 0;
+border: 1px solid #A9A9A9;
+}
+
+input[type=number] {
+background-color: #FFFFFF;
+width: 35px;
+font-size: 11px;
+margin: 2px 2px 0 0;
+padding: 2px 2px 0 0;
+border: 1px solid #A9A9A9;
+text-align: right;
+}
+
+input[type=checkbox] {
+background-color: #EDEDED;
+margin: 0 0 0 0;
+padding: 0 0 0 0;
+border: 1px solid #A9A9A9;
+}
+
+select {
+background-color: #FFFFFF;
+width: auto;
+font-size: 11px;
+margin: 2px 2px 0 0;
+padding: 2px 2px 0 0;
+border: 1px solid #A9A9A9;
+}
+
+input[disabled=disabled] {
+color: #000000;
+border: none;
+background-color: inherit;
+}
+
+input[readonly=readonly] {
+color: #000000;
+border: none;
+background-color: inherit;
+}
+
+input[type=text].emailpart {
+width: 90px;
+}
+
+select.domainpart {
+background-color: #FFFFFF;
+width: 120px;
+font-size: 11px;
+margin: 2px 2px 0 0;
+padding: 2px 2px 0 0;
+border: 1px solid #A9A9A9;
+}

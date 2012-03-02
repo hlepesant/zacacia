@@ -1,0 +1,156 @@
+#form_box {
+width: 600px;
+margin: 20px auto 0px auto;
+background-color: #FFFFFF;
+}
+
+#form_header {
+width: 500px;
+height: 30px;
+padding: 1px 0px 1px 1px;
+margin: 0px auto 0px auto;
+background-color: #04243A;
+clear: both;
+border-top: 1px solid #273B52;
+border-left: 1px solid #273B52;
+border-right: 1px solid #273B52;
+border-bottom: 1px solid #C0C0C0;
+}
+
+#form_header h1 {
+color: #FFFFFF;
+font-family: Helvetica;
+font-size: 14px;
+letter-spacing: 2px;
+padding: 4px 0 0 10px;
+font-weight: bold;
+}
+
+#form_item {
+width: 500px;
+height: 25px;
+padding: 1px 0px 1px 1px;
+margin: 0px auto 0px auto;
+background-color: #F0F0F0;
+clear: both;
+border-bottom: 1px solid #C0C0C0;
+border-left: 1px solid #C0C0C0;
+border-right: 1px solid #C0C0C0;
+}
+
+#form_item ._name {
+float: left;
+width: 250px;
+height: 18px;
+padding: 2px 0 0 10px;
+margin: 0;
+text-align: left;
+color: #000000;
+font-family: Arial;
+font-size: 13px;
+font-weight: bold;
+}
+
+#form_item ._field {
+float: left;
+width: 160px;
+height: 18px;
+padding: 2px 0 0 0;
+margin: 0;
+text-align: left;
+}
+
+#form_item ._ajaxCheck {
+float: right;
+width: 18px;
+height: 18px;
+padding: 5px 10px 0px 0px;
+margin: 0;
+text-align: right;
+}
+
+#form_item ._ajaxSwitch {
+float: right;
+width: 30px;
+height: 18px;
+padding: 0px 0px 0px 0px;
+margin: 4px 0px 0px 0px;
+visibility: hidden;
+}
+
+#checkName {
+text-align: right;
+}
+
+#form_sub_section {
+border: 1px solid red;
+width: 500px;
+height: 30px;
+padding: 1px 0px 1px 1px;
+margin: 0px auto 0px auto;
+background-color: #04243A;
+clear: both;
+border-top: 1px solid #273B52;
+border-left: 1px solid #273B52;
+border-right: 1px solid #273B52;
+border-bottom: 1px solid #C0C0C0;
+}
+
+#form_sub_section h1 {
+color: #FFFFFF;
+font-family: Helvetica;
+font-size: 13px;
+letter-spacing: 2px;
+padding: 4px 0 0 20px;
+font-weight: bold;
+}
+
+#form_sub_section ._field {
+padding: 3px 10px 0 0;
+margin: 0;
+text-align: right;
+float: right;
+}
+
+#form_item_email {
+width: 500px;
+height: 25px;
+padding: 1px 0px 1px 1px;
+margin: 0px auto 0px auto;
+background-color: #F0F0F0;
+clear: both;
+border-bottom: 1px solid #C0C0C0;
+border-left: 1px solid #C0C0C0;
+border-right: 1px solid #C0C0C0;
+}
+
+#form_item_email ._name {
+float: left;
+width: 170px;
+height: 18px;
+padding: 2px 0 0 10px;
+margin: 0;
+text-align: left;
+color: #000000;
+font-family: Arial;
+font-size: 13px;
+font-weight: bold;
+}
+
+#form_item_email ._field {
+float: left;
+width: 260px;
+height: 18px;
+padding: 2px 0 0 0;
+margin: 0;
+text-align: left;
+}
+
+#form_item_email ._ajaxCheck {
+float: right;
+width: 18px;
+height: 18px;
+padding: 5px 10px 0px 0px;
+margin: 0;
+text-align: right;
+}

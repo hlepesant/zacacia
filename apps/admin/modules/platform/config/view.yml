@@ -1,6 +1,8 @@
 indexSuccess:
-    stylesheets:    [collection.css, tooltip.css]
-    javascripts:    [indexPlatform.js]
+#    stylesheets:    [collection.css, tooltip.css]
+#    javascripts:    [indexPlatform.js]
+    stylesheets:    []
+    javascripts:    []
 
 newSuccess:
     stylesheets:    [form.css, input.css, button.css, tooltip.css, validator.css]
