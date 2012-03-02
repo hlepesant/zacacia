@@ -1,8 +1,22 @@
-<?php slot('topnav') ?>
+<?php slot('menu_top') ?>
 <?php echo __('Home') ;?> &raquo; 
 <strong><?php echo __('Platforms') ;?></strong>
 <?php echo image_tag('famfam/door_in.png', array('title' => __('Logout'), 'id' => 'logout', 'class' => 'tt')); ?>
 <?php end_slot() ?>
+
+
+<?php slot('menu_content') ?>
+<?php echo form_tag('@homepage') ?>
+<?php echo $PlatformSelector ?>
+</form>
+<?php end_slot() ?>
+
+
+<?php slot('menu_bottom') ?>
+<?php echo link_to( __('Logout'), 'security/logout'); ?>
+<?php end_slot() ?>
+
+
 
 <div id="collection">
     <div id="collection_menu">
@@ -20,11 +34,13 @@
 
     <div id="collection_enumerate">
 <?php
+/*
 $id = 0;
 foreach ($platforms as $p) {
     include_partial('item', array('p' => $p, 'id' => $id, 'f' => $forms[$p->getDn()]));
     $id++;
 }
+*/
 ?>
     </div>
     <!-- end #collection_enumerate -->
@@ -33,7 +49,7 @@ foreach ($platforms as $p) {
 <!-- end #collection -->
 
 <form action="<?php echo url_for('platform/new') ?>" method="POST" id="platform_new" class="invisible">
-<?php echo $new->renderHiddenFields() ?>
+<?php /* echo $new->renderHiddenFields() */ ?>
 </form>
 
 <?php echo javascript_tag("

@@ -2,6 +2,44 @@
 
 class PlatformPeer extends BasePlatformPeer
 {
+    protected
+        $ldap = null;
+
+    public function __construct()
+    {
+        $this->ldap = parent::__construct();
+        return $this;
+    }
+
+    public function getPlatforms()
+    {
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'zacaciaPlatform');
+        $criteria->setSortFilter('cn');
+
+        $this->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
+        return $this->doSelect($criteria);
+    }
+
+    public function getPlatformsAsOption()
+    {
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'zacaciaPlatform');
+        $criteria->setSortFilter('cn');
+
+        $this->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
+        $result =  $this->doSelect($criteria);
+
+        $p = array();
+        foreach( $result as $platform ) {
+            $p[ $platform->setDn64() ] = $platform->getCn();
+        }
+        return $p;
+    }
+
+/*
+
+
     public function doAdd(LDAPObject $ldap_object)
     {
         if ( ! parent::doAdd($ldap_object) ) {
@@ -65,4 +103,5 @@ class PlatformPeer extends BasePlatformPeer
 
         return $subtree;
     }
+*/
 }

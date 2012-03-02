@@ -33,7 +33,8 @@ class BasePlatformPeer extends LDAPPeer
         $values = $this->extractValues($ldap_entry, $attributes);
         $dn = ldap_get_dn($this->getLinkId(), $ldap_entry);
         
-        $ldap_object = new BasePlatformObject();
+        #$ldap_object = new BasePlatformObject();
+        $ldap_object = new PlatformObject();
         $ldap_object->setDn($dn);
         $ldap_object->__constructFrom($values);
         return( $ldap_object );

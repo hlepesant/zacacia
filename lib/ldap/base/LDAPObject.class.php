@@ -3,11 +3,10 @@
 class LDAPObject
 {
   protected $dn;
-  protected $attributes;
+  protected $attributes = array();
 
   public function __construct()
   {
-    $this->attributes = array();
   }
 
   public function setDn($v)
@@ -23,8 +22,6 @@ class LDAPObject
 
   public function getAttributes()
   {
-    #return $this->attributes;
-    
     $filled_attributes = array();
 
     foreach ( $this->attributes as $key => $value )

@@ -1,33 +1,29 @@
-/*
- *  Minivisp Style 0.1
- *   - Menu
- */
-
-#menu ul {
-    margin: 0 0 0 20px;
-    padding: 0 0 0 0;
-    line-height: 40px;
-    display: inline;
-    text-align: justify;
+.menu-item {
+height: 20px;
+border-bottom: 1px solid #C0C0C0;
 }
 
-#menu li {
-    display: inline;
-    padding: 0 5px 0 5px;
-    margin: 0 0 0 0;
+.menu-label {
+font-size: 90%;
+font-family: 'Helvetica';
+color: #FFFFFF;
+padding: 2px 0px 0px 4px;
+margin: 0px;
+height: 20px;
 }
 
-#menu a {
-    letter-spacing: -1px;
-    text-decoration: none;
-    text-align: center;
-    text-transform: lowercase;
-    font-family: Arial;
-    font-size: 1em;
-    font-weight: bold;
-    color: #999999;
+.menu-field {
+padding: 0px 0px 0px 0px;
+margin: 0px;
+height: 20px;
 }
 
-#menu a.active {
-    color: #F0C020;
+.menu-field select {
+width: 150px;
+border: 1px solid #C0C0C0;
+font-size: 0.9em;
+font-family: 'Helvetica';
+padding: 0px;
+margin: 0px;
+background-color: #E5E5E5;
 }

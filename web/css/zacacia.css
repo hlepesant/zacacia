@@ -2,9 +2,12 @@
  *  Zacacia Style 0.2
  *
  */
+body {
+background-color: #EAEAEA;
+}
 
 .header {
-background-color: #003366;
+background-color: #203D5B;
 }
 
 .header-top {
@@ -28,7 +31,8 @@ min-height: 70px;
 }
 
 .spacer {
-min-height: 5px;
+min-height: 3px;
+height: 3px;
 background-color: #FFFFFF;
 }
 
@@ -37,8 +41,32 @@ min-height: 450px;
 border: 1px solid red;
 }
 
-.footer {
-padding: 10px 0 10px 0;
-text-align: center;
+.menu {
+background-color: #203D5B;
+}
+
+.menu-top {
+min-height: 40px;
 border: 1px solid red;
+}
+
+.menu-content {
+min-height: 370px;
+border: 1px solid red;
+}
+
+.menu-bottom {
+min-height: 40px;
+border: 1px solid red;
+}
+
+.footer {
+background-color: #203D5B;
+}
+
+.footer-content {
+color: #FFFFFF;
+text-align: center;
+padding: 10px 0px 0px 0px;
+min-height: 30px;
 }
