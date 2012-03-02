@@ -7,8 +7,9 @@ About
 =====
 
 zacacia is a web frontend to manage an OpenLDAP direcory.
-The LDAP tree is deisgned to be by Zarafa Collaborative Platform - ZCP - (http://www.zarafa.com/)
+The LDAP tree is deisgned to be used by Zarafa Collaborative Platform - ZCP - (http://www.zarafa.com/)
 zacacia will help you to manage the different LDAP object.
+The goal is to work with Zarafa 7.x
 
 
 Requirements
