@@ -1,6 +1,4 @@
 indexSuccess:
-#    stylesheets:    [collection.css, tooltip.css]
-#    javascripts:    [indexPlatform.js]
     stylesheets:    []
     javascripts:    []
 

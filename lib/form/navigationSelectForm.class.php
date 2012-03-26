@@ -1,13 +1,15 @@
 <?php
-class platformSelectForm extends zacaciaForm
+class navigationSelectForm extends zacaciaForm
 {
     public function configure()
     {
         $this->setWidgets(array(
-            'selectedPlatform' => new sfWidgetFormSelect(array(
-                'choices' => array('none' => 'Select the platform'), 
-                'default' => 'none'
-        ))));
+            'selectedPlatform' => new sfWidgetFormSelect(
+                array(
+                    'choices' => array('none' => 'Select the platform'), 
+                    'default' => 'none'),
+                array('required' => true)
+        )));
 
         $this->widgetSchema->setLabels(array(
             'selectedPlatform' => 'Plateform',
@@ -17,7 +19,7 @@ class platformSelectForm extends zacaciaForm
             'selectedPlatform' => new sfValidatorString(),
         ));
 
-        #$this->widgetSchema->setNameFormat('nav[%%s]');
+        $this->widgetSchema->setNameFormat('nav[%s]');
         $this->widgetSchema->setFormFormatterName('grid');
     }
 }

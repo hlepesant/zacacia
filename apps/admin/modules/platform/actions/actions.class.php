@@ -25,14 +25,22 @@ class platformActions extends sfActions
         $this->platforms = $l->doSelect($criteria);
         */
 
-        $pPeer = new PlatformPeer();
-        $platforms = $pPeer->getPlatformsAsOption();
+        $ldapPeer = new PlatformPeer();
+        $platforms = $ldapPeer->getPlatformsAsOption();
 
-        $this->PlatformSelector = new PlatformSelectForm();
-        $choices = array_merge($this->PlatformSelector->getWidget('selectedPlatform')->getChoices(), $platforms);
-        $this->PlatformSelector->getWidget('selectedPlatform')->setOption('choices', $choices);
+        $this->navigation = new NavigationSelectForm();
+        $choices = array_merge($this->navigation->getWidget('selectedPlatform')->getChoices(), $platforms);
+        $this->navigation->getWidget('selectedPlatform')->setOption('choices', $choices);
+
+        if ($request->isMethod('post') && $request->getParameter('nav')) {
+            $this->navigation->bind($request->getParameter('nav'));
+            if ($this->navigation->isValid()) {
+        
+                print_r( $_POST );
+
+            }
+        }
 /*
-
         $id=0;
         $this->forms = array();
         foreach ($this->platforms as $p) {

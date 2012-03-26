@@ -7,8 +7,7 @@
 
 <?php slot('menu_content') ?>
 <?php echo form_tag('@homepage', array('id' => 'navPlatform')) ?>
-<?php echo $navigation->renderHiddenFields() ?>
-<?php echo $navigation ?>
+<?php echo $platformSelector ?>
 </form>
 <?php end_slot() ?>
 
