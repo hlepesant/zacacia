@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+/*
     $("#gotonew").click(function() {
         $("#platform_new").submit();
     });
@@ -13,6 +13,7 @@ $(document).ready(function() {
         position: "top left",
         opacity: 0.9
     });
+*/ 
 });
 
 function jumpTo(id, name, target, status) {

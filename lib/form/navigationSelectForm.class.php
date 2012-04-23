@@ -6,7 +6,10 @@ class navigationSelectForm extends zacaciaForm
         $this->setWidgets(array(
             'selectedPlatform' => new sfWidgetFormSelect(
                 array(
-                    'choices' => array('none' => 'Select the platform'), 
+                    'choices' => array(
+                        'none' => 'Select the platform',
+                        'add'  => 'Create a platform',
+                    ), 
                     'default' => 'none'),
                 array('required' => true)
         )));
@@ -19,8 +22,8 @@ class navigationSelectForm extends zacaciaForm
             'selectedPlatform' => new sfValidatorString(),
         ));
 
-        $this->widgetSchema->setNameFormat('nav[%s]');
-        $this->widgetSchema->setFormFormatterName('grid');
+        $this->widgetSchema->setNameFormat('navigation[%s]');
+        $this->widgetSchema->setFormFormatterName('gridNavigation');
     }
 }
 

@@ -6,7 +6,7 @@
 
 
 <?php slot('menu_content') ?>
-<?php echo form_tag('@homepage', array('id' => 'navPlatform')) ?>
+<?php echo form_tag('@platform', array('id' => 'navForm')) ?>
 <?php echo $navigation->renderHiddenFields() ?>
 <?php echo $navigation ?>
 </form>
@@ -16,7 +16,6 @@
 <?php slot('menu_bottom') ?>
 <?php echo link_to( __('Logout'), 'security/logout'); ?>
 <?php end_slot() ?>
-
 
 
 <div id="collection">
@@ -33,7 +32,7 @@
     </div>
     <!-- end #collection_description -->
 
-    <div id="collection_enumerate">
+    <div id="statistics">
 <?php
 /*
 $id = 0;
@@ -53,10 +52,7 @@ foreach ($platforms as $p) {
 <?php /* echo $new->renderHiddenFields() */ ?>
 </form>
 
-<?php /* echo javascript_tag("
-var _js_msg_01 = '".__("Disable the platform")."';
-var _js_msg_02 = '".__("Enable the platform")."';
-var _js_msg_03 = '".__("Delete the platform")."';
-var _js_module = '".$this->getModuleName()."';
-var _js_url = '".url_for(false)."';
-") */ ?>
+<?php echo javascript_tag("
+var create_url = '".url_for('@platform_new')."';
+var show_url = '".url_for('@platform')."';
+") ?>

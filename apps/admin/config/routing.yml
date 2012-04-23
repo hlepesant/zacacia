@@ -6,6 +6,27 @@ homepage:
   url:   /
   param: { module: platform, action: index }
 
+# platform
+platforms:
+  url:   /
+  param: { module: platform, action: index }
+
+platform:
+  url:   /platform
+  param: { module: platform, action: show }
+
+platform_new:
+  url:   /platform/add
+  param: { module: platform, action: new }
+
+platform_show:
+  url:   /platform/:pid
+  param: { module: platform, action: show }
+
+platform_edit:
+  url:   /platform/edit/:pid
+  param: { module: platform, action: edit }
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
@@ -18,10 +39,6 @@ default:
 logout:
   url:   /:module/:action
   param: { module: security, action: logout }
-
-platform:
-  url:   /
-  param: { module: platform, action: index }
 
 server:
   url:   /server/:action

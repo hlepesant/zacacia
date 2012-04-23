@@ -32,7 +32,7 @@
 </div>
 <!-- end #form_box -->
 
-<form action="<?php echo url_for('@platform') ?>" method="POST" id="form_cancel">
+<form action="<?php echo url_for('@platforms') ?>" method="POST" id="form_cancel">
 <?php echo $cancel->renderHiddenFields() ?>
 </form>
 

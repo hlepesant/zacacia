@@ -14,7 +14,7 @@ default:
 
   stylesheets:    [zacacia.css, menu.css]
 
-  javascripts:    [jquery/jquery.js, navigation.js]
+  javascripts:    [jquery/jquery.js, phpjs/phpjs.js, navigation.js]
 #  javascripts:    [lib/jquery-1.7.min.js, lib/php.full.min-3.26.js, lib/jquery.tools.tooltip.min-1.2.6.js]
 #  javascripts:    [lib/jquery-1.6.4.min.js, lib/jquery.tools.min-1.2.6.js, lib/php.full.min-3.26.js]
 

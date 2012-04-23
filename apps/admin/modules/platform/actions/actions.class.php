@@ -107,8 +107,26 @@ class platformActions extends sfActions
         unset($this->cancel['platformDn']);
     }
 
+    public function executeShow(sfWebRequest $request)
+    {
+        $platformDn = base64_decode($request->getParameter('pid'));
+
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
+            $this->redirect('@platform');
+        }
+
+        $ldapPeer = new PlatformPeer();
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+        print( $this->platform->getCn() );
+
+        exit;
+    }
+
     public function executeEdit(sfWebRequest $request)
     {
+        print_r( $_GET );
+        exit;
         $data = $request->getParameter('zdata');
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
 

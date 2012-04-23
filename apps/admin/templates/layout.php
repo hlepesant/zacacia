@@ -26,11 +26,13 @@
 
 <div class="container content">
     <div class="span-6 menu">
+    <?php /*
         <div class="menu-top">
         <?php if (has_slot('menu_top')): ?>
             <?php include_slot('menu_top') ?>
         <?php endif; ?>
         </div>
+        */ ?>
         <div class="menu-content">
         <?php if (has_slot('menu_content')): ?>
             <?php include_slot('menu_content') ?>
@@ -50,7 +52,7 @@
 
 <div class="container footer">
     <div class="span-24 spacer"></div>
-    <div class="span-24 bottom loud footer-content">hugues-at-lepesant-dot-co </div>
+    <div class="span-24 bottom loud footer-content">hugues-at-lepesant-dot-com </div>
 </div>
 
 <?php /*

@@ -37,6 +37,16 @@ class PlatformPeer extends BasePlatformPeer
         return $p;
     }
 
+    public function getPlatform($dn)
+    {
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'zacaciaPlatform');
+        $criteria->setSortFilter('cn');
+
+        $this->setBaseDn($dn);
+        return $this->doSelectOne($criteria);
+    }
+
 /*
 
 
