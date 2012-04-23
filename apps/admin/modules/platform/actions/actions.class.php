@@ -109,11 +109,11 @@ class platformActions extends sfActions
 
     public function executeShow(sfWebRequest $request)
     {
-        $platformDn = base64_decode($request->getParameter('pid'));
+        $platformDn = base64_decode($request->getParameter('selectedPlatform'));
 
         if ( empty($platformDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
-            $this->redirect('@platform');
+            $this->redirect('@platforms');
         }
 
         $ldapPeer = new PlatformPeer();

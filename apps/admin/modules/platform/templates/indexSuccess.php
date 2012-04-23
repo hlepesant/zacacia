@@ -6,7 +6,7 @@
 
 
 <?php slot('menu_content') ?>
-<?php echo form_tag('@platform', array('id' => 'navForm')) ?>
+<?php echo form_tag('@platform_show', array('id' => 'navForm')) ?>
 <?php echo $navigation->renderHiddenFields() ?>
 <?php echo $navigation ?>
 </form>
@@ -54,5 +54,5 @@ foreach ($platforms as $p) {
 
 <?php echo javascript_tag("
 var create_url = '".url_for('@platform_new')."';
-var show_url = '".url_for('@platform')."';
+var show_url = '".url_for('@platform_show')."';
 ") ?>

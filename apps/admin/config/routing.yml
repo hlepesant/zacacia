@@ -11,20 +11,16 @@ platforms:
   url:   /
   param: { module: platform, action: index }
 
-platform:
-  url:   /platform
-  param: { module: platform, action: show }
-
 platform_new:
   url:   /platform/add
   param: { module: platform, action: new }
 
 platform_show:
-  url:   /platform/:pid
+  url:   /platform/show
   param: { module: platform, action: show }
 
 platform_edit:
-  url:   /platform/edit/:pid
+  url:   /platform/edit/:pid/
   param: { module: platform, action: edit }
 
 # generic rules

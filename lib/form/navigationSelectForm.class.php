@@ -22,7 +22,7 @@ class navigationSelectForm extends zacaciaForm
             'selectedPlatform' => new sfValidatorString(),
         ));
 
-        $this->widgetSchema->setNameFormat('navigation[%s]');
+#        $this->widgetSchema->setNameFormat('navigation[%s]');
         $this->widgetSchema->setFormFormatterName('gridNavigation');
     }
 }
