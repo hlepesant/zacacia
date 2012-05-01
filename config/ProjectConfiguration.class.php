@@ -13,7 +13,8 @@ class ProjectConfiguration extends sfProjectConfiguration
     sfConfig::set('projetctDesc', 'zarafa + ldap = Zacacia');
 
     sfConfig::set('widgetNameFormat', 'zdata');
-    sfConfig::set('widgetFormaterName', 'Zacacia');
+    # sfConfig::set('widgetFormaterName', 'Zacacia');
+    sfConfig::set('widgetFormaterName', 'GridForm');
 
 # Ldap Internal
     sfConfig::set('ldap_host', "localhost");

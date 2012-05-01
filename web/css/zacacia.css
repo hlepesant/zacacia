@@ -51,13 +51,12 @@ border: 1px solid red;
 }
 
 .menu-content {
-min-height: 370px;
-border: 1px solid red;
+min-height: 400px;
+height: 410px;
 }
 
 .menu-bottom {
 min-height: 40px;
-border: 1px solid red;
 }
 
 .footer {
@@ -69,4 +68,13 @@ color: #FFFFFF;
 text-align: center;
 padding: 10px 0px 0px 0px;
 min-height: 30px;
+}
+
+.page-title {
+color: #000000;
+font-family: Helvetica;
+font-size: 20px;
+letter-spacing: 1px;
+padding: 4px 0 0 10px;
+font-weight: bold;
 }

@@ -1,5 +1,5 @@
 indexSuccess:
-    stylesheets:    []
+    stylesheets:    [button.css]
     javascripts:    []
 
 newSuccess:

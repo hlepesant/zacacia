@@ -8,7 +8,6 @@ class navigationSelectForm extends zacaciaForm
                 array(
                     'choices' => array(
                         'none' => 'Select the platform',
-                        'add'  => 'Create a platform',
                     ), 
                     'default' => 'none'),
                 array('required' => true)

@@ -4,17 +4,20 @@ class PlatformForm extends ZacaciaForm
     public function configure()
     {
         $this->setWidgets(array(
-            'cn'          => new sfWidgetFormInput(array(), array('pattern' => '[a-zA-Z ]{5,}', 'maxlength' => 30, 'required' => 'required')),
-            'multitenant' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
-            'multiserver' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
-            'status'      => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1, 'default' => 1)),
+            'cn'          => new sfWidgetFormInput(array(), array('pattern' => '[a-zA-Z ]{5,}', 'maxlength' => 30, 'required' => 'required', 'class' => 'text')),
+            #'multitenant' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
+            'multitenant' => new sfWidgetFormChoice(array('choices' => array('no', 'yes'))),
+            #'multiserver' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
+            'multiserver' => new sfWidgetFormChoice(array('choices' => array('no', 'yes'))),
+            #'status'      => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1, 'default' => 1)),
+            'status'      => new sfWidgetFormChoice(array('choices' => array('enable', 'disable'))),
         ));
     
         $this->widgetSchema->setLabels(array(
             'cn'          => 'Name',
             'multitenant' => 'Multi tenant',
             'multiserver' => 'Multi server',
-            'status'      => 'Enable',
+            'status'      => 'Status',
         ));
     
         $this->setValidators(array(

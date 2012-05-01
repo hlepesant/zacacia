@@ -14,45 +14,34 @@
 
 
 <?php slot('menu_bottom') ?>
-<?php echo link_to( __('Logout'), 'security/logout'); ?>
+<input type="button" value="<?php echo __("Logout") ?>" id="logout" class="button_logout" />
 <?php end_slot() ?>
 
 
 <div id="collection">
     <div id="collection_menu">
-        <div class="_right">
-            <?php echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew')); ?>
+        <div class="right">
+            <?php /* echo image_tag('famfam/add.png', array('title' => __('New'), 'id' => 'gotonew')); */ ?>
+            <input type="button" value="<?php echo __("New") ?>" id="gotonew" class="button_new" />
         </div>
     </div>
     <!-- end #collection_menu -->
 
-    <div id="collection_description">
-        <div class="_name"><?php echo __("Name") ?></div>
-        <div class="_action"><?php echo __("Actions") ?></div>
-    </div>
-    <!-- end #collection_description -->
-
     <div id="statistics">
-<?php
-/*
-$id = 0;
-foreach ($platforms as $p) {
-    include_partial('item', array('p' => $p, 'id' => $id, 'f' => $forms[$p->getDn()]));
-    $id++;
-}
-*/
-?>
     </div>
-    <!-- end #collection_enumerate -->
+    <!-- end #statistics -->
 
 </div>
 <!-- end #collection -->
-
+<?php /*
 <form action="<?php echo url_for('platform/new') ?>" method="POST" id="platform_new" class="invisible">
-<?php /* echo $new->renderHiddenFields() */ ?>
+echo $new->renderHiddenFields()
 </form>
+*/
+?>
 
 <?php echo javascript_tag("
-var create_url = '".url_for('@platform_new')."';
 var show_url = '".url_for('@platform_show')."';
+var new_url = '".url_for('@platform_new')."';
+var logout_url = '".url_for('security/logout')."';
 ") ?>

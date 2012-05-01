@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <div class="span-18 last showgrid">
+    <div class="span-18 last">
         <?php echo $sf_content ?>
     </div>
 </div>

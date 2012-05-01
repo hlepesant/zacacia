@@ -1,36 +1,26 @@
-<?php slot('topnav') ?>
-<?php echo __('Home') ;?> &raquo; 
-<strong><?php echo __('Platforms') ;?></strong>
-<?php end_slot() ?>
+<h1><?php echo __('Create a platform') ?></h1>
 
-<div id="form_box">
+<div class='form-block'>
 <form action="<?php echo url_for('platform/new') ?>" method="POST" id="new_item">
 <?php echo $form->renderHiddenFields() ?>
 
-    <div id="form_header">
-        <h1><?php echo __('Create a platform') ?></h1>
-    </div>
-
-    <div id="form_item">
-        <div class="_name"><?php echo $form['cn']->renderLabel() ?></div>
-        <div class="_field"><?php echo $form['cn']->render() ?></div>
-        <div class="_ajaxCheck"><div id="checkName_msg"></div></div>
-    </div>
-    <!-- end #form_item -->
-
-    <?php echo $form['multitenant']->renderRow() ?>
-    <?php echo $form['multiserver']->renderRow() ?>
-    <?php echo $form['status']->renderRow() ?>
-
-    <div id="form_submit">
-        <input type="button" value="<?php echo __("Cancel") ?>" class="button_cancel" />
-        <input type="submit" value="<?php echo __('Create') ?>" disabled="true" class="button_submit" />
-    </div>
-    <!-- end #form_submit -->
-
-</form>
+<div class='span-14 last form-item'>
+<div class='span-6 form-label'><?php echo $form['cn']->renderLabel() ?></div>
+<div class='span-6 form-field'><?php echo $form['cn']->render() ?></div>
+<div class='span-1 last form-item-check' id='checkName_msg'></div>
 </div>
-<!-- end #form_box -->
+
+<?php echo $form['multitenant']->renderRow() ?>
+<?php echo $form['multiserver']->renderRow() ?>
+<?php echo $form['status']->renderRow() ?>
+
+<div class='span-14 last form-button'>
+<input type="button" value="<?php echo __("Cancel") ?>" class="button_cancel" />
+<input type="submit" value="<?php echo __('Create') ?>" disabled="true" class="button_submit" />
+</div>
+</form>
+
+</div>
 
 <form action="<?php echo url_for('@platforms') ?>" method="POST" id="form_cancel">
 <?php echo $cancel->renderHiddenFields() ?>
