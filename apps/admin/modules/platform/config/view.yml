@@ -3,7 +3,7 @@ indexSuccess:
     javascripts:    []
 
 newSuccess:
-    stylesheets:    [form.css, input.css, button.css, tooltip.css, validator.css]
+    stylesheets:    [form.css, button.css] # tooltip.css, validator.css]
     javascripts:    [newPlatform.js, lib/jquery.observe_field.js]
 
 editSuccess:

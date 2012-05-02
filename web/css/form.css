@@ -7,51 +7,28 @@ padding-top: 10px;
 }
 
 .form-item {
-padding: 3px;
 }
 
-.form-label {
-font-family: Helvetica;
+.form-item-label {
 font-size: 14px;
-letter-spacing: 1px;
-padding: 4px 0 0 10px;
-font-weight: normal;
+padding: 0px 0px 0px 10px;
+margin: 10px 0px 0px 0px;
+vertical-align: baseline;
+font-family: Helvetica;
 }
+
+.form-item-field {
+}
+
+.form-item-check {
+height: 20px;
+text-align: center;
+margin: 15px 0px 0px 0px;
+}
+
+
+
 /*
-#form_item {
-width: 500px;
-height: 25px;
-padding: 1px 0px 1px 1px;
-margin: 0px auto 0px auto;
-background-color: #F0F0F0;
-clear: both;
-border-bottom: 1px solid #C0C0C0;
-border-left: 1px solid #C0C0C0;
-border-right: 1px solid #C0C0C0;
-}
-
-#form_item ._name {
-float: left;
-width: 250px;
-height: 18px;
-padding: 2px 0 0 10px;
-margin: 0;
-text-align: left;
-color: #000000;
-font-family: Arial;
-font-size: 13px;
-font-weight: bold;
-}
-
-#form_item ._field {
-float: left;
-width: 160px;
-height: 18px;
-padding: 2px 0 0 0;
-margin: 0;
-text-align: left;
-}
-
 #form_item ._ajaxCheck {
 float: right;
 width: 18px;

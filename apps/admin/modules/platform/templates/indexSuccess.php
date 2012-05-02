@@ -1,5 +1,4 @@
 <?php slot('menu_top') ?>
-<?php echo __('Home') ;?> &raquo; 
 <strong><?php echo __('Platforms') ;?></strong>
 <?php echo image_tag('famfam/door_in.png', array('title' => __('Logout'), 'id' => 'logout', 'class' => 'tt')); ?>
 <?php end_slot() ?>
@@ -10,6 +9,7 @@
 <?php echo $navigation->renderHiddenFields() ?>
 <?php echo $navigation ?>
 </form>
+<?php /* include_partial('security/navigation', array('navigation' => $navigation)) */ ?>
 <?php end_slot() ?>
 
 

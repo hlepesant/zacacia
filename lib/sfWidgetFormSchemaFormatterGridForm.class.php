@@ -10,10 +10,10 @@ class sfWidgetFormSchemaFormatterGridForm extends sfWidgetFormSchemaFormatter
 #    $namedErrorRowFormatInARow = "    <li>%name%: %error%</li>\n",
 #    $rowFormat       = "<div id=\"form_item\">\n\t\t<div class=\"_name\">%label%%error%</div>\n\t\t<div class=\"_field\">%field%%help%%hidden_fields%</div>\n\t\t<div class=\"_ajaxCheck\"></div>\n\t</div>\n\t<!-- end #form_item -->",
     $rowFormat                 = <<<EOF
-<div class='span-14 last form-item'>
-<div class='span-6 form-label'>%label%</div>
-<div class='span-6 form-field'>%field%</div>
-<div class='span-2 last'></div>
+<div class='span-15 last form-item'>
+<div class='span-6 form-item-label'>%label%</div>
+<div class='span-6 form-item-field'>%field%</div>
+<div class='span-1 form-item-check last'></div>
 </div>
 EOF;
 #    $rowFormat                 = "<p>%label%<br />%field%</p>";

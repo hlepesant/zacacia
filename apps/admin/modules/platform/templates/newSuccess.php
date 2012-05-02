@@ -5,8 +5,8 @@
 <?php echo $form->renderHiddenFields() ?>
 
 <div class='span-14 last form-item'>
-<div class='span-6 form-label'><?php echo $form['cn']->renderLabel() ?></div>
-<div class='span-6 form-field'><?php echo $form['cn']->render() ?></div>
+<div class='span-6 form-item-label'><?php echo $form['cn']->renderLabel() ?></div>
+<div class='span-6 form-item-field'><?php echo $form['cn']->render() ?></div>
 <div class='span-1 last form-item-check' id='checkName_msg'></div>
 </div>
 
