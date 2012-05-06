@@ -21,60 +21,45 @@
 </head>
 <body>
 
-<header>
-  <div class="ym-column">
-    <div class="ym-col1">
+<div class="container header">
+    <div class="span-24 top header-top"></div>
+    <div class="span-20 header-content">
+        <?php echo image_tag('zacacia_logo_w.png') ?>
     </div>
-    
-    <div class="ym-col2">
+    <div class="span-4 last header-logo"></div>
+    <div class="span-24 spacer"></div>
+</div>
+
+<div class="container content">
+    <div class="span-6 menu">
+    <?php /*
+        <div class="menu-top">
+        <?php if (has_slot('menu_top')): ?>
+            <?php include_slot('menu_top') ?>
+        <?php endif; ?>
+        </div>
+        */ ?>
+        <div class="menu-content">
+        <?php if (has_slot('menu_content')): ?>
+            <?php include_slot('menu_content') ?>
+        <?php endif; ?>
+        </div>
+        <div class="last menu-bottom">
+        <?php if (has_slot('menu_bottom')): ?>
+            <?php include_slot('menu_bottom') ?>
+        <?php endif; ?>
+        </div>
     </div>
 
-    <div class="ym-col3">
-      <div class="ym-cbox">
-      content
-      <?php echo image_tag('zacacia_logo_w.png') ?>
-      </div>
+    <div class="span-18 last">
+        <?php echo $sf_content ?>
     </div>
+</div>
 
-  </div>
-</header>
-
-<content>
-  <div class="ym-column">
-    <div class="ym-col1">
-      <?php if (has_slot('menu_content')): ?>
-          <?php include_slot('menu_content') ?>
-      <?php endif; ?>
-      <?php if (has_slot('menu_bottom')): ?>
-          <?php include_slot('menu_bottom') ?>
-      <?php endif; ?>
-    </div>
-    
-    <div class="ym-col2">
-    </div>
-
-    <div class="ym-col3 page">
-      <?php echo $sf_content ?>
-    </div>
-  </div>
-</content>
-
-<footer>
-  <div class="ym-column">
-    <div class="ym-col1">
-    </div>
-    
-    <div class="ym-col2">
-    </div>
-
-    <div class="ym-col3">
-      <div class="ym-cbox">
-      hugues-at-lepesant-dot-com
-      </div>
-    </div>
-
-  </div>
-</footer>
+<div class="container footer">
+    <div class="span-24 spacer"></div>
+    <div class="span-24 bottom loud footer-content">hugues-at-lepesant-dot-com </div>
+</div>
 
 <?php /*
 <div id="wrapper">
