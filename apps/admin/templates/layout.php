@@ -29,11 +29,8 @@
     <div class="ym-col2">
     </div>
 
-    <div class="ym-col3">
-      <div class="ym-cbox">
-      content
-      <?php echo image_tag('zacacia_logo_w.png') ?>
-      </div>
+    <div class="ym-col3 z-logo">
+    <?php echo image_tag('zacacia_logo_w.png') ?>
     </div>
 
   </div>
@@ -50,10 +47,7 @@
       <?php endif; ?>
     </div>
     
-    <div class="ym-col2">
-    </div>
-
-    <div class="ym-col3 page">
+    <div class="ym-col3 z-content">
       <?php echo $sf_content ?>
     </div>
   </div>
@@ -67,10 +61,8 @@
     <div class="ym-col2">
     </div>
 
-    <div class="ym-col3">
-      <div class="ym-cbox">
+    <div class="ym-col3 z-footer">
       hugues-at-lepesant-dot-com
-      </div>
     </div>
 
   </div>

@@ -4,6 +4,7 @@
  */
 body > header {
 min-width: 760px;
+height: 60px;
 background-color: #222E44;
 }
 
@@ -14,6 +15,7 @@ background-color: #C0C0C0;
 
 body > footer {
 min-width: 760px;
+height: 60px;
 background-color: #222E44;
 }
 
@@ -31,7 +33,16 @@ margin-left: 20%;
 margin-right: 20%;
 }
 
-.page {
-height: 400px;
-min-height: 400px;
+.z-logo {
+padding-top: 5px;
+}
+
+.z-footer {
+padding-top: 5px;
+text-align: center;
+font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.z-content {
+min-height: 450px;
 }
