@@ -20,6 +20,21 @@ class securityActions extends sfActions
     $this->forward('default', 'module');
   }
 
+  public function executeLogin(sfWebRequest $request)
+  {
+    $this->form = new LoginForm();
+    
+    if ($request->isMethod('post') && $request->getParameter('zdata')) {
+    
+        $this->form->bind($request->getParameter('zdata'));
+    
+        if ($this->form->isValid()) {
+        }
+    }
+    $this->cancel = new PlatformNavigationForm();
+    unset($this->cancel['platformDn']);
+  }
+
   public function executeLogout(sfWebRequest $request)
   {
     $this->redirect('@platforms');

@@ -23,6 +23,9 @@ test:
     etag:                   false
 
 all:
+  .actions:
+    login_module: security
+    login_action: login
   .settings:
     # Form security secret (CSRF protection)
     csrf_secret:            bb19dca817f3a59b1713b1c3a972180052ec5e86
