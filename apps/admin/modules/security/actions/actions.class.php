@@ -22,14 +22,27 @@ class securityActions extends sfActions
 
   public function executeLogin(sfWebRequest $request)
   {
+
+
     $this->form = new LoginForm();
     
-    if ($request->isMethod('post') && $request->getParameter('zdata')) {
-    
-        $this->form->bind($request->getParameter('zdata'));
-    
-        if ($this->form->isValid()) {
+    if ( $request->isMethod('post') ) {
+
+      $this->form->bind($request->getParameter('login'));
+      
+      if ($this->form->isValid()) {
+
+        if ( $this->form->getValue('username') == $this->form->getValue('password') ) {
+
+          $this->getUser()->setAuthenticated(true);
+          $this->getUser()->addCredential('admin');
+
+          $this->redirect('@platforms');
+
         }
+
+        exit;
+      }
     }
     $this->cancel = new PlatformNavigationForm();
     unset($this->cancel['platformDn']);
@@ -37,6 +50,9 @@ class securityActions extends sfActions
 
   public function executeLogout(sfWebRequest $request)
   {
+    $this->getUser()->setAuthenticated(false);
+    $this->getUser()->clearCredentials();
+
     $this->redirect('@platforms');
   }
 }

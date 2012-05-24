@@ -18,7 +18,7 @@ class LoginForm extends ZacaciaForm
             'password'  => new sfValidatorString(),
         ));
 
-        // $this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));
+        $this->widgetSchema->setNameFormat('login[%s]');
         $this->widgetSchema->setFormFormatterName( sfConfig::get('widgetFormaterName') );
     }
 }

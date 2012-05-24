@@ -2,8 +2,9 @@
   <div class="z-logo">
     <?php echo image_tag('zacacia_logo_w.png', array('class' => 'z-logo-img')) ?>
   </div>
-<form class="ym-form ym-full">
+<form class="ym-form ym-full" method="post">
 
+<?php echo $form->renderHiddenFields() ?>
 <?php echo $form ?>
 
 <div class="ym-fbox-button">
