@@ -2,6 +2,11 @@
  *  Zacacia Style 0.2
  *
  */
+
+body {
+font-family: Arial, Helvetica, sans-serif;
+}
+
 body > header {
 min-width: 760px;
 height: 60px;

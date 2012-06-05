@@ -1,23 +1,31 @@
-<h1><?php echo __('Create a platform') ?></h1>
-
-<div class='form-block'>
-<form action="<?php echo url_for('platform/new') ?>" method="POST" id="new_item">
-<?php echo $form->renderHiddenFields() ?>
-
-<div class='span-14 last form-item'>
-<div class='span-6 form-item-label'><?php echo $form['cn']->renderLabel() ?></div>
-<div class='span-6 form-item-field'><?php echo $form['cn']->render() ?></div>
-<div class='span-1 last form-item-check' id='checkName_msg'></div>
+<div class="form-title">
+  <?php echo __('Create a platform') ?>
 </div>
 
-<?php echo $form['multitenant']->renderRow() ?>
-<?php echo $form['multiserver']->renderRow() ?>
-<?php echo $form['status']->renderRow() ?>
+<form action="<?php echo url_for('platform/new') ?>" method="POST" id="form_new" class="ym-form">
+<?php echo $form->renderHiddenFields() ?>
 
-<div class='span-14 last form-button'>
+<div class="ym-fbox-text">
+<?php echo $form['cn']->renderRow() ?>
+</div>
+
+<div class="ym-fbox-select">
+<?php echo $form['multitenant']->renderRow() ?>
+</div>
+
+<div class="ym-fbox-select">
+<?php echo $form['multiserver']->renderRow() ?>
+</div>
+
+<div class="ym-fbox-select">
+<?php echo $form['status']->renderRow() ?>
+</div>
+
+<div class="ym-fbox-button">
 <input type="button" value="<?php echo __("Cancel") ?>" class="button_cancel" />
 <input type="submit" value="<?php echo __('Create') ?>" disabled="true" class="button_submit" />
 </div>
+
 </form>
 
 </div>

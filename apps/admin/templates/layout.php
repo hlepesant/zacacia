@@ -4,16 +4,10 @@
 <?php include_metas() ?>
 <?php include_title() ?>
 <link rel="shortcut icon" href="/images/favicon.ico" />
-<?php /*
-<?php echo stylesheet_tag('blueprint/screen.css', array('type'=>'text/css', 'media' => 'screen, projection')); ?>
-<?php echo stylesheet_tag('blueprint/print.css', array('type'=>'text/css', 'media' => 'print')); ?>
-<!--[if IE]>
-<?php echo stylesheet_tag('/css/blueprint/ie.css', array('type'=>'text/css', 'media' => 'screen, projection')) ?>
-<![endif]-->
-*/ ?>
-<?php echo stylesheet_tag('yaml/core/base.min.css', array('type'=>'text/css')); ?>
+<?php echo stylesheet_tag('yaml/core/base.css', array('type'=>'text/css')); ?>
+<?php echo stylesheet_tag('yaml/forms/gray-theme.css', array('type'=>'text/css')); ?>
 <!--[if lte IE 7]>
-<link rel="stylesheet" href="/css/yaml/core/iehacks.min.css" type="text/css"/>
+<link rel="stylesheet" href="/css/yaml/core/iehacks.css" type="text/css"/>
 <![endif]-->
 <?php include_stylesheets() ?>
 
@@ -67,43 +61,6 @@
 
   </div>
 </footer>
-
-<?php /*
-<div id="wrapper">
-
-	<div id="top">
-        <div id="header">
-            <div class="col-full">
-                <div id="title">
-                    <?php echo image_tag('zacacia_logo_w.png') ?><br />
-                </div><!-- /#logo -->
-                <div id="logo">
-                    <?php echo image_tag('zacacia_w.png') ?><br />
-                </div><!-- /#logo -->
-            </div><!-- /.col-full -->
-        </div><!-- /#header -->
-
-        <div id="breadcrumb">
-            <div class="col-full">
-            <?php if (has_slot('topnav')): ?>
-                <?php include_slot('topnav') ?>
-            <?php endif; ?>
-            </div><!-- /.col-full -->
-        </div><!-- /#breadcrumb -->
-	</div><!-- /#top -->
-       
-    <div id="content">
-        <?php echo $sf_content ?>
-    </div><!-- /#content -->
-        
-	<div id="footer">
-        <div class="col-full">
-            <p>hugues-at-lepesant-dot-com</p>
-        </div><!-- /.col-full -->
-	</div><!-- /#footer  -->
-
-</div><!-- /#wrapper -->
-*/?>
 
 </body>
 </html>

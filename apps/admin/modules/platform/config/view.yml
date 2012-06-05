@@ -1,12 +1,12 @@
 all:
-  stylesheets:    [zacacia.css, menu.css]
+  stylesheets:    [zacacia.css]
 
 indexSuccess:
-  stylesheets:    [button.css]
+  stylesheets:    []
   javascripts:    []
 
 newSuccess:
-  stylesheets:    [form.css, button.css] # tooltip.css, validator.css]
+  stylesheets:    [new.css]
   javascripts:    [newPlatform.js, lib/jquery.observe_field.js]
 
 editSuccess:

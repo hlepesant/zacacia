@@ -9,12 +9,7 @@ class sfWidgetFormSchemaFormatterYaml extends sfWidgetFormSchemaFormatter
 #    $errorRowFormatInARow      = "    <li>%error%</li>\n",
 #    $namedErrorRowFormatInARow = "    <li>%name%: %error%</li>\n",
 #    $rowFormat       = "<div id=\"form_item\">\n\t\t<div class=\"_name\">%label%%error%</div>\n\t\t<div class=\"_field\">%field%%help%%hidden_fields%</div>\n\t\t<div class=\"_ajaxCheck\"></div>\n\t</div>\n\t<!-- end #form_item -->",
-    $rowFormat                 = <<<EOF
-<div class="ym-fbox-text">
-%label%
-%field%
-</div>\n
-EOF;
+    $rowFormat                 = "%label%\n%field%\n";
 #    $rowFormat                 = "<p>%label%<br />%field%</p>";
 
 }
