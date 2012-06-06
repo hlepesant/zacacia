@@ -26,11 +26,13 @@ class platformActions extends sfActions
         */
 
         $ldapPeer = new PlatformPeer();
-        $platforms = $ldapPeer->getPlatformsAsOption();
-
+        # $platforms = $ldapPeer->getPlatformsAsOption();
+        $this->platforms = $ldapPeer->getPlatforms();
+/*
         $this->navigation = new NavigationSelectForm();
         $choices = array_merge($this->navigation->getWidget('selectedPlatform')->getChoices(), $platforms);
         $this->navigation->getWidget('selectedPlatform')->setOption('choices', $choices);
+*/
 
         if ($request->isMethod('post') && $request->getParameter('nav')) {
             $this->navigation->bind($request->getParameter('nav'));
@@ -40,7 +42,7 @@ class platformActions extends sfActions
 
             }
         }
-/*
+
         $id=0;
         $this->forms = array();
         foreach ($this->platforms as $p) {
@@ -48,13 +50,7 @@ class platformActions extends sfActions
             $form = new PlatformNavigationForm();
             $form->getWidget('platformDn')->setDefault($p->getDn());
 
-            $criteria_company = new LDAPCriteria();
-            $criteria_company->setBaseDn(sprintf("ou=Organizations,%s", $p->getDn()));
-            $criteria_company->add('objectClass', 'zacaciaCompany');
-            $criteria_company->add('cn', '*');
-            $count_company = $l->doCount($criteria_company);
-
-            $p->set('company_count', $count_company);
+            $p->set('company_count', $ldapPeer->countCompany($p->getDn()));
 
             $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
 
@@ -64,7 +60,6 @@ class platformActions extends sfActions
 
         $this->new = new PlatformNavigationForm();
         unset($this->new['platformDn']);
-*/
     }
 
     public function executeNew(sfWebRequest $request)

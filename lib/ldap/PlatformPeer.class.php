@@ -47,6 +47,15 @@ class PlatformPeer extends BasePlatformPeer
         return $this->doSelectOne($criteria);
     }
 
+    public function countCompany($dn)
+    {
+        $criteria = new LDAPCriteria();
+        $criteria->setBaseDn(sprintf("ou=Organizations,%s", $dn));
+        $criteria->add('objectClass', 'zacaciaCompany');
+        $criteria->add('cn', '*');
+        return $this->doCount($criteria);
+    }
+
 /*
 
 

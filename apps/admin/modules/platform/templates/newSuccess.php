@@ -1,6 +1,10 @@
-<div class="form-title">
-  <?php echo __('Create a platform') ?>
+<div class="ym-grid z-content-header">
+  <div class="ym-g70 ym-gl z-content-header-title"><?php echo __('Create a platform') ?></div>
+  <div class="ym-g30 ym-gr">
+    <input type="button" value="<?php echo __("Cancel") ?>" class="ym-button z-button-cancel" />
+  </div>
 </div>
+
 
 <form action="<?php echo url_for('platform/new') ?>" method="POST" id="form_new" class="ym-form">
 <?php echo $form->renderHiddenFields() ?>

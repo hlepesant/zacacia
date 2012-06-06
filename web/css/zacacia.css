@@ -5,6 +5,7 @@
 
 body {
 font-family: Arial, Helvetica, sans-serif;
+background-color: #F0F0F0;
 }
 
 body > header {
@@ -15,7 +16,6 @@ background-color: #222E44;
 
 body > content {
 min-width: 760px;
-background-color: #C0C0C0;
 }
 
 body > footer {
@@ -33,7 +33,6 @@ width: 20%;
 }
 
 .ym-col3 { /* left column */
-border: 1px solid red;
 margin-left: 20%;
 margin-right: 20%;
 }
@@ -50,4 +49,24 @@ font-family: "Comic Sans MS", cursive, sans-serif;
 
 .z-content {
 min-height: 450px;
+}
+
+.z-content-header {
+background-color: #222222;
+}
+
+.z-content-header-title {
+font-size: 2em;
+color: #FFFFFF;
+margin: 10px 0 0 10px;
+}
+
+.z-button-new {
+margin-top: 1em;
+margin-bottom: 1em;
+}
+
+.z-button-cancel {
+margin-top: 1em;
+margin-bottom: 1em;
 }

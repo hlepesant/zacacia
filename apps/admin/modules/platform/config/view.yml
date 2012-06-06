@@ -2,7 +2,7 @@ all:
   stylesheets:    [zacacia.css]
 
 indexSuccess:
-  stylesheets:    []
+  stylesheets:    [collection.css]
   javascripts:    []
 
 newSuccess:
