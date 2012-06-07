@@ -1,11 +1,15 @@
-<div class="ym-g80 ym-gl z-<?php echo (($id & 1) ? 'odd' : 'even'); ?>">
-    <div class="z-<?php echo $p->getZacaciaStatus() ?>"><?php echo $p->getCn() ?></div>
+<div class="ym-grid z-line z-<?php echo (($id & 1) ? 'odd' : 'even'); ?>">
+
+<div class="ym-g80 ym-gl">
+    <div class="z-status-<?php echo $p->getZacaciaStatus() ?>"><?php echo $p->getCn() ?></div>
 </div>
 
-<div class="ym-g20 ym-gr z-<?php echo (($id & 1) ? 'odd' : 'even'); ?>">
-    <form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
-        <?php echo $f->renderHiddenFields() ?>
-        <?php
+<div class="ym-g20 ym-gr">
+
+<form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
+<?php 
+    echo $f->renderHiddenFields();
+
 /* -- Edit -- */
             echo link_to_function(
                 image_tag('famfam/page_white_edit.png', array('title' => 'Edit')),
@@ -38,6 +42,8 @@
             echo link_to_function(
                 image_tag('famfam/building.png', array('title' => 'Company')),
                 "jumpTo('".sprintf('%03d', $id)."', '".addslashes($p->getCn())."', 'company', null)");
-        ?>
-    </form>
+?>
 </div>
+</form>
+</div>
+<!-- next -->

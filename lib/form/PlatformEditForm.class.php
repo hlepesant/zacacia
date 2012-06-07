@@ -4,23 +4,23 @@ class PlatformEditForm extends ZacaciaForm
     public function configure()
     {
         $this->setWidgets(array(
-            'platformDn'  => new sfWidgetFormInputHidden(),
-            'multitenant' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
-            'multiserver' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
-            'status'      => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
+            'platformDn'    => new sfWidgetFormInputHidden(),
+            'multitenant'   => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
+            'multiserver'   => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
+            'status'        => new sfWidgetFormChoice(array('choices' => self::$option_status)),
         ));
         
         $this->widgetSchema->setLabels(array(
-            'multitenant' => 'Multi tenant',
-            'multiserver' => 'Multi server',
-            'status'      => 'Enable',
+            'multitenant'   => 'Multi tenant',
+            'multiserver'   => 'Multi server',
+            'status'        => 'Enable',
         ));
         
         $this->setValidators(array(
-            'platformDn'  => new sfValidatorString(),
-            'multitenant' => new sfValidatorBoolean(),
-            'multiserver' => new sfValidatorBoolean(),
-            'status'      => new sfValidatorBoolean(),
+            'platformDn'    => new sfValidatorString(),
+            'multitenant'   => new sfValidatorChoice(array('choices' => array_keys(self::$option_noyes))),
+            'multiserver'   => new sfValidatorChoice(array('choices' => array_keys(self::$option_noyes))),
+            'status'        => new sfValidatorChoice(array('choices' => array_keys(self::$option_status))),
         ));
         
         $this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));

@@ -25,7 +25,6 @@
   </div>
 </div>
 
-<div class="ym-grid z-collection">
 <?php
 $id = 0;
 foreach ($platforms as $p) {
@@ -33,11 +32,13 @@ foreach ($platforms as $p) {
     $id++;
 }
 ?>
-</div>
 <!-- end #collection -->
 
 <?php echo javascript_tag("
 var show_url = '".url_for('@platform_show')."';
 var new_url = '".url_for('@platform_new')."';
 var logout_url = '".url_for('security/logout')."';
+
+var _js_module = '".$this->getModuleName()."';
+var _js_url = '".url_for(false)."';
 ") ?>

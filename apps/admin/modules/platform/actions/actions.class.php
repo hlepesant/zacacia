@@ -72,11 +72,11 @@ class platformActions extends sfActions
 
             if ($this->form->isValid()) {
 
-                $l = new PlatformPeer();
-                $l->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
+                $ldapPeer = new PlatformPeer();
+                $ldapPeer->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
 
                 $platform = new PlatformObject();
-                $platform->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
+                $platform->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $ldapPeer->getBaseDn()));
                 $platform->setCn($this->form->getValue('cn'));
 
                 if ( $this->form->getValue('multitenant') )
@@ -87,12 +87,10 @@ class platformActions extends sfActions
 
                 $platform->setZacaciaStatus($this->form->getValue('status'));
 
-                #var_dump( $platform ); exit;
-
-                if ( $l->doAdd($platform) ) {
-                  sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                  echo fake_post($this, 'platform/index', Array());
-                  exit;
+                if ( $ldapPeer->doAdd($platform) ) {
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
+                    echo fake_post($this, 'platform/index', Array());
+                    exit;
                 }
             } else {
                 $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
@@ -120,8 +118,6 @@ class platformActions extends sfActions
 
     public function executeEdit(sfWebRequest $request)
     {
-        print_r( $_GET );
-        exit;
         $data = $request->getParameter('zdata');
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
 

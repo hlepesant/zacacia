@@ -1,11 +1,24 @@
-.ym-grid {
+.z-line {
 line-height: 20px;
+border-bottom:  1px solid #222222;
 }
 
 .z-odd {
 background-color: #C0C0C0;
 }
 
-.z-even {
-background-color: #FFFFCC;
+.z-even{
+background-color: #FFFFFF;
+}
+
+.z-status-enable {
+font-weight: bold;
+color: green;
+margin: 0 0 0 10px;
+}
+
+.z-status-disable {
+font-weight: bold;
+color: red;
+margin: 0 0 0 10px;
 }

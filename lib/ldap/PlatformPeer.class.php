@@ -56,9 +56,6 @@ class PlatformPeer extends BasePlatformPeer
         return $this->doCount($criteria);
     }
 
-/*
-
-
     public function doAdd(LDAPObject $ldap_object)
     {
         if ( ! parent::doAdd($ldap_object) ) {
@@ -122,5 +119,4 @@ class PlatformPeer extends BasePlatformPeer
 
         return $subtree;
     }
-*/
 }

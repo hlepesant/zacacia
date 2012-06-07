@@ -3,7 +3,7 @@ all:
 
 indexSuccess:
   stylesheets:    [collection.css]
-  javascripts:    []
+  javascripts:    [indexPlatform.js]
 
 newSuccess:
   stylesheets:    [new.css]

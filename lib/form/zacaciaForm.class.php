@@ -1,6 +1,10 @@
 <?php
 class zacaciaForm extends sfFormSymfony
 {
+
+    protected static $option_noyes =array('no', 'yes');
+    protected static $option_status =array( 'enable' => 'enable', 'disable' => 'disable' );
+
     protected function __($string, $args = array(), $catalogue = 'messages')
     {
         return sfContext::getInstance()->getI18N()->__($string, $args, $catalogue);
