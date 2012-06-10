@@ -58,9 +58,9 @@ background-color: #222222;
 }
 
 .z-content-header-title {
-font-size: 2em;
+font-size: 24px;
 color: #FFFFFF;
-margin: 10px 0 0 10px;
+margin: 10px 0 5px 10px;
 }
 
 .z-button-new {

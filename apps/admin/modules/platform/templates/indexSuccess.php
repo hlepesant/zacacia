@@ -41,4 +41,8 @@ var logout_url = '".url_for('security/logout')."';
 
 var _js_module = '".$this->getModuleName()."';
 var _js_url = '".url_for(false)."';
+
+var _js_msg_disable = '".__("Disable the platform")."';
+var _js_msg_enable = '".__("Enable the platform")."';
+var _js_msg_delete = '".__("Delete the platform")."';
 ") ?>

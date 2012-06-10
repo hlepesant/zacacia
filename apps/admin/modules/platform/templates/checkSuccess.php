@@ -1,5 +1,5 @@
 <?php
-if ( $count ) {
+if ( $exist ) {
     $arr = array(
         'disabled' => true,
     );

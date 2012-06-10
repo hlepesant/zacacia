@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     $('.button-cancel').click(function() {
-        $('#form-cancel').submit();
+        $('#form_cancel').submit();
     });
 
     $('input#zdata_cn').observe_field(0.5, function() {

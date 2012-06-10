@@ -21,6 +21,7 @@ class PlatformPeer extends BasePlatformPeer
         return $this->doSelect($criteria);
     }
 
+/*
     public function getPlatformsAsOption()
     {
         $criteria = new LDAPCriteria();
@@ -36,10 +37,13 @@ class PlatformPeer extends BasePlatformPeer
         }
         return $p;
     }
+*/
 
     public function getPlatform($dn)
     {
         $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'organizationalRole');
         $criteria->add('objectClass', 'zacaciaPlatform');
         $criteria->setSortFilter('cn');
 
@@ -119,4 +123,17 @@ class PlatformPeer extends BasePlatformPeer
 
         return $subtree;
     }
+
+    public function doSearch($cn)
+    {
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'zacaciaPlatform');
+        $criteria->add('cn', $cn);
+
+        $this->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
+        
+        return $this->doCount($criteria);
+    }
+
+    
 }

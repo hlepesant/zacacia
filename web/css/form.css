@@ -1,0 +1,14 @@
+.ym-form {
+-webkit-box-shadow: none;
+-moz-box-shadow: none;
+box-shadow: none;
+margin: 0;
+border: none;
+border-bottom: 1px solid #D8D7D6;
+}
+
+.ym-form label {
+font-size: 12px;
+font-weight: bold;
+color: #262626;
+}

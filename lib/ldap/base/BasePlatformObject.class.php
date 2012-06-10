@@ -35,11 +35,14 @@ class BasePlatformObject extends LDAPObject
   
     public function setZacaciaStatus($v)
     {
+        $this->attributes['zacaciaStatus'] = $v;
+/*
         if ( $v ) {
             $this->attributes['zacaciaStatus'] = 'enable';
         } else {
             $this->attributes['zacaciaStatus'] = 'disable';
         }
+*/
     	return $this;
     }
 

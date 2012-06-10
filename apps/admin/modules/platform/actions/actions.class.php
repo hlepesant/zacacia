@@ -26,22 +26,7 @@ class platformActions extends sfActions
         */
 
         $ldapPeer = new PlatformPeer();
-        # $platforms = $ldapPeer->getPlatformsAsOption();
         $this->platforms = $ldapPeer->getPlatforms();
-/*
-        $this->navigation = new NavigationSelectForm();
-        $choices = array_merge($this->navigation->getWidget('selectedPlatform')->getChoices(), $platforms);
-        $this->navigation->getWidget('selectedPlatform')->setOption('choices', $choices);
-*/
-
-        if ($request->isMethod('post') && $request->getParameter('nav')) {
-            $this->navigation->bind($request->getParameter('nav'));
-            if ($this->navigation->isValid()) {
-        
-                print_r( $_POST );
-
-            }
-        }
 
         $id=0;
         $this->forms = array();
@@ -79,11 +64,13 @@ class platformActions extends sfActions
                 $platform->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $ldapPeer->getBaseDn()));
                 $platform->setCn($this->form->getValue('cn'));
 
-                if ( $this->form->getValue('multitenant') )
+                if ( $this->form->getValue('multitenant') ) {
                     $platform->setZacaciaMultiTenant($this->form->getValue('multitenant'));
+                }
 
-                if ( $this->form->getValue('multiserver') )
+                if ( $this->form->getValue('multiserver') ) {
                     $platform->setZacaciaMultiServer($this->form->getValue('multiserver'));
+                }
 
                 $platform->setZacaciaStatus($this->form->getValue('status'));
 
@@ -126,14 +113,8 @@ class platformActions extends sfActions
             $this->redirect('@homepage');
         }
 
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaPlatform');
-
-        $l = new PlatformPeer();
-        $l->setBaseDn($platformDn);
-        $this->platform = $l->retrieveByDn($c);
+        $ldapPeer = new PlatformPeer();
+        $this->platform = $ldapPeer->getPlatform($platformDn);
 
         $this->form = new PlatformEditForm();
 
@@ -147,14 +128,8 @@ class platformActions extends sfActions
                 $this->platform->setZacaciaMultiServer($this->form->getValue('multiserver'));
                 $this->platform->setZacaciaUnDeletable($this->form->getValue('undeletable'));
                 $this->platform->setZacaciaStatus($this->form->getValue('status'));
-/*
-                if ( $this->form->getValue('status') ) {
-                    $this->platform->setZacaciaStatus('enable');
-                } else {
-                    $this->platform->setZacaciaStatus('disable');
-                }
-*/
-                if ( $l->doSave($this->platform) ) {
+
+                if ( $ldapPeer->doSave($this->platform) ) {
 
                   sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                   echo fake_post($this, 'platform/index', Array());
@@ -187,19 +162,16 @@ class platformActions extends sfActions
 
     public function executeStatus(sfWebRequest $request)
     {
-        $c = new LDAPCriteria();
-        $c->setBaseDn($request->getParameter('platformDn'));
+        $ldapPeer = new PlatformPeer();
+        $platform = $ldapPeer->getPlatform($request->getParameter('platformDn'));
 
-        $l = new PlatformPeer();
-        $p = $l->retrieveByDn($c);
-
-        if ( 'enable' === $p->getZacaciaStatus()) {
-            $p->setZacaciaStatus(false);
+        if ( 'enable' === $platform->getZacaciaStatus()) {
+            $platform->setZacaciaStatus('disable');
         } else {
-            $p->setZacaciaStatus(true);
+            $platform->setZacaciaStatus('enable');
         }
 
-        $l->doSave($p);
+        $ldapPeer->doSave($platform);
 
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
         echo fake_post($this, 'platform/index', Array());
@@ -208,14 +180,11 @@ class platformActions extends sfActions
 
     public function executeDelete(sfWebRequest $request)
     {
-        $c = new LDAPCriteria();
-        $c->setBaseDn($request->getParameter('platformDn'));
+        $ldapPeer = new PlatformPeer();
+        $platform = $ldapPeer->getPlatform($request->getParameter('platformDn'));
 
-        $l = new PlatformPeer();
-        $p = $l->retrieveByDn($c);
-
-        if ( 'disable' === $p->getZacaciaStatus()) {
-            $l->doDelete($p, true);
+        if ( 'disable' === $platform->getZacaciaStatus()) {
+            $ldapPeer->doDelete($platform, true);
         }
 
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
@@ -228,18 +197,10 @@ class platformActions extends sfActions
     {
         $this->setTemplate('check');
         $this->setLayout(false);
-        $this->count = 0;
+        $this->exist = 0;
 
-        $l = new PlatformPeer();
-        $l->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
-
-        $c = new LDAPCriteria();
-
-        $c->setBaseDn( $l->getBaseDn() );
-        $c->add('objectClass', 'zacaciaPlatform');
-        $c->add('cn', $request->getParameter('name'));
-
-        $this->count = $l->doCount($c);
+        $ldapPeer = new PlatformPeer();
+        $this->exist = $ldapPeer->doSearch($request->getParameter('name'));
 
         return sfView::SUCCESS;
     }

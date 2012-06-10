@@ -6,9 +6,9 @@ indexSuccess:
   javascripts:    [indexPlatform.js]
 
 newSuccess:
-  stylesheets:    [new.css]
+  stylesheets:    [form.css]
   javascripts:    [newPlatform.js, lib/jquery.observe_field.js]
 
 editSuccess:
-  stylesheets:    [form.css, input.css, button.css, tooltip.css]
+  stylesheets:    [form.css]
   javascripts:    [editPlatform.js]

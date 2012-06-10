@@ -19,7 +19,7 @@
   RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>
 
-AuthType Basic
-AuthName "Password Required"
-AuthUserFile /opt/WebSites/Zacacia/password.file
-Require valid-user
+#AuthType Basic
+#AuthName "Password Required"
+#AuthUserFile /opt/WebSites/Zacacia/password.file
+#Require valid-user
