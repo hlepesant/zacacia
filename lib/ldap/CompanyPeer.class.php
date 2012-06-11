@@ -17,8 +17,8 @@ class CompanyPeer extends BaseCompanyPeer
 
         #$options = array();
         $options = array(sfConfig::get('undefined') => 'none');
-        foreach( $servers as $server )
-        {
+
+        foreach( $servers as $server ) {
             $options[ $server->getDn() ] = $server->getCn();
         }
         return $options;
@@ -39,8 +39,8 @@ class CompanyPeer extends BaseCompanyPeer
 
         #$options = array();
         $options = array(sfConfig::get('undefined') => 'none');
-        foreach( $users as $user )
-        {
+
+        foreach( $users as $user ) {
             $options[ $user->getDn() ] = $user->getCn();
         }
         return $options;

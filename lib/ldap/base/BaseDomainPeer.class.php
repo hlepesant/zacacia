@@ -54,11 +54,9 @@ class BaseDomainPeer extends LDAPPeer
         
         $objects = array();
         
-        if ($ldap_entry !== false)
-        {
+        if ($ldap_entry !== false) {
             $objects[] = $this->createLDAPObject($ldap_entry, $ldap_object);
-            while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry))
-            {
+            while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry)) {
                 $objects[] = $this->createLDAPObject($ldap_entry, $ldap_object);
             }
         }

@@ -53,12 +53,7 @@ class BaseCompanyObject extends LDAPObject
 
     public function setZacaciaStatus($v)
     {
-#        $this->attributes['zacaciaStatus'] = $v;
-        if ( $v ) {
-            $this->attributes['zacaciaStatus'] = 'enable';
-        } else {
-            $this->attributes['zacaciaStatus'] = 'disable';
-        }
+        $this->attributes['zacaciaStatus'] = $v;
         return $this;
     }
 

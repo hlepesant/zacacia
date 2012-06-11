@@ -29,8 +29,8 @@ class BaseUserPeer extends LDAPPeer
         $values = $this->extractValues($ldap_entry, $attributes);
         $dn = ldap_get_dn($this->getLinkId(), $ldap_entry);
 
-        switch ($ldap_object)
-        {
+        switch ($ldap_object) {
+
             case 'extended':
                 $ldap_object = new UserObject();
             break;
@@ -57,8 +57,7 @@ class BaseUserPeer extends LDAPPeer
         
         if ($ldap_entry !== false) {
             $objects[] = $this->createLDAPObject($ldap_entry, $ldap_object);
-            while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry))
-            {
+            while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry)) {
                 $objects[] = $this->createLDAPObject($ldap_entry, $ldap_object);
             }
         }
@@ -82,12 +81,6 @@ class BaseUserPeer extends LDAPPeer
         return self::doSelectOne($ldap_criteria);
     }
 
-#    public function doCount(LDAPCriteria $ldap_criteria)
-#    {
-#        $ldap_criteria = self::configureCriteria($ldap_criteria);
-#        return parent::doCount($ldap_criteria);
-#    }
-
     public function retrieveByDn(LDAPCriteria $ldap_criteria)
     {
         $ldap_criteria->setSearchScope(LDAPCriteria::BASE);
@@ -96,7 +89,6 @@ class BaseUserPeer extends LDAPPeer
         $ldap_criteria->add('objectClass', 'posixAccount');
         $ldap_criteria->add('objectClass', 'zarafa-user');
         $ldap_criteria->add('objectClass', 'zacaciaUser');
-
 
         $ldap_criteria = self::configureCriteria($ldap_criteria);
         

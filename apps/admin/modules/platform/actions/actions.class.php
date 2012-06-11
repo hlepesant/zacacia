@@ -30,16 +30,16 @@ class platformActions extends sfActions
 
         $id=0;
         $this->forms = array();
-        foreach ($this->platforms as $p) {
+        foreach ($this->platforms as $platform) {
 
             $form = new PlatformNavigationForm();
-            $form->getWidget('platformDn')->setDefault($p->getDn());
+            $form->getWidget('platformDn')->setDefault($platform->getDn());
 
-            $p->set('company_count', $ldapPeer->countCompany($p->getDn()));
+            $platform->set('company_count', $ldapPeer->countCompany($platform->getDn()));
 
             $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
 
-            $this->forms[$p->getDn()] = $form;
+            $this->forms[$platform->getDn()] = $form;
             $id++;
         }
 

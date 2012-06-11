@@ -36,13 +36,6 @@ class BasePlatformObject extends LDAPObject
     public function setZacaciaStatus($v)
     {
         $this->attributes['zacaciaStatus'] = $v;
-/*
-        if ( $v ) {
-            $this->attributes['zacaciaStatus'] = 'enable';
-        } else {
-            $this->attributes['zacaciaStatus'] = 'disable';
-        }
-*/
     	return $this;
     }
 
@@ -81,8 +74,9 @@ class BasePlatformObject extends LDAPObject
  
     public function getZacaciaMultiServer()
     {
-        if ( (int)$this->attributes['zacaciaMultiServer'] )
+        if ( (int)$this->attributes['zacaciaMultiServer'] ) {
             return true;
+         }
         
         return false;
     }
@@ -99,8 +93,9 @@ class BasePlatformObject extends LDAPObject
  
     public function getZacaciaMultiTenant()
     {
-        if ( (int)$this->attributes['zacaciaMultiTenant'] )
+        if ( (int)$this->attributes['zacaciaMultiTenant'] ) {
             return true;
+        }
 
         return false;
     }

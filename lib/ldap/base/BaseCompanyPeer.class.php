@@ -18,28 +18,11 @@ class BaseCompanyPeer extends LDAPPeer
 
     public function configureCriteria(LDAPCriteria $ldap_criteria)
     {
-#       $ldap_criteria->setHost(self::HOST);
-#       $ldap_criteria->setUsername(self::USERNAME);
-#       $ldap_criteria->setPassword(self::PASSWORD);
-#       $ldap_criteria->setUseSsl(self::USE_SSL);
-#       if ( $ldap_criteria->getBaseDn() == null ) $ldap_criteria->setBaseDn(self::BASE_DN);
         if ( $ldap_criteria->getBaseDn() == null ) $ldap_criteria->setBaseDn($this->getBaseDn());
         
         return $ldap_criteria;
     }
-/*
-    private function createLDAPObject($ldap_entry)
-    {
-        $attributes = $this->extractAttributes($ldap_entry);
-        $values = $this->extractValues($ldap_entry, $attributes);
-        $dn = ldap_get_dn($this->getLinkId(), $ldap_entry);
-        
-        $ldap_object = new ServerObject();
-        $ldap_object->setDn($dn);
-        $ldap_object->__constructFrom($values);
-        return( $ldap_object );
-    }
-*/
+
     private function createLDAPObject($ldap_entry, $ldap_object = 'base')
     {
         $attributes = $this->extractAttributes($ldap_entry);
@@ -101,8 +84,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_ou_1->set('ou', 'AddressLists'); 
         $ldap_object_ou_1->set('objectclass', (array('top','organizationalUnit'))); 
 
-        if ( ! parent::doAdd($ldap_object_ou_1 ) )
-        {
+        if ( ! parent::doAdd($ldap_object_ou_1 ) ) {
             $subtree = false;
         }
 
@@ -112,8 +94,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_ou_2->set('ou', 'Contacts'); 
         $ldap_object_ou_2->set('objectclass', (array('top','organizationalUnit'))); 
 
-        if ( ! parent::doAdd($ldap_object_ou_2) )
-        {
+        if ( ! parent::doAdd($ldap_object_ou_2) ) {
             $subtree = false;
         }
 
@@ -123,8 +104,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_ou_3->set('ou', 'Domains'); 
         $ldap_object_ou_3->set('objectclass', (array('top','organizationalUnit'))); 
 
-        if ( ! parent::doAdd($ldap_object_ou_3) )
-        {
+        if ( ! parent::doAdd($ldap_object_ou_3) ) {
             $subtree = false;
         }
 
@@ -134,8 +114,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_ou_4->set('ou', 'Forwards'); 
         $ldap_object_ou_4->set('objectclass', (array('top','organizationalUnit'))); 
 
-        if ( ! parent::doAdd($ldap_object_ou_4) )
-        {
+        if ( ! parent::doAdd($ldap_object_ou_4) ) {
             $subtree = false;
         }
 
@@ -145,8 +124,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_ou_5->set('ou', 'Groups'); 
         $ldap_object_ou_5->set('objectclass', (array('top','organizationalUnit'))); 
 
-        if ( ! parent::doAdd($ldap_object_ou_5) )
-        {
+        if ( ! parent::doAdd($ldap_object_ou_5) ) {
             $subtree = false;
         }
 
@@ -156,8 +134,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_ou_6->set('ou', 'Users'); 
         $ldap_object_ou_6->set('objectclass', (array('top','organizationalUnit'))); 
 
-        if ( ! parent::doAdd($ldap_object_ou_6) )
-        {
+        if ( ! parent::doAdd($ldap_object_ou_6) ) {
             $subtree = false;
         }
 
@@ -167,8 +144,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_ou_sg->set('ou', 'SecurityGroups'); 
         $ldap_object_ou_sg->set('objectclass', (array('top','organizationalUnit'))); 
         
-        if ( ! parent::doAdd($ldap_object_ou_sg) )
-        {
+        if ( ! parent::doAdd($ldap_object_ou_sg) ) {
             $subtree = false;
         }
 
@@ -177,8 +153,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_sg_1->set('cn', 'AddressListAdmin'); 
         $ldap_object_sg_1->set('objectclass', (array('top','zacaciaSecurityGroup'))); 
         
-        if ( ! parent::doAdd($ldap_object_sg_1) )
-        {
+        if ( ! parent::doAdd($ldap_object_sg_1) ) {
             $subtree = false;
         }
 
@@ -187,8 +162,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_sg_2->set('cn', 'ContactAdmin'); 
         $ldap_object_sg_2->set('objectclass', (array('top','zacaciaSecurityGroup'))); 
         
-        if ( ! parent::doAdd($ldap_object_sg_2) )
-        {
+        if ( ! parent::doAdd($ldap_object_sg_2) ) {
             $subtree = false;
         }
 
@@ -197,8 +171,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_sg_3->set('cn', 'DomainAdmin'); 
         $ldap_object_sg_3->set('objectclass', (array('top','zacaciaSecurityGroup'))); 
         
-        if ( ! parent::doAdd($ldap_object_sg_3) )
-        {
+        if ( ! parent::doAdd($ldap_object_sg_3) ) {
             $subtree = false;
         }
 
@@ -207,8 +180,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_sg_4->set('cn', 'ForwardAdmin'); 
         $ldap_object_sg_4->set('objectclass', (array('top','zacaciaSecurityGroup'))); 
         
-        if ( ! parent::doAdd($ldap_object_sg_4) )
-        {
+        if ( ! parent::doAdd($ldap_object_sg_4) ) {
             $subtree = false;
         }
 
@@ -217,8 +189,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_sg_5->set('cn', 'GroupAdmin'); 
         $ldap_object_sg_5->set('objectclass', (array('top','zacaciaSecurityGroup'))); 
         
-        if ( ! parent::doAdd($ldap_object_sg_5) )
-        {
+        if ( ! parent::doAdd($ldap_object_sg_5) ) {
             $subtree = false;
         }
 
@@ -227,8 +198,7 @@ class BaseCompanyPeer extends LDAPPeer
         $ldap_object_sg_6->set('cn', 'UserAdmin'); 
         $ldap_object_sg_6->set('objectclass', (array('top','zacaciaSecurityGroup'))); 
         
-        if ( ! parent::doAdd($ldap_object_sg_6) )
-        {
+        if ( ! parent::doAdd($ldap_object_sg_6) ) {
             $subtree = false;
         }
 
@@ -268,22 +238,4 @@ class BaseCompanyPeer extends LDAPPeer
         
         return $this->doSelectOne($ldap_criteria, $ldap_object);
     }
-
-#  public function doSave(LDAPObject $ldap_object)
-#  {
-#    if ( ! parent::doSave($ldap_object) )
-#    {
-#      return false;
-#    }
-#    return true;
-#  }
-
-#  public function doDelete(LDAPObject $ldap_object, $recursive=false)
-#  {
-#    if ( ! parent::doDelete($ldap_object, $recursive) )
-#    {
-#      return false;
-#    }
-#    return true;
-#  }
 }

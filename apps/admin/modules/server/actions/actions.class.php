@@ -21,48 +21,28 @@ class serverActions extends sfActions
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
-            $this->redirect('@platform');
+            $this->redirect('@platforms');
         }
 
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaPlatform');
-        $l = new PlatformPeer();
-        $l->setBaseDn($platformDn);
-        $this->platform = $l->retrieveByDn($c);
 
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zarafa-server');
-        $c->add('objectClass', 'ipHost');
-        $c->add('objectClass', 'zacaciaServer');
-        #$c->add('objectClass', Array('top', 'organizationalRole', 'zarafa-server', 'ipHost', 'zacaciaServer'));
-
-        $l = new ServerPeer();
-        $l->setBaseDn(sprintf("ou=Servers,%s", $platformDn));
-        $this->servers = $l->doSelect($c, 'base');
+        $ldapPeer = new ServerPeer();
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+        $this->servers = $ldapPeer->getServers($platformDn);
 
         $id=0;
         $this->forms = array();
-        foreach ($this->servers as $s) {
+        foreach ($this->servers as $server) {
 
             $form = new ServerNavigationForm();
             $form->getWidget('platformDn')->setDefault($platformDn);
-            $form->getWidget('serverDn')->setDefault($s->getDn());
+            $form->getWidget('serverDn')->setDefault($server->getDn());
 
-            $criteria_user = new LDAPCriteria();
-            $criteria_user->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
-            $criteria_user->add('objectClass', 'zarafa-user');
-            $criteria_user->add('zacaciaUserServer', $s->getCn());
-            $count_user = $l->doCount($criteria_user);
-            $s->set('user_count', $count_user);
+            $server->set('user_count', $ldapPeer->countUser($this->platform, $server));
 
             $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
             $form->getWidget('serverDn')->setIdFormat(sprintf('%%s_%03d', $id));
 
-            $this->forms[$s->getDn()] = $form;
+            $this->forms[$server->getDn()] = $form;
             $id++;
         }
 

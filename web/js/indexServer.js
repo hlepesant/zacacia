@@ -3,7 +3,6 @@ $(document).ready(function() {
     $("#goback").hover(function() {
         alert('go back');
     });
-*/
     $("#goback").click(function() {
         $("#platform_back").submit();
     });
@@ -21,6 +20,7 @@ $(document).ready(function() {
         position: "top left",
         opacity: 0.9
     });
+*/
 });
 
 function jumpTo(id, name, target, status) {

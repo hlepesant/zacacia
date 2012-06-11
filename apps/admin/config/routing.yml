@@ -23,6 +23,23 @@ platform_edit:
   url:   /platform/edit/:pid/
   param: { module: platform, action: edit }
 
+# server
+servers:
+  url:   /
+  param: { module: server, action: index }
+
+server_new:
+  url:   /server/add
+  param: { module: server, action: new }
+
+server_show:
+  url:   /server/show
+  param: { module: server, action: show }
+
+server_edit:
+  url:   /server/edit/:pid/
+  param: { module: server, action: edit }
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
