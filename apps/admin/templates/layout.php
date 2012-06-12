@@ -33,12 +33,15 @@
 <content>
   <div class="ym-column">
     <div class="ym-col1">
-      <?php if (has_slot('menu_content')): ?>
+      <?php if (has_slot('menu_top')): ?>
+          <?php include_slot('menu_top') ?>
+      <?php endif; ?>
+      <?php /* if (has_slot('menu_content')): ?>
           <?php include_slot('menu_content') ?>
       <?php endif; ?>
       <?php if (has_slot('menu_bottom')): ?>
           <?php include_slot('menu_bottom') ?>
-      <?php endif; ?>
+      <?php endif; */ ?>
     </div>
     
     <div class="ym-col3 z-content">

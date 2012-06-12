@@ -72,3 +72,19 @@ margin-bottom: 1em;
 margin-top: 1em;
 margin-bottom: 1em;
 }
+
+.z-menu {
+border-top: 1px solid #191919;
+background-color: #6A6A6A;
+margin: 0px;
+}
+
+.z-menu-line {
+height: 20px;
+font-size: 18px;
+font-weight: thicker;
+color: #FFFFFF;
+margin: 0px;
+padding: 5px 0px 5px 5px;
+border-bottom: 1px solid #191919;
+}
