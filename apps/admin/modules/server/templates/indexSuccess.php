@@ -1,10 +1,11 @@
 <?php slot('menu_top') ?>
 <div class="z-menu">
 <div class="z-menu-line">
-    <strong><?php echo __('Platforms') ;?></strong>
+    <strong><?php echo __('Platform') ;?></strong> :
+    <?php echo $platform->getCn() ?>
 </div>
 <div class="z-menu-line">
-<?php echo image_tag('famfam/door_in.png', array('title' => __('Logout'), 'id' => 'logout')); ?>
+<?php echo link_to(__('Logout'), 'security/logout', array('id' => 'logount-link')) ?>
 </div>
 </div>
 <?php end_slot() ?>

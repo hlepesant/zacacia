@@ -1,14 +1,14 @@
-<?php /* slot('menu_top') ?>
-<strong><?php echo __('Platforms') ;?></strong>
-<?php echo image_tag('famfam/door_in.png', array('title' => __('Logout'), 'id' => 'logout')); ?>
-<?php end_slot() */ ?>
+<?php slot('menu_top') ?>
+<div class="z-menu">
+<div class="z-menu-line">
+    <strong><?php echo __('Platforms') ;?></strong>
+</div>
+<div class="z-menu-line">
+<?php echo link_to(__('Logout'), 'security/logout', array('id' => 'logount-link')) ?>
+</div>
+</div>
+<?php end_slot() ?>
 
-<?php /* slot('menu_content') ?>
-<?php echo form_tag('@platform_show', array('id' => 'navForm')) ?>
-<?php echo $navigation->renderHiddenFields() ?>
-<?php echo $navigation ?>
-</form>
-<?php end_slot() */ ?>
 
 
 <?php slot('menu_bottom') ?>

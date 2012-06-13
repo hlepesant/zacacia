@@ -14,6 +14,12 @@ $(document).ready(function() {
         opacity: 0.9
     });
 */ 
+
+    $('#logount-link').click(function() {
+        if ( confirm(_js_msg_logout) == false ) {
+            return false;
+        }
+    });
 });
 
 function jumpTo(id, name, target, status) {

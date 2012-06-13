@@ -83,8 +83,19 @@ margin: 0px;
 height: 20px;
 font-size: 18px;
 font-weight: thicker;
-color: #FFFFFF;
+color: #000000;
 margin: 0px;
 padding: 5px 0px 5px 5px;
 border-bottom: 1px solid #191919;
+}
+
+.z-menu-line strong {
+color: #191919; 
+font-weight: normal;
+text-decoration:underline;
+}
+
+.z-menu-line a {
+color: #191919; 
+text-decoration: none;
 }

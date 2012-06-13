@@ -49,4 +49,32 @@ class ServerPeer extends BaseServerPeer
         return $this->doCount($criteria);
     }
 
+    public function getServer($dn)
+    {
+        $this->setBaseDn($dn);
+
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'organizationalRole');
+        $criteria->add('objectClass', 'zarafa-server');
+        $criteria->add('objectClass', 'ipHost');
+        $criteria->add('objectClass', 'zacaciaServer');
+        
+        return $this->doSelectOne($criteria);
+    }
+
+    public function doSearch($cn)
+    {
+        $this->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
+
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'organizationalRole');
+        $criteria->add('objectClass', 'zarafa-server');
+        $criteria->add('objectClass', 'ipHost');
+        $criteria->add('objectClass', 'zacaciaServer');
+        $criteria->add('cn', $cn);
+
+        return $this->doCount($criteria);
+    }
 }

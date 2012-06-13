@@ -56,12 +56,8 @@ class BaseServerObject extends LDAPObject
   
     public function setZacaciaStatus($v)
     {
-        if ( $v ) {
-            $this->attributes['zacaciaStatus'] = 'enable';
-        } else {
-            $this->attributes['zacaciaStatus'] = 'disable';
-        }
-        return $this;
+        $this->attributes['zacaciaStatus'] = $v;
+    	return $this;
     }
 
     public function getZacaciaStatus()

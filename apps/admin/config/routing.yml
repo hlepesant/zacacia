@@ -25,7 +25,7 @@ platform_edit:
 
 # server
 servers:
-  url:   /
+  url:   /server/
   param: { module: server, action: index }
 
 server_new:

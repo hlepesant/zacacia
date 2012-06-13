@@ -5,24 +5,23 @@
  */
 
 $(document).ready(function() {
-
+/*
     $('._link img[title]').tooltip({
         position: 'bottom left',
         opacity: 0.9
     });
-
-    $('.button_cancel').click(function() {
-        $('#form_cancel').submit();
+*/
+    $('.button-cancel').click(function() {
+        $('#form-cancel').submit();
     });
 
-    $(".button_submit").removeAttr("disabled");
+    $(".button-submit").removeAttr("disabled");
 
     $("input#zdata_cn").change(function() {
         $("#checkIpAddress_msg_msg").html('');
         if ( $("input#zdata_ip").length ) {
-            $("#checkIpAddress_msg_msg").html('<img src=\'/images/famfam/tick.png\' />');
             if ( data.disabled ) {
-                $(".button_submit").attr("disabled", true);
+                $(".button-submit").attr("disabled", true);
             }
         }
         check_form();
@@ -36,12 +35,13 @@ $(document).ready(function() {
         $("input[type='checkbox']#zdata_zarafaContainsPublic").attr("disabled", true);
     }
 */
-    $("input[type='checkbox']#zdata_zarafaAccount").change(function() {
 
-        if ($(this).is(':checked')) {
-          $("#zarafa_settings").slideDown('slow');
+    $("select#zdata_zarafaAccount").change(function() {
+
+        if ($(this).val() == 1) {
+          $("#zarafa-settings").slideDown('slow');
         } else {
-          $("#zarafa_settings").slideUp();
+          $("#zarafa-settings").slideUp();
         }
     });
 /*

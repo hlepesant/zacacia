@@ -6,7 +6,6 @@ $(document).ready(function() {
 
     $('input#zdata_cn').observe_field(0.5, function() {
 
-        $('#checkName_msg').html('');
         $('.button-submit').attr('disabled', true);
 
         if ( $('input#zdata_cn').length ) {
