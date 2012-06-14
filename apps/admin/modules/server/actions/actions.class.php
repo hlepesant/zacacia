@@ -133,11 +133,8 @@ class serverActions extends sfActions
             echo fake_post($this, '@servers', Array('platformDn' => $platformDn));
         }
 
-        $l = new ServerPeer();
-        $l->setBaseDn(sprintf("ou=Servers,%s", $platformDn));
-        $c = new LDAPCriteria();
-        $c->setBaseDn($serverDn);
-        $this->server = $l->retrieveByDn($c);
+        $ldapPeer = new ServerPeer();
+        $this->server = $ldapPeer->getServer($serverDn);
 
         $this->form = new ServerEditForm();
 
@@ -168,7 +165,7 @@ class serverActions extends sfActions
 
                 #var_dump( $this->server ); exit;
 
-                if ( $l->doSave($this->server) ) {
+                if ( $ldapPeer->doSave($this->server) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                     echo fake_post($this, '@server', Array('platformDn' => $platformDn));
                     exit;
@@ -181,38 +178,26 @@ class serverActions extends sfActions
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('serverDn')->setDefault($serverDn);
         $this->form->getWidget('ip')->setDefault($this->server->getIpHostNumber());
-
-        if ( $this->server->getZacaciaStatus() == 'enable' ) {
-            $this->form->getWidget('status')->setDefault('true');
-        }
+        $this->form->getWidget('status')->setDefault($this->server->getZacaciaStatus());
 
         $this->zarafa_settings_display = 'none';
 
         if ( $this->server->getZarafaAccount() ) {
             $this->zarafa_settings_display = 'block';
-            $this->form->getWidget('zarafaAccount')->setDefault('true');
-            $this->form->getWidget('zarafaHttpPort')->setDefault($this->server->getZarafaHttpPort());
-            $this->form->getWidget('zarafaSslPort')->setDefault($this->server->getZarafaSslPort());
-            if ( $this->server->getZarafaContainsPublic() ) {
-                $this->form->getWidget('zarafaContainsPublic')->setDefault('true');
-            }
-            if ( $this->server->getZacaciaMultiTenant() ) {
-                $this->form->getWidget('multitenant')->setDefault('true');
-            }
-            $this->form->getWidget('zarafaQuotaHard')->setDefault($this->server->getZarafaQuotaHard());
         }
 
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaPlatform');
-        $l = new PlatformPeer();
-        $l->setBaseDn($platformDn);
-        $this->platform = $l->retrieveByDn($c);
+        $this->form->getWidget('zarafaAccount')->setDefault($this->server->getZarafaAccount());
+        $this->form->getWidget('zarafaHttpPort')->setDefault($this->server->getZarafaHttpPort());
+        $this->form->getWidget('zarafaSslPort')->setDefault($this->server->getZarafaSslPort());
+        $this->form->getWidget('zarafaContainsPublic')->setDefault($this->server->getZarafaContainsPublic());
+        $this->form->getWidget('multitenant')->setDefault($this->server->getZacaciaMultiTenant());
+        $this->form->getWidget('zarafaQuotaHard')->setDefault($this->server->getZarafaQuotaHard());
+
+        $this->platform = $ldapPeer->getPlatform($platformDn);
 
         $this->cancel = new ServerNavigationForm();
         unset($this->cancel['serverDn']);
-        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
+        $this->cancel->getWidget('platformDn')->setDefault($platformDn);
     }
 
     public function executeStatus(sfWebRequest $request)

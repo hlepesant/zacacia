@@ -46,47 +46,54 @@ $(document).ready(function() {
                 name: $(this).val()
             },
             function(data){
-                $('input#zdata_cn').css('border', '1px solid #C0C0C0');
-                $('input#zdata_cn').css('background-color', '#FFFFFF');
+/*
+                if ( $('#cn').hasClass('ym-error') ) { 
+                    $('#cn').removeClass('ym-error');
+                    $('#cn-message').hide();
+                }
+*/
 
-                if ( data.disabled ) {
-                    $('input#zdata_cn').css('border', '1px solid #FF0000');
-                    $('input#zdata_cn').css('background-color', '#F58D82');
+                if ( data.disabled == true ) {
+                    $('#cn').addClass('ym-error');
+                    $('#cn-message').show();
+                    cn_ok = 0;
+                } else {
+                    $('#cn').removeClass('ym-error');
+                    $('#cn-message').hide();
+                    cn_ok = 1;
                 }
 
-                if ( ! data.disabled ) {
-                    $('.button-submit').removeAttr('disabled');
-                }
             }, 'json');
 
             $.get( json_resolvhost_url, { name: $(this).val() },
                 function(data){
                     $('input#zdata_ip').val(data.ip);
-                    if ( ! data.disabled ) {
-                        ip_ok = 1;
+                    if ( data.disabled ) {
+                        ip_ok = 0;
                     }
                     /* no network */
                     ip_ok = 1;
                     /* end no network */
-                    check_form();
                 },
                 'json');
+
+            check_form();
         }
     });
 
-    $("select#zdata_zarafaAccount").change(function() {
-
+    $('select#zdata_zarafaAccount').change(function() {
         if ($(this).val() == 1) {
-          $("#zarafa-settings").slideDown('slow');
+          $('#zarafa-settings').slideDown('slow');
         } else {
-          $("#zarafa-settings").slideUp();
+          $('#zarafa-settings').slideUp();
         }
     });
 });
 
 function check_form() {
-    $(".button-submit").attr("disabled", true);
+    $('.button-submit').attr('disabled', true);
+
     if ( (cn_ok == 1 ) && (ip_ok == 1) ) {
-        $(".button-submit").removeAttr("disabled");
+        $('.button-submit').removeAttr("disabled");
     }
 }

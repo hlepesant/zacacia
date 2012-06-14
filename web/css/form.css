@@ -12,3 +12,27 @@ font-size: 12px;
 font-weight: bold;
 color: #262626;
 }
+
+.ym-form .ym-error label {
+color:#800;
+font-weight:normal;
+}
+
+.ym-form .ym-error input,
+.ym-form .ym-error select,
+.ym-form .ym-error textarea {
+border: 2px #800 solid;
+}
+
+.ym-form .ym-error input:hover,
+.ym-form .ym-error input:focus,
+.ym-form .ym-error select:hover,
+.ym-form .ym-error select:focus,
+.ym-form .ym-error textarea:hover,
+.ym-form .ym-error textarea:focus {
+border: 2px #800 solid !important;
+}
+
+.ym-form .ym-message {
+display: none;
+}

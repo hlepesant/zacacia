@@ -22,7 +22,11 @@ $(document).ready(function() {
     });
 */
 
-    $('#logount-link').click(function() {
+    $('#back-link').click(function() {
+        $('#back_form').submit();
+    });
+
+    $('#logout-link').click(function() {
         if ( confirm(_js_msg_logout) == false ) {
             return false;
         }

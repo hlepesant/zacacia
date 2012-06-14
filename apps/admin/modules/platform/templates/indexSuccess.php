@@ -1,18 +1,16 @@
 <?php slot('menu_top') ?>
 <div class="z-menu">
-<div class="z-menu-line">
-    <strong><?php echo __('Platforms') ;?></strong>
+    <div class="z-menu-line">
+        <strong><?php echo __('Platforms') ;?></strong>
+    </div>
+    <div class="ym-grid z-menu-line">
+        <div class="ym-g40 ym-gl z-logout">
+            <?php echo link_to(__('Logout'), 'security/logout', array('id' => 'logout-link')) ?>
+        </div>
+        <div class="ym-g40 ym-gr z-back">
+        </div>
+    </div>
 </div>
-<div class="z-menu-line">
-<?php echo link_to(__('Logout'), 'security/logout', array('id' => 'logount-link')) ?>
-</div>
-</div>
-<?php end_slot() ?>
-
-
-
-<?php slot('menu_bottom') ?>
-<input type="button" value="<?php echo __("Logout") ?>" id="logout" class="button_logout" />
 <?php end_slot() ?>
 
 <div class="ym-grid z-content-header">

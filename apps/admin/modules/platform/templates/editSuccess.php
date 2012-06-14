@@ -4,7 +4,7 @@
     </div>
 </div>
 
-<form action="<?php echo url_for('platform/edit') ?>" method="POST" id="form_edit" class="ym-form">
+<form action="<?php echo url_for('platform/edit') ?>" method="POST" id="form_edit" class="ym-form ym-columnar">
 <?php echo $form->renderHiddenFields() ?>
 
 <div class="ym-fbox-select">

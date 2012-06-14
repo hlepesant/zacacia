@@ -4,7 +4,7 @@
     <div class="z-status-<?php echo $p->getZacaciaStatus() ?>"><?php echo $p->getCn() ?></div>
 </div>
 
-<div class="ym-g20 ym-gr">
+<div class="ym-g20 ym-gr z-action">
 
 <form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
 <?php 

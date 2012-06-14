@@ -1,16 +1,18 @@
 <?php slot('menu_top') ?>
 <div class="z-menu">
-<div class="z-menu-line">
-    <strong><?php echo __('Platforms') ;?> :</strong>
-    <?php echo $platform->getCn() ?>
-</div>
-<div class="z-menu-line">
-    <strong><?php echo __('Servers') ;?> :</strong>
-    <?php echo __('New') ;?>
-</div>
-<div class="z-menu-line">
-<?php echo link_to(__('Logout'), 'security/logout', array('id' => 'logount-link')) ?>
-</div>
+    <div class="z-menu-line">
+        <strong><?php echo __('Platform') ;?></strong> :
+        <?php echo $platform->getCn() ?>
+    </div>
+    <div class="z-menu-line">
+        <strong><?php echo __('Servers') ;?></strong> :
+        <?php echo __('New') ;?>
+    </div>
+    <div class="ym-grid z-menu-line">
+        <div class="ym-g40 ym-gl z-logout">
+            <?php echo link_to(__('Logout'), 'security/logout', array('id' => 'logout-link')) ?>
+        </div>
+    </div>
 </div>
 <?php end_slot() ?>
 
@@ -20,15 +22,17 @@
     </div>
 </div>
 
-<form action="<?php echo url_for('server/new') ?>" method="POST" id="form_new" class="ym-form">
+<form action="<?php echo url_for('server/new') ?>" method="POST" id="form_new" class="ym-form ym-columnar">
 <?php echo $form->renderHiddenFields() ?>
 
-<div class="ym-fbox-text">
+<div id="cn" class="ym-fbox-text">
 <?php echo $form['cn']->renderRow() ?>
+<p id="cn-message" class="ym-message">Error: invalid value!</p>
 </div>
 
 <div class="ym-fbox-text">
 <?php echo $form['ip']->renderRow() ?>
+<p class="ym-message">Error: invalid value!</p>
 </div>
 
 <div class="ym-fbox-select">
