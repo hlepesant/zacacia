@@ -25,6 +25,15 @@ class companyActions extends sfActions
             $this->redirect('@platform');
         }
 
+        $ldapPeer = new CompanyPeer();
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+        $this->companies= $ldapPeer->getCompanies($platformDn);
+
+/*
+        print_r( $this->platform );
+        print_r( $this->companies );
+        exit;
+
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
@@ -43,6 +52,7 @@ class companyActions extends sfActions
         $l->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
        
         $this->companies = $l->doSelect($c, 'extended');
+*/
         
         $id=0;
         $this->forms = array();

@@ -40,6 +40,24 @@ server_edit:
   url:   /server/edit/:pid/
   param: { module: server, action: edit }
 
+# company
+companys:
+  url:   /
+  param: { module: company, action: index }
+
+company_new:
+  url:   /company/add
+  param: { module: company, action: new }
+
+company_show:
+  url:   /company/show
+  param: { module: company, action: show }
+
+company_edit:
+  url:   /company/edit/:pid/
+  param: { module: company, action: edit }
+
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:

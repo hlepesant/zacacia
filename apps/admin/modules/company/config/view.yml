@@ -1,11 +1,14 @@
+all:
+    stylesheets:    [zacacia.css]
+
 indexSuccess:
-    stylesheets:    [collection.css, tooltip.css]
+    stylesheets:    [collection.css]
     javascripts:    [indexCompany.js]
 
 newSuccess:
-    stylesheets:    [form.css, input.css, button.css, tooltip.css, validator.css]
+    stylesheets:    [form.css]
     javascripts:    [newCompany.js, lib/jquery.observe_field.js]
 
 editSuccess:
-    stylesheets:    [form.css, input.css, button.css, tooltip.css, validator.css]
+    stylesheets:    [form.css]
     javascripts:    [editCompany.js]
