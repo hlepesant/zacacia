@@ -2,16 +2,9 @@
 
 class CompanyObject extends BaseCompanyObject
 {
-    public function setNumberOfDomains($l)
+    public function setNumberOfDomains($v)
     {
-        $c = new LDAPCriteria();
-        $c->setBaseDn(sprintf("ou=Domains,%s", $this->getDn()));
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'zacaciaDomain');
-        $c->add('cn', '*');
-        $count = $l->doCount($c);
-    
-        $this->attributes['numberOfDomains'] = $count;
+        $this->attributes['numberOfDomains'] = (int)$v;
    	    return $this;
     }
 
@@ -20,17 +13,10 @@ class CompanyObject extends BaseCompanyObject
         return $this->attributes['numberOfDomains'];
     }
     
-    public function setNumberOfUsers($l)
+    public function setNumberOfUsers($v)
     {
-        $c = new LDAPCriteria();
-        $c->setBaseDn(sprintf("ou=Users,%s", $this->getDn()));
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'zarafa-user');
-        $c->add('objectClass', 'zacaciaUser');
-        $c->add('cn', '*');
-        $count = $l->doCount($c);
     
-        $this->attributes['numberOfUsers'] = $count;
+        $this->attributes['numberOfUsers'] = $v;
    	    return $this;
     }
 
@@ -39,17 +25,9 @@ class CompanyObject extends BaseCompanyObject
         return $this->attributes['numberOfUsers'];
     }
     
-    public function setNumberOfGroups($l)
+    public function setNumberOfGroups($v)
     {
-        $c = new LDAPCriteria();
-        $c->setBaseDn(sprintf("ou=Groups,%s", $this->getDn()));
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'zarafa-group');
-        $c->add('objectClass', 'zacaciaGroup');
-        $c->add('cn', '*');
-        $count = $l->doCount($c);
-    
-        $this->attributes['numberOfGroups'] = $count;
+        $this->attributes['numberOfGroups'] = $v;
    	    return $this;
     }
 
@@ -58,16 +36,9 @@ class CompanyObject extends BaseCompanyObject
         return $this->attributes['numberOfGroups'];
     }
     
-    public function setNumberOfForwards($l)
+    public function setNumberOfForwards($v)
     {
-        $c = new LDAPCriteria();
-        $c->setBaseDn(sprintf("ou=Forwards,%s", $this->getDn()));
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'zacaciaForward');
-        $c->add('cn', '*');
-        $count = $l->doCount($c);
-    
-        $this->attributes['numberOfForwards'] = $count;
+        $this->attributes['numberOfForwards'] = $v;
    	    return $this;
     }
 
@@ -76,17 +47,9 @@ class CompanyObject extends BaseCompanyObject
         return $this->attributes['numberOfForwards'];
     }
     
-    public function setNumberOfContacts($l)
+    public function setNumberOfContacts($v)
     {
-        $c = new LDAPCriteria();
-        $c->setBaseDn(sprintf("ou=Contacts,%s", $this->getDn()));
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'zarafa-contact');
-        $c->add('objectClass', 'zacaciaContact');
-        $c->add('cn', '*');
-        $count = $l->doCount($c);
-    
-        $this->attributes['numberOfContacts'] = $count;
+        $this->attributes['numberOfContacts'] = $v;
    	    return $this;
     }
 
@@ -95,17 +58,9 @@ class CompanyObject extends BaseCompanyObject
         return $this->attributes['numberOfContacts'];
     }
     
-    public function setNumberOfAddressLists($l)
+    public function setNumberOfAddressLists($v)
     {
-        $c = new LDAPCriteria();
-        $c->setBaseDn(sprintf("ou=AddressLists,%s", $this->getDn()));
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'zarafa-addresslist');
-        $c->add('objectClass', 'zacaciaForward');
-        $c->add('cn', '*');
-        $count = $l->doCount($c);
-    
-        $this->attributes['numberOfAddressLists'] = $count;
+        $this->attributes['numberOfAddressLists'] = $v;
    	    return $this;
     }
 

@@ -61,12 +61,12 @@ class companyActions extends sfActions
             $form->getWidget('platformDn')->setDefault($platformDn);
             $form->getWidget('companyDn')->setDefault($company->getDn());
 
-            $company->setNumberOfDomains($l);
-            $company->setNumberOfUsers($l);
-            $company->setNumberOfGroups($l);
-            $company->setNumberOfForwards($l);
-            $company->setNumberOfContacts($l);
-            $company->setNumberOfAddressLists($l);
+            $company->setNumberOfDomains($ldapPeer->countDomains($company->getDn()));
+            $company->setNumberOfUsers($ldapPeer->countUsers($company->getDn()));
+            $company->setNumberOfGroups($ldapPeer->countGroups($company->getDn()));
+            $company->setNumberOfForwards($ldapPeer->countForwards($company->getDn()));
+            $company->setNumberOfContacts($ldapPeer->countContacts($company->getDn()));
+            $company->setNumberOfAddressLists($ldapPeer->countAddressLists($company->getDn()));
 
             $undeletable = (
                 $company->getNumberOfDomains() +
@@ -100,6 +100,8 @@ class companyActions extends sfActions
           $this->redirect('@platform');
         }
 
+        $ldapPeer = new CompanyPeer();
+
         $this->form = new CompanyForm();
 
         $this->form->getWidget('platformDn')->setDefault($platformDn);
@@ -109,14 +111,13 @@ class companyActions extends sfActions
             
             if ($this->form->isValid()) {
 
-                $l = new CompanyPeer();
-                $l->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
+                #$l->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
 
                 $company = new CompanyObject();
                 $company->setDn(sprintf("cn=%s,ou=Organizations,%s", $this->form->getValue('cn'), $platformDn));
                 $company->setCn($this->form->getValue('cn'));
                 $company->setZacaciaStatus($this->form->getValue('status'));
-                $company->setGidNumber($l->getNewGidNumber());
+                $company->setGidNumber($ldapPeer->getNewGidNumber());
 
                 if ( $this->form->getValue('zarafaQuotaOverride') ) {
                     $company->setZarafaQuotaOverride(1);
@@ -130,7 +131,7 @@ class companyActions extends sfActions
                     $company->setZarafaUserDefaultQuotaWarn($this->form->getValue('zarafaUserDefaultQuotaWarn'));
                 }
 
-                if ( $l->doAdd($company) ) {
+                if ( $ldapPeer->doAdd($company) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                     echo fake_post($this, '@company', Array('platformDn' => $platformDn));
                     exit;
@@ -144,13 +145,7 @@ class companyActions extends sfActions
         $l->setBaseDn(sprintf("ou=Companies,%s", $platformDn));
         $this->form->getWidget('zarafaCompanyServer')->setOption('choices', $l->getServerOptionList($platformDn));
 */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaPlatform');
-        $l = new PlatformPeer();
-        $l->setBaseDn($platformDn);
-        $this->platform = $l->retrieveByDn($c);
+        $this->platform = $ldapPeer->getPlatform($platformDn);
 
         $this->cancel = new CompanyNavigationForm();
         unset($this->cancel['companyDn'], $this->cancel['destination']);
