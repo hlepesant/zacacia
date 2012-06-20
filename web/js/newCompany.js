@@ -5,53 +5,71 @@
  */
 
 
+var cn_ok = 0;
+/* var ip_ok = 0;
+*/
+
 $(document).ready(function() {
 
-    $('.button_cancel').click(function() {
+    $('.button-cancel').click(function() {
         $("#form_cancel").submit();
     });
 
     $('input#zdata_cn').blur(function() {
-
-        $('#checkName_msg').html('');
-        $('.button_submit').attr('disabled', true);
 
         if ( $('input#zdata_cn').length ) {
             $.get( json_check_url, {
                 name: $(this).val()
             },
             function(data){
-                $('#checkName_msg').html('<img src=\"'+data.img+'\" />');
-                if ( ! data.disabled ) {
-                    $('.button_submit').removeAttr('disabled');
+
+                if ( data.disabled == true ) {
+                    $('#cn').addClass('ym-error');
+                    $('#cn-message').show();
+                    cn_ok = 0;
+                } else {
+                    $('#cn').removeClass('ym-error');
+                    $('#cn-message').hide();
+                    cn_ok = 1;
                 }
+
             }, 'json');
         }
+
+        check_form();
     });
 
-    $("input[type='checkbox']#zdata_zarafaAccount").change(function() {
-        if ($(this).is(':checked')) {
-          $('#zarafa_settings').slideDown('slow');
+    $('select#zdata_zarafaAccount').change(function() {
+        if ($(this).val() == 1) {
+          $('#zarafa-settings').slideDown('slow');
         } else {
-          $('#zarafa_settings').slideUp();
+          $('#zarafa-settings').slideUp();
         }
     });
 
-    $("input[type='checkbox']#zdata_zarafaQuotaOverride").change(function() {
-        if ($("input[type='checkbox']#zdata_zarafaQuotaOverride").is(':checked')) {
-            $('#zarafaQuota').show();
+    $('select#zdata_zarafaQuotaOverride').change(function() {
+        if ($(this).val() == 1) {
+          $('#zarafa-settings-zarafaquotawarn').slideDown('slow');
         } else {
-            $('#zarafaQuota').hide();
+          $('#zarafa-settings-zarafaquotawarn').slideUp();
         }
     });
 
-    $("input[type='checkbox']#zdata_zarafaUserDefaultQuotaOverride").change(function() {
-        if ($("input[type='checkbox']#zdata_zarafaUserDefaultQuotaOverride").is(':checked')) {
-            $('#zarafaUserDefaultQuota').show();
+    $('select#zdata_zarafaUserDefaultQuotaOverride').change(function() {
+        if ($(this).val() == 1) {
+          $('#zarafa-settings-userdefaultquota').slideDown('slow');
         } else {
-            $('#zarafaUserDefaultQuota').hide();
+          $('#zarafa-settings-userdefaultquota').slideUp();
         }
     });
 
 });
 
+function check_form() {
+
+    if ( cn_ok == 1 ) {
+        $('.button-submit').removeAttr("disabled");
+    } else {
+        $('.button-submit').attr('disabled', true);
+    }
+}

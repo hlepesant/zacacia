@@ -24,7 +24,7 @@ class CompanyForm extends ZacaciaForm
                 'maxlength' => '4', 
                 'data-message' => 'Enter a value between 25 and 2048',
             )),
-#
+
             'zarafaUserDefaultQuotaOverride'   => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
             'zarafaUserDefaultQuotaHard'     => new sfWidgetFormInput(),
             'zarafaUserDefaultQuotaSoft'     => new sfWidgetFormInput(),
@@ -34,17 +34,17 @@ class CompanyForm extends ZacaciaForm
         $this->widgetSchema->setLabels(array(
             'cn'            => 'Name',
             'status'        => 'Enable',
-#
+
             'zarafaAccount'         => 'Zarafa Account',
 #           'zarafaCompanyServer'   => 'Home server for the company', // dn
 
             'zarafaQuotaOverride'   => 'Override System Wide Quota', // integer
-            'zarafaQuotaWarn'       => ' - Company Warning Quota', // integer 
-#
+            'zarafaQuotaWarn'       => 'Company Warning Quota', // integer 
+
             'zarafaUserDefaultQuotaOverride'    => 'Override User Default Quota',
-            'zarafaUserDefaultQuotaHard'        => ' - User Hard Quota',
-            'zarafaUserDefaultQuotaSoft'        => ' - User Soft Quota',
-            'zarafaUserDefaultQuotaWarn'        => ' - User Warning Quota',
+            'zarafaUserDefaultQuotaHard'        => 'User Hard Quota',
+            'zarafaUserDefaultQuotaSoft'        => 'User Soft Quota',
+            'zarafaUserDefaultQuotaWarn'        => 'User Warning Quota',
         ));
 
         $this->setValidators(array(

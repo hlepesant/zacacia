@@ -1,16 +1,13 @@
 $(document).ready(function() {
 
-    $("#goback").click(function() {
-        $("#platform_back").submit();
+    $('#back-link').click(function() {
+        $('#back_form').submit();
     });
 
-    $("#gotonew").click(function() {
-        $("#company_new").submit();
-    });
-
-    $("img[title].tt").tooltip({
-        position: "bottom left",
-        opacity: 0.9
+    $('#logout-link').click(function() {
+        if ( confirm(_js_msg_logout) == false ) {
+            return false;
+        }
     });
 });
 

@@ -75,7 +75,7 @@ margin-bottom: 1em;
 
 .z-menu {
 border-top: 1px solid #191919;
-background-color: #6A6A6A;
+background-color: #222E44;
 margin: 0px;
 }
 
@@ -83,21 +83,26 @@ margin: 0px;
 height: 20px;
 font-size: 18px;
 font-weight: thicker;
-color: #000000;
+color: #FFFFFF;
 margin: 0px;
 padding: 5px 0px 5px 0px;
 border-bottom: 1px solid #191919;
 }
 
 .z-menu-line strong {
-color: #191919; 
+color: #FFFFFF; 
 font-weight: normal;
-text-decoration:underline;
+text-decoration: none;
 padding-left: 10px;
 }
 
 .z-menu-line a {
-color: #191919; 
+color: #FFFFFF; 
+text-decoration: none;
+}
+
+.z-menu-line a:hover {
+color: #008C00; 
 text-decoration: none;
 }
 

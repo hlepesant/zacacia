@@ -4,6 +4,9 @@
         <strong><?php echo __('Platform') ;?></strong> :
         <?php echo $platform->getCn() ?>
     </div>
+    <div class="z-menu-line">
+        <strong><?php echo __('Servers') ;?></strong>
+    </div>
     <div class="ym-grid z-menu-line">
         <div class="ym-g40 ym-gl z-logout">
             <?php echo link_to(__('Logout'), 'security/logout', array('id' => 'logout-link')) ?>
@@ -46,6 +49,6 @@ var _js_msg_enable = '".__("Enable the server")."';
 var _js_msg_delete = '".__("Delete the server")."';
 ") ?>
 
-<form action="<?php echo url_for('@platforms') ?>" method="POST" id="back_form" class="invisible">
+<form action="<?php echo url_for('@companies') ?>" method="POST" id="back_form" class="invisible">
 <?php echo $new->renderHiddenFields() ?>
 </form>

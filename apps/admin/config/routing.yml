@@ -41,7 +41,7 @@ server_edit:
   param: { module: server, action: edit }
 
 # company
-companys:
+companies:
   url:   /
   param: { module: company, action: index }
 

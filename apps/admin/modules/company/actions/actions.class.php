@@ -29,31 +29,6 @@ class companyActions extends sfActions
         $this->platform = $ldapPeer->getPlatform($platformDn);
         $this->companies= $ldapPeer->getCompanies($platformDn);
 
-/*
-        print_r( $this->platform );
-        print_r( $this->companies );
-        exit;
-
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaPlatform');
-        $l = new PlatformPeer();
-        $l->setBaseDn($platformDn);
-        $this->platform = $l->retrieveByDn($c);
-        
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zarafa-company');
-        $c->add('objectClass', 'zacaciaCompany');
-        
-        $l = new CompanyPeer();
-        $l->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
-       
-        $this->companies = $l->doSelect($c, 'extended');
-*/
-        
         $id=0;
         $this->forms = array();
         foreach ($this->companies as $company) {

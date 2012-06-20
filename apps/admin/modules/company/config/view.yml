@@ -7,7 +7,7 @@ indexSuccess:
 
 newSuccess:
     stylesheets:    [form.css]
-    javascripts:    [newCompany.js, lib/jquery.observe_field.js]
+    javascripts:    [newCompany.js, jquery/jquery.observe_field.js, jquery/jquery.tools.validator.min.js]
 
 editSuccess:
     stylesheets:    [form.css]

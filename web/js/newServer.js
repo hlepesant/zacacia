@@ -28,30 +28,12 @@ $(document).ready(function() {
 
 
     $('input#zdata_cn').blur(function() {
-/*
-        if ( $('input#zdata_cn').length ) {
 
-            $.get( json_check_url, { name: $(this).val() },
-                function(data){
-                    cn_ok = 0;
-                    if ( ! data.disabled ) {
-                        cn_ok = 1;
-                    }
-                    check_form();
-                },
-                'json');
-*/
         if ( $('input#zdata_cn').length ) {
             $.get( json_check_url, {
                 name: $(this).val()
             },
             function(data){
-/*
-                if ( $('#cn').hasClass('ym-error') ) { 
-                    $('#cn').removeClass('ym-error');
-                    $('#cn-message').hide();
-                }
-*/
 
                 if ( data.disabled == true ) {
                     $('#cn').addClass('ym-error');
