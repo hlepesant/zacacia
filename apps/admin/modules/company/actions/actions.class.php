@@ -27,7 +27,8 @@ class companyActions extends sfActions
 
         $ldapPeer = new CompanyPeer();
         $this->platform = $ldapPeer->getPlatform($platformDn);
-        $this->companies= $ldapPeer->getCompanies($platformDn);
+
+        $this->companies = $ldapPeer->getCompanies($platformDn);
 
         $id=0;
         $this->forms = array();
@@ -76,6 +77,7 @@ class companyActions extends sfActions
         }
 
         $ldapPeer = new CompanyPeer();
+        $this->platform = $ldapPeer->getPlatform($platformDn);
 
         $this->form = new CompanyForm();
 
@@ -120,7 +122,6 @@ class companyActions extends sfActions
         $l->setBaseDn(sprintf("ou=Companies,%s", $platformDn));
         $this->form->getWidget('zarafaCompanyServer')->setOption('choices', $l->getServerOptionList($platformDn));
 */
-        $this->platform = $ldapPeer->getPlatform($platformDn);
 
         $this->cancel = new CompanyNavigationForm();
         unset($this->cancel['companyDn'], $this->cancel['destination']);

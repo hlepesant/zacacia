@@ -2,14 +2,14 @@
 
 class CompanyPeer extends BaseCompanyPeer
 {
-    protected
-        $ldap = null;
-
-    public function __construct()
-    {
-        $this->ldap = parent::__construct();
-        return $this;
-    }
+#    protected
+#        $ldap = null;
+#
+#    public function __construct()
+#    {
+#        $this->ldap = parent::__construct();
+#        return $this;
+#    }
 
     public function getPlatform($dn)
     {
@@ -20,7 +20,7 @@ class CompanyPeer extends BaseCompanyPeer
         $criteria->add('objectClass', 'zacaciaPlatform');
         $criteria->setSortFilter('cn');
 
-        return $this->doSelectOne($criteria);
+        return $this->doSelectOne($criteria, 'BasePlatformObject');
     }
 
     public function getCompanies($dn)
@@ -33,7 +33,7 @@ class CompanyPeer extends BaseCompanyPeer
         $criteria->add('objectClass', 'zarafa-company');
         $criteria->add('objectClass', 'zacaciaCompany');
 
-        return $this->doSelect($criteria, 'extended');
+        return $this->doSelect($criteria, 'CompanyObject');
     }
 
     public function countDomains($dn)
