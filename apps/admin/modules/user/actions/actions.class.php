@@ -31,18 +31,19 @@ class userActions extends sfActions
               echo fake_post($this, '@company', Array('holdingDn' => $holdingDn));
               exit;
         }
-          
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'inetOrgPerson');
-        $c->add('objectClass', 'posixAccount');
-        $c->add('objectClass', 'zarafa-user');
-        $c->add('objectClass', 'zacaciaUser');
         
-        $l = new UserPeer();
-        $l->setBaseDn(sprintf("ou=Users,%s", $companyDn));
-        
-        $this->users = $l->doSelect($c, 'extended');
+        $ldapPeer = new UserPeer();
+
+
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+        $this->company = $ldapPeer->getCompany($companyDn);
+        $this->users = $ldapPeer->getUsers($companyDn);
+
+        print_r( $this->platform);
+        print_r( $this->company );
+        print_r( $this->users );
+        exit;
+
         
         $id=0;
         $this->forms = array();

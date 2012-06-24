@@ -18,7 +18,7 @@ class PlatformPeer extends BasePlatformPeer
         $criteria->setSortFilter('cn');
 
         $this->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
-        return $this->doSelect($criteria);
+        return $this->doSelect($criteria, 'BasePlatformObject');
     }
 
 /*
@@ -48,7 +48,7 @@ class PlatformPeer extends BasePlatformPeer
         $criteria->setSortFilter('cn');
 
         $this->setBaseDn($dn);
-        return $this->doSelectOne($criteria);
+        return $this->doSelectOne($criteria, 'BasePlatformObject');
     }
 
     public function countCompany($dn)

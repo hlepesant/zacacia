@@ -20,7 +20,7 @@ class ServerPeer extends BaseServerPeer
         $criteria->add('objectClass', 'zacaciaPlatform');
         $criteria->setSortFilter('cn');
 
-        return $this->doSelectOne($criteria);
+        return $this->doSelectOne($criteria, 'BasePlatformObject');
     }
 
     public function getServers($dn)
@@ -35,7 +35,7 @@ class ServerPeer extends BaseServerPeer
         $criteria->add('objectClass', 'zacaciaServer');
         #$criteria->add('objectClass', Array('top', 'organizationalRole', 'zarafa-server', 'ipHost', 'zacaciaServer'));
 
-        return $this->doSelect($criteria);
+        return $this->doSelect($criteria, 'BaseServerObject');
     }
 
     public function countUser($platform, $server)
@@ -60,7 +60,7 @@ class ServerPeer extends BaseServerPeer
         $criteria->add('objectClass', 'ipHost');
         $criteria->add('objectClass', 'zacaciaServer');
         
-        return $this->doSelectOne($criteria);
+        return $this->doSelectOne($criteria, 'BaseServerObject');
     }
 
     public function doSearch($cn)

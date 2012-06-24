@@ -18,7 +18,6 @@ class CompanyPeer extends BaseCompanyPeer
         $criteria->add('objectClass', 'top');
         $criteria->add('objectClass', 'organizationalRole');
         $criteria->add('objectClass', 'zacaciaPlatform');
-        $criteria->setSortFilter('cn');
 
         return $this->doSelectOne($criteria, 'BasePlatformObject');
     }

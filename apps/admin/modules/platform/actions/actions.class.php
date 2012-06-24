@@ -16,15 +16,6 @@ class platformActions extends sfActions
   */
     public function executeIndex(sfWebRequest $request)
     {
-    /*
-        $criteria = new LDAPCriteria();
-        $criteria->add('objectClass', 'zacaciaPlatform');
-        $criteria->setSortFilter('cn');
-        $l = new PlatformPeer();
-        $l->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
-        $this->platforms = $l->doSelect($criteria);
-        */
-
         $ldapPeer = new PlatformPeer();
         $this->platforms = $ldapPeer->getPlatforms();
 

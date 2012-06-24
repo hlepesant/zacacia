@@ -27,44 +27,44 @@ class BasePlatformPeer extends LDAPPeer
         return $ldap_criteria;
     }
 
-    private function createLDAPObject($ldap_entry)
-    {
-        $attributes = $this->extractAttributes($ldap_entry);
-        $values = $this->extractValues($ldap_entry, $attributes);
-        $dn = ldap_get_dn($this->getLinkId(), $ldap_entry);
-        
-        #$ldap_object = new BasePlatformObject();
-        $ldap_object = new PlatformObject();
-        $ldap_object->setDn($dn);
-        $ldap_object->__constructFrom($values);
-        return( $ldap_object );
-    }
+#    private function createLDAPObject($ldap_entry)
+#    {
+#        $attributes = $this->extractAttributes($ldap_entry);
+#        $values = $this->extractValues($ldap_entry, $attributes);
+#        $dn = ldap_get_dn($this->getLinkId(), $ldap_entry);
+#        
+#        #$ldap_object = new BasePlatformObject();
+#        $ldap_object = new PlatformObject();
+#        $ldap_object->setDn($dn);
+#        $ldap_object->__constructFrom($values);
+#        return( $ldap_object );
+#    }
 
-    public function doSelect(LDAPCriteria $ldap_criteria)
-    {
-        $ldap_criteria = self::configureCriteria($ldap_criteria);
-        $results = $this->select($ldap_criteria);
-        $ldap_entry = ldap_first_entry($this->getLinkId(), $results);
-        
-        $objects = array();
-        
-        if ($ldap_entry !== false) {
-            $objects[] = $this->createLDAPObject($ldap_entry);
-            while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry)) {
-                $objects[] = $this->createLDAPObject($ldap_entry);
-            }
-        }
-        
-        return $objects;
-    }
+#    public function doSelect(LDAPCriteria $ldap_criteria)
+#    {
+#        $ldap_criteria = self::configureCriteria($ldap_criteria);
+#        $results = $this->select($ldap_criteria);
+#        $ldap_entry = ldap_first_entry($this->getLinkId(), $results);
+#        
+#        $objects = array();
+#        
+#        if ($ldap_entry !== false) {
+#            $objects[] = $this->createLDAPObject($ldap_entry);
+#            while ($ldap_entry = ldap_next_entry($this->getLinkId(), $ldap_entry)) {
+#                $objects[] = $this->createLDAPObject($ldap_entry);
+#            }
+#        }
+#        
+#        return $objects;
+#    }
 
-    public function doSelectOne(LDAPCriteria $ldap_criteria)
-    {
-        $ldap_criteria = self::configureCriteria($ldap_criteria);
-        $results = $this->select($ldap_criteria);
-        $first_entry = ldap_first_entry($this->getLinkid(), $results);
-        return $this->createLDAPObject($first_entry);
-    }
+#    public function doSelectOne(LDAPCriteria $ldap_criteria)
+#    {
+#        $ldap_criteria = self::configureCriteria($ldap_criteria);
+#        $results = $this->select($ldap_criteria);
+#        $first_entry = ldap_first_entry($this->getLinkid(), $results);
+#        return $this->createLDAPObject($first_entry);
+#    }
 
     public function doCount(LDAPCriteria $ldap_criteria)
     {
