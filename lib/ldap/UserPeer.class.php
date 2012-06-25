@@ -24,7 +24,7 @@ class UserPeer extends BaseUserPeer
         $criteria->add('objectClass', 'zarafa-company');
         $criteria->add('objectClass', 'zacaciaCompany');
 
-        return $this->doSelect($criteria, 'BaseCompanyObject');
+        return $this->doSelectOne($criteria, 'BaseCompanyObject');
     }
 
     public function getUsers($dn)
@@ -38,7 +38,7 @@ class UserPeer extends BaseUserPeer
         $criteria->add('objectClass', 'zarafa-user');
         $criteria->add('objectClass', 'zacaciaUser');
 
-        return $this->doSelect($criteria, 'BaseUserObject');
+        return $this->doSelect($criteria, 'UserObject');
     }
 
     public function getNewUidNumber()

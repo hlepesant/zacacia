@@ -7,7 +7,7 @@ $(document).ready(function() {
     $("#gotonew").click(function() {
         $("#domain_new").submit();
     });
-
+/*
     $("img[title].tt").tooltip({
         position: "bottom left",
         opacity: 0.9
@@ -17,6 +17,7 @@ $(document).ready(function() {
         position: "top left",
         opacity: 0.9
     });
+*/
 });
 
 function jumpTo(id, name, target, status) {

@@ -34,7 +34,6 @@ class userActions extends sfActions
         
         $ldapPeer = new UserPeer();
 
-
         $this->platform = $ldapPeer->getPlatform($platformDn);
         $this->company = $ldapPeer->getCompany($companyDn);
         $this->users = $ldapPeer->getUsers($companyDn);

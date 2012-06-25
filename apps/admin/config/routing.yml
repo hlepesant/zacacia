@@ -42,7 +42,7 @@ server_edit:
 
 # company
 companies:
-  url:   /
+  url:   /company/
   param: { module: company, action: index }
 
 company_new:
@@ -56,6 +56,23 @@ company_show:
 company_edit:
   url:   /company/edit/:pid/
   param: { module: company, action: edit }
+
+# domain
+domains:
+  url:   /domain/
+  param: { module: domain, action: index }
+
+domain_new:
+  url:   /domain/add
+  param: { module: domain, action: new }
+
+#domain_show:
+#  url:   /domain/show
+#  param: { module: domain, action: show }
+
+domain_edit:
+  url:   /domain/edit/:pid/
+  param: { module: domain, action: edit }
 
 
 # generic rules
@@ -71,18 +88,18 @@ logout:
   url:   /:module/:action
   param: { module: security, action: logout }
 
-server:
-  url:   /server/:action
-  param: { }
-
-company:
-  url:   /company/:action
-  param: { module: company, action: index }
-
-domain:
-  url:   /domain/:action
-  param: { module: domain, action: index }
-
-user:
-  url:   /user/:action
-  param: { module: user, action: index }
+#server:
+#  url:   /server/:action
+#  param: { }
+#
+#company:
+#  url:   /company/:action
+#  param: { module: company, action: index }
+#
+#domain:
+#  url:   /domain/:action
+#  param: { module: domain, action: index }
+#
+#user:
+#  url:   /user/:action
+#  param: { module: user, action: index }

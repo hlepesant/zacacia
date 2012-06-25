@@ -22,45 +22,22 @@ class domainActions extends sfActions
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
-            $this->redirect('@platform');
+            $this->redirect('@platforms');
         }
           
         $companyDn = $request->getParameter('companyDn', $data['companyDn']);
         if ( empty($companyDn) ) {
               sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-              echo fake_post($this, '@company', Array('holdingDn' => $holdingDn));
+              echo fake_post($this, '@companies', Array('holdingDn' => $holdingDn));
               exit;
         }
 
-/* zacaciaPlatform */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaPlatform');
-        $l = new PlatformPeer();
-        $l->setBaseDn($platformDn);
-        $this->platform = $l->retrieveByDn($c);
+        $ldapPeer = new DomainPeer();
 
-/* zacaciaCompany */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaCompany');
-        $l = new CompanyPeer();
-        $l->setBaseDn($companyDn);
-        $this->company = $l->retrieveByDn($c);
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+        $this->company = $ldapPeer->getCompany($companyDn);
+        $this->domains = $ldapPeer->getDomains($companyDn);
 
-/* zacaciaDomain */          
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaDomain');
-        
-        $l = new DomainPeer();
-        $l->setBaseDn(sprintf("ou=Domains,%s", $companyDn));
-        
-        $this->domains = $l->doSelect($c, 'extended');
-        
         $id=0;
         $this->forms = array();
         foreach ($this->domains as $domain)
@@ -69,14 +46,6 @@ class domainActions extends sfActions
             $form->getWidget('platformDn')->setDefault($platformDn);
             $form->getWidget('companyDn')->setDefault($companyDn);
             $form->getWidget('domainDn')->setDefault($domain->getDn());
-            
-            $criteria_user = new LDAPCriteria();
-            $criteria_user->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
-            $criteria_user->add('objectClass', 'zarafa-user');
-            $criteria_user->add('zarafaUserServer', $domain->getCn());
-            $count_user = $l->doCount($criteria_user);
-            
-            $domain->set('user_count', $count_user);
         
             $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
             $form->getWidget('companyDn')->setIdFormat(sprintf('%%s_%03d', $id));
@@ -98,13 +67,13 @@ class domainActions extends sfActions
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
           $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
-          $this->redirect('@platform');
+          $this->redirect('@platforms');
         }
           
         $companyDn = $request->getParameter('companyDn', $data['companyDn']);
         if ( empty($companyDn) ) {
               sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-              echo fake_post($this, '@domain', Array('holdingDn' => $holdingDn, 'companyDn' => $companyDn));
+              echo fake_post($this, '@companies', Array('holdingDn' => $holdingDn));
               exit;
         }
     
@@ -158,6 +127,7 @@ class domainActions extends sfActions
         $this->cancel->getWidget('companyDn')->setDefault($this->company->getDn());
     }
 
+/*
     public function executeEdit(sfWebRequest $request)
     {
         $data = $request->getParameter('zdata');
@@ -217,7 +187,6 @@ class domainActions extends sfActions
             $this->form->getWidget('status')->setDefault('true');
         }
 
-/* zacaciaPlatform */
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
@@ -226,7 +195,6 @@ class domainActions extends sfActions
         $l->setBaseDn($platformDn);
         $this->platform = $l->retrieveByDn($c);
 
-/* zacaciaCompany */
         $c = new LDAPCriteria();
         $c->add('objectClass', 'top');
         $c->add('objectClass', 'organizationalRole');
@@ -240,45 +208,44 @@ class domainActions extends sfActions
         $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
         $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
     }
+*/
 
     public function executeStatus(sfWebRequest $request)
     {
         $platformDn = $request->getParameter('platformDn');
         if ( empty($platformDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
-            $this->redirect('@platform');
+            $this->redirect('@platforms');
         }
         
         $companyDn = $request->getParameter('companyDn');
         if ( empty($companyDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing company's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, '@company', Array('platformDn' => $platformDn));
+            echo fake_post($this, '@companies', Array('platformDn' => $platformDn));
         }
         
         $domainDn = $request->getParameter('domainDn');
         if ( empty($domainDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing domain's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, '@domain', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
-        }
-        
-        $c = new LDAPCriteria();
-        $c->setBaseDn($domainDn);
-        
-        $l = new DomainPeer();
-        $d = $l->retrieveByDn($c);
-        
-        if ( 'enable' === $d->getZacaciaStatus()) {
-            $d->setZacaciaStatus(false);
-        } else {
-            $d->setZacaciaStatus(true);
+            echo fake_post($this, '@domains', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         }
 
-        $l->doSave($d);
+        $ldapPeer = new DomainPeer();
+
+        $domain = $ldapPeer->getDomain($domainDn);
+
+        if ( 'enable' === $domain->getZacaciaStatus()) {
+            $domain->setZacaciaStatus(false);
+        } else {
+            $domain->setZacaciaStatus(true);
+        }
+
+        $ldapPeer->doSave($domain);
         
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-        echo fake_post($this, '@domain', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+        echo fake_post($this, '@domains', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         exit;
     }
 
@@ -287,21 +254,21 @@ class domainActions extends sfActions
         $platformDn = $request->getParameter('platformDn');
         if ( empty($platformDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
-            $this->redirect('@platform');
+            $this->redirect('@platforms');
         }
 
         $companyDn = $request->getParameter('companyDn');
         if ( empty($companyDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing company's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, '@company', Array('platformDn' => $platformDn));
+            echo fake_post($this, '@companies', Array('platformDn' => $platformDn));
         }
         
         $domainDn = $request->getParameter('domainDn');
         if ( empty($domainDn) ) {
             $this->getUser()->setFlash('miniJsAlert', "Missing domain's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, '@domain', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+            echo fake_post($this, '@domains', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         }
         
         

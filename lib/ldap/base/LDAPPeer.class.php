@@ -250,11 +250,9 @@ class LDAPPeer
 
     }
 
-
-
-
     public function doCount(LDAPCriteria $ldap_criteria)
     {
+        $ldap_criteria = self::configureCriteria($ldap_criteria);
         $results = $this->select($ldap_criteria);
         return ldap_count_entries($this->getLinkId(), $results);
     }
