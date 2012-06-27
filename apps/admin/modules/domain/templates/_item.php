@@ -10,12 +10,6 @@
 <?php 
     echo $f->renderHiddenFields();
 
-/* -- Edit -- */
-/*
-            echo link_to_function(
-                image_tag('famfam/page_white_edit.png', array('title' => 'Edit')),
-                "jumpTo('".sprintf('%03d', $id)."', '".addslashes($d->getCn())."', 'edit', null)");
-*/
 /* -- Status -- */
             echo link_to_function(
                 image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Status')),

@@ -74,4 +74,17 @@ class DomainPeer extends BaseDomainPeer
 
         return $this->doCount($criteria);
     }
+
+    public function doSearch($cn)
+    {
+        $this->setBaseDn(sfConfig::get('ldap_base_dn'));
+
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'organizationalRole');
+        $criteria->add('objectClass', 'zacaciaDomain');
+        $criteria->add('cn', $cn);
+
+        return $this->doCount($criteria);
+    }
 }

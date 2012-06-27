@@ -7,7 +7,7 @@ class DomainForm extends ZacaciaForm
             'platformDn'    => new sfWidgetFormInputHidden(),
             'companyDn'     => new sfWidgetFormInputHidden(),
             'cn'            => new sfWidgetFormInput(),
-            'status'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1', 'default' => '1')),
+            'status'        => new sfWidgetFormChoice(array('choices' => self::$option_status)),
         ));
     
         $this->widgetSchema->setLabels(array(
@@ -19,7 +19,7 @@ class DomainForm extends ZacaciaForm
             'platformDn'    => new sfValidatorString(),
             'companyDn'     => new sfValidatorString(),
             'cn'            => new sfValidatorString(),
-            'status'        => new sfValidatorBoolean(),
+            'status'        => new sfValidatorChoice(array('choices' => array_keys(self::$option_status))),
         ));
 
         $this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));

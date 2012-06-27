@@ -76,6 +76,8 @@ class domainActions extends sfActions
               echo fake_post($this, '@companies', Array('holdingDn' => $holdingDn));
               exit;
         }
+        
+        $ldapPeer = new DomainPeer();
     
         $this->form = new DomainForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
@@ -85,17 +87,16 @@ class domainActions extends sfActions
             $this->form->bind($request->getParameter('zdata'));
             
                 if ($this->form->isValid()) {
-                    $l = new DomainPeer();
-                    $l->setBaseDn(sprintf("ou=Domains,%s", $companyDn));
+                    $ldapPeer->setBaseDn(sprintf("ou=Domains,%s", $companyDn));
                     
                     $domain = new DomainObject();
-                    $domain->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $l->getBaseDn()));
+                    $domain->setDn(sprintf("cn=%s,%s", $this->form->getValue('cn'), $ldapPeer->getBaseDn()));
                     $domain->setCn($this->form->getValue('cn'));
                     $domain->setZacaciaStatus($this->form->getValue('status'));
 
-                    if ( $l->doAdd($domain) ) {
+                    if ( $ldapPeer->doAdd($domain) ) {
                         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                        echo fake_post($this, '@domain', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+                        echo fake_post($this, '@domains', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
                         exit;
                     }
                 } else {
@@ -103,112 +104,14 @@ class domainActions extends sfActions
                 }
         }
 
-/* zacaciaPlatform */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaPlatform');
-        $l = new PlatformPeer();
-        $l->setBaseDn($platformDn);
-        $this->platform = $l->retrieveByDn($c);
-
-/* zacaciaCompany */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaCompany');
-        $l = new CompanyPeer();
-        $l->setBaseDn($companyDn);
-        $this->company = $l->retrieveByDn($c);
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+        $this->company = $ldapPeer->getCompany($companyDn);
         
         $this->cancel = new DomainNavigationForm();
         unset($this->cancel['domainDn']);
-        $this->cancel->getWidget('platformDn')->setDefault($this->platform->getDn());
-        $this->cancel->getWidget('companyDn')->setDefault($this->company->getDn());
+        $this->cancel->getWidget('platformDn')->setDefault($platformDn);
+        $this->cancel->getWidget('companyDn')->setDefault($companyDn);
     }
-
-/*
-    public function executeEdit(sfWebRequest $request)
-    {
-        $data = $request->getParameter('zdata');
-        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
-        if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('miniJsAlert', "Missing platform's DN.");
-            $this->redirect('@platform');
-        }
-          
-        $companyDn = $request->getParameter('companyDn', $data['companyDn']);
-        if ( empty($companyDn) ) {
-            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-            echo fake_post($this, '@company', Array('holdingDn' => $holdingDn));
-            exit;
-        }
-          
-        $domainDn = $request->getParameter('domainDn', $data['domainDn']);
-        if ( empty($domainDn) ) {
-            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-            echo fake_post($this, '@company', Array('holdingDn' => $holdingDn, 'companyDn' => $companyDn));
-            exit;
-        }
-
-        $l = new DomainPeer();
-        $l->setBaseDn(sprintf("ou=Domains,%s", $companyDn));
-        
-        $c = new LDAPCriteria();
-        $c->setBaseDn($domainDn);
-
-        $this->domain = $l->retrieveByDn($c);
-
-        $this->form = new DomainEditForm();
-
-        if ($request->isMethod('post') && $request->getParameter('zdata')) {
-
-            $this->form->bind($request->getParameter('zdata'));
-            
-                if ($this->form->isValid()) {
-                    $this->domain->setZacaciaStatus($this->form->getValue('status'));
-                    #var_dump( $this->domain ); exit;
-
-                    if ( $l->doSave($this->domain) ) {
-                        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                        echo fake_post($this, '@domain', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
-                        exit;
-                    }
-                } else {
-                    $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
-                }
-        }
-
-        $this->form->getWidget('platformDn')->setDefault($platformDn);
-        $this->form->getWidget('companyDn')->setDefault($companyDn);
-        $this->form->getWidget('domainDn')->setDefault($domainDn);
-
-        if ( $this->domain->getZacaciaStatus() == 'enable' ) {
-            $this->form->getWidget('status')->setDefault('true');
-        }
-
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaPlatform');
-        $l = new PlatformPeer();
-        $l->setBaseDn($platformDn);
-        $this->platform = $l->retrieveByDn($c);
-
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaCompany');
-        $l = new CompanyPeer();
-        $l->setBaseDn($companyDn);
-        $this->company = $l->retrieveByDn($c);
-
-        $this->cancel = new DomainNavigationForm();
-        unset($this->cancel['domainDn'], $this->cancel['destination']);
-        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
-        $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
-    }
-*/
 
     public function executeStatus(sfWebRequest $request)
     {
@@ -233,7 +136,6 @@ class domainActions extends sfActions
         }
 
         $ldapPeer = new DomainPeer();
-
         $domain = $ldapPeer->getDomain($domainDn);
 
         if ( 'enable' === $domain->getZacaciaStatus()) {
@@ -272,47 +174,32 @@ class domainActions extends sfActions
         }
         
         
-        $c = new LDAPCriteria();
-        $c->setBaseDn($domainDn);
-        
-        $l = new DomainPeer();
-        $d = $l->retrieveByDn($c);
+        $ldapPeer = new DomainPeer();
+        $domain = $ldapPeer->getDomain($domainDn);
 
-        if ( 'disable' === $d->getZacaciaStatus())
-        {
-            $l->doDelete($d, false);
+        if ( 'disable' === $domain->getZacaciaStatus()) {
+            $ldapPeer->doDelete($domain, false);
         }
         
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-        echo fake_post($this, '@domain', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+        echo fake_post($this, '@domains', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         exit;
     }
 
 /* WebServices */
     public function executeCheck(sfWebRequest $request)
     {
-        $this->setTemplate('check');
         $this->setLayout(false);
-        $this->count = 0;
         
         $pattern = sfConfig::get('domain_pattern');
         
-        if ( ! preg_match($pattern, $request->getParameter('name') ) )
-        {
-            $this->count = 1;
+        if ( ! preg_match($pattern, $request->getParameter('name') ) ) {
+            $this->exist = 1;
             return sfView::SUCCESS;
         }
-        $l = new ServerPeer();
-        $c = new LDAPCriteria();
-        
-        $c->setBaseDn( sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')) );
-        
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'miniDomain');
-        $c->add('cn', $request->getParameter('name'));
-        
-        $this->count = $l->doCount($c);
+
+        $ldapPeer = new DomainPeer();
+        $this->exist = $ldapPeer->doSearch($request->getParameter('name'));
         
         return sfView::SUCCESS;
     }
