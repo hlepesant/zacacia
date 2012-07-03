@@ -25,21 +25,16 @@
 
 <?php
 $id = 0;
-foreach ($platforms as $p) {
-    include_partial('item', array('p' => $p, 'id' => $id, 'f' => $forms[$p->getDn()]));
+foreach ($platforms as $platform) {
+    include_partial('item', array('platform' => $platform, 'id' => $id, 'f' => $forms[$platform->getDn()]));
     $id++;
 }
 ?>
 <!-- end #collection -->
 
 <?php echo javascript_tag("
-var show_url = '".url_for('@platform_show')."';
-var new_url = '".url_for('@platform_new')."';
-var logout_url = '".url_for('security/logout')."';
-
 var _js_module = '".$this->getModuleName()."';
 var _js_url = '".url_for(false)."';
-
 var _js_msg_disable = '".__("Disable the platform")."';
 var _js_msg_enable = '".__("Enable the platform")."';
 var _js_msg_delete = '".__("Delete the platform")."';

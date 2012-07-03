@@ -18,7 +18,43 @@ class PlatformPeer extends BasePlatformPeer
         $criteria->setSortFilter('cn');
 
         $this->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
-        return $this->doSelect($criteria, 'BasePlatformObject');
+        #return $this->doSelect($criteria, 'BasePlatformObject');
+
+        $platforms = $this->doSelect($criteria, 'PlatformObject');
+
+        foreach ($platforms as $platform) {
+            $platform->set('company_count', $this->countCompanyOnPlatform($platform));
+            $platform->set('server_count', $this->countServerOnPlatform($platform));
+        }
+
+        return $platforms;
+    }
+
+    public function countCompanyOnPlatform($platform)
+    {
+        $this->setBaseDn($platform->getDn());
+
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'organizationalRole');
+        $criteria->add('objectClass', 'zarafa-company');
+        $criteria->add('objectClass', 'zacaciaCompany');
+
+        return $this->doCount($criteria);
+    }
+
+    public function countServerOnPlatform($platform)
+    {
+        $this->setBaseDn($platform->getDn());
+
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'organizationalRole');
+        $criteria->add('objectClass', 'zarafa-server');
+        $criteria->add('objectClass', 'ipHost');
+        $criteria->add('objectClass', 'zacaciaServer');
+
+        return $this->doCount($criteria);
     }
 
 /*

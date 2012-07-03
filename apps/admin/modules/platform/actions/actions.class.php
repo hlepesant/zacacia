@@ -25,11 +25,7 @@ class platformActions extends sfActions
 
             $form = new PlatformNavigationForm();
             $form->getWidget('platformDn')->setDefault($platform->getDn());
-
-            $platform->set('company_count', $ldapPeer->countCompany($platform->getDn()));
-
             $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
-
             $this->forms[$platform->getDn()] = $form;
             $id++;
         }
@@ -76,22 +72,6 @@ class platformActions extends sfActions
         }
         $this->cancel = new PlatformNavigationForm();
         unset($this->cancel['platformDn']);
-    }
-
-    public function executeShow(sfWebRequest $request)
-    {
-        $platformDn = base64_decode($request->getParameter('selectedPlatform'));
-
-        if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
-            $this->redirect('@platforms');
-        }
-
-        $ldapPeer = new PlatformPeer();
-        $this->platform = $ldapPeer->getPlatform($platformDn);
-        print( $this->platform->getCn() );
-
-        exit;
     }
 
     public function executeEdit(sfWebRequest $request)

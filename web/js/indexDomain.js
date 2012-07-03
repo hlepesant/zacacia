@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-    $("#goback").click(function() {
-        $("#company_back").submit();
+    $('#back-link').click(function() {
+        $('#back_form').submit();
     });
 
     $("#gotonew").click(function() {

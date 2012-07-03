@@ -40,7 +40,7 @@ foreach ($domains as $d) {
 }
 ?>
 
-<?php echo javascript_tag("
+<?php /* echo javascript_tag("
 var new_url = '".url_for('@domain_new')."';
 var logout_url = '".url_for('security/logout')."';
 
@@ -50,7 +50,7 @@ var _js_url = '".url_for(false)."';
 var _js_msg_disable = '".__("Disable the domain")."';
 var _js_msg_enable = '".__("Enable the domain")."';
 var _js_msg_delete = '".__("Delete the domain")."';
-") ?>
+") */ ?>
 
 <form action="<?php echo url_for('@companies') ?>" method="POST" id="back_form" class="invisible">
 <?php echo $new->renderHiddenFields() ?>
