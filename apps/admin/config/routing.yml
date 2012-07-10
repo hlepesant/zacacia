@@ -66,15 +66,6 @@ domain_new:
   url:   /domain/add
   param: { module: domain, action: new }
 
-#domain_show:
-#  url:   /domain/show
-#  param: { module: domain, action: show }
-
-domain_edit:
-  url:   /domain/edit/:pid/
-  param: { module: domain, action: edit }
-
-
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
@@ -87,19 +78,3 @@ default:
 logout:
   url:   /:module/:action
   param: { module: security, action: logout }
-
-#server:
-#  url:   /server/:action
-#  param: { }
-#
-#company:
-#  url:   /company/:action
-#  param: { module: company, action: index }
-#
-#domain:
-#  url:   /domain/:action
-#  param: { module: domain, action: index }
-#
-#user:
-#  url:   /user/:action
-#  param: { module: user, action: index }

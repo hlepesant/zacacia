@@ -65,11 +65,5 @@
   </div>
 </footer>
 
-<?php echo javascript_tag("
-var _js_msg_logout = '".__("Quit Zacacia ?")."';
-") ?>
-
-
-
 </body>
 </html>

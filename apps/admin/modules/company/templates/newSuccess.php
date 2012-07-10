@@ -10,7 +10,7 @@
     </div>
     <div class="ym-grid z-menu-line">
         <div class="ym-g40 ym-gl z-logout">
-            <?php echo link_to(__('Logout'), 'security/logout', array('id' => 'logout-link')) ?>
+            <?php echo link_to(__('Logout'), 'security/logout', array('id' => 'logout-link', 'confirm' => __('Quit Zacacia ?'))) ?>
         </div>
     </div>
 </div>

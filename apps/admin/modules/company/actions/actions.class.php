@@ -17,8 +17,6 @@ class companyActions extends sfActions
   */
     public function executeIndex(sfWebRequest $request)
     {
-        print_r( $_POST );
-        print_r( $_GET ); exit;
         $data = $request->getParameter('zdata');
         
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);

@@ -1,19 +1,15 @@
 <div class="ym-grid z-line z-<?php echo (($id & 1) ? 'odd' : 'even'); ?>">
-
-<div class="ym-g50 ym-gl">
-    <div class="z-status-<?php echo $d->getZacaciaStatus() ?>"><?php echo $d->getCn() ?></div>
-</div>
-
-<div class="ym-g30 ym-gl z-notice">
+    <div class="ym-g50 ym-gl">
+        <div class="z-status-<?php echo $d->getZacaciaStatus() ?>"><?php echo $d->getCn() ?></div>
+    </div>
+    <div class="ym-g30 ym-gl z-notice">
 <?php 
-    echo $d->get('email_count');
-    echo __(' email');
-    echo($d->get('email_count') > 1 ? 's' : '')
+echo $d->get('email_count');
+echo __(' email');
+echo($d->get('email_count') > 1 ? 's' : '')
 ?>
-</div>
-
-<div class="ym-g20 ym-gr z-action">
-
+    </div>
+    <div class="ym-g20 ym-gr z-action">
 <form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
 <?php 
     echo $f->renderHiddenFields();
@@ -32,7 +28,7 @@
                 echo image_tag('famfam/blank.png');
             }
 ?>
-</div>
 </form>
+    </div>
 </div>
 <!-- next -->

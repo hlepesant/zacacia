@@ -9,7 +9,7 @@
     <?php echo $server->getCn() ?>
 </div>
 <div class="z-menu-line">
-<?php echo link_to(__('Logout'), 'security/logout', array('id' => 'logount-link')) ?>
+<?php echo link_to(__('Logout'), 'security/logout', array('id' => 'logount-link', 'confirm' => __('Quit Zacacia ?'))) ?>
 </div>
 </div>
 <?php end_slot() ?>
