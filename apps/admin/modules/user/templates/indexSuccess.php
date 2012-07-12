@@ -5,7 +5,11 @@
         <?php echo $platform->getCn() ?>
     </div>
     <div class="z-menu-line">
-        <strong><?php echo __('Companies') ;?></strong>
+        <strong><?php echo __('Company') ;?></strong> :
+        <?php echo $company->getCn() ?>
+    </div>
+    <div class="z-menu-line">
+        <strong><?php echo __('Users') ;?></strong>
     </div>
     <div class="ym-grid z-menu-line">
         <div class="ym-g40 ym-gl z-logout">
@@ -19,9 +23,9 @@
 <?php end_slot() ?>
 
 <div class="ym-grid z-content-header">
-  <div class="ym-g70 ym-gl z-content-header-title"><?php echo __("All Companies") ?></div>
+  <div class="ym-g70 ym-gl z-content-header-title"><?php echo __("All Users") ?></div>
   <div class="ym-g30 ym-gr">
-    <form action="<?php echo url_for('company/new') ?>" method="POST" id="company_new" class="invisible">
+    <form action="<?php echo url_for('user/new') ?>" method="POST" id="user_new" class="invisible">
     <?php echo $new->renderHiddenFields(); ?>
     <input type="submit" value="<?php echo __("New") ?>" class="ym-button z-button-new" />
     </form>
@@ -30,29 +34,25 @@
 
 <?php
 $id = 0;
-foreach ($companies as $c) {
-    include_partial('item', array('c' => $c, 'id' => $id, 'f' => $forms[$c->getDn()]));
+foreach ($users as $user) {
+    include_partial('item', array('user' => $user, 'id' => $id, 'form' => $forms[$user->getDn()]));
     $id++;
 }
 ?>
 <!-- end #collection -->
 
 <?php echo javascript_tag("
-var show_url = '".url_for('@company_show')."';
-var new_url = '".url_for('@company_new')."';
-/*
-var logout_url = '".url_for('security/logout')."';
-*/
+var new_url = '".url_for('@user_new')."';
 
 var _js_module = '".$this->getModuleName()."';
 var _js_url = '".url_for(false)."';
 
-var _js_msg_disable = '".__("Disable the company")."';
-var _js_msg_enable = '".__("Enable the company")."';
-var _js_msg_delete = '".__("Delete the company")."';
+var _js_msg_disable = '".__("Disable the user")."';
+var _js_msg_enable = '".__("Enable the user")."';
+var _js_msg_delete = '".__("Delete the user")."';
 ") ?>
 
-<form action="<?php echo url_for('@platforms') ?>" method="POST" id="back_form" class="invisible">
+<form action="<?php echo url_for('@companies') ?>" method="POST" id="back_form" class="invisible">
 <?php echo $new->renderHiddenFields() ?>
 </form>
 

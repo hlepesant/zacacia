@@ -1,15 +1,18 @@
+all:
+    stylesheets:    [zacacia.css]
+
 indexSuccess:
-    stylesheets:    [collection.css, tooltip.css]
+    stylesheets:    [collection.css]
     javascripts:    [indexUser.js]
 
 newSuccess:
-    stylesheets:    [form.css, input.css, button.css, tooltip.css, validator.css, password.css]
-    javascripts:    [newUser.js, lib/jquery.observe_field.js, lib/jquery.pwdMeter.min-1.0.1.js, lib/jquery.crypt-1.1.0.js]
+    stylesheets:    [form.css]
+    javascripts:    [newUser.js, jquery/jquery.observe_field.js, jquery/jquery.pwdMeter.min-1.0.1.js, jquery/jquery.crypt-1.1.0.js]
 
 editSuccess:
-    stylesheets:    [form.css, input.css, button.css, tooltip.css, validator.css]
-    javascripts:    [editUser.js, lib/jquery.observe_field.js]
+    stylesheets:    [form.css]
+    javascripts:    [editUser.js]
 
 passwordSuccess:
-    stylesheets:    [form.css, input.css, button.css, tooltip.css, validator.css, password.css]
-    javascripts:    [passwordUser.js, lib/jquery.observe_field.js, lib/jquery.pwdMeter.min-1.0.1.js, lib/jquery.crypt-1.1.0.js]
+    stylesheets:    [form.css]
+    javascripts:    [passwordUser.js, jquery/jquery.observe_field.js, jquery/jquery.pwdMeter.min-1.0.1.js, jquery/jquery.crypt-1.1.0.js]

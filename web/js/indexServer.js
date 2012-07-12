@@ -1,27 +1,4 @@
 $(document).ready(function() {
-/*
-    $("#goback").hover(function() {
-        alert('go back');
-    });
-    $("#goback").click(function() {
-        $("#platform_back").submit();
-    });
-
-    $("#gotonew").click(function() {
-        $("#server_new").submit();
-    });
-
-    $("img[title].tt").tooltip({
-        position: "bottom left",
-        opacity: 0.9
-    });
-
-    $("img[title].act").tooltip({
-        position: "top left",
-        opacity: 0.9
-    });
-*/
-
     $('#back-link').click(function() {
         $('#back_form').submit();
     });

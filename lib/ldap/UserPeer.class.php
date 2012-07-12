@@ -41,11 +41,30 @@ class UserPeer extends BaseUserPeer
         return $this->doSelect($criteria, 'UserObject');
     }
 
+    public function getDomainsAsOption($dn)
+    {
+        $this->setBaseDn(sprintf("ou=Domains,%s", $dn));
+
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'organizationalRole');
+        $criteria->add('objectClass', 'zacaciaDomain');
+        
+        $domains = $this->doSelect($criteria, 'domainObject');
+        $options = array();
+        foreach ( $domains as $domain ) {
+            $options[ $domain->getCn() ] = $domain->getCn();
+        }
+
+        return $options;
+    }
+
     public function getNewUidNumber()
     {
         $uidNumber = sfConfig::get('uid_min');
 
         $l = clone $this;
+        die("why clone");
         $l->setBaseDn(sfConfig::get('ldap_base_dn'));
 
         $c = new LDAPCriteria();

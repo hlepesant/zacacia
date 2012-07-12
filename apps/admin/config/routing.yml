@@ -49,9 +49,9 @@ company_new:
   url:   /company/add
   param: { module: company, action: new }
 
-company_show:
-  url:   /company/show
-  param: { module: company, action: show }
+#company_show:
+#  url:   /company/show
+#  param: { module: company, action: show }
 
 company_edit:
   url:   /company/edit/:pid/
@@ -65,6 +65,19 @@ domains:
 domain_new:
   url:   /domain/add
   param: { module: domain, action: new }
+
+# user
+users:
+  url:   /user/
+  param: { module: user, action: index }
+
+user_new:
+  url:   /user/add
+  param: { module: user, action: new }
+
+user_edit:
+  url:   /user/edit/:pid/
+  param: { module: user, action: edit }
 
 # generic rules
 # please, remove them by adding more specific rules

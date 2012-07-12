@@ -33,9 +33,9 @@ function jumpTo(id, name, target, status) {
 
         case 'status':
             if ( 'enable' == status ) {
-                var alert_msg = _js_msg_01;
+                var alert_msg = _js_msg_disable;
             } else {
-                var alert_msg = _js_msg_02;
+                var alert_msg = _js_msg_enable;
             }
             
             if ( ! confirm( alert_msg + ' ' + name + ' ?') ) {
@@ -44,7 +44,7 @@ function jumpTo(id, name, target, status) {
         break;
 
         case 'delete':
-            if ( ! confirm( _js_msg_03 + ' ' + name + ' ?') ) {
+            if ( ! confirm( _js_msg_delete + ' ' + name + ' ?') ) {
                 return false;
             }
         break;

@@ -37,7 +37,6 @@ class userActions extends sfActions
         $this->platform = $ldapPeer->getPlatform($platformDn);
         $this->company = $ldapPeer->getCompany($companyDn);
         $this->users = $ldapPeer->getUsers($companyDn);
-
         
         $id=0;
         $this->forms = array();
@@ -60,24 +59,6 @@ class userActions extends sfActions
         unset($this->new['userDn']);
         $this->new->getWidget('platformDn')->setDefault($platformDn);
         $this->new->getWidget('companyDn')->setDefault($companyDn);
-
-/* zacaciaPlatform */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaPlatform');
-        $l = new PlatformPeer();
-        $l->setBaseDn($platformDn);
-        $this->platform = $l->retrieveByDn($c);
-
-/* zacaciaCompany */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaCompany');
-        $l = new CompanyPeer();
-        $l->setBaseDn($companyDn);
-        $this->company = $l->retrieveByDn($c);
     }
 
     public function executeNew(sfWebRequest $request)
@@ -87,34 +68,21 @@ class userActions extends sfActions
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
-            $this->redirect('@platform');
+            $this->redirect('@platforms');
         }
 
         $companyDn = $request->getParameter('companyDn', $data['companyDn']);
         if ( empty($companyDn) ) {
             sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-            echo fake_post($this, '@company', Array('holdingDn' => $holdingDn));
+            echo fake_post($this, '@companies', Array('holdingDn' => $holdingDn));
             exit;
         }
+        
+        $ldapPeer = new UserPeer();
 
-/* zacaciaPlatform */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaPlatform');
-        $l = new PlatformPeer();
-        $l->setBaseDn($platformDn);
-        $this->platform = $l->retrieveByDn($c);
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+        $this->company = $ldapPeer->getCompany($companyDn);
 
-/* zacaciaCompany */
-        $c2 = new LDAPCriteria();
-        $c2->add('objectClass', 'top');
-        $c2->add('objectClass', 'organizationalRole');
-        $c2->add('objectClass', 'zacaciaCompany');
-        $l2 = new CompanyPeer();
-        $l2->setBaseDn($companyDn);
-        $this->company = $l2->retrieveByDn($c2, 'extended');
-    
         $this->form = new UserForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
@@ -125,10 +93,9 @@ class userActions extends sfActions
             
             if ($this->form->isValid()) {
 
-                #print_r( $this->form->getValues()); exit;
+                print_r( $this->form->getValues()); exit;
 
-                $l = new UserPeer();
-                $l->setBaseDn(sprintf("ou=Users,%s", $companyDn));
+                $ldapPeer->setBaseDn(sprintf("ou=Users,%s", $companyDn));
 
                 $user = new UserObject();
                 $user->setDn(sprintf("cn=%s %s,%s", $this->form->getValue('sn'), $this->form->getValue('givenName'), $l->getBaseDn()));
@@ -169,30 +136,13 @@ class userActions extends sfActions
             }
         }
 
-/* zacaciaDomain */          
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaDomain');
-        
-        $l = new DomainPeer();
-        $l->setBaseDn(sprintf("ou=Domains,%s", $companyDn));
-        
-        $domains = $l->doSelect($c);
-        $domainWidgetChoice = array();
-        foreach ( $domains as $domain ) {
-            $domainWidgetChoice[ $domain->getCn() ] = $domain->getCn();
-        }
-        $this->form->getWidget('domain')->setOption('choices', $domainWidgetChoice);
-/*        $this->form->getWidget('domain')->setDefault(); */
+        $this->form->getWidget('domain')->setOption('choices', $ldapPeer->getDomainsAsOption($companyDn));
+/*      $this->form->getWidget('domain')->setDefault(); */
 
-/* zacaciaCompany */
-
-        
         $this->cancel = new UserNavigationForm();
         unset($this->cancel['userDn']);
-        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
-        $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
+        $this->cancel->getWidget('platformDn')->setDefault($platformDn);
+        $this->cancel->getWidget('companyDn')->setDefault($companyDn);
 
     }
 
