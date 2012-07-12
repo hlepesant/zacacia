@@ -37,6 +37,16 @@ border: 2px #800 solid !important;
 display: none;
 }
 
+.z-mail input {
+width: 50px;
+border: 1px solid red;
+}
+
+.z-domain select {
+width: 50px;
+border: 1px solid red;
+}
+
 .z-option label {
 color: #666666;
 padding-left: 40px;

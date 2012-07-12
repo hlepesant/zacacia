@@ -38,11 +38,7 @@ foreach ($companies as $c) {
 <!-- end #collection -->
 
 <?php echo javascript_tag("
-var show_url = '".url_for('@company_show')."';
 var new_url = '".url_for('@company_new')."';
-/*
-var logout_url = '".url_for('security/logout')."';
-*/
 
 var _js_module = '".$this->getModuleName()."';
 var _js_url = '".url_for(false)."';

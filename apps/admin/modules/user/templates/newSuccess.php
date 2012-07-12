@@ -60,8 +60,46 @@
 </div>
 
 <div class="ym-fbox-select">
-<?php /* echo $form['status']->renderRow() */ ?>
+<?php echo $form['status']->renderRow() ?>
 </div>
+
+<div class="ym-fbox-select">
+<?php echo $form['zarafaAccount']->renderRow() ?>
+</div>
+
+<div id="zarafa-settings" style="display: none;">
+
+    <div id="zarafa-email">
+        <div id="mail" class="ym-fbox-text">
+        <?php echo $form['mail']->renderLabel() ?>
+            <div id="mail_value" class="ym-grid">
+                <div id="email_user" class="ym-g30"><?php echo $form['mail']->render(array('class' => 'z-mail')) ?></div>
+                <div id="email_user" class="ym-g10"> @ </div>
+                <div id="email_user" class="ym-g30"><?php echo $form['domain']->render(array('class' => 'z-domain')) ?></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ym-fbox-select">
+    <?php echo $form['zarafaQuotaOverride']->renderRow() ?>
+    </div>
+
+    <div id="zarafa-settings-zarafaquotawarn" style="display: none;">
+        <div class="ym-fbox-text z-option">
+        <?php echo $form['zarafaQuotaHard']->renderRow() ?>
+        </div>
+    </div>
+
+    <div class="ym-fbox-select">
+    <?php echo $form['zarafaAdmin']->renderRow() ?>
+    </div>
+
+    <div class="ym-fbox-select">
+    <?php echo $form['zarafaHidden']->renderRow() ?>
+    </div>
+
+</div>
+
 
 <div class="ym-fbox-button">
 <input type="button" value="<?php echo __("Cancel") ?>" class="button-cancel" />

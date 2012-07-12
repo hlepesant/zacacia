@@ -8,13 +8,14 @@ class CompanyForm extends ZacaciaForm
         self::$quotas = sfConfig::get('options_user_quota_hard');
         
         $this->setWidgets(array(
-            'platformDn'    => new sfWidgetFormInputHidden(),
-            'cn'            => new sfWidgetFormInput(),
-            'status'        => new sfWidgetFormChoice(array('choices' => self::$option_status)),
+            'platformDn'            => new sfWidgetFormInputHidden(),
+            'cn'                    => new sfWidgetFormInput(),
+            'status'                => new sfWidgetFormChoice(array('choices' => self::$option_status)),
 
             'zarafaAccount'         => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
-
-#           'zarafaCompanyServer' => new sfWidgetFormSelect(array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
+/*
+            'zarafaCompanyServer'   => new sfWidgetFormSelect(array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
+*/
             'zarafaQuotaOverride'   => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
             'zarafaQuotaWarn'       => new sfWidgetFormInput(array(), array(
                 'type' => 'number',

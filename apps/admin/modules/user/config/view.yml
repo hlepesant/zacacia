@@ -7,7 +7,7 @@ indexSuccess:
 
 newSuccess:
     stylesheets:    [form.css]
-    javascripts:    [newUser.js, jquery/jquery.observe_field.js, jquery/jquery.pwdMeter.min-1.0.1.js, jquery/jquery.crypt-1.1.0.js]
+    javascripts:    [newUser.js, jquery/jquery.observe_field.js, jquery/jquery.pwdMeter.min.js, jquery/jquery.crypt.js]
 
 editSuccess:
     stylesheets:    [form.css]
@@ -15,4 +15,4 @@ editSuccess:
 
 passwordSuccess:
     stylesheets:    [form.css]
-    javascripts:    [passwordUser.js, jquery/jquery.observe_field.js, jquery/jquery.pwdMeter.min-1.0.1.js, jquery/jquery.crypt-1.1.0.js]
+    javascripts:    [passwordUser.js, jquery/jquery.observe_field.js, jquery/jquery.pwdMeter.min.js, jquery/jquery.crypt.js]

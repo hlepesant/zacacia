@@ -17,25 +17,20 @@ var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 
 $(document).ready(function() {
 
-    $.fx.off = true;
-    
-    $("#section_userinfo").show();
-    $("#section_zarafa").hide();
-
-    $("#goto_section_zarafa").click(function() {
-        $("#section_userinfo").hide();
-        $("#section_zarafa").show();
-        return false;
-    }); 
-
-    $("#back_section_userinfo").click(function() {
-        $("#section_userinfo").show();
-        $("#section_zarafa").hide();
-    });
 
     $('.button_cancel').click(function() {
         $('#form_cancel').submit();
     });
+
+    $('select#zdata_zarafaAccount').change(function() {
+        if ($(this).val() == 1) {
+          $('#zarafa-settings').slideDown('slow');
+        } else {
+          $('#zarafa-settings').slideUp();
+        }
+    });
+
+/*
 
     $('input#zdata_sn').observe_field(0.5, function() {
         if( $('input#zdata_givenName').val().length ) {
@@ -206,7 +201,9 @@ $(document).ready(function() {
             $('#quota_setting').hide();
         }
     });
+*/
 });
+
 
 function checkSumUserInfo() {
 
