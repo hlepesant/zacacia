@@ -38,11 +38,6 @@ class userActions extends sfActions
         $this->company = $ldapPeer->getCompany($companyDn);
         $this->users = $ldapPeer->getUsers($companyDn);
 
-        print_r( $this->platform);
-        print_r( $this->company );
-        print_r( $this->users );
-        exit;
-
         
         $id=0;
         $this->forms = array();
