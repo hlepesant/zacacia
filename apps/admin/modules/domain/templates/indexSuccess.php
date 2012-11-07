@@ -40,6 +40,11 @@ foreach ($domains as $d) {
 }
 ?>
 
+<?php echo javascript_tag("
+var _js_msg_disable = '".__("Disable the domain")."';
+var _js_msg_enable = '".__("Enable the domain")."';
+var _js_msg_delete = '".__("Delete the domain")."';
+") ?>
 <?php /* echo javascript_tag("
 var new_url = '".url_for('@domain_new')."';
 var logout_url = '".url_for('security/logout')."';

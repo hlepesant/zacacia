@@ -245,7 +245,7 @@ class companyActions extends sfActions
         if ( empty($companyDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing company's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, '@company', Array('platformDn' => $platformDn));
+            echo fake_post($this, '@companies', Array('platformDn' => $platformDn));
         }
 
         $criteria = new LDAPCriteria();
@@ -255,15 +255,15 @@ class companyActions extends sfActions
         $company = $l->retrieveByDn($criteria);
 
         if ( 'enable' === $company->getZacaciaStatus()) {
-            $company->setZacaciaStatus(false);
+            $company->setZacaciaStatus('disable');
         } else {
-            $company->setZacaciaStatus(true);
+            $company->setZacaciaStatus('enable');
         }
 
         $l->doSave($company);
 
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-        echo fake_post($this, '@company', Array('platformDn' => $platformDn));
+        echo fake_post($this, '@companies', Array('platformDn' => $platformDn));
         exit;
     }
 
@@ -279,7 +279,7 @@ class companyActions extends sfActions
         if ( empty($companyDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing company's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, '@company', Array('platformDn' => $platformDn));
+            echo fake_post($this, '@companies', Array('platformDn' => $platformDn));
         }
 
         $criteria = new LDAPCriteria();
@@ -293,7 +293,7 @@ class companyActions extends sfActions
         }
 
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-        echo fake_post($this, '@company', Array('platformDn' => $platformDn));
+        echo fake_post($this, '@companies', Array('platformDn' => $platformDn));
         exit;
     }
 

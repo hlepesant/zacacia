@@ -81,7 +81,7 @@
 
 </form>
 
-<form action="<?php echo url_for('@company') ?>" method="POST" id="form_cancel">
+<form action="<?php echo url_for('@companies') ?>" method="POST" id="form_cancel">
 <?php echo $cancel->renderHiddenFields() ?>
 </form>
 

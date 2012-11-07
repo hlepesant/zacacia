@@ -151,21 +151,21 @@ class userActions extends sfActions
         $platformDn = $request->getParameter('platformDn');
         if ( empty($platformDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
-            $this->redirect('@platform');
+            $this->redirect('@platforms');
         }
 
         $companyDn = $request->getParameter('companyDn');
         if ( empty($companyDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing company's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, '@company', Array('platformDn' => $platformDn));
+            echo fake_post($this, '@companies', Array('platformDn' => $platformDn));
         }
 
         $userDn = $request->getParameter('userDn');
         if ( empty($userDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing user's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, '@user', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+            echo fake_post($this, '@users', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         }
 
         $criteria = new LDAPCriteria();
@@ -175,15 +175,15 @@ class userActions extends sfActions
         $user = $l->retrieveByDn($criteria);
 
         if ( 'enable' === $user->getZacaciaStatus()) {
-            $user->setZacaciaStatus(false);
+            $user->setZacaciaStatus('disable');
         } else {
-            $user->setZacaciaStatus(true);
+            $user->setZacaciaStatus('enable');
         }
 
         $l->doSave($user);
 
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-        echo fake_post($this, '@user', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+        echo fake_post($this, '@users', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         exit;
     }
 
@@ -192,21 +192,21 @@ class userActions extends sfActions
         $platformDn = $request->getParameter('platformDn');
         if ( empty($platformDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
-            $this->redirect('@platform');
+            $this->redirect('@platforms');
         }
 
         $companyDn = $request->getParameter('companyDn');
         if ( empty($companyDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing company's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, '@company', Array('platformDn' => $platformDn));
+            echo fake_post($this, '@companies', Array('platformDn' => $platformDn));
         }
 
         $userDn = $request->getParameter('userDn');
         if ( empty($userDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing user's DN.");
             sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-            echo fake_post($this, '@user', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+            echo fake_post($this, '@users', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         }
 
         $criteria = new LDAPCriteria();
@@ -220,7 +220,7 @@ class userActions extends sfActions
         }
 
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-        echo fake_post($this, '@user', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+        echo fake_post($this, '@users', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         exit;
     }
 
@@ -231,45 +231,32 @@ class userActions extends sfActions
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
-            $this->redirect('@platform');
+            $this->redirect('@platforms');
         }
 
         $companyDn = $request->getParameter('companyDn', $data['companyDn']);
         if ( empty($companyDn) ) {
             sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-            echo fake_post($this, '@company', Array('holdingDn' => $holdingDn));
+            echo fake_post($this, '@companies', Array('holdingDn' => $holdingDn));
             exit;
         }
 
         $userDn = $request->getParameter('userDn', $data['userDn']);
         if ( empty($userDn) ) {
             sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-            echo fake_post($this, '@company', Array('holdingDn' => $holdingDn, 'companyDn' => $companyDn));
+            echo fake_post($this, '@users', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
             exit;
         }
 
-/* zacaciaPlatform */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaPlatform');
-        $l = new PlatformPeer();
-        $l->setBaseDn($platformDn);
-        $this->platform = $l->retrieveByDn($c);
+        $ldapPeer = new UserPeer();
 
-/* zacaciaCompany */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaCompany');
-        $l = new CompanyPeer();
-        $l->setBaseDn($companyDn);
-        $this->company = $l->retrieveByDn($c);
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+        $this->company = $ldapPeer->getCompany($companyDn);
+        $this->userInfo = $ldapPeer->getUser($userDn);
 
-/* zacaciaUser */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'posixAccount');
+        print_r( $this->userInfo );
+        exit;
+
         $c->add('objectClass', 'inetOrgPerson');
         $c->add('objectClass', 'zarafa-user');
         $c->add('objectClass', 'zacaciaUser');
@@ -349,51 +336,28 @@ class userActions extends sfActions
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
-            $this->redirect('@platform');
+            $this->redirect('@platforms');
         }
 
         $companyDn = $request->getParameter('companyDn', $data['companyDn']);
         if ( empty($companyDn) ) {
             sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-            echo fake_post($this, '@company', Array('holdingDn' => $holdingDn));
+            echo fake_post($this, '@companies', Array('platformDn' => $platformDn));
             exit;
         }
 
         $userDn = $request->getParameter('userDn', $data['userDn']);
         if ( empty($userDn) ) {
             sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-            echo fake_post($this, '@company', Array('holdingDn' => $holdingDn, 'companyDn' => $companyDn));
+            echo fake_post($this, '@companies', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
             exit;
         }
 
-/* zacaciaPlatform */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaPlatform');
-        $l = new PlatformPeer();
-        $l->setBaseDn($platformDn);
-        $this->platform = $l->retrieveByDn($c);
+        $ldapPeer = new UserPeer();
 
-/* zacaciaCompany */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaCompany');
-        $l = new CompanyPeer();
-        $l->setBaseDn($companyDn);
-        $this->company = $l->retrieveByDn($c);
-
-/* zacaciaUser */
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'posixAccount');
-        $c->add('objectClass', 'inetOrgPerson');
-        $c->add('objectClass', 'zarafa-user');
-        $c->add('objectClass', 'zacaciaUser');
-        $l = new UserPeer();
-        $l->setBaseDn($userDn);
-        $this->zuser = $l->retrieveByDn($c);
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+        $this->company = $ldapPeer->getCompany($companyDn);
+        $this->userInfo = $ldapPeer->getUser($userDn);
 
         $this->form = new UserPasswordForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
@@ -404,16 +368,11 @@ class userActions extends sfActions
 
             $this->form->bind($request->getParameter('zdata'));
 
-#            print_r( $_POST['zdata'] ); exit;
-#            print_r( $this->form->getValues() ); exit;
-            
             if ($this->form->isValid()) {
 
-                $this->zuser->setUserPassword($this->form->getValue('userPassword'));
+                $this->userInfo->setUserPassword($this->form->getValue('userPassword'));
 
-#                var_dump( $this->zuser ); exit;
-
-                if ( $l->doSave($this->zuser) ) {
+                if ( $ldapPeer->doSave($this->userInfo) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                     echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
                     exit;
@@ -421,23 +380,10 @@ class userActions extends sfActions
             }
         }
 
-#        $this->form->getWidget('sn')->setDefault($this->zuser->getSn());
-#        $this->form->getWidget('givenName')->setDefault($this->zuser->getGivenName());
-#        $this->form->getWidget('displayName')->setDefault($this->zuser->getDisplayName());
-#        $this->form->getWidget('zarafaAccount')->setDefault($this->zuser->getZarafaAccount());
-#        $this->form->getWidget('zarafaAdmin')->setDefault($this->zuser->getZarafaAdmin());
-#        $this->form->getWidget('zarafaHidden')->setDefault($this->zuser->getZarafaHidden());
-#        //$this->form->getWidget('status')->setDefault('true');
-#        //$this->form->getWidget('firstname')->setDefault($this->zuser->get());
-#        //$this->form->getWidget('firstname')->setDefault($this->zuser->get());
-#        $this->form->getWidget('mail')->setDefault($mail);
-#        $this->form->getWidget('domain')->setDefault($domain);
-        
         $this->cancel = new UserNavigationForm();
         unset($this->cancel['userDn']);
         $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
         $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
-
     }
 
 /* WebServices */
@@ -445,31 +391,20 @@ class userActions extends sfActions
     {
         $this->setTemplate('check');
         $this->setLayout(false);
-        $this->count = 0;
+        $this->exist = 0;
 
         if ( ! $request->hasParameter('companyDn') ) {
-            $this->count = 1;
+            $this->exist = 1;
             return sfView::SUCCESS;
         }
 
         if ( ! $request->hasParameter('name') ) {
-            $this->count = 1;
+            $this->exist = 1;
             return sfView::SUCCESS;
         }
 
-        $l = new UserPeer();
-        $c = new LDAPCriteria();
-        
-        $c->setBaseDn( sprintf("ou=Users,%s", $request->getParameter('companyDn')) );
-        
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'inetOrgPerson');
-        $c->add('objectClass', 'posixAccount');
-        $c->add('objectClass', 'zarafa-user');
-        $c->add('objectClass', 'zacaciaUser');
-        $c->add('cn', $request->getParameter('name'));
-        
-        $this->count = $l->doCount($c);
+        $ldapPeer = new UserPeer();
+        $this->exist = $ldapPeer->doCheckCn($request->getParameter('companyDn'), $request->getParameter('name'));
 
         return sfView::SUCCESS;
     }
@@ -512,6 +447,13 @@ class userActions extends sfActions
             $this->count = 1;
             return sfView::SUCCESS;
         }
+
+        $ldapPeer = new UserPeer();
+
+        $this->exist = $ldapPeer->doSearch($request->getParameter('name'));
+        $this->users = $ldapPeer->getUsers($companyDn);
+
+
 
         $l = new LdapPeer();
         $c = new LDAPCriteria();

@@ -41,6 +41,20 @@ class UserPeer extends BaseUserPeer
         return $this->doSelect($criteria, 'UserObject');
     }
 
+    public function getUser($dn)
+    {
+        $this->setBaseDn($dn);
+
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'inetOrgPerson');
+        $criteria->add('objectClass', 'posixAccount');
+        $criteria->add('objectClass', 'zarafa-user');
+        $criteria->add('objectClass', 'zacaciaUser');
+
+        return $this->doSelectOne($criteria, 'UserObject');
+    }
+
     public function getDomainsAsOption($dn)
     {
         $this->setBaseDn(sprintf("ou=Domains,%s", $dn));
@@ -53,7 +67,7 @@ class UserPeer extends BaseUserPeer
         $domains = $this->doSelect($criteria, 'domainObject');
         $options = array();
         foreach ( $domains as $domain ) {
-            $options[ $domain->getCn() ] = $domain->getCn();
+            $options[ $domain->getCn() ] = sprintf("@%s", $domain->getCn() );
         }
 
         return $options;
@@ -88,4 +102,19 @@ class UserPeer extends BaseUserPeer
         return $uidNumber;
     }
 
+    public function doCheckCn($companyDn, $userCn)
+    {
+        
+        $this->setBaseDn(sprintf("ou=Users,%s", $companyDn));
+        
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'inetOrgPerson');
+        $criteria->add('objectClass', 'posixAccount');
+        $criteria->add('objectClass', 'zarafa-user');
+        $criteria->add('objectClass', 'zacaciaUser');
+        $criteria->add('cn', $userCn);
+        
+        return $this->doCount($criteria);
+    }
 }

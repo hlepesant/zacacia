@@ -51,6 +51,7 @@ class ProjectConfiguration extends sfProjectConfiguration
 #
 # User Quota
 # - Global User Quota
+    sfConfig::set('full_user_quota_setting', true);
     sfConfig::set('server_user_quota_hard', 250);
     sfConfig::set('server_user_quota_warn', ceil(sfConfig::get('server_quota_hard') * sfConfig::get('warnQuota')));
     sfConfig::set('server_user_quota_soft', ceil(sfConfig::get('server_quota_hard') * sfConfig::get('softQuota')));

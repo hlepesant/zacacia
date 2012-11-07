@@ -2,7 +2,8 @@
 -webkit-box-shadow: none;
 -moz-box-shadow: none;
 box-shadow: none;
-margin: 20px 0 0 0;
+margin: 0px 0 0 0;
+padding-top: 20px;
 border: none;
 border-bottom: 1px solid #D8D7D6;
 }
@@ -21,7 +22,8 @@ font-weight:normal;
 .ym-form .ym-error input,
 .ym-form .ym-error select,
 .ym-form .ym-error textarea {
-border: 2px #800 solid;
+border: 1px #800 solid;
+background-color: #FFA1A1;
 }
 
 .ym-form .ym-error input:hover,
@@ -30,24 +32,46 @@ border: 2px #800 solid;
 .ym-form .ym-error select:focus,
 .ym-form .ym-error textarea:hover,
 .ym-form .ym-error textarea:focus {
-border: 2px #800 solid !important;
+background-color: #FFA1A1;
+border: 1px #800 solid !important;
 }
 
 .ym-form .ym-message {
 display: none;
 }
 
-.z-mail input {
-width: 50px;
-border: 1px solid red;
-}
-
-.z-domain select {
-width: 50px;
-border: 1px solid red;
+.ym-columnar .z-select select,
+.ym-columnar .z-text input {
+width: 100%;
 }
 
 .z-option label {
 color: #666666;
 padding-left: 40px;
+}
+
+dl {
+border: 1px solid red;
+display: inline;
+}
+
+dt {
+border: 1px solid black;
+}
+
+dd {
+border: 1px solid blue;
+}
+
+.z-label {
+display: inline;
+float: left;
+width: 30%;
+color: #262626;
+font-size: 12px;
+font-weight: bold;
+line-height: 1.5em;
+-moz-box-sizing: border-box;
+cursor: pointer;
+position: relative;
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php include_http_metas() ?>
 <?php include_metas() ?>
@@ -15,9 +15,13 @@
 </head>
 <body>
 
-<content>
+<div id="header">
+</div>
+<div id="wrap">
   <?php echo $sf_content ?>
-</content>
+</div>
+<div id="footer">
+</div>
 
 </body>
 </html>
