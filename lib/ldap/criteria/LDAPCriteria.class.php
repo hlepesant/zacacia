@@ -213,4 +213,16 @@ class LDAPCriteria
     $this->setFilter($new_filter);
     return $this;
   }
+
+  public function addNot($attribute, $value, $comparator = self::EQUAL, $like = null)
+  {
+    $new_filter = sprintf("(!%s)", $this->getCondition($attribute, $value, $comparator, $like));
+
+    if ($this->getFilter() != self::DEFAULT_FILTER)
+    {
+      $new_filter = "(&".$new_filter.$this->getFilter().")";
+    }
+    $this->setFilter($new_filter);
+    return $this;
+  }
 }

@@ -88,7 +88,7 @@
     <div id="zarafa-email">
         <div class="ym-grid">
             <div class="ym-g30 ym-gl">
-                <div id="mail" class="ym-fbox-text">
+                <div id="maillabel" class="ym-fbox-text">
                 <?php echo $form['mail']->renderLabel() ?>
                 </div>
             </div>
@@ -114,27 +114,33 @@
             <div class="ym-g30 ym-gl ym-fbox-text z-label"> <?php echo __('Quotas') ?> </div>
             <div class="ym-g20 ym-gl"><?php echo $form['zarafaQuotaHard']->renderLabel() ?></div>
 <?php if ( sfConfig::get('full_user_quota_setting') ): ?>
-            <div class="ym-g20 ym-gl"><?php echo $form['zarafaQuotaWarn']->renderLabel() ?></div>
             <div class="ym-g20 ym-gl"><?php echo $form['zarafaQuotaSoft']->renderLabel() ?></div>
+            <div class="ym-g20 ym-gl"><?php echo $form['zarafaQuotaWarn']->renderLabel() ?></div>
 <?php endif; ?>
         </div>
 
         <div class="ym-grid">
             <div class="ym-g40 ym-gl z-label">&nbsp;</div>
             <div class="ym-g20 ym-gl">
-                <div class="ym-fbox-text z-option">
-                <?php echo $form['zarafaQuotaHard']->render() ?>
+                <div id="zarafa-quota-hard">
+                    <div class="ym-fbox-text z-option">
+                    <?php echo $form['zarafaQuotaHard']->render() ?>
+                    </div>
                 </div>
             </div>
 <?php if ( sfConfig::get('full_user_quota_setting') ): ?>
             <div class="ym-g20 ym-gl">
-                <div class="ym-fbox-text z-option">
-                <?php echo $form['zarafaQuotaWarn']->render() ?>
+                <div id="zarafa-quota-soft">
+                    <div class="ym-fbox-text z-option">
+                    <?php echo $form['zarafaQuotaSoft']->render() ?>
+                    </div>
                 </div>
             </div>
             <div class="ym-g20 ym-gl">
-                <div class="ym-fbox-text z-option">
-                <?php echo $form['zarafaQuotaSoft']->render() ?>
+                <div id="zarafa-quota-warn">
+                    <div class="ym-fbox-text z-option">
+                    <?php echo $form['zarafaQuotaWarn']->render() ?>
+                    </div>
                 </div>
             </div>
 <?php endif; ?>
@@ -151,7 +157,6 @@
 
 </div>
 
-
 <div class="ym-fbox-button">
 <input type="button" value="<?php echo __("Cancel") ?>" class="button-cancel" />
 <input type="submit" value="<?php echo __('Create') ?>" disabled="true" class="button-submit" />
@@ -165,37 +170,12 @@
 
 <?php echo javascript_tag("
 var json_checkcn_url = '".url_for('user/checkcn/')."';
-var json_checkemail_url = '".url_for('user/checkemail/')."';
-");?>
-
-
-
-<?php /*
-<div id="form_box">
-<form action="<?php echo url_for('user/new') ?>" method="POST" id="userform">
-<?php echo $form->renderHiddenFields() ?>
-
-<?php include_partial('userinfo', array('form' => $form)) ?>
-<?php include_partial('zarafa', array('form' => $form)) ?>
-
-</form>
-</div>
-<!-- end #form_box -->
-
-<form action="<?php echo url_for('user/index') ?>" method="POST" id="form_cancel" class="invisible">
-<?php echo $cancel->renderHiddenFields() ?>
-</form>
-
-<?php
-echo javascript_tag("
-var json_checkcn_url = '".url_for('user/checkcn/')."';
 var json_checkuid_url = '".url_for('user/checkuid/')."';
-var password_i18n = new Array();
-password_i18n[1] = '".__('Too weak')."'; 
-password_i18n[2] = '".__('Weak')."'; 
-password_i18n[3] = '".__('Medium')."'; 
-password_i18n[4] = '".__('Strong')."'; 
-password_i18n[5] = '".__('Very strong')."'; 
-");?>
-*/
+var json_checkemail_url = '".url_for('user/checkemail/')."';
+
+var full_user_quota_check = ".sfConfig::get('full_user_quota_setting').";
+var quota_hard = ".sfConfig::get('quota_hard').";
+var quota_soft = ".sfConfig::get('quota_soft').";
+var quota_warn = ".sfConfig::get('quota_warn').";
+");
 ?>

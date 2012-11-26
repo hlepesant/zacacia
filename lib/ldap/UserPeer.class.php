@@ -77,20 +77,19 @@ class UserPeer extends BaseUserPeer
     {
         $uidNumber = sfConfig::get('uid_min');
 
-        $l = clone $this;
-        die("why clone");
-        $l->setBaseDn(sfConfig::get('ldap_base_dn'));
+        // $l = clone $this;
+        $this->setBaseDn(sfConfig::get('ldap_base_dn'));
 
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'inetOrgPerson');
-        $c->add('objectClass', 'posixAccount');
-        $c->add('objectClass', 'zarafa-user');
-        $c->add('objectClass', 'zacaciaUser');
-        $c->add('cn', '*');
-        $c->setAttributes(array('uidNumber'));
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'inetOrgPerson');
+        $criteria->add('objectClass', 'posixAccount');
+        $criteria->add('objectClass', 'zarafa-user');
+        $criteria->add('objectClass', 'zacaciaUser');
+        $criteria->add('cn', '*');
+        $criteria->setAttributes(array('uidNumber'));
        
-        if ( $users = $l->doSelect($c, 'BaseUserObject') ) {
+        if ( $users = $this->doSelect($criteria, 'BaseUserObject') ) {
             $uids = array();
             foreach( $users as $user ) {
                 $uids[] = $user->getUidNumber();
@@ -104,7 +103,6 @@ class UserPeer extends BaseUserPeer
 
     public function doCheckCn($companyDn, $userCn)
     {
-        
         $this->setBaseDn(sprintf("ou=Users,%s", $companyDn));
         
         $criteria = new LDAPCriteria();
@@ -114,6 +112,53 @@ class UserPeer extends BaseUserPeer
         $criteria->add('objectClass', 'zarafa-user');
         $criteria->add('objectClass', 'zacaciaUser');
         $criteria->add('cn', $userCn);
+        
+        return $this->doCount($criteria);
+    }
+
+    public function doCheckUid($uid)
+    {
+        $this->setBaseDn( sfConfig::get('ldap_base_dn') );
+        
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'inetOrgPerson');
+        $criteria->add('objectClass', 'posixAccount');
+        $criteria->add('objectClass', 'zarafa-user');
+        $criteria->add('objectClass', 'zacaciaUser');
+        $criteria->add('uid', $uid);
+        
+        return $this->doCount($criteria);
+    }
+
+    public function doCheckEmailAddress($email)
+    {
+        $this->setBaseDn( sfConfig::get('ldap_base_dn') );
+
+        $criteria = new LDAPCriteria();
+        $criteria->addOr('mail', $email);
+        $criteria->addOr('mailAlternateAddress', $email);
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'inetOrgPerson');
+        $criteria->add('objectClass', 'posixAccount');
+        $criteria->add('objectClass', 'zarafa-user');
+        $criteria->add('objectClass', 'zacaciaUser');
+        
+        return $this->doCount($criteria);
+    }
+
+    public function doCheckEmailAddressForUpdate($dn, $email)
+    {
+        $this->setBaseDn( sfConfig::get('ldap_base_dn') );
+
+        $criteria = new LDAPCriteria();
+        $criteria->addNot('entryDN', $dn);
+        $criteria->add('mail', $email);
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'inetOrgPerson');
+        $criteria->add('objectClass', 'posixAccount');
+        $criteria->add('objectClass', 'zarafa-user');
+        $criteria->add('objectClass', 'zacaciaUser');
         
         return $this->doCount($criteria);
     }

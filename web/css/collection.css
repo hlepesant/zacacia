@@ -12,18 +12,20 @@ background-color: #FFFFFF;
 }
 
 .z-status-enable {
-font-weight: bold;
 color: green;
-margin: 0 0 0 10px;
+margin-left: 10px;
 }
 
 .z-status-disable {
-font-weight: bold;
 color: red;
-margin: 0 0 0 10px;
+margin-left: 10px;
 }
 
 .z-action {
 text-align: right;
 padding: 1px 5px 1px 0px;
+}
+
+.z-action img {
+padding-left: 5px;
 }

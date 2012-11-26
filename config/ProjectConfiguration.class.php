@@ -58,6 +58,7 @@ class ProjectConfiguration extends sfProjectConfiguration
 # - Company User Quota
 # - Specific User Quota
 # - Options for select
+/*
     sfConfig::set('options_user_quota_hard', array(
         '256'  => '250 Mo',
         '512'  => '500 Mo',
@@ -65,15 +66,20 @@ class ProjectConfiguration extends sfProjectConfiguration
         '2048' => '2 Go',
         '0'    => 'Unlimited',
     ));
+*/
     sfConfig::set('ratio_quota_hard', 1.00 );
     sfConfig::set('ratio_quota_soft', 0.90 );
     sfConfig::set('ratio_quota_warn', 0.80 );
+
+    sfConfig::set('quota_hard', 1000);
+    sfConfig::set('quota_soft', sfConfig::get('quota_hard') * sfConfig::get('ratio_quota_soft') );
+    sfConfig::set('quota_warn', sfConfig::get('quota_hard') * sfConfig::get('ratio_quota_warn') );
 
     #sfConfig::set('server_user_quota_default', sfConfig::get('server_user_quota_hard'));
     sfConfig::set('server_user_quota_default', 0);
 # End Quota
 
-    sfConfig::set('username_format', '%s%s'); // hlepesant
+    #sfConfig::set('username_format', '%s%s'); // hlepesant
     #sfConfig::set('username_format', '%s.%s'); // h.lepesant
     #sfConfig::set('username_format', '%s_%s'); // h_lepesant
     sfConfig::set('uid_min', 10001);

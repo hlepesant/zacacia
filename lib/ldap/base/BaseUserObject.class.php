@@ -19,6 +19,9 @@ class BaseUserObject extends LDAPObject
         $this->attributes['zarafaAccount']          = 1;
         $this->attributes['zarafaAdmin']            = 0;
         $this->attributes['zarafaQuotaOverride']    = 0;
+        $this->attributes['zarafaQuotaWarn']        = 0;
+        $this->attributes['zarafaQuotaSoft']        = 0;
+        $this->attributes['zarafaQuotaHard']        = 0;
         $this->attributes['zarafaSendAsPrivilege']  = '';
         $this->attributes['zarafaUserServer']       = '';
         $this->attributes['zarafaHidden']           = '';
@@ -232,20 +235,20 @@ class BaseUserObject extends LDAPObject
         return $this->attributes['uid'];
     }
   
-    public function setZarafaQuotaSoft($v)
+    public function setZarafaQuotaOverride($v)
     {
-        $this->attributes['zarafaQuotaSoft'] = $v;
+        $this->attributes['zarafaQuotaOverride'] = (int)$v;
    	    return $this;
     }
 
-    public function getZarafaQuotaSoft()
+    public function getZarafaQuotaOverride()
     {
-        return $this->attributes['zarafaQuotaSoft'];
+        return $this->attributes['zarafaQuotaOverride'];
     }
   
     public function setZarafaQuotaHard($v)
     {
-        $this->attributes['zarafaQuotaHard'] = $v;
+        $this->attributes['zarafaQuotaHard'] = (int)$v;
    	    return $this;
     }
 
@@ -254,26 +257,26 @@ class BaseUserObject extends LDAPObject
         return $this->attributes['zarafaQuotaHard'];
     }
   
+    public function setZarafaQuotaSoft($v)
+    {
+        $this->attributes['zarafaQuotaSoft'] = (int)$v;
+   	    return $this;
+    }
+
+    public function getZarafaQuotaSoft()
+    {
+        return $this->attributes['zarafaQuotaSoft'];
+    }
+  
     public function setZarafaQuotaWarn($v)
     {
-        $this->attributes['zarafaQuotaWarn'] = $v;
+        $this->attributes['zarafaQuotaWarn'] = (int)$v;
    	    return $this;
     }
 
     public function getZarafaQuotaWarn()
     {
         return $this->attributes['zarafaQuotaWarn'];
-    }
-  
-    public function setZarafaQuotaOverride($v)
-    {
-        $this->attributes['zarafaQuotaOverride'] = $v;
-   	    return $this;
-    }
-
-    public function getZarafaQuotaOverride()
-    {
-        return $this->attributes['zarafaQuotaOverride'];
     }
   
     public function setZarafaUserServer($v)

@@ -84,6 +84,7 @@ class userActions extends sfActions
         $this->company = $ldapPeer->getCompany($companyDn);
 
         $this->form = new UserForm();
+
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
     
@@ -93,42 +94,39 @@ class userActions extends sfActions
             
             if ($this->form->isValid()) {
 
-                print_r( $this->form->getValues()); exit;
+//                print_r( $_POST );
 
                 $ldapPeer->setBaseDn(sprintf("ou=Users,%s", $companyDn));
 
-                $user = new UserObject();
-                $user->setDn(sprintf("cn=%s %s,%s", $this->form->getValue('sn'), $this->form->getValue('givenName'), $l->getBaseDn()));
-                $user->setGivenName($this->form->getValue('givenName'));
-                $user->setSn($this->form->getValue('sn'));
-                $user->setDisplayName($this->form->getValue('displayName'));
-
-                $fi = strToLower($this->form->getValue('sn'));
-                $la = strToLower($this->form->getValue('givenName'));
-
-                $user->setUid(sprintf('%s%s', $fi[0], $la));
-                $user->setUserPassword($this->form->getValue('userPassword'));
-                $user->setUidNumber($l->getNewUidNumber());
-                $user->setGidNumber($this->company->getGidNumber());
-
-                $user->setEmailAddress( sprintf("%s@%s", $this->form->getValue('mail'), $this->form->getValue('domain')));
+                $userAccount = new UserObject();
+                $userAccount->setCn(sprintf("%s %s", $this->form->getValue('sn'), $this->form->getValue('givenName')));
+                $userAccount->setDn(sprintf("cn=%s,%s", $userAccount->getCn(), $ldapPeer->getBaseDn()));
+                $userAccount->setGivenName($this->form->getValue('givenName'));
+                $userAccount->setSn($this->form->getValue('sn'));
+                $userAccount->setDisplayName($this->form->getValue('displayName'));
 
 /*
-                if ( $this->form->getValue('zarafaQuotaOverride') ) {
-                    $user->setZarafaQuotaOverride(1);
-                    $user->setZarafaQuotaWarn($this->form->getValue('zarafaQuotaWarn'));
-                }
-
-                if ( $this->form->getValue('zarafaUserDefaultQuotaOverride') ) {
-                    $user->setZarafaUserDefaultQuotaOverride(1);
-                    $user->setZarafaUserDefaultQuotaHard($this->form->getValue('zarafaUserDefaultQuotaHard'));
-                    $user->setZarafaUserDefaultQuotaSoft($this->form->getValue('zarafaUserDefaultQuotaSoft'));
-                    $user->setZarafaUserDefaultQuotaWarn($this->form->getValue('zarafaUserDefaultQuotaWarn'));
-                }
-                var_dump( $user ); exit;
+                $fi = strToLower($this->form->getValue('sn'));
+                $la = strToLower($this->form->getValue('givenName'));
+                $user->setUid(sprintf('%s%s', $fi[0], $la));
 */
+                $userAccount->setUid($this->form->getValue('uid'));
+                $userAccount->setUserPassword($this->form->getValue('userPassword'));
+                $userAccount->setUidNumber($ldapPeer->getNewUidNumber());
+                $userAccount->setGidNumber($this->company->getGidNumber());
 
-                if ( $l->doAdd($user) ) {
+                $userAccount->setEmailAddress( sprintf("%s@%s", $this->form->getValue('mail'), $this->form->getValue('domain')));
+
+                if ( $this->form->getValue('zarafaQuotaOverride') == 1 ) {
+                    $userAccount->setZarafaQuotaOverride(1);
+                    $userAccount->setZarafaQuotaHard($this->form->getValue('zarafaQuotaHard'));
+                    $userAccount->setZarafaQuotaSoft($this->form->getValue('zarafaQuotaSoft'));
+                    $userAccount->setZarafaQuotaWarn($this->form->getValue('zarafaQuotaWarn'));
+                }
+
+//                var_dump( $user ); exit;
+
+                if ( $ldapPeer->doAdd($userAccount) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                     echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
                     exit;
@@ -137,13 +135,165 @@ class userActions extends sfActions
         }
 
         $this->form->getWidget('domain')->setOption('choices', $ldapPeer->getDomainsAsOption($companyDn));
-/*      $this->form->getWidget('domain')->setDefault(); */
 
         $this->cancel = new UserNavigationForm();
         unset($this->cancel['userDn']);
         $this->cancel->getWidget('platformDn')->setDefault($platformDn);
         $this->cancel->getWidget('companyDn')->setDefault($companyDn);
+    }
 
+    public function executeEdit(sfWebRequest $request)
+    {
+        $data = $request->getParameter('zdata');
+
+        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
+            $this->redirect('@platforms');
+        }
+
+        $companyDn = $request->getParameter('companyDn', $data['companyDn']);
+        if ( empty($companyDn) ) {
+            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
+            echo fake_post($this, '@companies', Array('holdingDn' => $holdingDn));
+            exit;
+        }
+
+        $userDn = $request->getParameter('userDn', $data['userDn']);
+        if ( empty($userDn) ) {
+            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
+            echo fake_post($this, '@users', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+            exit;
+        }
+
+        $ldapPeer = new UserPeer();
+
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+        $this->company = $ldapPeer->getCompany($companyDn);
+        $this->userAccount = $ldapPeer->getUser($userDn);
+
+        $this->form = new UserEditForm();
+        $this->form->getWidget('platformDn')->setDefault($platformDn);
+        $this->form->getWidget('companyDn')->setDefault($companyDn);
+        $this->form->getWidget('userDn')->setDefault($userDn);
+    
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+
+            $this->form->bind($request->getParameter('zdata'));
+
+#            print_r( $_POST['zdata'] ); exit;
+            print_r( $this->form->getValues() ); exit;
+            
+            if ($this->form->isValid()) {
+
+                $this->userAccount->setGivenName($this->form->getValue('givenName'));
+                $this->userAccount->setSn($this->form->getValue('sn'));
+                $this->userAccount->setDisplayName($this->form->getValue('displayName'));
+                $this->userAccount->setEmailAddress( sprintf("%s@%s", $this->form->getValue('mail'), $this->form->getValue('domain')));
+
+                var_dump( $this->userAccount ); exit;
+
+                if ( $l->doSave($this->userAccount) ) {
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
+                    echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+                    exit;
+                }
+            }
+        }
+
+        $this->form->getWidget('domain')->setOption('choices', $ldapPeer->getDomainsAsOption($companyDn));
+
+        $this->form->getWidget('sn')->setDefault($this->userAccount->getSn());
+        $this->form->getWidget('givenName')->setDefault($this->userAccount->getGivenName());
+        $this->form->getWidget('displayName')->setDefault($this->userAccount->getDisplayName());
+        $this->form->getWidget('zarafaAccount')->setDefault($this->userAccount->getZarafaAccount());
+
+        $this->showZarafaSetting = 'none';
+        $this->showZarafaQuotaSetting = 'none';
+
+        if ( $this->userAccount->getZarafaAccount() == 1) {
+            $this->showZarafaSetting = 'visible';
+            $this->form->getWidget('zarafaAccount')->setDefault(1);
+
+            $this->form->getWidget('zarafaAdmin')->setDefault($this->userAccount->getZarafaAdmin());
+            $this->form->getWidget('zarafaHidden')->setDefault($this->userAccount->getZarafaHidden());
+
+            $this->form->getWidget('emailAddress')->setDefault($this->userAccount->getMail());
+            list($mail, $domain) = preg_split('/@/', $this->userAccount->getMail(), 2);
+            $this->form->getWidget('mail')->setDefault($mail);
+            $this->form->getWidget('domain')->setDefault($domain);
+
+            if ( $this->userAccount->getZarafaQuotaOverride() == 1) {
+                $this->showZarafaQuotaSetting = 'visible';
+                $this->form->getWidget('zarafaQuotaOverride')->setDefault(1);
+                $this->form->getWidget('zarafaQuotaHard')->setDefault($this->userAccount->getZarafaQuotaHard());
+                $this->form->getWidget('zarafaQuotaSoft')->setDefault($this->userAccount->getZarafaQuotaSoft());
+                $this->form->getWidget('zarafaQuotaWarn')->setDefault($this->userAccount->getZarafaQuotaWarn());
+            }
+        }
+
+        $this->cancel = new UserNavigationForm();
+        unset($this->cancel['userDn']);
+        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
+        $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
+
+    }
+
+    public function executePassword(sfWebRequest $request)
+    {
+        $data = $request->getParameter('zdata');
+
+        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
+            $this->redirect('@platforms');
+        }
+
+        $companyDn = $request->getParameter('companyDn', $data['companyDn']);
+        if ( empty($companyDn) ) {
+            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
+            echo fake_post($this, '@companies', Array('platformDn' => $platformDn));
+            exit;
+        }
+
+        $userDn = $request->getParameter('userDn', $data['userDn']);
+        if ( empty($userDn) ) {
+            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
+            echo fake_post($this, '@companies', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+            exit;
+        }
+
+        $ldapPeer = new UserPeer();
+
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+        $this->company = $ldapPeer->getCompany($companyDn);
+        $this->userInfo = $ldapPeer->getUser($userDn);
+
+        $this->form = new UserPasswordForm();
+        $this->form->getWidget('platformDn')->setDefault($platformDn);
+        $this->form->getWidget('companyDn')->setDefault($companyDn);
+        $this->form->getWidget('userDn')->setDefault($userDn);
+    
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+
+            $this->form->bind($request->getParameter('zdata'));
+
+            if ($this->form->isValid()) {
+
+                $this->userInfo->setUserPassword($this->form->getValue('userPassword'));
+
+                if ( $ldapPeer->doSave($this->userInfo) ) {
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
+                    echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+                    exit;
+                }
+            }
+        }
+
+        $this->cancel = new UserNavigationForm();
+        unset($this->cancel['userDn']);
+        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
+        $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
     }
 
     public function executeStatus(sfWebRequest $request)
@@ -224,168 +374,6 @@ class userActions extends sfActions
         exit;
     }
 
-    public function executeEdit(sfWebRequest $request)
-    {
-        $data = $request->getParameter('zdata');
-
-        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
-        if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
-            $this->redirect('@platforms');
-        }
-
-        $companyDn = $request->getParameter('companyDn', $data['companyDn']);
-        if ( empty($companyDn) ) {
-            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-            echo fake_post($this, '@companies', Array('holdingDn' => $holdingDn));
-            exit;
-        }
-
-        $userDn = $request->getParameter('userDn', $data['userDn']);
-        if ( empty($userDn) ) {
-            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-            echo fake_post($this, '@users', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
-            exit;
-        }
-
-        $ldapPeer = new UserPeer();
-
-        $this->platform = $ldapPeer->getPlatform($platformDn);
-        $this->company = $ldapPeer->getCompany($companyDn);
-        $this->userInfo = $ldapPeer->getUser($userDn);
-
-        print_r( $this->userInfo );
-        exit;
-
-        $c->add('objectClass', 'inetOrgPerson');
-        $c->add('objectClass', 'zarafa-user');
-        $c->add('objectClass', 'zacaciaUser');
-        $l = new UserPeer();
-        $l->setBaseDn($userDn);
-        $this->zuser = $l->retrieveByDn($c);
-
-#        print_r( $this->zuser ); exit;
-
-        $this->form = new UserEditForm();
-        $this->form->getWidget('platformDn')->setDefault($platformDn);
-        $this->form->getWidget('companyDn')->setDefault($companyDn);
-        $this->form->getWidget('userDn')->setDefault($userDn);
-    
-        if ($request->isMethod('post') && $request->getParameter('zdata')) {
-
-            $this->form->bind($request->getParameter('zdata'));
-
-#            print_r( $_POST['zdata'] ); exit;
-#            print_r( $this->form->getValues() ); exit;
-            
-            if ($this->form->isValid()) {
-
-                $this->zuser->setGivenName($this->form->getValue('givenName'));
-                $this->zuser->setSn($this->form->getValue('sn'));
-                $this->zuser->setDisplayName($this->form->getValue('displayName'));
-                $this->zuser->setEmailAddress( sprintf("%s@%s", $this->form->getValue('mail'), $this->form->getValue('domain')));
-
-#                var_dump( $this->zuser ); exit;
-
-                if ( $l->doSave($this->zuser) ) {
-                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                    echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
-                    exit;
-                }
-            }
-        }
-
-/* zacaciaDomain */          
-        $c = new LDAPCriteria();
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'organizationalRole');
-        $c->add('objectClass', 'zacaciaDomain');
-        
-        $l = new DomainPeer();
-        $l->setBaseDn(sprintf("ou=Domains,%s", $companyDn));
-        
-        $domains = $l->doSelect($c);
-        $domainWidgetChoice = array();
-        foreach ( $domains as $domain ) {
-            $domainWidgetChoice[ $domain->getCn() ] = $domain->getCn();
-        }
-        $this->form->getWidget('domain')->setOption('choices', $domainWidgetChoice);
-        list($mail, $domain) = preg_split('/@/', $this->zuser->getMail(), 2);
-        $this->form->getWidget('domain')->setDefault($domain);
-
-        $this->form->getWidget('sn')->setDefault($this->zuser->getSn());
-        $this->form->getWidget('givenName')->setDefault($this->zuser->getGivenName());
-        $this->form->getWidget('displayName')->setDefault($this->zuser->getDisplayName());
-        $this->form->getWidget('zarafaAccount')->setDefault($this->zuser->getZarafaAccount());
-        $this->form->getWidget('zarafaAdmin')->setDefault($this->zuser->getZarafaAdmin());
-        $this->form->getWidget('zarafaHidden')->setDefault($this->zuser->getZarafaHidden());
-        $this->form->getWidget('mail')->setDefault($mail);
-        $this->form->getWidget('domain')->setDefault($domain);
-        
-        $this->cancel = new UserNavigationForm();
-        unset($this->cancel['userDn']);
-        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
-        $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
-
-    }
-
-    public function executePassword(sfWebRequest $request)
-    {
-        $data = $request->getParameter('zdata');
-
-        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
-        if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
-            $this->redirect('@platforms');
-        }
-
-        $companyDn = $request->getParameter('companyDn', $data['companyDn']);
-        if ( empty($companyDn) ) {
-            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-            echo fake_post($this, '@companies', Array('platformDn' => $platformDn));
-            exit;
-        }
-
-        $userDn = $request->getParameter('userDn', $data['userDn']);
-        if ( empty($userDn) ) {
-            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
-            echo fake_post($this, '@companies', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
-            exit;
-        }
-
-        $ldapPeer = new UserPeer();
-
-        $this->platform = $ldapPeer->getPlatform($platformDn);
-        $this->company = $ldapPeer->getCompany($companyDn);
-        $this->userInfo = $ldapPeer->getUser($userDn);
-
-        $this->form = new UserPasswordForm();
-        $this->form->getWidget('platformDn')->setDefault($platformDn);
-        $this->form->getWidget('companyDn')->setDefault($companyDn);
-        $this->form->getWidget('userDn')->setDefault($userDn);
-    
-        if ($request->isMethod('post') && $request->getParameter('zdata')) {
-
-            $this->form->bind($request->getParameter('zdata'));
-
-            if ($this->form->isValid()) {
-
-                $this->userInfo->setUserPassword($this->form->getValue('userPassword'));
-
-                if ( $ldapPeer->doSave($this->userInfo) ) {
-                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                    echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
-                    exit;
-                }
-            }
-        }
-
-        $this->cancel = new UserNavigationForm();
-        unset($this->cancel['userDn']);
-        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
-        $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
-    }
-
 /* WebServices */
     public function executeCheckcn(sfWebRequest $request)
     {
@@ -413,27 +401,16 @@ class userActions extends sfActions
     {
         $this->setTemplate('check');
         $this->setLayout(false);
-        $this->count = 0;
+        $this->exist = 0;
 
         if ( ! $request->hasParameter('name') ) {
-            $this->count = 1;
+            $this->exist = 1;
             return sfView::SUCCESS;
         }
 
-        $l = new UserPeer();
-        $c = new LDAPCriteria();
-        
-        $c->setBaseDn( sfConfig::get('ldap_base_dn') );
-        
-        $c->add('objectClass', 'top');
-        $c->add('objectClass', 'inetOrgPerson');
-        $c->add('objectClass', 'posixAccount');
-        $c->add('objectClass', 'zarafa-user');
-        $c->add('objectClass', 'zacaciaUser');
-        $c->add('uid', $request->getParameter('name'));
-        
-        $this->count = $l->doCount($c);
-        
+        $ldapPeer = new UserPeer();
+        $this->exist = $ldapPeer->doCheckUid($request->getParameter('name'));
+
         return sfView::SUCCESS;
     }
 
@@ -441,38 +418,38 @@ class userActions extends sfActions
     {
         $this->setTemplate('check');
         $this->setLayout(false);
-        $this->count = 0;
+        $this->exist = 0;
 
         if ( ! $request->hasParameter('email') ) {
-            $this->count = 1;
+            $this->exist = 1;
             return sfView::SUCCESS;
         }
 
         $ldapPeer = new UserPeer();
+        $this->exist = $ldapPeer->doCheckEmailAddress($request->getParameter('email'));
 
-        $this->exist = $ldapPeer->doSearch($request->getParameter('name'));
-        $this->users = $ldapPeer->getUsers($companyDn);
+        return sfView::SUCCESS;
+    }
 
+    public function executeCheckemailforupdate(sfWebRequest $request)
+    {
+        $this->setTemplate('check');
+        $this->setLayout(false);
+        $this->exist = 0;
 
+        if ( ! $request->hasParameter('email') ) {
+            $this->exist = 1;
+            return sfView::SUCCESS;
+        }
 
-        $l = new LdapPeer();
-        $c = new LDAPCriteria();
-        
-        $c->setBaseDn( sfConfig::get('ldap_base_dn') );
-        
-#        $c->add('objectClass', 'top');
-#        $c->add('objectClass', 'inetOrgPerson');
-#        $c->add('objectClass', 'posixAccount');
-#        $c->add('objectClass', 'zarafa-user');
-#        $c->add('objectClass', 'zacaciaUser');
-        $c->addOr('mail', $request->getParameter('email'));
-        $c->addOr('mailAlternateAddress', $request->getParameter('email'));
-        $c->add('objectClass', 'top');
-       
-        if ( $l->doCount($c) == 0 ) {
-            $this->count = 0;
-        };
-        
+        if ( ! $request->hasParameter('dn') ) {
+            $this->exist = 1;
+            return sfView::SUCCESS;
+        }
+
+        $ldapPeer = new UserPeer();
+        $this->exist = $ldapPeer->doCheckEmailAddressForUpdate($request->getParameter('dn'), $request->getParameter('email'));
+
         return sfView::SUCCESS;
     }
 }

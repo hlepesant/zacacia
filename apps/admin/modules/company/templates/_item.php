@@ -1,10 +1,10 @@
 <div class="ym-grid z-line z-<?php echo (($id & 1) ? 'odd' : 'even'); ?>">
 
-<div class="ym-g80 ym-gl">
-    <div class="z-status-<?php echo $c->getZacaciaStatus() ?>"><?php echo $c->getCn() ?></div>
+<div class="ym-g60 ym-gl">
+<div class="z-status-<?php echo $c->getZacaciaStatus() ?>"><?php echo $c->getCn() ?></div>
 </div>
 
-<div class="ym-g20 ym-gr z-action">
+<div class="ym-g40 ym-gr z-action">
 
 <form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
 <?php 

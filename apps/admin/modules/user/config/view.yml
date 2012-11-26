@@ -10,8 +10,8 @@ newSuccess:
     javascripts:    [user/lib.js, user/new.js, jquery/jquery.observe_field.js, jquery/jquery.pwdMeter.min.js, jquery/jquery.crypt.js]
 
 editSuccess:
-    stylesheets:    [form.css]
-    javascripts:    [user/edit.js]
+    stylesheets:    [form.css, zyaml.css]
+    javascripts:    [user/lib.js, user/edit.js, jquery/jquery.observe_field.js]
 
 passwordSuccess:
     stylesheets:    [form.css]
