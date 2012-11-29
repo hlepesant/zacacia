@@ -1,17 +1,14 @@
-<?php slot('menu_top') ?>
+<?php /* slot('menu_top') ?>
 <div class="z-menu">
-    <div class="z-menu-line">
+    <!-- div class="z-menu-line">
         <strong><?php echo __('Platforms') ;?></strong>
-    </div>
+    </div -->
     <div class="ym-grid z-menu-line">
-        <div class="ym-g40 ym-gl z-logout">
-            <?php echo link_to(image_tag('famfam/door_out.png'), array(), array('id' => 'logout-link', 'confirm' => __('Quit Zacacia ?'))); ?>
-        </div>
         <div class="ym-g40 ym-gr z-back">
         </div>
     </div>
 </div>
-<?php end_slot() ?>
+<?php end_slot() */ ?>
 
 <div class="ym-grid z-content-header">
   <div class="ym-g70 ym-gl z-content-header-title"><?php echo __("Platforms") ?></div>
@@ -39,3 +36,4 @@ var _js_msg_disable = '".__("Disable the platform")."';
 var _js_msg_enable = '".__("Enable the platform")."';
 var _js_msg_delete = '".__("Delete the platform")."';
 ") ?>
+

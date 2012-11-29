@@ -145,6 +145,17 @@ class companyActions extends sfActions
             echo fake_post($this, '@company', Array('platformDn' => $platformDn));
         }
 
+        $ldapPeer = new CompanyPeer();
+
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+        $this->company = $ldapPeer->getCompany($companyDn);
+
+        var_dump( $this->platform);
+        var_dump( $this->company );
+        exit;
+
+
+
         $l = new CompanyPeer();
         $l->setBaseDn(sprintf("ou=Organizations,%s", $platformDn));
         

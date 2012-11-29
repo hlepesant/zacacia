@@ -1,4 +1,4 @@
-<?php slot('menu_top') ?>
+<?php /* slot('menu_top') ?>
 <div class="z-menu">
 <div class="z-menu-line">
     <strong><?php echo __('Platforms') ;?></strong> :
@@ -12,11 +12,12 @@
 <?php echo link_to(__('Logout'), 'security/logout', array('id' => 'logount-link', 'confirm' => __('Quit Zacacia ?'))) ?>
 </div>
 </div>
-<?php end_slot() ?>
+<?php end_slot() */ ?>
 
 <div class="ym-grid z-content-header">
     <div class="ym-g70 ym-gl z-content-header-title">
-        <?php echo __('Edit server') ?>
+       <?php echo __('Platforms') ;?> : <?php echo $platform->getCn() ?> &rarr;
+        <?php echo __('Server') ?> : <?php echo $server->getCn() ?>::<?php echo __('Edit') ?>
     </div>
 </div>
 
@@ -36,7 +37,7 @@
 </div>
 
 <div id="zarafa-settings" style="display: <?php echo $zarafa_settings_display ?>;">
-    <div class="ym-fbox-select">
+    <div class="ym-fbox-text">
     <?php echo $form['zarafaQuotaHard']->renderRow() ?>
     </div>
     <div class="ym-fbox-text">

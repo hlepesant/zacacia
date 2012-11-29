@@ -10,12 +10,10 @@ class CompanyEditForm extends ZacaciaForm
         $this->setWidgets(array(
             'platformDn'    => new sfWidgetFormInputHidden(),
             'companyDn'     => new sfWidgetFormInputHidden(),
-#            'cn'            => new sfWidgetFormInput(),
-            'status'        => new sfWidgetFormInputCheckbox(array('value_attribute_value' => '1')),
-#
-            'zarafaAccount'         => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
+            'status'                => new sfWidgetFormChoice(array('choices' => self::$option_status)),
+            'zarafaAccount'         => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
 #            'zarafaCompanyServer'   => new sfWidgetFormSelect(array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
-            'zarafaQuotaOverride'   => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
+            'zarafaQuotaOverride'   => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
             'zarafaQuotaWarn'       => new sfWidgetFormInput(array(), array(
                     'type' => 'number',
                     'size' => '5',
@@ -25,18 +23,18 @@ class CompanyEditForm extends ZacaciaForm
                     'data-message' => 'Enter a value between 25 and 2048',
                 )),
 #
-            'zarafaUserDefaultQuotaOverride' => new sfWidgetFormInputCheckbox(array('value_attribute_value' => 1)),
-            'zarafaUserDefaultQuotaHard'     => new sfWidgetFormSelect(array('choices' => self::$quotas)),
+            'zarafaUserDefaultQuotaOverride'   => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
+            'zarafaUserDefaultQuotaHard'     => new sfWidgetFormInput(),
+            'zarafaUserDefaultQuotaSoft'     => new sfWidgetFormInput(),
+            'zarafaUserDefaultQuotaWarn'     => new sfWidgetFormInput(),
         ));
         
         $this->widgetSchema->setLabels(array(
-#            'cn'            => 'Name',
             'status'        => 'Enable',
-#
-            'zarafaAccount'         => 'Zarafa Properties',
-#            'zarafaCompanyServer'   => 'Home server for the company', // dn
+            'zarafaAccount'         => 'Zarafa Account',
+#           'zarafaCompanyServer'   => 'Home server for the company', // dn
             'zarafaQuotaOverride'   => 'Override System Wide Quota', // integer
-            'zarafaQuotaWarn'       => ' - Company Warning Quota', // integer 
+            'zarafaQuotaWarn'       => 'Company Warning Quota', // integer 
 #
             'zarafaUserDefaultQuotaOverride' => 'Override User Default Quota',
             'zarafaUserDefaultQuotaHard' => ' - User Hard Quota',

@@ -27,25 +27,26 @@
 </div>
 
 <div id="wrap">
-        <div class="ym-column">
-
-          <div class="ym-col1">
+    <div class="ym-column">
+        <div class="ym-col1">
             <?php if (has_slot('menu_top')): ?>
                 <?php include_slot('menu_top') ?>
             <?php endif; ?>
-            <?php /* if (has_slot('menu_content')): ?>
-                <?php include_slot('menu_content') ?>
-            <?php endif; ?>
-            <?php if (has_slot('menu_bottom')): ?>
-                <?php include_slot('menu_bottom') ?>
-            <?php endif; */ ?>
-          </div>
-          
-          <div class="ym-col3 z-content">
-            <?php echo $sf_content ?>
-          </div>
         </div>
+        
+        <div class="ym-col3 z-content">
+            <?php echo $sf_content ?>
+        </div>
+    </div>
+
+    <div class="ym-column">
+        <div class="ym-col1"></div>
+        <div class="ym-col3 z-content-footer">
+            <?php echo link_to(image_tag('famfam/door_out.png'), array(), array('id' => 'logout-link', 'confirm' => __('Quit Zacacia ?'))); ?>
+        </div>
+    </div>
 </div>
+        
 
 <?php /*
 <div id="footer">

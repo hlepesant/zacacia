@@ -11,6 +11,14 @@ $(document).ready(function() {
         $('#form_cancel').submit();
     });
 
+    $('select#zdata_zarafaAccount').change(function() {
+        if ($(this).val() == 1) {
+          $('#zarafa-settings').slideDown('slow');
+        } else {
+          $('#zarafa-settings').slideUp();
+        }
+    });
+/*
     if ($("input[type='checkbox']#zdata_zarafaQuotaOverride").is(':checked')) {
         $('#zarafaQuota').show();
     }
@@ -41,6 +49,6 @@ $(document).ready(function() {
             $('#zarafaUserDefaultQuota').hide();
         }
     });
-
+*/
 });
 

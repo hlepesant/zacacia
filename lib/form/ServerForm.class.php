@@ -15,7 +15,7 @@ class ServerForm extends ZacaciaForm
             
             'zarafaAccount'         => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
 
-            'zarafaQuotaHard'       => new sfWidgetFormSelect(array('choices' => self::$quotas, 'default' => 0)),
+            'zarafaQuotaHard'       => new sfWidgetFormInput(array(), array('type' => 'number')),
             'zarafaFilePath'        => new sfWidgetFormInputHidden(array('default' => '/var/run/zarafa')),
             'zarafaHttpPort'        => new sfWidgetFormInput(array(), array('type' => 'number')),
             'zarafaHttpPort'        => new sfWidgetFormInput(array(), array('type' => 'number')),
@@ -46,7 +46,7 @@ class ServerForm extends ZacaciaForm
             'ip'                    => new sfValidatorIpAddress(),
             'status'                => new sfValidatorChoice(array('choices' => array_keys(self::$option_status))),
             
-            'zarafaAccount'         => new sfValidatorChoice(array('choices' => array_keys(self::$option_noyes))),
+            'zarafaAccount'         => new  sfValidatorInteger(),
             'zarafaQuotaHard'       => new sfValidatorInteger(),
             'zarafaFilePath'        => new sfValidatorString(),
             'zarafaHttpPort'        => new sfValidatorInteger(), //array('required' => false)),

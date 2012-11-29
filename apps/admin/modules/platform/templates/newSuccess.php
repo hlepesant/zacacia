@@ -1,6 +1,6 @@
 <div class="ym-grid z-content-header">
     <div class="ym-g70 ym-gl z-content-header-title">
-        <?php echo __('Create a platform') ?>
+        <?php echo __('Platform') ?>::<?php echo __('New') ?>
     </div>
 </div>
 

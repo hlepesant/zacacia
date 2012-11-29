@@ -1,4 +1,4 @@
-<?php slot('menu_top') ?>
+<?php /* slot('menu_top') ?>
 <div class="z-menu">
     <div class="z-menu-line">
         <strong><?php echo __('Platform') ;?></strong> :
@@ -14,11 +14,12 @@
         </div>
     </div>
 </div>
-<?php end_slot() ?>
+<?php end_slot() */ ?>
 
 <div class="ym-grid z-content-header">
     <div class="ym-g70 ym-gl z-content-header-title">
-        <?php echo __('Add a server') ?>
+        <?php echo __('Platform') ;?> : <?php echo $platform->getCn() ?> &rarr;
+        <?php echo __('Server') ?>::<?php echo __('New') ?>
     </div>
 </div>
 

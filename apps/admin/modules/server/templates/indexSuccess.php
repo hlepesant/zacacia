@@ -1,8 +1,6 @@
-<?php slot('menu_top') ?>
+<?php /* slot('menu_top') ?>
 <div class="z-menu">
     <div class="z-menu-line">
-        <strong><?php echo __('Platform') ;?></strong> :
-        <?php echo $platform->getCn() ?>
     </div>
     <div class="z-menu-line">
         <strong><?php echo __('Servers') ;?></strong>
@@ -16,16 +14,19 @@
         </div>
     </div>
 </div>
-<?php end_slot() ?>
+<?php end_slot() */ ?>
 
 <div class="ym-grid z-content-header">
-  <div class="ym-g70 ym-gl z-content-header-title"><?php echo __("Servers") ?></div>
-  <div class="ym-g30 ym-gr">
-    <form action="<?php echo url_for('server/new') ?>" method="POST" id="server_new" class="invisible">
-    <?php echo $new->renderHiddenFields(); ?>
-    <input type="submit" value="<?php echo __("New") ?>" class="ym-button z-button-new" />
-    </form>
-  </div>
+    <div class="ym-g70 ym-gl z-content-header-title" id="back-link">
+        <?php echo __('Platform') ;?> : <?php echo $platform->getCn() ?> &rarr;
+        <?php echo __("Servers") ?>
+    </div>
+    <div class="ym-g30 ym-gr">
+        <form action="<?php echo url_for('server/new') ?>" method="POST" id="server_new" class="invisible">
+        <?php echo $new->renderHiddenFields(); ?>
+        <input type="submit" value="<?php echo __("New") ?>" class="ym-button z-button-new" />
+        </form>
+    </div>
 </div>
 
 <?php

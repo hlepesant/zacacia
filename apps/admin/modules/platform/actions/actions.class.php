@@ -113,6 +113,7 @@ class platformActions extends sfActions
 
         $this->form->getWidget('platformDn')->setDefault($this->platform->getDn());
 
+
         if ( $this->platform->getZacaciaMultiServer() ) {
             $this->form->getWidget('multiserver')->setDefault('true');
         }

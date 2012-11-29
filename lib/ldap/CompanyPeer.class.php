@@ -35,6 +35,19 @@ class CompanyPeer extends BaseCompanyPeer
         return $this->doSelect($criteria, 'CompanyObject');
     }
 
+    public function getCompany($dn)
+    {
+        $this->setBaseDn($dn);
+
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'organizationalRole');
+        $criteria->add('objectClass', 'zarafa-company');
+        $criteria->add('objectClass', 'zacaciaCompany');
+
+        return $this->doSelect($criteria, 'CompanyObject');
+    }
+
     public function countDomains($dn)
     {
         $this->setBaseDn(sprintf("ou=Domains,%s", $dn));

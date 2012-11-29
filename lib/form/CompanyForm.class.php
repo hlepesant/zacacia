@@ -11,11 +11,8 @@ class CompanyForm extends ZacaciaForm
             'platformDn'            => new sfWidgetFormInputHidden(),
             'cn'                    => new sfWidgetFormInput(),
             'status'                => new sfWidgetFormChoice(array('choices' => self::$option_status)),
-
             'zarafaAccount'         => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
-/*
-            'zarafaCompanyServer'   => new sfWidgetFormSelect(array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
-*/
+#           'zarafaCompanyServer'   => new sfWidgetFormSelect(array('choices' => array(), 'default' => 'none'), array('class' => 'large') ),
             'zarafaQuotaOverride'   => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
             'zarafaQuotaWarn'       => new sfWidgetFormInput(array(), array(
                 'type' => 'number',
@@ -35,10 +32,8 @@ class CompanyForm extends ZacaciaForm
         $this->widgetSchema->setLabels(array(
             'cn'            => 'Name',
             'status'        => 'Enable',
-
             'zarafaAccount'         => 'Zarafa Account',
 #           'zarafaCompanyServer'   => 'Home server for the company', // dn
-
             'zarafaQuotaOverride'   => 'Override System Wide Quota', // integer
             'zarafaQuotaWarn'       => 'Company Warning Quota', // integer 
 
@@ -52,13 +47,10 @@ class CompanyForm extends ZacaciaForm
             'platformDn'    => new sfValidatorString(),
             'cn'            => new sfValidatorString(),
             'status'        => new sfValidatorChoice(array('choices' => array_keys(self::$option_status))),
-#
             'zarafaAccount'         => new sfValidatorChoice(array('choices' => array_keys(self::$option_noyes))),
 #           'zarafaCompanyServer'   => new sfValidatorString(array('required' => false)),
-
             'zarafaQuotaOverride'   => new sfValidatorChoice(array('choices' => array_keys(self::$option_noyes))),
             'zarafaQuotaWarn'       => new sfValidatorInteger(array('required' => false)),
-#
             'zarafaUserDefaultQuotaOverride'    => new sfValidatorChoice(array('choices' => array_keys(self::$option_noyes))),
             'zarafaUserDefaultQuotaHard'        => new sfValidatorInteger(array('required' => false)),
             'zarafaUserDefaultQuotaSoft'        => new sfValidatorInteger(array('required' => false)),

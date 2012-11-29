@@ -7,6 +7,7 @@ html, body, #wrap {
 color: #000000;
 height: 100%;
 font-family: Verdana,arial,sans-serif;
+background-color: #222E44;
 }
 
 body > #wrap {
@@ -94,6 +95,8 @@ font-family: "Comic Sans MS", cursive, sans-serif;
 .z-content {
 border-left:  1px solid #222222;
 border-right:  1px solid #222222;
+background-color: #ECECEC;
+min-height: 500px;
 }
 
 .z-content-header {
@@ -101,9 +104,16 @@ background-color: #222222;
 }
 
 .z-content-header-title {
-font-size: 24px;
+font-size: 12px;
 color: #FFFFFF;
 margin: 10px 0 5px 10px;
+}
+
+.z-content-footer {
+text-align: right;
+background-color: #222222;
+border: 1px solid #222222;
+padding: 5px 15px 5px 0px;
 }
 
 .z-button-new {
@@ -117,7 +127,7 @@ margin-bottom: 1em;
 }
 
 .z-menu {
-border-top: 1px solid #191919;
+/*border-top: 1px solid #191919; */
 background-color: #222E44;
 margin: 0px;
 }
@@ -129,7 +139,7 @@ font-weight: thicker;
 color: #FFFFFF;
 margin: 0px;
 padding: 5px 0px 5px 0px;
-border-bottom: 1px solid #191919;
+/* border-bottom: 1px solid #191919; */
 }
 
 .z-menu-line strong {
@@ -161,4 +171,8 @@ padding-left: 10px;
 
 .z-notice {
 font-size: 12px;
+}
+
+#back-link {
+cursor: pointer;
 }
