@@ -54,9 +54,9 @@ class UserEditForm extends ZacaciaForm
             'zarafaAdmin'           => new sfValidatorBoolean(),
             'zarafaHidden'          => new sfValidatorBoolean(),
             'zarafaQuotaOverride'   => new sfValidatorBoolean(),
-            #'zarafaQuotaWarn'      => new sfValidatorInteger(),
-            #'zarafaQuotaSoft'      => new sfValidatorInteger(),
-            'zarafaQuotaHard'       => new sfValidatorInteger(),
+            'zarafaQuotaHard'       => new sfValidatorInteger(array('required' => false)),
+            'zarafaQuotaWarn'       => new sfValidatorInteger(array('required' => false)),
+            'zarafaQuotaSoft'       => new sfValidatorInteger(array('required' => false)),
             #'zarafaUserServer'     => new sfWidgetFormSelect(array('choices' => array())),
             'emailAddress'          => new sfValidatorEmail(),
         ));

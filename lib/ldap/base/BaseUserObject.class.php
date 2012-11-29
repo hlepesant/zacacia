@@ -248,7 +248,12 @@ class BaseUserObject extends LDAPObject
   
     public function setZarafaQuotaHard($v)
     {
-        $this->attributes['zarafaQuotaHard'] = (int)$v;
+        #$this->attributes['zarafaQuotaHard'] = (int)$v;
+        if ( is_null( $v ) ) {
+            $this->attributes['zarafaQuotaHard'] = array();
+        } else {
+            $this->attributes['zarafaQuotaHard'] = (int)$v;
+        }
    	    return $this;
     }
 
@@ -259,7 +264,12 @@ class BaseUserObject extends LDAPObject
   
     public function setZarafaQuotaSoft($v)
     {
-        $this->attributes['zarafaQuotaSoft'] = (int)$v;
+        #$this->attributes['zarafaQuotaSoft'] = (int)$v;
+        if ( is_null( $v ) ) {
+            $this->attributes['zarafaQuotaSoft'] = array();
+        } else {
+            $this->attributes['zarafaQuotaSoft'] = (int)$v;
+        }
    	    return $this;
     }
 
@@ -270,7 +280,12 @@ class BaseUserObject extends LDAPObject
   
     public function setZarafaQuotaWarn($v)
     {
-        $this->attributes['zarafaQuotaWarn'] = (int)$v;
+        #$this->attributes['zarafaQuotaWarn'] = (int)$v;
+        if ( is_null( $v ) ) {
+            $this->attributes['zarafaQuotaWarn'] = array();
+        } else {
+            $this->attributes['zarafaQuotaWarn'] = (int)$v;
+        }
    	    return $this;
     }
 
@@ -281,10 +296,10 @@ class BaseUserObject extends LDAPObject
   
     public function setZarafaUserServer($v)
     {
-        if ( $v ) {
-            $this->attributes['zarafaUserServer'] = $v;
-        } else {
+        if ( is_null( $v ) ) {
             $this->attributes['zarafaUserServer'] = array();
+        } else {
+            $this->attributes['zarafaUserServer'] = $v;
         }
         return $this;
     }
@@ -296,10 +311,10 @@ class BaseUserObject extends LDAPObject
   
     public function setZarafaSendAsPrivilege($v)
     {
-        if ( $v ) {
-            $this->attributes['zarafaSendAsPrivilege'] = $v;
-        } else {
+        if ( is_null( $v ) ) {
             $this->attributes['zarafaSendAsPrivilege'] = array();
+        } else {
+            $this->attributes['zarafaSendAsPrivilege'] = $v;
         }
         return $this;
     }

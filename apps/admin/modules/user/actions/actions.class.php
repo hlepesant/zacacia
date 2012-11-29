@@ -115,6 +115,7 @@ class userActions extends sfActions
                 $userAccount->setUidNumber($ldapPeer->getNewUidNumber());
                 $userAccount->setGidNumber($this->company->getGidNumber());
 
+                $userAccount->setZarafaAccount($this->form->getValue('zarafaAccount'));
                 $userAccount->setEmailAddress( sprintf("%s@%s", $this->form->getValue('mail'), $this->form->getValue('domain')));
 
                 if ( $this->form->getValue('zarafaQuotaOverride') == 1 ) {
@@ -180,20 +181,35 @@ class userActions extends sfActions
         if ($request->isMethod('post') && $request->getParameter('zdata')) {
 
             $this->form->bind($request->getParameter('zdata'));
-
-#            print_r( $_POST['zdata'] ); exit;
-            print_r( $this->form->getValues() ); exit;
             
             if ($this->form->isValid()) {
+
+#            print_r( $this->form->getValues() ); exit;
 
                 $this->userAccount->setGivenName($this->form->getValue('givenName'));
                 $this->userAccount->setSn($this->form->getValue('sn'));
                 $this->userAccount->setDisplayName($this->form->getValue('displayName'));
+                $this->userAccount->setZarafaAccount($this->form->getValue('zarafaAccount'));
+
+                $this->userAccount->setZarafaAdmin($this->form->getValue('zarafaAdmin'));
+
+                if ( $this->form->getValue('zarafaQuotaOverride') == 1 ) {
+                    $this->userAccount->setZarafaQuotaOverride(1);
+                    $this->userAccount->setZarafaQuotaHard($this->form->getValue('zarafaQuotaHard'));
+                    $this->userAccount->setZarafaQuotaSoft($this->form->getValue('zarafaQuotaSoft'));
+                    $this->userAccount->setZarafaQuotaWarn($this->form->getValue('zarafaQuotaWarn'));
+                } else {
+                    $this->userAccount->setZarafaQuotaOverride(0);
+                    $this->userAccount->setZarafaQuotaHard(null);
+                    $this->userAccount->setZarafaQuotaSoft(null);
+                    $this->userAccount->setZarafaQuotaWarn(null);
+                }
+
                 $this->userAccount->setEmailAddress( sprintf("%s@%s", $this->form->getValue('mail'), $this->form->getValue('domain')));
 
-                var_dump( $this->userAccount ); exit;
+#                var_dump( $this->userAccount ); exit;
 
-                if ( $l->doSave($this->userAccount) ) {
+                if ( $ldapPeer->doSave($this->userAccount) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                     echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
                     exit;
