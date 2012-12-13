@@ -1,28 +1,9 @@
-<?php slot('menu_top') ?>
-<div class="z-menu">
-    <div class="z-menu-line">
-        <strong><?php echo __('Platform') ;?></strong> :
-        <?php echo $platform->getCn() ?>
-    </div>
-    <div class="z-menu-line">
-        <strong><?php echo __('Company') ;?></strong> :
-        <?php echo $company->getCn() ?>
-    </div>
-    <div class="z-menu-line">
-        <strong><?php echo __('Users') ;?></strong> :
-        <?php echo __('New') ;?>
-    </div>
-    <div class="ym-grid z-menu-line">
-        <div class="ym-g40 ym-gl z-logout">
-            <?php echo link_to(__('Logout'), 'security/logout', array('id' => 'logout-link', 'confirm' => __('Quit Zacacia ?'))) ?>
-        </div>
-    </div>
-</div>
-<?php end_slot() ?>
 
 <div class="ym-grid z-content-header">
     <div class="ym-g70 ym-gl z-content-header-title">
-        <?php echo __('Add an user') ?>
+        <?php echo __('Platform') ;?> : <?php echo $platform->getCn() ?> &rarr;
+        <?php echo __('Company') ;?> : <?php echo $company->getCn() ?> &rarr;
+        <?php echo __('User') ?>::<?php echo __('New') ?>
     </div>
 </div>
 

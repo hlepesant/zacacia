@@ -15,11 +15,11 @@ $(document).ready(function() {
                 if ( data.disabled == true ) {
                     $('#cn').addClass('ym-error');
                     $('#cn-message').show();
-                    $("#button-submit").attr("disabled", true);
+                    $(".button-submit").attr("disabled", true);
                 } else {
                     $('#cn').removeClass('ym-error');
                     $('#cn-message').hide();
-                    $("#button-submit").removeAttr("disabled");
+                    $(".button-submit").removeAttr("disabled");
                 }
             }, "json");
         }

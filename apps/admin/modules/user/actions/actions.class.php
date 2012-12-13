@@ -3,9 +3,9 @@
 /**
  * user actions.
  *
- * @package    MinivISP
+ * @package    Zacacia
  * @subpackage user
- * @author     Your name here
+ * @author     Hugues Lepesant
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 class userActions extends sfActions
@@ -283,7 +283,7 @@ class userActions extends sfActions
 
         $this->platform = $ldapPeer->getPlatform($platformDn);
         $this->company = $ldapPeer->getCompany($companyDn);
-        $this->userInfo = $ldapPeer->getUser($userDn);
+        $this->userAccount = $ldapPeer->getUser($userDn);
 
         $this->form = new UserPasswordForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
@@ -296,9 +296,9 @@ class userActions extends sfActions
 
             if ($this->form->isValid()) {
 
-                $this->userInfo->setUserPassword($this->form->getValue('userPassword'));
+                $this->userAccount->setUserPassword($this->form->getValue('userPassword'));
 
-                if ( $ldapPeer->doSave($this->userInfo) ) {
+                if ( $ldapPeer->doSave($this->userAccount) ) {
                     sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
                     echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
                     exit;
@@ -388,6 +388,64 @@ class userActions extends sfActions
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
         echo fake_post($this, '@users', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         exit;
+    }
+
+    public function executeAliases(sfWebRequest $request)
+    {
+        $data = $request->getParameter('zdata');
+
+        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
+            $this->redirect('@platforms');
+        }
+
+        $companyDn = $request->getParameter('companyDn', $data['companyDn']);
+        if ( empty($companyDn) ) {
+            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
+            echo fake_post($this, '@companies', Array('platformDn' => $platformDn));
+            exit;
+        }
+
+        $userDn = $request->getParameter('userDn', $data['userDn']);
+        if ( empty($userDn) ) {
+            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
+            echo fake_post($this, '@companies', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+            exit;
+        }
+
+        $ldapPeer = new UserPeer();
+
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+        $this->company = $ldapPeer->getCompany($companyDn);
+        $this->userAccount = $ldapPeer->getUser($userDn);
+        $this->aliases = $ldapPeer->getAliases($userDn);
+
+        $this->form = new UserPasswordForm();
+        $this->form->getWidget('platformDn')->setDefault($platformDn);
+        $this->form->getWidget('companyDn')->setDefault($companyDn);
+        $this->form->getWidget('userDn')->setDefault($userDn);
+    
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+
+            $this->form->bind($request->getParameter('zdata'));
+
+            if ($this->form->isValid()) {
+
+                $this->userAccount->setUserPassword($this->form->getValue('userPassword'));
+
+                if ( $ldapPeer->doSave($this->userAccount) ) {
+                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
+                    echo fake_post($this, 'user/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+                    exit;
+                }
+            }
+        }
+
+        $this->cancel = new UserNavigationForm();
+        unset($this->cancel['userDn']);
+        $this->cancel->getWidget('platformDn')->setDefault($request->getParameter('platformDn'));
+        $this->cancel->getWidget('companyDn')->setDefault($request->getParameter('companyDn'));
     }
 
 /* WebServices */
