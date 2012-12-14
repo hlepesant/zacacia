@@ -392,9 +392,6 @@ class userActions extends sfActions
 
     public function executeAliases(sfWebRequest $request)
     {
-	#print_r( $_POST );
-	#exit;
-
         $data = $request->getParameter('zdata');
 
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
@@ -422,8 +419,7 @@ class userActions extends sfActions
         $this->platform = $ldapPeer->getPlatform($platformDn);
         $this->company = $ldapPeer->getCompany($companyDn);
         $this->userAccount = $ldapPeer->getUser($userDn);
-        $this->aliases = $this->userAccount->getZarafaAliases();
-	#$this->aliases[] = $this->userAccount->getMail();
+        $this->aliases = $this->userAccount->getZarafaAliases($userDn);
 
         $this->form = new UserAliasesForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
@@ -436,7 +432,7 @@ class userActions extends sfActions
 
             if ($this->form->isValid()) {
 
-		print_r( $this->form->getValues() );
+		print_r( $this->form->getValue('zarafaAliases') );
 		exit;
 
 		$aliases = $this->form->getValue('zarafaAliases');

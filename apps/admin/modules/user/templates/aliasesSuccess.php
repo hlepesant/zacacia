@@ -9,32 +9,26 @@
 
 
 
+<form action="<?php echo url_for('user/aliases') ?>" method="POST" id="form_aliases" class="ym-form ym-columnar">
+<?php echo $form->renderHiddenFields() ?>
+
 <?php
 $id = 0;
 foreach ($aliases as $alias) {
-    include_partial('alias', array('alias' => $alias, 'id' => $id, 'form' => $forms[$alias]));
+    include_partial('alias', array('alias' => $alias, 'id' => $id, 'form' => $form));
     $id++;
 }
 ?>
 <!-- end #collection -->
 
 
-<form action="<?php echo url_for('user/aliases') ?>" method="POST" id="form_aliases" class="ym-form ym-columnar">
-<?php echo $form->renderHiddenFields() ?>
-
-<div id="userPassword" class="ym-fbox-text">
-<?php echo $form['userPassword']->renderRow() ?>
-<p id="userPassword-message" class="ym-message">Error: invalid value!</p>
-</div>
-
-<div id="confirmPassword" class="ym-fbox-text">
-<?php echo $form['confirmPassword']->renderRow() ?>
-<p id="confirmPassword-message" class="ym-message">Error: invalid value!</p>
+<div id="userAliases" class="ym-fbox-text">
+<?php echo $form['zarafaAliases[]']->renderRow() ?>
 </div>
 
 <div class="ym-fbox-button">
 <input type="button" value="<?php echo __("Cancel") ?>" class="button-cancel" />
-<input type="submit" value="<?php echo __("Update") ?>" disabled="true" class="button-submit" />
+<input type="submit" value="<?php echo __("Validate") ?>" class="button-submit" />
 </div>
 
 </form>

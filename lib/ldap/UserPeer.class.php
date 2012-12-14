@@ -162,20 +162,4 @@ class UserPeer extends BaseUserPeer
         
         return $this->doCount($criteria);
     }
-
-    public function getAliases($dn)
-    {
-        $this->setBaseDn($dn);
-
-        $criteria = new LDAPCriteria();
-        $criteria->add('objectClass', 'top');
-        $criteria->add('objectClass', 'inetOrgPerson');
-        $criteria->add('objectClass', 'posixAccount');
-        $criteria->add('objectClass', 'zarafa-user');
-        $criteria->add('objectClass', 'zacaciaUser');
-
-        $userAccount = $this->doSelect($criteria, 'UserObject');
-	var_dump( $userAccount );
-	exit;
-    }
 }

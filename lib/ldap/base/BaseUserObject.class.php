@@ -26,6 +26,7 @@ class BaseUserObject extends LDAPObject
         $this->attributes['zarafaUserServer']       = '';
         $this->attributes['zarafaHidden']           = '';
         $this->attributes['mail']                   = '';
+        $this->attributes['zarafaAliases']          = Array();
 
         return $this;
     }
@@ -193,13 +194,25 @@ class BaseUserObject extends LDAPObject
   
     public function setZarafaAliases($v)
     {
-        $this->attributes['zarafaAliases'] = $v;
-   	    return $this;
+	if ( is_null($v) ) {
+        	$this->attributes['zarafaAliases'] = Array();
+	}
+	elseif ( is_array($v) ) {
+        	$this->attributes['zarafaAliases'] = $v;
+	}
+	else {
+        	$this->attributes['zarafaAliases'] = Array($v);
+	}
+   	return $this;
     }
 
     public function getZarafaAliases()
     {
-        return $this->attributes['zarafaAliases'];
+        $aliases = $this->attributes['zarafaAliases'];
+	if ( is_array( $aliases ) ) {
+		return $aliases;
+	}
+	return Array($aliases);
     }
   
     public function setZarafaAdmin($v)
