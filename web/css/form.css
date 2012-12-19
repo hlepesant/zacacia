@@ -86,3 +86,13 @@ position: relative;
 margin-top: 40px;
 }
 
+/*.ym-fbox-check .checkbox_list li {
+list-style: circle outside;
+}
+.ym-fbox-check ul.checkbox_list {
+li {
+*/
+
+.ym-fbox-check ul.checkbox_list li {
+list-style: none;
+}

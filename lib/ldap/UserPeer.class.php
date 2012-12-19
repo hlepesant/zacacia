@@ -162,4 +162,5 @@ class UserPeer extends BaseUserPeer
         
         return $this->doCount($criteria);
     }
+
 }

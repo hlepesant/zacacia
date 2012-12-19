@@ -12,19 +12,43 @@
 <form action="<?php echo url_for('user/aliases') ?>" method="POST" id="form_aliases" class="ym-form ym-columnar">
 <?php echo $form->renderHiddenFields() ?>
 
-<?php
-$id = 0;
-foreach ($aliases as $alias) {
-    include_partial('alias', array('alias' => $alias, 'id' => $id, 'form' => $form));
-    $id++;
-}
-?>
-<!-- end #collection -->
 
-
-<div id="userAliases" class="ym-fbox-text">
-<?php echo $form['zarafaAliases[]']->renderRow() ?>
+<div id="selectAll" class="ym-fbox-check">
+<?php echo $form['selectAll']->renderRow() ?>
 </div>
+
+<div id="zarafaAliases" class="ym-fbox-check">
+<?php echo $form['zarafaAliases']->renderRow() ?>
+</div>
+
+<?php /*
+<div id="zarafaAlias" class="ym-fbox-text">
+<?php echo $form['zarafaAlias']->renderRow() ?>
+</div>
+*/ ?>
+
+<div class="ym-grid">
+    <div class="ym-g30 ym-gl">
+        <div id="maillabel" class="ym-fbox-text">
+        <?php echo $form['mail']->renderLabel() ?>
+        </div>
+    </div>
+    <div class="ym-g35 ym-gl">
+        <div id="mail" class="ym-fbox-text z-text">
+        <?php echo $form['mail']->render() ?>
+        </div>
+    </div>
+    <div class="ym-g30 ym-gl">
+        <div id="domain" class="ym-fbox-select z-select">
+        <?php echo $form['domain']->render() ?>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 
 <div class="ym-fbox-button">
 <input type="button" value="<?php echo __("Cancel") ?>" class="button-cancel" />

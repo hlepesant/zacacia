@@ -392,8 +392,8 @@ class userActions extends sfActions
 
     public function executeAliases(sfWebRequest $request)
     {
-	#print_r( $_POST );
-	#exit;
+	    #print_r( $_POST );
+	    #exit;
 
         $data = $request->getParameter('zdata');
 
@@ -422,8 +422,8 @@ class userActions extends sfActions
         $this->platform = $ldapPeer->getPlatform($platformDn);
         $this->company = $ldapPeer->getCompany($companyDn);
         $this->userAccount = $ldapPeer->getUser($userDn);
-        $this->aliases = $this->userAccount->getZarafaAliases();
-	#$this->aliases[] = $this->userAccount->getMail();
+        #$this->aliases = $this->userAccount->getZarafaAliases();
+        $this->aliases = $this->userAccount->getZarafaAliasesAsOptions();
 
         $this->form = new UserAliasesForm();
         $this->form->getWidget('platformDn')->setDefault($platformDn);
@@ -436,10 +436,10 @@ class userActions extends sfActions
 
             if ($this->form->isValid()) {
 
-		print_r( $this->form->getValues() );
-		exit;
+		        print_r( $this->form->getValues() );
+		        exit;
 
-		$aliases = $this->form->getValue('zarafaAliases');
+		        $aliases = $this->form->getValue('zarafaAliases');
 
                 $this->userAccount->setZarafaAliases($aliases);
 
@@ -450,6 +450,9 @@ class userActions extends sfActions
                 }
             }
         }
+        
+		$this->form->getWidget('zarafaAliases')->setOption('choices', $this->aliases);
+        $this->form->getWidget('domain')->setOption('choices', $ldapPeer->getDomainsAsOption($companyDn));
 
         $this->cancel = new UserNavigationForm();
         unset($this->cancel['userDn']);

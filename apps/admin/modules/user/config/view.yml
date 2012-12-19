@@ -16,3 +16,7 @@ editSuccess:
 passwordSuccess:
     stylesheets:    [form.css]
     javascripts:    [user/password.js, jquery/jquery.observe_field.js, jquery/jquery.pwdMeter.min.js, jquery/jquery.crypt.js]
+
+aliasesSuccess:
+    stylesheets:    [form.css]
+    javascripts:    [user/aliases.js, jquery/jquery.observe_field.js]

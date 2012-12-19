@@ -1,22 +1,22 @@
 <div class="ym-grid z-line z-<?php echo (($id & 1) ? 'odd' : 'even'); ?>">
 
-<div class="ym-g50 ym-gl">
+<div class="ym-g40 ym-gl">
     <div class="z-status-<?php echo $platform->getZacaciaStatus() ?>"><?php echo $platform->getCn() ?></div>
 </div>
 
 <div class="ym-g30 ym-gl z-notice">
 <?php 
-    echo $platform->get('company_count');
-    echo __(' company');
-    echo($platform->get('company_count') > 1 ? 's' : '');
-    echo ", ";
-    echo $platform->get('server_count');
-    echo __(' server');
-    echo($platform->get('server_count') > 1 ? 's' : '');
+echo $platform->get('company_count');
+echo __(' company');
+echo($platform->get('company_count') > 1 ? 's' : '');
+echo ", ";
+echo $platform->get('server_count');
+echo __(' server');
+echo($platform->get('server_count') > 1 ? 's' : '');
 ?>
 </div>
 
-<div class="ym-g20 ym-gr z-action">
+<div class="ym-g30 ym-gr z-action">
 <form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
 <?php 
 echo $f->renderHiddenFields();
@@ -46,7 +46,7 @@ if ( !$platform->getZacaciaUnDeletable() &&
 }
 
 /* -- Separateur -- */
-echo image_tag('famfam/blank.png');
+#echo image_tag('famfam/blank.png');
 
 /* -- Server -- */
 echo link_to_function(
