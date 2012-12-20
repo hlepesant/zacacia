@@ -8,7 +8,11 @@ class UserAliasesForm extends ZacaciaForm
 			'companyDn'           => new sfWidgetFormInputHidden(),
 			'userDn'              => new sfWidgetFormInputHidden(),
 			'selectAll'           => new sfWidgetFormInputCheckbox(),
-			'zarafaAliases'       => new sfWidgetFormSelectCheckbox(array('choices' => array())),
+			'zarafaAliases'       => new sfWidgetFormSelectCheckbox(array(
+                'choices'           => array(),
+                'formatter'         => array($this, 'zFormatter'),
+                'label_separator'   => '</div><div ym-g33 ym-gl>',
+            )),
 			'mail'                => new sfWidgetFormInputText(),
             'domain'              => new sfWidgetFormSelect(array('choices' => array())),
             'zarafaAlias'         => new sfWidgetFormInputHidden(),
@@ -47,4 +51,23 @@ class UserAliasesForm extends ZacaciaForm
 		catch(sfValidatorError $e) {
 		}
 	}
+
+    public function zFormatter($widget, $inputs)
+    {
+        $rows = array();
+        $i=0;
+        foreach ($inputs as $input)
+        {
+            $color = sprintf('za-%s', (($i%2)==0) ? 'odd' : 'even');
+
+            $rows[] = $widget->renderContentTag(
+                'div',
+                $input['label'].'</div><div class="ym-g20 ym-gl za-liner '.$color.'">'.$input['input'],
+                array('class' => 'ym-g75 ym-gl za-line '.$color)
+            );
+            $i++;
+        }
+
+        return $widget->renderContentTag('div', implode($widget->getOption('separator'), $rows), array('class' => 'ym-grid'));
+    }
 }

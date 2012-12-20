@@ -86,13 +86,21 @@ position: relative;
 margin-top: 40px;
 }
 
-/*.ym-fbox-check .checkbox_list li {
-list-style: circle outside;
+.za-line {
+line-height: 22px;
 }
-.ym-fbox-check ul.checkbox_list {
-li {
-*/
 
-.ym-fbox-check ul.checkbox_list li {
-list-style: none;
+.za-liner {
+line-height: 22px;
+text-align: right;
+}
+
+.za-odd {
+background-color: #C0C0C0;
+padding: 2px 3px 2px 3px;
+}
+
+.za-even{
+background-color: #FFFFFF;
+padding: 2px 3px 2px 3px;
 }
