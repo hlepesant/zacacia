@@ -86,6 +86,10 @@ position: relative;
 margin-top: 40px;
 }
 
+.za-linet {
+line-height: 22px;
+}
+
 .za-line {
 line-height: 22px;
 }
@@ -93,6 +97,11 @@ line-height: 22px;
 .za-liner {
 line-height: 22px;
 text-align: right;
+}
+
+.za-selectAll {
+background-color: #CCCCCC;
+padding: 2px 3px 2px 3px;
 }
 
 .za-odd {

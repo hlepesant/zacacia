@@ -1,27 +1,3 @@
-<?php /* slot('menu_top') ?>
-<div class="z-menu">
-    <div class="z-menu-line">
-        <strong><?php echo __('Platform') ;?></strong> :
-        <?php echo $platform->getCn() ?>
-    </div>
-    <div class="z-menu-line">
-        <strong><?php echo __('Company') ;?></strong> :
-        <?php echo $company->getCn() ?>
-    </div>
-    <div class="z-menu-line">
-        <strong><?php echo __('Domains') ;?></strong>
-    </div>
-    <div class="ym-grid z-menu-line">
-        <div class="ym-g40 ym-gl z-logout">
-            <?php echo link_to(image_tag('famfam/door_out.png'), array(), array('id' => 'logout-link', 'confirm' => __('Quit Zacacia ?'))); ?>
-        </div>
-        <div class="ym-g40 ym-gr z-back">
-            <?php echo image_tag('famfam/arrow_up.png', array('id' => 'back-link')); ?>
-        </div>
-    </div>
-</div>
-<?php end_slot() */ ?>
-
 <div class="ym-grid z-content-header">
     <div class="ym-g70 ym-gl z-content-header-title" id="back-link">
     <?php echo __('Platform') ;?> : <?php echo $platform->getCn() ?> &rarr;

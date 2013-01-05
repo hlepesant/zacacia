@@ -12,42 +12,31 @@
 <form action="<?php echo url_for('user/aliases') ?>" method="POST" id="form_aliases" class="ym-form ym-columnar">
 <?php echo $form->renderHiddenFields() ?>
 
-
-<div id="selectAll" class="ym-fbox-check">
-<?php echo $form['selectAll']->renderRow() ?>
-</div>
-
 <div id="zarafaAliases" class="ym-fbox-check">
-<?php echo $form['zarafaAliases']->renderRow() ?>
-</div>
-
-<?php /*
-<div id="zarafaAlias" class="ym-fbox-text">
-<?php echo $form['zarafaAlias']->renderRow() ?>
-</div>
-*/ ?>
 
 <div class="ym-grid">
-    <div class="ym-g30 ym-gl">
+    <div class="ym-g75 ym-gl za-line za-selectAll"><?php echo $form['zarafaAliases']->renderLabel() ?></div>
+    <div class="ym-g20 ym-gl za-liner za-selectAll"><?php echo $form['selectAll']->render() ?></div>
+    <?php echo $form['zarafaAliases']->render() ?>
+</div>
+
+<div class="ym-grid">
+    <div class="ym-g33 ym-gl">
         <div id="maillabel" class="ym-fbox-text">
         <?php echo $form['mail']->renderLabel() ?>
         </div>
     </div>
-    <div class="ym-g35 ym-gl">
+    <div class="ym-g33 ym-gl">
         <div id="mail" class="ym-fbox-text z-text">
         <?php echo $form['mail']->render() ?>
         </div>
     </div>
-    <div class="ym-g30 ym-gl">
+    <div class="ym-g33 ym-gl">
         <div id="domain" class="ym-fbox-select z-select">
         <?php echo $form['domain']->render() ?>
         </div>
     </div>
 </div>
-
-
-
-
 
 
 <div class="ym-fbox-button">

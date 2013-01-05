@@ -392,9 +392,6 @@ class userActions extends sfActions
 
     public function executeAliases(sfWebRequest $request)
     {
-	    #print_r( $_POST );
-	    #exit;
-
         $data = $request->getParameter('zdata');
 
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
@@ -429,13 +426,16 @@ class userActions extends sfActions
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
         $this->form->getWidget('userDn')->setDefault($userDn);
-    
+
         if ($request->isMethod('post') && $request->getParameter('zdata')) {
+		
+            $this->form->getValidator('zarafaAliases')->setOption('choices', array_values($this->aliases));
 
             $this->form->bind($request->getParameter('zdata'));
 
             if ($this->form->isValid()) {
-
+	    
+                print_r( $_POST );
 		        print_r( $this->form->getValues() );
 		        exit;
 

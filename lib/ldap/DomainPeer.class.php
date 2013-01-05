@@ -71,6 +71,7 @@ class DomainPeer extends BaseDomainPeer
         $criteria->addOr('objectClass', 'zarafa-group');
         $criteria->add('objectClass', 'top');
         $criteria->add('mail', sprintf('@%s', $domain), '=', 2);
+        $criteria->addOr('zarafaAliases', sprintf('@%s', $domain), '=', 2);
 
         return $this->doCount($criteria);
     }

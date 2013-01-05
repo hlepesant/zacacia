@@ -28,12 +28,14 @@ class UserAliasesForm extends ZacaciaForm
 			'platformDn'          => new sfValidatorString(),
 			'companyDn'           => new sfValidatorString(),
 			'userDn'              => new sfValidatorString(),
-			'zarafaAliases'       => new sfValidatorCallback(array(
-				'callback' => array($this, 'aliasValidator')
-			)),
-            'mail'                => new sfValidatorString(),
+			'zarafaAliases'       => new sfValidatorChoice(array('choices' => array())),
+#			'zarafaAliases'       => new sfValidatorCallback(array(
+#				'required' => false,
+#				'callback' => array($this, 'aliasValidator')
+#			)),
+            'mail'                => new sfValidatorString(array('required' => false)),
             'domain'              => new sfValidatorString(),
-		 	'zarafaAlias'         => new sfValidatorEmail(),
+		 	'zarafaAlias'         => new sfValidatorEmail(array('required' => false)),
 		));
     
 		$this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));
@@ -68,6 +70,6 @@ class UserAliasesForm extends ZacaciaForm
             $i++;
         }
 
-        return $widget->renderContentTag('div', implode($widget->getOption('separator'), $rows), array('class' => 'ym-grid'));
+        return $widget->renderContentTag('div', implode($widget->getOption('separator'), $rows));
     }
 }
