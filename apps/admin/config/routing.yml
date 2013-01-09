@@ -12,15 +12,11 @@ platforms:
   param: { module: platform, action: index }
 
 platform_new:
-  url:   /platform/add
+  url:   /platform/add/
   param: { module: platform, action: new }
 
-platform_show:
-  url:   /platform/show
-  param: { module: platform, action: show }
-
 platform_edit:
-  url:   /platform/edit/:pid/
+  url:   /platform/edit/
   param: { module: platform, action: edit }
 
 # server
@@ -29,15 +25,11 @@ servers:
   param: { module: server, action: index }
 
 server_new:
-  url:   /server/add
+  url:   /server/add/
   param: { module: server, action: new }
 
-server_show:
-  url:   /server/show
-  param: { module: server, action: show }
-
 server_edit:
-  url:   /server/edit/:pid/
+  url:   /server/edit/
   param: { module: server, action: edit }
 
 # company
@@ -46,15 +38,11 @@ companies:
   param: { module: company, action: index }
 
 company_new:
-  url:   /company/add
+  url:   /company/add/
   param: { module: company, action: new }
 
-#company_show:
-#  url:   /company/show
-#  param: { module: company, action: show }
-
 company_edit:
-  url:   /company/edit/:pid/
+  url:   /company/edit/
   param: { module: company, action: edit }
 
 # domain
@@ -63,7 +51,7 @@ domains:
   param: { module: domain, action: index }
 
 domain_new:
-  url:   /domain/add
+  url:   /domain/add/
   param: { module: domain, action: new }
 
 # user
@@ -72,12 +60,29 @@ users:
   param: { module: user, action: index }
 
 user_new:
-  url:   /user/add
+  url:   /user/add/
   param: { module: user, action: new }
 
 user_edit:
-  url:   /user/edit/:pid/
+  url:   /user/edit/
   param: { module: user, action: edit }
+
+user_aliases:
+  url:   /user/aliases/
+  param: { module: user, action: aliases }
+
+# group
+groups:
+  url:   /group/
+  param: { module: group, action: index }
+
+group_new:
+  url:   /group/add/
+  param: { module: group, action: new }
+
+group_edit:
+  url:   /group/edit/
+  param: { module: group, action: edit }
 
 # generic rules
 # please, remove them by adding more specific rules

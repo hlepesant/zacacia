@@ -409,9 +409,9 @@ class BaseUserObject extends LDAPObject
         return !empty($md5) && preg_match('/^[a-f0-9]{32}$/', $md5);
     }
 
-    private function isValidEmail($mail)
-    {
-        return true;
-        return !empty($mail) && preg_match('/^[a-f0-9\.\-]\@{32}$/', $mail);
-    }
+#    private function isValidEmail($mail)
+#    {
+#        return true;
+#        return !empty($mail) && preg_match('/^[a-f0-9\.\-]\@{32}$/', $mail);
+#    }
 }

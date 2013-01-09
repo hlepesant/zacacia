@@ -85,4 +85,10 @@ class LDAPObject
         
         return $this;
     }
+
+    private function isValidEmail($mail)
+    {
+        return true;
+        return !empty($mail) && preg_match('/^[a-f0-9\.\-]\@{32}$/', $mail);
+    }
 }

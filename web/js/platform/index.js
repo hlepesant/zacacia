@@ -54,7 +54,7 @@ function jumpTo(id, name, target, status) {
         case 'company':
         case 'server':
             m = target;
-            d = 'index';
+            d = null;
         break;
 
         default:
@@ -62,7 +62,12 @@ function jumpTo(id, name, target, status) {
         break;
     }
 
-    f.attr('action', sprintf('%s%s/%s/', _js_url, m, d));
+    if ( is_null(d) ) {
+        f.attr('action', sprintf('%s%s/', _js_url, m));
+    }
+    else {
+        f.attr('action', sprintf('%s%s/%s/', _js_url, m, d));
+    }
 
     f.submit();
     return true;
