@@ -1,5 +1,6 @@
 var _check_cn = 'no';
-var _check_emailAddress = 'no';
+var _check_emailAddress = 'yes';
+var _check_member = 'no';
 var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 
 
@@ -29,6 +30,16 @@ $(document).ready(function() {
         checkSumGroupInfo()
     });
 
+
+    //$('select#zdata_member').observe_field(0.7, function() {
+    $('select#zdata_member').change(function() {
+        _check_member = 'no';
+        if($('select#zdata_member').size() > 0 ) {
+            _check_member = 'yes';
+        };
+        checkSumGroupInfo()
+    });
+
     $('select#zdata_zarafaAccount').change(function() {
         if ($(this).val() == 1) {
             $('#zarafa-settings').slideDown('slow');
@@ -36,10 +47,12 @@ $(document).ready(function() {
             $('input#zdata_emailAddress').val(buildEmailAddress($('input#zdata_mail'), $('#zdata_domain'))) ;
 
             $('input#zdata_mail').focus();
+            _check_emailAddress = 'no';
 
         } else {
             $('input#zdata_mail').val(null);
             $('#zarafa-settings').slideUp();
+            _check_emailAddress = 'yes';
         }
     });
 
@@ -79,14 +92,16 @@ $(document).ready(function() {
 
 function checkSumGroupInfo() {
 
-alert("check_cn = " + _check_cn );
-alert("check_emailAddress = " + _check_emailAddress );
+//alert("check_cn = " + _check_cn );
+//alert("check_emailAddress = " + _check_emailAddress );
+//alert("check_member = " + _check_member );
 
     if ( ( _check_cn == 'yes' ) && 
-         ( _check_emailAddress == 'yes' )
+         ( _check_emailAddress == 'yes' ) &&
+         ( _check_member == 'yes' )
     ) {
-        $(".button-submit").attr("disabled", true);
-    } else {
         $(".button-submit").removeAttr("disabled");
+    } else {
+        $(".button-submit").attr("disabled", true);
     }
 }

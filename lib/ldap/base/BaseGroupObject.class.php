@@ -10,7 +10,7 @@ class BaseGroupObject extends LDAPObject
 
     public function applyDefaultValues()
     {
-        $this->attributes['objectClass']            = Array('top', 'groupOfNames', 'zarafa-group', 'zacaciaUser');
+        $this->attributes['objectClass']            = Array('top', 'groupOfNames', 'zarafa-group', 'zacaciaGroup');
         $this->attributes['cn']                     = null;
         $this->attributes['member']                 = Array();
 
@@ -22,8 +22,8 @@ class BaseGroupObject extends LDAPObject
         #$this->attributes['seeAlso']                = Array();
 
         $this->attributes['mail']                   = '';
-        $this->attributes['zarafaAccount']          = 1;
-        $this->attributes['zarafaAliases']          = Array();
+        $this->attributes['zarafaAccount']          = 0;
+        #$this->attributes['zarafaAliases']          = Array();
         $this->attributes['zarafaHidden']           = '';
         $this->attributes['zarafaSecurityGroup']    = 0;
 
@@ -42,6 +42,29 @@ class BaseGroupObject extends LDAPObject
     public function getCn()
     {
         return $this->attributes['cn'];
+    }
+  
+    public function setMember($v)
+    {
+	    if ( is_null($v) ) {
+            $this->attributes['member'] = Array();
+	    }
+	    elseif ( is_array($v) ) {
+            $this->attributes['member'] = $v;
+	    }
+	    else {
+           	$this->attributes['member'] = Array($v);
+	    }
+   	    return $this;
+    }
+
+    public function getMember()
+    {
+        $member = $this->attributes['member'];
+	    if ( is_array( $member ) ) {
+	    	return $member;
+	    }
+	    return Array($member);
     }
   
     public function setMail($v)

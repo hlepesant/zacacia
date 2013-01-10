@@ -113,8 +113,8 @@
 </div>
 
 <div class="ym-fbox-button">
-<input type="button" value="<?php echo __("Cancel") ?>" class="button_cancel" />
-<input type="submit" value="<?php echo __('Update') ?>" class="button_submit" />
+<input type="button" value="<?php echo __("Cancel") ?>" class="button-cancel" />
+<input type="submit" value="<?php echo __('Update') ?>" class="button-submit" />
 </div>
 
 

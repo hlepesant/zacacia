@@ -37,14 +37,15 @@ class GroupForm extends ZacaciaForm
             'companyDn'             => new sfValidatorString(),
             'status'                => new sfValidatorChoice(array('choices' => array_keys(self::$option_status))),
             'cn'                    => new sfValidatorString(),
-            'member'                => new sfValidatorString(),
-            'mail'                  => new sfValidatorString(),
-            'domain'                => new sfValidatorString(),
-            'emailAddress'          => new sfValidatorEmail(),
+            'member'                => new sfValidatorChoice(array('choices' => array(), 'multiple' => true)),
+            'mail'                  => new sfValidatorString(array('required' => false)),
+            'domain'                => new sfValidatorChoice(array('choices' => array(), 'required' => false)),
+            #'domain'                => new sfValidatorString(array('required' => false)),
+            'emailAddress'          => new sfValidatorEmail(array('required' => false)),
             'zarafaAccount'         => new sfValidatorChoice(array('choices' => array_keys(self::$option_noyes))),
-            'zarafaAliases'         => new sfValidatorString(),
-            'zarafaHidden'          => new sfValidatorBoolean(),
-            'zarafaSecurityGroup'   => new sfValidatorChoice(array('choices' => array_keys(self::$option_noyes))),
+            'zarafaAliases'         => new sfValidatorString(array('required' => false)),
+            'zarafaHidden'          => new sfValidatorBoolean(array('required' => false)),
+            'zarafaSecurityGroup'   => new sfValidatorChoice(array('choices' => array_keys(self::$option_noyes), 'required' => false)),
         ));
     
         $this->widgetSchema->setNameFormat(sprintf('%s[%%s]', sfConfig::get('widgetNameFormat')));

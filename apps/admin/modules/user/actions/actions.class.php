@@ -426,10 +426,10 @@ class userActions extends sfActions
         $this->form->getWidget('platformDn')->setDefault($platformDn);
         $this->form->getWidget('companyDn')->setDefault($companyDn);
         $this->form->getWidget('userDn')->setDefault($userDn);
+        $this->form->getValidator('zarafaAliases')->setOption('choices', array_values($this->aliases));
 
         if ($request->isMethod('post') && $request->getParameter('zdata')) {
 		
-            $this->form->getValidator('zarafaAliases')->setOption('choices', array_values($this->aliases));
 
             $this->form->bind($request->getParameter('zdata'));
 
