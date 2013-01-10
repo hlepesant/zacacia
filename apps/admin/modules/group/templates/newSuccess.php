@@ -19,6 +19,10 @@
 </div>
 
 <div class="ym-fbox-select">
+<?php echo $form['member']->renderRow() ?>
+</div>
+
+<div class="ym-fbox-select">
 <?php echo $form['zarafaAccount']->renderRow() ?>
 </div>
 
@@ -62,13 +66,7 @@
 </form>
 
 <?php echo javascript_tag("
-var json_checkcn_url = '".url_for('user/checkcn/')."';
-var json_checkuid_url = '".url_for('user/checkuid/')."';
-var json_checkemail_url = '".url_for('user/checkemail/')."';
-
-var full_user_quota_check = ".sfConfig::get('full_user_quota_setting').";
-var quota_hard = ".sfConfig::get('quota_hard').";
-var quota_soft = ".sfConfig::get('quota_soft').";
-var quota_warn = ".sfConfig::get('quota_warn').";
+var json_checkcn_url = '".url_for('group/checkcn/')."';
+var json_checkemail_url = '".url_for('group/checkemail/')."';
 ");
 ?>

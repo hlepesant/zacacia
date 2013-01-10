@@ -4,14 +4,14 @@ class GroupForm extends ZacaciaForm
     public function configure()
     {
         $this->setWidgets(array(
-            'platformDn'            => new sfWidgetFormInputText(),
+            'platformDn'            => new sfWidgetFormInputHidden(),
             'companyDn'             => new sfWidgetFormInputHidden(),
             'status'                => new sfWidgetFormChoice(array('choices' => self::$option_status)),
 # ObjectClasse: groupOfNames
-            'cn'                    => new sfWidgetFormInputHidden(),
-            'member'                => new sfWidgetFormChoice(array('choices' => array())),
+            'cn'                    => new sfWidgetFormInputText(),
+            'member'                => new sfWidgetFormSelectMany(array('choices' => array())),
 # ObjectClasse: zarafa-group
-            'mail'                  => new sfWidgetFormInput(),
+            'mail'                  => new sfWidgetFormInputText(),
             'domain'                => new sfWidgetFormSelect(array('choices' => array())),
             'emailAddress'          => new sfWidgetFormInputHidden(),
 

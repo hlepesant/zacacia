@@ -124,6 +124,7 @@ class groupActions extends sfActions
         }
 
         $this->form->getWidget('domain')->setOption('choices', $ldapPeer->getDomainsAsOption($companyDn));
+        $this->form->getWidget('member')->setOption('choices', $ldapPeer->getUsersAsOption($companyDn));
 
         $this->cancel = new UserNavigationForm();
         unset($this->cancel['userDn']);

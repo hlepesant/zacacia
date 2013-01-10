@@ -71,6 +71,26 @@ class GroupPeer extends BaseGroupPeer
         return $options;
     }
 
+    public function getUsersAsOption($dn)
+    {
+        $this->setBaseDn(sprintf("ou=Users,%s", $dn));
+
+        $criteria = new LDAPCriteria();
+        $criteria->add('objectClass', 'top');
+        $criteria->add('objectClass', 'inetOrgPerson');
+        $criteria->add('objectClass', 'posixAccount');
+        $criteria->add('objectClass', 'zarafa-user');
+        $criteria->add('objectClass', 'zacaciaUser');
+        
+        $users = $this->doSelect($criteria, 'userObject');
+        $options = array();
+        foreach ( $users as $user ) {
+            $options[ $user->getDn() ] = sprintf("%s", $user->getCn() );
+        }
+
+        return $options;
+    }
+
     public function doCheckCn($companyDn, $groupCn)
     {
         $this->setBaseDn(sprintf("ou=Groups,%s", $companyDn));
