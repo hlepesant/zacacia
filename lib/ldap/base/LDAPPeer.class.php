@@ -275,9 +275,9 @@ class LDAPPeer
         throw new Exception("Fatal: ".ldap_error($this->getLinkId()));
     }
 
-    public function doRename($oldDn, LDAPObject $ldap_object)
+    public function doRename(LDAPObject $ldap_object, $newDn)
     {
-        if ( ldap_rename($this->getLinkId(), $oldDn, $ldap_object->getDn(), $this->getBaseDn(), true)) {
+        if ( @ldap_rename($this->getLinkId(), $ldap_object->getDn(), $newDn, $this->getBaseDn(), true)) {
             return true;
         }
 

@@ -230,8 +230,6 @@ class groupActions extends sfActions
             exit;
         }
 
-        #print_r($_POST); exit;
-
         $ldapPeer = new GroupPeer();
 
         $this->platform = $ldapPeer->getPlatform($platformDn);
@@ -267,8 +265,8 @@ class groupActions extends sfActions
 
                     try {
                         $ldapPeer->doRename($this->group, $newDn);
-                        $this->group->setCn(sprintf("%s", $this->form->getValue('cn')));
                         $this->group->setDn(sprintf("cn=%s,%s", $this->group->getCn(), $ldapPeer->getBaseDn()));
+                        $this->group->setCn(sprintf("%s", $this->form->getValue('cn')));
                     }
                     catch (Exception $e) {
                         var_dump( $e->getMessage() );
