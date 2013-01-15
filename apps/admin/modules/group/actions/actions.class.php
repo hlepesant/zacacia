@@ -156,8 +156,8 @@ class groupActions extends sfActions
         $criteria = new LDAPCriteria();
         $criteria->setBaseDn($groupDn);
 
-        $l = new GroupPeer();
-        $group = $l->retrieveByDn($criteria);
+        $ldapPeer = new GroupPeer();
+        $group = $ldapPeer->retrieveByDn($criteria);
 
         if ( 'enable' === $group->getZacaciaStatus()) {
             $group->setZacaciaStatus('disable');
@@ -165,7 +165,7 @@ class groupActions extends sfActions
             $group->setZacaciaStatus('enable');
         }
 
-        $l->doSave($group);
+        $ldapPeer->doSave($group);
 
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
         echo fake_post($this, '@groups', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
@@ -194,11 +194,8 @@ class groupActions extends sfActions
             echo fake_post($this, '@groups', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         }
 
-        $criteria = new LDAPCriteria();
-        $criteria->setBaseDn($groupDn);
-
-        $l = new GroupPeer();
-        $group = $l->retrieveByDn($criteria);
+        $ldapPeer = new GroupPeer();
+        $group = $ldapPeer->getGroup($groupDn);
 
         if ( 'disable' === $group->getZacaciaStatus()) {
             $l->doDelete($group, true);
@@ -207,6 +204,108 @@ class groupActions extends sfActions
         sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
         echo fake_post($this, '@groups', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
         exit;
+    }
+
+    public function executeEdit(sfWebRequest $request)
+    {
+        $data = $request->getParameter('zdata');
+
+        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+        if ( empty($platformDn) ) {
+            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
+            $this->redirect('@platforms');
+        }
+
+        $companyDn = $request->getParameter('companyDn', $data['companyDn']);
+        if ( empty($companyDn) ) {
+            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
+            echo fake_post($this, '@companies', Array('holdingDn' => $holdingDn));
+            exit;
+        }
+
+        $groupDn = $request->getParameter('groupDn', $data['groupDn']);
+        if ( empty($groupDn) ) {
+            sfContext::getInstance()->getConfiguration()->loadHelpers('veePeeFakePost');
+            echo fake_post($this, '@groups', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+            exit;
+        }
+
+        $ldapPeer = new GroupPeer();
+
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+        $this->company = $ldapPeer->getCompany($companyDn);
+        $this->group = $ldapPeer->getGroup($groupDn);
+
+        $this->form = new GroupEditForm();
+
+        $this->form->getWidget('platformDn')->setDefault($platformDn);
+        $this->form->getWidget('companyDn')->setDefault($companyDn);
+        $this->form->getWidget('groupDn')->setDefault($groupDn);
+
+        $domains = $ldapPeer->getDomainsAsOption($companyDn);
+        $this->form->getWidget('domain')->setOption('choices', $domains );
+
+        $users = $ldapPeer->getUsersAsOption($companyDn);
+        $this->form->getWidget('member')->setOption('choices', $users);
+
+        if ($request->isMethod('post') && $request->getParameter('zdata')) {
+
+            $this->form->getValidator('domain')->setOption('choices', array_keys($domains));
+            $this->form->getValidator('member')->setOption('choices', array_keys($users));
+
+            $this->form->bind($request->getParameter('zdata'));
+            
+            if ($this->form->isValid()) {
+
+                $ldapPeer->setBaseDn(sprintf("ou=Groups,%s", $companyDn));
+
+                $groupOfNames = new groupObject();
+
+                if ( $this->form->getValue('cn') != $this->form->getValue('rename') ) {
+                    $groupOfNames->setCn(sprintf("%s", $this->form->getValue('cn')));
+                    $groupOfNames->setDn(sprintf("cn=%s,%s", $groupOfNames->getCn(), $ldapPeer->getBaseDn()));
+
+                    try {
+                        $container = 
+                        $ldapPeer->doRename($groupDn, $groupOfNames);
+                    }
+                    catch (Exception $e) {
+                        var_dump( $e->getMessage() );
+                        exit;
+                    }
+
+
+                }
+                else {
+
+                    $groupOfNames->setMember($this->form->getValue('member'));
+
+                    $groupOfNames->setZarafaAccount($this->form->getValue('zarafaAccount'));
+                    if ( $this->form->getValue('zarafaAccount') ) {
+                        $groupOfNames->setEmailAddress( sprintf("%s@%s", $this->form->getValue('mail'), $this->form->getValue('domain')));
+                    }
+
+#                    var_dump( $groupOfNames ); exit;
+
+                    if ( $ldapPeer->doSave($groupOfNames) ) {
+                        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
+                        echo fake_post($this, 'group/index', Array('platformDn' => $platformDn, 'companyDn' => $companyDn));
+                        exit;
+                    }
+                }
+            }
+        }
+
+        $this->form->getWidget('cn')->setDefault($this->group->getCn());
+        $this->form->getWidget('rename')->setDefault($this->group->getCn());
+        $this->form->getWidget('status')->setDefault($this->group->getZacaciaStatus());
+        $this->form->getWidget('member')->setDefault($this->group->getMember());
+        $this->form->getWidget('zarafaAccount')->setDefault($this->group->getZarafaAccount());
+
+        $this->cancel = new GroupNavigationForm();
+        unset($this->cancel['userDn']);
+        $this->cancel->getWidget('platformDn')->setDefault($platformDn);
+        $this->cancel->getWidget('companyDn')->setDefault($companyDn);
     }
 
 /* WebServices */
