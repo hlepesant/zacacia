@@ -7,19 +7,20 @@ class UserAliasesForm extends ZacaciaForm
 			'platformDn'          => new sfWidgetFormInputHidden(),
 			'companyDn'           => new sfWidgetFormInputHidden(),
 			'userDn'              => new sfWidgetFormInputHidden(),
-			'selectAll'           => new sfWidgetFormInputCheckbox(),
+			'zarafaAliases'       => new sfWidgetFormSelectCheckbox(array('choices' => array())),
+            /*
 			'zarafaAliases'       => new sfWidgetFormSelectCheckbox(array(
                 'choices'           => array(),
                 'formatter'         => array($this, 'zFormatter'),
                 'label_separator'   => '</div><div ym-g33 ym-gl>',
             )),
+            */
 			'mail'                => new sfWidgetFormInputText(),
             'domain'              => new sfWidgetFormSelect(array('choices' => array())),
             'zarafaAlias'         => new sfWidgetFormInputHidden(),
 		));
 	      
 		$this->widgetSchema->setLabels(array(
-			'selectAll'           => 'Select All',
 			'zarafaAliases'       => 'Enabled Alias',
 			'mail'                => 'New Alias',
 		));

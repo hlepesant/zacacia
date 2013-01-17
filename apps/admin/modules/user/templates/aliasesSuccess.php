@@ -15,9 +15,16 @@
 <div id="zarafaAliases" class="ym-fbox-check">
 
 <div class="ym-grid">
+<fieldset>
     <div class="ym-g75 ym-gl za-line za-selectAll"><?php echo $form['zarafaAliases']->renderLabel() ?></div>
-    <div class="ym-g20 ym-gl za-liner za-selectAll"><?php echo $form['selectAll']->render() ?></div>
+    <div class="ym-g20 ym-gl za-liner za-selectAll">
+<?php /*
+    <?php echo $form['selectAll']->render() ?>i
+*/ ?>
+    <a href="#" class="selectAll"><?php echo __('Select All') ?></a>
+    </div>
     <?php echo $form['zarafaAliases']->render() ?>
+</fieldset>
 </div>
 
 <div class="ym-grid">
