@@ -22,7 +22,7 @@ $(document).ready(function() {
         $("#section_zarafa").hide();
     });
 
-    $('.button_cancel').click(function() {
+    $('.button-cancel').click(function() {
         $('#form_cancel').submit();
     });
 

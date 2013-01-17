@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     $.fx.off = true;
     
-    $('#button-cancel').click(function() {
+    $('.button-cancel').click(function() {
         $('#form_cancel').submit();
     });
 /*

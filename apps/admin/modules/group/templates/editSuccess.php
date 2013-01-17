@@ -61,7 +61,7 @@
 
 </form>
 
-<form action="<?php echo url_for('@groups') ?>" method="POST" id="form_cancel">
+<form action="<?php echo url_for('@groups') ?>" method="POST" id="form_cancel" class="invisible">
 <?php echo $cancel->renderHiddenFields() ?>
 </form>
 

@@ -267,8 +267,12 @@ class groupActions extends sfActions
 
                     try {
                         $ldapPeer->doRename($this->group, $newDn);
+
                         $this->group->setCn(sprintf("%s", $this->form->getValue('cn')));
-                        $this->group->setDn(sprintf("cn=%s,%s", $this->group->getCn(), $ldapPeer->getBaseDn()));
+                        
+                        $groupDn = sprintf("%s,%s", $newDn, $ldapPeer->getBaseDn());
+                        $this->group->setDn($groupDn);
+                        #$this->group = $ldapPeer->getGroup($groupDn);
                     }
                     catch (Exception $e) {
                         var_dump( $e->getMessage() );

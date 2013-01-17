@@ -8,7 +8,7 @@ var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 
 $(document).ready(function() {
 
-    $('.button_cancel').click(function() {
+    $('.button-cancel').click(function() {
         $('#form_cancel').submit();
     });
 

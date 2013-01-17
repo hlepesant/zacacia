@@ -1,12 +1,12 @@
 var _check_cn = 'no';
 var _check_emailAddress = 'yes';
-var _check_member = 'no';
+var _check_member = 'yes';
 var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 
 
 $(document).ready(function() {
 
-    $('.button_cancel').click(function() {
+    $('.button-cancel').click(function() {
         $('#form_cancel').submit();
     });
 

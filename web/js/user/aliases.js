@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $('.button_cancel').click(function() {
+    $('.button-cancel').click(function() {
         $('#form_cancel').submit();
     });
 
