@@ -19,17 +19,33 @@ echo($platform->get('server_count') > 1 ? 's' : '');
 <div class="ym-g30 ym-gr z-action">
 <form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
 <?php 
-echo $f->renderHiddenFields();
+#echo $f->renderHiddenFields();
 
 /* -- Edit -- */
-echo link_to_function(
+#echo link_to_function(
+#    image_tag('famfam/page_white_edit.png', array('title' => 'Edit')),
+#    "jumpTo('".sprintf('%03d', $id)."', '".addslashes($platform->getCn())."', 'edit', null)");
+
+echo link_to(
     image_tag('famfam/page_white_edit.png', array('title' => 'Edit')),
-    "jumpTo('".sprintf('%03d', $id)."', '".addslashes($platform->getCn())."', 'edit', null)");
+    url_for(array(
+        'module' => 'platform',
+        'action' => 'edit',
+        'platform' => $platform->getCn()
+    )));
 
 /* -- Status -- */
-echo link_to_function(
+#echo link_to_function(
+#    image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Status')),
+#    "jumpTo('".sprintf('%03d', $id)."', '".addslashes($platform->getCn())."', 'status', '".$platform->getZacaciaStatus()."')");
+
+echo link_to(
     image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Status')),
-    "jumpTo('".sprintf('%03d', $id)."', '".addslashes($platform->getCn())."', 'status', '".$platform->getZacaciaStatus()."')");
+    url_for(array(
+        'module' => 'platform',
+        'action' => 'status',
+        'platform' => $platform->getCn()
+    )));
 
 /* -- Delete -- */
 #if ( !$platform->getZacaciaUnDeletable() && 'disable' === $platform->getZacaciaStatus() ) {

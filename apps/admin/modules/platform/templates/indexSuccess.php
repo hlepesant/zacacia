@@ -1,15 +1,3 @@
-<?php /* slot('menu_top') ?>
-<div class="z-menu">
-    <!-- div class="z-menu-line">
-        <strong><?php echo __('Platforms') ;?></strong>
-    </div -->
-    <div class="ym-grid z-menu-line">
-        <div class="ym-g40 ym-gr z-back">
-        </div>
-    </div>
-</div>
-<?php end_slot() */ ?>
-
 <div class="ym-grid z-content-header">
   <div class="ym-g70 ym-gl z-content-header-title"><?php echo __("Platforms") ?></div>
   <div class="ym-g30 ym-gr">
@@ -23,7 +11,8 @@
 <?php
 $id = 0;
 foreach ($platforms as $platform) {
-    include_partial('item', array('platform' => $platform, 'id' => $id, 'f' => $forms[$platform->getDn()]));
+    #include_partial('item', array('platform' => $platform, 'id' => $id, 'f' => $forms[$platform->getDn()]));
+    include_partial('item', array('platform' => $platform, 'id' => $id));
     $id++;
 }
 ?>

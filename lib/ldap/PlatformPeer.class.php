@@ -11,14 +11,19 @@ class PlatformPeer extends BasePlatformPeer
         return $this;
     }
 
+    public function doDn($platformCN)
+    {
+        $this->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
+        return sprintf("cn=%s,%s", $platformCN, $this->getBaseDn());
+    }
+
     public function getPlatforms()
     {
+        $this->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
+
         $criteria = new LDAPCriteria();
         $criteria->add('objectClass', 'zacaciaPlatform');
         $criteria->setSortFilter('cn');
-
-        $this->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
-        #return $this->doSelect($criteria, 'BasePlatformObject');
 
         $platforms = $this->doSelect($criteria, 'PlatformObject');
 

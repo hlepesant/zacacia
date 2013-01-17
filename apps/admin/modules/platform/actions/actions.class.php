@@ -19,16 +19,15 @@ class platformActions extends sfActions
         $ldapPeer = new PlatformPeer();
         $this->platforms = $ldapPeer->getPlatforms();
 
-        $id=0;
-        $this->forms = array();
-        foreach ($this->platforms as $platform) {
-
-            $form = new PlatformNavigationForm();
-            $form->getWidget('platformDn')->setDefault($platform->getDn());
-            $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
-            $this->forms[$platform->getDn()] = $form;
-            $id++;
-        }
+#        $id=0;
+#        $this->forms = array();
+#        foreach ($this->platforms as $platform) {
+#            $form = new PlatformNavigationForm();
+#            $form->getWidget('platformDn')->setDefault($platform->getDn());
+#            $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
+#            $this->forms[$platform->getDn()] = $form;
+#            $id++;
+#        }
 
         $this->new = new PlatformNavigationForm();
         unset($this->new['platformDn']);
@@ -76,16 +75,18 @@ class platformActions extends sfActions
 
     public function executeEdit(sfWebRequest $request)
     {
-        $data = $request->getParameter('zdata');
-        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
-
-        if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
-            $this->redirect('@homepage');
-        }
 
         $ldapPeer = new PlatformPeer();
-        $this->platform = $ldapPeer->getPlatform($platformDn);
+        $platformDn = $ldapPeer->doDn($request->getParameter('platform'));
+
+        $this->forward404Unless( $this->platform = $ldapPeer->getPlatform($platformDn) );
+
+#        $data = $request->getParameter('zdata');
+#        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
+#        if ( empty($platformDn) ) {
+#            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
+#            $this->redirect('@homepage');
+#        }
 
         $this->form = new PlatformEditForm();
 
@@ -111,8 +112,7 @@ class platformActions extends sfActions
             }
         }
 
-        $this->form->getWidget('platformDn')->setDefault($this->platform->getDn());
-
+        #$this->form->getWidget('platformDn')->setDefault($this->platform->getDn());
 
         if ( $this->platform->getZacaciaMultiServer() ) {
             $this->form->getWidget('multiserver')->setDefault('true');
@@ -129,7 +129,7 @@ class platformActions extends sfActions
         $this->form->getWidget('status')->setDefault($this->platform->getZacaciaStatus());
 
         $this->cancel = new PlatformNavigationForm();
-        unset($this->cancel['platformDn']);
+        #unset($this->cancel['platformDn']);
     }
 
     public function executeStatus(sfWebRequest $request)
