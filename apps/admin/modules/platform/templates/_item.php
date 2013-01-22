@@ -22,27 +22,14 @@ echo($platform->get('server_count') > 1 ? 's' : '');
 #echo $f->renderHiddenFields();
 
 /* -- Edit -- */
-#echo link_to_function(
-#    image_tag('famfam/page_white_edit.png', array('title' => 'Edit')),
-#    "jumpTo('".sprintf('%03d', $id)."', '".addslashes($platform->getCn())."', 'edit', null)");
-
-echo link_to( image_tag('famfam/page_white_edit.png', array('title' => 'Edit')), '@platform_edit?platform='.$platform->getCn());
+echo link_to( image_tag('famfam/page_white_edit.png', array('title' => 'Edit')), '@platform_edit?platform='.$platform->getCn() );
 
 /* -- Status -- */
-#echo link_to_function(
-#    image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Status')),
-#    "jumpTo('".sprintf('%03d', $id)."', '".addslashes($platform->getCn())."', 'status', '".$platform->getZacaciaStatus()."')");
-
-echo link_to( image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Status')), '@platform_status?platform='.$platform->getCn());
-/*
-echo link_to(
-    image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Status')),
-    url_for(array(
-        'module' => 'platform',
-        'action' => 'status',
-        'platform' => $platform->getCn()
-    )));
-*/
+if ( $platform->getZacaciaStatus() === 'enable' ):
+echo link_to( image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Status')), '@platform_status?platform='.$platform->getCn()."&status=0" );
+else :
+echo link_to( image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Status')), '@platform_status?platform='.$platform->getCn()."&status=1" );
+endif;
 
 /* -- Delete -- */
 #if ( !$platform->getZacaciaUnDeletable() && 'disable' === $platform->getZacaciaStatus() ) {

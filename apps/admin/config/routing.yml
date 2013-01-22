@@ -15,18 +15,34 @@ platform_new:
   url:   /platform/add/
   param: { module: platform, action: new }
 
-platform_edit:
-  url:   /platform/:platform
+platform_check_cn:
+  url:   /platform/check/*
   class: sfRequestRoute
+  param: { module: platform, action: check }
+  requirements:
+    sf_method: [get]
+    name: \w+
+
+platform_edit:
+  url:   /platform/edit/:platform
   param: { module: platform, action: edit }
+  requirements:
+    platform: \w+
+    sf_method: [get]
+
+platform_status:
+  url:   /platform/status/:platform/:status
+  class: sfRequestRoute
+  param: { module: platform, action: status }
   requirements:
     sf_method: [get]
     platform: \w+
+    status: \d
 
-platform_status:
-  url:   /platform/status/:platform
+platform_delete:
+  url:   /platform/delete/:platform
   class: sfRequestRoute
-  param: { module: platform, action: status }
+  param: { module: platform, action: delete }
   requirements:
     sf_method: [get]
     platform: \w+

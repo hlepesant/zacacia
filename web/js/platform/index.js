@@ -1,9 +1,5 @@
 $(document).ready(function() {
 /*
-    $("#gotonew").click(function() {
-        $("#platform_new").submit();
-    });
-
     $("._link img[title]").tooltip({
         position: "bottom left",
         opacity: 0.9
@@ -41,12 +37,6 @@ function jumpTo(id, name, target, status) {
             }
             
             if ( ! confirm( alert_msg + ' ' + name + ' ?') ) {
-                return false;
-            }
-        break;
-
-        case 'delete':
-            if ( ! confirm( _js_msg_delete + ' ' + name + ' ?') ) {
                 return false;
             }
         break;

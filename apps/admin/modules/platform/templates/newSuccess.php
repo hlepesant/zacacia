@@ -35,5 +35,5 @@
 </form>
 
 <?php echo javascript_tag("
-var json_check_url = '". url_for('platform/check/')."';
+var json_check_url = '". url_for('@platform_check_cn')."';
 ");?>

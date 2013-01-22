@@ -60,13 +60,10 @@ class platformActions extends sfActions
 
                 $platform->setZacaciaStatus($this->form->getValue('status'));
 
-                if ( $ldapPeer->doAdd($platform) ) {
-                    sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                    echo fake_post($this, 'platform/index', Array());
-                    exit;
-                }
-            } else {
-                $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
+                $this->redirectIf(
+                    $ldapPeer->doAdd($platform),
+                    $this->getController()->genUrl('@platforms')
+                );
             }
         }
         $this->cancel = new PlatformNavigationForm();
@@ -75,18 +72,10 @@ class platformActions extends sfActions
 
     public function executeEdit(sfWebRequest $request)
     {
-
         $ldapPeer = new PlatformPeer();
         $platformDn = $ldapPeer->doDn($request->getParameter('platform'));
 
         $this->forward404Unless( $this->platform = $ldapPeer->getPlatform($platformDn) );
-
-#        $data = $request->getParameter('zdata');
-#        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
-#        if ( empty($platformDn) ) {
-#            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
-#            $this->redirect('@homepage');
-#        }
 
         $this->form = new PlatformEditForm();
 
@@ -98,70 +87,56 @@ class platformActions extends sfActions
 
                 $this->platform->setZacaciaMultiTenant($this->form->getValue('multitenant'));
                 $this->platform->setZacaciaMultiServer($this->form->getValue('multiserver'));
-                $this->platform->setZacaciaUnDeletable($this->form->getValue('undeletable'));
+                #$this->platform->setZacaciaUnDeletable($this->form->getValue('undeletable'));
                 $this->platform->setZacaciaStatus($this->form->getValue('status'));
 
-                if ( $ldapPeer->doSave($this->platform) ) {
-
-                  sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                  echo fake_post($this, 'platform/index', Array());
-                  exit;
-                }
-            } else {
-                $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
+                $this->redirectIf(
+                    $ldapPeer->doSave($this->platform),
+                    $this->getController()->genUrl('@platforms')
+                );
             }
         }
 
-        #$this->form->getWidget('platformDn')->setDefault($this->platform->getDn());
-
-        if ( $this->platform->getZacaciaMultiServer() ) {
-            $this->form->getWidget('multiserver')->setDefault('true');
-        }
-
-        if ( $this->platform->getZacaciaMultiTenant() ) {
-            $this->form->getWidget('multitenant')->setDefault('true');
-        }
-
-        if ( $this->platform->getZacaciaUndeletable() ) {
-            $this->form->getWidget('undeletable')->setDefault('true');
-        }
+        $this->form->getWidget('multiserver')->setDefault($this->platform->getZacaciaMultiServer());
+        $this->form->getWidget('multitenant')->setDefault($this->platform->getZacaciaMultiTenant());
+        #$this->form->getWidget('undeletable')->setDefault($this->platform->getZacaciaUndeletable());
 
         $this->form->getWidget('status')->setDefault($this->platform->getZacaciaStatus());
 
         $this->cancel = new PlatformNavigationForm();
-        #unset($this->cancel['platformDn']);
     }
 
     public function executeStatus(sfWebRequest $request)
     {
         $ldapPeer = new PlatformPeer();
-        $platform = $ldapPeer->getPlatform($request->getParameter('platformDn'));
+        $platformDn = $ldapPeer->doDn($request->getParameter('platform'));
 
-        if ( 'enable' === $platform->getZacaciaStatus()) {
+        $this->forward404Unless( $platform = $ldapPeer->getPlatform($platformDn) );
+
+        if ( $request->getParameter('status') == 0 ) {
             $platform->setZacaciaStatus('disable');
         } else {
             $platform->setZacaciaStatus('enable');
         }
 
-        $ldapPeer->doSave($platform);
-
-        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-        echo fake_post($this, 'platform/index', Array());
-        exit;
+        $this->redirectIf(
+            $ldapPeer->doSave($platform),
+            $this->getController()->genUrl('@platforms')
+        );
     }
 
     public function executeDelete(sfWebRequest $request)
     {
         $ldapPeer = new PlatformPeer();
-        $platform = $ldapPeer->getPlatform($request->getParameter('platformDn'));
+        $platformDn = $ldapPeer->doDn($request->getParameter('platform'));
+
+        $this->forward404Unless( $platform = $ldapPeer->getPlatform($platformDn) );
 
         if ( 'disable' === $platform->getZacaciaStatus()) {
             $ldapPeer->doDelete($platform, true);
         }
 
-        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-        echo fake_post($this, 'platform/index', Array());
-        exit;
+        $this->redirect($this->getController()->genUrl('@platforms'));
     }
 
 /* WebServices */

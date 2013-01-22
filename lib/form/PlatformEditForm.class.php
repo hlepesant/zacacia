@@ -4,7 +4,6 @@ class PlatformEditForm extends ZacaciaForm
     public function configure()
     {
         $this->setWidgets(array(
-#            'platformDn'    => new sfWidgetFormInputHidden(),
             'multitenant'   => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
             'multiserver'   => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
             'status'        => new sfWidgetFormChoice(array('choices' => self::$option_status)),
@@ -17,7 +16,6 @@ class PlatformEditForm extends ZacaciaForm
         ));
         
         $this->setValidators(array(
-#            'platformDn'    => new sfValidatorString(),
             'multitenant'   => new sfValidatorChoice(array('choices' => array_keys(self::$option_noyes))),
             'multiserver'   => new sfValidatorChoice(array('choices' => array_keys(self::$option_noyes))),
             'status'        => new sfValidatorChoice(array('choices' => array_keys(self::$option_status))),
