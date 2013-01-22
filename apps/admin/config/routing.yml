@@ -16,12 +16,20 @@ platform_new:
   param: { module: platform, action: new }
 
 platform_edit:
-  url:   /platform/edit/:platform/
+  url:   /platform/:platform
   class: sfRequestRoute
   param: { module: platform, action: edit }
   requirements:
-    platform: \s+
     sf_method: [get]
+    platform: \w+
+
+platform_status:
+  url:   /platform/status/:platform
+  class: sfRequestRoute
+  param: { module: platform, action: status }
+  requirements:
+    sf_method: [get]
+    platform: \w+
 
 # server
 servers:
