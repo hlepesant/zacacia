@@ -1,29 +1,11 @@
-<?php /* slot('menu_top') ?>
-<div class="z-menu">
-    <div class="z-menu-line">
-        <strong><?php echo __('Platform') ;?></strong> :
-        <?php echo $platform->getCn() ?>
-    </div>
-    <div class="z-menu-line">
-        <strong><?php echo __('Servers') ;?></strong> :
-        <?php echo __('New') ;?>
-    </div>
-    <div class="ym-grid z-menu-line">
-        <div class="ym-g40 ym-gl z-logout">
-            <?php echo link_to(__('Logout'), 'security/logout', array('id' => 'logout-link', 'confirm' => __('Quit Zacacia ?'))) ?>
-        </div>
-    </div>
-</div>
-<?php end_slot() */ ?>
-
 <div class="ym-grid z-content-header">
-    <div class="ym-g70 ym-gl z-content-header-title">
-        <?php echo __('Platform') ;?> : <?php echo $platform->getCn() ?> &rarr;
+    <div class="ym-g70 ym-gl z-content-header-title" id="back-link">
+        <?php echo __('Platform : '); echo link_to($platform->getCn(), '@platforms'); ?> &rarr;
         <?php echo __('Server') ?>::<?php echo __('New') ?>
     </div>
 </div>
 
-<form action="<?php echo url_for('server/new') ?>" method="POST" id="form_new" class="ym-form ym-columnar">
+<?php echo form_tag('@server_new?platform='.$platform->getCn(), array('id' => 'form_new', 'class' => 'ym-form ym-columnar') ); ?>
 <?php echo $form->renderHiddenFields() ?>
 
 <div id="cn" class="ym-fbox-text">
@@ -63,13 +45,13 @@
 </div>
 
 <div class="ym-fbox-button">
-<input type="button" value="<?php echo __("Cancel") ?>" class="button-cancel" />
+<?php echo button_to('Cancel', '@servers?platform='.$platform->getCn(), array('class' => 'button-cancel')) ?>
 <input type="submit" value="<?php echo __('Create') ?>" disabled="true" class="button-submit" />
 </div>
 
 </form>
 
-<form action="<?php echo url_for('@servers') ?>" method="POST" id="form-cancel">
+<form action="<?php echo url_for('@servers?platform='.$platform->getCn()) ?>" method="POST" id="form-cancel">
 <?php echo $cancel->renderHiddenFields() ?>
 </form>
 

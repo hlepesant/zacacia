@@ -7,8 +7,8 @@
 <div class="ym-g30 ym-gl z-notice">
 <?php 
 echo $platform->get('company_count');
-echo __(' company');
-echo($platform->get('company_count') > 1 ? 's' : '');
+echo __(' compan');
+echo($platform->get('company_count') > 1 ? 'ies' : 'y');
 echo ", ";
 echo $platform->get('server_count');
 echo __(' server');
@@ -17,22 +17,14 @@ echo($platform->get('server_count') > 1 ? 's' : '');
 </div>
 
 <div class="ym-g30 ym-gr z-action">
-<form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
 <?php 
-#echo $f->renderHiddenFields();
-
 /* -- Edit -- */
 echo link_to( image_tag('famfam/page_white_edit.png', array('title' => 'Edit')), '@platform_edit?platform='.$platform->getCn() );
 
 /* -- Status -- */
-if ( $platform->getZacaciaStatus() === 'enable' ):
-echo link_to( image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Status')), '@platform_status?platform='.$platform->getCn()."&status=0" );
-else :
-echo link_to( image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Status')), '@platform_status?platform='.$platform->getCn()."&status=1" );
-endif;
+echo link_to( image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Status')), '@platform_status?platform='.$platform->getCn() );
 
 /* -- Delete -- */
-#if ( !$platform->getZacaciaUnDeletable() && 'disable' === $platform->getZacaciaStatus() ) {
 if ( !$platform->getZacaciaUnDeletable() && 
     'disable' === $platform->getZacaciaStatus() && 
     0 === $platform->get('company_count') && 
@@ -43,29 +35,17 @@ if ( !$platform->getZacaciaUnDeletable() &&
         '@platform_delete?platform='.$platform->getCn(),
         array('confirm' => 'Are you sure ?')
     );
-    /*
-    echo link_to_function(
-        image_tag('famfam/cross.png'),
-        "jumpTo('".sprintf('%03d', $id)."', '".addslashes($platform->getCn())."', 'delete', null)");
-        */
 } else {
     echo image_tag('famfam/blank.png');
 }
 
 /* -- Separateur -- */
 #echo image_tag('famfam/blank.png');
-
 /* -- Server -- */
-echo link_to_function(
-    image_tag('famfam/server.png', array('title' => 'Server')),
-    "jumpTo('".sprintf('%03d', $id)."', '".addslashes($platform->getCn())."', 'server', null)");
-
+echo link_to( image_tag('famfam/server.png', array('title' => 'Server')), '@servers?platform='.$platform->getCn() );
 /* -- Company -- */
-echo link_to_function(
-    image_tag('famfam/building.png', array('title' => 'Company')),
-    "jumpTo('".sprintf('%03d', $id)."', '".addslashes($platform->getCn())."', 'company', null)");
+echo link_to( image_tag('famfam/building.png', array('title' => 'Company')), '@companies?platform='.$platform->getCn() );
 ?>
-</form>
 </div>
 </div>
 <!-- next -->

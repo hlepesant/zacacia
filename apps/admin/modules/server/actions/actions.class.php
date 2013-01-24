@@ -16,51 +16,43 @@ class serverActions extends sfActions
   */
     public function executeIndex(sfWebRequest $request)
     {
-        $data = $request->getParameter('zdata');
-
-        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
-        if ( empty($platformDn) ) {
-            $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
-            $this->redirect('@platforms');
-        }
-
         $ldapPeer = new ServerPeer();
+        $platformDn = $ldapPeer->doPlatformDn($request->getParameter('platform'));
+        $this->forward404Unless( $this->platform = $ldapPeer->getPlatform($platformDn) );
+
+
         $this->platform = $ldapPeer->getPlatform($platformDn);
         $this->servers = $ldapPeer->getServers($platformDn);
 
-        $id=0;
-        $this->forms = array();
-        foreach ($this->servers as $server) {
+#        $id=0;
+#        $this->forms = array();
+#        foreach ($this->servers as $server) {
+#            $form = new ServerNavigationForm();
+#            $form->getWidget('platformDn')->setDefault($platformDn);
+#            $form->getWidget('serverDn')->setDefault($server->getDn());
+#
+#            $server->set('user_count', $ldapPeer->countUser($this->platform, $server));
+#
+#            $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
+#            $form->getWidget('serverDn')->setIdFormat(sprintf('%%s_%03d', $id));
+#
+#            $this->forms[$server->getDn()] = $form;
+#            $id++;
+#        }
 
-            $form = new ServerNavigationForm();
-            $form->getWidget('platformDn')->setDefault($platformDn);
-            $form->getWidget('serverDn')->setDefault($server->getDn());
-
-            $server->set('user_count', $ldapPeer->countUser($this->platform, $server));
-
-            $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
-            $form->getWidget('serverDn')->setIdFormat(sprintf('%%s_%03d', $id));
-
-            $this->forms[$server->getDn()] = $form;
-            $id++;
-        }
-
-        $this->new = new ServerNavigationForm();
-        unset($this->new['serverDn']);
-        $this->new->getWidget('platformDn')->setDefault($platformDn);
+#        $this->new = new ServerNavigationForm();
+#        unset($this->new['serverDn']);
+#        $this->new->getWidget('platformDn')->setDefault($platformDn);
     }
 
     public function executeNew(sfWebRequest $request)
     {
-        $data = $request->getParameter('zdata');
-
-        $platformDn = $request->getParameter('platformDn', $data['platformDn']);
-        if ( empty($platformDn) ) {
-          $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");
-          $this->redirect('@platforms');
-        }
-
         $ldapPeer = new ServerPeer();
+        $platformDn = $ldapPeer->doPlatformDn($request->getParameter('platform'));
+        $this->forward404Unless( $this->platform = $ldapPeer->getPlatform($platformDn) );
+
+        $this->platform = $ldapPeer->getPlatform($platformDn);
+
         $ldapPeer->setBaseDn(sprintf("ou=Servers,%s", $platformDn));
 
         $this->form = new ServerForm();
@@ -110,7 +102,7 @@ class serverActions extends sfActions
 
         $this->form->getWidget('zarafaHttpPort')->setDefault(sfConfig::get('zarafaHttpPort'));
         $this->form->getWidget('zarafaSslPort')->setDefault(sfConfig::get('zarafaSslPort'));
-        # $this->form->getWidget('multitenant')->setDefault($this->platform->getZacaciaMultiTenant());
+        #$this->form->getWidget('multitenant')->setDefault($this->platform->getZacaciaMultiTenant());
 
         $this->cancel = new ServerNavigationForm();
         unset($this->cancel['serverDn']);

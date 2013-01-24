@@ -12,7 +12,7 @@ platforms:
   param: { module: platform, action: index }
 
 platform_new:
-  url:   /platform/add/
+  url:   /platform/create/
   param: { module: platform, action: new }
 
 platform_check_cn:
@@ -24,23 +24,22 @@ platform_check_cn:
     name: \w+
 
 platform_edit:
-  url:   /platform/edit/:platform
+  url:   /platform/modify/:platform
   param: { module: platform, action: edit }
   requirements:
     platform: \w+
     sf_method: [get]
 
 platform_status:
-  url:   /platform/status/:platform/:status
+  url:   /platform/changestatus/:platform
   class: sfRequestRoute
   param: { module: platform, action: status }
   requirements:
     sf_method: [get]
     platform: \w+
-    status: \d
 
 platform_delete:
-  url:   /platform/delete/:platform
+  url:   /platform/destroy/:platform
   class: sfRequestRoute
   param: { module: platform, action: delete }
   requirements:
@@ -49,21 +48,56 @@ platform_delete:
 
 # server
 servers:
-  url:   /server/
+  url:   /server/:platform
+  class: sfRequestRoute
   param: { module: server, action: index }
+  requirements:
+    sf_method: [get]
+    platform: \w+
 
 server_new:
-  url:   /server/add/
+  url:   /server/create/:platform
+  class: sfRequestRoute
   param: { module: server, action: new }
+  requirements:
+    sf_method: [get]
+    platform: \w+
+
+server_status:
+  url:   /server/changestatus/:platform/:server
+  class: sfRequestRoute
+  param: { module: server, action: status }
+  requirements:
+    sf_method: [get]
+    platform: \w+
+    server: \w+
 
 server_edit:
-  url:   /server/edit/
+  url:   /server/modify/:platform/:server
+  class: sfRequestRoute
   param: { module: server, action: edit }
+  requirements:
+    sf_method: [get]
+    platform: \w+
+    server: \w+
+ 
+server_delete:
+  url:   /server/destroy/:platform/:server
+  class: sfRequestRoute
+  param: { module: server, action: delete }
+  requirements:
+    sf_method: [get]
+    platform: \w+
+    server: \w+
 
 # company
 companies:
-  url:   /company/
+  url:   /company/:platform
+  class: sfRequestRoute
   param: { module: company, action: index }
+  requirements:
+    sf_method: [get]
+    platform: \w+
 
 company_new:
   url:   /company/add/

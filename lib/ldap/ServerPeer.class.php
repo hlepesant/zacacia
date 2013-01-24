@@ -11,6 +11,12 @@ class ServerPeer extends BaseServerPeer
         return $this;
     }
 
+    public function doPlatformDn($platformCN)
+    {
+        $this->setBaseDn(sprintf("ou=Platforms,%s", sfConfig::get('ldap_base_dn')));
+        return sprintf("cn=%s,%s", $platformCN, $this->getBaseDn());
+    }
+
     public function getPlatform($dn)
     {
         $this->setBaseDn($dn);

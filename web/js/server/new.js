@@ -9,23 +9,11 @@ var ip_ok = 0;
 
 $(document).ready(function() {
 
-/*
-    $('._link img[title]').tooltip({
-        position: "bottom left",
-        opacity: 0.9
-    });
-*/
-
     $('#logount-link').click(function() {
         if ( confirm(_js_msg_logout) == false ) {
             return false;
         }
     });
-
-    $('.button-cancel').click(function() {
-        $('#form-cancel').submit();
-    });
-
 
     $('input#zdata_cn').blur(function() {
 

@@ -176,3 +176,16 @@ font-size: 12px;
 #back-link {
 cursor: pointer;
 }
+
+#back-link a {
+cursor: pointer;
+color: #FFFFFF; 
+text-decoration: none;
+}
+
+#back-link a:hover {
+cursor: pointer;
+color: #FFFF00; 
+/* color: #008C00; */
+text-decoration: none;
+}

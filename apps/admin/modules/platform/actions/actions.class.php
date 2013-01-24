@@ -19,18 +19,8 @@ class platformActions extends sfActions
         $ldapPeer = new PlatformPeer();
         $this->platforms = $ldapPeer->getPlatforms();
 
-#        $id=0;
-#        $this->forms = array();
-#        foreach ($this->platforms as $platform) {
-#            $form = new PlatformNavigationForm();
-#            $form->getWidget('platformDn')->setDefault($platform->getDn());
-#            $form->getWidget('platformDn')->setIdFormat(sprintf('%%s_%03d', $id));
-#            $this->forms[$platform->getDn()] = $form;
-#            $id++;
-#        }
-
-        $this->new = new PlatformNavigationForm();
-        unset($this->new['platformDn']);
+        #$this->new = new PlatformNavigationForm();
+        #unset($this->new['platformDn']);
     }
 
     public function executeNew(sfWebRequest $request)
@@ -74,7 +64,6 @@ class platformActions extends sfActions
     {
         $ldapPeer = new PlatformPeer();
         $platformDn = $ldapPeer->doDn($request->getParameter('platform'));
-
         $this->forward404Unless( $this->platform = $ldapPeer->getPlatform($platformDn) );
 
         $this->form = new PlatformEditForm();
@@ -113,7 +102,8 @@ class platformActions extends sfActions
 
         $this->forward404Unless( $platform = $ldapPeer->getPlatform($platformDn) );
 
-        if ( $request->getParameter('status') == 0 ) {
+        #if ( $request->getParameter('status') == 0 ) {
+        if ( 'enable' === $platform->getZacaciaStatus() ) {
             $platform->setZacaciaStatus('disable');
         } else {
             $platform->setZacaciaStatus('enable');

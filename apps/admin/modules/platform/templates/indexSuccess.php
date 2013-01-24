@@ -1,17 +1,19 @@
 <div class="ym-grid z-content-header">
   <div class="ym-g70 ym-gl z-content-header-title"><?php echo __("Platforms") ?></div>
   <div class="ym-g30 ym-gr">
-    <form action="<?php echo url_for('platform/new') ?>" method="POST" id="platform_new" class="invisible">
+    <?php echo button_to('New', '@platform_new', array('class' => 'ym-button z-button-new')) ?>
+    <?php /*
+    <form action="<?php echo url_for('@platform_new') ?>" method="POST" id="platform_new" class="invisible">
     <?php echo $new->renderHiddenFields(); ?>
     <input type="submit" value="<?php echo __("New") ?>" class="ym-button z-button-new" />
     </form>
+    */ ?>
   </div>
 </div>
 
 <?php
 $id = 0;
 foreach ($platforms as $platform) {
-    #include_partial('item', array('platform' => $platform, 'id' => $id, 'f' => $forms[$platform->getDn()]));
     include_partial('item', array('platform' => $platform, 'id' => $id));
     $id++;
 }
