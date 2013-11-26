@@ -163,6 +163,7 @@ objectClass: organizationalRole
 objectClass: zarafa-company
 objectClass: zacaciaCompany
 cn: Lepesant
+ou: Lepesant
 zacaciaStatus: enable
 gidNumber: 10001
 zarafaAccount: 1

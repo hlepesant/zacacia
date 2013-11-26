@@ -9,12 +9,13 @@ default:
     title:        Zacacia
     description:  Zarafa Identity Manager
     keywords:     zarafa, identity
+    viewport:     width=device-width, initial-scale=1.0
     #language:     en
     #robots:       index, follow
 
   stylesheets:    [zacacia.css]
 
-  javascripts:    [jquery/jquery.js, phpjs/phpjs.js, navigation.js]
+  javascripts:    [bootstrap/bootstrap.js, jquery/jquery.js, phpjs/phpjs.js, navigation.js]
 
   has_layout:     true
   layout:         layout

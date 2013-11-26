@@ -4,11 +4,15 @@
 <?php include_metas() ?>
 <?php include_title() ?>
 <link rel="shortcut icon" href="/images/favicon.ico" />
-<?php echo stylesheet_tag('yaml/core/base.css', array('type'=>'text/css')); ?>
-<?php echo stylesheet_tag('yaml/forms/gray-theme.css', array('type'=>'text/css')); ?>
+<?php /* echo stylesheet_tag('yaml/core/base.css', array('type'=>'text/css')); */ ?>
+<?php /* echo stylesheet_tag('yaml/forms/gray-theme.css', array('type'=>'text/css')); */ ?>
+<?php echo stylesheet_tag('bootstrap/bootstrap-responsive.css', array('type'=>'text/css')); ?>
+<?php /*
 <!--[if lte IE 7]>
 <link rel="stylesheet" href="/css/yaml/core/iehacks.css" type="text/css"/>
 <![endif]-->
+*/ ?>
+
 <?php include_stylesheets() ?>
 
 <?php include_javascripts() ?>

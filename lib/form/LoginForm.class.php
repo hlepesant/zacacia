@@ -4,13 +4,19 @@ class LoginForm extends ZacaciaForm
     public function configure()
     {
         $this->setWidgets(array(
-            'username'  => new sfWidgetFormInput(),
-            'password'  => new sfWidgetFormInputPassword(),
+            'username'  => new sfWidgetFormInput(array(), array(
+                'class' => 'input-block-level',
+                'placeholder' => 'Username',
+            )),
+            'password'  => new sfWidgetFormInputPassword(array(), array(
+                'class' => 'input-block-level',
+                'placeholder' => 'Password',
+            )),
         ));
     
         $this->widgetSchema->setLabels(array(
-            'username'  => 'Username',
-            'password'  => 'Password',
+            'username'  => ' ',
+            'password'  => ' ',
         ));
     
         $this->setValidators(array(
