@@ -15,8 +15,8 @@ class LoginForm extends ZacaciaForm
         ));
     
         $this->widgetSchema->setLabels(array(
-            'username'  => ' ',
-            'password'  => ' ',
+            'username'  => false,
+            'password'  => false,
         ));
     
         $this->setValidators(array(

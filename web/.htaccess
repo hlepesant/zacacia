@@ -19,6 +19,8 @@
   RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>
 
+AcceptPathInfo on
+
 #AuthType Basic
 #AuthName "Password Required"
 #AuthUserFile /opt/WebSites/Zacacia/password.file
