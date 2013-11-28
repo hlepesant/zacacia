@@ -21,12 +21,11 @@
     </div>
 </div>
 
-<header id="overview" class="jumbotron subhead">
+<div class="page-header">
     <div class="container">
-        <br />
         <h2 style="font-family: 'Lobster', cursive;"><?php include_slot('title', 'no slot defined !!') ?></h2>
     </div>
-</header>
+</div>
 
 <div class="container">
 <?php echo $sf_content ?>
