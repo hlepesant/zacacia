@@ -1,6 +1,3 @@
-
-
-
 <tr>
 <td><?php echo $platform->getZacaciaStatus() ?></td>
 <td><?php echo $platform->getCn() ?></td>
@@ -8,7 +5,6 @@
 <td><?php echo($platform->get('company_count') > 1 ? 'ies' : 'y'); ?></td>
 <td><?php echo $platform->get('server_count'); ?></td>
 <td><?php echo($platform->get('server_count') > 1 ? 's' : ''); ?></td>
-
 <td><?php 
 /* -- Edit -- */
 echo link_to( image_tag('famfam/page_white_edit.png', array('title' => 'Edit')), '@platform_edit?platform='.$platform->getCn() ); ?></td>

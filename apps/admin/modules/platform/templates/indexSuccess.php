@@ -7,7 +7,17 @@
 
 <?php echo button_to('New', '@platform_new', array('class' => 'ym-button z-button-new')) ?>
 
-<table class="table table-hover">
+<table class="table table-striped">
+<thead>
+<tr>
+<th class="col-sm-1"><?php echo __('Status') ?></th>
+<th class="col-sm-4"><?php echo __('Name') ?></th>
+<th class="col-sm-1"><?php echo __('Company'); ?></th>
+<th class="col-sm-1"><?php echo __('Server'); ?></th>
+<th class="col-sm-4"><?php echo __('Actions'); ?></th>
+</tr>
+</thead>
+<tbody>
 <?php
 $id = 0;
 foreach ($platforms as $platform) {
@@ -15,6 +25,7 @@ foreach ($platforms as $platform) {
     $id++;
 }
 ?>
+</tbody>
 </table>
 <!-- end #collection -->
 
