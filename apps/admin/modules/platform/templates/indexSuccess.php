@@ -14,7 +14,7 @@
 <th class="col-sm-4"><?php echo __('Name') ?></th>
 <th class="col-sm-1"><?php echo __('Company'); ?></th>
 <th class="col-sm-1"><?php echo __('Server'); ?></th>
-<th class="col-sm-4"><?php echo __('Actions'); ?></th>
+<th class="col-sm-1"><?php echo __('Actions'); ?></th>
 </tr>
 </thead>
 <tbody>
