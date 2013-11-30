@@ -24,7 +24,7 @@ platform_check_cn:
     name: \w+
 
 platform_edit:
-  url:   /platform/modify/:platform
+  url:   /platform/edit/:platform
   param: { module: platform, action: edit }
   requirements:
     platform: \w+
