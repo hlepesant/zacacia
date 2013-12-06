@@ -42,8 +42,8 @@ all:
     # Enable the helper manager
     standard_helpers:       [Partial,Cache,I18N,JavascriptBase]
     # jQuery Reloader
-    jquery_web_dir:         /sfJqueryReloadedPlugin
-    jquery_core:            jquery-1.4.2.min.js
-    jquery_sortable:        jquery-ui-1.8.2.custom.min.js
-    jquery_autocomplete:    jquery.autocomplete.min.js
+    # jquery_web_dir:         /sfJqueryReloadedPlugin
+    # jquery_core:            jquery-1.4.2.min.js
+    # jquery_sortable:        jquery-ui-1.8.2.custom.min.js
+    # jquery_autocomplete:    jquery.autocomplete.min.js
 

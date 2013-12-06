@@ -8,8 +8,10 @@ class sfWidgetFormSchemaFormatterBootstrap extends sfWidgetFormSchemaFormatter
 #    $errorListFormatInARow     = "  <ul class=\"error-list\">\n%errors%</ul>\n",
 #    $errorRowFormatInARow      = "    <li>%error%</li>\n",
 #    $namedErrorRowFormatInARow = "    <li>%name%: %error%</li>\n",
-#    $rowFormat       = "<div id=\"form_item\">\n\t\t<div class=\"_name\">%label%%error%</div>\n\t\t<div class=\"_field\">%field%%help%%hidden_fields%</div>\n\t\t<div class=\"_ajaxCheck\"></div>\n\t</div>\n\t<!-- end #form_item -->",
-    $rowFormat                 = "%label%\n%field%\n";
-#    $rowFormat                 = "<p>%label%<br />%field%</p>";
+#    $rowFormat                 = "<div class=\"form-group\">\n\t%label%\n\t%field%\n</div>\n";
 
+    $rowFormat = "<div class=\"form-group\">
+                  <label class=\"col-sm-2 control-label\">%label%</label>
+                  <div class=\"col-sm-4\">%field%</div>
+                  </div>";
 }

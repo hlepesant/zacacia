@@ -16,7 +16,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <h1 style="font-family: 'Lobster', cursive; color: white;">Zacacia</h2>
+            <h1 style="font-family: 'Lobster', cursive; color: white;">Zacacia</h1>
         </div>
     </div>
 </div>
