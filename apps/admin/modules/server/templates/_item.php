@@ -1,46 +1,24 @@
-<div class="ym-grid z-line z-<?php echo (($id & 1) ? 'odd' : 'even'); ?>">
-
-<div class="ym-g80 ym-gl">
-    <div class="z-status-<?php echo $server->getZacaciaStatus() ?>"><?php echo $server->getCn() ?></div>
-</div>
-
-<div class="ym-g20 ym-gr z-action">
-
-<form action="#" method="POST" id="<?php printf('navigation_form_%03d', $id) ?>">
-<?php 
-#echo $f->renderHiddenFields();
-
+    <tr>
+        <td><?php echo $server->getZacaciaStatus()    ?></td>
+        <td><?php echo $server->getCn()               ?></td>
+        <td><?php 
 /* -- Edit -- */
 echo link_to( image_tag('famfam/page_white_edit.png', array('title' => 'Edit')), 
     '@server_edit?platform='.$platform->getCn().'&server='.$server->getCn() );
-
-#echo link_to_function(
-#    image_tag('famfam/page_white_edit.png', array('title' => 'Edit')),
-#    "jumpTo('".sprintf('%03d', $id)."', '".addslashes($s->getCn())."', 'edit', null)");
 
 /* -- Status -- */
 echo link_to( image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Change Status')), 
     '@server_status?platform='.$platform->getCn().'&server='.$server->getCn() );
 
-#echo link_to_function(
-#image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Status')),
-#"jumpTo('".sprintf('%03d', $id)."', '".addslashes($s->getCn())."', 'status', '".$s->getZacaciaStatus()."')");
-
 /* -- Delete -- */
-#if ( !$s->getZacaciaUnDeletable() && 'disable' === $s->getZacaciaStatus() && 0 === $s->get('company_count') ) {
 if ( !$server->getZacaciaUnDeletable() && 'disable' === $server->getZacaciaStatus() ) {
     echo link_to( image_tag('famfam/arrow_rotate_clockwise.png', array('title' => 'Change Status')), 
         '@server_delete?platform='.$platform->getCn().'&server='.$server->getCn(),
         array('confirm' => 'Are you sure ?')
         );
-#echo link_to_function(
-#    image_tag('famfam/cross.png'),
-#    "jumpTo('".sprintf('%03d', $id)."', '".addslashes($s->getCn())."', 'delete', null)");
 } else {
     echo image_tag('famfam/blank.png');
 }
 ?>
-</div>
-</form>
-</div>
-<!-- next -->
+        </td>
+    </tr>

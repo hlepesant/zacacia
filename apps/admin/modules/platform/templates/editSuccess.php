@@ -1,27 +1,19 @@
-<div class="ym-grid z-content-header">
-    <div class="ym-g70 ym-gl z-content-header-title">
-        <?php echo __('Platform') ?> : <?php echo $platform->getCn() ?>::<?php echo __('Edit') ?>
-    </div>
-</div>
+<?php slot(
+    'title',
+    __("Platform"."::"."Edit")
+);
+?>
 
-<form action="<?php echo url_for('platform/edit?platform='.$platform->getCn()) ?>" method="POST" id="form_edit" class="ym-form ym-columnar">
+<form action="<?php echo url_for('platform/edit?platform='.$platform->getCn()) ?>" method="POST" id="form_edit" class="form-horizontal" role="form">
 <?php echo $form->renderHiddenFields() ?>
 
-<div class="ym-fbox-select">
-<?php echo $form['multitenant']->renderRow() ?>
-</div>
+<?php echo $form->render() ?>
 
-<div class="ym-fbox-select">
-<?php echo $form['multiserver']->renderRow() ?>
-</div>
-
-<div class="ym-fbox-select">
-<?php echo $form['status']->renderRow() ?>
-</div>
-
-<div class="ym-fbox-button">
-<input type="button" value="<?php echo __("Cancel") ?>" class="button-cancel" />
-<input type="submit" value="<?php echo __('Update') ?>" class="button-submit" />
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-5">
+        <button type="submit" class="btn btn-primary"><?php echo __("Update") ?></button>
+        <button type="cancel" class="btn btn-cancel"><?php echo __("Cancel") ?></button>
+    </div>
 </div>
 
 </form>

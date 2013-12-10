@@ -25,7 +25,7 @@ class LoginForm extends ZacaciaForm
         ));
 
         $this->widgetSchema->setNameFormat('login[%s]');
-        $this->widgetSchema->setFormFormatterName( sfConfig::get('widgetFormaterName') );
+#        $this->widgetSchema->setFormFormatterName( sfConfig::get('widgetFormaterName') );
     }
 }
 

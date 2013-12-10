@@ -18,8 +18,8 @@ if ( !$platform->getZacaciaUnDeletable() &&
             '@platform_delete?platform='.$platform->getCn(),
             array('confirm' => 'Are you sure ?')
         );
-#} else {
-#    echo image_tag('famfam/blank.png');
+} else {
+    echo image_tag('famfam/blank.png');
 }
 /* -- Separateur -- */
 # echo image_tag('famfam/blank.png');

@@ -86,6 +86,7 @@ class platformActions extends sfActions
             }
         }
 
+        $this->form->getWidget('cn')->setDefault($this->platform->getCn());
         $this->form->getWidget('multiserver')->setDefault($this->platform->getZacaciaMultiServer());
         $this->form->getWidget('multitenant')->setDefault($this->platform->getZacaciaMultiTenant());
         #$this->form->getWidget('undeletable')->setDefault($this->platform->getZacaciaUndeletable());
@@ -102,7 +103,6 @@ class platformActions extends sfActions
 
         $this->forward404Unless( $platform = $ldapPeer->getPlatform($platformDn) );
 
-        #if ( $request->getParameter('status') == 0 ) {
         if ( 'enable' === $platform->getZacaciaStatus() ) {
             $platform->setZacaciaStatus('disable');
         } else {

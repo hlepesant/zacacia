@@ -27,8 +27,8 @@ platform_edit:
   url:   /platform/edit/:platform
   param: { module: platform, action: edit }
   requirements:
-    platform: \w+
     sf_method: [get]
+    platform:
 
 platform_status:
   url:   /platform/changestatus/:platform
@@ -36,7 +36,7 @@ platform_status:
   param: { module: platform, action: status }
   requirements:
     sf_method: [get]
-    platform: \w+
+    platform:
 
 platform_delete:
   url:   /platform/destroy/:platform
@@ -44,7 +44,7 @@ platform_delete:
   param: { module: platform, action: delete }
   requirements:
     sf_method: [get]
-    platform: \w+
+    platform:
 
 # server
 servers:
@@ -53,7 +53,7 @@ servers:
   param: { module: server, action: index }
   requirements:
     sf_method: [get]
-    platform: \w+
+    platform:
 
 server_new:
   url:   /server/create/:platform
@@ -61,7 +61,7 @@ server_new:
   param: { module: server, action: new }
   requirements:
     sf_method: [get]
-    platform: \w+
+    platform:
 
 server_status:
   url:   /server/changestatus/:platform/:server
@@ -69,8 +69,8 @@ server_status:
   param: { module: server, action: status }
   requirements:
     sf_method: [get]
-    platform: \w+
-    server: \w+
+    platform:
+    server:
 
 server_edit:
   url:   /server/modify/:platform/:server
@@ -78,8 +78,8 @@ server_edit:
   param: { module: server, action: edit }
   requirements:
     sf_method: [get]
-    platform: \w+
-    server: \w+
+    platform:
+    server:
  
 server_delete:
   url:   /server/destroy/:platform/:server
@@ -87,8 +87,8 @@ server_delete:
   param: { module: server, action: delete }
   requirements:
     sf_method: [get]
-    platform: \w+
-    server: \w+
+    platform:
+    server:
 
 # company
 companies:

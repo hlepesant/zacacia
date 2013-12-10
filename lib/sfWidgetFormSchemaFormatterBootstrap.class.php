@@ -10,8 +10,13 @@ class sfWidgetFormSchemaFormatterBootstrap extends sfWidgetFormSchemaFormatter
 #    $namedErrorRowFormatInARow = "    <li>%name%: %error%</li>\n",
 #    $rowFormat                 = "<div class=\"form-group\">\n\t%label%\n\t%field%\n</div>\n";
 
-    $rowFormat = "<div class=\"form-group\">
-                  <label class=\"col-sm-2 control-label\">%label%</label>
-                  <div class=\"col-sm-4\">%field%</div>
-                  </div>";
+#    $rowFormat = "<div class=\"form-group\">\n\t
+#                  <label class=\"col-sm-2 control-label\">%label%</label>\n\t
+#                  <div class=\"col-sm-5\">%field%</div>\n
+#                  </div>\n";
+
+      $rowFormat = "<div class=\"form-group\">
+\t<label class=\"col-sm-2 control-label\">%label%</label>
+\t<div class=\"col-sm-5\">%field%</div>
+</div>\n\n";
 }
