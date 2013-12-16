@@ -16,7 +16,8 @@
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-5">
         <button type="submit" class="btn btn-primary"><?php echo __("Create") ?></button>
-        <button type="cancel" class="btn btn-cancel"><?php echo __("Cancel") ?></button>
+        <!-- button type="cancel" class="btn btn-cancel"><?php echo __("Cancel") ?></button -->
+        <?php echo button_to('Cancel', '@platforms', array('class' => 'btn btn-cancel')) ?>
     </div>
 </div>
 

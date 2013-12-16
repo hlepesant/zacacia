@@ -1,42 +1,25 @@
-<div class="ym-grid z-content-header">
-    <div class="ym-g70 ym-gl z-content-header-title" id="back-link">
-        <?php echo __('Platform : '); echo link_to($platform->getCn(), '@platforms'); ?> &rarr;
-        <?php echo __('Server') ?>::<?php echo __('New') ?>
-    </div>
-</div>
+<?php slot(
+    'title',
+    __("Platform".":".$platform->getCn()."::"."New")
+);
+?>
 
-<?php echo form_tag('@server_new?platform='.$platform->getCn(), array('id' => 'form_new', 'class' => 'ym-form ym-columnar') ); ?>
+<?php echo form_tag('@server_new?platform='.$platform->getCn(), array('id' => 'form_new', 'class' => 'form-horizontal', 'role' => 'form' )); ?>
 <?php echo $form->renderHiddenFields() ?>
 
-<div id="cn" class="ym-fbox-text">
-<?php echo $form['cn']->renderRow() ?>
-<p id="cn-message" class="ym-message">Error: invalid value!</p>
-</div>
+<?php echo $form->render() ?>
 
-<div class="ym-fbox-text">
-<?php echo $form['ip']->renderRow() ?>
-<p class="ym-message">Error: invalid value!</p>
-</div>
-
-<div class="ym-fbox-select">
-<?php echo $form['status']->renderRow() ?>
-</div>
-
-<div class="ym-fbox-select">
-<?php echo $form['zarafaAccount']->renderRow() ?>
-</div>
-
-<div id="zarafa-settings" style="display: none;">
-    <div class="ym-fbox-select">
-    <?php echo $form['zarafaQuotaHard']->renderRow() ?>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-5">
+        <button type="submit" class="btn btn-primary"><?php echo __("Create") ?></button>
+        <?php echo button_to('Cancel', '@servers?platform='.$platform->getCn(), array('class' => 'btn btn-cancel')) ?>
     </div>
-    <div class="ym-fbox-text">
-    <?php echo $form['zarafaHttpPort']->renderRow() ?>
-    </div>
-    <div class="ym-fbox-text">
-    <?php echo $form['zarafaSslPort']->renderRow() ?>
-    </div>
-    <div class="ym-fbox-select">
+</div>
+
+</form>
+
+
+<?php /*
     <?php echo $form['multitenant']->renderRow() ?>
     </div>
     <div class="ym-fbox-select">
@@ -50,6 +33,7 @@
 </div>
 
 </form>
+*/ ?>
 
 <form action="<?php echo url_for('@servers?platform='.$platform->getCn()) ?>" method="POST" id="form-cancel">
 <?php echo $cancel->renderHiddenFields() ?>

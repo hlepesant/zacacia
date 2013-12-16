@@ -4,8 +4,14 @@
 );
 ?>
 
-
-<?php echo button_to('New', '@server_new?platform='.$platform->getCn(), array('class' => 'btn btn-primary')) ?>
+<div class="row">
+    <div class="col-md-10">
+<?php echo button_to('New', '@server_new?platform='.$platform->getCn(), array('class' => 'btn btn-primary')) ?> &nbsp;
+    </div>
+    <div class="col-md-2">
+<?php echo button_to('Back', '@platforms', array('class' => 'btn btn-info')) ?>
+    </div>
+</div>
 
 <table class="table table-striped table-hover">
     <thead>
