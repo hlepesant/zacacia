@@ -9,19 +9,19 @@ class ServerForm extends ZacaciaForm
         
         $this->setWidgets(array(
             'platformDn'            => new sfWidgetFormInputHidden(),
-            'cn'                    => new sfWidgetFormInput(),
-            'ip'                    => new sfWidgetFormInput(),
-            'status'                => new sfWidgetFormChoice(array('choices' => self::$option_status)),
+            'cn'                    => new sfWidgetFormInput(array(), array('class' => 'form-control')),
+            'ip'                    => new sfWidgetFormInput(array(), array('class' => 'form-control')),
+            'status'                => new sfWidgetFormChoice(array('choices' => self::$option_status), array('class' => 'form-control')),
             
-            'zarafaAccount'         => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
+            'zarafaAccount'         => new sfWidgetFormChoice(array('choices' => self::$option_noyes), array('class' => 'form-control')),
 
-            'zarafaQuotaHard'       => new sfWidgetFormInput(array(), array('type' => 'number')),
-            'zarafaFilePath'        => new sfWidgetFormInputHidden(array('default' => '/var/run/zarafa')),
-            'zarafaHttpPort'        => new sfWidgetFormInput(array(), array('type' => 'number')),
-            'zarafaHttpPort'        => new sfWidgetFormInput(array(), array('type' => 'number')),
-            'zarafaSslPort'         => new sfWidgetFormInput(array(), array('type' => 'number')),
-            'zarafaContainsPublic'  => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
-            'multitenant'           => new sfWidgetFormChoice(array('choices' => self::$option_noyes)),
+            'zarafaQuotaHard'       => new sfWidgetFormInput(array(), array('type' => 'number', 'class' => 'form-control')),
+            'zarafaFilePath'        => new sfWidgetFormInputHidden(array('default' => '/var/run/zarafa'), array('class' => 'form-control')),
+            'zarafaHttpPort'        => new sfWidgetFormInput(array(), array('type' => 'number', 'class' => 'form-control')),
+            'zarafaHttpPort'        => new sfWidgetFormInput(array(), array('type' => 'number', 'class' => 'form-control')),
+            'zarafaSslPort'         => new sfWidgetFormInput(array(), array('type' => 'number', 'class' => 'form-control')),
+            'zarafaContainsPublic'  => new sfWidgetFormChoice(array('choices' => self::$option_noyes), array('class' => 'form-control')),
+            'multitenant'           => new sfWidgetFormChoice(array('choices' => self::$option_noyes), array('class' => 'form-control')),
         ));
         
         $this->widgetSchema->setLabels(array(

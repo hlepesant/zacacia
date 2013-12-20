@@ -4,7 +4,8 @@
 );
 ?>
 
-<form action="<?php echo url_for('platform/new') ?>" method="POST" id="form_new" class="form-horizontal" role="form">
+<?php echo form_tag('platform/new', array('id' => 'form_new', 'class' => 'form-horizontal', 'role' => 'form' )); ?>
+
 <?php echo $form->renderHiddenFields() ?>
 
 <?php echo $form->render() ?>
