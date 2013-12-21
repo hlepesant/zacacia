@@ -88,11 +88,10 @@ class serverActions extends sfActions
                         }
                     }
 
-                    if ( $ldapPeer->doAdd($server) ) {
-                        sfContext::getInstance()->getConfiguration()->loadHelpers('fakePost');
-                        echo fake_post($this, '@servers', Array('platformDn' => $platformDn));
-                        exit;
-                    }
+                    $this->redirectIf(
+                        $ldapPeer->doAdd($server),
+                        $this->getController()->genUrl('@servers?platform='.$request->getParameter('platform'))
+                    );
                 } else {
                     $this->getUser()->setFlash('veeJsAlert', $this->getContext()->getI18N()->__('Missing parameters', Array(), 'messages'));
                 }
@@ -112,6 +111,14 @@ class serverActions extends sfActions
     public function executeEdit(sfWebRequest $request)
     {
         $data = $request->getParameter('zdata');
+
+        print( $request->getParameter('platform' ) );
+        print( $request->getParameter('server' ) );
+        exit;
+        $platformDn = $ldapPeer->doPlatformDn($request->getParameter('platform'));
+
+
+
         $platformDn = $request->getParameter('platformDn', $data['platformDn']);
         if ( empty($platformDn) ) {
             $this->getUser()->setFlash('zJsAlert', "Missing platform's DN.");

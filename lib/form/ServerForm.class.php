@@ -16,7 +16,7 @@ class ServerForm extends ZacaciaForm
             'zarafaAccount'         => new sfWidgetFormChoice(array('choices' => self::$option_noyes), array('class' => 'form-control')),
 
             'zarafaQuotaHard'       => new sfWidgetFormInput(array(), array('type' => 'number', 'class' => 'form-control')),
-            'zarafaFilePath'        => new sfWidgetFormInputHidden(array('default' => '/var/run/zarafa'), array('class' => 'form-control')),
+            'zarafaFilePath'        => new sfWidgetFormInputHidden(array('default' => '/var/run/zarafa')),
             'zarafaHttpPort'        => new sfWidgetFormInput(array(), array('type' => 'number', 'class' => 'form-control')),
             'zarafaHttpPort'        => new sfWidgetFormInput(array(), array('type' => 'number', 'class' => 'form-control')),
             'zarafaSslPort'         => new sfWidgetFormInput(array(), array('type' => 'number', 'class' => 'form-control')),

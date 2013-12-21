@@ -63,6 +63,14 @@ server_new:
     sf_method: [get]
     platform:
 
+server_create:
+  url:   /server/create/:platform
+  class: sfRequestRoute
+  param: { module: server, action: new }
+  requirements:
+    sf_method: [post]
+    platform: \w+
+
 server_status:
   url:   /server/changestatus/:platform/:server
   class: sfRequestRoute
@@ -79,7 +87,7 @@ server_edit:
   requirements:
     sf_method: [get]
     platform:
-    server:
+    server: .+ 
  
 server_delete:
   url:   /server/destroy/:platform/:server
