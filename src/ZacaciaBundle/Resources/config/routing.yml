@@ -1,0 +1,8 @@
+zacacia_homepage:
+    path:     /
+    defaults: { _controller: ZacaciaBundle:Default:index }
+
+zacacia_platform:
+    path:   /platform
+    defaults: { _controller: ZacaciaBundle:Platform:index }
+    
