@@ -1,3 +1,8 @@
+html {
+    font-family:Roboto, sans-serif;
+    
+}
+
 body {
     display: flex;
     min-height: 100vh;
@@ -6,4 +11,13 @@ body {
 
 main {
     flex: 1 0 auto;
+}
+
+nav.top-nav a.page-title {
+    font-size: 46px;
+    line-height: 70px;
+}
+
+a {
+    text-decoration:none;
 }
