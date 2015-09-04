@@ -417,6 +417,7 @@
     <parameter key="assetic.node.bin">/usr/bin/node</parameter>
     <parameter key="assetic.ruby.bin">/usr/bin/ruby</parameter>
     <parameter key="assetic.sass.bin">/usr/bin/sass</parameter>
+    <parameter key="assetic.reactjsx.bin">/usr/bin/jsx</parameter>
     <parameter key="assetic.filter.cssrewrite.class">Assetic\Filter\CssRewriteFilter</parameter>
     <parameter key="assetic.twig_extension.functions" type="collection"/>
     <parameter key="assetic.controller.class">Symfony\Bundle\AsseticBundle\Controller\AsseticController</parameter>
@@ -1710,7 +1711,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>55ea15102430f3.30972317</argument>
+            <argument>55ea18e1db3c62.07543812</argument>
           </service>
         </argument>
       </argument>
@@ -1833,7 +1834,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>55ea15102430f3.30972317</argument>
+            <argument>55ea18e1db3c62.07543812</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2228,15 +2229,15 @@
     <service id="assetic.filter.cssrewrite" class="Assetic\Filter\CssRewriteFilter">
       <tag name="assetic.filter" alias="cssrewrite"/>
     </service>
-    <service id="assetic.controller" class="Symfony\Bundle\AsseticBundle\Controller\AsseticController" scope="prototype">
-      <argument type="service" id="request"/>
+    <service id="assetic.controller" class="Symfony\Bundle\AsseticBundle\Controller\AsseticController">
       <argument type="service" id="assetic.asset_manager"/>
-      <argument type="service" id="assetic.cache"/>
+      <argument type="service">
+        <service class="Assetic\Cache\FilesystemCache" public="false">
+          <argument>/opt/WebSites/zacacia/app/cache/dev/assetic/assets</argument>
+        </service>
+      </argument>
       <argument>false</argument>
       <argument type="service" id="profiler" on-invalid="null"/>
-    </service>
-    <service id="assetic.cache" class="Assetic\Cache\FilesystemCache" public="false">
-      <argument>/opt/WebSites/zacacia/app/cache/dev/assetic/assets</argument>
     </service>
     <service id="assetic.request_listener" class="Symfony\Bundle\AsseticBundle\EventListener\RequestListener">
       <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
