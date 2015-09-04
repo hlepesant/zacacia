@@ -138,7 +138,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         // zacacia_platform
         if ($pathinfo === '/platform') {
-            return array (  '_controller' => 'ZacaciaBundle:Platform:index',  '_route' => 'zacacia_platform',);
+            return array (  '_controller' => 'ZacaciaBundle\\Controller\\PlatformController::indexAction',  '_route' => 'zacacia_platform',);
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
