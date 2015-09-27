@@ -743,7 +743,7 @@ return $name;
 } elseif (isset($this->cache[$name])) {
 return $this->cache[$name];
 }
-$name = str_replace(':/',':', preg_replace('#/{2,}#','/', strtr($name,'\\','/')));
+$name = str_replace(':/',':', preg_replace('#/{2,}#','/', str_replace('\\','/', $name)));
 if (false !== strpos($name,'..')) {
 throw new \RuntimeException(sprintf('Template name "%s" contains invalid characters.', $name));
 }
@@ -1835,7 +1835,7 @@ return $prev;
 public function throwAt($levels, $replace = false)
 {
 $prev = $this->thrownErrors;
-$this->thrownErrors = ($levels | E_RECOVERABLE_ERROR | E_USER_ERROR) & ~E_USER_DEPRECATED & ~E_DEPRECATED;
+$this->thrownErrors = (E_ALL | E_STRICT) & ($levels | E_RECOVERABLE_ERROR | E_USER_ERROR) & ~E_USER_DEPRECATED & ~E_DEPRECATED;
 if (!$replace) {
 $this->thrownErrors |= $prev;
 }
@@ -1884,7 +1884,7 @@ set_error_handler(array($this,'handleError'), $this->thrownErrors | $this->logge
 }
 public function handleError($type, $message, $file, $line, array $context, array $backtrace = null)
 {
-$level = error_reporting() | E_RECOVERABLE_ERROR | E_USER_ERROR;
+$level = error_reporting() | E_RECOVERABLE_ERROR | E_USER_ERROR | E_DEPRECATED | E_USER_DEPRECATED;
 $log = $this->loggedErrors & $type;
 $throw = $this->thrownErrors & $type & $level;
 $type &= $level | $this->screamedErrors;
@@ -2191,15 +2191,17 @@ $event = new Event();
 }
 $event->setDispatcher($this);
 $event->setName($eventName);
-if (!isset($this->listeners[$eventName])) {
-return $event;
+if ($listeners = $this->getListeners($eventName)) {
+$this->doDispatch($listeners, $eventName, $event);
 }
-$this->doDispatch($this->getListeners($eventName), $eventName, $event);
 return $event;
 }
 public function getListeners($eventName = null)
 {
 if (null !== $eventName) {
+if (!isset($this->listeners[$eventName])) {
+return array();
+}
 if (!isset($this->sorted[$eventName])) {
 $this->sortListeners($eventName);
 }
@@ -2270,10 +2272,8 @@ break;
 private function sortListeners($eventName)
 {
 $this->sorted[$eventName] = array();
-if (isset($this->listeners[$eventName])) {
 krsort($this->listeners[$eventName]);
 $this->sorted[$eventName] = call_user_func_array('array_merge', $this->listeners[$eventName]);
-}
 }
 }
 }
@@ -2351,11 +2351,6 @@ $this->listenerIds[$eventName][] = array($serviceId, $listener[0], isset($listen
 }
 }
 }
-}
-public function dispatch($eventName, Event $event = null)
-{
-$this->lazyLoad($eventName);
-return parent::dispatch($eventName, $event);
 }
 public function getContainer()
 {
@@ -2937,15 +2932,15 @@ return $service;
 throw new \LogicException(sprintf('Unable to parse the controller name "%s".', $controller));
 }
 }
-list($class, $method) = explode('::', $controller, 2);
-if (!class_exists($class)) {
-throw new \InvalidArgumentException(sprintf('Class "%s" does not exist.', $class));
+return parent::createController($controller);
 }
-$controller = $this->instantiateController($class);
+protected function instantiateController($class)
+{
+$controller = parent::instantiateController($class);
 if ($controller instanceof ContainerAwareInterface) {
 $controller->setContainer($this->container);
 }
-return array($controller, $method);
+return $controller;
 }
 }
 }
@@ -3442,7 +3437,7 @@ namespace
 {
 class Twig_Environment
 {
-const VERSION ='1.21.1';
+const VERSION ='1.22.2';
 protected $charset;
 protected $loader;
 protected $debug;
@@ -3469,6 +3464,9 @@ protected $templateClassPrefix ='__TwigTemplate_';
 protected $functionCallbacks = array();
 protected $filterCallbacks = array();
 protected $staging;
+private $originalCache;
+private $bcWriteCacheFile = false;
+private $bcGetCacheFilename = false;
 public function __construct(Twig_LoaderInterface $loader = null, $options = array())
 {
 if (null !== $loader) {
@@ -3488,6 +3486,18 @@ $this->addExtension(new Twig_Extension_Core());
 $this->addExtension(new Twig_Extension_Escaper($options['autoescape']));
 $this->addExtension(new Twig_Extension_Optimizer($options['optimizations']));
 $this->staging = new Twig_Extension_Staging();
+if (is_string($this->originalCache)) {
+$r = new ReflectionMethod($this,'writeCacheFile');
+if ($r->getDeclaringClass()->getName() !== __CLASS__) {
+@trigger_error('The Twig_Environment::writeCacheFile method is deprecated and will be removed in Twig 2.0.', E_USER_DEPRECATED);
+$this->bcWriteCacheFile = true;
+}
+$r = new ReflectionMethod($this,'getCacheFilename');
+if ($r->getDeclaringClass()->getName() !== __CLASS__) {
+@trigger_error('The Twig_Environment::getCacheFilename method is deprecated and will be removed in Twig 2.0.', E_USER_DEPRECATED);
+$this->bcGetCacheFilename = true;
+}
+}
 }
 public function getBaseTemplateClass()
 {
@@ -3533,28 +3543,38 @@ public function isStrictVariables()
 {
 return $this->strictVariables;
 }
-public function getCache()
+public function getCache($original = true)
 {
-return $this->cache;
+return $original ? $this->originalCache : $this->cache;
 }
 public function setCache($cache)
 {
-$this->cache = $cache ? $cache : false;
+if (is_string($cache)) {
+$this->originalCache = $cache;
+$this->cache = new Twig_Cache_Filesystem($cache);
+} elseif (false === $cache) {
+$this->originalCache = $cache;
+$this->cache = new Twig_Cache_Null();
+} elseif ($cache instanceof Twig_CacheInterface) {
+$this->originalCache = $this->cache = $cache;
+} else {
+throw new LogicException(sprintf('Cache can only be a string, false, or a Twig_CacheInterface implementation.'));
+}
 }
 public function getCacheFilename($name)
 {
-if (false === $this->cache) {
-return false;
-}
-$class = substr($this->getTemplateClass($name), strlen($this->templateClassPrefix));
-return $this->getCache().'/'.$class[0].'/'.$class[1].'/'.$class.'.php';
+@trigger_error(sprintf('The %s method is deprecated and will be removed in Twig 2.0.', __METHOD__), E_USER_DEPRECATED);
+$key = $this->cache->generateKey($name, $this->getTemplateClass($name));
+return !$key ? false : $key;
 }
 public function getTemplateClass($name, $index = null)
 {
-return $this->templateClassPrefix.hash('sha256', $this->getLoader()->getCacheKey($name)).(null === $index ?'':'_'.$index);
+$key = $this->getLoader()->getCacheKey($name).'__'.implode('__', array_keys($this->extensions));
+return $this->templateClassPrefix.hash('sha256', $key).(null === $index ?'':'_'.$index);
 }
 public function getTemplateClassPrefix()
 {
+@trigger_error(sprintf('The %s method is deprecated and will be removed in Twig 2.0.', __METHOD__), E_USER_DEPRECATED);
 return $this->templateClassPrefix;
 }
 public function render($name, array $context = array())
@@ -3572,13 +3592,22 @@ if (isset($this->loadedTemplates[$cls])) {
 return $this->loadedTemplates[$cls];
 }
 if (!class_exists($cls, false)) {
-if (false === $cache = $this->getCacheFilename($name)) {
-eval('?>'.$this->compileSource($this->getLoader()->getSource($name), $name));
+if ($this->bcGetCacheFilename) {
+$key = $this->getCacheFilename($name);
 } else {
-if (!is_file($cache) || ($this->isAutoReload() && !$this->isTemplateFresh($name, filemtime($cache)))) {
-$this->writeCacheFile($cache, $this->compileSource($this->getLoader()->getSource($name), $name));
+$key = $this->cache->generateKey($name, $cls);
 }
-require_once $cache;
+if (!$this->isAutoReload() || $this->isTemplateFresh($name, $this->cache->getTimestamp($key))) {
+$this->cache->load($key);
+}
+if (!class_exists($cls, false)) {
+$content = $this->compileSource($this->getLoader()->getSource($name), $name);
+if ($this->bcWriteCacheFile) {
+$this->writeCacheFile($key, $content);
+} else {
+$this->cache->write($key, $content);
+}
+eval('?>'.$content);
 }
 }
 if (!$this->runtimeInitialized) {
@@ -3639,12 +3668,12 @@ $this->loadedTemplates = array();
 }
 public function clearCacheFiles()
 {
-if (false === $this->cache) {
-return;
-}
-foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->cache), RecursiveIteratorIterator::LEAVES_ONLY) as $file) {
+@trigger_error(sprintf('The %s method is deprecated and will be removed in Twig 2.0.', __METHOD__), E_USER_DEPRECATED);
+if (is_string($this->originalCache)) {
+foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->originalCache), RecursiveIteratorIterator::LEAVES_ONLY) as $file) {
 if ($file->isFile()) {
 @unlink($file->getPathname());
+}
 }
 }
 }
@@ -3696,7 +3725,11 @@ return $this->getCompiler()->compile($node)->getSource();
 public function compileSource($source, $name = null)
 {
 try {
-return $this->compile($this->parse($this->tokenize($source, $name)));
+$compiled = $this->compile($this->parse($this->tokenize($source, $name)), $source);
+if (isset($source[0])) {
+$compiled .='/* '.str_replace(array('*/',"\r\n","\r","\n"), array('*//* ',"\n","\n","*/\n/* "), $source)."*/\n";
+}
+return $compiled;
 } catch (Twig_Error $e) {
 $e->setTemplateFile($name);
 throw $e;
@@ -4082,25 +4115,7 @@ $this->binaryOperators = array_merge($this->binaryOperators, $operators[1]);
 }
 protected function writeCacheFile($file, $content)
 {
-$dir = dirname($file);
-if (!is_dir($dir)) {
-if (false === @mkdir($dir, 0777, true)) {
-clearstatcache(false, $dir);
-if (!is_dir($dir)) {
-throw new RuntimeException(sprintf('Unable to create the cache directory (%s).', $dir));
-}
-}
-} elseif (!is_writable($dir)) {
-throw new RuntimeException(sprintf('Unable to write in the cache directory (%s).', $dir));
-}
-$tmpFile = tempnam($dir, basename($file));
-if (false !== @file_put_contents($tmpFile, $content)) {
-if (@rename($tmpFile, $file) || (@copy($tmpFile, $file) && unlink($tmpFile))) {
-@chmod($file, 0666 & ~umask());
-return;
-}
-}
-throw new RuntimeException(sprintf('Failed to write cache file "%s".', $file));
+$this->cache->write($file, $content);
 }
 }
 }
@@ -4233,7 +4248,7 @@ $filters = array(
 new Twig_SimpleFilter('date','twig_date_format_filter', array('needs_environment'=> true)),
 new Twig_SimpleFilter('date_modify','twig_date_modify_filter', array('needs_environment'=> true)),
 new Twig_SimpleFilter('format','sprintf'),
-new Twig_SimpleFilter('replace','strtr'),
+new Twig_SimpleFilter('replace','twig_replace_filter'),
 new Twig_SimpleFilter('number_format','twig_number_format_filter', array('needs_environment'=> true)),
 new Twig_SimpleFilter('abs','abs'),
 new Twig_SimpleFilter('round','twig_round'),
@@ -4443,15 +4458,31 @@ $date->setTimezone($timezone);
 }
 return $date;
 }
+if (null === $date ||'now'=== $date) {
+return new DateTime($date, false !== $timezone ? $timezone : $env->getExtension('core')->getTimezone());
+}
 $asString = (string) $date;
 if (ctype_digit($asString) || (!empty($asString) &&'-'=== $asString[0] && ctype_digit(substr($asString, 1)))) {
-$date ='@'.$date;
-}
+$date = new DateTime('@'.$date);
+} else {
 $date = new DateTime($date, $env->getExtension('core')->getTimezone());
+}
 if (false !== $timezone) {
 $date->setTimezone($timezone);
 }
 return $date;
+}
+function twig_replace_filter($str, $from, $to = null)
+{
+if ($from instanceof Traversable) {
+$from = iterator_to_array($from);
+} elseif (is_string($from) && is_string($to)) {
+@trigger_error('Using "replace" with character by character replacement is deprecated and will be removed in Twig 2.0', E_USER_DEPRECATED);
+return strtr($str, $from, $to);
+} elseif (!is_array($from)) {
+throw new Twig_Error_Runtime(sprintf('The "replace" filter expects an array or "Traversable" as replace values, got "%s".',is_object($from) ? get_class($from) : gettype($from)));
+}
+return strtr($str, $from);
 }
 function twig_round($value, $precision = 0, $method ='common')
 {
@@ -4516,8 +4547,15 @@ $value = (string) $value;
 }
 function twig_array_merge($arr1, $arr2)
 {
-if (!is_array($arr1) || !is_array($arr2)) {
-throw new Twig_Error_Runtime(sprintf('The merge filter only works with arrays or hashes; %s and %s given.', gettype($arr1), gettype($arr2)));
+if ($arr1 instanceof Traversable) {
+$arr1 = iterator_to_array($arr1);
+} elseif (!is_array($arr1)) {
+throw new Twig_Error_Runtime(sprintf('The merge filter only works with arrays or "Traversable", got "%s" as first argument.', gettype($arr1)));
+}
+if ($arr2 instanceof Traversable) {
+$arr2 = iterator_to_array($arr2);
+} elseif (!is_array($arr2)) {
+throw new Twig_Error_Runtime(sprintf('The merge filter only works with arrays or "Traversable", got "%s" as second argument.', gettype($arr2)));
 }
 return array_merge($arr1, $arr2);
 }
@@ -4592,7 +4630,7 @@ return $value;
 }
 function twig_get_array_keys_filter($array)
 {
-if (is_object($array) && $array instanceof Traversable) {
+if ($array instanceof Traversable) {
 return array_keys(iterator_to_array($array));
 }
 if (!is_array($array)) {
@@ -4602,7 +4640,7 @@ return array_keys($array);
 }
 function twig_reverse_filter(Twig_Environment $env, $item, $preserveKeys = false)
 {
-if (is_object($item) && $item instanceof Traversable) {
+if ($item instanceof Traversable) {
 return array_reverse(iterator_to_array($item), $preserveKeys);
 }
 if (is_array($item)) {
@@ -4624,6 +4662,11 @@ return strrev((string) $item);
 }
 function twig_sort_filter($array)
 {
+if ($array instanceof Traversable) {
+$array = iterator_to_array($array);
+} elseif (!is_array($array)) {
+throw new Twig_Error_Runtime(sprintf('The sort filter only works with arrays or "Traversable", got "%s".', gettype($array)));
+}
 asort($array);
 return $array;
 }
@@ -4828,9 +4871,8 @@ return ucwords(strtolower($string));
 }
 function twig_capitalize_string_filter(Twig_Environment $env, $string)
 {
-if (null !== ($charset = $env->getCharset())) {
-return mb_strtoupper(mb_substr($string, 0, 1, $charset), $charset).
-mb_strtolower(mb_substr($string, 1, mb_strlen($string, $charset), $charset), $charset);
+if (null !== $charset = $env->getCharset()) {
+return mb_strtoupper(mb_substr($string, 0, 1, $charset), $charset).mb_strtolower(mb_substr($string, 1, mb_strlen($string, $charset), $charset), $charset);
 }
 return ucfirst(strtolower($string));
 }
@@ -5189,6 +5231,23 @@ throw $e;
 public function getBlocks()
 {
 return $this->blocks;
+}
+public function getSource()
+{
+$reflector = new ReflectionClass($this);
+$file = $reflector->getFileName();
+if (!file_exists($file)) {
+return;
+}
+$source = file($file, FILE_IGNORE_NEW_LINES);
+array_splice($source, 0, $reflector->getEndLine());
+$i = 0;
+while (isset($source[$i]) &&'/* */'=== substr_replace($source[$i],'', 3, -2)) {
+$source[$i] = str_replace('*//* ','*/', substr($source[$i], 3, -2));
+++$i;
+}
+array_splice($source, $i);
+return implode("\n", $source);
 }
 public function display(array $context, array $blocks = array())
 {
@@ -6942,10 +7001,17 @@ private $dir;
 private $debug;
 private $loadedAnnotations = array();
 private $classNameHashes = array();
-public function __construct(Reader $reader, $cacheDir, $debug = false)
+private $umask;
+public function __construct(Reader $reader, $cacheDir, $debug = false, $umask = 0002)
 {
+if ( ! is_int($umask)) {
+throw new \InvalidArgumentException(sprintf('The parameter umask must be an integer, was: %s',
+gettype($umask)
+));
+}
 $this->reader = $reader;
-if (!is_dir($cacheDir) && !@mkdir($cacheDir, 0777, true)) {
+$this->umask = $umask;
+if (!is_dir($cacheDir) && !@mkdir($cacheDir, 0777 & (~$this->umask), true)) {
 throw new \InvalidArgumentException(sprintf('The directory "%s" does not exist and could not be created.', $cacheDir));
 }
 $this->dir = rtrim($cacheDir,'\\/');
@@ -7041,11 +7107,11 @@ $written = file_put_contents($tempfile,'<?php return unserialize('.var_export(se
 if (false === $written) {
 throw new \RuntimeException(sprintf('Unable to write cached file to: %s', $tempfile));
 }
+@chmod($tempfile, 0666 & (~$this->umask));
 if (false === rename($tempfile, $path)) {
 @unlink($tempfile);
 throw new \RuntimeException(sprintf('Unable to rename %s to %s', $tempfile, $path));
 }
-@chmod($path, 0666 & ~umask());
 }
 public function getClassAnnotation(\ReflectionClass $class, $annotationName)
 {

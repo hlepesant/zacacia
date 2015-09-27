@@ -8,6 +8,8 @@
             "SymfonyStandard\\": "app/SymfonyStandard/"
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=5.3.9",
         "symfony/symfony": "2.7.*",
@@ -19,7 +21,8 @@
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "~2.0",
+        "dreamscapes/ldap-core": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

@@ -27,13 +27,18 @@ class appProdUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         $context = $this->context;
         $request = $this->request;
 
-        // homepage
+        // zacacia_homepage
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'homepage');
+                return $this->redirect($pathinfo.'/', 'zacacia_homepage');
             }
 
-            return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
+            return array (  '_controller' => 'ZacaciaBundle\\Controller\\DefaultController::indexAction',  '_route' => 'zacacia_homepage',);
+        }
+
+        // zacacia_platform
+        if ($pathinfo === '/platform') {
+            return array (  '_controller' => 'ZacaciaBundle\\Controller\\PlatformController::indexAction',  '_route' => 'zacacia_platform',);
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
