@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "606e51bc504ee35224e6f69a5b3919d8",
-    "content-hash": "e34a46534068e4b61cfc4c3d92fa25bd",
+    "hash": "4dd334e0aae0e818bbfe52ae1492bf55",
+    "content-hash": "aacf2496f13a780fffeb8b8e33b3150b",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -933,6 +933,62 @@
             "time": "2015-08-31 19:07:16"
         },
         {
+            "name": "ldaptools/ldaptools",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ldaptools/ldaptools.git",
+                "reference": "cffd4fc01ad1e5e8dad94f30749903e6d730d312"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ldaptools/ldaptools/zipball/cffd4fc01ad1e5e8dad94f30749903e6d730d312",
+                "reference": "cffd4fc01ad1e5e8dad94f30749903e6d730d312",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ldap": "*",
+                "php": ">=5.6",
+                "symfony/yaml": ">=2.0"
+            },
+            "require-dev": {
+                "doctrine/cache": "~1.0",
+                "fabpot/php-cs-fixer": "~1.0",
+                "phpspec/phpspec": "~2.0",
+                "tedivm/stash": "*"
+            },
+            "suggest": {
+                "doctrine/cache": "Provides the cache_type 'doctrine' to help increase performance.",
+                "tedivm/stash": "Provides the cache_type 'stash' to help increase performance."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LdapTools\\": "src/LdapTools"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chad Sikorra",
+                    "email": "Chad.Sikorra@gmail.com",
+                    "homepage": "http://www.chadsikorra.com"
+                }
+            ],
+            "description": "LdapTools is a feature-rich LDAP library for PHP 5.6+.",
+            "homepage": "http://www.phpldaptools.com",
+            "keywords": [
+                "Microsoft Exchange",
+                "active directory",
+                "ldap",
+                "openldap"
+            ],
+            "time": "2015-09-19 14:52:05"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.17.1",
             "source": {
@@ -1626,6 +1682,55 @@
                 "templating"
             ],
             "time": "2015-09-22 13:59:32"
+        },
+        {
+            "name": "ucsf/ldaporm-bundle",
+            "version": "dev-master",
+            "target-dir": "Ucsf/LdapOrmBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ucsf-iam/UcsfLdapOrm.git",
+                "reference": "d89ec6ad0f01ada72cc6147fe8c047d820a91682"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ucsf-iam/UcsfLdapOrm/zipball/d89ec6ad0f01ada72cc6147fe8c047d820a91682",
+                "reference": "d89ec6ad0f01ada72cc6147fe8c047d820a91682",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "symfony/class-loader": "2.*",
+                "symfony/dependency-injection": "2.*",
+                "symfony/framework-bundle": "2.*",
+                "symfony/http-kernel": "2.*",
+                "symfony/monolog-bundle": "2.*",
+                "symfony/twig-bundle": "2.*",
+                "symfony/yaml": "2.*"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Ucsf\\LdapOrmBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL"
+            ],
+            "authors": [
+                {
+                    "name": "UCSF IT Identity & Access Management",
+                    "email": "iam-team@ucsf.edu"
+                }
+            ],
+            "description": "Another LDAP ORM for Symfony2",
+            "keywords": [
+                "ldap",
+                "orm",
+                "ucsf"
+            ],
+            "time": "2015-09-18 08:32:52"
         }
     ],
     "packages-dev": [
@@ -1681,7 +1786,9 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "dreamscapes/ldap-core": 20
+        "dreamscapes/ldap-core": 20,
+        "ucsf/ldaporm-bundle": 20,
+        "ldaptools/ldaptools": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
