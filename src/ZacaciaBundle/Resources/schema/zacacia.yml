@@ -1,8 +1,7 @@
 objects:
     zacacia_platform:
-        type: zacaciaPlatform
+        type: Platform
         class: zacaciaPlatform
-        category: platform
         converters:
              generalized_time:
                  - 'created'
