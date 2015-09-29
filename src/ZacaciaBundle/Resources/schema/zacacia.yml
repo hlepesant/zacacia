@@ -1,0 +1,14 @@
+objects:
+    zacacia_platform:
+        type: zacaciaPlatform
+        class: zacaciaPlatform
+        category: platform
+        converters:
+             generalized_time:
+                 - 'created'
+                 - 'modified'
+        attributes:
+            cn: cn
+            zacaciaStatus: zacaciaStatus
+        attributes_to_select:
+            - 'cn'
