@@ -19,27 +19,29 @@ class PlatformController extends Controller
         $query = $ldap->buildLdapQuery();
 
         $platforms = $query->select()
+            ->setBaseDn('ou=Platforms,ou=Zacacia,ou=Applications,dc=zarafa,dc=com')
             ->from('Platform')
             ->Where(['zacaciaStatus' => 'enable'])
             ->getLdapQuery()
             ->getResult();
 
         echo "Found ".$platforms->count()." platforms.";
+        echo "<ul>";
         foreach ($platforms as $platform) {
-            echo "Platform: ".$platform->getCn();
+            echo "<li>Platform: ".$platform->getCn();
         }
+        echo "</ul>";
 
         $ldapObject = $ldap->createLdapObject();
-
 
 
         try {
             $new_platform = $ldapObject->create('Platform')
                 ->in('ou=Platforms,ou=Zacacia,ou=Applications,dc=zarafa,dc=com')
-                ->setDn('cn=Henri,ou=Platforms,ou=Zacacia,ou=Applications,dc=zarafa,dc=com')
+                ->setDn('cn=StLouis,ou=Platforms,ou=Zacacia,ou=Applications,dc=zarafa,dc=com')
                 ->with([
                     'objectClass' => ['top', 'organizationalRole', 'zacaciaPlatform'],
-                    'cn' => 'Henri',
+                    'cn' => 'StLouis',
                     'zacaciaStatus' => 'enable'
                 ])
                 ->execute();
