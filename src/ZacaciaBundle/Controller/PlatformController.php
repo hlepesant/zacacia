@@ -22,6 +22,7 @@ class PlatformController extends Controller
             ->setBaseDn('ou=Platforms,ou=Zacacia,ou=Applications,dc=zarafa,dc=com')
             ->from('Platform')
             ->Where(['zacaciaStatus' => 'enable'])
+            ->orderBy('cn')
             ->getLdapQuery()
             ->getResult();
 
