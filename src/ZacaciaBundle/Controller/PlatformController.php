@@ -22,6 +22,7 @@ class PlatformController extends Controller
             ->setBaseDn('ou=Platforms,ou=Zacacia,ou=Applications,dc=zarafa,dc=com')
             ->from('Platform')
             ->Where(['zacaciaStatus' => 'enable'])
+            ->andWhere(['cn' => 'Hugues'])
             ->orderBy('cn')
             ->getLdapQuery()
             ->getResult();
@@ -33,8 +34,9 @@ class PlatformController extends Controller
         }
         echo "</ul>";
 
-        $ldapObject = $ldap->createLdapObject();
 
+/*
+        $ldapObject = $ldap->createLdapObject();
 
         try {
             $new_platform = $ldapObject->create('Platform')
@@ -50,7 +52,7 @@ class PlatformController extends Controller
             echo "Failed to add user!".PHP_EOL;
             echo $e->getMessage().PHP_EOL;
         }
-
+*/
         exit;
 
         return $this->render('ZacaciaBundle:Platform:index.html.twig');

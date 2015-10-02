@@ -1,7 +1,10 @@
 objects:
     zacacia_platform:
         type: Platform
-        class: zacaciaPlatform
+        class: 
+            - 'top'
+            - 'organizationalRole'
+            - 'zacaciaPlatform'
         converters:
              generalized_time:
                  - 'created'

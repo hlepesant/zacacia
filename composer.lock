@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4dd334e0aae0e818bbfe52ae1492bf55",
-    "content-hash": "aacf2496f13a780fffeb8b8e33b3150b",
+    "hash": "a0f4ad9e2129b843a2d06d2e62fc2ffb",
+    "content-hash": "e684b3c49bd3ab2988f4b0811ed207ba",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -704,56 +704,6 @@
             "time": "2015-08-31 13:19:01"
         },
         {
-            "name": "dreamscapes/ldap-core",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Dreamscapes/Ldap-Core.git",
-                "reference": "85408988344f04a8a1ee3c00e859a58d02cd6c9e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Dreamscapes/Ldap-Core/zipball/85408988344f04a8a1ee3c00e859a58d02cd6c9e",
-                "reference": "85408988344f04a8a1ee3c00e859a58d02cd6c9e",
-                "shasum": ""
-            },
-            "require": {
-                "ext-ldap": "*",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpdocumentor/phpdocumentor": "~2",
-                "squizlabs/php_codesniffer": "~2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Dreamscapes\\": "."
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Robert Rossmann",
-                    "email": "rr.rossmann@me.com"
-                }
-            ],
-            "description": "Object encapsulation of PHP's native ldap functions",
-            "keywords": [
-                "OOP",
-                "directory",
-                "ldap",
-                "library",
-                "mock",
-                "openldap",
-                "testing"
-            ],
-            "time": "2015-05-04 14:47:46"
-        },
-        {
             "name": "incenteev/composer-parameter-handler",
             "version": "v2.1.1",
             "source": {
@@ -1386,34 +1336,34 @@
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "v2.7.1",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bundle.git",
-                "reference": "9320b6863404c70ebe111e9040dab96f251de7ac"
+                "reference": "78883d8c1cfa523ac3a28a482b7793036b243f7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/9320b6863404c70ebe111e9040dab96f251de7ac",
-                "reference": "9320b6863404c70ebe111e9040dab96f251de7ac",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/78883d8c1cfa523ac3a28a482b7793036b243f7d",
+                "reference": "78883d8c1cfa523ac3a28a482b7793036b243f7d",
                 "shasum": ""
             },
             "require": {
                 "monolog/monolog": "~1.8",
                 "php": ">=5.3.2",
-                "symfony/config": "~2.3",
-                "symfony/dependency-injection": "~2.3",
-                "symfony/http-kernel": "~2.3",
-                "symfony/monolog-bridge": "~2.3"
+                "symfony/config": "~2.3|3.*",
+                "symfony/dependency-injection": "~2.3|3.*",
+                "symfony/http-kernel": "~2.3|3.*",
+                "symfony/monolog-bridge": "~2.3|3.*"
             },
             "require-dev": {
-                "symfony/console": "~2.3",
+                "symfony/console": "~2.3|3.*",
                 "symfony/yaml": "~2.3"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7.x-dev"
+                    "dev-master": "2.8.x-dev"
                 }
             },
             "autoload": {
@@ -1441,7 +1391,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2015-01-04 20:21:17"
+            "time": "2015-09-29 17:13:11"
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -1682,55 +1632,6 @@
                 "templating"
             ],
             "time": "2015-09-22 13:59:32"
-        },
-        {
-            "name": "ucsf/ldaporm-bundle",
-            "version": "dev-master",
-            "target-dir": "Ucsf/LdapOrmBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ucsf-iam/UcsfLdapOrm.git",
-                "reference": "d89ec6ad0f01ada72cc6147fe8c047d820a91682"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ucsf-iam/UcsfLdapOrm/zipball/d89ec6ad0f01ada72cc6147fe8c047d820a91682",
-                "reference": "d89ec6ad0f01ada72cc6147fe8c047d820a91682",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9",
-                "symfony/class-loader": "2.*",
-                "symfony/dependency-injection": "2.*",
-                "symfony/framework-bundle": "2.*",
-                "symfony/http-kernel": "2.*",
-                "symfony/monolog-bundle": "2.*",
-                "symfony/twig-bundle": "2.*",
-                "symfony/yaml": "2.*"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Ucsf\\LdapOrmBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL"
-            ],
-            "authors": [
-                {
-                    "name": "UCSF IT Identity & Access Management",
-                    "email": "iam-team@ucsf.edu"
-                }
-            ],
-            "description": "Another LDAP ORM for Symfony2",
-            "keywords": [
-                "ldap",
-                "orm",
-                "ucsf"
-            ],
-            "time": "2015-09-18 08:32:52"
         }
     ],
     "packages-dev": [
@@ -1786,8 +1687,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "dreamscapes/ldap-core": 20,
-        "ucsf/ldaporm-bundle": 20,
         "ldaptools/ldaptools": 20
     },
     "prefer-stable": true,
