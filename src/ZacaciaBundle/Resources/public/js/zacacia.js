@@ -5,14 +5,12 @@
 
 angular.module('zacaciaApp', [
     'platformList'
-]).config(function($interpolateProvider){
-    $interpolateProvider.startSymbol('[[').endSymbol(']]');
-});
+]);
 
 
 var platformList = angular.module('platformList',[]);
 
-platformList.controller('platformCtrl', ['$scope',
+platformList.controller('PlatformController', ['$scope',
     function($scope) {
 
         var platforms = $scope.platforms = [];

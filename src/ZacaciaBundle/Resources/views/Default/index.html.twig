@@ -8,18 +8,19 @@
 
 
 {% block main %}
-
-<section ng-controller="platformCtrl">
+{% verbatim %}
+<section ng-controller="PlatformController">
     <article ng-show="platforms.length">
         <ul id="platform-list">
             <li ng-repeat="platform in platforms">
                 <div class="view">
-                    <span>[[platform.cn]]</span>
+                    <span>{{platform.cn}}</span>
                 </div>
             </li>
         </ul>
     </article>
 </section>
+{% endverbatim %}
 {% endblock %}
 
 {% block footer %}
