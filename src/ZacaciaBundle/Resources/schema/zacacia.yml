@@ -1,7 +1,7 @@
 objects:
     zacacia_platform:
         type: Platform
-        class: 
+        class:
             - 'top'
             - 'organizationalRole'
             - 'zacaciaPlatform'
@@ -14,3 +14,4 @@ objects:
             zacaciaStatus: zacaciaStatus
         attributes_to_select:
             - 'cn'
+            - 'zacaciaStatus'

@@ -5,4 +5,7 @@ zacacia_homepage:
 zacacia_platform:
     path:   /platform
     defaults: { _controller: ZacaciaBundle:Platform:index }
-    
+
+zacacia_api_platform:
+    path:   /api/:platform
+    defaults: { _controller: ZacaciaBundle:Platform:getall, _format: json }

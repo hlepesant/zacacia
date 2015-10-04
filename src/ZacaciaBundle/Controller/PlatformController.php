@@ -2,7 +2,10 @@
 
 namespace ZacaciaBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use LdapTools\Configuration;
 use LdapTools\LdapManager;
@@ -11,7 +14,19 @@ use LdapTools\Exception\LdapConnectionException;
 
 class PlatformController extends Controller
 {
+    /**
+    * @Route("/platform", name = "zacacia_platform")
+    */
     public function indexAction()
+    {
+        return $this->render('ZacaciaBundle:Platform:index.html.twig');
+    }
+
+    /**
+    * @Route("/api/platforms")
+    * @Method("GET")
+    */
+    public function getallAction()
     {
         $config = (new Configuration())->load($this->container->get('kernel')->locateResource('@ZacaciaBundle/Resources/config/zacacia.yml'));
         $ldap = new LdapManager($config);
@@ -22,39 +37,20 @@ class PlatformController extends Controller
             ->setBaseDn('ou=Platforms,ou=Zacacia,ou=Applications,dc=zarafa,dc=com')
             ->from('Platform')
             ->Where(['zacaciaStatus' => 'enable'])
-            ->andWhere(['cn' => 'Hugues'])
             ->orderBy('cn')
             ->getLdapQuery()
             ->getResult();
 
-        echo "Found ".$platforms->count()." platforms.";
-        echo "<ul>";
-        foreach ($platforms as $platform) {
-            echo "<li>Platform: ".$platform->getCn();
+        $data = Array();
+
+        foreach( $platforms as $platform ) {
+            $item = array();
+            $item['dn'] = $platform->getDn();
+            $item['cn'] = $platform->getCn();
+            $item['zacaciaStatus'] = $platform->getZacaciaStatus();
+            $data[] = $item;
         }
-        echo "</ul>";
 
-
-/*
-        $ldapObject = $ldap->createLdapObject();
-
-        try {
-            $new_platform = $ldapObject->create('Platform')
-                ->in('ou=Platforms,ou=Zacacia,ou=Applications,dc=zarafa,dc=com')
-                ->setDn('cn=StLouis,ou=Platforms,ou=Zacacia,ou=Applications,dc=zarafa,dc=com')
-                ->with([
-                    'objectClass' => ['top', 'organizationalRole', 'zacaciaPlatform'],
-                    'cn' => 'StLouis',
-                    'zacaciaStatus' => 'enable'
-                ])
-                ->execute();
-        } catch (LdapConnectionException $e) {
-            echo "Failed to add user!".PHP_EOL;
-            echo $e->getMessage().PHP_EOL;
-        }
-*/
-        exit;
-
-        return $this->render('ZacaciaBundle:Platform:index.html.twig');
+        return new JsonResponse($data);
     }
 }
