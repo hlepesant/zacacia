@@ -1,174 +1,34 @@
-/*
-html {
-    font-family:Roboto, sans-serif;
+html,body,.container {
+    height: 90%;
 }
 
-body {
-    margin: 0 !important;
-    padding: 0!important;
+body > .container {
+    border: 1px solid #000;
 }
 
-body, html, .container-fluid, .sidebar, .body {
-    height: 100%;
-    min-height: 100%;
+header {
+    padding: 0px 0px 25px 0px;
+    background-color: #01579b;
 }
 
-#container{
-    width:100%;
-    height:100%;
+#main-column {
+    border: 1px solid #000;
+    min-height: 80%;
 }
 
-.header {
-    height: 75px;
-    position: relative;
-    background-color: #16203D;
-    width:100%;
-    position: relative;
-    margin: 0;
-    padding: 0 10px 0 10px;
-}
-
-.sidebar{
-    width:12%;
-    float:left;
-    height:100%;
-    padding-top: 20px;
-    background-color: #E2E2E2;
-}
-
-.body{
-    background-color: whitesmoke;
-    float:left;
-    width:88%;
-    height:100%;
-    padding-top: 20px;
-}
-*/
-
-/*!
- * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
-
-/* Toggle Styles */
-
-#wrapper {
-    padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+.zacacia-menu {
+    min-height: 80%;
+    background-color: blue;
     border: 1px solid red;
+    height: 80%;
 }
 
-#wrapper.toggled {
-    padding-left: 250px;
+main {
+    border: 1px solid #000;
 }
 
-#sidebar-wrapper {
-    z-index: 1000;
-    position: fixed;
-    left: 250px;
-    width: 0;
-    height: 100%;
-    margin-left: -250px;
-    overflow-y: auto;
-    background: #000;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-    border: 1px solid blue;
-}
-
-#wrapper.toggled #sidebar-wrapper {
-    width: 250px;
-}
-
-#page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    padding: 15px;
-}
-
-#wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-right: -250px;
-}
-
-/* Sidebar Styles */
-
-.sidebar-nav {
-    position: absolute;
-    top: 0;
-    width: 250px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
-}
-
-.sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #999999;
-}
-
-.sidebar-nav li a:hover {
-    text-decoration: none;
-    color: #fff;
-    background: rgba(255,255,255,0.2);
-}
-
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-    text-decoration: none;
-}
-
-.sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
-}
-
-.sidebar-nav > .sidebar-brand a {
-    color: #999999;
-}
-
-.sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
-    background: none;
-}
-
-@media(min-width:768px) {
-    #wrapper {
-        padding-left: 250px;
-    }
-
-    #wrapper.toggled {
-        padding-left: 0;
-    }
-
-    #sidebar-wrapper {
-        width: 250px;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
-        width: 0;
-    }
-
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
-
-    #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
+footer {
+    border: 1px solid grey;
+    background-color: #01579b;
+    height: 60px;
 }
