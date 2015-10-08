@@ -13,53 +13,48 @@
     </head>
     <body>
 
-        <div class="container">
-        
-            <!-- BEGIN Header -->
-            <header class="row">
-                <div class="col-xs-12">
-                    <a class="navbar-brand" rel="home" href="{{ path('zacacia_homepage') }}" title="homepage">
-                        <object class="img-responsive" id="front-page-logo" type="image/png" data="{{ asset('bundles/zacacia/images/zacacia_w.png') }}">Your browser does not support PNG</object>
-                    </a>
-                </div>
-            </header>
-            <!-- END Header -->
-        
-            <!-- BEGIN Main column -->
-            <div id="main-column">
-                <div class="row">
-        
-                    <!-- BEGIN Aside -->
-                    <!-- aside class="col-xs-12 col-sm-4 col-sm-pull-8 col-md-3 col-md-pull-9" -->
-                    <div id="zacacia-menu" class="col-xs-3">
-                        <ul>
-                            {%block nav_menu %}{% endblock %}
-                            <li class="bold"><a href="/logout" class="waves-effect waves-teal">Logout</a></li>
-                        </ul>
-                    </div>
-                    <!-- END Aside -->
-        
-                    <!-- BEGIN Main -->
-                    <!-- main class="col-xs-12 col-sm-8 col-sm-push-4 col-md-9 col-md-push-3" -->
-                    <div id="zacacia-content"  class="col-xs-8">
-                        {% block main %}{% endblock %}
-                    </div>
-                    <!-- END Main -->
-        
-                </div>
+        <!-- BEGIN Header -->
+        <header class="row">
+            <div class="col-xs-12">
+                <a class="navbar-brand" rel="home" href="{{ path('zacacia_homepage') }}" title="homepage">
+                    <object class="img-responsive" id="front-page-logo" type="image/png" data="{{ asset('bundles/zacacia/images/zacacia_w.png') }}">Your browser does not support PNG</object>
+                </a>
             </div>
-            <!-- END Main column -->
+        </header>
+        <!-- END Header -->
+
+        <!-- BEGIN Main column -->
+        <main id="main" class="container-fluid">
+            <div class="row">
         
-            <!-- BEGIN Footer -->
-            <footer class="row">
-                <div class="col-xs-12">
-                {% block footer %}{% endblock %}
+                <!-- BEGIN Aside -->
+                <div id="zacacia-menu" class="col-md-2 col-md-push-0">
+                    <ul>
+                        {%block nav_menu %}{% endblock %}
+                        <li class="bold"><a href="/logout" class="waves-effect waves-teal">Logout</a></li>
+                    </ul>
                 </div>
-            </footer>
-            <!-- END Footer -->
+                <!-- END Aside -->
         
-        </div>        
-    
+                <!-- BEGIN Main -->
+                <div id="zacacia-content" class="col-md-10 col-md-push-2">
+                    {% block main %}{% endblock %}
+                </div>
+                <!-- END Main -->
+        
+            </div>
+        
+        </main>
+        <!-- END Main column -->
+        
+        <!-- BEGIN Footer -->
+        <footer class="row">
+            <div class="col-md-12">
+            {% block footer %}{% endblock %}
+            </div>
+        </footer>
+        <!-- END Footer -->
+        
         <!-- Compiled and minified JavaScript -->
         <script src="{{ asset('bundles/zacacia/vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('bundles/zacacia/vendor/materialize/js/materialize.min.js') }}"></script>
