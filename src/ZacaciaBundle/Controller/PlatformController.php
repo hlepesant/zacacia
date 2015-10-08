@@ -15,14 +15,34 @@ use LdapTools\Exception\LdapConnectionException;
 class PlatformController extends Controller
 {
     /**
-    * @Route("/platform", name = "zacacia_platform")
+    * Lists all Platform entities.
+    *
+    * @Route("/platform", name="platform_list")
+    * @Route("/platform/{cn}", name="platform_edit")
     */
-    public function indexAction()
+    public function indexAction($cn=null)
     {
-        return $this->render('ZacaciaBundle:Platform:index.html.twig');
+        if ( is_null($cn) )
+            return $this->render('ZacaciaBundle:Platform:index.html.twig');
+        else
+            return $this->render('ZacaciaBundle:Platform:edit.html.twig');
     }
+    
+    /**
+    * Add Platform entity.
+    *
+    * @Route("/platform/add", name="platform_add")
+    */
+    public function addAction()
+    {
+        return $this->render('ZacaciaBundle:Platform:add.html.twig');
+    }
+    
+
 
     /**
+    * API : Lists all Platform entities.
+    *
     * @Route("/api/platforms")
     * @Method("GET")
     */

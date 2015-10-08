@@ -2,4 +2,5 @@ web/bundles/
 app/bootstrap.*
 app/config/parameters.yml
 app/cache/*
+app/logs/dev.log
 app/logs/*
