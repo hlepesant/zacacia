@@ -1,0 +1,18 @@
+{% extends 'ZacaciaBundle::zacacia.html.twig' %}
+
+{% block javascripts %}
+<script src="{{ asset('bundles/zacacia/js/platform.js') }}"></script>
+{% endblock %}
+
+{%block nav_menu %}
+<button type="button" class="btn btn-active btn-lg btn-block">Plateforms</button>
+{% endblock %}
+
+{% block main %}
+<div ng-controller="PlatformController">
+</div>
+{% endblock %}
+
+{% block footer %}
+a
+{% endblock %}

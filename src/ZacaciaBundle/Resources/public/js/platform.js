@@ -9,7 +9,7 @@ zacacia.controller('PlatformController', ['$scope', '$http',
 
         var platforms = $scope.platforms = [];
 
-        $http.get('/api/platforms').success(function(data) {
+        $http.get('/api/platform').success(function(data) {
             $scope.platforms = data;
         });
     }

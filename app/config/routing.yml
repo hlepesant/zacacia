@@ -1,6 +1,4 @@
 zacacia:
-#    resource:   "@ZacaciaBundle/Resources/config/routing.yml"
-#    prefix:     /
     resource:   "@ZacaciaBundle/Controller"
     type:       annotation
     prefix:     /

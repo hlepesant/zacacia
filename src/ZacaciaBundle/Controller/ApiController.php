@@ -12,41 +12,18 @@ use LdapTools\LdapManager;
 use LdapTools\Exception\LdapConnectionException;
 
 
-class PlatformController extends Controller
+/**
+ * @Route("/api")
+ */
+class ApiController extends Controller
 {
-    /**
-    * Lists all Platform entities.
-    *
-    * @Route("/platform", name="platform_list")
-    * @Route("/platform/{cn}", name="platform_edit")
-    */
-    public function indexAction($cn=null)
-    {
-        if ( is_null($cn) )
-            return $this->render('ZacaciaBundle:Platform:index.html.twig');
-        else
-            return $this->render('ZacaciaBundle:Platform:edit.html.twig');
-    }
-    
-    /**
-    * Add Platform entity.
-    *
-    * @Route("/platform/add", name="platform_add")
-    */
-    public function addAction()
-    {
-        return $this->render('ZacaciaBundle:Platform:add.html.twig');
-    }
-    
-
-
     /**
     * API : Lists all Platform entities.
     *
-    * @Route("/api/platforms")
+    * @Route("/platform")
     * @Method("GET")
     */
-    public function getallAction()
+    public function platformAction()
     {
         $config = (new Configuration())->load($this->container->get('kernel')->locateResource('@ZacaciaBundle/Resources/config/zacacia.yml'));
         $ldap = new LdapManager($config);
@@ -73,4 +50,34 @@ class PlatformController extends Controller
 
         return new JsonResponse($data);
     }
+
+    /**
+    * API : Lists all Platform entities.
+    *
+    * @Route("/platform/{cn}")
+    * @Method("GET")
+    */
+    public function platformeditAction($cn)
+    {
+        $config = (new Configuration())->load($this->container->get('kernel')->locateResource('@ZacaciaBundle/Resources/config/zacacia.yml'));
+        $ldap = new LdapManager($config);
+
+        $query = $ldap->buildLdapQuery();
+
+        $platform = $query->select()
+            ->setBaseDn('ou=Platforms,ou=Zacacia,ou=Applications,dc=zarafa,dc=com')
+            ->from('Platform')
+            ->Where(['cn' => $cn])
+            ->getLdapQuery()
+            ->getSingleResult();
+
+        $data = Array();
+
+        $data['dn'] = $platform->getDn();
+        $data['cn'] = $platform->getCn();
+        $data['zacaciaStatus'] = $platform->getZacaciaStatus();
+
+        return new JsonResponse($data);
+    }
+    
 }
