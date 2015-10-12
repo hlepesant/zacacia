@@ -40,6 +40,12 @@ footer {
     min-height: 100%;
 }
 
+#zacacia-title {
+    font-family: 'Exo', sans-serif;
+    color: white;
+    margin-bottom: -8px;
+}
+
 
 .btn-group-vertical {
     width: 100%;

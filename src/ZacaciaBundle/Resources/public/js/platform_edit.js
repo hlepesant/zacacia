@@ -4,11 +4,11 @@
 
 var app = angular.module('zacaciaApp', ['ngRoute']);
 
-app.config(['$routeProvider', function ($routeProvider) {
+app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+
+        $locationProvider.html5Mode(true); 
+
         $routeProvider
-            .when('/', {
-                template: "het hop"
-            })
             .when('/platform/:cn', {
                 template: "het hop HIP",
                 controller: 'PlatformController'

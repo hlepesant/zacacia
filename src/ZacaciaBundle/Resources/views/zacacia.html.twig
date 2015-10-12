@@ -6,6 +6,7 @@
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="{{ asset('bundles/zacacia/vendor/bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('bundles/zacacia/css/zacacia.css') }}" />
+        <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet" type="text/css" />
         {% block stylesheets %}{% endblock %}
         <script src="{{ asset('bundles/zacacia/vendor/angular/angular.min.js') }}"></script>
         <script src="{{ asset('bundles/zacacia/js/zacacia.js') }}"></script>
@@ -20,6 +21,7 @@
                 <a class="navbar-brand" rel="home" href="{{ path('zacacia_homepage') }}" title="homepage">
                     <object class="img-responsive" id="front-page-logo" type="image/png" data="{{ asset('bundles/zacacia/images/zacacia_w.png') }}">Your browser does not support PNG</object>
                 </a>
+                <h1 id="zacacia-title">Zacacia</h1>
             </div>
         </header>
         <!-- END Header -->
