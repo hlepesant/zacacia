@@ -16,28 +16,4 @@ class DefaultController extends Controller
     {
         return $this->render('ZacaciaBundle:Default:index.html.twig');
     }
-
-    /**
-    * Lists all Platform entities.
-    *
-    * @Route("/platform", name="platform")
-    * @Route("/platform/{cn}", name="platform_edit")
-    */
-    public function platformAction($cn=null)
-    {
-        if ( is_null($cn) )
-            return $this->render('ZacaciaBundle:Default:platform/index.html.twig');
-        else
-            return $this->render('ZacaciaBundle:Default:platform/edit.html.twig');
-    }
-    
-    /**
-    * Add Platform entity.
-    *
-    * @Route("/platform/new", name="platform_new")
-    */
-    public function platformnewAction()
-    {
-        return $this->render('ZacaciaBundle:Default:platform/new.html.twig');
-    }
 }

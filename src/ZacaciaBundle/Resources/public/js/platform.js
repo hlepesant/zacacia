@@ -1,26 +1,16 @@
 /**
- * Created by hugues on 02/10/15.
+ * Created by hugues on 12/10/2015.
  */
 
-var zacacia = angular.module('zacaciaApp', []);
+var zacaciaAppControllers = angular.module('zacaciaAppControllers', []);
 
-/*
-zacacia.controller('PlatformController', ['$scope', '$http',
-    function($scope, $http) {
-
+zacaciaAppControllers.controller('platformController', [
+    '$scope',
+    '$http',
+    function ($scope, $http) {
         var platforms = $scope.platforms = [];
-
-        $http.get('/api/platform').success(function(data) {
+        $http.get('/api/platform').success(function (data) {
             $scope.platforms = data;
         });
-    });
+    }
 ]);
-*/
-
-zacacia.controller('PlatformController',
-    function($scope, $http) {
-        var platforms = $scope.platforms = [];
-        $http.get('/api/platform').success(function(data) {
-            $scope.platforms = data;
-        });
-    });

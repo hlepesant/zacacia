@@ -9,7 +9,7 @@
         <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet" type="text/css" />
         {% block stylesheets %}{% endblock %}
         <script src="{{ asset('bundles/zacacia/vendor/angular/angular.min.js') }}"></script>
-        <script src="{{ asset('bundles/zacacia/js/zacacia.js') }}"></script>
+        <script src="{{ asset('bundles/zacacia/vendor/angular/angular-route.min.js') }}"></script>
         {% block javascripts %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -41,6 +41,8 @@
         
                 <!-- BEGIN Section -->
                 <section id="zacacia-content" class="col-md-10 col-md-push-2">
+                    <div ng-view>
+                    </div>
                     {% block main %}{% endblock %}
                 </section>
                 <!-- END Section -->
