@@ -1,27 +1,34 @@
-<div ng-controller="platformEditController">
+<div ng-controller="platformEditController" class="article">
     <article>
-        <h2>Edit Platform : {{cn}}</h2><br />
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">CN</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="platform.cn" placeholder="{{platform.cn}}" readonly="readonly">
-                </div>
+        <div class="row form-title">
+            <div class="col-xs-12 col-md-ofsset-0">
+                <h3>Edit Platform : {{cn}}</h3>
             </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" ng-model="platform.zacaciaStatus" ng-true-value="'enable'" ng-false-value="'disable'"> Active
-                        </label>
+        </div>
+        <div class="row">
+            <form class="form-horizontal" ng-submit="submit()">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">CN</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="platform.cn" placeholder="{{platform.cn}}" readonly="readonly">
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default" ng-submit="">Update</button>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="platform.zacaciaStatus" ng-true-value="'enable'" ng-false-value="'disable'"> Active
+                            </label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </form>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <a ng-href="/#platform"><button type="button" class="btn btn-danger">Cancel</button></a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </article>
 </div>
