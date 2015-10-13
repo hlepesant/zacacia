@@ -1,4 +1,0 @@
-zacacia:
-    resource:   "@ZacaciaBundle/Controller"
-    type:       annotation
-    prefix:     /

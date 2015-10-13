@@ -1,4 +1,0 @@
-services:
-#    zacacia.example:
-#        class: ZacaciaBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="zacaciaApp">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Zacacia</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/zacacia.css" />
+        <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet" type="text/css" />
+        <script src="/vendor/angular/angular.min.js"></script>
+        <script src="/vendor/angular/angular-route.min.js"></script>
+        <script src="/js/route.js"></script>
+        <script src="/js/controller.js"></script>
+        <script src="/js/platform.js"></script>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    </head>
+    <body>
+
+        <!-- BEGIN Header -->
+        <header class="row">
+            <div class="col-xs-12">
+                <a class="navbar-brand" rel="home" href="/" title="homepage">
+                    <object class="img-responsive" id="front-page-logo" type="image/png" data="/images/zacacia_w.png">Your browser does not support PNG</object>
+                </a>
+                <h1 id="zacacia-title">Zacacia</h1>
+            </div>
+        </header>
+        <!-- END Header -->
+
+        <!-- BEGIN Main column -->
+        <main id="main" class="container-fluid">
+            <div class="row">
+        
+                <!-- BEGIN Aside -->
+                <aside id="zacacia-menu" class="col-md-2 col-md-push-0">
+                    <div class="btn-group-vertical" role="group">
+                    <button type="button" class="btn btn-lg btn-block"><a href="/#platform">Plateforms</a></button>
+                    <button type="button" class="btn btn-logout btn-lg btn-block">Logout</button>
+                    </div>
+                </aside>
+                <!-- END Aside -->
+        
+                <!-- BEGIN Section -->
+                <section id="zacacia-content" class="col-md-10 col-md-push-2">
+                    <div ng-view>
+                    </div>
+                </section>
+                <!-- END Section -->
+        
+            </div>
+        
+        </main>
+        <!-- END Main column -->
+        
+        <!-- BEGIN Footer -->
+        <footer class="row">
+            <div class="col-md-12">
+            </div>
+        </footer>
+        <!-- END Footer -->
+        
+        <!-- Compiled and minified JavaScript -->
+        <script src="/vendor/jquery/jquery.min.js"></script>
+        <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    </body>
+</html>
