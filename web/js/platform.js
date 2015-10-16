@@ -31,9 +31,8 @@ zacaciaAppControllers.controller('platformEditController', [
         $scope.submit = function () {
             var p = {
                 params: {
-                    'callback' : 'JSON_CALLBACK',
-                    'cn' : $scope.cn,
-                    'zacaciaStatus' : $scope.zacaciaStatus
+                    'cn': $scope.cn,
+                    'zacaciaStatus': $scope.zacaciaStatus
                 }
             };
 
