@@ -12,6 +12,10 @@ zacaciaApp.config([
     '$routeProvider',
     function ($routeProvider) {
         $routeProvider
+            .when('/signup', {
+                templateUrl: '/templates/signup.html',
+                controller: 'signupController'
+            })
             .when('/platform', {
                 templateUrl: '/templates/platform.html',
                 controller: 'platformController'

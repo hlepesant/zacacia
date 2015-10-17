@@ -4,30 +4,47 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bcfa24c2633cc2e68d77bdf9af5402cb",
-    "content-hash": "1e6b9fae753865a94a07982210d5a63d",
+    "hash": "ac175411328d2737a8a4b186b6ed4857",
+    "content-hash": "d875dbcb76711e328a2aa880674613ae",
     "packages": [
         {
-            "name": "firebase/php-jwt",
-            "version": "v3.0.0",
+            "name": "lcobucci/jwt",
+            "version": "3.0.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1"
+                "url": "https://github.com/lcobucci/jwt.git",
+                "reference": "0935669796f0ecacebe93c19c99b3d0c82fda1cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1",
-                "reference": "fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/0935669796f0ecacebe93c19c99b3d0c82fda1cc",
+                "reference": "0935669796f0ecacebe93c19c99b3d0c82fda1cc",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "ext-openssl": "*",
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "mdanter/ecc": "~0.3",
+                "mikey179/vfsstream": "~1.5",
+                "phpmd/phpmd": "~2.2",
+                "phpunit/php-invoker": "~1.1",
+                "phpunit/phpunit": "~4.5",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "suggest": {
+                "mdanter/ecc": "Required to use Elliptic Curves based algorithms."
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
-                    "Firebase\\JWT\\": "src"
+                    "Lcobucci\\JWT\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -36,19 +53,17 @@
             ],
             "authors": [
                 {
-                    "name": "Neuman Vong",
-                    "email": "neuman+pear@twilio.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Anant Narayanan",
-                    "email": "anant@php.net",
+                    "name": "Luís Otávio Cobucci Oblonczyk",
+                    "email": "lcobucci@gmail.com",
                     "role": "Developer"
                 }
             ],
-            "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
-            "homepage": "https://github.com/firebase/php-jwt",
-            "time": "2015-07-22 18:31:08"
+            "description": "A simple library to work with JSON Web Token and JSON Web Signature",
+            "keywords": [
+                "JWS",
+                "jwt"
+            ],
+            "time": "2015-10-01 16:14:36"
         },
         {
             "name": "ldaptools/ldaptools",
@@ -105,44 +120,6 @@
                 "openldap"
             ],
             "time": "2015-06-17 00:40:00"
-        },
-        {
-            "name": "psr/log",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/log.git",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Psr\\Log\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for logging libraries",
-            "keywords": [
-                "log",
-                "psr",
-                "psr-3"
-            ],
-            "time": "2012-12-21 11:40:51"
         },
         {
             "name": "slim/slim",
@@ -238,59 +215,6 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2015-09-14 14:14:09"
-        },
-        {
-            "name": "tuupola/slim-jwt-auth",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tuupola/slim-jwt-auth.git",
-                "reference": "9923f764a5a447f6d8da8f9d822cd4e2500f99fe"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tuupola/slim-jwt-auth/zipball/9923f764a5a447f6d8da8f9d822cd4e2500f99fe",
-                "reference": "9923f764a5a447f6d8da8f9d822cd4e2500f99fe",
-                "shasum": ""
-            },
-            "require": {
-                "firebase/php-jwt": "^3.0",
-                "php": ">=5.3.0",
-                "psr/log": "~1.0",
-                "slim/slim": "~2.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.6",
-                "squizlabs/php_codesniffer": "~2.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Slim\\Middleware\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mika Tuupola",
-                    "email": "tuupola@appelsiini.net",
-                    "homepage": "http://www.appelsiini.net/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "JSON Web Token Authorization Middleware for Slim Framework",
-            "homepage": "https://github.com/tuupola/slim-jwt-auth",
-            "keywords": [
-                "auth",
-                "json",
-                "jwt",
-                "middleware",
-                "slim"
-            ],
-            "time": "2015-10-01 13:42:36"
         }
     ],
     "packages-dev": [],
