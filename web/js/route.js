@@ -3,26 +3,21 @@
  */
 'use strict';
 
-var zacaciaApp = angular.module('zacaciaApp', [
-    'ngRoute',
-    'zacaciaAppControllers'
-]);
-
 zacaciaApp.config([
     '$routeProvider',
     function ($routeProvider) {
         $routeProvider
             .when('/signup', {
                 templateUrl: '/templates/signup.html',
-                controller: 'signupController'
+                controller: 'SignupController'
             })
             .when('/platform', {
                 templateUrl: '/templates/platform.html',
-                controller: 'platformController'
+                controller: 'PlatformController'
             })
             .when('/platform/:cn/edit', {
                 templateUrl: '/templates/platform_edit.html',
-                controller: 'platformEditController'
+                controller: 'PlatformEditController'
             })
             .otherwise({
                 redirectTo: '/'

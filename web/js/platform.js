@@ -3,7 +3,7 @@
  */
 'use strict';
 
-var zacaciaAppControllers = angular.module('zacaciaAppControllers', []);
+//var zacaciaAppControllers = angular.module('zacaciaAppControllers', []);
 
 zacaciaAppControllers.controller('platformController', [
     '$scope',
