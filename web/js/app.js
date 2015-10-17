@@ -1,31 +1,30 @@
-(function() {
+(function () {
     'use strict';
 
-    angular.module('app', [
+    angular.module('zapp', [
         'ngStorage',
         'ngRoute',
-        'zacaciaAppControllers'
+        'angular-loading-bar'
     ])
         .constant('urls', {
-            BASE: '/',
-            BASE_API: '/api/'
+            BASE: '/api'
         })
-        .config(['$routeProvider', '$httpProvider', function ($routeProvider) {
-            $routeProvider
-                .when('/signup', {
-                    templateUrl: '/templates/signup.html',
-                    controller: 'signupController'
-                })
-                .when('/platform', {
-                    templateUrl: '/templates/platform.html',
-                    controller: 'platformController'
-                })
-                .when('/platform/:cn/edit', {
-                    templateUrl: '/templates/platform_edit.html',
-                    controller: 'platformEditController'
-                })
-                .otherwise({
-                    redirectTo: '/'
+        .config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
+            $routeProvider.
+                when('/', {
+                    templateUrl: 'partials/home.html',
+                    controller: 'ZacaciaController'
+                }).
+                when('/signin', {
+                    templateUrl: 'partials/signin.html',
+                    controller: 'ZacaciaController'
+                }).
+                when('/signup', {
+                    templateUrl: 'partials/signup.html',
+                    controller: 'ZacaciaController'
+                }).
+                otherwise({
+                    redirectTo: '/signin'
                 });
 
             $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
@@ -39,13 +38,21 @@
                     },
                     'responseError': function (response) {
                         if (response.status === 401 || response.status === 403) {
+                            delete $localStorage.token;
                             $location.path('/signin');
                         }
                         return $q.reject(response);
                     }
                 };
             }]);
-        }]
-    );
+        }
+        ]).run(function($rootScope, $location, $localStorage) {
+            $rootScope.$on( "$routeChangeStart", function(event, next) {
+                if ($localStorage.token == null) {
+                    if ( next.templateUrl === "partials/restricted.html") {
+                        $location.path("/signin");
+                    }
+                }
+            });
+        });
 })();
-

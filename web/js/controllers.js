@@ -1,53 +1,55 @@
 (function () {
     'use strict';
 
-    angular.module('app')
-        .controller('SignupController', ['$rootScope', '$scope', '$location', '$localStorage', 'Auth',
-    ]);
+    angular.module('zapp')
+        .controller('ZacaciaController', ['$rootScope', '$scope', '$location', '$localStorage', 'Auth',
+            function ($rootScope, $scope, $location, $localStorage, Auth) {
+                function successAuth(res) {
+                    $localStorage.token = res.token;
+                    window.location = "/";
+                }
 
-/*
-    zacaciaAppControllers.controller('PlatformController', [
-        '$scope',
-        '$http',
-        function ($scope, $http) {
-            var platforms = $scope.platforms = [];
-            $http.get('/api/platform').success(function (data) {
-                $scope.platforms = data;
-            });
-        }
-    ]);
+                $scope.signin = function () {
+                    var formData = {
+                        email: $scope.email,
+                        password: $scope.password
+                    };
 
-    zacaciaAppControllers.controller('PlatformEditController', [
-        '$scope',
-        '$routeParams',
-        '$http',
-        function ($scope, $routeParams, $http) {
-            $http.get('/api/platform/' + $routeParams.cn)
-                .success(function (data) {
-                    $scope.platform = data;
-                    $scope.cn = $routeParams.cn;
-                });
-
-            $scope.submit = function () {
-                var p = {
-                    params: {
-                        'cn': $scope.cn,
-                        'zacaciaStatus': $scope.zacaciaStatus
-                    }
+                    Auth.signin(formData, successAuth, function () {
+                        $rootScope.error = 'Invalid credentials.';
+                    })
                 };
 
-                var $promise = $http.put('/api/platform/' + $scope.cn, p)
-                    .success(function (data, status, headers, config) {
-                        if (data.status === 'OK') {
-                            $scope.cn = null;
-                            $scope.zacaciaStatus = 'enable';
-                            $scope.message = 'Update OK';
-                        }
+                $scope.signup = function () {
+                    var formData = {
+                        email: $scope.email,
+                        password: $scope.password
+                    };
+
+                    Auth.signup(formData, successAuth, function (res) {
+                        $rootScope.error = res.error || 'Failed to sign up.';
+                    })
+                };
+
+                $scope.logout = function () {
+                    Auth.logout(function () {
+                        window.location = "/"
                     });
+                };
+                $scope.token = $localStorage.token;
+                $scope.tokenClaims = Auth.getTokenClaims();
+            }])
 
-            };
-
-        }
-    ]);
-    */
+        .controller('RestrictedController', ['$rootScope', '$scope', 'Data', function ($rootScope, $scope, Data) {
+            Data.getRestrictedData(function (res) {
+                $scope.data = res.data;
+            }, function () {
+                $rootScope.error = 'Failed to fetch restricted content.';
+            });
+            Data.getApiData(function (res) {
+                $scope.api = res.data;
+            }, function () {
+                $rootScope.error = 'Failed to fetch restricted API content.';
+            });
+        }]);
 })();

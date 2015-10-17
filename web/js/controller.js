@@ -1,24 +1,19 @@
-/**
- * Created by hugues on 12/10/2015.
-     */
-'use strict';
+(function () {
+    'use strict';
 
-var zacaciaAppControllers = angular.module('zacaciaAppControllers', []);
-
-
-
-zacaciaAppControllers.controller('SignupController', [
-    '$scope',
-    '$http',
-    function ($scope, $http) {
-        var platforms = $scope.platforms = [];
-        $http.get('/api/platform').success(function (data) {
-            $scope.platforms = data;
-        });
-    }
+    angular.module('zapp')
+        .controller('SignupController', [
+            '$scope',
+            '$http',
+            function ($scope, $http) {
+                var platforms = $scope.platforms = [];
+                $http.get('/api/platform').success(function (data) {
+                    $scope.platforms = data;
+                });
+            }
 ]);
 
-
+/*
 zacaciaAppControllers.controller('platformController', [
     '$scope',
     '$http',
@@ -62,4 +57,5 @@ zacaciaAppControllers.controller('platformEditController', [
         };
 
     }
+    */
 ]);

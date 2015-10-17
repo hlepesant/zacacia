@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('app')
+    angular.module('zapp')
         .factory('Auth', ['$http', '$localStorage', 'urls', function ($http, $localStorage, urls) {
             function urlBase64Decode(str) {
                 var output = str.replace('-', '+').replace('_', '/');
@@ -51,7 +51,7 @@
         }
         ]);
 
-    angular.module('app')
+    angular.module('zapp')
         .factory('Data', ['$http', 'urls', function ($http, urls) {
 
             return {

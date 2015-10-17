@@ -7,17 +7,19 @@ zacaciaApp.config([
     function ($routeProvider) {
         $routeProvider
             .when('/signup', {
-                templateUrl: '/templates/signup.html',
+                templateUrl: '/partials/signup.html',
                 controller: 'SignupController'
             })
+            /*
             .when('/platform', {
-                templateUrl: '/templates/platform.html',
+                templateUrl: '/partials/platform.html',
                 controller: 'PlatformController'
             })
             .when('/platform/:cn/edit', {
-                templateUrl: '/templates/platform_edit.html',
+                templateUrl: '/partials/platform_edit.html',
                 controller: 'PlatformEditController'
             })
+            */
             .otherwise({
                 redirectTo: '/'
             });
