@@ -1,7 +1,6 @@
-/**
- * Created by hugues on 12/10/2015.
- */
-'use strict';
+(function() {
+
+    'use strict';
 
 zacaciaApp.config([
     '$routeProvider',
