@@ -9,19 +9,33 @@ use LdapTools\LdapManager;
 use LdapTools\Exception\LdapConnectionException;
 
 
-$app = new \Slim\Slim();
+$app = new \Slim\Slim(array(
+    'log.writer' => new \Slim\Logger\DateTimeFileWriter(array(
+        'path' => '/var/www/logs',
+        'name_format' => 'Y-m-d',
+        'message_format' => '%label% - %date% - %message%'
+    ))
+));
+
+$app->log->setEnabled(true);
+$app->log->setLevel(\Slim\Log::DEBUG);
 
 
 $app->get('/hello/:name', function ($name='hugues') {
     echo "Hello, $name";
 });
 
-$app->post('/signin', function () {
-
-    var_dump($_GET);
-    var_dump($_POST);
+$app->get('/signin/:login/:password', function ($login, $password) use($app) {
+    echo $login;
     exit;
+});
+    
 
+$app->post('/signin/', function () use ($app) {
+    
+    $login = $app->request->put('username');
+    $app->log->debug($login);
+        
     $token = (new Builder())->setIssuer('http://example.com') // Configures the issuer (iss claim)
         ->setAudience('http://example.org') // Configures the audience (aud claim)
         ->setId('4f1g23a12aa', true) // Configures the id (jti claim), replicating as a header item
