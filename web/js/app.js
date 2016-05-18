@@ -19,10 +19,12 @@
                     templateUrl: 'partials/signin.html',
                     controller: 'ZacaciaController'
                 }).
+/*            
                 when('/signup', {
                     templateUrl: 'partials/signup.html',
                     controller: 'ZacaciaController'
                 }).
+*/                
                 otherwise({
                     redirectTo: '/signin'
                 });

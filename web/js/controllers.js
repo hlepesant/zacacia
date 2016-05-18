@@ -19,7 +19,7 @@
                         $rootScope.error = 'Invalid credentials.';
                     })
                 };
-
+/*
                 $scope.signup = function () {
                     var formData = {
                         email: $scope.email,
@@ -30,7 +30,7 @@
                         $rootScope.error = res.error || 'Failed to sign up.';
                     })
                 };
-
+*/
                 $scope.logout = function () {
                     Auth.logout(function () {
                         window.location = "/"

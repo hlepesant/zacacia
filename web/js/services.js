@@ -33,9 +33,11 @@
             var tokenClaims = getClaimsFromToken();
 
             return {
+/*                
                 signup: function (data, success, error) {
                     $http.post(urls.BASE + '/signup', data).success(success).error(error)
                 },
+*/
                 signin: function (data, success, error) {
                     $http.post(urls.BASE + '/signin', data).success(success).error(error)
                 },
