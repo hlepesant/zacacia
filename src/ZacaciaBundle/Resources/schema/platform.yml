@@ -1,5 +1,5 @@
 objects:
-    zplatform:
+    platform:
         type: platform
         class:
             - top
@@ -20,3 +20,4 @@ objects:
             - 'entryUUID'
             - 'createTimestamp'
             - 'modifyTimestamp'
+        repository: '\ZacaciaBundle\Entity\PlaformRepository'

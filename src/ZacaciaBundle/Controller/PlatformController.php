@@ -14,7 +14,8 @@ use LdapTools\Configuration;
 use LdapTools\LdapManager;
 use LdapTools\Query\LdapQueryBuilder;
 
-use ZacaciaBundle\Entity\Platform;
+//use ZacaciaBundle\Entity\Platform;
+//use ZacaciaBundle\Entity\PlatformRepository;
 
 class PlatformController extends Controller
 {
@@ -25,9 +26,12 @@ class PlatformController extends Controller
     {
         $config = (new Configuration())->load(__DIR__."/../Resources/config/zacacia.yml");
         $ldap = new LdapManager($config);
-        $query = $ldap->buildLdapQuery();
+
+        $repository = $ldap->getRepository('platform');
+        $platforms = $repository->getAllPlatforms();
 
         /*
+        $query = $ldap->buildLdapQuery();
         $platforms = $query->select()
             ->setBaseDn('ou=Platforms,ou=Zacacia,ou=Applications,dc=zarafa,dc=com')
             ->from('Platform')
@@ -37,11 +41,16 @@ class PlatformController extends Controller
             ->getResult();
         */
 
+        /*
+        $query = $ldap->buildLdapQuery();
         $platforms = $query->fromPlatform()
             ->Where(['zacaciaStatus' => 'enable'])
             ->orderBy('cn')
             ->getLdapQuery()
             ->getResult();
+        */
+
+        print_r($platforms); exit;
 
         return $this->render('ZacaciaBundle:Platform:index.html.twig', array(
             'platforms' => $platforms,

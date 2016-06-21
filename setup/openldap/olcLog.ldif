@@ -1,0 +1,9 @@
+dn: cn=config
+changetype: modify
+replace: olcLogLevel
+olcLogLevel: stats stats2 
+
+dn: cn=config
+changetype: modify
+replace: olcLogFile
+olcLogFile: /var/log/openldap/ldap.log

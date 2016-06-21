@@ -2,8 +2,6 @@
 
 namespace ZacaciaBundle\Entity;
 
-//use ZacaciaBundle\Entity\LdapObject;
-
 use Symfony\Component\Validator\Constraints as Assert;
 
 class Platform extends LdapObject

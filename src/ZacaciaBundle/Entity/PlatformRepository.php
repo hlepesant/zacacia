@@ -2,6 +2,28 @@
 
 namespace ZacaciaBundle\Entity;
 
+use LdapTools\Object\LdapObjectRepository;
+
+
+class PlatformRepository extends LdapObjectRepository
+{
+
+    public function getAllPlatforms()
+    {
+        $query = $ldap->buildLdapQuery();
+
+        $platforms = $query->fromPlatform()
+            ->Where(['zacaciaStatus' => 'enable'])
+            ->orderBy('cn')
+            ->getLdapQuery()
+            ->getResult();
+
+        return $platforms;
+    }
+
+
+}
+
 /*
 use Zacacia\LdapUtils\Core\LdapPeer;
 use Zacacia\LdapUtils\Core\LdapCriteria;
