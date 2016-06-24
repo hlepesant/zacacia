@@ -29,3 +29,6 @@ olcDbIndex: dc eq
 -
 add: olcDbIndex
 olcDbIndex: zacaciaStatus eq
+-
+add: olcDbIndex
+olcDbIndex: entryUUID eq

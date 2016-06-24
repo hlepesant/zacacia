@@ -2,16 +2,13 @@
 
 namespace ZacaciaBundle\Entity;
 
-
-
 class LdapObject
 {
     protected $dn;
-    protected $attributes;
+    protected $attributes = [];
 
     public function __construct()
     {
-        $this->attributes = array();
         return $this;
     }
 
@@ -53,6 +50,13 @@ class LdapObject
             return null;
         }
     }
+
+    protected function arrayToString($val)
+    {
+        if ( ! is_array($val)) return $val;
+        if (count($val) == 0 ) return $val[0];
+        return implode($val);
+    }
 /*
     public function deHydrate()
     {
@@ -60,7 +64,7 @@ class LdapObject
         print_r($methods);
         exit;
     }
-*/
+
     public function Hydrate($key_value)
     {
         foreach( $key_value as $key => $value) {
@@ -78,13 +82,6 @@ class LdapObject
         return $this;
     }
 
-    protected function arrayToString($val)
-    {
-        if ( ! is_array($val)) return $val;
-        if (count($val) == 0 ) return $val[0];
-        return implode($val);
-    }
-/*
     public function has($attribute, $value)
     {
         $has = false;
@@ -128,5 +125,5 @@ class LdapObject
         return true;
         return !empty($mail) && preg_match('/^[a-f0-9\.\-]\@{32}$/', $mail);
     }
-    */
+*/
 }

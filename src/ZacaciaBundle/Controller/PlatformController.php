@@ -14,8 +14,8 @@ use LdapTools\Configuration;
 use LdapTools\LdapManager;
 use LdapTools\Query\LdapQueryBuilder;
 
-//use ZacaciaBundle\Entity\Platform;
-//use ZacaciaBundle\Entity\PlatformRepository;
+use ZacaciaBundle\Entity\Platform;
+use ZacaciaBundle\Entity\PlatformPeer;
 
 class PlatformController extends Controller
 {
@@ -24,33 +24,8 @@ class PlatformController extends Controller
      */
     public function indexAction()
     {
-        $config = (new Configuration())->load(__DIR__."/../Resources/config/zacacia.yml");
-        $ldap = new LdapManager($config);
-
-        $repository = $ldap->getRepository('platform');
+        $repository = (new PlatformPeer())->getLdapManager()->getRepository('platform');
         $platforms = $repository->getAllPlatforms();
-
-        /*
-        $query = $ldap->buildLdapQuery();
-        $platforms = $query->select()
-            ->setBaseDn('ou=Platforms,ou=Zacacia,ou=Applications,dc=zarafa,dc=com')
-            ->from('Platform')
-            ->Where(['zacaciaStatus' => 'enable'])
-            ->orderBy('cn')
-            ->getLdapQuery()
-            ->getResult();
-        */
-
-        /*
-        $query = $ldap->buildLdapQuery();
-        $platforms = $query->fromPlatform()
-            ->Where(['zacaciaStatus' => 'enable'])
-            ->orderBy('cn')
-            ->getLdapQuery()
-            ->getResult();
-        */
-
-        print_r($platforms); exit;
 
         return $this->render('ZacaciaBundle:Platform:index.html.twig', array(
             'platforms' => $platforms,
@@ -62,10 +37,6 @@ class PlatformController extends Controller
      */
     public function newAction(Request $request)
     {
-        $config = (new Configuration())->load(__DIR__."/../Resources/config/zacacia.yml");
-
-        $ldap = new LdapManager($config);
-
         $platform = new Platform();
         $platform->setZacaciastatus("enable");
 
@@ -85,21 +56,12 @@ class PlatformController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             try{
-                $base_dn = $config->getDomainConfiguration($config->getDefaultDomain())->getBaseDn();
 
-                $dn = sprintf("cn=%s,ou=Platforms,%s", $platform->getCn(),$base_dn);
+                $platformPeer = new PlatformPeer();
+                $platformPeer->createPlaform($platform);
 
-                $ldapObject = $ldap->createLdapObject();
-                $ldapObject->create('platform')
-                    ->setDn($dn)
-                    ->in($base_dn)
-                    ->with([
-                        'objectClass' => ['top', 'organizationalRole', 'zacaciaPlatform'],
-                        'cn' => $platform->getCn(),
-                        'zacaciaStatus' => $platform->getZacaciaStatus()
-                    ])
-                    ->execute();        
-
+                //(new PlatformPeer())->createPlaform($platform);
+  
                 return $this->redirectToRoute('_platform');                
             
             } catch (LdapConnectionException $e) {
@@ -119,6 +81,7 @@ class PlatformController extends Controller
      */
     public function editAction(Request $request)
     {
+        print "to do"; exit;
         $config = (new Configuration())->load(__DIR__."/../Resources/config/zacacia.yml");
         $ldap = new LdapManager($config);
 
@@ -159,17 +122,10 @@ class PlatformController extends Controller
      */
     public function deleteAction($uuid)
     {
-        $config = (new Configuration())->load(__DIR__."/../Resources/config/zacacia.yml");
-        $ldap = new LdapManager($config);
-        $query = $ldap->buildLdapQuery();
-
-        $platform = $query->fromPlatform()
-            ->Where(['entryUUID' => $uuid])
-            ->getLdapQuery()
-            ->getOneOrNullResult();
-
         try {
-            $ldap->delete($platform);
+            $ldapPeer = new PlatformPeer();
+            $ldapPeer->deletePlatform($uuid);    
+            
         } catch (LdapConnectionException $e) {
                 echo "Failed to delete platform!".PHP_EOL;
                 echo $e->getMessage().PHP_EOL;

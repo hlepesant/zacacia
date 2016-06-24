@@ -12,6 +12,7 @@ class Platform extends LdapObject
     protected $cn;
     
     protected $zacaciaStatus;
+    protected $objectclass = [ 'top', 'organizationalRole', 'zacaciaPlatform'];
 
     protected $companycount = 0;
     protected $servercount = 0;
@@ -19,12 +20,12 @@ class Platform extends LdapObject
     public function __construct()
     {
         parent::__construct();
+        return $this;
+    }
 
-        $this->setObjectclass( array(
-            'top',
-            'organizationalRole',
-            'zacaciaPlatform'
-        ));
+    function getObjectclass()
+    {
+        return $this->objectclass;
     }
 
     function setCn($cn)
@@ -37,17 +38,6 @@ class Platform extends LdapObject
     function getCn()
     {
         return $this->cn;
-    }
-
-    function setObjectclass($objectclass)
-    {
-        $this->attributes['objectclass'] = $objectclass;
-        return $this;
-    }
-
-    function getObjectclass()
-    {
-        return $this->objectclass;
     }
 
     function setZacaciastatus($status)
