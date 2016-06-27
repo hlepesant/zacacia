@@ -27,8 +27,8 @@
       <td>{{ platform.createTimestamp }}</td>
       <td>{{ platform.modifyTimestamp }}</td>
       <td>
-        <a href="{{ path('_server', {'uuid' : platform.entryUUID} ) }}">Server</a> | 
-        <a href="{{ path('_customer', {'uuid' : platform.entryUUID} ) }}">Customer</a>
+        <a href="{{ path('_server', {'platform' : platform.entryUUID} ) }}">Server</a> | 
+        <a href="{{ path('_customer', {'platform' : platform.entryUUID} ) }}">Customer</a>
       </td>
       <td>
         <a href="{{ path('_platform_edit', {'uuid' : platform.entryUUID} ) }}">Edit</a> | 

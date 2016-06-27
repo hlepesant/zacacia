@@ -4,8 +4,6 @@ namespace ZacaciaBundle\Entity;
 
 use LdapTools\Object\LdapObjectRepository;
 
-
-//class PlatformRepository
 class PlatformRepository extends LdapObjectRepository
 {
     public function getAllPlatforms()
@@ -25,5 +23,15 @@ class PlatformRepository extends LdapObjectRepository
             ->Where(['entryUUID' => $uuid])
             ->getLdapQuery()
             ->getOneOrNullResult();
+    }
+
+    public function getPlatformByName($name)
+    {
+        $platforms = $this->buildLdapQuery()
+            ->Where(['cn' => $name])        
+            ->getLdapQuery()
+            ->getResult();
+
+        return $platforms;
     }
 }

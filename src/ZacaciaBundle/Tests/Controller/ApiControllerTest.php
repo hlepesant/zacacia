@@ -4,13 +4,13 @@ namespace ZacaciaBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class CustomerControllerTest extends WebTestCase
+class ApiControllerTest extends WebTestCase
 {
-    public function testIndex()
+    public function testCheckplatform()
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/customer');
+        $crawler = $client->request('GET', '/check/platform');
     }
 
 }
