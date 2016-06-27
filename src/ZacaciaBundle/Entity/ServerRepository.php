@@ -5,13 +5,12 @@ namespace ZacaciaBundle\Entity;
 use LdapTools\Object\LdapObjectRepository;
 
 
-//class PlatformRepository
-class PlatformRepository extends LdapObjectRepository
+//class ServerRepository
+class ServerRepository extends LdapObjectRepository
 {
-    public function getAllPlatforms()
+    public function getAllServers()
     {
         $platforms = $this->buildLdapQuery()
-            //->Where(['zacaciaStatus' => 'enable'])
             ->orderBy('cn')
             ->getLdapQuery()
             ->getResult();
@@ -19,7 +18,7 @@ class PlatformRepository extends LdapObjectRepository
         return $platforms;
     }
 
-    public function getPlatformByUUID($uuid)
+    public function getServerByUUID($uuid)
     {
         return $this->buildLdapQuery()
             ->Where(['entryUUID' => $uuid])

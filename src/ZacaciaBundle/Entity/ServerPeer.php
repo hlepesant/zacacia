@@ -8,8 +8,8 @@ use LdapTools\Query\LdapQueryBuilder;
 //use LdapTools\Object\LdapObjectRepository;
 
 
-//class PlatformPeer
-class PlatformPeer
+//class ServerPeer
+class ServerPeer
 {
     protected $config;
     protected $ldapmanager;
@@ -39,18 +39,18 @@ class PlatformPeer
         return $domain_config->getBaseDn()          ;
     }
 
-    public function createPlatform($platform)
+    public function createServer($server)
     {
-        $dn = sprintf("cn=%s,ou=Platforms,%s", $platform->getCn(), self::getBaseDn());
+        $dn = sprintf("cn=%s,ou=Servers,%s", $server->getCn(), self::getBaseDn());
 
         $ldapObject = $this->ldapmanager->createLdapObject();
-        $ldapObject->create('platform')
+        $ldapObject->create('server')
             ->setDn($dn)
             ->in(self::getBaseDn())
             ->with([
-                'objectClass'   => $platform->getObjectclass(),
-                'cn'            => $platform->getCn(),
-                'zacaciaStatus' => $platform->getZacaciaStatus()
+                'objectClass'   => $server->getObjectclass(),
+                'cn'            => $server->getCn(),
+                'zacaciaStatus' => $server->getZacaciaStatus()
             ])
             ->execute();
 
@@ -59,9 +59,9 @@ class PlatformPeer
         return;
     }
 
-    public function updatePlaform($platform)
+    public function updatePlaform($server)
     {
-        $this->ldapmanager->persist($platform);
+        $this->ldapmanager->persist($server);
         return;
     }
 
@@ -105,53 +105,13 @@ class PlatformPeer
         return;
     }
 
-    public function deletePlatform($uuid, $recursive=false)
+    public function deleteServer($uuid)
     {
+        $server = $this->ldapmanager->getRepository('server')->getServerByUUID($uuid);
 
-        $platform = $this->ldapmanager->getRepository('platform')->getPlatformByUUID($uuid);
-
-        if ( $recursive )
-            self::deleteSubtree($platform->getDn());
-
-        if ( $platform )
-            $this->ldapmanager->delete($platform);
+        if ( $server )
+            $this->ldapmanager->delete($server);
 
         return;
-    }
-
-    private function deleteSubtree($dn)
-    {
-        $query = $this->ldapmanager->buildLdapQuery();
-        $results = $query->select('entryUUID')
-            ->where(['objectClass' => 'top'])
-            ->setBaseDn($dn)
-            ->setScopeSubTree()
-            ->getLdapQuery()
-            ->execute();
-
-        $arrayOfDn = array();
-        $i=0;
-
-        foreach( $results as $result  ) {
-            if ( $result->getDn() != $dn ) {
-                $arrayOfDn[$i]['uuid'] = $result->getEntryUUID();
-                $arrayOfDn[$i]['dn'] = $result->getDn();
-                $i++;
-            }
-        }
-
-        rsort($arrayOfDn);
-
-        foreach( $arrayOfDn as $item  ) {
-            $query = $this->ldapmanager->buildLdapQuery();
-            $object = $query->select('entryUUID')
-                ->Where(['entryUUID' => $item['uuid']])
-                ->setBaseDn($dn)
-                ->setScopeSubTree()
-                ->getLdapQuery()
-                ->getOneOrNullResult();
-            $this->ldapmanager->delete($object);
-        }
-        return true;
     }
 }

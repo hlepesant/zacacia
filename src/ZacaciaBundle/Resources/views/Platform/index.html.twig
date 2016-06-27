@@ -23,9 +23,13 @@
 {% for platform in platforms %}
     <tr>
       <td>{{ platform.cn }}</td>
-      <td>{{ platform.zacaciaStatus }}</td>
+      <td class="{{ platform.zacaciaStatus | lower}}">{{ platform.zacaciaStatus }}</td>
       <td>{{ platform.createTimestamp }}</td>
       <td>{{ platform.modifyTimestamp }}</td>
+      <td>
+        <a href="{{ path('_server', {'uuid' : platform.entryUUID} ) }}">Server</a> | 
+        <a href="{{ path('_customer', {'uuid' : platform.entryUUID} ) }}">Customer</a>
+      </td>
       <td>
         <a href="{{ path('_platform_edit', {'uuid' : platform.entryUUID} ) }}">Edit</a> | 
         <a href="{{ path('_platform_delete', {'uuid' : platform.entryUUID} ) }}">Delete</a>

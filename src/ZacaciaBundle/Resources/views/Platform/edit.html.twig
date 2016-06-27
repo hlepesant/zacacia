@@ -1,0 +1,32 @@
+{% extends "ZacaciaBundle::layout.html.twig" %}
+
+{% block title %}ZacaciaBundle:Platform:index{% endblock %}
+
+{% block content %}
+<h1 class="page-header">New Platform</h1>
+
+<div class="table-responsive">
+
+{{ form_start(form) }}
+	 {{ form_errors(form) }}
+
+	<fieldset class="form-group">
+		{{ form_label(form.cn) }}
+		{{ form_errors(form.cn) }}
+		{{ form_widget(form.cn, {'attr': {'class': 'form-control'}}) }}
+	</fieldset>
+
+	<fieldset class="form-group">
+		{{ form_label(form.zacaciastatus) }}
+		{{ form_errors(form.zacaciastatus) }}
+		{{ form_widget(form.zacaciastatus, {'attr': {'class': 'form-control'}}) }}
+	</fieldset>
+
+	<fieldset class="form-group">
+		{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
+	</fieldset>
+
+{{ form_end(form) }}
+
+</div>
+{% endblock %}

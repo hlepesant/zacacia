@@ -4,7 +4,7 @@ namespace ZacaciaBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Platform extends LdapObject
+class Server extends LdapObject
 {
     /**
     * @Assert\NotBlank()
@@ -13,10 +13,7 @@ class Platform extends LdapObject
     
     protected $zacaciaStatus;
     protected $entryUUID;
-    protected $objectclass = [ 'top', 'organizationalRole', 'zacaciaPlatform'];
-
-    protected $companycount = 0;
-    protected $servercount = 0;
+    protected $objectclass = [ 'top', 'organizationalRole', 'zacaciaServer', 'zarafa-server', 'ipHost'];
 
     public function __construct()
     {
@@ -32,7 +29,6 @@ class Platform extends LdapObject
     function setCn($cn)
     {
         $this->cn = parent::arrayToString($cn);
- //       $this->attributes['cn'] = $this->getCn();
         return $this;
     }
 
@@ -44,7 +40,6 @@ class Platform extends LdapObject
     function setZacaciastatus($status)
     {
         $this->zacaciaStatus = parent::arrayToString($status);
- //       $this->attributes['zacaciaStatus'] = $this->getZacaciastatus();
         return $this;
     }
 
@@ -61,29 +56,6 @@ class Platform extends LdapObject
     function setEntryUUID($uuid)
     {
         $this->entryUUID = parent::arrayToString($uuid);
-//        $this->attributes['entryUUID'] = $this->getEntryUUID();
         return $this;        
-    }
-
-    function setCompanyCount($nb)
-    {
-        $this->companyCount = $nb;
-        return $this;
-    }
-
-    function getCompanyCount()
-    {
-        return $this->companyCount;
-    }
-
-    function setServerCount($nb)
-    {
-        $this->serverCount = $nb;
-        return $this;
-    }
-
-    function getServerCount()
-    {
-        return $this->serverCount;
     }
 }
