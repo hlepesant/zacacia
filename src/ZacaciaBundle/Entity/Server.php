@@ -58,4 +58,59 @@ class Server extends LdapObject
         $this->entryUUID = parent::arrayToString($uuid);
         return $this;        
     }
+
+    function getIpHostNumber()
+    {
+        return $this->ipHostNumber;
+    }
+
+    function setIpHostNumber($ipHostNumber)
+    {
+        $this->ipHostNumber = parent::arrayToString($ipHostNumber);
+        return $this;        
+    }
+
+    function getZarafaAccount()
+    {
+        return $this->zarafaAccount;
+    }
+
+    function setZarafaAccount($zarafaAccount)
+    {
+        $this->zarafaAccount = parent::arrayToString($zarafaAccount);
+        return $this;        
+    }
+
+    function getZarafaFilePath()
+    {
+        return $this->zarafaFilePath;
+    }
+
+    function setZarafaFilePatht($zarafaFilePath)
+    {
+        $this->zarafaFilePath = parent::arrayToString($zarafaFilePath);
+        return $this;        
+    }
+
+    function getZarafaHttpPort()
+    {
+        return $this->zarafaHttpPort;
+    }
+
+    function setZarafaHttpPort($zarafaHttpPort)
+    {
+        $this->zarafaHttpPort = parent::arrayToString($zarafaHttpPort);
+        return $this;        
+    }
+
+    function getZarafaSslPort()
+    {
+        return $this->zarafaSslPort;
+    }
+
+    function setZarafaSslPort($zarafaSslPort)
+    {
+        $this->zarafaSslPort = parent::arrayToString($zarafaSslPort);
+        return $this;        
+    }
 }

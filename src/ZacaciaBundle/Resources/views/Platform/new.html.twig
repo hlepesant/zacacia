@@ -1,6 +1,6 @@
 {% extends "ZacaciaBundle::layout.html.twig" %}
 
-{% block title %}ZacaciaBundle:Platform:index{% endblock %}
+{% block title %}ZacaciaBundle:Platform:new{% endblock %}
 
 {% block content %}
 <h1 class="page-header">New Platform</h1>
@@ -29,4 +29,8 @@
 {{ form_end(form) }}
 
 </div>
+{% endblock %}
+
+{% block zavascripts %}
+<script src= "{{ asset('js/platform/new.js') }}"></script>
 {% endblock %}

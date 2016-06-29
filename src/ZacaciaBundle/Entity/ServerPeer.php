@@ -5,19 +5,19 @@ namespace ZacaciaBundle\Entity;
 use LdapTools\Configuration;
 use LdapTools\LdapManager;
 use LdapTools\Query\LdapQueryBuilder;
-//use LdapTools\Object\LdapObjectRepository;
 
 
-//class ServerPeer
 class ServerPeer
 {
     protected $config;
     protected $ldapmanager;
 
-    public function __construct()
+    public function __construct($platform_base_dn)
     {
         $this->config = (new Configuration())->load(__DIR__."/../Resources/config/zacacia.yml");
         $this->ldapmanager = new LdapManager($this->config);
+
+        $this->config->getDomainConfiguration($this->config->getDefaultDomain())->setBaseDn($platform_base_dn);
 
         return true;
     }

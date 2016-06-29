@@ -59,7 +59,7 @@ objects:
             - 'zacaciaStatus'
             - 'zarafaAccount'
             - 'zarafaFilePath'
-            -  'zarafaHttpPort'
+            - 'zarafaHttpPort'
             - 'zarafaSslPort'
             - 'ipHostNumber'
             - 'entryUUID'

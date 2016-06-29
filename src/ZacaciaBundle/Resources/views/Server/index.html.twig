@@ -1,7 +1,39 @@
-{% extends "::base.html.twig" %}
+{% extends "ZacaciaBundle::layout.html.twig" %}
 
 {% block title %}ZacaciaBundle:Server:index{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Server:index page</h1>
+{% block content %}
+<h1 class="page-header">Platform : {{ platform.cn }}</h1>
+<h2 class="page-header">Servers</h2>
+
+<div class="table-responsive">
+
+    <a href="{{ path('_server_new', {'platform' : platform.entryUUID} ) }}">New</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Created</th>
+      <th>Modified</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for server in servers %}
+    <tr>
+      <td>{{ server.cn }}</td>
+      <td class="{{ server.zacaciaStatus | lower}}">{{ server.zacaciaStatus }}</td>
+      <td>{{ server.createTimestamp }}</td>
+      <td>{{ server.modifyTimestamp }}</td>
+      <td>
+        <a href="{{ path('_server_edit', {'platform' : platform.entryUUID, 'uuid' : server.entryUUID} ) }}">Edit</a> | 
+        <a href="{{ path('_server_delete', {'platform' : platform.entryUUID, 'uuid' : server.entryUUID} ) }}">Delete</a>
+      </td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+</div>
 {% endblock %}

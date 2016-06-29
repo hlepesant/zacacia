@@ -75,11 +75,10 @@ class PlatformController extends Controller
         ));
     }
 
-
     /**
      * @Route("/platform/{uuid}/edit", name="_platform_edit", requirements={
-        "uuid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
-     })
+     *     "uuid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
+     * })
      */
     public function editAction(Request $request, $uuid)
     {
@@ -120,10 +119,10 @@ class PlatformController extends Controller
 
     /**
      * @Route("/platform/{uuid}/delete", name="_platform_delete", requirements={
-        "uuid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
-     })
+     *     "uuid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
+     * })
      */
-    public function deleteAction($uuid)
+    public function deleteAction(Request $request, $uuid)
     {
         try {
             $ldapPeer = new PlatformPeer();

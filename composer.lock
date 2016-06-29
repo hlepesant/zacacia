@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "611108208106dd6d7a1420596bcaf2ef",
-    "content-hash": "6d69f5f4bed39fa978dbbb4c6e17e917",
+    "hash": "e37f88c239a2e60d90e2ad291f8be8cb",
+    "content-hash": "1f1b86bbb68f585007002d1f545cf737",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -877,16 +877,16 @@
         },
         {
             "name": "ldaptools/ldaptools",
-            "version": "v0.20.0",
+            "version": "v0.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ldaptools/ldaptools.git",
-                "reference": "748ef32f54d6f31239c33dd1854d667cc22800e6"
+                "reference": "16825018a4c641bf6f3ed938d61a64ed3d2c9c7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ldaptools/ldaptools/zipball/748ef32f54d6f31239c33dd1854d667cc22800e6",
-                "reference": "748ef32f54d6f31239c33dd1854d667cc22800e6",
+                "url": "https://api.github.com/repos/ldaptools/ldaptools/zipball/16825018a4c641bf6f3ed938d61a64ed3d2c9c7b",
+                "reference": "16825018a4c641bf6f3ed938d61a64ed3d2c9c7b",
                 "shasum": ""
             },
             "require": {
@@ -897,7 +897,7 @@
             },
             "require-dev": {
                 "doctrine/cache": "~1.0",
-                "fabpot/php-cs-fixer": "~1.0",
+                "friendsofphp/php-cs-fixer": "~1.0",
                 "phpspec/phpspec": "~2.5",
                 "tedivm/stash": ">=0.14.1"
             },
@@ -930,7 +930,7 @@
                 "ldap",
                 "openldap"
             ],
-            "time": "2016-05-11 01:15:21"
+            "time": "2016-06-27 12:27:24"
         },
         {
             "name": "monolog/monolog",
