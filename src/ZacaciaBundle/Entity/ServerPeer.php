@@ -50,7 +50,12 @@ class ServerPeer
             ->with([
                 'objectClass'   => $server->getObjectclass(),
                 'cn'            => $server->getCn(),
-                'zacaciaStatus' => $server->getZacaciaStatus()
+                'zacaciaStatus' => $server->getZacaciaStatus(),
+                'ipHostNumber'  => $server->getipHostNumber(),
+                'zarafaAccount' => $server->getZarafaAccount(),
+                'zarafaFilePath'=> $server->getZarafaFilePath(),
+                'zarafaHttpPort'=> $server->getZarafaHttpPort(),
+                'zarafaSslPort' => $server->getZarafaSslPort(),
             ])
             ->execute();
 

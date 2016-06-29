@@ -64,6 +64,16 @@ class ServerController extends Controller
                     'Enable' => 'enable',
                     'Disable' => 'disable',
             )))
+            ->add('iphostnumber', TextType::class, array('label' => 'IP address'))
+            ->add('zarafaaccount', ChoiceType::class, array(
+                'label' => 'Account', 
+                'choices' => array(
+                    'Yes' => 1,
+                    'No' => 0,
+            )))
+            ->add('zarafafilepath', TextType::class, array('label' => 'File Path', 'data' => '/var/run/zarafa'))
+            ->add('zarafahttpport', TextType::class, array('label' => 'Http Port', 'data' => 636))
+            ->add('zarafasslport', TextType::class, array('label' => 'Https Port', 'data' => 637))
             ->add('save', SubmitType::class, array('label' => 'Create Server'))
             ->getForm();
 
@@ -72,10 +82,10 @@ class ServerController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             try{
-                $serverPeer = new ServerPeer();
+                $serverPeer =  new ServerPeer($platform->getDn());
                 $serverPeer->createServer($server);
 
-                return $this->redirectToRoute('_server');                
+                return $this->redirectToRoute('_server', array('platform' => $platform->getEntryUUID()));                
             
             } catch (LdapConnectionException $e) {
                 echo "Failed to add server!".PHP_EOL;
@@ -83,7 +93,8 @@ class ServerController extends Controller
             }
         }
 
-        return $this->render('ZacaciaBundle:Platform:new.html.twig', array(
+        return $this->render('ZacaciaBundle:Server:new.html.twig', array(
+            'platform' => $platform,
             'form' => $form->createView(),
         ));
     }

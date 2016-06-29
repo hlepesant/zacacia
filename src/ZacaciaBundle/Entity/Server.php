@@ -14,6 +14,11 @@ class Server extends LdapObject
     protected $zacaciaStatus;
     protected $entryUUID;
     protected $objectclass = [ 'top', 'organizationalRole', 'zacaciaServer', 'zarafa-server', 'ipHost'];
+    protected $ipHostNumber;
+    protected $zarafaAccount;
+    protected $zarafaFilePath;
+    protected $zarafaHttpPort;
+    protected $zarafaSslPort;
 
     public function __construct()
     {
@@ -86,7 +91,7 @@ class Server extends LdapObject
         return $this->zarafaFilePath;
     }
 
-    function setZarafaFilePatht($zarafaFilePath)
+    function setZarafaFilePath($zarafaFilePath)
     {
         $this->zarafaFilePath = parent::arrayToString($zarafaFilePath);
         return $this;        
