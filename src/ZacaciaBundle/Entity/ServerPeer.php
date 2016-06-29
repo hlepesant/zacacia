@@ -42,7 +42,12 @@ class ServerPeer
     public function createServer($server)
     {
         $dn = sprintf("cn=%s,ou=Servers,%s", $server->getCn(), self::getBaseDn());
-
+/*
+        $server->setDn($dn);
+        var_dump($server);
+        $this->ldapmanager->persist($server);
+        return;
+*/
         $ldapObject = $this->ldapmanager->createLdapObject();
         $ldapObject->create('server')
             ->setDn($dn)
@@ -58,55 +63,12 @@ class ServerPeer
                 'zarafaSslPort' => $server->getZarafaSslPort(),
             ])
             ->execute();
-
-        self::createSubTree($dn);
-
         return;
     }
 
-    public function updatePlaform($server)
+    public function updateServer($server)
     {
         $this->ldapmanager->persist($server);
-        return;
-    }
-
-    private function createSubTree($dn)
-    {
-        $ldapObject = $this->ldapmanager->createLdapObject();
-
-        $ldapObject->createOU()
-            ->in($dn)
-            ->with(['name' => 'Organizations'])
-            ->execute();
-
-        $ldapObject->createOU()
-            ->in($dn)
-            ->with(['name' => 'Servers'])
-            ->execute();
-
-        $ldapObject->createOU()
-            ->in($dn)
-            ->with(['name' => 'SecurityGroups'])
-            ->execute();
-
-        $ldapObject->create('securitygroup')
-            ->setDn(sprintf("cn=OrganizationAdmin,ou=SecurityGroups,%s", $dn))
-            ->in(sprintf("ou=SecurityGroups,%s", $dn))
-            ->with([
-                'objectClass'   => ['top', 'zacaciaSecurityGroup'],
-                'cn'            => 'OrganizationAdmin'
-            ])
-            ->execute();
-
-        $ldapObject->create('securitygroup')
-            ->setDn(sprintf("cn=ServerAdmin,ou=SecurityGroups,%s", $dn))
-            ->in(sprintf("ou=SecurityGroups,%s", $dn))
-            ->with([
-                'objectClass'   => ['top', 'zacaciaSecurityGroup'],
-                'cn'            => 'ServerAdmin'
-            ])
-            ->execute();
-
         return;
     }
 

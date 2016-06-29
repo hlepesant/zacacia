@@ -4,7 +4,7 @@ namespace ZacaciaBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Platform extends LdapObject
+class Platform extends ZacaciaObject
 {
     /**
     * @Assert\NotBlank()
@@ -18,11 +18,11 @@ class Platform extends LdapObject
     protected $companycount = 0;
     protected $servercount = 0;
 
-    public function __construct()
-    {
-        parent::__construct();
-        return $this;
-    }
+//    public function __construct()
+//    {
+//        parent::__construct();
+//        return $this;
+//    }
 
     function getObjectclass()
     {

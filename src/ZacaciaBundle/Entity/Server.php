@@ -4,27 +4,42 @@ namespace ZacaciaBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Server extends LdapObject
+class Server extends ZacaciaObject
 {
     /**
     * @Assert\NotBlank()
     */
     protected $cn;
     
+    /**
+    * @Assert\Ip
+    */
+    protected $ipHostNumber;
+
     protected $zacaciaStatus;
     protected $entryUUID;
     protected $objectclass = [ 'top', 'organizationalRole', 'zacaciaServer', 'zarafa-server', 'ipHost'];
-    protected $ipHostNumber;
     protected $zarafaAccount;
+    /**
+    * @Assert\NotBlank()
+    */
     protected $zarafaFilePath;
+
+    /**
+    * @Assert\NotBlank()
+    */
     protected $zarafaHttpPort;
+
+    /**
+    * @Assert\NotBlank()
+    */
     protected $zarafaSslPort;
 
-    public function __construct()
-    {
-        parent::__construct();
-        return $this;
-    }
+//    public function __construct()
+//    {
+//        parent::__construct();
+//        return $this;
+//    }
 
     function getObjectclass()
     {
