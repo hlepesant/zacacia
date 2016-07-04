@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -72,8 +73,8 @@ class ServerController extends Controller
                     'No' => 0,
             )))
             ->add('zarafafilepath', TextType::class, array('label' => 'File Path', 'data' => '/var/run/zarafa'))
-            ->add('zarafahttpport', TextType::class, array('label' => 'Http Port', 'data' => 636))
-            ->add('zarafasslport', TextType::class, array('label' => 'Https Port', 'data' => 637))
+            ->add('zarafahttpport', IntegerType::class, array('label' => 'Http Port', 'data' => 636))
+            ->add('zarafasslport', IntegerType::class, array('label' => 'Https Port', 'data' => 637))
             ->add('save', SubmitType::class, array('label' => 'Create Server'))
             ->getForm();
 
@@ -107,6 +108,63 @@ class ServerController extends Controller
      */
     public function editAction(Request $request, $platform, $uuid)
     {
+        $platform_repository = (new PlatformPeer())->getLdapManager()->getRepository('platform');
+        $platform = $platform_repository->getPlatformByUUID($platform);
+
+        $serverPeer = new ServerPeer($platform->getDn());
+        $server_repository = $serverPeer->getLdapManager()->getRepository('server');
+        $server = $server_repository->getServerByUUID($uuid);
+
+#        var_dump($server->getZacaciaStatus()); exit;
+
+        $form = $this->createFormBuilder($server)
+            ->setAction($this->generateUrl('_server_edit', array('platform' => $platform->getEntryUUID(), 'uuid' => $uuid)))
+            ->add('cn', TextType::class, array('label' => 'Name', 'attr' => array('readonly' => 'readonly')))
+            ->add('zacaciastatus', ChoiceType::class, array(
+                'label' => 'Status',
+                'choices' => array(
+                    'Enable' => 'enable',
+                    'Disable' => 'disable',
+            )))
+            ->add('iphostnumber', TextType::class, array('label' => 'IP address'))
+            ->add('zarafaaccount', ChoiceType::class, array(
+                'label' => 'Account', 
+                'choices' => array(
+                    'Yes' => 1,
+                    'No' => 0,
+            )))
+            ->add('zarafafilepath', TextType::class, array('label' => 'File Path', 'data' => '/var/run/zarafa'))
+            ->add('zarafahttpport', IntegerType::class, array('label' => 'Http Port', 'data' => 636))
+            ->add('zarafasslport', IntegerType::class, array('label' => 'Https Port', 'data' => 637))
+            ->add('entryUUID', HiddenType::class)
+            ->add('save', SubmitType::class, array('label' => 'Update Server'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+#            $server->ipHostNumber   = $form['iphostnumber']->getData();
+#            $server->zarafaAcount   = $form['zarafaaccount']->getData();
+#            $server->zarafaFilePath = $form['zarafafilepath']->getData();
+#            $server->zarafaHttpPort = $form['zarafahttpport']->getData();
+#            $server->zarafaSslPort  = $form['zarafasslport']->getData();
+
+            try{
+                $serverPeer->updateServer($server);
+
+                return $this->redirectToRoute('_server', array('platform' => $platform->getEntryUUID()));                
+            
+            } catch (LdapConnectionException $e) {
+                echo "Failed to update server!".PHP_EOL;
+                echo $e->getMessage().PHP_EOL;
+            }
+        }
+
+        return $this->render('ZacaciaBundle:Server:edit.html.twig', array(
+            'platform' => $platform,
+            'form' => $form->createView(),
+        ));
     }
 
     /**
@@ -117,16 +175,19 @@ class ServerController extends Controller
      */
     public function deleteAction(Request $request, $platform, $uuid)
     {
+        $platform_repository = (new PlatformPeer())->getLdapManager()->getRepository('platform');
+        $platform = $platform_repository->getPlatformByUUID($platform);
+
         try {
-            $ldapPeer = new ServerPeer();
-            $ldapPeer->deleteServer($uuid, true);    
+            $serverPeer =  new ServerPeer($platform->getDn());
+            $serverPeer->deleteServer($uuid);    
             
         } catch (LdapConnectionException $e) {
                 echo "Failed to delete server!".PHP_EOL;
                 echo $e->getMessage().PHP_EOL;
         }
 
-        return $this->redirectToRoute('_server');
+        return $this->redirectToRoute('_server', array('platform' => $platform->getEntryUUID()));                
     }
 
 }

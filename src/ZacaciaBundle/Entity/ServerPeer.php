@@ -6,7 +6,6 @@ use LdapTools\Configuration;
 use LdapTools\LdapManager;
 use LdapTools\Query\LdapQueryBuilder;
 
-
 class ServerPeer
 {
     protected $config;

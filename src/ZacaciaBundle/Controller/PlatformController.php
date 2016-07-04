@@ -82,12 +82,14 @@ class PlatformController extends Controller
      */
     public function editAction(Request $request, $uuid)
     {
-        $ldapPeer = new PlatformPeer();
-        $platform = $ldapPeer->getLdapManager()->getRepository('platform')->getPlatformByUUID($uuid);
+        $platformPeer = new PlatformPeer();
+        $platform = $platformPeer->getLdapManager()->getRepository('platform')->getPlatformByUUID($uuid);
 
 //        $platform = new Platform();
 //        $platform->setCn($platform->getCn());
 //        $platform->setZacaciastatus($platform->getZacaciaStatus());
+
+#        var_dump($platform->getZacaciaStatus()); exit;
 
         $form = $this->createFormBuilder($platform)
             ->setAction($this->generateUrl('_platform_edit', array('uuid' => $uuid)))
@@ -106,7 +108,6 @@ class PlatformController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $platformPeer = new PlatformPeer();
             $platformPeer->updatePlaform($platform);
 
             return $this->redirectToRoute('_platform');

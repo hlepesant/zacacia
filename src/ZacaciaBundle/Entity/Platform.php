@@ -18,12 +18,6 @@ class Platform extends ZacaciaObject
     protected $companycount = 0;
     protected $servercount = 0;
 
-//    public function __construct()
-//    {
-//        parent::__construct();
-//        return $this;
-//    }
-
     function getObjectclass()
     {
         return $this->objectclass;
@@ -32,7 +26,6 @@ class Platform extends ZacaciaObject
     function setCn($cn)
     {
         $this->cn = parent::arrayToString($cn);
- //       $this->attributes['cn'] = $this->getCn();
         return $this;
     }
 
@@ -44,7 +37,6 @@ class Platform extends ZacaciaObject
     function setZacaciastatus($status)
     {
         $this->zacaciaStatus = parent::arrayToString($status);
- //       $this->attributes['zacaciaStatus'] = $this->getZacaciastatus();
         return $this;
     }
 
@@ -61,7 +53,6 @@ class Platform extends ZacaciaObject
     function setEntryUUID($uuid)
     {
         $this->entryUUID = parent::arrayToString($uuid);
-//        $this->attributes['entryUUID'] = $this->getEntryUUID();
         return $this;        
     }
 

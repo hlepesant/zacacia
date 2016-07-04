@@ -5,10 +5,7 @@ namespace ZacaciaBundle\Entity;
 use LdapTools\Configuration;
 use LdapTools\LdapManager;
 use LdapTools\Query\LdapQueryBuilder;
-//use LdapTools\Object\LdapObjectRepository;
 
-
-//class PlatformPeer
 class PlatformPeer
 {
     protected $config;

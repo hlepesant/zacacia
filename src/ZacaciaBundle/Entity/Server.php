@@ -26,20 +26,18 @@ class Server extends ZacaciaObject
     protected $zarafaFilePath;
 
     /**
-    * @Assert\NotBlank()
+    * @Assert\Type(
+    *      type="integer"
+    * )
     */
     protected $zarafaHttpPort;
 
     /**
-    * @Assert\NotBlank()
+    * @Assert\Type(
+    *      type="integer"
+    * )
     */
     protected $zarafaSslPort;
-
-//    public function __construct()
-//    {
-//        parent::__construct();
-//        return $this;
-//    }
 
     function getObjectclass()
     {
@@ -57,13 +55,13 @@ class Server extends ZacaciaObject
         return $this->cn;
     }
 
-    function setZacaciastatus($status)
+    function setZacaciaStatus($status)
     {
         $this->zacaciaStatus = parent::arrayToString($status);
         return $this;
     }
 
-    function getZacaciastatus()
+    function getZacaciaStatus()
     {
         return $this->zacaciaStatus;
     }
@@ -101,18 +99,18 @@ class Server extends ZacaciaObject
         return $this;        
     }
 
-    function getZarafaFilePath()
+    public function getZarafaFilePath()
     {
         return $this->zarafaFilePath;
     }
 
-    function setZarafaFilePath($zarafaFilePath)
+    public function setZarafaFilePath($zarafaFilePath)
     {
         $this->zarafaFilePath = parent::arrayToString($zarafaFilePath);
         return $this;        
     }
 
-    function getZarafaHttpPort()
+    public function getZarafaHttpPort()
     {
         return $this->zarafaHttpPort;
     }
