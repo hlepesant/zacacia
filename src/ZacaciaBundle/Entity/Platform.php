@@ -17,7 +17,7 @@ class Platform extends ZacaciaObject
 
     protected $companycount = 0;
     protected $servercount = 0;
-
+/*
     function getObjectclass()
     {
         return $this->objectclass;
@@ -77,4 +77,5 @@ class Platform extends ZacaciaObject
     {
         return $this->serverCount;
     }
+*/
 }

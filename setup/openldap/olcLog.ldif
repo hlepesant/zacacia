@@ -1,7 +1,7 @@
 dn: cn=config
 changetype: modify
 replace: olcLogLevel
-olcLogLevel: stats stats2 
+olcLogLevel: stats stats2 BER
 
 dn: cn=config
 changetype: modify

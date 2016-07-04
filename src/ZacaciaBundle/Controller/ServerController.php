@@ -69,8 +69,8 @@ class ServerController extends Controller
             ->add('zarafaaccount', ChoiceType::class, array(
                 'label' => 'Account', 
                 'choices' => array(
-                    'Yes' => 1,
-                    'No' => 0,
+                    'Yes' => "1",
+                    'No' => "0",
             )))
             ->add('zarafafilepath', TextType::class, array('label' => 'File Path', 'data' => '/var/run/zarafa'))
             ->add('zarafahttpport', IntegerType::class, array('label' => 'Http Port', 'data' => 636))
@@ -130,12 +130,14 @@ class ServerController extends Controller
             ->add('zarafaaccount', ChoiceType::class, array(
                 'label' => 'Account', 
                 'choices' => array(
-                    'Yes' => 1,
-                    'No' => 0,
+                    'Yes' => "1",
+                    'No' => "0",
             )))
-            ->add('zarafafilepath', TextType::class, array('label' => 'File Path', 'data' => '/var/run/zarafa'))
-            ->add('zarafahttpport', IntegerType::class, array('label' => 'Http Port', 'data' => 636))
-            ->add('zarafasslport', IntegerType::class, array('label' => 'Https Port', 'data' => 637))
+            ->add('zarafafilepath', TextType::class, array('label' => 'File Path'))
+#            ->add('zarafahttpport', IntegerType::class, array('label' => 'Http Port'))
+            ->add('zarafahttpport', TextType::class, array('label' => 'Http Port'))
+#            ->add('zarafasslport', IntegerType::class, array('label' => 'Https Port'))
+            ->add('zarafasslport', TextType::class, array('label' => 'Https Port'))
             ->add('entryUUID', HiddenType::class)
             ->add('save', SubmitType::class, array('label' => 'Update Server'))
             ->getForm();
@@ -144,11 +146,8 @@ class ServerController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-#            $server->ipHostNumber   = $form['iphostnumber']->getData();
-#            $server->zarafaAcount   = $form['zarafaaccount']->getData();
-#            $server->zarafaFilePath = $form['zarafafilepath']->getData();
-#            $server->zarafaHttpPort = $form['zarafahttpport']->getData();
-#            $server->zarafaSslPort  = $form['zarafasslport']->getData();
+            #$server->setZarafaHttpPort($form['zarafahttpport']->getData());
+            #$server->zarafaHttpPort = (string)$form['zarafahttpport']->getData();
 
             try{
                 $serverPeer->updateServer($server);
