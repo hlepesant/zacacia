@@ -2,8 +2,13 @@
 
 {% block title %}ZacaciaBundle:Platform:index{% endblock %}
 
+{% block navmenu %}
+<li><a href="{{ path('_dashboard') }}">Dashboard</a></li>
+<li class="active"><a href="#">Platform &rarr; Edit</a></li>
+{% endblock %}
+
 {% block content %}
-<h1 class="page-header">Edit Platform</h1>
+<h2 class="page-header">Platform :: {{ platform.cn }} &rarr; Edit </h2>
 
 <div class="table-responsive">
 
@@ -23,10 +28,18 @@
 	</fieldset>
 
 	<fieldset class="form-group">
+        {{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary' }}) }}
 		{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
 	</fieldset>
 
 {{ form_end(form) }}
 
 </div>
+{% endblock %}
+
+{% block zavascripts %}
+<script src= "{{ asset('js/platform/edit.js') }}"></script>
+<script>
+var cancel_redirect = "{{ path('_platform') }}"
+</script>
 {% endblock %}

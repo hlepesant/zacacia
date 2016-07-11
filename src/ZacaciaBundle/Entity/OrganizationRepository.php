@@ -5,20 +5,20 @@ namespace ZacaciaBundle\Entity;
 use LdapTools\Object\LdapObjectRepository;
 
 
-//class ServerRepository
-class ServerRepository extends LdapObjectRepository
+//class OrganizationRepository
+class OrganizationRepository extends LdapObjectRepository
 {
-    public function getAllServers()
+    public function getAllOrganizations()
     {
-        $platforms = $this->buildLdapQuery()
-            ->orderBy('cn')
+        $organizations = $this->buildLdapQuery()
+            ->orderBy('ou')
             ->getLdapQuery()
             ->getResult();
 
-        return $platforms;
+        return $organizations;
     }
 
-    public function getServerByUUID($uuid)
+    public function getOrganizationByUUID($uuid)
     {
         return $this->buildLdapQuery()
             ->Where(['entryUUID' => $uuid])
@@ -26,23 +26,23 @@ class ServerRepository extends LdapObjectRepository
             ->getOneOrNullResult();
     }
 
-    public function getServerByName($name)
+    public function getOrganizationByName($name)
     {
-        $servers = $this->buildLdapQuery()
+        $organizations = $this->buildLdapQuery()
             ->Where(['cn' => $name])        
             ->getLdapQuery()
             ->getResult();
 
-        return $servers;
+        return $organizations;
     }
 
-    public function getServerByIpAddress($ip)
+    public function getOrganizationByIpAddress($ip)
     {
-        $servers = $this->buildLdapQuery()
+        $organizations = $this->buildLdapQuery()
             ->Where(['ipHostNumber' => $ip])        
             ->getLdapQuery()
             ->getResult();
 
-        return $servers;
+        return $organizations;
     }
 }

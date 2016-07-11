@@ -2,8 +2,13 @@
 
 {% block title %}ZacaciaBundle:Platform:new{% endblock %}
 
+{% block navmenu %}
+<li><a href="{{ path('_dashboard') }}">Dashboard</a></li>
+<li class="active"><a href="#">Platform &rarr; New</a></li>
+{% endblock %}
+
 {% block content %}
-<h1 class="page-header">New Platform</h1>
+<h2 class="page-header">Platform &rarr; New</h2>
 
 <div class="table-responsive">
 
@@ -23,6 +28,7 @@
 	</fieldset>
 
 	<fieldset class="form-group">
+        {{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary' }}) }}
 		{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
 	</fieldset>
 
@@ -33,4 +39,7 @@
 
 {% block zavascripts %}
 <script src= "{{ asset('js/platform/new.js') }}"></script>
+<script>
+var cancel_redirect = "{{ path('_platform') }}"
+</script>
 {% endblock %}

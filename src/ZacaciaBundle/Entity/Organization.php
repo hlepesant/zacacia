@@ -4,19 +4,16 @@ namespace ZacaciaBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Platform extends ZacaciaObject
+class Organization extends ZacaciaObject
 {
     /**
     * @Assert\NotBlank()
     */
     protected $cn;
-    
     protected $zacaciaStatus;
     protected $entryUUID;
-    protected $objectclass = [ 'top', 'organizationalRole', 'zacaciaPlatform'];
-
-    protected $companycount = 0;
-    protected $servercount = 0;
+    protected $objectclass = [ 'top', 'organizationalRole', 'zacaciaCompany', 'zarafa-company'];
+    protected $zarafaAccount;
 
     function getObjectclass()
     {
@@ -34,13 +31,13 @@ class Platform extends ZacaciaObject
         return $this->cn;
     }
 
-    function setZacaciastatus($status)
+    function setZacaciaStatus($status)
     {
         $this->zacaciaStatus = parent::arrayToString($status);
         return $this;
     }
 
-    function getZacaciastatus()
+    function getZacaciaStatus()
     {
         return $this->zacaciaStatus;
     }
@@ -56,25 +53,25 @@ class Platform extends ZacaciaObject
         return $this;        
     }
 
-    function setCompanyCount($nb)
+    function getZarafaAccount()
     {
-        $this->companyCount = $nb;
-        return $this;
+        return $this->zarafaAccount;
     }
 
-    function getCompanyCount()
+    function setZarafaAccount($zarafaAccount)
     {
-        return $this->companyCount;
+        $this->zarafaAccount = parent::arrayToString($zarafaAccount);
+        return $this;        
     }
 
-    function setServerCount($nb)
+    function getZarafaHidden()
     {
-        $this->serverCount = $nb;
-        return $this;
+        return $this->zarafaHidden;
     }
 
-    function getServerCount()
+    function setZarafaHidden($zarafaHidden)
     {
-        return $this->serverCount;
+        $this->zarafaHidden = parent::arrayToString($zarafaHidden);
+        return $this;        
     }
 }

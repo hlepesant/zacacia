@@ -1,0 +1,44 @@
+{% extends "ZacaciaBundle::layout.html.twig" %}
+
+{% block title %}ZacaciaBundle:Organization:index{% endblock %}
+
+{% block navmenu %}
+<li><a href="{{ path('_dashboard') }}">Dashboard</a></li>
+<li><a href="{{ path('_platform') }}">Platform : {{ platform.cn }}</a></li>
+<li class="active"><a href="#">Organizations</a></li>
+{% endblock %}
+
+{% block content %}
+<h2 class="page-header">Platform : {{ platform.cn }} &rarr; Organizations</h2>
+
+<div class="table-responsive">
+
+    <a href="{{ path('_organization_new', {'platform' : platform.entryUUID} ) }}">New</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Created</th>
+      <th>Modified</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for organization in organizations %}
+    <tr>
+      <td>{{ organization.ou }}</td>
+      <td class="{{ organization.zacaciaStatus | lower}}">{{ organization.zacaciaStatus }}</td>
+      <td>{{ organization.createTimestamp }}</td>
+      <td>{{ organization.modifyTimestamp }}</td>
+      <td>
+        <a href="{{ path('_organization_edit', {'platform' : platform.entryUUID, 'uuid' : organization.entryUUID} ) }}">Edit</a> | 
+        <a id="delete_organization" href="{{ path('_organization_delete', {'platform' : platform.entryUUID, 'uuid' : organization.entryUUID} ) }}">Delete</a>
+      </td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

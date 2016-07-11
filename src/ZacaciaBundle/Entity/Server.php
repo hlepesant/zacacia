@@ -38,7 +38,7 @@ class Server extends ZacaciaObject
     * )
     */
     protected $zarafaSslPort;
-/*
+
     function getObjectclass()
     {
         return $this->objectclass;
@@ -131,5 +131,4 @@ class Server extends ZacaciaObject
         $this->zarafaSslPort = parent::arrayToString($zarafaSslPort);
         return $this;        
     }
-*/
 }

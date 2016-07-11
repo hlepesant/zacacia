@@ -2,9 +2,14 @@
 
 {% block title %}ZacaciaBundle:Server:index{% endblock %}
 
+{% block navmenu %}
+<li><a href="{{ path('_dashboard') }}">Dashboard</a></li>
+<li><a href="{{ path('_platform') }}">Platform : {{ platform.cn }}</a></li>
+<li class="active"><a href="#">Servers</a></li>
+{% endblock %}
+
 {% block content %}
-<h1 class="page-header">Platform : {{ platform.cn }}</h1>
-<h2 class="page-header">Servers</h2>
+<h2 class="page-header">Platform : {{ platform.cn }} &rarr; Servers</h2>
 
 <div class="table-responsive">
 
@@ -29,7 +34,7 @@
       <td>{{ server.modifyTimestamp }}</td>
       <td>
         <a href="{{ path('_server_edit', {'platform' : platform.entryUUID, 'uuid' : server.entryUUID} ) }}">Edit</a> | 
-        <a href="{{ path('_server_delete', {'platform' : platform.entryUUID, 'uuid' : server.entryUUID} ) }}">Delete</a>
+        <a id="delete_server" href="{{ path('_server_delete', {'platform' : platform.entryUUID, 'uuid' : server.entryUUID} ) }}">Delete</a>
       </td>
     </tr>
 {% endfor %}

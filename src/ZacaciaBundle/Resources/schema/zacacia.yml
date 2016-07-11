@@ -66,3 +66,31 @@ objects:
             - 'createTimestamp'
             - 'modifyTimestamp'
         repository: '\ZacaciaBundle\Entity\ServerRepository'
+
+    organization:
+        type: organization
+        class:
+            - top
+            - organizationalRole
+            - zarafa-company
+            - zacaciaCompany
+        converters:
+             generalized_time:
+                 - 'created'
+                 - 'modified'
+        attributes:
+            ou: ou
+            zacaciaStatus: zacaciaStatus
+            zarafaAccount: zarafaAccount
+            zacaciaHidden: zacaciaHidden
+            created: createTimestamp
+            modified: modifyTimestamp
+        attributes_to_select:
+            - 'ou'
+            - 'zacaciaStatus'
+            - 'zarafaAccount'
+            - 'zacaciaHidden'
+            - 'entryUUID'
+            - 'createTimestamp'
+            - 'modifyTimestamp'
+        repository: '\ZacaciaBundle\Entity\OrganizationRepository'

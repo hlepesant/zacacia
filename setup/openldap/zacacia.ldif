@@ -1,3 +1,18 @@
+dn: dc=zarafa,dc=com
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: Zarafa
+dc: zarafa
+
+dn: cn=admin,dc=zarafa,dc=com
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+description: LDAP administrator
+userPassword:: e1NTSEF9eGlDODB2bzZsVVlUOEI4aEt3YzFjbEx2WlAvYzZvcEc=
+structuralObjectClass: organizationalRole
+
 dn: ou=Applications,dc=zarafa,dc=com
 ou: Applications
 objectClass: organizationalUnit

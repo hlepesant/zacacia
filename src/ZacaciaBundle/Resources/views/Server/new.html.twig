@@ -1,0 +1,66 @@
+{% extends "ZacaciaBundle::layout.html.twig" %}
+
+{% block title %}ZacaciaBundle:Server:new{% endblock %}
+
+{% block content %}
+<h1 class="page-header">Platform : {{ platform.cn }} : Server : new</h1>
+
+<div class="table-responsive">
+
+{{ form_start(form) }}
+	 {{ form_errors(form) }}
+
+	<fieldset class="form-group">
+		{{  form_label(form.cn) }}
+		{{ form_errors(form.cn) }}
+		{{ form_widget(form.cn, {'attr': {'class': 'form-control'}}) }}
+	</fieldset>
+
+	<fieldset class="form-group">
+		{{  form_label(form.zacaciastatus) }}
+		{{ form_errors(form.zacaciastatus) }}
+		{{ form_widget(form.zacaciastatus, {'attr': {'class': 'form-control'}}) }}
+	</fieldset>
+
+	<fieldset class="form-group">
+		{{  form_label(form.iphostnumber) }}
+		{{ form_errors(form.iphostnumber) }}
+		{{ form_widget(form.iphostnumber, {'attr': {'class': 'form-control'}}) }}
+	</fieldset>
+
+	<fieldset class="form-group">
+		{{  form_label(form.zarafaaccount) }}
+		{{ form_errors(form.zarafaaccount) }}
+		{{ form_widget(form.zarafaaccount, {'attr': {'class': 'form-control'}}) }}
+	</fieldset>
+
+	<fieldset class="form-group">
+		{{  form_label(form.zarafafilepath) }}
+		{{ form_errors(form.zarafafilepath) }}
+		{{ form_widget(form.zarafafilepath, {'attr': {'class': 'form-control'}}) }}
+	</fieldset>
+
+	<fieldset class="form-group">
+		{{  form_label(form.zarafahttpport) }}
+		{{ form_errors(form.zarafahttpport) }}
+		{{ form_widget(form.zarafahttpport, {'attr': {'class': 'form-control'}}) }}
+	</fieldset>
+
+	<fieldset class="form-group">
+		{{  form_label(form.zarafasslport) }}
+		{{ form_errors(form.zarafasslport) }}
+		{{ form_widget(form.zarafasslport, {'attr': {'class': 'form-control'}}) }}
+	</fieldset>
+
+	<fieldset class="form-group">
+		{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
+	</fieldset>
+
+{{ form_end(form) }}
+
+</div>
+{% endblock %}
+
+{% block zavascripts %}
+<script src= "{{ asset('js/server/new.js') }}"></script>
+{% endblock %}

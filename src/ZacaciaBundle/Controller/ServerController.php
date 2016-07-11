@@ -4,6 +4,7 @@ namespace ZacaciaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -28,6 +29,7 @@ class ServerController extends Controller
      * @Route("/server/{platform}", name="_server", requirements={
      *     "platform": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
      * })
+     * @Method({"GET","HEAD"})
      */
     public function indexAction(Request $request, $platform)
     {
