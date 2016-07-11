@@ -61,6 +61,69 @@ class OrganizationPeer
                 'zarafaHidden'  => $organization->getZarafaHidden(),
             ])
             ->execute();
+
+        self::createSubTree($dn);
+
+        return;
+    }
+
+    private function createSubTree($dn)
+    {
+        $ldapObject = $this->ldapmanager->createLdapObject();
+
+        $ldapObject->createOU()
+            ->in($dn)
+            ->with(['name' => 'AddressLists'])
+            ->execute();
+
+        $ldapObject->createOU()
+            ->in($dn)
+            ->with(['name' => 'Contacts'])
+            ->execute();
+
+        $ldapObject->createOU()
+            ->in($dn)
+            ->with(['name' => 'Domains'])
+            ->execute();
+
+        $ldapObject->createOU()
+            ->in($dn)
+            ->with(['name' => 'Forwards'])
+            ->execute();
+
+        $ldapObject->createOU()
+            ->in($dn)
+            ->with(['name' => 'Groups'])
+            ->execute();
+
+        $ldapObject->createOU()
+            ->in($dn)
+            ->with(['name' => 'Users'])
+            ->execute();
+
+#        $ldapObject->createOU()
+#            ->in($dn)
+#            ->with(['name' => 'SecurityGroups'])
+#            ->execute();
+#
+#        $ldapObject->create('securitygroup')
+#            ->setDn(sprintf("cn=OrganizationAdmin,ou=SecurityGroups,%s", $dn))
+#            ->in(sprintf("ou=SecurityGroups,%s", $dn))
+#            ->with([
+#                'objectClass'   => ['top', 'zacaciaSecurityGroup'],
+#                'cn'            => 'OrganizationAdmin'
+#            ])
+#            ->execute();
+#
+#        $ldapObject->create('securitygroup')
+#            ->setDn(sprintf("cn=ServerAdmin,ou=SecurityGroups,%s", $dn))
+#            ->in(sprintf("ou=SecurityGroups,%s", $dn))
+#            ->with([
+#                'objectClass'   => ['top', 'zacaciaSecurityGroup'],
+#                'cn'            => 'ServerAdmin'
+#            ])
+#            ->execute();
+
         return;
     }
 

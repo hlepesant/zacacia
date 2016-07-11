@@ -56,12 +56,6 @@ class PlatformPeer
         return;
     }
 
-    public function updatePlaform($platform)
-    {
-        $this->ldapmanager->persist($platform);
-        return;
-    }
-
     private function createSubTree($dn)
     {
         $ldapObject = $this->ldapmanager->createLdapObject();
@@ -99,6 +93,12 @@ class PlatformPeer
             ])
             ->execute();
 
+        return;
+    }
+
+    public function updatePlaform($platform)
+    {
+        $this->ldapmanager->persist($platform);
         return;
     }
 
