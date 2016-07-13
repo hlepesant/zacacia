@@ -8,9 +8,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+#use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use LdapTools\Configuration;
@@ -20,41 +21,51 @@ use LdapTools\Query\LdapQueryBuilder;
 use ZacaciaBundle\Entity\Platform;
 use ZacaciaBundle\Entity\PlatformPeer;
 
-use ZacaciaBundle\Entity\Server;
-use ZacaciaBundle\Entity\ServerPeer;
+use ZacaciaBundle\Entity\Organization;
+use ZacaciaBundle\Entity\OrganizationPeer;
 
-class ServerController extends Controller
+use ZacaciaBundle\Entity\Domain;
+use ZacaciaBundle\Entity\DomainPeer;
+
+class DomainController extends Controller
 {
     /**
-     * @Route("/server/{platformid}", name="_server", requirements={
-     *     "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
+     * @Route("/domain/{platform}/{organization}", name="_domain", requirements={
+		 *    "platform": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+		 *    "organization": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
      * })
      * @Method({"GET","HEAD"})
      */
-    public function indexAction(Request $request, $platformid)
+    public function indexAction(Request $request, $platform, $organization)
     {
         $platform_repository = (new PlatformPeer())->getLdapManager()->getRepository('platform');
-        $platform = $platform_repository->getPlatformByUUID($platformid);
+        $platform = $platform_repository->getPlatformByUUID($platform);
 
-        $serverPeer =  new ServerPeer($platform->getDn());
-        $server_repository = $serverPeer->getLdapManager()->getRepository('server');
-        $servers = $server_repository->getAllServers();
+        $organizationPeer =  new OrganizationPeer($platform->getDn());
+        $organization_repository = $organizationPeer->getLdapManager()->getRepository('organization');
+        $organization = $organization_repository->getOrganizationByUUID($organization);
 
-        return $this->render('ZacaciaBundle:Server:index.html.twig', array(
+        $domainPeer =  new DomainPeer($organization->getDn());
+        $domain_repository = $domainPeer->getLdapManager()->getRepository('domain');
+        $domains = $domain_repository->getAllDomains();
+
+        return $this->render('ZacaciaBundle:Domain:index.html.twig', array(
             'platform' => $platform,
-            'servers' => $servers,
+            'organization' => $organization,
+            'domains' => $domains,
         ));
     }
 
     /**
-     * @Route("/server/{platformid}/new", name="_server_new", requirements={
-     *     "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
+     * @Route("/domain/{platform}/{organization}/new", name="_domain_new", requirements={
+     *    "platform": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+		 *    "organization": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
      * })
      */
-    public function newAction(Request $request, $platformid)
+    public function newAction(Request $request, $platform)
     {
         $platform_repository = (new PlatformPeer())->getLdapManager()->getRepository('platform');
-        $platform = $platform_repository->getPlatformByUUID($platformid);
+        $platform = $platform_repository->getPlatformByUUID($platform);
 
         $server = new Server();
         $server->setZacaciastatus("enable");
@@ -103,22 +114,25 @@ class ServerController extends Controller
     }
 
     /**
-     * @Route("/server/{platformid}/{serverid}/edit", name="_server_edit", requirements={
-     *     "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
-     *     "serverid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
+     * @Route("/domain/{platform}/{organization]/{domain}/edit", name="_domain_edit", requirements={
+     *   "platform": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+     *   "organization": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+     *   "domain": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
      * })
      */
-    public function editAction(Request $request, $platformid, $serverid)
+    public function editAction(Request $request, $platform, $organization, $domain)
     {
         $platform_repository = (new PlatformPeer())->getLdapManager()->getRepository('platform');
-        $platform = $platform_repository->getPlatformByUUID($platformid);
+        $platform = $platform_repository->getPlatformByUUID($platform);
 
-        $serverPeer = new ServerPeer($platform->getDn());
-        $server_repository = $serverPeer->getLdapManager()->getRepository('server');
-        $server = $server_repository->getServerByUUID($serverid);
+        $organizationPeer = new OrganizationPeer($platform->getDn());
+        $organization_repository = $organizationPeer->getLdapManager()->getRepository('organization');
+        $organization = $organization_repository->getOrganizationByUUID($uuid);
 
-        $form = $this->createFormBuilder($server)
-            ->setAction($this->generateUrl('_server_edit', array('platformid' => $platform->getEntryUUID(), 'serverid' => $server->getEntryUUID())))
+#        var_dump($organization); exit;
+
+        $form = $this->createFormBuilder($organization)
+            ->setAction($this->generateUrl('_organization_edit', array('platform' => $platform->getEntryUUID(), 'uuid' => $uuid)))
             ->add('cn', TextType::class, array('label' => 'Name', 'attr' => array('readonly' => 'readonly')))
             ->add('zacaciastatus', ChoiceType::class, array(
                 'label' => 'Status',
@@ -126,28 +140,34 @@ class ServerController extends Controller
                     'Enable' => 'enable',
                     'Disable' => 'disable',
             )))
-            ->add('iphostnumber', TextType::class, array('label' => 'IP address'))
             ->add('zarafaaccount', ChoiceType::class, array(
                 'label' => 'Account', 
                 'choices' => array(
                     'Yes' => "1",
                     'No' => "0",
             )))
-            ->add('zarafafilepath', TextType::class, array('label' => 'File Path'))
-            ->add('zarafahttpport', TextType::class, array('label' => 'Http Port'))
-            ->add('zarafasslport', TextType::class, array('label' => 'Https Port'))
-#            ->add('entryUUID', HiddenType::class, array('data' => $server->getEntryUUID()))
-            ->add('save', SubmitType::class, array('label' => 'Update Server'))
+            #->add('zarafahidden', TextType::class, array('label' => 'Hidden'))
+            ->add('zarafahidden', ChoiceType::class, array(
+                'label' => 'Hidden', 
+                'choices' => array(
+                    'Yes' => "1",
+                    'No' => "0",
+            )))
+            ->add('entryUUID', HiddenType::class)
+            ->add('save', SubmitType::class, array('label' => 'Update Customer'))
             ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            try{
-                $serverPeer->updateServer($server);
+            #$server->setZarafaHttpPort($form['zarafahttpport']->getData());
+            #$server->zarafaHttpPort = (string)$form['zarafahttpport']->getData();
 
-                return $this->redirectToRoute('_server', array('platform' => $platform->getEntryUUID()));                
+            try{
+                $organizationPeer->updateOrganization($organization);
+
+                return $this->redirectToRoute('_organization', array('platform' => $platform->getEntryUUID()));                
             
             } catch (LdapConnectionException $e) {
                 echo "Failed to update server!".PHP_EOL;
@@ -155,33 +175,33 @@ class ServerController extends Controller
             }
         }
 
-        return $this->render('ZacaciaBundle:Server:edit.html.twig', array(
+        return $this->render('ZacaciaBundle:Organization:edit.html.twig', array(
             'platform' => $platform,
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * @Route("/server/{platformid}/{serverid}/delete", name="_server_delete", requirements={
-     *     "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
-     *     "serverid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
+     * @Route("/domain/{platform}/{organization]/{domain}/delete", name="_domain_delete", requirements={
+     *   "platform": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+     *   "organization": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+     *   "domain": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
      * })
      */
-    public function deleteAction(Request $request, $platformid, $serverid)
+    public function deleteAction(Request $request, $platform, $uuid)
     {
         $platform_repository = (new PlatformPeer())->getLdapManager()->getRepository('platform');
         $platform = $platform_repository->getPlatformByUUID($platform);
 
         try {
-            $serverPeer =  new ServerPeer($platform->getDn());
-            $serverPeer->deleteServer($server);    
+            $organizationPeer =  new OrganizationPeer($platform->getDn());
+            $organizationPeer->deleteOrganization($uuid, true);
             
         } catch (LdapConnectionException $e) {
-                echo "Failed to delete server!".PHP_EOL;
-                echo $e->getMessage().PHP_EOL;
+          echo "Failed to delete organization!".PHP_EOL;
+          echo $e->getMessage().PHP_EOL;
         }
 
-        return $this->redirectToRoute('_server', array('platform' => $platform->getEntryUUID()));                
+        return $this->redirectToRoute('_organization', array('platform' => $platform->getEntryUUID()));                
     }
-
 }

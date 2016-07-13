@@ -80,17 +80,42 @@ objects:
                  - 'modified'
         attributes:
             ou: ou
+            cn: cn
             zacaciaStatus: zacaciaStatus
             zarafaAccount: zarafaAccount
-            zacaciaHidden: zacaciaHidden
+            zarafaHidden: zarafaHidden
             created: createTimestamp
             modified: modifyTimestamp
         attributes_to_select:
             - 'ou'
+            - 'cn'
             - 'zacaciaStatus'
             - 'zarafaAccount'
-            - 'zacaciaHidden'
+            - 'zarafaHidden'
             - 'entryUUID'
             - 'createTimestamp'
             - 'modifyTimestamp'
         repository: '\ZacaciaBundle\Entity\OrganizationRepository'
+
+    domain:
+        type: domain
+        class:
+            - top
+            - organizationalRole
+            - zacaciaDomain
+        converters:
+             generalized_time:
+                 - 'created'
+                 - 'modified'
+        attributes:
+            cn: cn
+            zacaciaStatus: zacaciaStatus
+            created: createTimestamp
+            modified: modifyTimestamp
+        attributes_to_select:
+            - 'cn'
+            - 'zacaciaStatus'
+            - 'entryUUID'
+            - 'createTimestamp'
+            - 'modifyTimestamp'
+        repository: '\ZacaciaBundle\Entity\DomainRepository'

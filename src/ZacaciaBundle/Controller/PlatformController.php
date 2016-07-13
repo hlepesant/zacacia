@@ -78,14 +78,14 @@ class PlatformController extends Controller
     }
 
     /**
-     * @Route("/platform/{uuid}/edit", name="_platform_edit", requirements={
-     *     "uuid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
+     * @Route("/platform/{platformid}/edit", name="_platform_edit", requirements={
+     *     "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
      * })
      */
-    public function editAction(Request $request, $uuid)
+    public function editAction(Request $request, $platformid)
     {
         $platformPeer = new PlatformPeer();
-        $platform = $platformPeer->getLdapManager()->getRepository('platform')->getPlatformByUUID($uuid);
+        $platform = $platformPeer->getLdapManager()->getRepository('platform')->getPlatformByUUID($platformid);
 
 //        $platform = new Platform();
 //        $platform->setCn($platform->getCn());
@@ -94,7 +94,7 @@ class PlatformController extends Controller
 #        var_dump($platform->getZacaciaStatus()); exit;
 
         $form = $this->createFormBuilder($platform)
-            ->setAction($this->generateUrl('_platform_edit', array('uuid' => $uuid)))
+            ->setAction($this->generateUrl('_platform_edit', array('platform' => $platformid)))
             ->add('cn', TextType::class, array('label' => 'Name', 'attr' => array('readonly' => 'readonly')))
             ->add('zacaciastatus', ChoiceType::class, array(
                 'label' => 'Status',
@@ -102,7 +102,7 @@ class PlatformController extends Controller
                     'Enable' => 'enable',
                     'Disable' => 'disable',
             )))
-            ->add('entryUUID', HiddenType::class)
+            ->add('entryUUID', HiddenType::class, array('data' => $platform->getEntryUUID()))
             ->add('save', SubmitType::class, array('label' => 'Update Platform'))
             ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
             ->getForm();
@@ -123,15 +123,15 @@ class PlatformController extends Controller
     }
 
     /**
-     * @Route("/platform/{uuid}/delete", name="_platform_delete", requirements={
-     *     "uuid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
+     * @Route("/platform/{platformid}/delete", name="_platform_delete", requirements={
+     *     "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
      * })
      */
-    public function deleteAction(Request $request, $uuid)
+    public function deleteAction(Request $request, $platformid)
     {
         try {
             $ldapPeer = new PlatformPeer();
-            $ldapPeer->deletePlatform($uuid, true);    
+            $ldapPeer->deletePlatform($platformid, true);    
             
         } catch (LdapConnectionException $e) {
                 echo "Failed to delete platform!".PHP_EOL;

@@ -104,7 +104,6 @@ class PlatformPeer
 
     public function deletePlatform($uuid, $recursive=false)
     {
-
         $platform = $this->ldapmanager->getRepository('platform')->getPlatformByUUID($uuid);
 
         if ( $recursive )

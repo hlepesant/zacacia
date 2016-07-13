@@ -1,0 +1,51 @@
+{% extends "ZacaciaBundle::layout.html.twig" %}
+
+{% block title %}ZacaciaBundle:Server:index{% endblock %}
+
+{% block navmenu %}
+<li><a href="{{ path('_dashboard') }}">Dashboard</a></li>
+<li><a href="{{ path('_platform') }}">Platform : {{ platform.cn }}</a></li>
+<li><a href="{{ path('_platform') }}">Customer : {{ organization.cn }}</a></li>
+<li class="active"><a href="#">Domains</a></li>
+{% endblock %}
+
+{% block content %}
+<h2 class="page-header">Platform : {{ platform.cn }} &rarr; Customer : {{ organization.cn }} &rarr; Domains</h2>
+
+<div class="table-responsive">
+
+    <a href="{{ path('_domain_new', {'platform' : platform.entryUUID, 'organization' : organization.entryUUID} ) }}">New</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Created</th>
+      <th>Modified</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for domain in domains %}
+    <tr>
+      <td>{{ domain.cn }}</td>
+      <td class="{{ domain.zacaciaStatus | lower}}">{{ domain.zacaciaStatus }}</td>
+      <td>{{ domain.createTimestamp }}</td>
+      <td>{{ domain.modifyTimestamp }}</td>
+      <td>
+        <a href="{{ path('_domain_edit', {
+          'platform' : platform.entryUUID, 
+          'organization' : organization.entryUUID, 
+          'domain' : domain.entryUUID} ) }}">Edit</a> | 
+        <a id="delete_domain" href="{{ path('_domain_delete', {
+          'platform' : platform.entryUUID, 
+          'organization' : organization.entryUUID, 
+          'domain' : domain.entryUUID} ) }}">Delete</a>
+      </td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

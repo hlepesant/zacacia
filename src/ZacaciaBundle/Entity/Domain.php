@@ -4,16 +4,21 @@ namespace ZacaciaBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Organization extends ZacaciaObject
+class Domain extends ZacaciaObject
 {
     /**
     * @Assert\NotBlank()
     */
     protected $cn;
+    
+    /**
+    * @Assert\Ip
+    */
+    protected $ipHostNumber;
+
     protected $zacaciaStatus;
     protected $entryUUID;
-    protected $objectclass = [ 'top', 'organizationalRole', 'zacaciaCompany', 'zarafa-company'];
-    protected $zarafaAccount;
+    protected $objectclass = [ 'top', 'organizationalRole', 'zacaciaDomain'];
 
     function getObjectclass()
     {
@@ -27,11 +32,6 @@ class Organization extends ZacaciaObject
     }
 
     function getCn()
-    {
-        return $this->cn;
-    }
-
-    function getOu()
     {
         return $this->cn;
     }
@@ -55,28 +55,6 @@ class Organization extends ZacaciaObject
     function setEntryUUID($uuid)
     {
         $this->entryUUID = parent::arrayToString($uuid);
-        return $this;        
-    }
-
-    function getZarafaAccount()
-    {
-        return $this->zarafaAccount;
-    }
-
-    function setZarafaAccount($zarafaAccount)
-    {
-        $this->zarafaAccount = parent::arrayToString($zarafaAccount);
-        return $this;        
-    }
-
-    function getZarafaHidden()
-    {
-        return $this->zarafaHidden;
-    }
-
-    function setZarafaHidden($zarafaHidden)
-    {
-        $this->zarafaHidden = parent::arrayToString($zarafaHidden);
         return $this;        
     }
 }

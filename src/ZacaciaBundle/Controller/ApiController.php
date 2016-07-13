@@ -13,9 +13,9 @@ use LdapTools\Configuration;
 use LdapTools\LdapManager;
 use LdapTools\Query\LdapQueryBuilder;
 
-//use ZacaciaBundle\Entity\Platform;
 use ZacaciaBundle\Entity\PlatformPeer;
 use ZacaciaBundle\Entity\ServerPeer;
+use ZacaciaBundle\Entity\OrganizationPeer;
 
 /**
  * @Route("/api")
@@ -25,8 +25,8 @@ class ApiController extends Controller
 {
     /**
      * @Route("/check/platform/{name}", name="_check_platform", requirements={
-		"name": "[a-zA-Z0-9\s\_\-]+"
-     })
+		 *   "name": "[a-zA-Z0-9\s\_\-]+"
+     * })
      * @Method({"GET","HEAD"})
      */
     public function checkplatformAction(Request $request, $name)
@@ -45,8 +45,8 @@ class ApiController extends Controller
 
     /**
      * @Route("/check/server/{name}", name="_check_server", requirements={
-		"name": "[a-zA-Z0-9\s\_\-\.]+"
-     })
+		 *   "name": "[a-zA-Z0-9\s\_\-\.]+"
+     * })
      * @Method({"GET","HEAD"})
      */
     public function checkserverAction(Request $request, $name)
@@ -71,8 +71,8 @@ class ApiController extends Controller
 
     /**
      * @Route("/check/serverip/{ip}", name="_check_serverip", requirements={
-		"ip": "[0-9.]+"
-     })
+		 *   "ip": "[0-9.]+"
+     * })
      * @Method({"GET","HEAD"})
      */
     public function checkserveripAction(Request $request, $ip)
@@ -90,6 +90,33 @@ class ApiController extends Controller
 
         $response->setData(array(
         	'data' => count($servers)
+    	));
+
+    	return $response;
+    }
+
+    /**
+     * @Route("/check/organization/{platform}/{name}", name="_check_organization", requirements={
+		 *   "platform": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+		 *   "name": "[a-zA-Z0-9\s\_\-]+"
+     * })
+     * @Method({"GET","HEAD"})
+     */
+    public function checkorganizationAction(Request $request, $platform, $name)
+    {
+        $platformPeer = new PlatformPeer();
+
+        $base_dn = $platformPeer->getConfig()->getDomainConfiguration(
+            $platformPeer->getConfig()->getDefaultDomain()
+        )->getBaseDn();
+
+        $organizationPeer =  new OrganizationPeer($base_dn);
+        $organizations = $organizationPeer->getLdapManager()->getRepository('organization')->getOrganizationByName($name);
+
+        $response = new JsonResponse();
+
+        $response->setData(array(
+        	'data' => count($organizations)
     	));
 
     	return $response;

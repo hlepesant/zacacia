@@ -101,28 +101,64 @@ class OrganizationPeer
             ->with(['name' => 'Users'])
             ->execute();
 
-#        $ldapObject->createOU()
-#            ->in($dn)
-#            ->with(['name' => 'SecurityGroups'])
-#            ->execute();
-#
-#        $ldapObject->create('securitygroup')
-#            ->setDn(sprintf("cn=OrganizationAdmin,ou=SecurityGroups,%s", $dn))
-#            ->in(sprintf("ou=SecurityGroups,%s", $dn))
-#            ->with([
-#                'objectClass'   => ['top', 'zacaciaSecurityGroup'],
-#                'cn'            => 'OrganizationAdmin'
-#            ])
-#            ->execute();
-#
-#        $ldapObject->create('securitygroup')
-#            ->setDn(sprintf("cn=ServerAdmin,ou=SecurityGroups,%s", $dn))
-#            ->in(sprintf("ou=SecurityGroups,%s", $dn))
-#            ->with([
-#                'objectClass'   => ['top', 'zacaciaSecurityGroup'],
-#                'cn'            => 'ServerAdmin'
-#            ])
-#            ->execute();
+        $ldapObject->createOU()
+            ->in($dn)
+            ->with(['name' => 'SecurityGroups'])
+            ->execute();
+
+        $ldapObject->create('securitygroup')
+            ->setDn(sprintf("cn=AddressListAdmin,ou=SecurityGroups,%s", $dn))
+            ->in(sprintf("ou=SecurityGroups,%s", $dn))
+            ->with([
+                'objectClass'   => ['top', 'zacaciaSecurityGroup'],
+                'cn'            => 'AddressListAdmin'
+            ])
+            ->execute();
+
+        $ldapObject->create('securitygroup')
+            ->setDn(sprintf("cn=ContactAdmin,ou=SecurityGroups,%s", $dn))
+            ->in(sprintf("ou=SecurityGroups,%s", $dn))
+            ->with([
+                'objectClass'   => ['top', 'zacaciaSecurityGroup'],
+                'cn'            => 'ContactAdmin'
+            ])
+            ->execute();
+
+        $ldapObject->create('securitygroup')
+            ->setDn(sprintf("cn=DomainAdmin,ou=SecurityGroups,%s", $dn))
+            ->in(sprintf("ou=SecurityGroups,%s", $dn))
+            ->with([
+                'objectClass'   => ['top', 'zacaciaSecurityGroup'],
+                'cn'            => 'DomainAdmin'
+            ])
+            ->execute();
+
+        $ldapObject->create('securitygroup')
+            ->setDn(sprintf("cn=ForwardAdmin,ou=SecurityGroups,%s", $dn))
+            ->in(sprintf("ou=SecurityGroups,%s", $dn))
+            ->with([
+                'objectClass'   => ['top', 'zacaciaSecurityGroup'],
+                'cn'            => 'ForwardAdmin'
+            ])
+            ->execute();
+
+        $ldapObject->create('securitygroup')
+            ->setDn(sprintf("cn=GroupAdmin,ou=SecurityGroups,%s", $dn))
+            ->in(sprintf("ou=SecurityGroups,%s", $dn))
+            ->with([
+                'objectClass'   => ['top', 'zacaciaSecurityGroup'],
+                'cn'            => 'GroupAdmin'
+            ])
+            ->execute();
+
+        $ldapObject->create('securitygroup')
+            ->setDn(sprintf("cn=UserAdmin,ou=SecurityGroups,%s", $dn))
+            ->in(sprintf("ou=SecurityGroups,%s", $dn))
+            ->with([
+                'objectClass'   => ['top', 'zacaciaSecurityGroup'],
+                'cn'            => 'UserAdmin'
+            ])
+            ->execute();
 
         return;
     }
@@ -133,13 +169,52 @@ class OrganizationPeer
         return;
     }
 
-    public function deleteOrganization($uuid)
+    public function deleteOrganization($uuid, $recursive=false)
     {
         $organization = $this->ldapmanager->getRepository('organization')->getOrganizationByUUID($uuid);
+
+        if ( $recursive )
+            self::deleteSubtree($organization->getDn());
 
         if ( $organization )
             $this->ldapmanager->delete($organization);
 
         return;
+    }
+
+    private function deleteSubtree($dn)
+    {
+        $query = $this->ldapmanager->buildLdapQuery();
+        $results = $query->select('entryUUID')
+            ->where(['objectClass' => 'top'])
+            ->setBaseDn($dn)
+            ->setScopeSubTree()
+            ->getLdapQuery()
+            ->execute();
+
+        $arrayOfDn = array();
+        $i=0;
+
+        foreach( $results as $result  ) {
+            if ( $result->getDn() != $dn ) {
+                $arrayOfDn[$i]['uuid'] = $result->getEntryUUID();
+                $arrayOfDn[$i]['dn'] = $result->getDn();
+                $i++;
+            }
+        }
+
+        rsort($arrayOfDn);
+
+        foreach( $arrayOfDn as $item  ) {
+            $query = $this->ldapmanager->buildLdapQuery();
+            $object = $query->select('entryUUID')
+                ->Where(['entryUUID' => $item['uuid']])
+                ->setBaseDn($dn)
+                ->setScopeSubTree()
+                ->getLdapQuery()
+                ->getOneOrNullResult();
+            $this->ldapmanager->delete($object);
+        }
+        return true;
     }
 }

@@ -21,11 +21,6 @@
 		{{ form_errors(form.zacaciastatus) }}
 		{{ form_widget(form.zacaciastatus, {'attr': {'class': 'form-control'}}) }}
 	</fieldset>
-	<fieldset class="form-group">
-		{{  form_label(form.iphostnumber) }}
-		{{ form_errors(form.iphostnumber) }}
-		{{ form_widget(form.iphostnumber, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
 
 	<fieldset class="form-group">
 		{{  form_label(form.zarafaaccount) }}
@@ -34,21 +29,9 @@
 	</fieldset>
 
 	<fieldset class="form-group">
-		{{  form_label(form.zarafafilepath) }}
-		{{ form_errors(form.zarafafilepath) }}
-		{{ form_widget(form.zarafafilepath, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
-
-	<fieldset class="form-group">
-		{{  form_label(form.zarafahttpport) }}
-		{{ form_errors(form.zarafahttpport) }}
-		{{ form_widget(form.zarafahttpport, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
-
-	<fieldset class="form-group">
-		{{  form_label(form.zarafasslport) }}
-		{{ form_errors(form.zarafasslport) }}
-		{{ form_widget(form.zarafasslport, {'attr': {'class': 'form-control'}}) }}
+		{{  form_label(form.zarafahidden) }}
+		{{ form_errors(form.zarafahidden) }}
+		{{ form_widget(form.zarafahidden, {'attr': {'class': 'form-control'}}) }}
 	</fieldset>
 
 	<fieldset class="form-group">
@@ -61,5 +44,5 @@
 {% endblock %}
 
 {% block zavascripts %}
-<script src= "{{ asset('js/server/edit.js') }}"></script>
+<script src= "{{ asset('js/organization/edit.js') }}"></script>
 {% endblock %}
