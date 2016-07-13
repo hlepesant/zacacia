@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="page-header">Platform : {{ platform.cn }} : Server : new</h1>
+<h1 class="page-header">Platform : {{ platform.cn }} &rarr; Customer : new</h1>
 
 <div class="table-responsive">
 
@@ -53,6 +53,6 @@
 {% block zavascripts %}
 <script src= "{{ asset('js/organization/new.js') }}"></script>
 <script>
-var cancel_redirect = "{{ path('_organization', { 'platform': platform.entryUUID }) }}"
+var cancel_redirect = "{{ path('_organization', { 'platformid': platform.entryUUID }) }}"
 </script>
 {% endblock %}

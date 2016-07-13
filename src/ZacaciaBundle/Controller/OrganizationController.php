@@ -28,7 +28,7 @@ class OrganizationController extends Controller
 {
     /**
      * @Route("/customer/{platformid}", name="_organization", requirements={
-		 *    "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
+		 *     "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
      * })
      * @Method({"GET","HEAD"})
      */
@@ -49,7 +49,7 @@ class OrganizationController extends Controller
 
     /**
      * @Route("/customer/{platformid}/new", name="_organization_new", requirements={
-     *   "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
+     *     "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
      * })
      */
     public function newAction(Request $request, $platformid)
@@ -94,7 +94,7 @@ class OrganizationController extends Controller
                 $organizationPeer =  new OrganizationPeer($platform->getDn());
                 $organizationPeer->createOrganization($organization);
 
-                return $this->redirectToRoute('_organization', array('platform' => $platform->getEntryUUID()));                
+                return $this->redirectToRoute('_organization', array('platformid' => $platform->getEntryUUID()));                
             
             } catch (LdapConnectionException $e) {
                 echo "Failed to add server!".PHP_EOL;
@@ -109,24 +109,27 @@ class OrganizationController extends Controller
     }
 
     /**
-     * @Route("/customer/{platform}/{organization}/edit", name="_organization_edit", requirements={
-     *   "platform": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
-     *   "organization": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
+     * @Route("/customer/{platformid}/{organizationid}/edit", name="_organization_edit", requirements={
+     *     "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+     *     "organizationid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
      * })
      */
-    public function editAction(Request $request, $platform, $organization)
+    public function editAction(Request $request, $platformid, $organizationid)
     {
         $platform_repository = (new PlatformPeer())->getLdapManager()->getRepository('platform');
-        $platform = $platform_repository->getPlatformByUUID($platform);
+        $platform = $platform_repository->getPlatformByUUID($platformid);
 
         $organizationPeer = new OrganizationPeer($platform->getDn());
         $organization_repository = $organizationPeer->getLdapManager()->getRepository('organization');
-        $organization = $organization_repository->getOrganizationByUUID($organization);
+        $organization = $organization_repository->getOrganizationByUUID($organizationid);
 
 #        var_dump($organization); exit;
 
         $form = $this->createFormBuilder($organization)
-            ->setAction($this->generateUrl('_organization_edit', array('platform' => $platform->getEntryUUID(), 'organization' => $organization)))
+            ->setAction($this->generateUrl('_organization_edit', array(
+                'platformid' => $platform->getEntryUUID(), 
+                'organizationid' => $organization->getEntryUUID()
+            )))
             ->add('cn', TextType::class, array('label' => 'Name', 'attr' => array('readonly' => 'readonly')))
             ->add('zacaciastatus', ChoiceType::class, array(
                 'label' => 'Status',
@@ -140,7 +143,6 @@ class OrganizationController extends Controller
                     'Yes' => "1",
                     'No' => "0",
             )))
-            #->add('zarafahidden', TextType::class, array('label' => 'Hidden'))
             ->add('zarafahidden', ChoiceType::class, array(
                 'label' => 'Hidden', 
                 'choices' => array(
@@ -155,13 +157,10 @@ class OrganizationController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            #$server->setZarafaHttpPort($form['zarafahttpport']->getData());
-            #$server->zarafaHttpPort = (string)$form['zarafahttpport']->getData();
-
             try{
                 $organizationPeer->updateOrganization($organization);
 
-                return $this->redirectToRoute('_organization', array('platform' => $platform->getEntryUUID()));                
+                return $this->redirectToRoute('_organization', array('platformid' => $platform->getEntryUUID()));                
             
             } catch (LdapConnectionException $e) {
                 echo "Failed to update server!".PHP_EOL;
@@ -176,25 +175,25 @@ class OrganizationController extends Controller
     }
 
     /**
-     * @Route("/customer/{platform}/{organization}/delete", name="_organization_delete", requirements={
-     *   "platform": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
-     *   "organization": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
+     * @Route("/customer/{platformid}/{organizationid}/delete", name="_organization_delete", requirements={
+     *     "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+     *     "organizationid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
      * })
      */
-    public function deleteAction(Request $request, $platform, $organization)
+    public function deleteAction(Request $request, $platformid, $organizationid)
     {
         $platform_repository = (new PlatformPeer())->getLdapManager()->getRepository('platform');
-        $platform = $platform_repository->getPlatformByUUID($platform);
+        $platform = $platform_repository->getPlatformByUUID($platformid);
 
         try {
             $organizationPeer =  new OrganizationPeer($platform->getDn());
-            $organizationPeer->deleteOrganization($organization, true);
+            $organizationPeer->deleteOrganization($organizationid, true);
             
         } catch (LdapConnectionException $e) {
           echo "Failed to delete organization!".PHP_EOL;
           echo $e->getMessage().PHP_EOL;
         }
 
-        return $this->redirectToRoute('_organization', array('platform' => $platform->getEntryUUID()));                
+        return $this->redirectToRoute('_organization', array('platformid' => $platform->getEntryUUID()));                
     }
 }

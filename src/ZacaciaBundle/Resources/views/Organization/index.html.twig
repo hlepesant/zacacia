@@ -13,7 +13,7 @@
 
 <div class="table-responsive">
 
-    <a href="{{ path('_organization_new', {'platform' : platform.entryUUID} ) }}">New</a>
+    <a href="{{ path('_organization_new', {'platformid' : platform.entryUUID} ) }}">New</a>
 
 <table class="table table-striped">
   <thead>
@@ -34,15 +34,20 @@
       <td>{{ organization.createTimestamp }}</td>
       <td>{{ organization.modifyTimestamp }}</td>
       <td>
-        <a href="{{ path('_organization_edit', {'platform' : platform.entryUUID, 'organization' : organization.entryUUID} ) }}">Edit</a> | 
+        <a href="{{ path('_organization_edit', {
+          'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Edit</a> | 
         <a id="delete_organization" href="{{ path('_organization_delete', {
-          'platform' : platform.entryUUID, 'organization' : organization.entryUUID} ) }}">Delete</a>
+          'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Delete</a>
       </td>
       <td>
-        <a href="{{ path('_domain', {'platform' : platform.entryUUID, 'organization' : organization.entryUUID} ) }}">Domains</a> | 
-        <a href="{{ path('_user', {'platform' : platform.entryUUID, 'organization' : organization.entryUUID} ) }}">Users</a> | 
-        <a href="{{ path('_group', {'platform' : platform.entryUUID, 'organization' : organization.entryUUID} ) }}">Groups</a> |
-        <!-- a href="{#{ path('_forward', {'platform' : platform.entryUUID, 'organization' : organization.entryUUID} ) }#}">Listes</a -->
+        <a href="{{ path('_domain', {
+          'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Domains</a> | 
+        <a href="{{ path('_user', {
+          'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Users</a> | 
+        <a href="{{ path('_group', {
+          'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Groups</a> |
+        <!-- a href="{#{ path('_forward', {
+          'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }#}">Listes</a -->
       </td>
     </tr>
 {% endfor %}

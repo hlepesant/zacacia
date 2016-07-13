@@ -87,14 +87,8 @@ class PlatformController extends Controller
         $platformPeer = new PlatformPeer();
         $platform = $platformPeer->getLdapManager()->getRepository('platform')->getPlatformByUUID($platformid);
 
-//        $platform = new Platform();
-//        $platform->setCn($platform->getCn());
-//        $platform->setZacaciastatus($platform->getZacaciaStatus());
-
-#        var_dump($platform->getZacaciaStatus()); exit;
-
         $form = $this->createFormBuilder($platform)
-            ->setAction($this->generateUrl('_platform_edit', array('platform' => $platformid)))
+            ->setAction($this->generateUrl('_platform_edit', array('platformid' => $platform->getEntryUUID())))
             ->add('cn', TextType::class, array('label' => 'Name', 'attr' => array('readonly' => 'readonly')))
             ->add('zacaciastatus', ChoiceType::class, array(
                 'label' => 'Status',

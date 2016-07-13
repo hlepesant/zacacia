@@ -27,24 +27,29 @@ use ZacaciaBundle\Entity\OrganizationPeer;
 class UserController extends Controller
 {
     /**
-     * @Route("/user/{platform}/{organization}", name="_user", requirements={
-		 * "platform": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
-		 * "organization": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+     * @Route("/user/{platformid}/{organizationid}", name="_user", requirements={
+		 *     "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+		 *     "organizationid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
      * })
      * @Method({"GET","HEAD"})
      */
-    public function indexAction(Request $request, $platform, $organization)
+    public function indexAction(Request $request, $platformid, $organizationid)
     {
         $platform_repository = (new PlatformPeer())->getLdapManager()->getRepository('platform');
-        $platform = $platform_repository->getPlatformByUUID($platform);
+        $platform = $platform_repository->getPlatformByUUID($platformid);
 
         $organizationPeer =  new OrganizationPeer($platform->getDn());
         $organization_repository = $organizationPeer->getLdapManager()->getRepository('organization');
-        $organizations = $organization_repository->getAllOrganizations();
+        $organization = $organization_repository->getOrganizationByUUID($organizationid);
 
-        return $this->render('ZacaciaBundle:Organization:index.html.twig', array(
+        $userPeer =  new UserPeer($organization->getDn());
+        $user_repository = $userPeer->getLdapManager()->getRepository('user');
+        $users = $user_repository->getAllUsers();
+
+        return $this->render('ZacaciaBundle:User:index.html.twig', array(
             'platform' => $platform,
-            'organizations' => $organizations,
+            'organization' => $organization,
+            'users' => $users,
         ));
     }
 }

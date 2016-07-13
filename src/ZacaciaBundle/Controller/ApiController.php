@@ -16,6 +16,7 @@ use LdapTools\Query\LdapQueryBuilder;
 use ZacaciaBundle\Entity\PlatformPeer;
 use ZacaciaBundle\Entity\ServerPeer;
 use ZacaciaBundle\Entity\OrganizationPeer;
+use ZacaciaBundle\Entity\DomainPeer;
 
 /**
  * @Route("/api")
@@ -117,6 +118,32 @@ class ApiController extends Controller
 
         $response->setData(array(
         	'data' => count($organizations)
+    	));
+
+    	return $response;
+    }
+
+    /**
+     * @Route("/check/domain/{name}", name="_check_domain", requirements={
+		 *     "name": "[a-zA-Z0-9\-\.]+"
+     * })
+     * @Method({"GET","HEAD"})
+     */
+    public function checkdomainAction(Request $request, $name)
+    {
+        $platformPeer = new PlatformPeer();
+
+        $base_dn = $platformPeer->getConfig()->getDomainConfiguration(
+            $platformPeer->getConfig()->getDefaultDomain()
+        )->getBaseDn();
+
+        $domainPeer =  new DomainPeer($base_dn);
+        $domains = $domainPeer->getLdapManager()->getRepository('domain')->getDomainByName($name);
+
+        $response = new JsonResponse();
+
+        $response->setData(array(
+        	'data' => count($domains)
     	));
 
     	return $response;

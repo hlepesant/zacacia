@@ -85,10 +85,10 @@ class ServerController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             try{
-                $serverPeer =  new ServerPeer($platform->getDn());
+                $serverPeer = new ServerPeer($platform->getDn());
                 $serverPeer->createServer($server);
 
-                return $this->redirectToRoute('_server', array('platform' => $platform->getEntryUUID()));                
+                return $this->redirectToRoute('_server', array('platformid' => $platform->getEntryUUID()));                
             
             } catch (LdapConnectionException $e) {
                 echo "Failed to add server!".PHP_EOL;
@@ -118,7 +118,10 @@ class ServerController extends Controller
         $server = $server_repository->getServerByUUID($serverid);
 
         $form = $this->createFormBuilder($server)
-            ->setAction($this->generateUrl('_server_edit', array('platformid' => $platform->getEntryUUID(), 'serverid' => $server->getEntryUUID())))
+            ->setAction($this->generateUrl('_server_edit', array(
+              'platformid' => $platform->getEntryUUID(), 
+              'serverid' => $server->getEntryUUID()
+            )))
             ->add('cn', TextType::class, array('label' => 'Name', 'attr' => array('readonly' => 'readonly')))
             ->add('zacaciastatus', ChoiceType::class, array(
                 'label' => 'Status',
@@ -147,7 +150,7 @@ class ServerController extends Controller
             try{
                 $serverPeer->updateServer($server);
 
-                return $this->redirectToRoute('_server', array('platform' => $platform->getEntryUUID()));                
+                return $this->redirectToRoute('_server', array('platformid' => $platform->getEntryUUID()));                
             
             } catch (LdapConnectionException $e) {
                 echo "Failed to update server!".PHP_EOL;
@@ -170,18 +173,18 @@ class ServerController extends Controller
     public function deleteAction(Request $request, $platformid, $serverid)
     {
         $platform_repository = (new PlatformPeer())->getLdapManager()->getRepository('platform');
-        $platform = $platform_repository->getPlatformByUUID($platform);
+        $platform = $platform_repository->getPlatformByUUID($platformid);
 
         try {
             $serverPeer =  new ServerPeer($platform->getDn());
-            $serverPeer->deleteServer($server);    
+            $serverPeer->deleteServer($serverid);
             
         } catch (LdapConnectionException $e) {
                 echo "Failed to delete server!".PHP_EOL;
                 echo $e->getMessage().PHP_EOL;
         }
 
-        return $this->redirectToRoute('_server', array('platform' => $platform->getEntryUUID()));                
+        return $this->redirectToRoute('_server', array('platformid' => $platform->getEntryUUID()));                
     }
 
 }

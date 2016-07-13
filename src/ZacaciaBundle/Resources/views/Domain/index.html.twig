@@ -14,7 +14,8 @@
 
 <div class="table-responsive">
 
-    <a href="{{ path('_domain_new', {'platform' : platform.entryUUID, 'organization' : organization.entryUUID} ) }}">New</a>
+    <a href="{{ path('_domain_new', {
+      'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">New</a>
 
 <table class="table table-striped">
   <thead>
@@ -35,13 +36,13 @@
       <td>{{ domain.modifyTimestamp }}</td>
       <td>
         <a href="{{ path('_domain_edit', {
-          'platform' : platform.entryUUID, 
-          'organization' : organization.entryUUID, 
-          'domain' : domain.entryUUID} ) }}">Edit</a> | 
+          'platformid' : platform.entryUUID, 
+          'organizationid' : organization.entryUUID, 
+          'domainid' : domain.entryUUID} ) }}">Edit</a> | 
         <a id="delete_domain" href="{{ path('_domain_delete', {
-          'platform' : platform.entryUUID, 
-          'organization' : organization.entryUUID, 
-          'domain' : domain.entryUUID} ) }}">Delete</a>
+          'platformid' : platform.entryUUID, 
+          'organizationid' : organization.entryUUID, 
+          'domainid' : domain.entryUUID} ) }}">Delete</a>
       </td>
     </tr>
 {% endfor %}
