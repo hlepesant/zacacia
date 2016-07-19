@@ -1,10 +1,21 @@
 {% extends "ZacaciaBundle::layout.html.twig" %}
 
-{% block title %}ZacaciaBundle:Server:new{% endblock %}
+{% block title %}ZacaciaBundle:Server:edit{% endblock %}
+
+{% block navmenu %}
+<li><a href="{{ path('_dashboard') }}">Dashboard</a></li>
+<li><a href="{{ path('_platform') }}">Platform : {{ platform.cn }}</a></li>
+<li class="active"><a href="#">Server : Edit</a></li>
+{% endblock %}
+
+{% block whereiam %}
+<ul class="list-inline">
+  <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
+  <li><h3 class="warning">{{ server.cn }}</a></h3><small>Server:Edit</small></li>
+</ul>
+{% endblock %}
 
 {% block content %}
-<h1 class="page-header">Platform : {{ platform.cn }} : Server : new</h1>
-
 <div class="table-responsive">
 
 {{ form_start(form) }}
@@ -52,6 +63,7 @@
 	</fieldset>
 
 	<fieldset class="form-group">
+    {{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary' }}) }}
 		{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
 	</fieldset>
 
@@ -62,4 +74,9 @@
 
 {% block zavascripts %}
 <script src= "{{ asset('js/server/edit.js') }}"></script>
+<script>
+var cancel_redirect = "{{ path('_server', { 
+    'platformid': platform.entryUUID,
+  }) }}"
+</script>
 {% endblock %}

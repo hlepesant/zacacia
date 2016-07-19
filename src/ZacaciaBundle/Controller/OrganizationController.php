@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-#use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
@@ -151,6 +150,7 @@ class OrganizationController extends Controller
             )))
             ->add('entryUUID', HiddenType::class)
             ->add('save', SubmitType::class, array('label' => 'Update Customer'))
+            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -170,6 +170,7 @@ class OrganizationController extends Controller
 
         return $this->render('ZacaciaBundle:Organization:edit.html.twig', array(
             'platform' => $platform,
+            'organization' => $organization,
             'form' => $form->createView(),
         ));
     }

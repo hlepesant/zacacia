@@ -4,14 +4,20 @@
 
 {% block navmenu %}
 <li><a href="{{ path('_dashboard') }}">Dashboard</a></li>
-<li><a href="{{ path('_platform') }}">Platform : {{ platform.cn }}</a></li>
-<li><a href="{{ path('_platform') }}">Customer : {{ organization.cn }}</a></li>
+<li><a href="{{ path('_platform') }}">Platform</a></li>
+<li><a href="{{ path('_organization', { 'platformid' : platform.entryUUID} ) }}">Customer</a></li> 
 <li class="active"><a href="#">Domains</a></li>
 {% endblock %}
 
-{% block content %}
-<h2 class="page-header">Platform : {{ platform.cn }} &rarr; Customer : {{ organization.cn }} &rarr; Domains</h2>
+{% block whereiam %}
+<ul class="list-inline">
+  <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
+  <li><h3 class="warning">{{ organization.cn }}</a></h3><small>Customer</small></li>
+  <li><h3 class="warning">Domain</a></h3><small>List</small></li>
+</ul>
+{% endblock %}
 
+{% block content %}
 <div class="table-responsive">
 
     <a href="{{ path('_domain_new', {
@@ -22,6 +28,7 @@
     <tr>
       <th>Name</th>
       <th>Status</th>
+      <th>Nb Email</th>
       <th>Created</th>
       <th>Modified</th>
       <th>Actions</th>
@@ -32,6 +39,7 @@
     <tr>
       <td>{{ domain.cn }}</td>
       <td class="{{ domain.zacaciaStatus | lower}}">{{ domain.zacaciaStatus }}</td>
+      <td>{{ domain.nbEmailForDomain }}</td>
       <td>{{ domain.createTimestamp }}</td>
       <td>{{ domain.modifyTimestamp }}</td>
       <td>
@@ -39,10 +47,14 @@
           'platformid' : platform.entryUUID, 
           'organizationid' : organization.entryUUID, 
           'domainid' : domain.entryUUID} ) }}">Edit</a> | 
+        {% if domain.nbEmailForDomain %}
+        <a id="delete_domain" href="#" class="disable">Delete</a>
+        {% else %}
         <a id="delete_domain" href="{{ path('_domain_delete', {
           'platformid' : platform.entryUUID, 
           'organizationid' : organization.entryUUID, 
           'domainid' : domain.entryUUID} ) }}">Delete</a>
+        {% endif %}
       </td>
     </tr>
 {% endfor %}

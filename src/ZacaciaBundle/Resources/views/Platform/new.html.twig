@@ -4,12 +4,16 @@
 
 {% block navmenu %}
 <li><a href="{{ path('_dashboard') }}">Dashboard</a></li>
-<li class="active"><a href="#">Platform &rarr; New</a></li>
+<li class="active"><a href="#">Platform</a></li>
+{% endblock %}
+
+{% block whereiam %}
+<ul class="list-inline">
+  <li><h3 class="warning">Platform</a></h3><small>New</small></li>
+</ul>
 {% endblock %}
 
 {% block content %}
-<h2 class="page-header">Platform &rarr; New</h2>
-
 <div class="table-responsive">
 
 {{ form_start(form) }}

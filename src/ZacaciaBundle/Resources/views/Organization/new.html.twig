@@ -5,12 +5,17 @@
 {% block navmenu %}
 <li><a href="{{ path('_dashboard') }}">Dashboard</a></li>
 <li><a href="{{ path('_platform') }}">Platform : {{ platform.cn }}</a></li>
-<li class="active"><a href="#">Organization:new</a></li>
+<li class="active"><a href="#">Customer : new</a></li>
+{% endblock %}
+
+{% block whereiam %}
+<ul class="list-inline">
+  <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
+  <li><h3>Customers</h3><small>New</small></li>
+</ul>
 {% endblock %}
 
 {% block content %}
-<h1 class="page-header">Platform : {{ platform.cn }} &rarr; Customer : new</h1>
-
 <div class="table-responsive">
 
 {{ form_start(form) }}

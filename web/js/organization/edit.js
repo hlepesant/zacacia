@@ -32,4 +32,10 @@ $(document).ready(function() {
             $('#form_zarafahttpport').addClass('has-error');
         }
     });
+
+    $('#form_cancel').on('click', function(){
+        if(confirm('Change have not been saved. Do you want to leave ?')) {
+            $(location).attr('href', cancel_redirect);
+        }
+    });
 });

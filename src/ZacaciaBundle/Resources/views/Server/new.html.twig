@@ -2,11 +2,21 @@
 
 {% block title %}ZacaciaBundle:Server:new{% endblock %}
 
+{% block navmenu %}
+<li><a href="{{ path('_dashboard') }}">Dashboard</a></li>
+<li><a href="{{ path('_platform') }}">Platform : {{ platform.cn }}</a></li>
+<li class="active"><a href="#">Server : New</a></li>
+{% endblock %}
+
+{% block whereiam %}
+<ul class="list-inline">
+  <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
+  <li><h3>Servers</h3><small>New</small></li>
+</ul>
+{% endblock %}
+
 {% block content %}
-<h1 class="page-header">Platform : {{ platform.cn }} : Server : new</h1>
-
 <div class="table-responsive">
-
 {{ form_start(form) }}
 	 {{ form_errors(form) }}
 
@@ -53,6 +63,7 @@
 	</fieldset>
 
 	<fieldset class="form-group">
+    {{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary' }}) }}
 		{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
 	</fieldset>
 
@@ -63,4 +74,9 @@
 
 {% block zavascripts %}
 <script src= "{{ asset('js/server/new.js') }}"></script>
+<script>
+var cancel_redirect = "{{ path('_server', { 
+    'platformid': platform.entryUUID,
+  }) }}"
+</script>
 {% endblock %}

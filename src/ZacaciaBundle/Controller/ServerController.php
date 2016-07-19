@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use LdapTools\Configuration;
@@ -78,6 +79,7 @@ class ServerController extends Controller
             ->add('zarafahttpport', IntegerType::class, array('label' => 'Http Port', 'data' => 636))
             ->add('zarafasslport', IntegerType::class, array('label' => 'Https Port', 'data' => 637))
             ->add('save', SubmitType::class, array('label' => 'Create Server'))
+            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -139,8 +141,8 @@ class ServerController extends Controller
             ->add('zarafafilepath', TextType::class, array('label' => 'File Path'))
             ->add('zarafahttpport', TextType::class, array('label' => 'Http Port'))
             ->add('zarafasslport', TextType::class, array('label' => 'Https Port'))
-#            ->add('entryUUID', HiddenType::class, array('data' => $server->getEntryUUID()))
             ->add('save', SubmitType::class, array('label' => 'Update Server'))
+            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -160,6 +162,7 @@ class ServerController extends Controller
 
         return $this->render('ZacaciaBundle:Server:edit.html.twig', array(
             'platform' => $platform,
+            'server' => $server,
             'form' => $form->createView(),
         ));
     }

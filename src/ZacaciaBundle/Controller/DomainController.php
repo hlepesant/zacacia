@@ -49,6 +49,12 @@ class DomainController extends Controller
         $domain_repository = $domainPeer->getLdapManager()->getRepository('domain');
         $domains = $domain_repository->getAllDomains();
 
+
+        foreach ($domains as $domain) {
+          $nbemail = $domainPeer->countEmailForDomain($domain->getCn());
+          $domain->setNbEmailForDomain($nbemail);
+        }
+
         return $this->render('ZacaciaBundle:Domain:index.html.twig', array(
             'platform' => $platform,
             'organization' => $organization,
@@ -128,12 +134,15 @@ class DomainController extends Controller
         $organization_repository = $organizationPeer->getLdapManager()->getRepository('organization');
         $organization = $organization_repository->getOrganizationByUUID($organizationid);
 
-        var_dump($organization); exit;
+        $domainPeer = new DomainPeer($organization->getDn());
+        $domain_repository = $domainPeer->getLdapManager()->getRepository('domain');
+        $domain = $domain_repository->getDomainByUUID($domainid);
 
         $form = $this->createFormBuilder($domain)
             ->setAction($this->generateUrl('_domain_edit', array(
               'platformid' => $platform->getEntryUUID(),
               'organizationid' => $organization->getEntryUUID(),
+              'domainid' => $domain->getEntryUUID(),
             )))
             ->add('cn', TextType::class, array('label' => 'Name', 'attr' => array('readonly' => 'readonly')))
             ->add('zacaciastatus', ChoiceType::class, array(
@@ -142,8 +151,8 @@ class DomainController extends Controller
                     'Enable' => 'enable',
                     'Disable' => 'disable',
             )))
-            #->add('entryUUID', HiddenType::class)
             ->add('save', SubmitType::class, array('label' => 'Update Domain'))
+            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -155,7 +164,7 @@ class DomainController extends Controller
 
                 return $this->redirectToRoute('_domain', array(
                   'platformid' => $platform->getEntryUUID(),
-                  'organization' => $organization->getEntryUUID(),
+                  'organizationid' => $organization->getEntryUUID(),
                 ));
             
             } catch (LdapConnectionException $e) {
@@ -167,6 +176,7 @@ class DomainController extends Controller
         return $this->render('ZacaciaBundle:Domain:edit.html.twig', array(
             'platform' => $platform,
             'organization' => $organization,
+            'domain' => $domain,
             'form' => $form->createView(),
         ));
     }

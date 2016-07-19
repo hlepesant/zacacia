@@ -8,9 +8,14 @@
 <li class="active"><a href="#">Servers</a></li>
 {% endblock %}
 
-{% block content %}
-<h2 class="page-header">Platform : {{ platform.cn }} &rarr; Servers</h2>
+{% block whereiam %}
+<ul class="list-inline">
+  <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
+  <li><h3>Servers</h3><small>List</small></li>
+</ul>
+{% endblock %}
 
+{% block content %}
 <div class="table-responsive">
 
     <a href="{{ path('_server_new', {'platformid' : platform.entryUUID} ) }}">New</a>

@@ -1,40 +1,42 @@
 {% extends "ZacaciaBundle::layout.html.twig" %}
 
-{% block title %}ZacaciaBundle:Platform:index{% endblock %}
+{% block title %}Zacacia:Domain:edit{% endblock %}
 
 {% block navmenu %}
 <li><a href="{{ path('_dashboard') }}">Dashboard</a></li>
-<li class="active"><a href="#">Platform &rarr; Edit</a></li>
+<li><a href="{{ path('_platform') }}">Platform</a></li>
+<li><a href="{{ path('_organization', { 'platformid' : platform.entryUUID} ) }}">Customers</a></li>
+<li class="active"><a href="#">Domain : edit</a></li>
 {% endblock %}
 
 {% block whereiam %}
 <ul class="list-inline">
-  <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform:Edit</small></li>
+  <li><h3>{{ platform.cn }}</a></h3><small>Platform</small></li>
+  <li><h3>{{ organization.cn }}</a></h3><small>Customer</small></li>
+  <li><h3>{{ domain.cn }}</a></h3><small>Edit</small></li>
 </ul>
 {% endblock %}
 
 {% block content %}
-<!--h2 class="page-header">Platform :: {{ platform.cn }} &rarr; Edit </h2 -->
-
 <div class="table-responsive">
 
 {{ form_start(form) }}
 	 {{ form_errors(form) }}
 
 	<fieldset class="form-group">
-		{{ form_label(form.cn) }}
+		{{  form_label(form.cn) }}
 		{{ form_errors(form.cn) }}
 		{{ form_widget(form.cn, {'attr': {'class': 'form-control'}}) }}
 	</fieldset>
 
 	<fieldset class="form-group">
-		{{ form_label(form.zacaciastatus) }}
+		{{  form_label(form.zacaciastatus) }}
 		{{ form_errors(form.zacaciastatus) }}
 		{{ form_widget(form.zacaciastatus, {'attr': {'class': 'form-control'}}) }}
 	</fieldset>
 
 	<fieldset class="form-group">
-        {{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary' }}) }}
+		{{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary'}}) }}
 		{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
 	</fieldset>
 
@@ -44,8 +46,11 @@
 {% endblock %}
 
 {% block zavascripts %}
-<script src= "{{ asset('js/platform/edit.js') }}"></script>
+<script src= "{{ asset('js/server/edit.js') }}"></script>
 <script>
-var cancel_redirect = "{{ path('_platform') }}"
+var cancel_redirect = "{{ path('_domain', { 
+    'platformid': platform.entryUUID,
+    'organizationid': organization.entryUUID,
+  }) }}"
 </script>
 {% endblock %}

@@ -1,17 +1,19 @@
 {% extends "ZacaciaBundle::layout.html.twig" %}
 
-{% block title %}ZacaciaBundle:Server:new{% endblock %}
+{% block title %}ZacaciaBundle:Domain:new{% endblock %}
 
 {% block navmenu %}
 <li><a href="{{ path('_dashboard') }}">Dashboard</a></li>
 <li><a href="{{ path('_platform') }}">Platform</a></li>
-<li class="active"><a href="#">Customer : edit</a></li>
+<li><a href="{{ path('_organization', {'platformid' : platform.entryUUID} ) }}">Customer</a></li>
+<li class="active"><a href="#">Domain : new</a></li>
 {% endblock %}
 
 {% block whereiam %}
 <ul class="list-inline">
   <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
   <li><h3 class="warning">{{ organization.cn }}</a></h3><small>Customer:Edit</small></li>
+  <li><h3 class="warning">Domain</a></h3><small>New</small></li>
 </ul>
 {% endblock %}
 
@@ -34,19 +36,7 @@
 	</fieldset>
 
 	<fieldset class="form-group">
-		{{  form_label(form.zarafaaccount) }}
-		{{ form_errors(form.zarafaaccount) }}
-		{{ form_widget(form.zarafaaccount, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
-
-	<fieldset class="form-group">
-		{{  form_label(form.zarafahidden) }}
-		{{ form_errors(form.zarafahidden) }}
-		{{ form_widget(form.zarafahidden, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
-
-	<fieldset class="form-group">
-		{{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary'}}) }}
+    {{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary' }}) }}
 		{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
 	</fieldset>
 
@@ -56,8 +46,11 @@
 {% endblock %}
 
 {% block zavascripts %}
-<script src= "{{ asset('js/organization/edit.js') }}"></script>
+<script src= "{{ asset('js/domain/new.js') }}"></script>
 <script>
-var cancel_redirect = "{{ path('_organization', { 'platformid': platform.entryUUID }) }}"
+var cancel_redirect = "{{ path('_domain', { 
+    'platformid': platform.entryUUID,
+    'organizationid': organization.entryUUID,
+  }) }}"
 </script>
 {% endblock %}
