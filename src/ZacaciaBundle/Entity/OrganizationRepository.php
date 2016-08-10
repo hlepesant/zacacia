@@ -3,6 +3,7 @@
 namespace ZacaciaBundle\Entity;
 
 use LdapTools\Object\LdapObjectRepository;
+use LdapTools\Query\LdapQueryBuilder;
 
 
 //class OrganizationRepository

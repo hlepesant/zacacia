@@ -119,3 +119,47 @@ objects:
             - 'createTimestamp'
             - 'modifyTimestamp'
         repository: '\ZacaciaBundle\Entity\DomainRepository'
+
+    user:
+        type: user
+        class:
+          - top
+          - inetOrgPerson
+          - posixAccount
+          - zarafa-user
+          - zacaciaUser
+        converters:
+            generalized_time:
+                - 'created'
+                - 'modified'
+        attributes:
+            cn: cn
+            homeDirectory: homeDirectory
+            loginShell: loginShell
+            zacaciaStatus: zacaciaStatus
+            zarafaAccount: zarafaAccount
+            zarafaQuotaOverride: zarafaQuotaOverride
+            zarafaQuotaWarn: zarafaQuotaWarn
+            zarafaQuotaSoft: zarafaQuotaSoft
+            zarafaQuotaHard: zarafaQuotaHard
+            zarafaHidden: zarafaHidden
+            mail: mail
+            gidNumber: gidNumber
+            givenName: givenName
+            sn: sn
+            displayName: displayName
+            uid: uid
+            userPassword: userPassword
+            uidNumber: uidNumber
+            zarafaAliases: zarafaAliases
+            created: createTimestamp
+            modified: modifyTimestamp
+        attributes_to_select:
+            - 'cn'
+            - 'zacaciaStatus'
+            - 'entryUUID'
+            - 'mail'
+            - 'displayName'
+            - 'createTimestamp'
+            - 'modifyTimestamp'
+        repository: '\ZacaciaBundle\Entity\UserRepository'

@@ -8,7 +8,7 @@ use LdapTools\Query\LdapQueryBuilder;
 use LdapTools\Query\Operator\bOr;
 use LdapTools\Query\Operator\Wildcard;
 
-class DomainPeer
+class UserPeer
 {
     protected $config;
     protected $ldapmanager;
@@ -35,55 +35,55 @@ class DomainPeer
 
     public function getBaseDn()
     {
-        $default_domain = $this->config->getDefaultDomain();
-        $domain_config = $this->config->getDomainConfiguration($default_domain);
-        return $domain_config->getBaseDn();
+        $default_user = $this->config->getDefaultUser();
+        $user_config = $this->config->getUserConfiguration($default_user);
+        return $user_config->getBaseDn();
     }
 
-    public function createDomain($domain)
+    public function createUser($user)
     {
-        $dn = sprintf("cn=%s,ou=Domains,%s", $domain->getCn(), self::getBaseDn());
+        $dn = sprintf("cn=%s,ou=Users,%s", $user->getCn(), self::getBaseDn());
 /*
-        $domain->setDn($dn);
-        var_dump($domain);
-        $this->ldapmanager->persist($domain);
+        $user->setDn($dn);
+        var_dump($user);
+        $this->ldapmanager->persist($user);
         return;
 */
         $ldapObject = $this->ldapmanager->createLdapObject();
-        $ldapObject->create('domain')
+        $ldapObject->create('user')
             ->setDn($dn)
             ->in(self::getBaseDn())
             ->with([
-                'objectClass'   => $domain->getObjectclass(),
-                'cn'            => $domain->getCn(),
-                'zacaciaStatus' => $domain->getZacaciaStatus(),
+                'objectClass'   => $user->getObjectclass(),
+                'cn'            => $user->getCn(),
+                'zacaciaStatus' => $user->getZacaciaStatus(),
             ])
             ->execute();
         return;
     }
 
-    public function updateDomain($domain)
+    public function updateUser($user)
     {
-        $this->ldapmanager->persist($domain);
+        $this->ldapmanager->persist($user);
         return;
     }
 
-    public function deleteDomain($uuid)
+    public function deleteUser($uuid)
     {
-        $domain = $this->ldapmanager->getRepository('domain')->getDomainByUUID($uuid);
+        $user = $this->ldapmanager->getRepository('user')->getUserByUUID($uuid);
 
-        if ( $domain )
-            $this->ldapmanager->delete($domain);
+        if ( $user )
+            $this->ldapmanager->delete($user);
 
         return;
     }
-
-    public function countEmailForDomain($name)
+/*
+    public function countEmailForUser($name)
     {
         $this->config = (new Configuration())->load(__DIR__."/../Resources/config/zacacia.yml");
         $this->ldapmanager = new LdapManager($this->config);
 
-        $base_dn = $this->config->getDomainConfiguration($this->config->getDefaultDomain())->getBaseDn();
+        $base_dn = $this->config->getUserConfiguration($this->config->getDefaultUser())->getBaseDn();
 
         $query = $this->ldapmanager->buildLdapQuery();
 
@@ -104,4 +104,5 @@ class DomainPeer
 
         return(count($results));
     }
+ */
 }

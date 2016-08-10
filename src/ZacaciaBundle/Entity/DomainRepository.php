@@ -10,12 +10,12 @@ class DomainRepository extends LdapObjectRepository
 {
     public function getAllDomains()
     {
-        $platforms = $this->buildLdapQuery()
+        $domains = $this->buildLdapQuery()
             ->orderBy('cn')
             ->getLdapQuery()
             ->getResult();
 
-        return $platforms;
+        return $domains;
     }
 
     public function getDomainByUUID($uuid)
@@ -32,6 +32,22 @@ class DomainRepository extends LdapObjectRepository
             ->Where(['cn' => $name])        
             ->getLdapQuery()
             ->getResult();
+
+        return $domains;
+    }
+
+    public function getAllDomainsAsChoice()
+    {
+        $results = $this->buildLdapQuery()
+            ->orderBy('cn')
+            ->getLdapQuery()
+            ->getResult();
+
+        $domains = array();
+
+        foreach( $results as $result ) {
+          $domains[sprintf('@%s', $result->getCn())] = $result->getCn();
+        } 
 
         return $domains;
     }

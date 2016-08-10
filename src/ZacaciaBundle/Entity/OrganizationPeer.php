@@ -5,6 +5,8 @@ namespace ZacaciaBundle\Entity;
 use LdapTools\Configuration;
 use LdapTools\LdapManager;
 use LdapTools\Query\LdapQueryBuilder;
+use LdapTools\Query\Operator\bOr;
+use LdapTools\Query\Operator\Wildcard;
 
 class OrganizationPeer
 {

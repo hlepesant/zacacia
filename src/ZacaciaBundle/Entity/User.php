@@ -4,7 +4,7 @@ namespace ZacaciaBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Domain extends ZacaciaObject
+class User extends ZacaciaObject
 {
     /**
     * @Assert\NotBlank()
