@@ -17,6 +17,7 @@ use ZacaciaBundle\Entity\PlatformPeer;
 use ZacaciaBundle\Entity\ServerPeer;
 use ZacaciaBundle\Entity\OrganizationPeer;
 use ZacaciaBundle\Entity\DomainPeer;
+use ZacaciaBundle\Entity\UserPeer;
 
 /**
  * @Route("/api")
@@ -144,6 +145,74 @@ class ApiController extends Controller
 
         $response->setData(array(
         	'data' => count($domains)
+    	));
+
+    	return $response;
+    }
+
+    /**
+     * @Route("/check/username/{platformid}/{organizationid}/{name}", name="_check_username", requirements={
+		 *   "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+		 *   "organizationid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+		 *   "name": "[a-zA-Z0-9\-\.]+"
+     * })
+     * @Method({"GET","HEAD"})
+     */
+    public function checkusernameAction(Request $request, $platformid, $organizationid, $name)
+    {
+        $platformPeer = new PlatformPeer();
+        $platform_repository = $platformPeer->getLdapManager()->getRepository('platform');
+        $platform = $platform_repository->getPlatformByUUID($platformid);
+
+        $organizationPeer =  new OrganizationPeer($platform->getDn());
+        $organization_repository = $organizationPeer->getLdapManager()->getRepository('organization');
+        $organization = $organization_repository->getOrganizationByUUID($organizationid);
+
+        $base_dn = sprintf('ou=Users,%s', $organization->getDn());
+
+        $userPeer =  new UserPeer($base_dn);
+        $users = $userPeer->getLdapManager()->getRepository('user')->getUserByUsername($name);
+
+
+        $response = new JsonResponse();
+
+        $response->setData(array(
+        	'data' => count($users)
+    	));
+
+    	return $response;
+    }
+
+    /**
+     * @Route("/check/displayname/{platformid}/{organizationid}/{name}", name="_check_displayname", requirements={
+		 *   "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+		 *   "organizationid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+		 *   "name": ".+"
+     * })
+     * @Method({"GET","HEAD"})
+     */
+    public function checkdisplaynameAction(Request $request, $platformid, $organizationid, $name)
+    {
+      $platformPeer = new PlatformPeer();
+      $platform_repository = $platformPeer->getLdapManager()->getRepository('platform');
+      $platform = $platform_repository->getPlatformByUUID($platformid);
+
+      $organizationPeer =  new OrganizationPeer($platform->getDn());
+      $organization_repository = $organizationPeer->getLdapManager()->getRepository('organization');
+      $organization = $organization_repository->getOrganizationByUUID($organizationid);
+
+      $base_dn = sprintf('ou=Users,%s', $organization->getDn());
+      
+      #$name = $request->attributes->get('name');
+
+      $userPeer =  new UserPeer($base_dn);
+      $users = $userPeer->getLdapManager()->getRepository('user')->getUserByDisplayname($name);
+
+
+      $response = new JsonResponse();
+
+      $response->setData(array(
+      	'data' => count($users)
     	));
 
     	return $response;

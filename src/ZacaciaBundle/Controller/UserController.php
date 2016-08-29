@@ -88,8 +88,8 @@ class UserController extends Controller
             ->add('email', TextType::class, array('label' => 'Email'))
             ->add('domain', ChoiceType::class, array(
               'label' => 'Domain',
-              'placeholder' => 'Choose a domain',
-              #'placeholder' => false,
+              #'placeholder' => 'Choose a domain',
+              'placeholder' => false,
               'choices' => $domain_repository->getAllDomainsAsChoice()
             ))
             ->add('username', TextType::class, array('label' => 'Username'))
@@ -121,6 +121,10 @@ class UserController extends Controller
             ->add('zarafaquotasoft', TextType::class, array('label' => 'Soft Quota'))
             ->add('zarafaquotawarn', TextType::class, array('label' => 'Warn Quota'))
             ->add('zarafaquotahard', TextType::class, array('label' => 'Hard Quota'))
+
+            ->add('platform', HiddenType::class, array('data' => $platform->getEntryUUID()))
+            ->add('organization', HiddenType::class, array('data' => $organization->getEntryUUID()))
+
             ->add('save', SubmitType::class, array('label' => 'Create User'))
             ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
             ->getForm();

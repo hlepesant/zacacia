@@ -26,122 +26,122 @@
 
   <div class="row">
     <div class="col-xs-3 col-md-3">
-	    <fieldset class="form-group">
+	    <div class="form-group">
 	    	{{  form_label(form.sn) }}
 	    	{{ form_errors(form.sn) }}
 	    	{{ form_widget(form.sn, {'attr': {'class': 'form-control'}}) }}
-	    </fieldset>
+	    </div>
     </div>
 
     <div class="col-xs-3 col-md-3 col‐md‐offset‐3">
-	    <fieldset class="form-group">
+	    <div class="form-group">
 	    	{{  form_label(form.givenname) }}
 	    	{{ form_errors(form.givenname) }}
 	    	{{ form_widget(form.givenname, {'attr': {'class': 'form-control'}}) }}
-	    </fieldset>
+	    </div>
     </div>
   </div>
 
-	<fieldset class="form-group">
+	<div class="form-group" id="form_group_displayname">
 		{{  form_label(form.displayname) }}
 		{{ form_errors(form.displayname) }}
 		{{ form_widget(form.displayname, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
+	</div>
 
-	<fieldset class="form-group">
+	<div class="form-group">
 		{{  form_label(form.username) }}
 		{{ form_errors(form.username) }}
 		{{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
+	</div>
 
-	<fieldset class="form-group">
+	<div class="form-group">
 		{{  form_label(form.password) }}
 		{{ form_errors(form.password) }}
 		{{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
+	</div>
 
   <div class="row">
     <div class="col-xs-4 col-md-2">
-	    <fieldset class="form-group">
-        {{  form_label(form.email) }}
+	    <div class="form-group">
+            {{  form_label(form.email) }}
 	    	{{ form_errors(form.email) }}
 	    	{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-	    </fieldset>
+	    </div>
     </div>
 
     <div class="col-xs-4 col-md-2">
-	    <fieldset class="form-group">
+	    <div class="form-group">
 	    	{{  form_label(form.domain) }}
 	    	{{ form_errors(form.domain) }}
 	    	{{ form_widget(form.domain, {'attr': {'class': 'form-control'}}) }}
-	    </fieldset>
+	    </div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-4 col-md-2">
-	    <fieldset class="form-group">
+	    <div class="form-group">
 	    	{{  form_label(form.zacaciastatus) }}
 	    	{{ form_errors(form.zacaciastatus) }}
 	    	{{ form_widget(form.zacaciastatus, {'attr': {'class': 'form-control'}}) }}
-	    </fieldset>
+	    </div>
     </div>
 
     <div class="col-xs-4 col-md-2">
-	    <fieldset class="form-group">
+	    <div class="form-group">
 	    	{{  form_label(form.zarafaaccount) }}
 	    	{{ form_errors(form.zarafaaccount) }}
 	    	{{ form_widget(form.zarafaaccount, {'attr': {'class': 'form-control'}}) }}
-	    </fieldset>
+	    </div>
     </div>
 
     <div class="col-xs-4 col-md-2 col‐md‐offset‐2">
-	    <fieldset class="form-group">
+	    <div class="form-group">
 	    	{{  form_label(form.zarafahidden) }}
 	    	{{ form_errors(form.zarafahidden) }}
 	    	{{ form_widget(form.zarafahidden, {'attr': {'class': 'form-control'}}) }}
-	    </fieldset>
+	    </div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-4 col-md-2">
-	    <fieldset class="form-group">
+	    <div class="form-group">
 	    	{{  form_label(form.zarafaquotaoverride) }}
 	    	{{ form_errors(form.zarafaquotaoverride) }}
 	    	{{ form_widget(form.zarafaquotaoverride, {'attr': {'class': 'form-control'}}) }}
-	    </fieldset>
+	    </div>
     </div>
 
     <div class="col-xs-4 col-md-2" id="block_zarafaquotasoft">
-	    <fieldset class="form-group">
+	    <div class="form-group">
 	    	{{  form_label(form.zarafaquotasoft) }}
 	    	{{ form_errors(form.zarafaquotasoft) }}
 	    	{{ form_widget(form.zarafaquotasoft, {'attr': {'class': 'form-control'}}) }}
-	    </fieldset>
+	    </div>
     </div>
 
     <div class="col-xs-4 col-md-2" id="block_zarafaquotawarn">
-	    <fieldset class="form-group">
+	    <div class="form-group">
 	    	{{  form_label(form.zarafaquotawarn) }}
 	    	{{ form_errors(form.zarafaquotawarn) }}
 	    	{{ form_widget(form.zarafaquotawarn, {'attr': {'class': 'form-control'}}) }}
-	    </fieldset>
+	    </div>
     </div>
 
     <div class="col-xs-4 col-md-2 col‐md‐offset‐2" id="block_zarafaquotahard">
-	    <fieldset class="form-group">
+	    <div class="form-group">
 	    	{{  form_label(form.zarafaquotahard) }}
 	    	{{ form_errors(form.zarafaquotahard) }}
 	    	{{ form_widget(form.zarafaquotahard, {'attr': {'class': 'form-control'}}) }}
-	    </fieldset>
+	    </div>
     </div>
   </div>
 
-	<fieldset class="form-group">
+	<div class="form-group">
     {{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary' }}) }}
 		{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
-	</fieldset>
+	</div>
 
 {{ form_end(form) }}
 

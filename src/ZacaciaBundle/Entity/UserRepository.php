@@ -35,4 +35,24 @@ class UserRepository extends LdapObjectRepository
 
         return $domains;
     }
+
+    public function getUserByUsername($name)
+    {
+        $domains = $this->buildLdapQuery()
+            ->Where(['uid' => $name])        
+            ->getLdapQuery()
+            ->getResult();
+
+        return $domains;
+    }
+
+    public function getUserByDisplayname($name)
+    {
+        $domains = $this->buildLdapQuery()
+            ->Where(['displayname' => $name])        
+            ->getLdapQuery()
+            ->getResult();
+
+        return $domains;
+    }
 }
