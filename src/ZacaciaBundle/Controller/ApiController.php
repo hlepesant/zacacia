@@ -217,4 +217,31 @@ class ApiController extends Controller
 
     	return $response;
     }
+
+    /**
+     * @Route("/check/useremail/{email}", name="_check_useremail", requirements={
+		 *   "email": ".+"
+     * })
+     * @Method({"GET","HEAD"})
+     */
+    public function checkuseremailAction(Request $request, $email)
+    {
+        $config = (new Configuration())->load(__DIR__."/../Resources/config/zacacia.yml");
+        $ldapmanager = new LdapManager($config);
+        $default_domain = $config->getDefaultDomain();
+        $domain_config = $config->getDomainConfiguration($default_domain);
+        $base_dn = $domain_config->getBaseDn();
+
+        $userPeer = new UserPeer($base_dn);
+
+        $emails = $userPeer->getLdapManager()->getRepository('user')->getUserByEmail($email);
+        
+        $response = new JsonResponse();
+        
+        $response->setData(array(
+        	'data' => count($emails)
+          ));
+        
+          return $response;
+    }
 }

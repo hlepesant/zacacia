@@ -18,134 +18,161 @@
 {% endblock %}
 
 {% block content %}
-<div class="table-responsive">
 
 {{ form_start(form) }}
-	 {{ form_errors(form) }}
+{{ form_errors(form) }}
 
+<div class="row">
+    <div class="col-md-6">
+        <fieldset class="form-group">
+            {{  form_label(form.sn, '', {'label_attr': {'class': 'control-label', 'for': form.sn.vars.id} } ) }}
+        	{{ form_errors(form.sn) }}
+        	{{ form_widget(form.sn, {'attr': {'class': 'form-control'}}) }}
+        </fieldset>
+    </div>
+    
+    <div class="col-md-6">
+        <fieldset class="form-group">
+        	{{  form_label(form.givenname, '', {'label_attr': {'class': 'control-label', 'for': form.givenname.vars.id}}) }}
+        	{{ form_errors(form.givenname) }}
+        	{{ form_widget(form.givenname, {'attr': {'class': 'form-control'}}) }}
+        </fieldset>
+    </div>
+</div>
 
-  <div class="row">
-    <div class="col-xs-3 col-md-3">
-	    <div class="form-group">
-	    	{{  form_label(form.sn) }}
-	    	{{ form_errors(form.sn) }}
-	    	{{ form_widget(form.sn, {'attr': {'class': 'form-control'}}) }}
-	    </div>
+<div class="row">
+    <div class="col-md-12">
+	    <fieldset class="form-group">
+	    	{{  form_label(form.displayname, '', {'label_attr': {'class': 'control-label', 'for': form.displayname.vars.id}}) }}
+	    	{{ form_errors(form.displayname) }}
+	    	{{ form_widget(form.displayname, {'attr': {'class': 'form-control'}}) }}
+	    </fieldset>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+	    <fieldset class="form-group">
+            {{  form_label(form.username, '', {'label_attr': {'class': 'control-label', 'for': form.username.vars.id}}) }}
+	    	{{ form_errors(form.username) }}
+	    	{{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+	    </fieldset>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+	    <fieldset class="form-group">
+	    	{{  form_label(form.password, '', {'label_attr': {'class': 'control-label', 'for': form.password.vars.id}}) }}
+	    	{{ form_errors(form.password) }}
+	    	{{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+	    </fieldset>
     </div>
 
-    <div class="col-xs-3 col-md-3 col‐md‐offset‐3">
-	    <div class="form-group">
-	    	{{  form_label(form.givenname) }}
-	    	{{ form_errors(form.givenname) }}
-	    	{{ form_widget(form.givenname, {'attr': {'class': 'form-control'}}) }}
-	    </div>
+    <div class="col-md-6">
+	    <fieldset class="form-group">
+	    	{{  form_label(form.confpass, '', {'label_attr': {'class': 'control-label', 'for': form.confpass.vars.id}}) }}
+	    	{{ form_errors(form.confpass) }}
+	    	{{ form_widget(form.confpass, {'attr': {'class': 'form-control'}}) }}
+	    </fieldset>
     </div>
-  </div>
+</div>
 
-	<div class="form-group" id="form_group_displayname">
-		{{  form_label(form.displayname) }}
-		{{ form_errors(form.displayname) }}
-		{{ form_widget(form.displayname, {'attr': {'class': 'form-control'}}) }}
-	</div>
-
-	<div class="form-group">
-		{{  form_label(form.username) }}
-		{{ form_errors(form.username) }}
-		{{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
-	</div>
-
-	<div class="form-group">
-		{{  form_label(form.password) }}
-		{{ form_errors(form.password) }}
-		{{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
-	</div>
-
-  <div class="row">
-    <div class="col-xs-4 col-md-2">
-	    <div class="form-group">
-            {{  form_label(form.email) }}
-	    	{{ form_errors(form.email) }}
-	    	{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-	    </div>
+<div class="row">
+    <div class="col-md-6">
+        <fieldset class="form-group">
+            {{  form_label(form.email, '', {'label_attr': {'class': 'control-label', 'for': form.email.vars.id}}) }}
+        	{{ form_errors(form.email) }}
+        	{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+        </fieldset>
     </div>
 
-    <div class="col-xs-4 col-md-2">
-	    <div class="form-group">
-	    	{{  form_label(form.domain) }}
-	    	{{ form_errors(form.domain) }}
-	    	{{ form_widget(form.domain, {'attr': {'class': 'form-control'}}) }}
-	    </div>
+    <div class="col-md-6">
+        <fieldset class="form-group">
+        	{{  form_label(form.domain, '', {'label_attr': {'class': 'control-label', 'for': form.domain.vars.id}}) }}
+        	{{ form_errors(form.domain) }}
+        	{{ form_widget(form.domain, {'attr': {'class': 'form-control'}}) }}
+        </fieldset>
     </div>
-  </div>
+</div>
 
-  <div class="row">
-    <div class="col-xs-4 col-md-2">
-	    <div class="form-group">
-	    	{{  form_label(form.zacaciastatus) }}
-	    	{{ form_errors(form.zacaciastatus) }}
-	    	{{ form_widget(form.zacaciastatus, {'attr': {'class': 'form-control'}}) }}
-	    </div>
+<div class="row">
+    <div class="col-md-4">
+        <fieldset class="form-group">
+        	{{  form_label(form.zacaciastatus, '', {'label_attr': {'class': 'control-label', 'for': form.zacaciastatus.vars.id}}) }}
+        	{{ form_errors(form.zacaciastatus) }}
+        	{{ form_widget(form.zacaciastatus, {'attr': {'class': 'form-control'}}) }}
+        </fieldset>
     </div>
-
-    <div class="col-xs-4 col-md-2">
-	    <div class="form-group">
-	    	{{  form_label(form.zarafaaccount) }}
-	    	{{ form_errors(form.zarafaaccount) }}
-	    	{{ form_widget(form.zarafaaccount, {'attr': {'class': 'form-control'}}) }}
-	    </div>
+    
+    <div class="col-md-4">
+        <fieldset class="form-group">
+        	{{  form_label(form.zarafaaccount, '', {'label_attr': {'class': 'control-label', 'for': form.zarafaaccount.vars.id}}) }}
+        	{{ form_errors(form.zarafaaccount) }}
+        	{{ form_widget(form.zarafaaccount, {'attr': {'class': 'form-control'}}) }}
+        </fieldset>
     </div>
-
-    <div class="col-xs-4 col-md-2 col‐md‐offset‐2">
-	    <div class="form-group">
-	    	{{  form_label(form.zarafahidden) }}
-	    	{{ form_errors(form.zarafahidden) }}
-	    	{{ form_widget(form.zarafahidden, {'attr': {'class': 'form-control'}}) }}
-	    </div>
+    
+    <div class="col-md-4">
+        <fieldset class="form-group">
+        	{{  form_label(form.zarafahidden, '', {'label_attr': {'class': 'control-label', 'for': form.zarafahidden.vars.id}}) }}
+        	{{ form_errors(form.zarafahidden) }}
+        	{{ form_widget(form.zarafahidden, {'attr': {'class': 'form-control'}}) }}
+        </fieldset>
     </div>
-  </div>
+</div>
 
-  <div class="row">
-    <div class="col-xs-4 col-md-2">
-	    <div class="form-group">
-	    	{{  form_label(form.zarafaquotaoverride) }}
-	    	{{ form_errors(form.zarafaquotaoverride) }}
-	    	{{ form_widget(form.zarafaquotaoverride, {'attr': {'class': 'form-control'}}) }}
-	    </div>
+<div class="row">
+    <div class="col-md-12">
+        <fieldset class="form-group">
+    	    {{  form_label(form.zarafaquotaoverride, '', {'label_attr': {'class': 'control-label', 'for': form.zarafaquotaoverride.vars.id}}) }}
+    	    {{ form_errors(form.zarafaquotaoverride) }}
+    	    {{ form_widget(form.zarafaquotaoverride, {'attr': {'class': 'form-control'}}) }}
+        </fieldset>
     </div>
+</div>
 
-    <div class="col-xs-4 col-md-2" id="block_zarafaquotasoft">
-	    <div class="form-group">
-	    	{{  form_label(form.zarafaquotasoft) }}
-	    	{{ form_errors(form.zarafaquotasoft) }}
-	    	{{ form_widget(form.zarafaquotasoft, {'attr': {'class': 'form-control'}}) }}
-	    </div>
+<div class="row" id="zarafa_quota_options">
+    <div class="col-md-4">
+        <fieldset class="form-group">
+    	    {{  form_label(form.zarafaquotasoft, '', {'label_attr': {'class': 'control-label', 'for': form.zarafaquotasoft.vars.id}}) }}
+    	    {{ form_errors(form.zarafaquotasoft) }}
+            <div class="input-group">
+    	        {{ form_widget(form.zarafaquotasoft, {'attr': {'class': 'form-control'}}) }}
+                <div class="input-group-addon">Mb</div>
+            </div>
+        </fieldset>
     </div>
-
-    <div class="col-xs-4 col-md-2" id="block_zarafaquotawarn">
-	    <div class="form-group">
-	    	{{  form_label(form.zarafaquotawarn) }}
-	    	{{ form_errors(form.zarafaquotawarn) }}
-	    	{{ form_widget(form.zarafaquotawarn, {'attr': {'class': 'form-control'}}) }}
-	    </div>
+    <div class="col-md-4">
+        <fieldset class="form-group">
+    	    {{  form_label(form.zarafaquotawarn, '', {'label_attr': {'class': 'control-label', 'for': form.zarafaquotawarn.vars.id}}) }}
+    	    {{ form_errors(form.zarafaquotawarn) }}
+            <div class="input-group">
+    	        {{ form_widget(form.zarafaquotawarn, {'attr': {'class': 'form-control'}}) }}
+                <div class="input-group-addon">Mb</div>
+            </div>
+        </fieldset>
     </div>
-
-    <div class="col-xs-4 col-md-2 col‐md‐offset‐2" id="block_zarafaquotahard">
-	    <div class="form-group">
-	    	{{  form_label(form.zarafaquotahard) }}
-	    	{{ form_errors(form.zarafaquotahard) }}
-	    	{{ form_widget(form.zarafaquotahard, {'attr': {'class': 'form-control'}}) }}
-	    </div>
+    <div class="col-md-4">
+        <fieldset class="form-group">
+    	    {{  form_label(form.zarafaquotahard, '', {'label_attr': {'class': 'control-label', 'for': form.zarafaquotahard.vars.id}}) }}
+    	    {{ form_errors(form.zarafaquotahard) }}
+            <div class="input-group">
+    	        {{ form_widget(form.zarafaquotahard, {'attr': {'class': 'form-control'}}) }}
+                <div class="input-group-addon">Mb</div>
+            </div>
+        </fieldset>
     </div>
-  </div>
+</div>
 
-	<div class="form-group">
-    {{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary' }}) }}
-		{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
-	</div>
+<div class="row">
+    <fieldset class="form-group">
+        {{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary' }}) }}
+    	{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
+    </fieldset>
+</div>
 
 {{ form_end(form) }}
-
-</div>
 {% endblock %}
 
 {% block zavascripts %}

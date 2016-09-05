@@ -1,8 +1,8 @@
-dn: olcDatabase={1}hdb,cn=config
+dn: olcDatabase={1}mdb,cn=config
 changetype: modify
-# add: olcDbIndex
-# olcDbIndex: cn pres,sub,eq
-# -
+add: olcDbIndex
+olcDbIndex: cn pres,sub,eq
+-
 add: olcDbIndex
 olcDbIndex: sn pres,sub,eq
 -
@@ -32,3 +32,6 @@ olcDbIndex: zacaciaStatus eq
 -
 add: olcDbIndex
 olcDbIndex: entryUUID eq
+-
+add: olcDbIndex
+olcDbIndex: mail eq

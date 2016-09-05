@@ -55,4 +55,14 @@ class UserRepository extends LdapObjectRepository
 
         return $domains;
     }
+
+    public function getUserByEmail($email)
+    {
+        $users = $this->buildLdapQuery()
+            ->Where(['mail' => $email])        
+            ->getLdapQuery()
+            ->getResult();
+
+        return $users;
+    }
 }

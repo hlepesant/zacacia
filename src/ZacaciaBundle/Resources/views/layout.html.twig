@@ -5,10 +5,62 @@
 {% block stylesheets %}
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap-theme.min.css') }}" />
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<link rel="stylesheet" href="{{ asset('css/ie10-viewport-bug-workaround.css') }}" />
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/ie10-viewport-bug-workaround.css') }}" />
 <!-- Custom styles for this template -->
 <link rel="stylesheet" href="{{ asset('css/zacacia.css') }}" />
+{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Zacacia</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+{% block navmenu %}
+{% endblock %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="col-md-8 col-md-offset-2 whereiam">
+{% block whereiam %}
+{% endblock %}
+    </div>
+
+    <div class="col-md-8 col-md-offset-2 main">
+{% block content %}
+{% endblock %}
+    </div>
+</div>
+
+{% block modal %}
+{% endblock %}
+
 {% endblock %}
 
 {% block javascripts %}
@@ -17,64 +69,12 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script -->
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-<script>window.jQuery || document.write('<script src="{{ asset('js/jquery.min.js') }}"><\/script>')</script>
-<script src= "{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+<script>window.jQuery || document.write('<script src="{{ asset('vendor/jquery/jquery.min.js') }}"><\/script>')</script>
+<script src= "{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src= "{{ asset('js/ie10-viewport-bug-workaround.js') }}"></script>
-{% endblock %}
-
-{% block body %}
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Zacacia</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Settings</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Help</a></li>
-      </ul>
-{#
-      <form class="navbar-form navbar-right">
-        <input type="text" class="form-control" placeholder="Search...">
-      </form>
-#}
-    </div>
-  </div>
-</nav>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <ul class="nav nav-sidebar">
-{% block navmenu %}
-{% endblock %}
-      </ul>
-    </div>
-
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    {% block whereiam %}
-    {% endblock %}
-<br />
-    {% block content %}
-    {% endblock %}
-    </div>
-  </div>
-</div>
-
-{% block modal %}
-{% endblock %}
-
+<script src= "{{ asset('vendor/bootstrap/js/ie10-viewport-bug-workaround.js') }}"></script>
 {% endblock %}
 
 {% block zavascripts %}

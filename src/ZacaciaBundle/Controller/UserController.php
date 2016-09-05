@@ -88,12 +88,12 @@ class UserController extends Controller
             ->add('email', TextType::class, array('label' => 'Email'))
             ->add('domain', ChoiceType::class, array(
               'label' => 'Domain',
-              #'placeholder' => 'Choose a domain',
               'placeholder' => false,
               'choices' => $domain_repository->getAllDomainsAsChoice()
             ))
             ->add('username', TextType::class, array('label' => 'Username'))
             ->add('password', PasswordType::class, array('label' => 'Password'))
+            ->add('confpass', PasswordType::class, array('label' => 'Confirm Password'))
             ->add('zacaciastatus', ChoiceType::class, array(
                 'label' => 'Status',
                 'choices' => array(
