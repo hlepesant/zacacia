@@ -11,9 +11,6 @@ class Domain extends ZacaciaObject
     */
     protected $cn;
     
-    /**
-    * @Assert\Ip
-    */
     protected $zacaciaStatus;
     protected $entryUUID;
     protected $objectclass = [ 'top', 'organizationalRole', 'zacaciaDomain'];

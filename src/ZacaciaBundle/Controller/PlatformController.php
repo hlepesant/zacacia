@@ -4,13 +4,7 @@ namespace ZacaciaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use LdapTools\Configuration;
 use LdapTools\LdapManager;
@@ -18,6 +12,9 @@ use LdapTools\Query\LdapQueryBuilder;
 
 use ZacaciaBundle\Entity\Platform;
 use ZacaciaBundle\Entity\PlatformPeer;
+use ZacaciaBundle\Form\PlatformType;
+
+use ZacaciaBundle\Form\DataTransformer\ZacaciaTransformer;
 
 
 class PlatformController extends Controller
@@ -43,24 +40,13 @@ class PlatformController extends Controller
         $platform = new Platform();
         $platform->setZacaciastatus("enable");
 
-        $form = $this->createFormBuilder($platform)
-            ->add('cn', TextType::class, array('label' => 'Name'))
-            ->add('zacaciastatus', ChoiceType::class, array(
-                'label' => 'Status',
-                'choices' => array(
-                    'Enable' => 'enable',
-                    'Disable' => 'disable',
-            )))
-            ->add('save', SubmitType::class, array('label' => 'Create Platform'))
-            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
-            ->getForm();
+        $form = $this->createForm(PlatformType::class, $platform);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             try{
-
                 $platformPeer = new PlatformPeer();
                 $platformPeer->createPlatform($platform);
 
@@ -85,27 +71,19 @@ class PlatformController extends Controller
     public function editAction(Request $request, $platformid)
     {
         $platformPeer = new PlatformPeer();
-        $platform = $platformPeer->getLdapManager()->getRepository('platform')->getPlatformByUUID($platformid);
+        $platformLdap = $platformPeer->getLdapManager()->getRepository('platform')->getPlatformByUUID($platformid);
 
-        $form = $this->createFormBuilder($platform)
-            ->setAction($this->generateUrl('_platform_edit', array('platformid' => $platform->getEntryUUID())))
-            ->add('cn', TextType::class, array('label' => 'Name', 'attr' => array('readonly' => 'readonly')))
-            ->add('zacaciastatus', ChoiceType::class, array(
-                'label' => 'Status',
-                'choices' => array(
-                    'Enable' => 'enable',
-                    'Disable' => 'disable',
-            )))
-            ->add('entryUUID', HiddenType::class, array('data' => $platform->getEntryUUID()))
-            ->add('save', SubmitType::class, array('label' => 'Update Platform'))
-            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
-            ->getForm();
+        $tranformer = new ZacaciaTransformer();
+        $platform = $tranformer->transPlatform($platformLdap);
+
+        $form = $this->createForm(PlatformType::class, $platform);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $platformPeer->updatePlaform($platform);
+            $platformLdap->setZacaciastatus($platform->getZacaciastatus());
+            $platformPeer->updatePlaform($platformLdap);
 
             return $this->redirectToRoute('_platform');
         }

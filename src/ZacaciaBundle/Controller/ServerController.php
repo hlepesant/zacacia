@@ -7,12 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use LdapTools\Configuration;
 use LdapTools\LdapManager;
@@ -23,6 +17,7 @@ use ZacaciaBundle\Entity\PlatformPeer;
 
 use ZacaciaBundle\Entity\Server;
 use ZacaciaBundle\Entity\ServerPeer;
+use ZacaciaBundle\Form\ServerType;
 
 class ServerController extends Controller
 {
@@ -60,27 +55,7 @@ class ServerController extends Controller
         $server = new Server();
         $server->setZacaciastatus("enable");
 
-        $form = $this->createFormBuilder($server)
-            ->add('cn', TextType::class, array('label' => 'Name'))
-            ->add('zacaciastatus', ChoiceType::class, array(
-                'label' => 'Status',
-                'choices' => array(
-                    'Enable' => 'enable',
-                    'Disable' => 'disable',
-            )))
-            ->add('iphostnumber', TextType::class, array('label' => 'IP address'))
-            ->add('zarafaaccount', ChoiceType::class, array(
-                'label' => 'Account', 
-                'choices' => array(
-                    'Yes' => "1",
-                    'No' => "0",
-            )))
-            ->add('zarafafilepath', TextType::class, array('label' => 'File Path', 'data' => '/var/run/zarafa'))
-            ->add('zarafahttpport', IntegerType::class, array('label' => 'Http Port', 'data' => 636))
-            ->add('zarafasslport', IntegerType::class, array('label' => 'Https Port', 'data' => 637))
-            ->add('save', SubmitType::class, array('label' => 'Create Server'))
-            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
-            ->getForm();
+        $form = $this->createForm(ServerType::class, $server);
 
         $form->handleRequest($request);
 

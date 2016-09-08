@@ -6,6 +6,7 @@
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap-theme.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('vendor/plugins/bootstrap3-dialog/bootstrap-dialog.css') }}" />
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/ie10-viewport-bug-workaround.css') }}" />
 <!-- Custom styles for this template -->
@@ -58,9 +59,6 @@
     </div>
 </div>
 
-{% block modal %}
-{% endblock %}
-
 {% endblock %}
 
 {% block javascripts %}
@@ -72,6 +70,7 @@
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 <script>window.jQuery || document.write('<script src="{{ asset('vendor/jquery/jquery.min.js') }}"><\/script>')</script>
 <script src= "{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src= "{{ asset('vendor/plugins/bootstrap3-dialog/bootstrap-dialog.js') }}"></script>
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src= "{{ asset('vendor/bootstrap/js/ie10-viewport-bug-workaround.js') }}"></script>

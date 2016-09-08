@@ -65,8 +65,9 @@ class DomainController extends Controller
     /**
      * @Route("/domain/{platformid}/{organizationid}/new", name="_domain_new", requirements={
      *    "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
-		 *    "organizationid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+	 *    "organizationid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
      * })
+     * @Method({"GET","POST"})
      */
     public function newAction(Request $request, $platformid, $organizationid)
     {
@@ -78,7 +79,7 @@ class DomainController extends Controller
         $organization = $organization_repository->getOrganizationByUUID($organizationid);
 
         $domain = new Domain();
-        $domain->setZacaciastatus("enable");
+        $domain->setZacaciastatus("disable");
 
         $form = $this->createFormBuilder($domain)
             ->add('cn', TextType::class, array('label' => 'Name'))
@@ -94,10 +95,10 @@ class DomainController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() /* && $form->isValid() */ ) {
 
             try{
-                $domainPeer =  new DomainPeer($organization->getDn());
+                $domainPeer = new DomainPeer($organization->getDn());
                 $domainPeer->createDomain($domain);
 
                 return $this->redirectToRoute('_domain', array(
@@ -199,7 +200,7 @@ class DomainController extends Controller
 
         try {
             $domainPeer =  new DomainPeer($organization->getDn());
-            $domainPeer->deleteOrganization($domainid, true);
+            $domainPeer->deleteDomain($domainid, true);
             
         } catch (LdapConnectionException $e) {
           echo "Failed to delete domain!".PHP_EOL;
@@ -207,8 +208,8 @@ class DomainController extends Controller
         }
 
         return $this->redirectToRoute('_domain', array(
-          'platform' => $platform->getEntryUUID(),
-          'organization' => $organization->getEntryUUID(),
+          'platformid' => $platform->getEntryUUID(),
+          'organizationid' => $organization->getEntryUUID(),
         ));
     }
 }

@@ -19,55 +19,43 @@
 <a href="{{ path('_platform_new') }}">New</a>
 
 <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Status</th>
-      <th>Created</th>
-      <th>Modified</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Modified</th>
+            <th>Actions</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
 {% for platform in platforms %}
-    <tr>
-      <td>{{ platform.cn }}</td>
-      <td class="{{ platform.zacaciaStatus | lower}}">{{ platform.zacaciaStatus }}</td>
-      <td>{{ platform.createTimestamp }}</td>
-      <td>{{ platform.modifyTimestamp }}</td>
-      <td>
-        <a href="{{ path('_server', {'platformid' : platform.entryUUID} ) }}">Server</a> | 
-        <a href="{{ path('_organization', {'platformid' : platform.entryUUID} ) }}">Customer</a>
-      </td>
-      <td>
-        <a href="{{ path('_platform_edit', {'platformid' : platform.entryUUID} ) }}">Edit</a> | 
-        <a class="delete_platform" href="{{ path('_platform_delete', {'platformid' : platform.entryUUID} ) }}">Delete</a>
-      </td>
-    </tr>
+        <tr class="{% if platform.zacaciaStatus == 'disable' %}danger{% endif %}">
+            <td>{{ platform.cn }}</td>
+            <td class="{{ platform.zacaciaStatus | lower}}">{{ platform.zacaciaStatus }}</td>
+            <td>{{ platform.createTimestamp }}</td>
+            <td>{{ platform.modifyTimestamp }}</td>
+            <td>
+                <a href="{{ path('_server', {'platformid' : platform.entryUUID} ) }}">Server</a> | 
+                <a href="{{ path('_organization', {'platformid' : platform.entryUUID} ) }}">Customer</a>
+            </td>
+            <td class="text-center"é>
+                <a href="{{ path('_platform_edit', {'platformid' : platform.entryUUID} ) }}">Edit</a>
+                {% if platform.zacaciaStatus == 'disable' %}
+                {# | <a id="delete_platform" href="{{ path('_platform_delete', {'platformid' : platform.entryUUID} ) }}" data-target="#modalDelete">Delete</a> #}
+                | <a data-href="{{ path('_platform_delete', {'platformid' : platform.entryUUID} ) }}" data-confirm="{{ platform.cn }}">Delete</a>
+                {% endif %}
+            </td>
+        </tr>
 {% endfor %}
-  </tbody>
+    </tbody>
 </table>
 </div>
 {% endblock %}
 
 {% block modal %}
-<div class="modal fade" tabindex="-1" role="dialog">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-<h4 class="modal-title">Modal title</h4>
-</div>
-<div class="modal-body">
-<p>One fine body&hellip;</p>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-<button type="button" class="btn btn-primary">Save changes</button>
-</div>
-</div>
-</div>
-</div>
+{# include('ZacaciaBundle::confirmdelete.html.twig') #}
 {% endblock %}
 
 {% block zavascripts %}

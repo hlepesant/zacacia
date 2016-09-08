@@ -18,31 +18,41 @@
 {% endblock %}
 
 {% block content %}
-<div class="table-responsive">
 
 {{ form_start(form) }}
 {{ form_errors(form) }}
 
-	<fieldset class="form-group">
-		{{  form_label(form.cn) }}
-		{{ form_errors(form.cn) }}
-		{{ form_widget(form.cn, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
+<div class="row">
+    <div class="col-md-12">
+	    <fieldset class="form-group">
+	    	{{  form_label(form.cn) }}
+	    	{{ form_errors(form.cn) }}
+	    	{{ form_widget(form.cn, {'attr': {'class': 'form-control'}}) }}
+	    </fieldset>
+    </div>
+</div>
 
-	<fieldset class="form-group">
-		{{  form_label(form.zacaciastatus) }}
-		{{ form_errors(form.zacaciastatus) }}
-		{{ form_widget(form.zacaciastatus, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
+<div class="row">
+    <div class="col-md-12">
+	    <fieldset class="form-group">
+	    	{{  form_label(form.zacaciastatus) }}
+	    	{{ form_errors(form.zacaciastatus) }}
+	    	{{ form_widget(form.zacaciastatus, {'attr': {'class': 'form-control'}}) }}
+	    </fieldset>
+    </div>
+</div>
 
-	<fieldset class="form-group">
-    {{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary' }}) }}
-		{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
-	</fieldset>
+<div class="row">
+    <div class="col-md-12">
+	    <fieldset class="form-group">
+            {{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary' }}) }}
+	    	{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
+	    </fieldset>
+    </div>
+</div>
 
 {{ form_end(form) }}
 
-</div>
 {% endblock %}
 
 {% block zavascripts %}
