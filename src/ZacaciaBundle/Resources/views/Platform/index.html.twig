@@ -43,7 +43,6 @@
             <td class="text-center"é>
                 <a href="{{ path('_platform_edit', {'platformid' : platform.entryUUID} ) }}">Edit</a>
                 {% if platform.zacaciaStatus == 'disable' %}
-                {# | <a id="delete_platform" href="{{ path('_platform_delete', {'platformid' : platform.entryUUID} ) }}" data-target="#modalDelete">Delete</a> #}
                 | <a data-href="{{ path('_platform_delete', {'platformid' : platform.entryUUID} ) }}" data-confirm="{{ platform.cn }}">Delete</a>
                 {% endif %}
             </td>
@@ -52,10 +51,6 @@
     </tbody>
 </table>
 </div>
-{% endblock %}
-
-{% block modal %}
-{# include('ZacaciaBundle::confirmdelete.html.twig') #}
 {% endblock %}
 
 {% block zavascripts %}

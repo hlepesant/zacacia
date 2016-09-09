@@ -10,42 +10,46 @@
 
 {% block whereiam %}
 <ul class="list-inline">
-  <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
-  <li><h3>Servers</h3><small>List</small></li>
+    <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
+    <li><h3>Servers</h3><small>List</small></li>
 </ul>
 {% endblock %}
 
 {% block content %}
 <div class="table-responsive">
 
-    <a href="{{ path('_server_new', {'platformid' : platform.entryUUID} ) }}">New</a>
+<a href="{{ path('_server_new', {'platformid' : platform.entryUUID} ) }}">New</a>
 
 <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Status</th>
-      <th>Created</th>
-      <th>Modified</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Modified</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
 {% for server in servers %}
-    <tr>
-      <td>{{ server.cn }}</td>
-      <td class="{{ server.zacaciaStatus | lower}}">{{ server.zacaciaStatus }}</td>
-      <td>{{ server.createTimestamp }}</td>
-      <td>{{ server.modifyTimestamp }}</td>
-      <td>
-        <a href="{{ path('_server_edit', {
-          'platformid' : platform.entryUUID, 'serverid' : server.entryUUID} ) }}">Edit</a> | 
-        <a id="delete_server" href="{{ path('_server_delete', {
-          'platformid' : platform.entryUUID, 'serverid' : server.entryUUID} ) }}">Delete</a>
-      </td>
-    </tr>
+        <tr class="{% if server.zacaciaStatus == 'disable' %}danger{% endif %}">
+            <td>{{ server.cn }}</td>
+            <td class="{{ server.zacaciaStatus | lower}}">{{ server.zacaciaStatus }}</td>
+            <td>{{ server.createTimestamp }}</td>
+            <td>{{ server.modifyTimestamp }}</td>
+            <td class="text-center"é>
+                <a href="{{ path('_server_edit', { 'platformid' : platform.entryUUID, 'serverid' : server.entryUUID } ) }}">Edit</a> 
+                {% if server.zacaciaStatus == 'disable' %}
+                | <a data-href="{{ path('_server_delete', { 'platformid' : platform.entryUUID, 'serverid' : server.entryUUID } ) }}" data-confirm="{{ server.cn }}">Delete</a>
+                {% endif %}
+            </td>
+        </tr>
 {% endfor %}
   </tbody>
 </table>
 </div>
+{% endblock %}
+
+{% block zavascripts %}
+<script src= "{{ asset('js/server/index.js') }}"></script>
 {% endblock %}

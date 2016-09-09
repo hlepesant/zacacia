@@ -2,22 +2,21 @@
 // ValidHostnameRegex = "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$";
 $(document).ready(function() {
 
-    function validateForm() {
+    function validateForm(){
         form_is_valid = false;
     
-        if ( $('#form_cn').val().length ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = cn"); }
-        if ( $('#form_iphostnumber').val().length ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = iphostnumber"); }
+        if ( $('#form_cn').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = cn"); }
+        if ( $('#form_iphostnumber').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = iphostnumber"); }
 
         console.log( "form is valid = " + form_is_valid);
-    
         if ( form_is_valid ) {
-            $('#form_save').show();
+            $('#form_save').removeClass('hidden').show();
         } else {
-            $('#form_save').hide();
+            $('#form_save').addClass('hidden').hide();
         }
     }
 
-    $('#form_save').hide();
+
     $('#form_cn').focus();
 
     $('#form_cn').on('change blur', function(){
@@ -27,13 +26,11 @@ $(document).ready(function() {
             $.getJSON('/api/check/server/' + cn, function(data) {
                 var server_exist = data['data'];
                 if ( server_exist == "0" ) {
-                    console.log( "show #form_save" );
-                    $('#form_cn').parent("fieldset.form-group").removeClass('has-error');
-                    $('#form_cn').parent("fieldset.form-group").addClass('has-success');
+                    $('#form_cn').parent("fieldset.form-group").removeClass('has-error').addClass('has-success');
+                    $('#glyphicon_form_cn').removeClass('glyphicon-remove').addClass('glyphicon-ok');
                 } else {
-                    console.log( "hide #form_save" );
-                    $('#form_cn').parent("fieldset.form-group").addClass('has-success');
-                    $('#form_cn').parent("fieldset.form-group").removeClass('has-error');
+                    $('#form_cn').parent("fieldset.form-group").removeClass('has-success').addClass('has-error');
+                    $('#glyphicon_form_cn').removeClass('glyphicon-ok').addClass('glyphicon-remove');
                 }
             })
             .fail(function() {
@@ -52,13 +49,11 @@ $(document).ready(function() {
             $.getJSON('/api/check/serverip/' + ip, function(data) {
                 var ip_exist = data['data'];
                 if ( ip_exist == "0" ) {
-                    console.log( "show #form_save" );
-                    $('#form_iphostnumber').parent("fieldset.form-group").removeClass('has-error');
-                    $('#form_iphostnumber').parent("fieldset.form-group").addClass('has-success');
+                    $('#form_iphostnumber').parent("fieldset.form-group").removeClass('has-error').addClass('has-success');
+                    $('#glyphicon_form_iphostnumber').removeClass('glyphicon-remove').addClass('glyphicon-ok');
                 } else {
-                    console.log( "hide #form_save" );
-                    $('#form_iphostnumber').parent("fieldset.form-group").addClass('has-success');
-                    $('#form_iphostnumber').parent("fieldset.form-group").removeClass('has-error');
+                    $('#form_iphostnumber').parent("fieldset.form-group").removeClass('has-success').addClass('has-error');
+                    $('#glyphicon_form_iphostnumber').removeClass('glyphicon-ok').addClass('glyphicon-remove');
                 }
             })
             .fail(function() {
@@ -70,9 +65,22 @@ $(document).ready(function() {
         }
     });
 
-    $('#form_cancel').on('click', function(){
-        if(confirm('Change have not been saved. Do you want to leave ?')) {
-            $(location).attr('href', cancel_redirect);
-        }
+    $('#form_cancel').click( function(){
+        BootstrapDialog.confirm({
+            title: 'INFO',
+            message: 'All changes will be lost !!',
+            type: BootstrapDialog.TYPE_INFO,
+            closable: false,
+            draggable: false,
+            btnCancelLabel: 'Cancel',
+            btnOKLabel: 'It\'s OK !',
+            btnOKClass: 'btn-info',
+            callback: function(result) {
+                if (result) {
+                    $(location).attr('href', cancel_redirect);
+                }
+            }
+        });
     });
+
 });

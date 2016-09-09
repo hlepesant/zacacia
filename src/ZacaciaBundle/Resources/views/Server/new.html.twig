@@ -16,56 +16,86 @@
 {% endblock %}
 
 {% block content %}
-<div class="table-responsive">
+
 {{ form_start(form) }}
-	 {{ form_errors(form) }}
+{{ form_errors(form) }}
 
-	<fieldset class="form-group">
-		{{  form_label(form.cn) }}
-		{{ form_errors(form.cn) }}
-		{{ form_widget(form.cn, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
+<div class="row">
+    <div class="col-md-6">
+	    <fieldset class="form-group has-feedback">
+	    	{{  form_label(form.cn) }}
+	    	{{ form_errors(form.cn) }}
+	    	{{ form_widget(form.cn, {'attr': {'class': 'form-control'}}) }}
+            <span id="glyphicon_{{ form.cn.vars.id }}" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+	    </fieldset>
+    </div>
 
-	<fieldset class="form-group">
-		{{  form_label(form.zacaciastatus) }}
-		{{ form_errors(form.zacaciastatus) }}
-		{{ form_widget(form.zacaciastatus, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
+    <div class="col-md-6">
+	    <fieldset class="form-group has-feedback">
+	    	{{  form_label(form.iphostnumber) }}
+	    	{{ form_errors(form.iphostnumber) }}
+	    	{{ form_widget(form.iphostnumber, {'attr': {'class': 'form-control'}}) }}
+            <span id="glyphicon_{{ form.iphostnumber.vars.id }}" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+	    </fieldset>
+    </div>
+</div>
 
-	<fieldset class="form-group">
-		{{  form_label(form.iphostnumber) }}
-		{{ form_errors(form.iphostnumber) }}
-		{{ form_widget(form.iphostnumber, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
+<div class="row">
+    <div class="col-md-12">
+	    <fieldset class="form-group">
+	    	{{  form_label(form.zarafaaccount) }}
+	    	{{ form_errors(form.zarafaaccount) }}
+	    	{{ form_widget(form.zarafaaccount, {'attr': {'class': 'form-control'}}) }}
+	    </fieldset>
+    </div>
+</div>
 
-	<fieldset class="form-group">
-		{{  form_label(form.zarafaaccount) }}
-		{{ form_errors(form.zarafaaccount) }}
-		{{ form_widget(form.zarafaaccount, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
+<div class="row">
+    <div class="col-md-12">
+	    <fieldset class="form-group">
+	    	{{  form_label(form.zarafafilepath) }}
+	    	{{ form_errors(form.zarafafilepath) }}
+	    	{{ form_widget(form.zarafafilepath, {'attr': {'class': 'form-control'}}) }}
+	    </fieldset>
+    </div>
+</div>
 
-	<fieldset class="form-group">
-		{{  form_label(form.zarafafilepath) }}
-		{{ form_errors(form.zarafafilepath) }}
-		{{ form_widget(form.zarafafilepath, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
+<div class="row">
+    <div class="col-md-6">
+	    <fieldset class="form-group">
+	    	{{  form_label(form.zarafahttpport) }}
+	    	{{ form_errors(form.zarafahttpport) }}
+	    	{{ form_widget(form.zarafahttpport, {'attr': {'class': 'form-control'}}) }}
+	    </fieldset>
+    </div>
 
-	<fieldset class="form-group">
-		{{  form_label(form.zarafahttpport) }}
-		{{ form_errors(form.zarafahttpport) }}
-		{{ form_widget(form.zarafahttpport, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
+    <div class="col-md-6">
+	    <fieldset class="form-group">
+	    	{{  form_label(form.zarafasslport) }}
+	    	{{ form_errors(form.zarafasslport) }}
+	    	{{ form_widget(form.zarafasslport, {'attr': {'class': 'form-control'}}) }}
+	    </fieldset>
+    </div>
+</div>
 
-	<fieldset class="form-group">
-		{{  form_label(form.zarafasslport) }}
-		{{ form_errors(form.zarafasslport) }}
-		{{ form_widget(form.zarafasslport, {'attr': {'class': 'form-control'}}) }}
-	</fieldset>
+<div class="row">
+    <div class="col-md-12">
+	    <fieldset class="form-group">
+	    	{{  form_label(form.zacaciastatus) }}
+	    	{{ form_errors(form.zacaciastatus) }}
+	    	{{ form_widget(form.zacaciastatus, {'attr': {'class': 'form-control'}}) }}
+	    </fieldset>
+    </div>
+</div>
 
-	<fieldset class="form-group">
-    {{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary' }}) }}
-		{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
-	</fieldset>
+<div class="row">
+    <div class="col-md-12">
+	    <fieldset class="form-group">
+            <button type="button" id="form_cancel" class="btn btn-primary">{% trans %}Cancel{% endtrans %}</button>
+            <button type="submit" id="form_save" class="btn btn-primary hidden">{% trans %}Create Server{% endtrans %}</button>
+	    </fieldset>
+    </div>
+</div>
 
 {{ form_end(form) }}
 

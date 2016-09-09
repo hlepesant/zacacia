@@ -22,6 +22,9 @@ use ZacaciaBundle\Entity\PlatformPeer;
 
 use ZacaciaBundle\Entity\Organization;
 use ZacaciaBundle\Entity\OrganizationPeer;
+use ZacaciaBundle\Form\OrganizationType;
+
+use ZacaciaBundle\Form\DataTransformer\ZacaciaTransformer;
 
 class OrganizationController extends Controller
 {
@@ -59,31 +62,9 @@ class OrganizationController extends Controller
         $organization = new Organization();
         $organization->setZacaciastatus("enable");
         $organization->setZarafahidden("0");
+        $organization->setPlatform( $platform->getEntryUUID() );
 
-        $form = $this->createFormBuilder($organization)
-            ->add('cn', TextType::class, array('label' => 'Name'))
-            ->add('zacaciastatus', ChoiceType::class, array(
-                'label' => 'Status',
-                'choices' => array(
-                    'Enable' => 'enable',
-                    'Disable' => 'disable',
-            )))
-            ->add('zarafaaccount', ChoiceType::class, array(
-                'label' => 'Account', 
-                'choices' => array(
-                    'Yes' => "1",
-                    'No' => "0",
-            )))
-            ->add('zarafahidden', ChoiceType::class, array(
-                'label' => 'Hidden', 
-                'choices' => array(
-                    'Yes' => "1",
-                    'No' => "0",
-            )))
-            ->add('platform', HiddenType::class, array('data' => $platform->getEntryUUID()))
-            ->add('save', SubmitType::class, array('label' => 'Create Organization'))
-            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
-            ->getForm();
+        $form = $this->createForm(OrganizationType::class, $organization);
 
         $form->handleRequest($request);
 

@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-    $('#form_save').hide();
     $('#form_cn').focus();
 
     $('#form_cn').change(function(){

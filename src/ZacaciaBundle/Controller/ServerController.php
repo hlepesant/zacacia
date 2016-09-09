@@ -19,6 +19,8 @@ use ZacaciaBundle\Entity\Server;
 use ZacaciaBundle\Entity\ServerPeer;
 use ZacaciaBundle\Form\ServerType;
 
+use ZacaciaBundle\Form\DataTransformer\ZacaciaTransformer;
+
 class ServerController extends Controller
 {
     /**
@@ -92,40 +94,20 @@ class ServerController extends Controller
 
         $serverPeer = new ServerPeer($platform->getDn());
         $server_repository = $serverPeer->getLdapManager()->getRepository('server');
-        $server = $server_repository->getServerByUUID($serverid);
+        $serverLdap = $server_repository->getServerByUUID($serverid);
 
-        $form = $this->createFormBuilder($server)
-            ->setAction($this->generateUrl('_server_edit', array(
-              'platformid' => $platform->getEntryUUID(), 
-              'serverid' => $server->getEntryUUID()
-            )))
-            ->add('cn', TextType::class, array('label' => 'Name', 'attr' => array('readonly' => 'readonly')))
-            ->add('zacaciastatus', ChoiceType::class, array(
-                'label' => 'Status',
-                'choices' => array(
-                    'Enable' => 'enable',
-                    'Disable' => 'disable',
-            )))
-            ->add('iphostnumber', TextType::class, array('label' => 'IP address'))
-            ->add('zarafaaccount', ChoiceType::class, array(
-                'label' => 'Account', 
-                'choices' => array(
-                    'Yes' => "1",
-                    'No' => "0",
-            )))
-            ->add('zarafafilepath', TextType::class, array('label' => 'File Path'))
-            ->add('zarafahttpport', TextType::class, array('label' => 'Http Port'))
-            ->add('zarafasslport', TextType::class, array('label' => 'Https Port'))
-            ->add('save', SubmitType::class, array('label' => 'Update Server'))
-            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
-            ->getForm();
+        $tranformer = new ZacaciaTransformer();
+        $server = $tranformer->transServer($serverLdap);
+
+        $form = $this->createForm(ServerType::class, $server);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             try{
-                $serverPeer->updateServer($server);
+                $serverLdap->setZacaciastatus($server->getZacaciastatus());
+                $serverPeer->updateServer($serverLdap);
 
                 return $this->redirectToRoute('_server', array('platformid' => $platform->getEntryUUID()));                
             
