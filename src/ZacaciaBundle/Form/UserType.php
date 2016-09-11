@@ -53,6 +53,13 @@ class UserType extends AbstractType
                     'No' => "0",
                     'Yes' => "1",
             )))
+
+            ->add('domain', ChoiceType::class, array(
+               'label' => 'Domain',
+               'placeholder' => false,
+              // 'choices' => $domain_repository->getAllDomainsAsChoice()
+            ))
+
             ->add('zarafaquotasoft', TextType::class, array('label' => 'Soft Quota'))
             ->add('zarafaquotawarn', TextType::class, array('label' => 'Warn Quota'))
             ->add('zarafaquotahard', TextType::class, array('label' => 'Hard Quota'))

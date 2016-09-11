@@ -84,11 +84,13 @@ class UserController extends Controller
         $form = $this->createForm(UserType::class, $user);
 
 
-       $form->add('domain', ChoiceType::class, array(
-          'label' => 'Domain',
-          'placeholder' => false,
-          'choices' => $domain_repository->getAllDomainsAsChoice()
-        ));
+        $form->get('domain')->setData($domain_repository->getAllDomainsAsChoice());
+
+#       $form->add('domain', ChoiceType::class, array(
+#          'label' => 'Domain',
+#          'placeholder' => false,
+#          'choices' => $domain_repository->getAllDomainsAsChoice()
+#        ));
 
 
 
