@@ -26,6 +26,7 @@
 		    {{  form_label(form.cn) }}
 		    {{ form_errors(form.cn) }}
 		    {{ form_widget(form.cn, {'attr': {'class': 'form-control'}}) }}
+            <span id="glyphicon_{{ form.cn.vars.id }}" class="glyphicon form-control-feedback" aria-hidden="true"></span>
 	    </fieldset>
     </div>
 </div>
@@ -62,14 +63,13 @@
     <div class="col-md-12">
 	    <fieldset class="form-group">
             <button type="button" id="form_cancel" class="btn btn-primary">{% trans %}Cancel{% endtrans %}</button>
-            <button type="submit" id="form_save" class="btn btn-primary hidden">{% trans %}Create Server{% endtrans %}</button>
+            <button type="submit" id="form_save" class="btn btn-primary hidden">{% trans %}Create Customer{% endtrans %}</button>
 	    </fieldset>
     </div>
 </div>
 
 {{ form_end(form) }}
 
-</div>
 {% endblock %}
 
 {% block zavascripts %}

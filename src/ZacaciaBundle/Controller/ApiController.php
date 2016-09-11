@@ -100,7 +100,7 @@ class ApiController extends Controller
     /**
      * @Route("/check/organization/{platform}/{name}", name="_check_organization", requirements={
 		 *   "platform": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
-		 *   "name": "[a-zA-Z0-9\s\_\-]+"
+		 *   "name": "[a-zA-Z0-9\s\_\-\+]+"
      * })
      * @Method({"GET","HEAD"})
      */

@@ -6,14 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-#use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+use Symfony\Component\HttpFoundation\Request;
 
 use LdapTools\Configuration;
 use LdapTools\LdapManager;
@@ -30,6 +25,9 @@ use ZacaciaBundle\Entity\DomainPeer;
 
 use ZacaciaBundle\Entity\User;
 use ZacaciaBundle\Entity\UserPeer;
+use ZacaciaBundle\Form\UserType;
+
+use ZacaciaBundle\Form\DataTransformer\ZacaciaTransformer;
 
 class UserController extends Controller
 {
@@ -80,54 +78,67 @@ class UserController extends Controller
 
         $user = new User();
         $user->setZacaciastatus("enable");
+        $user->setPlatform( $platform->getEntryUUID() );
+        $user->setOrganization( $organization->getEntryUUID() );
 
-        $form = $this->createFormBuilder($user)
-            ->add('sn', TextType::class, array('label' => 'Surname'))
-            ->add('givenname', TextType::class, array('label' => 'Givenname'))
-            ->add('displayname', TextType::class, array('label' => 'Display Name'))
-            ->add('email', TextType::class, array('label' => 'Email'))
-            ->add('domain', ChoiceType::class, array(
-              'label' => 'Domain',
-              'placeholder' => false,
-              'choices' => $domain_repository->getAllDomainsAsChoice()
-            ))
-            ->add('username', TextType::class, array('label' => 'Username'))
-            ->add('password', PasswordType::class, array('label' => 'Password'))
-            ->add('confpass', PasswordType::class, array('label' => 'Confirm Password'))
-            ->add('zacaciastatus', ChoiceType::class, array(
-                'label' => 'Status',
-                'choices' => array(
-                    'Enable' => 'enable',
-                    'Disable' => 'disable',
-            )))
-            ->add('zarafaaccount', ChoiceType::class, array(
-                'label' => 'Account', 
-                'choices' => array(
-                    'Yes' => "1",
-                    'No' => "0",
-            )))
-            ->add('zarafahidden', ChoiceType::class, array(
-                'label' => 'Hidden', 
-                'choices' => array(
-                    'No' => "0",
-                    'Yes' => "1",
-            )))
-            ->add('zarafaquotaoverride', ChoiceType::class, array(
-                'label' => 'Override Quota', 
-                'choices' => array(
-                    'No' => "0",
-                    'Yes' => "1",
-            )))
-            ->add('zarafaquotasoft', TextType::class, array('label' => 'Soft Quota'))
-            ->add('zarafaquotawarn', TextType::class, array('label' => 'Warn Quota'))
-            ->add('zarafaquotahard', TextType::class, array('label' => 'Hard Quota'))
+        $form = $this->createForm(UserType::class, $user);
 
-            ->add('platform', HiddenType::class, array('data' => $platform->getEntryUUID()))
-            ->add('organization', HiddenType::class, array('data' => $organization->getEntryUUID()))
 
-            ->add('save', SubmitType::class, array('label' => 'Create User'))
-            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
-            ->getForm();
+       $form->add('domain', ChoiceType::class, array(
+          'label' => 'Domain',
+          'placeholder' => false,
+          'choices' => $domain_repository->getAllDomainsAsChoice()
+        ));
+
+
+
+#        $form = $this->createFormBuilder($user)
+#            ->add('sn', TextType::class, array('label' => 'Surname'))
+#            ->add('givenname', TextType::class, array('label' => 'Givenname'))
+#            ->add('displayname', TextType::class, array('label' => 'Display Name'))
+#            ->add('email', TextType::class, array('label' => 'Email'))
+#            ->add('domain', ChoiceType::class, array(
+#              'label' => 'Domain',
+#              'placeholder' => false,
+#              'choices' => $domain_repository->getAllDomainsAsChoice()
+#            ))
+#            ->add('username', TextType::class, array('label' => 'Username'))
+#            ->add('password', PasswordType::class, array('label' => 'Password'))
+#            ->add('confpass', PasswordType::class, array('label' => 'Confirm Password'))
+#            ->add('zacaciastatus', ChoiceType::class, array(
+#                'label' => 'Status',
+#                'choices' => array(
+#                    'Enable' => 'enable',
+#                    'Disable' => 'disable',
+#            )))
+#            ->add('zarafaaccount', ChoiceType::class, array(
+#                'label' => 'Account', 
+#                'choices' => array(
+#                    'Yes' => "1",
+#                    'No' => "0",
+#            )))
+#            ->add('zarafahidden', ChoiceType::class, array(
+#                'label' => 'Hidden', 
+#                'choices' => array(
+#                    'No' => "0",
+#                    'Yes' => "1",
+#            )))
+#            ->add('zarafaquotaoverride', ChoiceType::class, array(
+#                'label' => 'Override Quota', 
+#                'choices' => array(
+#                    'No' => "0",
+#                    'Yes' => "1",
+#            )))
+#            ->add('zarafaquotasoft', TextType::class, array('label' => 'Soft Quota'))
+#            ->add('zarafaquotawarn', TextType::class, array('label' => 'Warn Quota'))
+#            ->add('zarafaquotahard', TextType::class, array('label' => 'Hard Quota'))
+#
+#            ->add('platform', HiddenType::class, array('data' => $platform->getEntryUUID()))
+#            ->add('organization', HiddenType::class, array('data' => $organization->getEntryUUID()))
+#
+#            ->add('save', SubmitType::class, array('label' => 'Create User'))
+#            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
+#            ->getForm();
 
         $form->handleRequest($request);
 

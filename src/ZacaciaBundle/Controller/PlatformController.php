@@ -82,10 +82,17 @@ class PlatformController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $platformLdap->setZacaciastatus($platform->getZacaciastatus());
-            $platformPeer->updatePlaform($platformLdap);
+            try{
+                $platformLdap->setZacaciastatus($platform->getZacaciastatus());
 
-            return $this->redirectToRoute('_platform');
+                $platformPeer->updatePlaform($platformLdap);
+
+                return $this->redirectToRoute('_platform');
+
+            } catch (LdapConnectionException $e) {
+                echo "Failed to update Platform!".PHP_EOL;
+                echo $e->getMessage().PHP_EOL;
+            }
         }
 
         return $this->render('ZacaciaBundle:Platform:edit.html.twig', array(

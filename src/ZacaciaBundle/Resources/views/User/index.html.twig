@@ -11,48 +11,45 @@
 
 {% block whereiam %}
 <ul class="list-inline">
-  <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
-  <li><h3 class="warning">{{ organization.cn }}</a></h3><small>Customer</small></li>
-  <li><h3 class="warning">User</a></h3><small>List</small></li>
+    <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
+    <li><h3 class="warning">{{ organization.cn }}</a></h3><small>Customer</small></li>
+    <li><h3 class="warning">User</a></h3><small>List</small></li>
 </ul>
 {% endblock %}
 
 {% block content %}
 <div class="table-responsive">
 
-    <a href="{{ path('_user_new', {
-      'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">New</a>
+<a href="{{ path('_user_new', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">New</a>
 
 <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Status</th>
-      <th>Created</th>
-      <th>Modified</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Modified</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
 {% for user in users %}
-    <tr>
-      <td>{{ user.cn }}</td>
-      <td class="{{ user.zacaciaStatus | lower}}">{{ user.zacaciaStatus }}</td>
-      <td>{{ user.createTimestamp }}</td>
-      <td>{{ user.modifyTimestamp }}</td>
-      <td>
-        <a href="{{ path('_user_edit', {
-          'platformid' : platform.entryUUID, 
-          'organizationid' : organization.entryUUID, 
-          'userid' : user.entryUUID} ) }}">Edit</a> | 
-        <a id="delete_user" href="{{ path('_user_delete', {
-          'platformid' : platform.entryUUID, 
-          'organizationid' : organization.entryUUID, 
-          'userid' : user.entryUUID} ) }}">Delete</a>
-      </td>
-    </tr>
+        <tr class="{% if user.zacaciaStatus == 'disable' %}danger{% endif %}">
+            <td>{{ user.cn }}</td>
+            <td class="{{ user.zacaciaStatus | lower}}">{{ user.zacaciaStatus }}</td>
+            <td>{{ user.createTimestamp }}</td>
+            <td>{{ user.modifyTimestamp }}</td>
+            <td>
+                <a href="{{ path('_user_edit', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'userid' : user.entryUUID} ) }}">Edit</a> 
+                | <a id="delete_user" href="{{ path('_user_delete', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'userid' : user.entryUUID} ) }}">Delete</a>
+            </td>
+        </tr>
 {% endfor %}
-  </tbody>
+    </tbody>
 </table>
 </div>
+{% endblock %}
+
+{% block zavascripts %}
+<script src= "{{ asset('js/domain/index.js') }}"></script>
 {% endblock %}

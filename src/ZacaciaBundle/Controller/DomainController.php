@@ -26,6 +26,9 @@ use ZacaciaBundle\Entity\OrganizationPeer;
 
 use ZacaciaBundle\Entity\Domain;
 use ZacaciaBundle\Entity\DomainPeer;
+use ZacaciaBundle\Form\DomainType;
+
+use ZacaciaBundle\Form\DataTransformer\ZacaciaTransformer;
 
 class DomainController extends Controller
 {
@@ -81,21 +84,11 @@ class DomainController extends Controller
         $domain = new Domain();
         $domain->setZacaciastatus("disable");
 
-        $form = $this->createFormBuilder($domain)
-            ->add('cn', TextType::class, array('label' => 'Name'))
-            ->add('zacaciastatus', ChoiceType::class, array(
-                'label' => 'Status',
-                'choices' => array(
-                    'Enable' => 'enable',
-                    'Disable' => 'disable',
-            )))
-            ->add('save', SubmitType::class, array('label' => 'Create Domain'))
-            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
-            ->getForm();
+        $form = $this->createForm(DomainType::class, $domain);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() /* && $form->isValid() */ ) {
+        if ($form->isSubmitted() && $form->isValid() ) {
 
             try{
                 $domainPeer = new DomainPeer($organization->getDn());
@@ -137,31 +130,20 @@ class DomainController extends Controller
 
         $domainPeer = new DomainPeer($organization->getDn());
         $domain_repository = $domainPeer->getLdapManager()->getRepository('domain');
-        $domain = $domain_repository->getDomainByUUID($domainid);
+        $domainLdap = $domain_repository->getDomainByUUID($domainid);
 
-        $form = $this->createFormBuilder($domain)
-            ->setAction($this->generateUrl('_domain_edit', array(
-              'platformid' => $platform->getEntryUUID(),
-              'organizationid' => $organization->getEntryUUID(),
-              'domainid' => $domain->getEntryUUID(),
-            )))
-            ->add('cn', TextType::class, array('label' => 'Name', 'attr' => array('readonly' => 'readonly')))
-            ->add('zacaciastatus', ChoiceType::class, array(
-                'label' => 'Status',
-                'choices' => array(
-                    'Enable' => 'enable',
-                    'Disable' => 'disable',
-            )))
-            ->add('save', SubmitType::class, array('label' => 'Update Domain'))
-            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
-            ->getForm();
+        $tranformer = new ZacaciaTransformer();
+        $domain = $tranformer->transDomain($domainLdap);
+
+        $form = $this->createForm(DomainType::class, $domain);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             try{
-                $domainPeer->updateDomain($domain);
+                $domainLdap->setZacaciastatus($domain->getZacaciastatus());
+                $domainPeer->updateDomain($domainLdap);
 
                 return $this->redirectToRoute('_domain', array(
                   'platformid' => $platform->getEntryUUID(),
@@ -203,13 +185,13 @@ class DomainController extends Controller
             $domainPeer->deleteDomain($domainid, true);
             
         } catch (LdapConnectionException $e) {
-          echo "Failed to delete domain!".PHP_EOL;
-          echo $e->getMessage().PHP_EOL;
+            echo "Failed to delete domain!".PHP_EOL;
+            echo $e->getMessage().PHP_EOL;
         }
 
         return $this->redirectToRoute('_domain', array(
-          'platformid' => $platform->getEntryUUID(),
-          'organizationid' => $organization->getEntryUUID(),
+            'platformid' => $platform->getEntryUUID(),
+            'organizationid' => $organization->getEntryUUID(),
         ));
     }
 }

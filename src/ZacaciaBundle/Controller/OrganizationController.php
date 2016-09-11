@@ -101,50 +101,29 @@ class OrganizationController extends Controller
 
         $organizationPeer = new OrganizationPeer($platform->getDn());
         $organization_repository = $organizationPeer->getLdapManager()->getRepository('organization');
-        $organization = $organization_repository->getOrganizationByUUID($organizationid);
+        $organizationLdap = $organization_repository->getOrganizationByUUID($organizationid);
 
-#        var_dump($organization); exit;
+        $tranformer = new ZacaciaTransformer();
+        $organization = $tranformer->transOrganization($organizationLdap);
 
-        $form = $this->createFormBuilder($organization)
-            ->setAction($this->generateUrl('_organization_edit', array(
-                'platformid' => $platform->getEntryUUID(), 
-                'organizationid' => $organization->getEntryUUID()
-            )))
-            ->add('cn', TextType::class, array('label' => 'Name', 'attr' => array('readonly' => 'readonly')))
-            ->add('zacaciastatus', ChoiceType::class, array(
-                'label' => 'Status',
-                'choices' => array(
-                    'Enable' => 'enable',
-                    'Disable' => 'disable',
-            )))
-            ->add('zarafaaccount', ChoiceType::class, array(
-                'label' => 'Account', 
-                'choices' => array(
-                    'Yes' => "1",
-                    'No' => "0",
-            )))
-            ->add('zarafahidden', ChoiceType::class, array(
-                'label' => 'Hidden', 
-                'choices' => array(
-                    'Yes' => "1",
-                    'No' => "0",
-            )))
-            ->add('entryUUID', HiddenType::class)
-            ->add('save', SubmitType::class, array('label' => 'Update Customer'))
-            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
-            ->getForm();
+        $form = $this->createForm(OrganizationType::class, $organization);
+
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             try{
-                $organizationPeer->updateOrganization($organization);
+                $organizationLdap->setZarafaHidden($organization->getZarafaHidden());
+                $organizationLdap->setZarafaAccount($organization->getZarafaAccount());
+                $organizationLdap->setZacaciastatus($organization->getZacaciastatus());
+
+                $organizationPeer->updateOrganization($organizationLdap);
 
                 return $this->redirectToRoute('_organization', array('platformid' => $platform->getEntryUUID()));                
             
             } catch (LdapConnectionException $e) {
-                echo "Failed to update server!".PHP_EOL;
+                echo "Failed to update organization!".PHP_EOL;
                 echo $e->getMessage().PHP_EOL;
             }
         }

@@ -11,54 +11,51 @@
 
 {% block whereiam %}
 <ul class="list-inline">
-  <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
-  <li><h3 class="warning">{{ organization.cn }}</a></h3><small>Customer</small></li>
-  <li><h3 class="warning">Domain</a></h3><small>List</small></li>
+    <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
+    <li><h3 class="warning">{{ organization.cn }}</a></h3><small>Customer</small></li>
+    <li><h3 class="warning">Domain</a></h3><small>List</small></li>
 </ul>
 {% endblock %}
 
 {% block content %}
 <div class="table-responsive">
 
-    <a href="{{ path('_domain_new', {
-      'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">New</a>
+<a href="{{ path('_domain_new', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">New</a>
 
 <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Status</th>
-      <th>Nb Email</th>
-      <th>Created</th>
-      <th>Modified</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Nb Email</th>
+            <th>Created</th>
+            <th>Modified</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
 {% for domain in domains %}
-    <tr>
-      <td>{{ domain.cn }}</td>
-      <td class="{{ domain.zacaciaStatus | lower}}">{{ domain.zacaciaStatus }}</td>
-      <td>{{ domain.nbEmailForDomain }}</td>
-      <td>{{ domain.createTimestamp }}</td>
-      <td>{{ domain.modifyTimestamp }}</td>
-      <td>
-        <a href="{{ path('_domain_edit', {
-          'platformid' : platform.entryUUID, 
-          'organizationid' : organization.entryUUID, 
-          'domainid' : domain.entryUUID} ) }}">Edit</a> | 
-        {% if domain.nbEmailForDomain %}
-        <a id="delete_domain" href="#" class="disable">Delete</a>
-        {% else %}
-        <a id="delete_domain" href="{{ path('_domain_delete', {
-          'platformid' : platform.entryUUID, 
-          'organizationid' : organization.entryUUID, 
-          'domainid' : domain.entryUUID} ) }}">Delete</a>
-        {% endif %}
-      </td>
-    </tr>
+        <tr class="{% if domain.zacaciaStatus == 'disable' %}danger{% endif %}">
+            <td>{{ domain.cn }}</td>
+            <td class="{{ domain.zacaciaStatus | lower}}">{{ domain.zacaciaStatus }}</td>
+            <td>{{ domain.nbEmailForDomain }}</td>
+            <td>{{ domain.createTimestamp }}</td>
+            <td>{{ domain.modifyTimestamp }}</td>
+            <td class="text-center"é>
+                <a href="{{ path('_domain_edit', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'domainid' : domain.entryUUID} ) }}">Edit</a>
+
+                {% if domain.zacaciaStatus == 'disable' and domain.nbEmailForDomain == 0 %}
+                | <a data-href="{{ path('_domain_delete', {'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'domainid' : domain.entryUUID} ) }}" data-confirm="{{ domain.cn }}">Delete</a>
+                {% endif %}
+
+            </td>
+        </tr>
 {% endfor %}
-  </tbody>
+    </tbody>
 </table>
 </div>
+{% endblock %}
+
+{% block zavascripts %}
+<script src= "{{ asset('js/domain/index.js') }}"></script>
 {% endblock %}

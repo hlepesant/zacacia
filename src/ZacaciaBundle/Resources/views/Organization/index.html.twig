@@ -10,53 +10,55 @@
 
 {% block whereiam %}
 <ul class="list-inline">
-  <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
-  <li><h3>Customers</h3><small>List</small></li>
+    <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
+    <li><h3>Customers</h3><small>List</small></li>
 </ul>
 {% endblock %}
 
 {% block content %}
 <div class="table-responsive">
 
-    <a href="{{ path('_organization_new', {'platformid' : platform.entryUUID} ) }}">New</a>
+<a href="{{ path('_organization_new', {'platformid' : platform.entryUUID} ) }}">New</a>
 
 <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Status</th>
-      <th>Created</th>
-      <th>Modified</th>
-      <th>Actions</th>
-      <th>Configure</th>
-    </tr>
-  </thead>
-  <tbody>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Modified</th>
+            <th>Actions</th>
+            <th>Configure</th>
+        </tr>
+    </thead>
+    <tbody>
 {% for organization in organizations %}
-    <tr>
-      <td>{{ organization.ou }}</td>
-      <td class="{{ organization.zacaciaStatus | lower}}">{{ organization.zacaciaStatus }}</td>
-      <td>{{ organization.createTimestamp }}</td>
-      <td>{{ organization.modifyTimestamp }}</td>
-      <td>
-        <a href="{{ path('_organization_edit', {
-          'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Edit</a> | 
-        <a id="delete_organization" href="{{ path('_organization_delete', {
-          'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Delete</a>
-      </td>
-      <td>
-        <a href="{{ path('_domain', {
-          'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Domains</a> | 
-        <a href="{{ path('_user', {
-          'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Users</a> | 
-        <a href="{{ path('_group', {
-          'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Groups</a> |
-        <!-- a href="{#{ path('_forward', {
-          'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }#}">Listes</a -->
-      </td>
-    </tr>
+        <tr class="{% if organization.zacaciaStatus == 'disable' %}danger{% endif %}">
+            <td>{{ organization.ou }}</td>
+            <td class="{{ organization.zacaciaStatus | lower}}">{{ organization.zacaciaStatus }}</td>
+            <td>{{ organization.createTimestamp }}</td>
+            <td>{{ organization.modifyTimestamp }}</td>
+
+            <td class="text-center"é>
+                <a href="{{ path('_organization_edit', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Edit</a>
+                {% if organization.zacaciaStatus == 'disable' %}
+                | <a data-href="{{ path('_organization_delete', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}" data-confirm="{{ organization.ou }}">Delete</a>
+                {% endif %}
+            </td>
+
+            <td class="text-center"é>
+                <a href="{{ path('_domain', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Domains</a>
+                | <a href="{{ path('_user', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Users</a>
+                | <a href="{{ path('_group', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Groups</a>
+                <!-- a href="{#{ path('_forward', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }#}">Listes</a -->
+            </td>
+        </tr>
 {% endfor %}
-  </tbody>
+    </tbody>
 </table>
 </div>
+{% endblock %}
+
+{% block zavascripts %}
+<script src= "{{ asset('js/organization/index.js') }}"></script>
 {% endblock %}

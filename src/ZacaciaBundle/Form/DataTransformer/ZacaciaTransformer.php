@@ -4,6 +4,8 @@ namespace ZacaciaBundle\Form\DataTransformer;
 
 use ZacaciaBundle\Entity\Platform;
 use ZacaciaBundle\Entity\Server;
+use ZacaciaBundle\Entity\Organization;
+use ZacaciaBundle\Entity\Domain;
 
 class ZacaciaTransformer extends Platform {
 
@@ -25,7 +27,24 @@ class ZacaciaTransformer extends Platform {
         $server->setZarafaFilePath($ldapObject->getZarafaFilePath());
         $server->setZarafaHttpPort($ldapObject->getZarafaHttpPort());
         $server->setZarafaSslPort($ldapObject->getZarafaSslPort());
-        # $server->set($ldapObject->get());
         return $server;
+    } 
+
+    public function transOrganization($ldapObject)
+    {
+        $organization = new Organization();
+        $organization->setCn($ldapObject->getCn());
+        $organization->setZacaciastatus($ldapObject->getZacaciastatus());
+        $organization->setZarafaHidden($ldapObject->getZarafaHidden());
+        $organization->setZarafaAccount($ldapObject->getZarafaAccount());
+        return $organization;
+    } 
+
+    public function transDomain($ldapObject)
+    {
+        $domain = new Domain();
+        $domain->setCn($ldapObject->getCn());
+        $domain->setZacaciastatus($ldapObject->getZacaciastatus());
+        return $domain;
     } 
 } 

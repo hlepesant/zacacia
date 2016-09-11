@@ -11,9 +11,9 @@
 
 {% block whereiam %}
 <ul class="list-inline">
-  <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
-  <li><h3 class="warning">{{ organization.cn }}</a></h3><small>Customer:Edit</small></li>
-  <li><h3 class="warning">Domain</a></h3><small>New</small></li>
+    <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
+    <li><h3 class="warning">{{ organization.cn }}</a></h3><small>Customer:Edit</small></li>
+    <li><h3 class="warning">Domain</a></h3><small>New</small></li>
 </ul>
 {% endblock %}
 
@@ -24,10 +24,11 @@
 
 <div class="row">
     <div class="col-md-12">
-	    <fieldset class="form-group">
+	    <fieldset class="form-group has-feedback">
 	    	{{  form_label(form.cn) }}
 	    	{{ form_errors(form.cn) }}
 	    	{{ form_widget(form.cn, {'attr': {'class': 'form-control'}}) }}
+            <span id="glyphicon_{{ form.cn.vars.id }}" class="glyphicon form-control-feedback" aria-hidden="true"></span>
 	    </fieldset>
     </div>
 </div>
@@ -45,11 +46,12 @@
 <div class="row">
     <div class="col-md-12">
 	    <fieldset class="form-group">
-            {{ form_widget(form.cancel, {'attr': {'class':  'btn btn-primary' }}) }}
-	    	{{ form_widget(form.save, {'attr': {'class':  'btn btn-primary'}}) }}
+            <button type="button" id="form_cancel" class="btn btn-primary">{% trans %}Cancel{% endtrans %}</button>
+            <button type="submit" id="form_save" class="btn btn-primary hidden">{% trans %}Create Domain{% endtrans %}</button>
 	    </fieldset>
     </div>
 </div>
+
 
 {{ form_end(form) }}
 
