@@ -53,9 +53,9 @@
 <div class="row">
     <div class="col-md-12">
 	    <fieldset class="form-group">
-            {{  form_label(form.username, '', {'label_attr': {'class': 'control-label', 'for': form.username.vars.id}}) }}
-	    	{{ form_errors(form.username) }}
-	    	{{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+            {{  form_label(form.uid, '', {'label_attr': {'class': 'control-label', 'for': form.uid.vars.id}}) }}
+	    	{{ form_errors(form.uid) }}
+	    	{{ form_widget(form.uid, {'attr': {'class': 'form-control'}}) }}
 	    </fieldset>
     </div>
 </div>
@@ -63,9 +63,9 @@
 <div class="row">
     <div class="col-md-6">
 	    <fieldset class="form-group">
-	    	{{  form_label(form.password, '', {'label_attr': {'class': 'control-label', 'for': form.password.vars.id}}) }}
-	    	{{ form_errors(form.password) }}
-	    	{{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+	    	{{  form_label(form.userpassword, '', {'label_attr': {'class': 'control-label', 'for': form.userpassword.vars.id}}) }}
+	    	{{ form_errors(form.userpassword) }}
+	    	{{ form_widget(form.userpassword, {'attr': {'class': 'form-control'}}) }}
 	    </fieldset>
     </div>
 
@@ -162,6 +162,15 @@
                 <div class="input-group-addon">Mb</div>
             </div>
         </fieldset>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+	    <fieldset class="form-group">
+            <button type="button" id="form_cancel" class="btn btn-primary">{% trans %}Cancel{% endtrans %}</button>
+            <button type="submit" id="form_save" class="btn btn-primary hidden">{% trans %}Create User{% endtrans %}</button>
+	    </fieldset>
     </div>
 </div>
 

@@ -14,20 +14,23 @@ use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
 class UserType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->domainChoices = $options['domain_choices'];
+
         $builder 
             ->add('sn', TextType::class, array('label' => 'Surname'))
             ->add('givenname', TextType::class, array('label' => 'Givenname'))
             ->add('displayname', TextType::class, array('label' => 'Display Name'))
             ->add('email', TextType::class, array('label' => 'Email'))
-#            ->add('domain', ChoiceType::class, array(
-#              'label' => 'Domain',
-#              'placeholder' => false,
-#              'choices' => $domain_repository->getAllDomainsAsChoice()
-#            ))
-            ->add('username', TextType::class, array('label' => 'Username'))
-            ->add('password', PasswordType::class, array('label' => 'Password'))
+            ->add('domain', ChoiceType::class, array(
+                'label' => 'Domain',
+                'placeholder' => false,
+                'choices' => $this->domainChoices
+            ))
+            ->add('uid', TextType::class, array('label' => 'Username'))
+            ->add('userpassword', PasswordType::class, array('label' => 'Password'))
             ->add('confpass', PasswordType::class, array('label' => 'Confirm Password'))
             ->add('zacaciastatus', ChoiceType::class, array(
                 'label' => 'Status',
@@ -53,19 +56,9 @@ class UserType extends AbstractType
                     'No' => "0",
                     'Yes' => "1",
             )))
-
-            ->add('domain', ChoiceType::class, array(
-               'label' => 'Domain',
-               'placeholder' => false,
-              // 'choices' => $domain_repository->getAllDomainsAsChoice()
-            ))
-
-            ->add('zarafaquotasoft', TextType::class, array('label' => 'Soft Quota'))
-            ->add('zarafaquotawarn', TextType::class, array('label' => 'Warn Quota'))
-            ->add('zarafaquotahard', TextType::class, array('label' => 'Hard Quota'))
-
-            #->add('platform', HiddenType::class, array('data' => $platform->getEntryUUID()))
-            #->add('organization', HiddenType::class, array('data' => $organization->getEntryUUID()))
+            ->add('zarafaquotasoft', TextType::class, array('label' => 'Soft Quota', 'required' => false))
+            ->add('zarafaquotawarn', TextType::class, array('label' => 'Warn Quota', 'required' => false))
+            ->add('zarafaquotahard', TextType::class, array('label' => 'Hard Quota', 'required' => false))
 
             ->add('platform', HiddenType::class)
             ->add('organization', HiddenType::class)
@@ -76,6 +69,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'ZacaciaBundle\Entity\User',
+            'domain_choices' => array(),
         ));
     }
 

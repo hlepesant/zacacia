@@ -6,14 +6,39 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class User extends ZacaciaObject
 {
+    protected $cn;
     /**
     * @Assert\NotBlank()
     */
-    protected $cn;
+    protected $sn;
+    /**
+    * @Assert\NotBlank()
+    */
+    protected $givenname;
+    /**
+    * @Assert\NotBlank()
+    */
+    protected $displayname;
+    /**
+    * @Assert\NotBlank()
+    */
+    protected $uid;
+    /**
+    * @Assert\NotBlank()
+    */
+    protected $email;
+    protected $userpassword;
+    protected $zarafaquotaoverride;
     
     protected $zacaciaStatus;
+    protected $zarafaAccount;
+    protected $zarafaHidden;
     protected $entryUUID;
-    protected $objectclass = [ 'top', 'organizationalRole', 'zacaciaDomain'];
+    protected $gidNumber = 10001;
+    protected $uidNumber = 10001;
+    protected $objectclass = ['top', 'posixAccount', 'inetOrgPerson', 'zarafa-user', 'zacaciaUser'];
+    protected $homeDirectory = '/dev/null';
+    protected $loginShell = '/bin/false';
 
     function getObjectclass()
     {
@@ -30,6 +55,150 @@ class User extends ZacaciaObject
     {
         return $this->cn;
     }
+
+    function setSn($sn)
+    {
+        $this->sn = parent::arrayToString($sn);
+        return $this;
+    }
+
+    function getSn()
+    {
+        return $this->sn;
+    }
+
+    function setGivenname($givenname)
+    {
+        $this->givenname = parent::arrayToString($givenname);
+        return $this;
+    }
+
+    function getGivenname()
+    {
+        return $this->givenname;
+    }
+
+    function setDisplayname($displayname)
+    {
+        $this->displayname = parent::arrayToString($displayname);
+        return $this;
+    }
+
+    function getDisplayname()
+    {
+        return $this->displayname;
+    }
+
+    function setUid($uid)
+    {
+        $this->uid = parent::arrayToString($uid);
+        return $this;
+    }
+
+    function getUid()
+    {
+        return $this->uid;
+    }
+
+    function setUserPassword($password)
+    {
+        $this->password = self::hash_password(parent::arrayToString($password));
+        return $this;
+    }
+
+    function getUserPassword()
+    {
+        return $this->password;
+    }
+
+    function setEmail($email)
+    {
+        $this->email = parent::arrayToString($email);
+        return $this;
+    }
+
+    function getEmail()
+    {
+        return $this->email;
+    }
+
+    function getZarafaAccount()
+    {
+        return $this->zarafaAccount;
+    }
+
+    function setZarafaAccount($zarafaAccount)
+    {
+        $this->zarafaAccount = parent::arrayToString($zarafaAccount);
+        return $this;        
+    }
+
+    function getZarafaHidden()
+    {
+        return $this->zarafaHidden;
+    }
+
+    function setZarafaHidden($zarafaHidden)
+    {
+        $this->zarafaHidden = parent::arrayToString($zarafaHidden);
+        return $this;        
+    }
+
+    function getZarafaQuotaOverride()
+    {
+        return $this->zarafaquotaoverride;
+    }
+
+    function setZarafaQuotaOverride($zarafaquotaoverride)
+    {
+        $this->zarafaquotaoverride = parent::arrayToString($zarafaquotaoverride);
+        return $this;        
+    }
+
+    function setUidNumber($uidNumber)
+    {
+        $this->uid = parent::arrayToString($uidNumber);
+        return $this;
+    }
+
+    function getUidNumber()
+    {
+        return $this->uidNumber;
+    }
+
+    function setGidNumber($gidNumber)
+    {
+        $this->gidNumber = parent::arrayToString($gidNumber);
+        return $this;
+    }
+
+    function getGidNumber()
+    {
+        return $this->gidNumber;
+    }
+
+    function setHomeDirectory($homeDirectory)
+    {
+        $this->homeDirectory = parent::arrayToString($homeDirectory);
+        return $this;
+    }
+
+    function getHomeDirectory()
+    {
+        return $this->homeDirectory;
+    }
+
+    function setLoginShell($loginShell)
+    {
+        $this->loginShell = parent::arrayToString($loginShell);
+        return $this;
+    }
+
+    function getLoginShell()
+    {
+        return $this->loginShell;
+    }
+
 
     function setZacaciaStatus($status)
     {
@@ -51,5 +220,11 @@ class User extends ZacaciaObject
     {
         $this->entryUUID = parent::arrayToString($uuid);
         return $this;        
+    }
+
+    private function hash_password($password) // SSHA with random 4-character salt
+    {
+        $salt = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',4)),0,4);
+        return '{SSHA}' . base64_encode(sha1( $password.$salt, TRUE ). $salt);
     }
 }

@@ -43,6 +43,11 @@ class OrganizationController extends Controller
         $organization_repository = $organizationPeer->getLdapManager()->getRepository('organization');
         $organizations = $organization_repository->getAllOrganizations();
 
+        foreach ($organizations as $organization) {
+          $nbdomain = $organizationPeer->countDomainForOrganization($organization->getDn());
+          $organization->setNumberOfDomain($nbdomain);
+        }
+
         return $this->render('ZacaciaBundle:Organization:index.html.twig', array(
             'platform' => $platform,
             'organizations' => $organizations,
@@ -107,7 +112,6 @@ class OrganizationController extends Controller
         $organization = $tranformer->transOrganization($organizationLdap);
 
         $form = $this->createForm(OrganizationType::class, $organization);
-
 
         $form->handleRequest($request);
 

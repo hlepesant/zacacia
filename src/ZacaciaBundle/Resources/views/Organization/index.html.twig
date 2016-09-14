@@ -48,8 +48,10 @@
 
             <td class="text-center"é>
                 <a href="{{ path('_domain', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Domains</a>
+                {% if organization.getNumberOfDomain %}
                 | <a href="{{ path('_user', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Users</a>
                 | <a href="{{ path('_group', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">Groups</a>
+                {% endif %}
                 <!-- a href="{#{ path('_forward', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }#}">Listes</a -->
             </td>
         </tr>

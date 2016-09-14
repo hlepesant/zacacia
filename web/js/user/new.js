@@ -1,38 +1,32 @@
 $(document).ready(function(){
 
-//  function ShowHide(check_values){
-//    console.log( "check_values = " + check_values );
-//    if ( check_values ) {
-//      console.log( "show #form_save" );
-//      $('#form_save').show();
-//    } else {
-//      console.log( "hide #form_save" );
-//      $('#form_save').hide();
-//    }
-//  }
-//
-
     var override_quota = 0;
     var quota_is_ok = 1;
 
     function validateForm() {
         form_is_valid = false;
     
-        if ( $('#form_sn').val().length ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = sn"); }
-        if ( $('#form_givenname').val().length ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = givenname"); }
-        if ( $('#form_displayname').val().length ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = displayname"); }
-        if ( $('#form_username').val().length ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = username"); }
-        if ( $('#form_password').val().length ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = password"); }
-        if ( $('#form_password').val() == $('#form_confpass').val() ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = confpass"); }
-
         if ( (!override_quota) || (quota_is_ok) )  { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = quota"); }
+
+        if ( $('#form_sn').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = sn"); }
+        if ( $('#form_givenname').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = givenname"); }
+        if ( $('#form_displayname').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = displayname"); }
+        if ( $('#form_uid').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = uid"); }
+        if ( $('#form_userpassword').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = userpassword"); }
+        if ( $('#form_confpass').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = confpass"); }
+
+        // if ( $('#form_zarafaquotaoverride').val() == 1 ) {
+        //     if ( $('#form_zarafaquotasoft').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = zarafaquotasoft"); }
+        //     if ( $('#form_zarafaquotawarn').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = zarafaquotawarn"); }
+        //     if ( $('#form_zarafaquotahard').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = zarafaquotahard"); }
+        // }
 
         console.log( "form is valid = " + form_is_valid);
     
         if ( form_is_valid ) {
-            $('#form_save').show();
+            $('#form_save').removeClass('hidden').show();
         } else {
-            $('#form_save').hide();
+            $('#form_save').addClass('hidden').hide();
         }
     }
 
@@ -158,32 +152,32 @@ $(document).ready(function(){
             })
             .always(function() {
                 validateForm()
-                $('#form_username').val(sn.slice(0,1).toLowerCase() + givenname.toLowerCase());
+                $('#form_uiserd').val(sn.slice(0,1).toLowerCase() + givenname.toLowerCase());
                 $('#form_email').val(sn.toLowerCase() + '.' + givenname.toLowerCase());
             });
         }
     });
   
-    $('#form_username').on('blur change click focus', function(){
+    $('#form_uid').on('blur change click focus', function(){
     
-        var username = ($('#form_username').val());
-        if ( username.length ) {
+        var uid = ($('#form_uid').val());
+        if ( uid.length ) {
             event.preventDefault();
-            $.getJSON('/api/check/username/' + platform + '/' + organization + '/' + username, function(data){
-                var username_exist = data['data'];
-                console.log( "username_exist = " + username_exist );
-                if ( username_exist == "0" ) {
-                    console.log( "username is free");
-                    $('#form_username').parent("fieldset.form-group").removeClass('has-error')
-                    $('#form_username').parent("fieldset.form-group").addClass('has-success');
+            $.getJSON('/api/check/username/' + platform + '/' + organization + '/' + uid, function(data){
+                var uid_exist = data['data'];
+                console.log( "uid_exist = " + uid_exist );
+                if ( uid_exist == "0" ) {
+                    console.log( "uid is free");
+                    $('#form_uid').parent("fieldset.form-group").removeClass('has-error')
+                    $('#form_uid').parent("fieldset.form-group").addClass('has-success');
                 } else {
-                    console.log( "username is used");
-                    $('#form_username').parent("fieldset.form-group").removeClass('has-success')
-                    $('#form_username').parent("fieldset.form-group").addClass('has-error');
+                    console.log( "uid is used");
+                    $('#form_uid').parent("fieldset.form-group").removeClass('has-success')
+                    $('#form_uid').parent("fieldset.form-group").addClass('has-error');
                 }
             })
             .fail(function() {
-                console.log( "fail to get data for username" );
+                console.log( "fail to get data for uid" );
             })
             .always(function() {
                 validateForm()
@@ -191,21 +185,21 @@ $(document).ready(function(){
         }
     });
 
-    $('#form_password').on('change blur', function(){
-        console.log( "password length = " + $('#form_password').val().length );
-        if ( $('#form_password').val().length == 0 ) {
+    $('#form_userpassword').on('change blur', function(){
+        console.log( "userpassword length = " + $('#form_userpassword').val().length );
+        if ( $('#form_userpassword').val().length == 0 ) {
             $('#form_confpass').parent("fieldset.form-group").removeClass('has-success')
-            $('#form_password').parent("fieldset.form-group").addClass('has-error')
+            $('#form_userpassword').parent("fieldset.form-group").addClass('has-error')
         } else {
             $('#form_confpass').parent("fieldset.form-group").removeClass('has-error')
-            $('#form_password').parent("fieldset.form-group").addClass('has-success')
+            $('#form_userpassword').parent("fieldset.form-group").addClass('has-success')
             validateForm()
         }
     });
 
     $('#form_confpass').on('change blur focus', function(){
-        if ( $('#form_password').val() == $('#form_confpass').val() ) {
-            console.log( "password match");
+        if ( $('#form_userpassword').val() == $('#form_confpass').val() ) {
+            console.log( "userpassword match");
             $('#form_confpass').parent("fieldset.form-group").removeClass('has-error')
             $('#form_confpass').parent("fieldset.form-group").addClass('has-success')
             validateForm()

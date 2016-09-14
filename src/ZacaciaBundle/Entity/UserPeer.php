@@ -35,28 +35,38 @@ class UserPeer
 
     public function getBaseDn()
     {
-        $default_user = $this->config->getDefaultUser();
-        $user_config = $this->config->getUserConfiguration($default_user);
+        $default_domain = $this->config->getDefaultDomain();
+        $user_config = $this->config->getDomainConfiguration($default_domain);
         return $user_config->getBaseDn();
     }
 
     public function createUser($user)
     {
         $dn = sprintf("cn=%s,ou=Users,%s", $user->getCn(), self::getBaseDn());
-/*
-        $user->setDn($dn);
-        var_dump($user);
-        $this->ldapmanager->persist($user);
-        return;
-*/
+
         $ldapObject = $this->ldapmanager->createLdapObject();
         $ldapObject->create('user')
             ->setDn($dn)
             ->in(self::getBaseDn())
             ->with([
-                'objectClass'   => $user->getObjectclass(),
-                'cn'            => $user->getCn(),
-                'zacaciaStatus' => $user->getZacaciaStatus(),
+                'objectClass'           => $user->getObjectclass(),
+                'cn'                    => $user->getCn(),
+                'displayName'           => $user->getDisplayName(),
+                'mail'                  => $user->getEmail(),
+                'gidNumber'             => $user->getGidNumber(),
+                'givenName'             => $user->getGivenName(),
+                'homeDirectory'         => $user->getHomeDirectory(),
+                'loginShell'            => $user->getLoginShell(),
+                'userpassword'          => $user->getUserPassword(),
+                'sn'                    => $user->getSn(),
+                'uidNumber'             => $user->getUidNumber(),
+                'uid'                   => $user->getUid(),
+                'zacaciaStatus'         => $user->getZacaciaStatus(),
+                'zarafaAccount'         => $user->getZarafaAccount(),
+                'zarafaQuotaOverride'   => $user->getZarafaQuotaOverride(),
+                'zarafaQuotaSoft'       => $user->getZarafaQuotaSoft(),
+                'zarafaQuotaWarn'       => $user->getZarafaQuotaWarn(),
+                'zarafaQuotaHard'       => $user->getZarafaQuotaHard(),
             ])
             ->execute();
         return;
@@ -77,32 +87,4 @@ class UserPeer
 
         return;
     }
-/*
-    public function countEmailForUser($name)
-    {
-        $this->config = (new Configuration())->load(__DIR__."/../Resources/config/zacacia.yml");
-        $this->ldapmanager = new LdapManager($this->config);
-
-        $base_dn = $this->config->getUserConfiguration($this->config->getDefaultUser())->getBaseDn();
-
-        $query = $this->ldapmanager->buildLdapQuery();
-
-        $results = $query->select('entryUUID')
-            ->setBaseDn($base_dn)
-            ->where(['objectClass' => 'top'])
-            ->andWhere(['objectClass' => 'posixAccount'])
-            ->andWhere(['objectClass' => 'inetOrgPerson'])
-            ->andWhere(['objectClass' => 'zarafa-user'])
-            ->andWhere(['objectClass' => 'zacaciaUser'])
-            ->andWhere(new bOr(
-              new Wildcard('mail', Wildcard::ENDS_WITH, $name),
-              new Wildcard('zarafaAliases', Wildcard::ENDS_WITH, $name)
-            ))
-            ->setScopeSubTree()
-            ->getLdapQuery()
-            ->execute();
-
-        return(count($results));
-    }
- */
 }

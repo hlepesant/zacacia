@@ -203,8 +203,6 @@ class ApiController extends Controller
 
       $base_dn = sprintf('ou=Users,%s', $organization->getDn());
       
-      #$name = $request->attributes->get('name');
-
       $userPeer =  new UserPeer($base_dn);
       $users = $userPeer->getLdapManager()->getRepository('user')->getUserByDisplayname($name);
 

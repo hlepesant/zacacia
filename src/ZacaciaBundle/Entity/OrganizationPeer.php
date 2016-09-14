@@ -189,6 +189,7 @@ class OrganizationPeer
         $query = $this->ldapmanager->buildLdapQuery();
         $results = $query->select('entryUUID')
             ->where(['objectClass' => 'top'])
+            ->orderBy('createTimestamp', 'ASC')
             ->setBaseDn($dn)
             ->setScopeSubTree()
             ->getLdapQuery()
@@ -211,12 +212,38 @@ class OrganizationPeer
             $query = $this->ldapmanager->buildLdapQuery();
             $object = $query->select('entryUUID')
                 ->Where(['entryUUID' => $item['uuid']])
+                ->orderBy('createTimestamp', 'ASC')
                 ->setBaseDn($dn)
                 ->setScopeSubTree()
                 ->getLdapQuery()
                 ->getOneOrNullResult();
-            $this->ldapmanager->delete($object);
+
+            try {
+                $this->ldapmanager->delete($object);
+            } catch (LdapConnectionException $e) {
+                echo "DN = ".$object->getDn()."<br/>\n";
+                echo "Failed to delete organization!".PHP_EOL;
+                echo $e->getMessage().PHP_EOL;
+            }
         }
         return true;
+    }
+
+    public function countDomainForOrganization($organizationDn)
+    {
+        $base_dn = sprintf('ou=Domains,%s', $organizationDn);
+
+        $query = $this->ldapmanager->buildLdapQuery();
+
+        $results = $query->select('cn')
+            ->setBaseDn($base_dn)
+            ->where(['objectClass' => 'top'])
+            ->andWhere(['objectClass' => 'organizationalRole'])
+            ->andWhere(['objectClass' => 'zacaciaDomain'])
+            ->setScopeSubTree()
+            ->getLdapQuery()
+            ->execute();
+
+        return(count($results));
     }
 }
