@@ -60,8 +60,9 @@ class UserType extends AbstractType
             ->add('zarafaquotawarn', TextType::class, array('label' => 'Warn Quota', 'required' => false))
             ->add('zarafaquotahard', TextType::class, array('label' => 'Hard Quota', 'required' => false))
 
-            ->add('platform', HiddenType::class)
-            ->add('organization', HiddenType::class)
+            ->add('platformid', HiddenType::class)
+            ->add('organizationid', HiddenType::class)
+            ->add('userid', HiddenType::class)
             ;
     }
 

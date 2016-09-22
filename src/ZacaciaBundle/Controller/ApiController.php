@@ -206,7 +206,6 @@ class ApiController extends Controller
       $userPeer =  new UserPeer($base_dn);
       $users = $userPeer->getLdapManager()->getRepository('user')->getUserByDisplayname($name);
 
-
       $response = new JsonResponse();
 
       $response->setData(array(
@@ -235,11 +234,49 @@ class ApiController extends Controller
         $emails = $userPeer->getLdapManager()->getRepository('user')->getUserByEmail($email);
         
         $response = new JsonResponse();
-        
         $response->setData(array(
         	'data' => count($emails)
           ));
         
           return $response;
+    }
+
+    /**
+     * @Route("/check/edituseremail/{userid}/{email}", name="_check_edituseremail", requirements={
+     *   "userid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+     *   "email": ".+"
+     * })
+     * @Method({"GET","HEAD"})
+     */
+    public function checkedituseremailAction(Request $request, $userid, $email)
+    {
+        $config = (new Configuration())->load(__DIR__."/../Resources/config/zacacia.yml");
+        $ldapmanager = new LdapManager($config);
+        $default_domain = $config->getDefaultDomain();
+        $domain_config = $config->getDomainConfiguration($default_domain);
+        $base_dn = $domain_config->getBaseDn();
+
+        $userPeer = new UserPeer($base_dn);
+
+        $emails = $userPeer->getLdapManager()->getRepository('user')->getUserByEmail($email);
+        
+        if ( count($emails) == 1 )
+        { 
+            foreach( $emails as $email ) {
+               $user = $email;
+            }
+
+            if ( $userid == $user->getEntryUUID() ) { $count = 0; }
+
+        } else {
+            $count = count($emails);
+        }
+
+        $response = new JsonResponse();
+        $response->setData(array(
+        	'data' => $count
+        ));
+        
+        return $response;
     }
 }

@@ -26,6 +26,7 @@ use ZacaciaBundle\Entity\DomainPeer;
 use ZacaciaBundle\Entity\User;
 use ZacaciaBundle\Entity\UserPeer;
 use ZacaciaBundle\Form\UserType;
+use ZacaciaBundle\Form\ChangePwdType;
 
 use ZacaciaBundle\Form\DataTransformer\ZacaciaTransformer;
 
@@ -78,15 +79,10 @@ class UserController extends Controller
 
         $user = new User();
         $user->setZacaciastatus("enable");
-        $user->setPlatform( $platform->getEntryUUID() );
-        $user->setOrganization( $organization->getEntryUUID() );
+        $user->setPlatformId($platform->getEntryUUID());
+        $user->setOrganizationId($organization->getEntryUUID());
 
         $form = $this->createForm(UserType::class, $user, array(
-#            'action' => $this->generateUrl('_user_new', array(
-#                'platformid' => $platform->getEntryUUID(),
-#                'organizationid' => $organization->getEntryUUID(),
-#            )),
-#            'method' => 'POST',
             'domain_choices' => $domain_repository->getAllDomainsAsChoice(),
          ));
 
@@ -139,31 +135,38 @@ class UserController extends Controller
 
         $userPeer = new UserPeer($organization->getDn());
         $user_repository = $userPeer->getLdapManager()->getRepository('user');
-        $user = $user_repository->getUserByUUID($userid);
+        $userLdap = $user_repository->getUserByUUID($userid);
 
-        $form = $this->createFormBuilder($user)
-            ->setAction($this->generateUrl('_user_edit', array(
-              'platformid' => $platform->getEntryUUID(),
-              'organizationid' => $organization->getEntryUUID(),
-              'userid' => $user->getEntryUUID(),
-            )))
-            ->add('cn', TextType::class, array('label' => 'Name', 'attr' => array('readonly' => 'readonly')))
-            ->add('zacaciastatus', ChoiceType::class, array(
-                'label' => 'Status',
-                'choices' => array(
-                    'Enable' => 'enable',
-                    'Disable' => 'disable',
-            )))
-            ->add('save', SubmitType::class, array('label' => 'Update User'))
-            ->add('cancel', ButtonType::class, array('label' => 'Cancel'))
-            ->getForm();
+        $domainPeer =  new DomainPeer($organization->getDn());
+        $domain_repository = $domainPeer->getLdapManager()->getRepository('domain');
+
+        $tranformer = new ZacaciaTransformer();
+        $user = $tranformer->transUser($userLdap, $platform, $organization);
+
+        $form = $this->createForm(UserType::class, $user, array(
+            'domain_choices' => $domain_repository->getAllDomainsAsChoice(),
+         ));
+
+        $form->remove('displayname');
+        $form->remove('uid');
+        $form->remove('userpassword');
+        $form->remove('confpass');
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             try{
-                $userPeer->updateUser($user);
+
+                $userLdap->setSn($user->getSn());
+                $userLdap->setGivenName($user->getGivenName());
+                $userLdap->setMail(sprintf('%s@%s', $user->getEmail(), $user->getDomain()));
+
+                $userLdap->setZarafaHidden($user->getZarafaHidden());
+                $userLdap->setZarafaAccount($user->getZarafaAccount());
+                $userLdap->setZacaciastatus($user->getZacaciastatus());
+
+                $userPeer->updateUser($userLdap);
 
                 return $this->redirectToRoute('_user', array(
                   'platformid' => $platform->getEntryUUID(),
@@ -177,6 +180,129 @@ class UserController extends Controller
         }
 
         return $this->render('ZacaciaBundle:User:edit.html.twig', array(
+            'platform' => $platform,
+            'organization' => $organization,
+            'user' => $user,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/user/{platformid}/{organizationid}/{userid}/alias", name="_user_alias", requirements={
+     *     "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+     *     "organizationid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+     *     "userid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
+     * })
+     */
+    public function aliasAction(Request $request, $platformid, $organizationid, $userid)
+    {
+        $platform_repository = (new PlatformPeer())->getLdapManager()->getRepository('platform');
+        $platform = $platform_repository->getPlatformByUUID($platformid);
+
+        $organizationPeer = new OrganizationPeer($platform->getDn());
+        $organization_repository = $organizationPeer->getLdapManager()->getRepository('organization');
+        $organization = $organization_repository->getOrganizationByUUID($organizationid);
+
+        $userPeer = new UserPeer($organization->getDn());
+        $user_repository = $userPeer->getLdapManager()->getRepository('user');
+        $userLdap = $user_repository->getUserByUUID($userid);
+
+        $domainPeer =  new DomainPeer($organization->getDn());
+        $domain_repository = $domainPeer->getLdapManager()->getRepository('domain');
+
+        $tranformer = new ZacaciaTransformer();
+        $user = $tranformer->transUser($userLdap, $platform, $organization);
+
+        $form = $this->createForm(UserType::class, $user, array(
+            'domain_choices' => $domain_repository->getAllDomainsAsChoice(),
+         ));
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            try{
+
+                $userLdap->setSn($user->getSn());
+                $userLdap->setGivenName($user->getGivenName());
+                $userLdap->setMail(sprintf('%s@%s', $user->getEmail(), $user->getDomain()));
+
+                $userLdap->setZarafaHidden($user->getZarafaHidden());
+                $userLdap->setZarafaAccount($user->getZarafaAccount());
+                $userLdap->setZacaciastatus($user->getZacaciastatus());
+
+                $userPeer->updateUser($userLdap);
+
+                return $this->redirectToRoute('_user', array(
+                  'platformid' => $platform->getEntryUUID(),
+                  'organizationid' => $organization->getEntryUUID(),
+                ));
+            
+            } catch (LdapConnectionException $e) {
+                echo "Failed to update user!".PHP_EOL;
+                echo $e->getMessage().PHP_EOL;
+            }
+        }
+
+        return $this->render('ZacaciaBundle:User:edit.html.twig', array(
+            'platform' => $platform,
+            'organization' => $organization,
+            'user' => $user,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/user/{platformid}/{organizationid}/{userid}/password", name="_user_password", requirements={
+     *     "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+     *     "organizationid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+     *     "userid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
+     * })
+     */
+    public function passwordAction(Request $request, $platformid, $organizationid, $userid)
+    {
+        $platform_repository = (new PlatformPeer())->getLdapManager()->getRepository('platform');
+        $platform = $platform_repository->getPlatformByUUID($platformid);
+
+        $organizationPeer = new OrganizationPeer($platform->getDn());
+        $organization_repository = $organizationPeer->getLdapManager()->getRepository('organization');
+        $organization = $organization_repository->getOrganizationByUUID($organizationid);
+
+        $userPeer = new UserPeer($organization->getDn());
+        $user_repository = $userPeer->getLdapManager()->getRepository('user');
+        $userLdap = $user_repository->getUserByUUID($userid);
+
+        $domainPeer =  new DomainPeer($organization->getDn());
+        $domain_repository = $domainPeer->getLdapManager()->getRepository('domain');
+
+        $tranformer = new ZacaciaTransformer();
+        $user = $tranformer->transUser($userLdap, $platform, $organization);
+        # print_r( $user ); exit;
+
+        $form = $this->createForm(ChangePwdType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            try{
+
+                $userLdap->setuserPassword($user->getPassword());
+
+                $userPeer->updateUser($userLdap);
+
+                return $this->redirectToRoute('_user', array(
+                  'platformid' => $platform->getEntryUUID(),
+                  'organizationid' => $organization->getEntryUUID(),
+                ));
+            
+            } catch (LdapConnectionException $e) {
+                echo "Failed to update user!".PHP_EOL;
+                echo $e->getMessage().PHP_EOL;
+            }
+        }
+
+        return $this->render('ZacaciaBundle:User:password.html.twig', array(
             'platform' => $platform,
             'organization' => $organization,
             'user' => $user,
@@ -201,8 +327,8 @@ class UserController extends Controller
         $organization = $organization_repository->getOrganizationByUUID($organizationid);
 
         try {
-            $userPeer =  new UserPeer($organization->getDn());
-            $userPeer->deleteOrganization($userid, true);
+            $userPeer = new UserPeer($organization->getDn());
+            $userPeer->deleteUser($userid, true);
             
         } catch (LdapConnectionException $e) {
           echo "Failed to delete user!".PHP_EOL;
@@ -210,8 +336,8 @@ class UserController extends Controller
         }
 
         return $this->redirectToRoute('_user', array(
-          'platform' => $platform->getEntryUUID(),
-          'organization' => $organization->getEntryUUID(),
+          'platformid' => $platform->getEntryUUID(),
+          'organizationid' => $organization->getEntryUUID(),
         ));
     }
 }

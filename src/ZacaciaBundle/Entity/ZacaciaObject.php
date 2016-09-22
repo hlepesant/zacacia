@@ -59,6 +59,13 @@ class ZacaciaObject extends LdapObject
         if (count($val) == 0 ) return $val[0];
         return implode($val);
     }
+
+    protected function arrayToInteger($val)
+    {
+        if ( ! is_array($val)) return (int)$val;
+        if (count($val) == 0 ) return (int)$val[0];
+        return 0;
+    }
 /*
     public function deHydrate()
     {

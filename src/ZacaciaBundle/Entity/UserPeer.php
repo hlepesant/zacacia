@@ -62,6 +62,7 @@ class UserPeer
                 'uidNumber'             => $user->getUidNumber(),
                 'uid'                   => $user->getUid(),
                 'zacaciaStatus'         => $user->getZacaciaStatus(),
+                'zarafaHidden'          => $user->getZarafaHidden(),
                 'zarafaAccount'         => $user->getZarafaAccount(),
                 'zarafaQuotaOverride'   => $user->getZarafaQuotaOverride(),
                 'zarafaQuotaSoft'       => $user->getZarafaQuotaSoft(),

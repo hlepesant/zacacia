@@ -27,8 +27,13 @@ class User extends ZacaciaObject
     * @Assert\NotBlank()
     */
     protected $email;
+    protected $mail;
+    protected $domain;
     protected $userpassword;
     protected $zarafaquotaoverride;
+    protected $zarafaquotasoft;
+    protected $zarafaquotawarn;
+    protected $zarafaquotahard;
     
     protected $zacaciaStatus;
     protected $zarafaAccount;
@@ -39,6 +44,9 @@ class User extends ZacaciaObject
     protected $objectclass = ['top', 'posixAccount', 'inetOrgPerson', 'zarafa-user', 'zacaciaUser'];
     protected $homeDirectory = '/dev/null';
     protected $loginShell = '/bin/false';
+    protected $platformid;
+    protected $organizationid;
+    protected $userid;
 
     function getObjectclass()
     {
@@ -111,6 +119,17 @@ class User extends ZacaciaObject
         return $this->password;
     }
 
+    function setMail($email)
+    {
+        $this->mail = parent::arrayToString($email);
+        return $this;
+    }
+
+    function getMail()
+    {
+        return $this->mail;
+    }
+
     function setEmail($email)
     {
         $this->email = parent::arrayToString($email);
@@ -120,6 +139,17 @@ class User extends ZacaciaObject
     function getEmail()
     {
         return $this->email;
+    }
+
+    function setDomain($domain)
+    {
+        $this->domain = parent::arrayToString($domain);
+        return $this;
+    }
+
+    function getDomain()
+    {
+        return $this->domain;
     }
 
     function getZarafaAccount()
@@ -152,6 +182,39 @@ class User extends ZacaciaObject
     function setZarafaQuotaOverride($zarafaquotaoverride)
     {
         $this->zarafaquotaoverride = parent::arrayToString($zarafaquotaoverride);
+        return $this;        
+    }
+
+    function getZarafaQuotaSoft()
+    {
+        return $this->zarafaquotasoft;
+    }
+
+    function setZarafaQuotaSoft($zarafaquotasoft)
+    {
+        $this->zarafaquotasoft = parent::arrayToString($zarafaquotasoft);
+        return $this;        
+    }
+
+    function getZarafaQuotaWarn()
+    {
+        return $this->zarafaquotawarn;
+    }
+
+    function setZarafaQuotaWarn($zarafaquotawarn)
+    {
+        $this->zarafaquotawarn = parent::arrayToString($zarafaquotawarn);
+        return $this;        
+    }
+
+    function getZarafaQuotaHard()
+    {
+        return $this->zarafaquotahard;
+    }
+
+    function setZarafaQuotaHard($zarafaquotahard)
+    {
+        $this->zarafaquotahard = parent::arrayToString($zarafaquotahard);
         return $this;        
     }
 
@@ -219,6 +282,39 @@ class User extends ZacaciaObject
     function setEntryUUID($uuid)
     {
         $this->entryUUID = parent::arrayToString($uuid);
+        return $this;        
+    }
+
+    function getUserId()
+    {
+        return $this->userid;
+    }
+
+    function setUserId($uuid)
+    {
+        $this->userid = parent::arrayToString($uuid);
+        return $this;        
+    }
+
+    function getPlatformId()
+    {
+        return $this->platformid;
+    }
+
+    function setPlatformId($id)
+    {
+        $this->platformid = parent::arrayToString($id);
+        return $this;        
+    }
+
+    function getOrganizationId()
+    {
+        return $this->organizationid;
+    }
+
+    function setOrganizationId($id)
+    {
+        $this->organizationid = parent::arrayToString($id);
         return $this;        
     }
 
