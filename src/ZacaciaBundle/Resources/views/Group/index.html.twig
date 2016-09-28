@@ -6,14 +6,14 @@
 <li><a href="{{ path('_dashboard') }}">Dashboard</a></li>
 <li><a href="{{ path('_platform') }}">Platform</a></li>
 <li><a href="{{ path('_organization', { 'platformid' : platform.entryUUID} ) }}">Customer</a></li> 
-<li class="active"><a href="#">Users</a></li>
+<li class="active"><a href="#">Groups</a></li>
 {% endblock %}
 
 {% block whereiam %}
 <ul class="list-inline">
     <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
     <li><h3 class="warning">{{ organization.cn }}</a></h3><small>Customer</small></li>
-    <li><h3 class="warning">User</a></h3><small>List</small></li>
+    <li><h3 class="warning">Groups</a></h3><small>List</small></li>
 </ul>
 {% endblock %}
 
@@ -33,17 +33,15 @@
         </tr>
     </thead>
     <tbody>
-{% for user in users %}
-        <tr class="{% if user.zacaciaStatus == 'disable' %}danger{% endif %}">
-            <td>{{ user.sn }} {{ user.givenName }}</td>
-            <td class="{{ user.zacaciaStatus | lower}}">{{ user.zacaciaStatus }}</td>
-            <td>{{ user.createTimestamp }}</td>
-            <td>{{ user.modifyTimestamp }}</td>
+{% for group in groups %}
+        <tr class="{% if group.zacaciaStatus == 'disable' %}danger{% endif %}">
+            <td>{{ group.cn }}</td>
+            <td class="{{ group.zacaciaStatus | lower}}">{{ group.zacaciaStatus }}</td>
+            <td>{{ group.createTimestamp }}</td>
+            <td>{{ group.modifyTimestamp }}</td>
             <td>
-                <a href="{{ path('_user_edit', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'userid' : user.entryUUID} ) }}">Edit</a> 
-                | <a href="{{ path('_user_password', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'userid' : user.entryUUID} ) }}">Password</a> 
-                | <a href="{{ path('_user_alias', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'userid' : user.entryUUID} ) }}">Aliases</a> 
-                | <a id="delete_user" href="{{ path('_user_delete', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'userid' : user.entryUUID} ) }}">Delete</a>
+                <a href="{{ path('_group_edit', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'groupid' : group.entryUUID} ) }}">Edit</a> 
+                |<a id="delete_user" href="{{ path('_group_delete', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'groupid' : group.entryUUID} ) }}">Delete</a>
             </td>
         </tr>
 {% endfor %}

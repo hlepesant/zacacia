@@ -6,9 +6,9 @@ use LdapTools\Object\LdapObjectRepository;
 
 
 //class UserRepository
-class UserRepository extends LdapObjectRepository
+class GroupRepository extends LdapObjectRepository
 {
-    public function getAllUsers()
+    public function getAllGroups()
     {
         $platforms = $this->buildLdapQuery()
             ->orderBy('cn')
@@ -18,7 +18,7 @@ class UserRepository extends LdapObjectRepository
         return $platforms;
     }
 
-    public function getUserByUUID($uuid)
+    public function getGroupByUUID($uuid)
     {
         return $this->buildLdapQuery()
             ->Where(['entryUUID' => $uuid])
@@ -26,7 +26,7 @@ class UserRepository extends LdapObjectRepository
             ->getOneOrNullResult();
     }
 
-    public function getUserByName($name)
+    public function getGroupByName($name)
     {
         $domains = $this->buildLdapQuery()
             ->Where(['cn' => $name])        
@@ -36,27 +36,7 @@ class UserRepository extends LdapObjectRepository
         return $domains;
     }
 
-    public function getUserByUsername($name)
-    {
-        $domains = $this->buildLdapQuery()
-            ->Where(['uid' => $name])        
-            ->getLdapQuery()
-            ->getResult();
-
-        return $domains;
-    }
-
-    public function getUserByDisplayname($name)
-    {
-        $domains = $this->buildLdapQuery()
-            ->Where(['displayname' => $name])        
-            ->getLdapQuery()
-            ->getResult();
-
-        return $domains;
-    }
-
-    public function getUserByEmail($email)
+    public function getGroupByEmail($email)
     {
         $users = $this->buildLdapQuery()
             ->Where(['mail' => $email])        
@@ -66,7 +46,7 @@ class UserRepository extends LdapObjectRepository
         return $users;
     }
 
-    public function getUserByEmailOrAlias($email)
+    public function getGroupByEmailOrAlias($email)
     {
         $users = $this->buildLdapQuery()
             ->OrWhere(['mail' => $email])        

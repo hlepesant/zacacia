@@ -25,8 +25,13 @@ use ZacaciaBundle\Entity\DomainPeer;
 
 use ZacaciaBundle\Entity\User;
 use ZacaciaBundle\Entity\UserPeer;
+
+use ZacaciaBundle\Entity\Alias;
+use ZacaciaBundle\Entity\AliasPeer;
+
 use ZacaciaBundle\Form\UserType;
 use ZacaciaBundle\Form\ChangePwdType;
+use ZacaciaBundle\Form\AliasType;
 
 use ZacaciaBundle\Form\DataTransformer\ZacaciaTransformer;
 
@@ -188,13 +193,15 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/user/{platformid}/{organizationid}/{userid}/alias", name="_user_alias", requirements={
+     * @Route("/user/{platformid}/{organizationid}/{userid}/alias/{action}/{alias}", name="_user_alias", 
+     * defaults={ "action" = "list", "alias" = "none" },
+     * requirements={
      *     "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
      *     "organizationid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
      *     "userid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})"
      * })
      */
-    public function aliasAction(Request $request, $platformid, $organizationid, $userid)
+    public function aliasAction(Request $request, $platformid, $organizationid, $userid, $action, $alias)
     {
         $platform_repository = (new PlatformPeer())->getLdapManager()->getRepository('platform');
         $platform = $platform_repository->getPlatformByUUID($platformid);
@@ -203,17 +210,47 @@ class UserController extends Controller
         $organization_repository = $organizationPeer->getLdapManager()->getRepository('organization');
         $organization = $organization_repository->getOrganizationByUUID($organizationid);
 
-        $userPeer = new UserPeer($organization->getDn());
+        $userPeer = new AliasPeer($organization->getDn());
         $user_repository = $userPeer->getLdapManager()->getRepository('user');
         $userLdap = $user_repository->getUserByUUID($userid);
+
+        $aliases = array();
+
+        if ( $userLdap->has('zarafaAliases') ) {
+            if ( ! is_array($userLdap->getZarafaAliases() ) ) {
+                $aliases[] = $userLdap->getZarafaAliases();
+            } else {
+                $aliases = $userLdap->getZarafaAliases();
+            }
+        }
+
+        switch($action) {
+            case "remove":
+                if( in_array($alias, $aliases) ) {
+                    $key = array_search($alias, $aliases);
+                    array_splice($aliases, $key, 1);
+                    $aliases = array_unique($aliases);
+                    $userLdap->setZarafaAliases($aliases);
+                    $userPeer->updateAliases($userLdap);
+
+                    return $this->redirectToRoute('_user_alias', array(
+                      'platformid' => $platform->getEntryUUID(),
+                      'organizationid' => $organization->getEntryUUID(),
+                      'userid' => $userLdap->getEntryUUID(),
+                      'action' => 'list'
+                    ));
+                }
+            break;
+        }
 
         $domainPeer =  new DomainPeer($organization->getDn());
         $domain_repository = $domainPeer->getLdapManager()->getRepository('domain');
 
         $tranformer = new ZacaciaTransformer();
         $user = $tranformer->transUser($userLdap, $platform, $organization);
+        $user->setEmail('');
 
-        $form = $this->createForm(UserType::class, $user, array(
+        $form = $this->createForm(AliasType::class, $user, array(
             'domain_choices' => $domain_repository->getAllDomainsAsChoice(),
          ));
 
@@ -222,33 +259,30 @@ class UserController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             try{
+                $aliases[] = sprintf('%s@%s', $user->getEmail(), $user->getDomain());
+                $aliases = array_unique($aliases);
+                $userLdap->setZarafaAliases($aliases);
+                $userPeer->updateAliases($userLdap);
 
-                $userLdap->setSn($user->getSn());
-                $userLdap->setGivenName($user->getGivenName());
-                $userLdap->setMail(sprintf('%s@%s', $user->getEmail(), $user->getDomain()));
-
-                $userLdap->setZarafaHidden($user->getZarafaHidden());
-                $userLdap->setZarafaAccount($user->getZarafaAccount());
-                $userLdap->setZacaciastatus($user->getZacaciastatus());
-
-                $userPeer->updateUser($userLdap);
-
-                return $this->redirectToRoute('_user', array(
+                return $this->redirectToRoute('_user_alias', array(
                   'platformid' => $platform->getEntryUUID(),
                   'organizationid' => $organization->getEntryUUID(),
+                  'userid' => $userLdap->getEntryUUID(),
+                  'action' => 'list'
                 ));
             
             } catch (LdapConnectionException $e) {
-                echo "Failed to update user!".PHP_EOL;
+                echo "Failed to add alias to user!".PHP_EOL;
                 echo $e->getMessage().PHP_EOL;
             }
         }
 
-        return $this->render('ZacaciaBundle:User:edit.html.twig', array(
+        return $this->render('ZacaciaBundle:User:alias.html.twig', array(
             'platform' => $platform,
             'organization' => $organization,
-            'user' => $user,
+            'user' => $userLdap,
             'form' => $form->createView(),
+            'aliases' => $aliases
         ));
     }
 

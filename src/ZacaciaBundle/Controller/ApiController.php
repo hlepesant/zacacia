@@ -231,7 +231,8 @@ class ApiController extends Controller
 
         $userPeer = new UserPeer($base_dn);
 
-        $emails = $userPeer->getLdapManager()->getRepository('user')->getUserByEmail($email);
+        # $emails = $userPeer->getLdapManager()->getRepository('user')->getUserByEmail($email);
+        $emails = $userPeer->getLdapManager()->getRepository('user')->getUserByEmailOrAlias($email);
         
         $response = new JsonResponse();
         $response->setData(array(
