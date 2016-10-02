@@ -79,6 +79,39 @@ class Group extends ZacaciaObject
         return $this;        
     }
 
+    function getZarafaSecurityGroup()
+    {
+        return $this->zarafaSecurityGroup;
+    }
+
+    function setZarafaSecurityGroup($zarafaSecurityGroup)
+    {
+        $this->zarafaSecurityGroup = parent::arrayToString($zarafaSecurityGroup);
+        return $this;        
+    }
+
+    function getZarafaSendAsPrivilege()
+    {
+        return $this->zarafaSendAsPrivilege;
+    }
+
+    function setZarafaSendAsPrivilege($zarafaSendAsPrivilege)
+    {
+        $this->zarafaSendAsPrivilege = parent::arrayToString($zarafaSendAsPrivilege);
+        return $this;        
+    }
+
+    function getZacaciaUnDeletable()
+    {
+        return $this->zacaciaUnDeletable;
+    }
+
+    function setZacaciaUnDeletable($zacaciaUnDeletable)
+    {
+        $this->zacaciaUnDeletable = parent::arrayToString($zacaciaUnDeletable);
+        return $this;        
+    }
+
     function setGidNumber($gidNumber)
     {
         $this->gidNumber = parent::arrayToString($gidNumber);

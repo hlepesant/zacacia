@@ -20,7 +20,7 @@
 {% block content %}
 <div class="table-responsive">
 
-<a href="{{ path('_user_new', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">New</a>
+<a href="{{ path('_group_new', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID} ) }}">New</a>
 
 <table class="table table-striped">
     <thead>
@@ -41,7 +41,9 @@
             <td>{{ group.modifyTimestamp }}</td>
             <td>
                 <a href="{{ path('_group_edit', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'groupid' : group.entryUUID} ) }}">Edit</a> 
-                |<a id="delete_user" href="{{ path('_group_delete', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'groupid' : group.entryUUID} ) }}">Delete</a>
+                |<a id="alias_group" href="{{ path('_group_alias', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'groupid' : group.entryUUID} ) }}">Alias</a>
+                |<a id="sendas_group" href="{{ path('_group_sendas', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'groupid' : group.entryUUID} ) }}">Send As</a>
+                |<a id="delete_group" href="{{ path('_group_delete', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'groupid' : group.entryUUID} ) }}">Delete</a>
             </td>
         </tr>
 {% endfor %}

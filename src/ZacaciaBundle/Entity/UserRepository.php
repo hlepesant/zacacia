@@ -76,4 +76,20 @@ class UserRepository extends LdapObjectRepository
 
         return $users;
     }
+
+    public function getAllUsersAsChoice()
+    {
+        $results = $this->buildLdapQuery()
+            ->orderBy('cn')
+            ->getLdapQuery()
+            ->getResult();
+
+        $userss = array();
+
+        foreach( $results as $result ) {
+          $userss[$result->getDisplayName()] = sprintf('%s', $result->getDn());
+        } 
+
+        return $userss;
+    }
 }

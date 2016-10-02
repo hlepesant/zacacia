@@ -1,0 +1,131 @@
+{% extends "ZacaciaBundle::layout.html.twig" %}
+
+{% block title %}ZacaciaBundle:User:new{% endblock %}
+
+{% block navmenu %}
+<li><a href="{{ path('_dashboard') }}">Dashboard</a></li>
+<li><a href="{{ path('_platform') }}">Platform</a></li>
+<li><a href="{{ path('_organization', {'platformid' : platform.entryUUID} ) }}">Customer</a></li>
+<li class="active"><a href="#">Group : new</a></li>
+{% endblock %}
+
+{% block whereiam %}
+<ul class="list-inline">
+  <li><h3 class="warning">{{ platform.cn }}</a></h3><small>Platform</small></li>
+  <li><h3 class="warning">{{ organization.cn }}</a></h3><small>Customer</small></li>
+  <li><h3 class="warning">Group</a></h3><small>New</small></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+
+{{ form_start(form) }}
+{{ form_errors(form) }}
+
+<div class="row">
+    <div class="col-md-12">
+        <fieldset class="form-group">
+            {{  form_label(form.cn, '', {'label_attr': {'class': 'control-label', 'for': form.cn.vars.id} } ) }}
+        	{{ form_errors(form.cn) }}
+        	{{ form_widget(form.cn, {'attr': {'class': 'form-control'}}) }}
+            <span id="glyphicon_{{ form.cn.vars.id }}" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        </fieldset>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <fieldset class="form-group">
+            {{  form_label(form.email, '', {'label_attr': {'class': 'control-label', 'for': form.email.vars.id}}) }}
+        	{{ form_errors(form.email) }}
+        	{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+            <span id="glyphicon_{{ form.email.vars.id }}" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        </fieldset>
+    </div>
+
+    <div class="col-md-6">
+        <fieldset class="form-group">
+        	{{  form_label(form.domain, '', {'label_attr': {'class': 'control-label', 'for': form.domain.vars.id}}) }}
+        	{{ form_errors(form.domain) }}
+        	{{ form_widget(form.domain, {'attr': {'class': 'form-control'}}) }}
+            <span id="glyphicon_{{ form.domain.vars.id }}" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        </fieldset>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <fieldset class="form-group">
+        	{{  form_label(form.member, '', {'label_attr': {'class': 'control-label', 'for': form.member.vars.id}}) }}
+        	{{ form_errors(form.member) }}
+        	{{ form_widget(form.member, {'attr': {'class': 'form-control'}}) }}
+        </fieldset>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <fieldset class="form-group">
+        	{{  form_label(form.zacaciaStatus, '', {'label_attr': {'class': 'control-label', 'for': form.zacaciaStatus.vars.id}}) }}
+        	{{ form_errors(form.zacaciaStatus) }}
+        	{{ form_widget(form.zacaciaStatus, {'attr': {'class': 'form-control'}}) }}
+        </fieldset>
+    </div>
+    
+    <div class="col-md-4">
+        <fieldset class="form-group">
+        	{{  form_label(form.zarafaAccount, '', {'label_attr': {'class': 'control-label', 'for': form.zarafaAccount.vars.id}}) }}
+        	{{ form_errors(form.zarafaAccount) }}
+        	{{ form_widget(form.zarafaAccount, {'attr': {'class': 'form-control'}}) }}
+        </fieldset>
+    </div>
+    
+    <div class="col-md-4">
+        <fieldset class="form-group">
+        	{{  form_label(form.zarafaHidden, '', {'label_attr': {'class': 'control-label', 'for': form.zarafaHidden.vars.id}}) }}
+        	{{ form_errors(form.zarafaHidden) }}
+        	{{ form_widget(form.zarafaHidden, {'attr': {'class': 'form-control'}}) }}
+        </fieldset>
+    </div>
+</div>
+    
+<div class="row">
+    <div class="col-md-6">
+        <fieldset class="form-group">
+        	{{  form_label(form.zarafaSecurityGroup, '', {'label_attr': {'class': 'control-label', 'for': form.zarafaSecurityGroup.vars.id}}) }}
+        	{{ form_errors(form.zarafaSecurityGroup) }}
+        	{{ form_widget(form.zarafaSecurityGroup, {'attr': {'class': 'form-control'}}) }}
+        </fieldset>
+    </div>
+
+    <div class="col-md-6">
+        <fieldset class="form-group">
+        	{{  form_label(form.zacaciaUnDeletable, '', {'label_attr': {'class': 'control-label', 'for': form.zacaciaUnDeletable.vars.id}}) }}
+        	{{ form_errors(form.zacaciaUnDeletable) }}
+        	{{ form_widget(form.zacaciaUnDeletable, {'attr': {'class': 'form-control'}}) }}
+        </fieldset>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+	    <fieldset class="form-group">
+            <button type="button" id="form_cancel" class="btn btn-primary">{% trans %}Cancel{% endtrans %}</button>
+            <button type="submit" id="form_save" class="btn btn-primary hidden">{% trans %}Create Group{% endtrans %}</button>
+	    </fieldset>
+    </div>
+</div>
+
+
+{{ form_end(form) }}
+{% endblock %}
+
+{% block zavascripts %}
+<script src= "{{ asset('js/group/new.js') }}"></script>
+<script>
+var cancel_redirect = "{{ path('_user', { 
+    'platformid': platform.entryUUID,
+    'organizationid': organization.entryUUID,
+}) }}"
+</script>
+{% endblock %}

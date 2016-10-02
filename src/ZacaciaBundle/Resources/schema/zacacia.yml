@@ -196,6 +196,7 @@ objects:
             created: createTimestamp
             modified: modifyTimestamp
             member: member
+            zacaciaUnDeletable: zacaciaUnDeletable
             zarafaSendAsPrivilege: zarafaSendAsPrivilege
         attributes_to_select:
             - 'cn'
@@ -205,6 +206,7 @@ objects:
             - 'member'
             - 'zarafaAliases'
             - 'zarafaSendAsPrivilege'
+            - 'zacaciaUnDeletable'
             - 'createTimestamp'
             - 'modifyTimestamp'
         repository: '\ZacaciaBundle\Entity\GroupRepository'
