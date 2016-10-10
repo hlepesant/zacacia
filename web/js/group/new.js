@@ -4,6 +4,7 @@ $(document).ready(function(){
         form_is_valid = false;
 
         if ( $('#form_cn').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = cn"); }
+        if ( $('#form_member').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = member"); }
 
         console.log( "form is valid = " + form_is_valid);
     
@@ -21,7 +22,7 @@ $(document).ready(function(){
         var domain = ($('#form_domain').val());
         var groupemail = (email + '@' + domain);
     
-        if ( useremail.length > 6 ) {
+        if ( groupemail.length > 6 ) {
             event.preventDefault();
             $.getJSON('/api/check/useremail/' + groupemail , function(data){
                 var useremail_exist = data['data'];
@@ -90,10 +91,13 @@ $(document).ready(function(){
                     console.log( "group name is free");
                     $('#form_cn').parent("fieldset.form-group").removeClass('has-error');
                     $('#form_cn').parent("fieldset.form-group").addClass('has-success');
+
+                    $('#form_email').val( displayname_exist );
                 } else {
                     console.log( "group name is used");
                     $('#form_sn').parent("fieldset.form-group").removeClass('has-success');
                     $('#form_cn').parent("fieldset.form-group").addClass('has-error');
+                    $('#form_email').val('');
                 }
             })
             .fail(function() {
@@ -108,11 +112,21 @@ $(document).ready(function(){
   
     $('#form_email').on('change blur click focus', function() {
         validateEmail();
-    //    validateForm()
     });
 
     $('#form_domain').on('change', function() {
         validateEmail();
-    //    validateForm()
+    });
+
+    $('#form_member').on('change blur click', function() {
+        console.log('member = '+$('#form_member').val().length);
+        if ( $('#form_member').val().length > 0 ) {
+            $('#form_member').parent("fieldset.form-group").removeClass('has-error');
+            $('#form_member').parent("fieldset.form-group").addClass('has-success');
+        } else {
+            $('#form_member').parent("fieldset.form-group").removeClass('has-success');
+            $('#form_member').parent("fieldset.form-group").addClass('has-error');
+        }
+        validateForm()
     });
 });

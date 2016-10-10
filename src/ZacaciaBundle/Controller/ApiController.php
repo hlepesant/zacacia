@@ -18,6 +18,7 @@ use ZacaciaBundle\Entity\ServerPeer;
 use ZacaciaBundle\Entity\OrganizationPeer;
 use ZacaciaBundle\Entity\DomainPeer;
 use ZacaciaBundle\Entity\UserPeer;
+use ZacaciaBundle\Entity\GroupPeer;
 
 /**
  * @Route("/api")
@@ -279,5 +280,37 @@ class ApiController extends Controller
         ));
         
         return $response;
+    }
+
+    /**
+     * @Route("/check/groupname/{platformid}/{organizationid}/{name}", name="_check_groupname", requirements={
+		 *   "platformid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+		 *   "organizationid": "([a-z0-9]{8})(\-[a-z0-9]{4}){3}(\-[a-z0-9]{12})",
+		 *   "name": ".+"
+     * })
+     * @Method({"GET","HEAD"})
+     */
+    public function checkgroupnameAction(Request $request, $platformid, $organizationid, $name)
+    {
+      $platformPeer = new PlatformPeer();
+      $platform_repository = $platformPeer->getLdapManager()->getRepository('platform');
+      $platform = $platform_repository->getPlatformByUUID($platformid);
+
+      $organizationPeer =  new OrganizationPeer($platform->getDn());
+      $organization_repository = $organizationPeer->getLdapManager()->getRepository('organization');
+      $organization = $organization_repository->getOrganizationByUUID($organizationid);
+
+      $base_dn = sprintf('ou=Groups,%s', $organization->getDn());
+      
+      $groupPeer =  new GroupPeer($base_dn);
+      $groups = $groupPeer->getLdapManager()->getRepository('group')->getGroupByName($name);
+
+      $response = new JsonResponse();
+
+      $response->setData(array(
+      	'data' => count($groups)
+    	));
+
+    	return $response;
     }
 }

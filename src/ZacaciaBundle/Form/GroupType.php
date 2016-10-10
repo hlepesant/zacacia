@@ -33,7 +33,11 @@ class GroupType extends AbstractType
                 'placeholder' => false,
                 'multiple' => true,
                 'required' => true,
-                'choices' => $this->memberChoices
+                'choices' => $this->memberChoices,
+                'preferred_choices' => array(),
+                'attr' => array(
+                    'size' => count($this->memberChoices) + 1,
+                )
             ))
             ->add('zacaciaStatus', ChoiceType::class, array(
                 'label' => 'Status',

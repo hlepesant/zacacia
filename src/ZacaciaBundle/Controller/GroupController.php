@@ -97,12 +97,11 @@ class GroupController extends Controller
             try{
                 $groupPeer = new GroupPeer($organization->getDn());
 
-                $group->setCn($group->getDisplayname());
                 $group->setEmail(sprintf('%s@%s', $group->getEmail(), $group->getDomain()));
 
-                $groupPeer->createUser($group);
+                $groupPeer->createGroup($group);
 
-                return $this->redirectToRoute('_user', array(
+                return $this->redirectToRoute('_group', array(
                   'platformid' => $platform->getEntryUUID(),
                   'organizationid' => $organization->getEntryUUID(),
                 ));

@@ -49,12 +49,13 @@ class GroupPeer
             ->setDn($dn)
             ->in(self::getBaseDn())
             ->with([
-                'objectClass'           => $user->getObjectclass(),
-                'cn'                    => $user->getCn(),
-                'mail'                  => $user->getEmail(),
-                'zacaciaStatus'         => $user->getZacaciaStatus(),
-                'zarafaHidden'          => $user->getZarafaHidden(),
-                'zarafaAccount'         => $user->getZarafaAccount(),
+                'objectClass'       => $group->getObjectclass(),
+                'cn'                => $group->getCn(),
+                'mail'              => $group->getEmail(),
+                'zacaciaStatus'     => $group->getZacaciaStatus(),
+                'zarafaHidden'      => $group->getZarafaHidden(),
+                'zarafaAccount'     => $group->getZarafaAccount(),
+                'member'            => $group->getMember(),
             ])
             ->execute();
         return;
