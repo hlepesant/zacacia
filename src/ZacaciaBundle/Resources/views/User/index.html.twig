@@ -41,9 +41,9 @@
             <td>{{ user.modifyTimestamp }}</td>
             <td>
                 <a href="{{ path('_user_edit', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'userid' : user.entryUUID} ) }}">Edit</a> 
-                | <a href="{{ path('_user_password', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'userid' : user.entryUUID} ) }}">Password</a> 
-                | <a href="{{ path('_user_alias', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'userid' : user.entryUUID} ) }}">Aliases</a> 
-                | <a id="delete_user" href="{{ path('_user_delete', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'userid' : user.entryUUID} ) }}">Delete</a>
+                | <a href="{{ path('_user_password', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'userid' : user.entryUUID} ) }}">Password</a> 
+                | <a href="{{ path('_user_alias', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'userid' : user.entryUUID} ) }}">Aliases</a> 
+                | <a id="delete_user" data-href="{{ path('_user_delete', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'userid' : user.entryUUID} ) }}">Delete</a>
             </td>
         </tr>
 {% endfor %}

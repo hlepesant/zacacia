@@ -209,4 +209,5 @@ objects:
             - 'zacaciaUnDeletable'
             - 'createTimestamp'
             - 'modifyTimestamp'
+            - 'zarafaSendAsPrivilege'
         repository: '\ZacaciaBundle\Entity\GroupRepository'

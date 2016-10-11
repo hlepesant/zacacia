@@ -39,18 +39,6 @@ class GroupType extends AbstractType
                     'size' => count($this->memberChoices) + 1,
                 )
             ))
-            ->add('zacaciaStatus', ChoiceType::class, array(
-                'label' => 'Status',
-                'choices' => array(
-                    'Enable' => 'enable',
-                    'Disable' => 'disable',
-            )))
-            ->add('zacaciaUnDeletable', ChoiceType::class, array(
-                'label' => 'UnDeletable', 
-                'choices' => array(
-                    'Yes' => "1",
-                    'No' => "0",
-            )))
             ->add('zarafaAccount', ChoiceType::class, array(
                 'label' => 'Account', 
                 'choices' => array(
@@ -69,6 +57,37 @@ class GroupType extends AbstractType
                     'No' => "0",
                     'Yes' => "1",
             )))
+            ->add('zacaciaStatus', ChoiceType::class, array(
+                'label' => 'Status',
+                'choices' => array(
+                    'Enable' => 'enable',
+                    'Disable' => 'disable',
+            )))
+            ->add('zacaciaUnDeletable', ChoiceType::class, array(
+                'label' => 'UnDeletable', 
+                'choices' => array(
+                    'Yes' => "1",
+                    'No' => "0",
+            )))
+            ->add('hasSendAs', ChoiceType::class, array(
+                'label' => 'Enable SendAs', 
+                'expanded' => true,
+                'multiple' => true,
+                'choices' => array(
+                    'Yes' => "1",
+             )))
+            ->add('zarafaSendAsPrivilege', ChoiceType::class, array(
+                'label' => 'SendAs',
+                'expanded' => false,
+                'placeholder' => false,
+                'multiple' => true,
+                'required' => true,
+                'choices' => $this->memberChoices,
+                'preferred_choices' => array(),
+                'attr' => array(
+                    'size' => 3,
+                )
+            ))
 
             ->add('platformid', HiddenType::class)
             ->add('organizationid', HiddenType::class)

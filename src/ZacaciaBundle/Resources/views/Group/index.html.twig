@@ -42,8 +42,7 @@
             <td>
                 <a href="{{ path('_group_edit', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'groupid' : group.entryUUID} ) }}">Edit</a> 
                 |<a id="alias_group" href="{{ path('_group_alias', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'groupid' : group.entryUUID} ) }}">Alias</a>
-                |<a id="sendas_group" href="{{ path('_group_sendas', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'groupid' : group.entryUUID} ) }}">Send As</a>
-                |<a id="delete_group" href="{{ path('_group_delete', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'groupid' : group.entryUUID} ) }}">Delete</a>
+                |<a id="delete_group" data-href="{{ path('_group_delete', { 'platformid' : platform.entryUUID, 'organizationid' : organization.entryUUID, 'groupid' : group.entryUUID} ) }}" data-confirm="{{ group.cn }}">Delete</a>
             </td>
         </tr>
 {% endfor %}
@@ -53,5 +52,5 @@
 {% endblock %}
 
 {% block zavascripts %}
-<script src= "{{ asset('js/user/index.js') }}"></script>
+<script src= "{{ asset('js/group/index.js') }}"></script>
 {% endblock %}

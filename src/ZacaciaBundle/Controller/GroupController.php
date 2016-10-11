@@ -47,7 +47,7 @@ class GroupController extends Controller
         $organization_repository = $organizationPeer->getLdapManager()->getRepository('organization');
         $organization = $organization_repository->getOrganizationByUUID($organizationid);
 
-        $groupPeer =  new GroupPeer($platform->getDn());
+        $groupPeer =  new GroupPeer($organization->getDn());
         $group_repository = $groupPeer->getLdapManager()->getRepository('group');
         $groups = $group_repository->getAllGroups();
 

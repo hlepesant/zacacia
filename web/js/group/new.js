@@ -4,6 +4,17 @@ $(document).ready(function(){
         form_is_valid = false;
 
         if ( $('#form_cn').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = cn"); }
+        if ( $('#form_hasSendAs_0').prop('checked') ) {
+            if ( $('#form_zarafaSendAsPrivilege').parent("fieldset.form-group").hasClass('has-success') ) {
+                form_is_valid = true;
+            } else {
+                form_is_valid = false;
+                console.log( "ko = sendas");
+            }
+        } else {
+            console.log('checkd = ' + $('#form_hasSendAs_0').prop('checked') );
+            form_is_valid = true;
+        }
         if ( $('#form_member').parent("fieldset.form-group").hasClass('has-success') ) { form_is_valid = true; } else { form_is_valid = false; console.log( "ko = member"); }
 
         console.log( "form is valid = " + form_is_valid);
@@ -51,6 +62,24 @@ $(document).ready(function(){
             
         }
     }
+
+    function validateSendAs() {
+        if ( $('#form_hasSendAs_0').prop('checked')) {
+            $('#form_zarafaSendAsPrivilege').parent().show();
+            if ( $('#form_zarafaSendAsPrivilege').val().length > 0 ) {
+                $('#form_zarafaSendAsPrivilege').parent("fieldset.form-group").removeClass('has-error');
+                $('#form_zarafaSendAsPrivilege').parent("fieldset.form-group").addClass('has-success');
+            } else {
+                $('#form_zarafaSendAsPrivilege').parent("fieldset.form-group").removeClass('has-success');
+                $('#form_zarafaSendAsPrivilege').parent("fieldset.form-group").addClass('has-error');
+            }
+        } else {
+            $('#form_zarafaSendAsPrivilege option').prop('selected', false);
+            $('#form_zarafaSendAsPrivilege').parent().hide();
+        }
+        validateForm();
+    }
+
   
     $('#form_cancel').click( function(){
         BootstrapDialog.confirm({
@@ -71,7 +100,9 @@ $(document).ready(function(){
     });
 
 
-    validateForm()
+    $('#form_zarafaSendAsPrivilege').parent().hide();
+
+    validateForm();
 
     $('#form_cn').focus();
   
@@ -104,7 +135,7 @@ $(document).ready(function(){
                 console.log( "fail to get data for group name" );
             })
             .always(function() {
-                validateForm()
+                validateForm();
                 $('#form_email').val(cn.toLowerCase());
             });
         }
@@ -127,6 +158,18 @@ $(document).ready(function(){
             $('#form_member').parent("fieldset.form-group").removeClass('has-success');
             $('#form_member').parent("fieldset.form-group").addClass('has-error');
         }
-        validateForm()
+        validateForm();
     });
+
+    $('#form_hasSendAs').on('click change', function() {
+        console.log('hasSendAs = '+$('#form_hasSendAs_0').prop('checked'));
+        validateSendAs();
+    });
+
+
+    $('#form_zarafaSendAsPrivilege').on('focus change blur', function() {
+        console.log('sendas = '+$('#form_zarafaSendAsPrivilege').val().length);
+        validateSendAs();
+    });
+
 });
